@@ -22,11 +22,11 @@ This allows simple specification of piecewise constant enrollment, failure rates
 While the sample size implementation focuses primarily on increasing enrollment rate to achieve power within a targeted trial duration, there is also an option to fix a maximum enrollment rate and extend follow-up until power is achieved as in @KimTsiatis; this method will not always work without some adjustment in assumptions.
 The methods all focus on 2-arm trials with a constant treatment effect over time (proportional hazards).
 It is assumed that a (stratified) logrank test or Wald test with a Cox model coefficient are used for statistical testing.
-The number of events drives power, regardless of study duration, as noted by @schoenfeld1981; that approximation for event requirements is provided in the `nSurv()` function for fixed design and `gsSurv()` for group sequential design as can be seen by code generated in the app or in **gsDesign** package documentation.
+The number of events drives power, regardless of study duration, as noted by @Schoenfeld1981; that approximation for event requirements is provided in the `nSurv()` function for fixed design and `gsSurv()` for group sequential design as can be seen by code generated in the app or in **gsDesign** package documentation.
 
 One place where we deviate from the Lachin and Foulkes method is when we approximate the hazard ratio at study bounds.
 This should always be considered an approximation that is informative to those reviewing the design rather than a requirement to cross a bound.
-In any case, the approximation is that of @schoenfeld1981 which is quite simple and implemented in the function `gsDesign::gsHR()`. 
+In any case, the approximation is that of @Schoenfeld1981 which is quite simple and implemented in the function `gsDesign::gsHR()`. 
 
 
 ## Metastatic oncology example {#mediansurvival}
