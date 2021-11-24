@@ -1,4 +1,4 @@
-# (PART) Others tests {-}
+# Fixed design {#fixed-design}
 
 ```{r, include=FALSE}
 library(dplyr)
@@ -6,25 +6,6 @@ library(gsDesign)
 library(gsdmvn)
 library(mvtnorm)
 ```
-
-# Overview {#overview-other-tests}
-
-We consider other alternative tests for group sequential design.
-
-- Weighted logrank tests such as the @FHRhoGamma and @MagirrBurman tests.
-- Combination tests such as the MaxCombo test by @NPHWG2020sim, @NPHWG2021Design.
-
-We will illustrate the concepts based on an experimental R packages.
-
-- [gsdmvn](https://merck.github.io/gsdmvn/): analytically based group sequential design.
-
-In this part, we will cover
-
-- Review of fixed design based on weighted logrank test and MaxCombo test
-- Group sequential design with weighted logrank test
-- Group sequential design with MaxCombo test
-
-# Fixed design {#fixed}
 
 We will briefly review fixed design based on weighted logrank test and MaxCombo test.
 

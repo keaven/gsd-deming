@@ -1,5 +1,4 @@
-
-# Proportional hazards {#ph}
+# Proportional hazards {#proportional-hazards}
 
 We consider designs under the assumption of proportional hazards in this chapter applying the **gsDesign** package.
 These will be most easily be developed using the gsDesign Shiny app at <https://rinpharma.shinyapps.io/gsdesign/>.
