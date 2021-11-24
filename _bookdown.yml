@@ -1,5 +1,5 @@
-book_filename: "GroupSequentialDesignTraining"
-repo: https://stash.merck.com/projects/BARDS/repos/groupsequentialdesigntraining/browse
+book_filename: "gsd-deming"
+repo: https://github.com/keaven/gsd-deming
 delete_merged_file: true
 language:
   label:
