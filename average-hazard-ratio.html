@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 3 Average hazard ratio | Group Sequential Design Under Non-Proportional Hazards</title>
+<meta name="author" content="Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao">
+<meta name="description" content="We consider designs for non-proportional hazards in this chapter. Because of its importance for regulatory applications, we focus here on the logrank tests. Others tests will be considered in...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 3 Average hazard ratio | Group Sequential Design Under Non-Proportional Hazards">
+<meta property="og:type" content="book">
+<meta property="og:description" content="We consider designs for non-proportional hazards in this chapter. Because of its importance for regulatory applications, we focus here on the logrank tests. Others tests will be considered in...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 3 Average hazard ratio | Group Sequential Design Under Non-Proportional Hazards">
+<meta name="twitter:description" content="We consider designs for non-proportional hazards in this chapter. Because of its importance for regulatory applications, we focus here on the logrank tests. Others tests will be considered in...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script><script type="text/javascript">
+      window.onload = function () {
+          document.body.innerHTML = document.body.innerHTML.replace(/https:\/\/rdrr.io\/pkg\/gsDesign2\/man\//g, 'https://merck.github.io/gsDesign2/reference/');
+          document.body.innerHTML = document.body.innerHTML.replace(/https:\/\/rdrr.io\/pkg\/simtrial\/man\//g, 'https://merck.github.io/simtrial/reference/');
+          document.body.innerHTML = document.body.innerHTML.replace(/https:\/\/rdrr.io\/pkg\/gsdmvn\/man\//g, 'https://merck.github.io/gsdmvn/reference/');
+      }
+  </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="Deming Conference Course, December 6, 2021">Group Sequential Design Under Non-Proportional Hazards</a>:
+        <small class="text-muted">Deming Conference Course, December 6, 2021</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Welcome!</a></li>
+<li><a class="" href="preface.html">Preface</a></li>
+<li><a class="" href="background.html"><span class="header-section-number">1</span> Background</a></li>
+<li><a class="" href="ph.html"><span class="header-section-number">2</span> Proportional hazards</a></li>
+<li><a class="active" href="average-hazard-ratio.html"><span class="header-section-number">3</span> Average hazard ratio</a></li>
+<li><a class="" href="introduction-to-gsdmvn-gsdesign2-and-simtrial.html"><span class="header-section-number">4</span> Introduction to gsdmvn, gsDesign2, and simtrial</a></li>
+<li class="book-part">Others tests</li>
+<li><a class="" href="overview-other-tests.html"><span class="header-section-number">5</span> Overview</a></li>
+<li><a class="" href="fixed.html"><span class="header-section-number">6</span> Fixed design</a></li>
+<li><a class="" href="wlr.html"><span class="header-section-number">7</span> Weighted logrank test</a></li>
+<li><a class="" href="wlr-boundary.html"><span class="header-section-number">8</span> Group sequential design boundary with weighted logrank test</a></li>
+<li><a class="" href="maxcombo.html"><span class="header-section-number">9</span> MaxCombo test</a></li>
+<li><a class="" href="maxcombo-boundary.html"><span class="header-section-number">10</span> Group sequential design boundary with MaxCombo test</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://stash.merck.com/projects/BARDS/repos/groupsequentialdesigntraining/browse">View book source <i class="fab fa-gitlab"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="average-hazard-ratio" class="section level1">
+<h1>
+<span class="header-section-number">3</span> Average hazard ratio<a class="anchor" aria-label="anchor" href="#average-hazard-ratio"><i class="fas fa-link"></i></a>
+</h1>
+<p>We consider designs for non-proportional hazards in this chapter.
+Because of its importance for regulatory applications, we focus here on the logrank tests.
+Others tests will be considered in Chapter <a href="overview-other-tests.html#overview-other-tests">5</a>.</p>
+<div id="piecewise-model" class="section level2">
+<h2>
+<span class="header-section-number">3.1</span> Piecewise model<a class="anchor" aria-label="anchor" href="#piecewise-model"><i class="fas fa-link"></i></a>
+</h2>
+<p>To model the time-varying hazard ratio, AHR commonly assumes that the hazard ratio is piecewise constant.
+Suppose the piecewise constant changes at the change points <span class="math inline">\(0 = t_0 &lt; t_1 &lt; \cdots &lt; t_M \le \infty\)</span>, and for each individual interval <span class="math inline">\((t_{m-1}, t_m]\)</span> for <span class="math inline">\(m = 1, \ldots, M\)</span>, the hazard ratio is a constant <span class="math inline">\(HR_m\)</span> (experimental: control) , i.e.,
+<span class="math display">\[
+  \text{hazard ratio}
+  =
+  \left\{
+  \begin{array}{ll}
+    HR_1  &amp; \text{for } t \in (0, t_1] \\
+    HR_2  &amp; \text{for } t \in (t_1, t_2] \\
+    \vdots \\
+    HR_M  &amp; \text{for } t \in (t_{M-1}, t_M] \\
+  \end{array}
+  \right..
+\]</span>
+For any <span class="math inline">\(m = 1, \ldots, M\)</span>,
+<span class="math display">\[
+  HR_m = \lambda_{1,m} / \lambda_{0,m},
+\]</span>
+where the subscript <span class="math inline">\(i\)</span> indexes the group, i.e., <span class="math inline">\(i = 0\)</span> for control arm and <span class="math inline">\(i=1\)</span> for treatment arm.
+From the assumption of the piecewise AHR model, we know the <span class="math inline">\(\lambda_{i,m}\)</span> is a constant in <span class="math inline">\((t_{m-1}, t_m]\)</span>.
+Its likelihood is
+<span class="math display">\[
+  L(\lambda_{i,m})
+  =
+  \exp(-\lambda_{i,m}T_{i,m})\;
+  \lambda_{i,m}^{d_{i,m}},
+\]</span>
+where <span class="math inline">\(d_{i,m}\)</span> is the number of observed events in <span class="math inline">\((t_{m-1}, t_m]\)</span> and <span class="math inline">\(T_{i,m}\)</span> is the follow-up time (total time on test) in in <span class="math inline">\((t_{m-1}, t_m]\)</span>.
+If we denote
+<span class="math display" id="eq:AhrLambdaGamma">\[\begin{equation}
+   \tag{3.1}
+   \lambda_{i,m} = e^{\gamma_{i, m}},
+\end{equation}\]</span>
+the above likelihood function of <span class="math inline">\(\lambda_{i,m}\)</span> can be re-written into the likelihood function of <span class="math inline">\(\gamma_{i, m}\)</span>, i.e.,
+<span class="math display">\[
+  L(\gamma_{i,m})
+  =
+  \exp(-e^{\gamma_{i,m}}T_{i,m})\;
+  e^{\gamma_{i,m}d_{i,m}}.
+\]</span>
+This leads to a log-likelihood:
+<span class="math display">\[
+  \ell(\gamma_{i,m})
+  \triangleq
+  \log\left( L(\gamma_{i,m}) \right)
+  =
+  -e^{\gamma_{i,m}}T_{i,m}
+  +
+  \gamma_{i,m}d_{i,m}.
+\]</span>
+By setting its first derivative with respect to <span class="math inline">\(\gamma_{i,m}\)</span> as zero,
+<span class="math display">\[
+  \frac{\partial}{\partial \gamma_{i,m}}
+  \ell(\gamma_{i,m})
+  =
+  -e^{\gamma_{i,m}}T_{i,m} + d_{i,m}
+  =
+  0
+\]</span>
+one gets its maximum likelihood estimation as
+<span class="math display" id="eq:AhrRateEstimation">\[\begin{equation}
+  \tag{3.2}
+  \hat\gamma_{i,m}
+  =
+  \log(d_{i,m}/T_{i,m}).
+\end{equation}\]</span>
+By taking the second derivative of <span class="math inline">\(\ell(\gamma_{i,m})\)</span>, one gets the variance of <span class="math inline">\(\hat\gamma_{i,m}\)</span> as
+<span class="math display">\[
+  \widehat{\hbox{Var}(\hat\gamma_{i,m})}
+  =
+  \left(
+    -\frac{\partial^2}{\partial \gamma_{i,m}^2} \ell(\hat\gamma_{i,m})
+  \right)^{-1}
+  =
+  \left(
+    e^{\hat\gamma_{i,m}}T_{i,m}
+  \right)^{-1}
+  =
+  \frac{1}{d_{i,m}}.
+\]</span></p>
+<p>By using the delta method (see details in <a href="https://web.stanford.edu/~lutian/stat331.HTML">Dr. Lu Tian’s slides</a>), we get the asymptotic distribution of <span class="math inline">\(\widehat\lambda_{i,m}\)</span> as
+<span class="math display" id="eq:AhrIndividualHazardRateDist">\[\begin{equation}
+  \tag{3.3}
+  \log(\widehat\lambda_{i,m})
+  \overset{\cdot}{\sim}
+  \text{Normal}
+  \left(
+    \log(\lambda_{i,m}), \; 1/d_{i,m}
+  \right),
+  \;\;
+  \forall i \in \{0, 1\}
+\end{equation}\]</span></p>
+<p>Withe the estimation of <span class="math inline">\(\{\lambda_{i,m}\}_{i=0,1 \text{ and } m = 1, \ldots, M}\)</span>, it is not complicated to get the estimation and the asymptotic distribution of <span class="math inline">\(HR_m\)</span>, which is defined as <span class="math inline">\(HR_m = \lambda_{1,m}/\lambda_{0,m}\)</span>.
+In this chapter, we are interested in the logarithm of <span class="math inline">\(HR_m\)</span> and denote it as <span class="math inline">\(\beta_m\)</span>.
+Recall that
+<span class="math display" id="eq:AhrSingleHazardRatioDef">\[\begin{equation}
+  \tag{3.4}
+  \beta_m
+  \triangleq
+  \log(HR_m)
+  =
+  \log\left( \frac{\lambda_{1,m}}{\lambda_{0,m}} \right)
+  =
+  \log(\lambda_{1,m}) - \log(\lambda_{0,m}).
+\end{equation}\]</span>
+For both <span class="math inline">\(\lambda_{1,m}\)</span> and <span class="math inline">\(\lambda_{0,m}\)</span> above, by equation <a href="average-hazard-ratio.html#eq:AhrRateEstimation">(3.2)</a>, we know they can be estimated by
+<span class="math display">\[
+  \widehat\lambda_{i,m} = \frac{d_{i,m}}{T_{i, m}} \;\; i \in\{0, 1\}
+\]</span>
+where <span class="math inline">\(d_{0,m}, d_{1,m}\)</span> are number of events in <span class="math inline">\((t_{m-1}, t_m]\)</span> for group <span class="math inline">\(0,1\)</span>, respectively.</p>
+<p>By plugging the asymptotic distribution of <span class="math inline">\(\{\lambda_{0, m}, \lambda_{1,m}\}\)</span> in equation <a href="average-hazard-ratio.html#eq:AhrIndividualHazardRateDist">(3.3)</a> into <a href="average-hazard-ratio.html#eq:AhrSingleHazardRatioDef">(3.4)</a>, we can derive the asymptotic distribution of <span class="math inline">\(\beta_m\)</span>:
+<span class="math display" id="eq:AhrSignleLogHazardRatio">\[\begin{equation}
+  \tag{3.5}
+  \widehat\beta_m
+  \overset{\cdot}{\sim}
+  \text{Normal}
+  \left(
+    \beta_m,
+    \frac{1}{D_{0m}} + \frac{1}{D_{1m}}
+  \right)
+  \;\; \forall m = 1,\ldots, M .
+\end{equation}\]</span></p>
+</div>
+<div id="ahr" class="section level2">
+<h2>
+<span class="header-section-number">3.2</span> Average hazard ratio<a class="anchor" aria-label="anchor" href="#ahr"><i class="fas fa-link"></i></a>
+</h2>
+<p>In this section, we discuss the estimation of AHR.
+Generally speaking, there are two estimations of AHR.
+One is the maximal likelihood estimation (MLE) under standard proportional hazards assumption, and the other utilizes the weighted summation of individual hazard ratio to approximate AHR.
+We introduce both of two estimations, with Section <a href="average-hazard-ratio.html#secAhrMLE">3.2.1</a> introducing MLE and Section <a href="average-hazard-ratio.html#secAhrWeightedSum">3.2.2</a> introducing weighted summation estimation.</p>
+<div id="secAhrMLE" class="section level3">
+<h3>
+<span class="header-section-number">3.2.1</span> MLE of AHR<a class="anchor" aria-label="anchor" href="#secAhrMLE"><i class="fas fa-link"></i></a>
+</h3>
+<p>If we set <span class="math inline">\(\beta_1 = \beta_2 = \ldots = \beta_m = \beta\)</span> in equation <a href="average-hazard-ratio.html#eq:AhrSingleHazardRatioDef">(3.4)</a>, it implies that
+<span class="math display">\[
+  \left\{
+  \begin{array}{ccl}
+  \lambda_{0,m} &amp;=&amp; \exp(\gamma_m) \\
+  \lambda_{1,m} &amp;=&amp; \exp(\gamma_m + \beta)
+  \end{array}
+  \right.,
+\]</span>
+where <span class="math inline">\(\gamma_m\)</span> is defined in equation <a href="average-hazard-ratio.html#eq:AhrLambdaGamma">(3.1)</a>.
+The above equation reduce the unknown parameter from <span class="math inline">\(\left\{\beta \cup \{ \lambda_{0,m}, \lambda_{1,m}, \gamma_m,\}_{m = 1, \ldots, M} \right\}\)</span> into <span class="math inline">\(\left\{\beta \cup \{\gamma_m,\}_{m = 1, \ldots, M} \right\}\)</span>.
+In the remaining of this section, we target on the estimation of parameters <span class="math inline">\(\left\{\beta \cup \{\gamma_m \}_{m = 1, \ldots, M} \right\}\)</span>.</p>
+<p>The log-likelihood of parameters <span class="math inline">\(\left\{\beta \cup \{\gamma_m,\}_{m = 1, \ldots, M} \right\}\)</span> is
+<span class="math display" id="eq:AhrLikelihoodBetaGamma">\[\begin{equation}
+  \tag{3.6}
+  \ell(\beta,{\gamma_1,\cdots,\gamma_M})
+  =
+  \sum_{m=1}^M
+  \left(
+    -e^{\gamma_m}(T_{0,m}+e^\beta T_{1,m}) + \gamma_m(d_{0,m} + d_{1,m}) +d_{1,m}\beta
+  \right).
+\end{equation}\]</span>
+By taking the first partial derivatives with respect to <span class="math inline">\(\gamma_m\)</span> and set it as <span class="math inline">\(0\)</span>, one has
+<span class="math display">\[
+  \begin{array}{cl}
+    &amp;
+    \frac{\partial}{\partial\gamma_m}
+    \ell(\beta,{\gamma_1,\ldots,\gamma_M})
+    =
+    -e^{\gamma_m}
+    (T_{0,m}+T_{1,m}e^\beta)
+    +
+    d_{0,m}
+    +
+    d_{1,m}
+    =0 \\
+    \Rightarrow &amp;
+    e^{\gamma_m}= \frac{d_{0,m}+d_{1,m}}{T_{0,m}+T_{1,m}e^\beta}.
+  \end{array}
+\]</span>
+By plugging the above equation into equation <a href="average-hazard-ratio.html#eq:AhrLikelihoodBetaGamma">(3.6)</a>, we can re-write our log-likelihood as only a function of the parameter <span class="math inline">\(\beta\)</span> as follows:
+<span class="math display">\[
+  \ell(\beta)
+  =
+  \sum_{m=1}^M(d_{0,m}+d_{1,m})\left(\log(d_{0,m}+d_{1,m})-\log(T_{0,m}+T_{1,m}e^\beta)-1\right) +d_{1,m}\beta,
+\]</span>
+with first and second partial derivatives as
+<span class="math display">\[
+  \begin{array}{rcl}
+  \frac{\partial}{\partial\beta}\ell(\beta)
+  &amp; = &amp;
+  \sum_{m=1}^M
+  \left(
+    -\frac{(d_{0,m}+d_{1,m})T_{1,m}e^\beta}{T_{0,m}+T_{1,m}e^\beta} + d_{1,m}
+  \right), \\
+  \frac{\partial^2}{\partial\beta^2}\ell(\beta)
+  &amp; = &amp;
+  -\sum_{m=1}^M
+  \frac{(d_{0,m}+d_{1,m})T_{1,m}e^\beta(T_{0,m}+T_{1,m}e^\beta)-
+(T_{1,m}e^\beta)^2(d_{0,m}+d_{1,m})}{(T_{0,m}+T_{1,m}e^\beta)^2}\\
+  &amp; = &amp;
+  \sum_{m=1}^M
+  \left(
+    \frac{(T_{1,m}e^\beta)^2(d_{0,m}+d_{1,m})}{(T_{0,m}+T_{1,m}e^\beta)^2}
+    -
+    \frac{(d_{0,m}+d_{1,m})T_{1,m}e^\beta}{T_{0,m}+T_{1,m}e^\beta}
+  \right).
+  \end{array}
+\]</span>
+With these, it should be straightforward to apply a Newton-Raphson iteration to get a maximum likelihood estimate of <span class="math inline">\(\beta\)</span> and we denote it as <span class="math inline">\(\widehat\beta_{MLE}\)</span>.</p>
+</div>
+<div id="secAhrWeightedSum" class="section level3">
+<h3>
+<span class="header-section-number">3.2.2</span> Commonly used estimation of AHR<a class="anchor" aria-label="anchor" href="#secAhrWeightedSum"><i class="fas fa-link"></i></a>
+</h3>
+<p>We can also define the logarithm of AHR as a weighted summation of the individual logarithm hazard ratio <span class="math inline">\(\{\beta_m\}_{m = 1, \ldots, M}\)</span>, i.e.,
+<span class="math display">\[
+  \beta
+  =
+  \sum_{m=1}^M w_m \beta_m,
+\]</span>
+We propose to estimate <span class="math inline">\(\beta\)</span> as a solution to maximize the likelihood under the proportional hazards model.
+This is actually a geometric weighted mean of the hazard ratio as defined from the full (NPH) piecewise log-hazard ratio estimates:
+<span class="math display" id="eq:AhrBetaEstimation">\[\begin{equation}
+  \tag{3.7}
+  \widehat\beta_{WS}
+  =
+  \sum_{m=1}^M
+  w_m
+  \left(\hat\gamma_{1,m} - \hat\gamma_{0,m}\right).
+\end{equation}\]</span>
+For the selection of weight <span class="math inline">\(\{w_m\}_{m = 1, \ldots, M}\)</span>, we use inverse variance weighting
+<span class="math display">\[
+  w_m
+  =
+  \left.
+  \left(
+    \frac{1}{1/d_{0,m}+1/d_{1,m}}
+  \right)^{-1}
+  \right/
+  \sum_{i=1}^M
+  \left(
+    \frac{1}{1/d_{0,i}+1/d_{1,i}}
+  \right)^{-1}.
+\]</span>
+By plugging the above weight into equation <a href="average-hazard-ratio.html#eq:AhrBetaEstimation">(3.7)</a>, <span class="math inline">\(\beta\)</span> can be estimated as
+<span class="math display">\[
+  \widehat\beta_{WS}
+  =
+  \frac{
+    \sum_{m=1}^M
+    \left( \frac{1}{d_{0,m}}+\frac{1}{d_{1,m}} \right)^{-1}
+    \left( \log(d_{1,m} / T_{1,m}) - \log(d_{0,m}/T_{0,m}) \right)
+  }{
+    \sum_{m=1}^M
+    \left( \frac{1}{d_{0,m}}+\frac{1}{d_{1,m}} \right)^{-1}
+  }.
+\]</span>
+The corresponding variance estimate is:
+<span class="math display">\[
+  \widehat{\hbox{Var}(\widehat\beta_{WS})}
+  =
+  \left(\sum_{m=1}^M(1/d_{0,m} + 1/d_{1,m})^{-1}\right)^{-1}.
+\]</span></p>
+<p>By plugging the asymptotic distribution of <span class="math inline">\(\widehat\beta_m\)</span> in equation <a href="average-hazard-ratio.html#eq:AhrSignleLogHazardRatio">(3.5)</a>, one gets the asymptotic distribution of <span class="math inline">\(\widehat\beta_{WS}\)</span> as
+<span class="math display">\[
+  \widehat\beta_{WS}
+  \overset{\cdot}{\sim}
+  \hbox{Normal}(\beta, \; \mathcal{I}^{-1}),
+\]</span>
+where <span class="math inline">\(\mathcal{I} = \sum_{m = 1}^M \left( \frac{1}{d_{0,m}} + \frac{1}{d_{1,m}} \right)^{-1}\)</span>.</p>
+<p>After reviewing the MLE (see Section <a href="average-hazard-ratio.html#secAhrMLE">3.2.1</a>) and weighted summation estimation (see Section <a href="average-hazard-ratio.html#secAhrWeightedSum">3.2.2</a>) of AHR, we summarize their difference in the following table.</p>
+<div id="enrzmtzpcs" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#enrzmtzpcs .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#enrzmtzpcs .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#enrzmtzpcs .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#enrzmtzpcs .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#enrzmtzpcs .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#enrzmtzpcs .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#enrzmtzpcs .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#enrzmtzpcs .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#enrzmtzpcs .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#enrzmtzpcs .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#enrzmtzpcs .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#enrzmtzpcs .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#enrzmtzpcs .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#enrzmtzpcs .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#enrzmtzpcs .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#enrzmtzpcs .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#enrzmtzpcs .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#enrzmtzpcs .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#enrzmtzpcs .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#enrzmtzpcs .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#enrzmtzpcs .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#enrzmtzpcs .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#enrzmtzpcs .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#enrzmtzpcs .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#enrzmtzpcs .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#enrzmtzpcs .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#enrzmtzpcs .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#enrzmtzpcs .gt_left {
+  text-align: left;
+}
+
+#enrzmtzpcs .gt_center {
+  text-align: center;
+}
+
+#enrzmtzpcs .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#enrzmtzpcs .gt_font_normal {
+  font-weight: normal;
+}
+
+#enrzmtzpcs .gt_font_bold {
+  font-weight: bold;
+}
+
+#enrzmtzpcs .gt_font_italic {
+  font-style: italic;
+}
+
+#enrzmtzpcs .gt_super {
+  font-size: 65%;
+}
+
+#enrzmtzpcs .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 65%;
+}
+</style>
+<div class="inline-table"><table class="gt_table">
+<thead class="gt_col_headings"><tr>
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"> </th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">MLE</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Weighted Summation</th>
+    </tr></thead>
+<tbody class="gt_table_body">
+<tr>
+<td class="gt_row gt_left">Idea</td>
+<td class="gt_row gt_left">To maximize the log-likelihood function under standard proportional hazards assumption</td>
+<td class="gt_row gt_left">Sum individual hazard ratios with weights</td>
+</tr>
+<tr>
+<td class="gt_row gt_left">Computation</td>
+<td class="gt_row gt_left">Newton-Raphson iterations are required</td>
+<td class="gt_row gt_left">Closed-form</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<p>We note that the weighted summation <span class="math inline">\(\widehat\beta_{WS}\)</span> is not a maximum likelihood estimate, but in our experience it provides a good approximation of MLE <span class="math inline">\(\widehat\beta_{ML}\)</span>.</p>
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="ph.html"><span class="header-section-number">2</span> Proportional hazards</a></div>
+<div class="next"><a href="introduction-to-gsdmvn-gsdesign2-and-simtrial.html"><span class="header-section-number">4</span> Introduction to gsdmvn, gsDesign2, and simtrial</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#average-hazard-ratio"><span class="header-section-number">3</span> Average hazard ratio</a></li>
+<li><a class="nav-link" href="#piecewise-model"><span class="header-section-number">3.1</span> Piecewise model</a></li>
+<li>
+<a class="nav-link" href="#ahr"><span class="header-section-number">3.2</span> Average hazard ratio</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#secAhrMLE"><span class="header-section-number">3.2.1</span> MLE of AHR</a></li>
+<li><a class="nav-link" href="#secAhrWeightedSum"><span class="header-section-number">3.2.2</span> Commonly used estimation of AHR</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://stash.merck.com/projects/BARDS/repos/groupsequentialdesigntraining/browse/blob/master/04-ahr.Rmd">View source <i class="fab fa-gitlab"></i></a></li>
+          <li><a id="book-edit" href="https://stash.merck.com/projects/BARDS/repos/groupsequentialdesigntraining/browse/edit/master/04-ahr.Rmd">Edit this page <i class="fab fa-gitlab"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Group Sequential Design Under Non-Proportional Hazards</strong>: Deming Conference Course, December 6, 2021" was written by Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao. It was last built on 2021-11-24.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 10 Group sequential design boundary with MaxCombo test | Group Sequential Design Under Non-Proportional Hazards</title>
+<meta name="author" content="Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao">
+<meta name="description" content="In this chapter, we calculate boundary based on the error spending approach following (???). We continue use the same example scenario in the last chapter. enrollRates &lt;- tibble::tibble(Stratum =...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 10 Group sequential design boundary with MaxCombo test | Group Sequential Design Under Non-Proportional Hazards">
+<meta property="og:type" content="book">
+<meta property="og:description" content="In this chapter, we calculate boundary based on the error spending approach following (???). We continue use the same example scenario in the last chapter. enrollRates &lt;- tibble::tibble(Stratum =...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 10 Group sequential design boundary with MaxCombo test | Group Sequential Design Under Non-Proportional Hazards">
+<meta name="twitter:description" content="In this chapter, we calculate boundary based on the error spending approach following (???). We continue use the same example scenario in the last chapter. enrollRates &lt;- tibble::tibble(Stratum =...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script><script type="text/javascript">
+      window.onload = function () {
+          document.body.innerHTML = document.body.innerHTML.replace(/https:\/\/rdrr.io\/pkg\/gsDesign2\/man\//g, 'https://merck.github.io/gsDesign2/reference/');
+          document.body.innerHTML = document.body.innerHTML.replace(/https:\/\/rdrr.io\/pkg\/simtrial\/man\//g, 'https://merck.github.io/simtrial/reference/');
+          document.body.innerHTML = document.body.innerHTML.replace(/https:\/\/rdrr.io\/pkg\/gsdmvn\/man\//g, 'https://merck.github.io/gsdmvn/reference/');
+      }
+  </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="Deming Conference Course, December 6, 2021">Group Sequential Design Under Non-Proportional Hazards</a>:
+        <small class="text-muted">Deming Conference Course, December 6, 2021</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Welcome!</a></li>
+<li><a class="" href="preface.html">Preface</a></li>
+<li><a class="" href="background.html"><span class="header-section-number">1</span> Background</a></li>
+<li><a class="" href="ph.html"><span class="header-section-number">2</span> Proportional hazards</a></li>
+<li><a class="" href="average-hazard-ratio.html"><span class="header-section-number">3</span> Average hazard ratio</a></li>
+<li><a class="" href="introduction-to-gsdmvn-gsdesign2-and-simtrial.html"><span class="header-section-number">4</span> Introduction to gsdmvn, gsDesign2, and simtrial</a></li>
+<li class="book-part">Others tests</li>
+<li><a class="" href="overview-other-tests.html"><span class="header-section-number">5</span> Overview</a></li>
+<li><a class="" href="fixed.html"><span class="header-section-number">6</span> Fixed design</a></li>
+<li><a class="" href="wlr.html"><span class="header-section-number">7</span> Weighted logrank test</a></li>
+<li><a class="" href="wlr-boundary.html"><span class="header-section-number">8</span> Group sequential design boundary with weighted logrank test</a></li>
+<li><a class="" href="maxcombo.html"><span class="header-section-number">9</span> MaxCombo test</a></li>
+<li><a class="active" href="maxcombo-boundary.html"><span class="header-section-number">10</span> Group sequential design boundary with MaxCombo test</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://stash.merck.com/projects/BARDS/repos/groupsequentialdesigntraining/browse">View book source <i class="fab fa-gitlab"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="maxcombo-boundary" class="section level1">
+<h1>
+<span class="header-section-number">10</span> Group sequential design boundary with MaxCombo test<a class="anchor" aria-label="anchor" href="#maxcombo-boundary"><i class="fas fa-link"></i></a>
+</h1>
+<p>In this chapter, we calculate boundary based on the error spending approach following <span class="citation">(<span class="citeproc-not-found" data-reference-id="gordon1983discrete"><strong>???</strong></span>)</span>.</p>
+<p>We continue use the same example scenario in the last chapter.</p>
+<div class="sourceCode" id="cb302"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">enrollRates</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>Stratum <span class="op">=</span> <span class="st">"All"</span>, duration <span class="op">=</span> <span class="fl">12</span>, rate <span class="op">=</span> <span class="fl">500</span> <span class="op">/</span> <span class="fl">12</span><span class="op">)</span>
+
+<span class="va">failRates</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>
+  Stratum <span class="op">=</span> <span class="st">"All"</span>,
+  duration <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">100</span><span class="op">)</span>,
+  failRate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op">/</span> <span class="fl">15</span>, <span class="co"># Median survival is 15 months</span>
+  hr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">.6</span><span class="op">)</span>,
+  dropoutRate <span class="op">=</span> <span class="fl">0.001</span>
+<span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb303"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Randomization Ratio is 1:1</span>
+<span class="va">ratio</span> <span class="op">&lt;-</span> <span class="fl">1</span>
+
+<span class="co"># Type 1 error (one-sided)</span>
+<span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fl">0.025</span>
+
+<span class="co"># Power (1 - beta)</span>
+<span class="va">beta</span> <span class="op">&lt;-</span> <span class="fl">0.2</span>
+<span class="va">power</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">-</span> <span class="va">beta</span>
+
+<span class="co"># Interim analysis time</span>
+<span class="va">analysisTimes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">12</span>, <span class="fl">24</span>, <span class="fl">36</span><span class="op">)</span></code></pre></div>
+<ul>
+<li>Example 1 in the previous chapter</li>
+</ul>
+<div class="sourceCode" id="cb304"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">fh_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
+    rho <span class="op">=</span> <span class="fl">0</span>, gamma <span class="op">=</span> <span class="fl">0</span>, tau <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>,
+    test <span class="op">=</span> <span class="fl">1</span>,
+    Analysis <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,
+    analysisTimes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">12</span>, <span class="fl">24</span>, <span class="fl">36</span><span class="op">)</span>
+  <span class="op">)</span>,
+  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
+    rho <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.5</span><span class="op">)</span>, gamma <span class="op">=</span> <span class="fl">0.5</span>, tau <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>,
+    test <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">3</span>,
+    Analysis <span class="op">=</span> <span class="fl">3</span>, analysisTimes <span class="op">=</span> <span class="fl">36</span>
+  <span class="op">)</span>
+<span class="op">)</span>
+<span class="va">fh_test</span></code></pre></div>
+<pre><code>#&gt;   rho gamma tau test Analysis analysisTimes
+#&gt; 1 0.0   0.0  -1    1        1            12
+#&gt; 2 0.0   0.0  -1    1        2            24
+#&gt; 3 0.0   0.0  -1    1        3            36
+#&gt; 4 0.0   0.5  -1    2        3            36
+#&gt; 5 0.5   0.5  -1    3        3            36</code></pre>
+<div id="sample-size-calculation-based-on-spending-function" class="section level2">
+<h2>
+<span class="header-section-number">10.1</span> Sample size calculation based on spending function<a class="anchor" aria-label="anchor" href="#sample-size-calculation-based-on-spending-function"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>Implementation in <code>gsdmvn</code>
+</li>
+</ul>
+<div class="sourceCode" id="cb306"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_design_combo.html">gs_design_combo</a></span><span class="op">(</span><span class="va">enrollRates</span>,
+  <span class="va">failRates</span>,
+  <span class="va">fh_test</span>,
+  alpha <span class="op">=</span> <span class="fl">0.025</span>,
+  beta <span class="op">=</span> <span class="fl">0.2</span>,
+  ratio <span class="op">=</span> <span class="fl">1</span>,
+  binding <span class="op">=</span> <span class="cn">FALSE</span>, <span class="co"># test.type = 4 non-binding futility bound</span>
+  upper <span class="op">=</span> <span class="va">gs_spending_combo</span>,
+  upar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>sf <span class="op">=</span> <span class="fu">gsDesign</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/gsDesign/man/sfLDOF.html">sfLDOF</a></span>, total_spend <span class="op">=</span> <span class="fl">0.025</span><span class="op">)</span>, <span class="co"># alpha spending</span>
+  lower <span class="op">=</span> <span class="va">gs_spending_combo</span>,
+  lpar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>sf <span class="op">=</span> <span class="fu">gsDesign</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/gsDesign/man/sfLDOF.html">sfLDOF</a></span>, total_spend <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span>, <span class="co"># beta spending</span>
+<span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>`Probability_Null (%)` <span class="op">=</span> <span class="va">Probability_Null</span> <span class="op">*</span> <span class="fl">100</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">Probability_Null</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_if</a></span><span class="op">(</span><span class="va">is.numeric</span>, <span class="va">round</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
+<pre><code>#&gt;   Analysis Bound Time      N Events     Z Probability Probability_Null (%)
+#&gt; 1        1 Upper   12 301.23  64.70  6.18        0.00                 0.00
+#&gt; 3        2 Upper   24 301.23 148.38  2.80        0.22                 0.26
+#&gt; 5        3 Upper   36 301.23 199.59  2.10        0.80                 2.50
+#&gt; 2        1 Lower   12 301.23  64.70 -2.72        0.00                   NA
+#&gt; 4        2 Lower   24 301.23 148.38  0.65        0.08                   NA
+#&gt; 6        3 Lower   36 301.23 199.59  2.10        0.20                   NA</code></pre>
+<ul>
+<li>Simulation results based on 10,000 replications.</li>
+</ul>
+<pre><code>#&gt;     n      d analysisTimes lower upper
+#&gt; 7 302  64.78            12  0.00  0.00
+#&gt; 8 302 148.75            24  0.08  0.22
+#&gt; 9 302 200.18            36  0.20  0.80</code></pre>
+<ul>
+<li>Compared with <span class="math inline">\(FH(0, 0)\)</span> using boundary based on <code>test.type = 4</code>
+</li>
+</ul>
+<div class="sourceCode" id="cb309"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_design_wlr.html">gs_design_wlr</a></span><span class="op">(</span>
+  enrollRates <span class="op">=</span> <span class="va">enrollRates</span>, failRates <span class="op">=</span> <span class="va">failRates</span>,
+  ratio <span class="op">=</span> <span class="va">ratio</span>, alpha <span class="op">=</span> <span class="va">alpha</span>, beta <span class="op">=</span> <span class="va">beta</span>,
+  weight <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">arm0</span>, <span class="va">arm1</span><span class="op">)</span> <span class="op">{</span>
+    <span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/wlr_weight.html">wlr_weight_fh</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">arm0</span>, <span class="va">arm1</span>, rho <span class="op">=</span> <span class="fl">0</span>, gamma <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
+  <span class="op">}</span>,
+  upper <span class="op">=</span> <span class="va">gs_spending_bound</span>,
+  lower <span class="op">=</span> <span class="va">gs_spending_bound</span>,
+  upar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>sf <span class="op">=</span> <span class="fu">gsDesign</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/gsDesign/man/sfLDOF.html">sfLDOF</a></span>, total_spend <span class="op">=</span> <span class="va">alpha</span><span class="op">)</span>,
+  lpar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>sf <span class="op">=</span> <span class="fu">gsDesign</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/gsDesign/man/sfLDOF.html">sfLDOF</a></span>, total_spend <span class="op">=</span> <span class="va">beta</span><span class="op">)</span>,
+  analysisTimes <span class="op">=</span> <span class="va">analysisTimes</span>
+<span class="op">)</span><span class="op">$</span><span class="va">bounds</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_if</a></span><span class="op">(</span><span class="va">is.numeric</span>, <span class="va">round</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
+<span class="va">x</span></code></pre></div>
+<pre><code>#&gt; # A tibble: 6 × 11
+#&gt;   Analysis Bound  Time     N Events     Z Probability   AHR theta  info info0
+#&gt;      &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1        1 Upper    12  377.    81   3.79        0     0.84  0.17  20.2  20.3
+#&gt; 2        2 Upper    24  377.   186.  2.36        0.46  0.72  0.33  46.3  46.8
+#&gt; 3        3 Upper    36  377.   250.  2.01        0.8   0.68  0.38  61.8  63.3
+#&gt; 4        1 Lower    12  377.    81  -1.18        0.03  0.84  0.17  20.2  20.3
+#&gt; 5        2 Lower    24  377.   186.  1.15        0.14  0.72  0.33  46.3  46.8
+#&gt; 6        3 Lower    36  377.   250.  2.01        0.2   0.68  0.38  61.8  63.3</code></pre>
+<ul>
+<li>Compared with <span class="math inline">\(FH(0.5, 0.5)\)</span> using boundary based on <code>test.type = 4</code>
+</li>
+</ul>
+<div class="sourceCode" id="cb311"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_design_wlr.html">gs_design_wlr</a></span><span class="op">(</span>
+  enrollRates <span class="op">=</span> <span class="va">enrollRates</span>, failRates <span class="op">=</span> <span class="va">failRates</span>,
+  ratio <span class="op">=</span> <span class="va">ratio</span>, alpha <span class="op">=</span> <span class="va">alpha</span>, beta <span class="op">=</span> <span class="va">beta</span>,
+  weight <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">arm0</span>, <span class="va">arm1</span><span class="op">)</span> <span class="op">{</span>
+    <span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/wlr_weight.html">wlr_weight_fh</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">arm0</span>, <span class="va">arm1</span>, rho <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>
+  <span class="op">}</span>,
+  upper <span class="op">=</span> <span class="va">gs_spending_bound</span>,
+  lower <span class="op">=</span> <span class="va">gs_spending_bound</span>,
+  upar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>sf <span class="op">=</span> <span class="fu">gsDesign</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/gsDesign/man/sfLDOF.html">sfLDOF</a></span>, total_spend <span class="op">=</span> <span class="va">alpha</span><span class="op">)</span>,
+  lpar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>sf <span class="op">=</span> <span class="fu">gsDesign</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/gsDesign/man/sfLDOF.html">sfLDOF</a></span>, total_spend <span class="op">=</span> <span class="va">beta</span><span class="op">)</span>,
+  analysisTimes <span class="op">=</span> <span class="va">analysisTimes</span>
+<span class="op">)</span><span class="op">$</span><span class="va">bounds</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_if</a></span><span class="op">(</span><span class="va">is.numeric</span>, <span class="va">round</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
+<span class="va">x</span></code></pre></div>
+<pre><code>#&gt; # A tibble: 6 × 11
+#&gt;   Analysis Bound  Time     N Events     Z Probability   AHR theta  info info0
+#&gt;      &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1        1 Upper    12  304.   65.3  5.05        0     0.79  0.68  1.76  1.77
+#&gt; 2        2 Upper    24  304.  150.   2.51        0.42  0.68  0.93  6.17  6.28
+#&gt; 3        3 Upper    36  304.  201.   1.99        0.8   0.65  0.97  9.16  9.44
+#&gt; 4        1 Lower    12  304.   65.3 -1.8         0     0.79  0.68  1.76  1.77
+#&gt; 5        2 Lower    24  304.  150.   1.12        0.12  0.68  0.93  6.17  6.28
+#&gt; 6        3 Lower    36  304.  201.   1.99        0.2   0.65  0.97  9.16  9.44</code></pre>
+<ul>
+<li>Compared with <span class="math inline">\(FH(0, 0.5)\)</span> using boundary based on <code>test.type = 4</code>
+</li>
+</ul>
+<div class="sourceCode" id="cb313"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_design_wlr.html">gs_design_wlr</a></span><span class="op">(</span>
+  enrollRates <span class="op">=</span> <span class="va">enrollRates</span>, failRates <span class="op">=</span> <span class="va">failRates</span>,
+  ratio <span class="op">=</span> <span class="va">ratio</span>, alpha <span class="op">=</span> <span class="va">alpha</span>, beta <span class="op">=</span> <span class="va">beta</span>,
+  weight <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">arm0</span>, <span class="va">arm1</span><span class="op">)</span> <span class="op">{</span>
+    <span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/wlr_weight.html">wlr_weight_fh</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">arm0</span>, <span class="va">arm1</span>, rho <span class="op">=</span> <span class="fl">0</span>, gamma <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>
+  <span class="op">}</span>,
+  upper <span class="op">=</span> <span class="va">gs_spending_bound</span>,
+  lower <span class="op">=</span> <span class="va">gs_spending_bound</span>,
+  upar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>sf <span class="op">=</span> <span class="fu">gsDesign</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/gsDesign/man/sfLDOF.html">sfLDOF</a></span>, total_spend <span class="op">=</span> <span class="va">alpha</span><span class="op">)</span>,
+  lpar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>sf <span class="op">=</span> <span class="fu">gsDesign</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/gsDesign/man/sfLDOF.html">sfLDOF</a></span>, total_spend <span class="op">=</span> <span class="va">beta</span><span class="op">)</span>,
+  analysisTimes <span class="op">=</span> <span class="va">analysisTimes</span>
+<span class="op">)</span><span class="op">$</span><span class="va">bounds</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_if</a></span><span class="op">(</span><span class="va">is.numeric</span>, <span class="va">round</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
+<span class="va">x</span></code></pre></div>
+<pre><code>#&gt; # A tibble: 6 × 11
+#&gt;   Analysis Bound  Time     N Events     Z Probability   AHR theta  info info0
+#&gt;      &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1        1 Upper    12  288.   61.9  6.18        0     0.78  0.63  2.08  2.09
+#&gt; 2        2 Upper    24  288.  142    2.8         0.3   0.67  0.77  8.86  9.07
+#&gt; 3        3 Upper    36  288.  191.   1.97        0.8   0.64  0.73 15.7  16.4 
+#&gt; 4        1 Lower    12  288.   61.9 -2.43        0     0.78  0.63  2.08  2.09
+#&gt; 5        2 Lower    24  288.  142    0.93        0.09  0.67  0.77  8.86  9.07
+#&gt; 6        3 Lower    36  288.  191.   1.97        0.2   0.64  0.73 15.7  16.4</code></pre>
+</div>
+<div id="information-fraction-1" class="section level2">
+<h2>
+<span class="header-section-number">10.2</span> Information fraction<a class="anchor" aria-label="anchor" href="#information-fraction-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>Under same design assumption, information fraction is different from different weight parameters in WLR.</p>
+<p>There are two potential strategies to calculate the information fraction:</p>
+<ul>
+<li>Option 1: Use minimal information fraction of all candidate test (implemented in <code>gsdmvn</code>).</li>
+<li>Option 2: Use weighted average of information fraction.</li>
+</ul>
+<div class="inline-figure"><img src="images/g_info.png" width="60%" style="display: block; margin: auto;"></div>
+<div class="sourceCode" id="cb315"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">utility</span> <span class="op">&lt;-</span> <span class="fu">gsdmvn</span><span class="fu">:::</span><span class="fu">gs_utility_combo</span><span class="op">(</span><span class="va">enrollRates</span>, <span class="va">failRates</span>, fh_test <span class="op">=</span> <span class="va">fh_test</span>, ratio <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+<span class="va">utility</span><span class="op">$</span><span class="va">info_all</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_if</a></span><span class="op">(</span><span class="va">is.numeric</span>, <span class="va">round</span>, digits <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
+<pre><code>#&gt;   test Analysis Time   N  Events   AHR  delta sigma2 theta   info  info0
+#&gt; 1    1        1   12 500 107.394 0.842 -0.009  0.054 0.172 26.841 26.899
+#&gt; 2    1        2   24 500 246.283 0.716 -0.041  0.123 0.333 61.352 62.087
+#&gt; 3    1        3   36 500 331.291 0.683 -0.062  0.164 0.381 81.918 83.944
+#&gt; 4    2        1   12 500 107.394 0.781 -0.005  0.007 0.626  3.605  3.624
+#&gt; 5    2        2   24 500 246.283 0.666 -0.024  0.031 0.765 15.371 15.737
+#&gt; 6    2        3   36 500 331.291 0.639 -0.040  0.054 0.732 27.205 28.484
+#&gt; 7    3        1   12 500 107.394 0.790 -0.004  0.006 0.676  2.898  2.910
+#&gt; 8    3        2   24 500 246.283 0.675 -0.019  0.020 0.927 10.155 10.335
+#&gt; 9    3        3   36 500 331.291 0.650 -0.029  0.030 0.973 15.070 15.526</code></pre>
+<div class="sourceCode" id="cb317"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">info_frac</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tapply.html">tapply</a></span><span class="op">(</span><span class="va">utility</span><span class="op">$</span><span class="va">info_all</span><span class="op">$</span><span class="va">info0</span>, <span class="va">utility</span><span class="op">$</span><span class="va">info_all</span><span class="op">$</span><span class="va">test</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>
+<span class="va">info_frac</span></code></pre></div>
+<pre><code>#&gt; $`1`
+#&gt; [1] 0.3204395 0.7396239 1.0000000
+#&gt; 
+#&gt; $`2`
+#&gt; [1] 0.1272245 0.5525079 1.0000000
+#&gt; 
+#&gt; $`3`
+#&gt; [1] 0.1874599 0.6656420 1.0000000</code></pre>
+<div class="sourceCode" id="cb319"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">min_info_frac</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="va">info_frac</span><span class="op">)</span>, <span class="fl">2</span>, <span class="va">min</span><span class="op">)</span>
+<span class="va">min_info_frac</span></code></pre></div>
+<pre><code>#&gt; [1] 0.1272245 0.5525079 1.0000000</code></pre>
+</div>
+<div id="spending-function" class="section level2">
+<h2>
+<span class="header-section-number">10.3</span> Spending function<a class="anchor" aria-label="anchor" href="#spending-function"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>
+<p><code>gsDesign</code> bound can not be directly used for MaxCombo test:</p>
+<ul>
+<li>Multiple test statistics are considered in interim analysis or final analysis.</li>
+</ul>
+</li>
+<li>
+<p>Design example:</p>
+<ul>
+<li><span class="math inline">\(\alpha = 0.025\)</span></li>
+<li><span class="math inline">\(\beta = 0.2\)</span></li>
+<li>
+<span class="math inline">\(K=3\)</span> total analysis.</li>
+<li>
+<code>test.type=4</code>: A two-sided, asymmetric, beta-spending with non-binding lower bound.</li>
+</ul>
+</li>
+<li><p>Lan-DeMets spending function to approximate an O’Brien-Fleming bound <span class="citation">(<span class="citeproc-not-found" data-reference-id="gordon1983discrete"><strong>???</strong></span>)</span>. (<code><a href="https://rdrr.io/pkg/gsDesign/man/sfLDOF.html">gsDesign::sfLDOF</a></code>)</p></li>
+<li><p><span class="math inline">\(t\)</span> is information fraction in the formula below.</p></li>
+</ul>
+<p><span class="math display">\[f(t; \alpha)=2-2\Phi\left(\Phi^{-1}\left(\frac{1-\alpha/2}{t^{\rho/2}}\right)\right)\]</span></p>
+<ul>
+<li><p>Other spending functions are discussed in the gsDesign technical manual
+and implemented in <code>gsDesign::sf*()</code> functions.</p></li>
+<li>
+<p>Upper bound:</p>
+<ul>
+<li>Non-binding lower bound: lower bound are all <code>-Inf</code>.</li>
+</ul>
+</li>
+</ul>
+<div class="sourceCode" id="cb321"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">alpha_spend</span> <span class="op">&lt;-</span> <span class="fu">gsDesign</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gsDesign/man/sfLDOF.html">sfLDOF</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.025</span>, t <span class="op">=</span> <span class="va">min_info_frac</span><span class="op">)</span><span class="op">$</span><span class="va">spend</span>
+<span class="va">alpha_spend</span></code></pre></div>
+<pre><code>#&gt; [1] 3.300225e-10 2.566068e-03 2.500000e-02</code></pre>
+<ul>
+<li>Lower bound:</li>
+</ul>
+<div class="sourceCode" id="cb323"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">beta_spend</span> <span class="op">&lt;-</span> <span class="fu">gsDesign</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gsDesign/man/sfLDOF.html">sfLDOF</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.2</span>, t <span class="op">=</span> <span class="va">min_info_frac</span><span class="op">)</span><span class="op">$</span><span class="va">spend</span>
+<span class="va">beta_spend</span></code></pre></div>
+<pre><code>#&gt; [1] 0.0003269604 0.0846866352 0.2000000000</code></pre>
+</div>
+<div id="technical-details-2" class="section level2">
+<h2>
+<span class="header-section-number">10.4</span> Technical details<a class="anchor" aria-label="anchor" href="#technical-details-2"><i class="fas fa-link"></i></a>
+</h2>
+<p>This section describes the details of calculating the sample size
+and events required for WLR under group sequential design.
+It can be skipped for the first read of this training material.</p>
+</div>
+<div id="upper-bound-in-group-sequential-design" class="section level2">
+<h2>
+<span class="header-section-number">10.5</span> Upper bound in group sequential design<a class="anchor" aria-label="anchor" href="#upper-bound-in-group-sequential-design"><i class="fas fa-link"></i></a>
+</h2>
+<div id="one-test-in-each-interim-analysis" class="section level3">
+<h3>
+<span class="header-section-number">10.5.1</span> One test in each interim analysis<a class="anchor" aria-label="anchor" href="#one-test-in-each-interim-analysis"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>First interim analysis</li>
+</ul>
+<p><span class="math display">\[\alpha_1 = \text{Pr}(Z_1 &gt; b_1 \mid H_0)\]</span></p>
+<div class="sourceCode" id="cb325"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">alpha_spend</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></code></pre></div>
+<pre><code>#&gt; [1] 6.17538</code></pre>
+<ul>
+<li>General formula (non-binding futility bound)</li>
+</ul>
+<p><span class="math display">\[\alpha_k = \text{Pr}(\cap_{i=1}^{i=k-1} Z_i &lt; b_i, Z_k &gt; b_k \mid H_0)\]</span></p>
+</div>
+<div id="maxcombo-upper-bound" class="section level3">
+<h3>
+<span class="header-section-number">10.5.2</span> MaxCombo upper bound<a class="anchor" aria-label="anchor" href="#maxcombo-upper-bound"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>First interim analysis upper bound</li>
+</ul>
+<p><span class="math display">\[\alpha_1 = \text{Pr}(G_1 &gt; b_1 \mid H_0) = 1 - \text{Pr}(\cap_i Z_{i1} &lt; b_1 \mid H_0)\]</span></p>
+<ul>
+<li>General formula (non-binding futility bound)</li>
+</ul>
+<p><span class="math display">\[\alpha_k = \text{Pr}(\cap_{i=1}^{i=k-1} G_i &lt; b_i, G_k &gt; b_k \mid H_0)\]</span>
+<span class="math display">\[ = \text{Pr}(\cap_{i=1}^{i=k-1} G_i &lt; b_i \mid H_0) - \text{Pr}(\cap_{i=1}^{i=k} G_i &lt; b_i \mid H_0)\]</span></p>
+<ul>
+<li>
+<code>gsdmvn</code> implementation for MaxCombo test</li>
+</ul>
+<div class="sourceCode" id="cb327"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">gsdmvn</span><span class="fu">:::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_bound.html">gs_bound</a></span><span class="op">(</span><span class="va">alpha_spend</span>, <span class="va">beta_spend</span>,
+  analysis <span class="op">=</span> <span class="va">utility</span><span class="op">$</span><span class="va">info</span><span class="op">$</span><span class="va">Analysis</span>, <span class="co"># Analysis indicator</span>
+  theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">fh_test</span><span class="op">)</span><span class="op">)</span>, <span class="co"># Under the null hypothesis</span>
+  corr <span class="op">=</span> <span class="va">utility</span><span class="op">$</span><span class="va">corr</span>
+<span class="op">)</span><span class="op">$</span><span class="va">upper</span> <span class="co"># Correlation</span></code></pre></div>
+<pre><code>#&gt; [1] 6.175397 2.798651 2.097491</code></pre>
+<ul>
+<li>Compared with upper bound calculated from <code>gsDesign</code>
+</li>
+</ul>
+<div class="sourceCode" id="cb329"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">gsDesign</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gsDesign/man/nSurv.html">gsSurv</a></span><span class="op">(</span>
+  k <span class="op">=</span> <span class="fl">3</span>, test.type <span class="op">=</span> <span class="fl">4</span>, alpha <span class="op">=</span> <span class="fl">0.025</span>,
+  beta <span class="op">=</span> <span class="fl">0.2</span>, astar <span class="op">=</span> <span class="fl">0</span>, timing <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>,
+  sfu <span class="op">=</span> <span class="va">sfLDOF</span>, sfupar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span>, sfl <span class="op">=</span> <span class="va">sfLDOF</span>,
+  sflpar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span>, lambdaC <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.1</span><span class="op">)</span>,
+  hr <span class="op">=</span> <span class="fl">0.6</span>, hr0 <span class="op">=</span> <span class="fl">1</span>, eta <span class="op">=</span> <span class="fl">0.01</span>,
+  gamma <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>,
+  R <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span>, S <span class="op">=</span> <span class="cn">NULL</span>,
+  T <span class="op">=</span> <span class="fl">36</span>, minfup <span class="op">=</span> <span class="fl">24</span>, ratio <span class="op">=</span> <span class="fl">1</span>
+<span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb330"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span><span class="op">$</span><span class="va">upper</span><span class="op">$</span><span class="va">bound</span></code></pre></div>
+<pre><code>#&gt; [1] 3.710303 2.511407 1.992970</code></pre>
+</div>
+</div>
+<div id="lower-bound-in-group-sequential-design" class="section level2">
+<h2>
+<span class="header-section-number">10.6</span> Lower bound in group sequential design<a class="anchor" aria-label="anchor" href="#lower-bound-in-group-sequential-design"><i class="fas fa-link"></i></a>
+</h2>
+<div id="one-test-in-each-interim-analysis-1" class="section level3">
+<h3>
+<span class="header-section-number">10.6.1</span> One test in each interim analysis<a class="anchor" aria-label="anchor" href="#one-test-in-each-interim-analysis-1"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>First interim analysis</li>
+</ul>
+<p><span class="math display">\[\beta_1 = \text{Pr}(Z_1 &lt; a_1 \mid H_1)\]</span></p>
+<div class="sourceCode" id="cb332"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">400</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="va">beta_spend</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, mean <span class="op">=</span> <span class="va">utility</span><span class="op">$</span><span class="va">theta</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<pre><code>#&gt; [1] -2.610665</code></pre>
+<div class="sourceCode" id="cb334"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">500</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="va">beta_spend</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, mean <span class="op">=</span> <span class="va">utility</span><span class="op">$</span><span class="va">theta</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<pre><code>#&gt; [1] -2.516528</code></pre>
+<ul>
+<li>General formula
+<span class="math display">\[\beta_k = \text{Pr}(\cap_{i=1}^{i=k-1}  a_i &lt; Z_i &lt; b_i, Z_k &lt; a_k \mid H_1)\]</span>
+</li>
+</ul>
+</div>
+<div id="maxcombo-lower-bound" class="section level3">
+<h3>
+<span class="header-section-number">10.6.2</span> MaxCombo lower bound<a class="anchor" aria-label="anchor" href="#maxcombo-lower-bound"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>First interim analysis upper bound</li>
+</ul>
+<p><span class="math display">\[\beta_1 = \text{Pr}(G_1 &lt; a_1 \mid H_1) = \text{Pr}(\cap_i Z_{i1} &lt; a_1 \mid H_0)\]</span></p>
+<ul>
+<li>General formula (non-binding futility bound)</li>
+</ul>
+<p><span class="math display">\[\beta_k = \text{Pr}(\cap_{i=1}^{i=k-1} a_i &lt;G_i &lt; b_i, G_k &lt; a_k \mid H_0)\]</span></p>
+<ul>
+<li>
+<code>gsdmvn</code> implementation for MaxCombo test</li>
+</ul>
+<div class="sourceCode" id="cb336"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">400</span>
+<span class="va">utility</span> <span class="op">&lt;-</span> <span class="fu">gsdmvn</span><span class="fu">:::</span><span class="fu">gs_utility_combo</span><span class="op">(</span><span class="va">enrollRates</span>, <span class="va">failRates</span>, fh_test <span class="op">=</span> <span class="va">fh_test</span>, ratio <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+<span class="va">bound</span> <span class="op">&lt;-</span> <span class="fu">gsdmvn</span><span class="fu">:::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_bound.html">gs_bound</a></span><span class="op">(</span><span class="va">alpha_spend</span>, <span class="va">beta_spend</span>,
+  analysis <span class="op">=</span> <span class="va">utility</span><span class="op">$</span><span class="va">info</span><span class="op">$</span><span class="va">Analysis</span>, <span class="co"># Analysis indicator</span>
+  theta <span class="op">=</span> <span class="va">utility</span><span class="op">$</span><span class="va">theta</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>, <span class="co"># Under the alternative hypothesis</span>
+  corr <span class="op">=</span> <span class="va">utility</span><span class="op">$</span><span class="va">corr</span>
+<span class="op">)</span> <span class="co"># Correlation</span>
+
+<span class="va">bound</span><span class="op">$</span><span class="va">lower</span></code></pre></div>
+<pre><code>#&gt; [1] -2.6106678  0.9619422  2.0971764</code></pre>
+<ul>
+<li>Compared with lower bound calculated from <code>gsDesign</code>
+</li>
+</ul>
+<div class="sourceCode" id="cb338"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span><span class="op">$</span><span class="va">lower</span><span class="op">$</span><span class="va">bound</span></code></pre></div>
+<pre><code>#&gt; [1] -0.2361874  1.1703638  1.9929702</code></pre>
+</div>
+</div>
+<div id="sample-size-calculation-2" class="section level2">
+<h2>
+<span class="header-section-number">10.7</span> Sample size calculation<a class="anchor" aria-label="anchor" href="#sample-size-calculation-2"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>sample size and boundaries are set simultaneously using an iterative algorithm.</li>
+</ul>
+<div id="initiate-the-calculation-from-lower-bound-derived-at-n-400" class="section level3">
+<h3>
+<span class="header-section-number">10.7.1</span> Initiate the calculation from lower bound derived at <span class="math inline">\(N = 400\)</span><a class="anchor" aria-label="anchor" href="#initiate-the-calculation-from-lower-bound-derived-at-n-400"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb340"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">bound</span></code></pre></div>
+<pre><code>#&gt;      upper      lower
+#&gt; 1 6.175397 -2.6106678
+#&gt; 2 2.798651  0.9619422
+#&gt; 3 2.097176  2.0971764</code></pre>
+<div class="sourceCode" id="cb342"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_design_combo.html">gs_design_combo</a></span><span class="op">(</span><span class="va">enrollRates</span>,
+  <span class="va">failRates</span>,
+  <span class="va">fh_test</span>,
+  alpha <span class="op">=</span> <span class="fl">0.025</span>,
+  beta <span class="op">=</span> <span class="fl">0.2</span>,
+  ratio <span class="op">=</span> <span class="fl">1</span>,
+  binding <span class="op">=</span> <span class="cn">FALSE</span>,
+  upar <span class="op">=</span> <span class="va">bound</span><span class="op">$</span><span class="va">upper</span>,
+  lpar <span class="op">=</span> <span class="va">bound</span><span class="op">$</span><span class="va">lower</span>,
+<span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_if</a></span><span class="op">(</span><span class="va">is.numeric</span>, <span class="va">round</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
+<pre><code>#&gt;   Analysis Bound Time      N Events     Z Probability Probability_Null
+#&gt; 1        1 Upper   12 324.93  69.79  6.18        0.00             0.00
+#&gt; 3        2 Upper   24 324.93 160.05  2.80        0.24             0.00
+#&gt; 5        3 Upper   36 324.93 215.30  2.10        0.80             0.03
+#&gt; 2        1 Lower   12 324.93  69.79 -2.61        0.00               NA
+#&gt; 4        2 Lower   24 324.93 160.05  0.96        0.13               NA
+#&gt; 6        3 Lower   36 324.93 215.30  2.10        0.20               NA</code></pre>
+</div>
+<div id="update-bound-based-on-newly-calculated-sample-size" class="section level3">
+<h3>
+<span class="header-section-number">10.7.2</span> Update bound based on newly calculated sample size<a class="anchor" aria-label="anchor" href="#update-bound-based-on-newly-calculated-sample-size"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb344"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">355</span>
+<span class="va">utility</span> <span class="op">&lt;-</span> <span class="fu">gsdmvn</span><span class="fu">:::</span><span class="fu">gs_utility_combo</span><span class="op">(</span><span class="va">enrollRates</span>, <span class="va">failRates</span>, fh_test <span class="op">=</span> <span class="va">fh_test</span>, ratio <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+<span class="va">bound</span> <span class="op">&lt;-</span> <span class="fu">gsdmvn</span><span class="fu">:::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_bound.html">gs_bound</a></span><span class="op">(</span><span class="va">alpha_spend</span>, <span class="va">beta_spend</span>,
+  analysis <span class="op">=</span> <span class="va">utility</span><span class="op">$</span><span class="va">info</span><span class="op">$</span><span class="va">Analysis</span>, <span class="co"># Analysis indicator</span>
+  theta <span class="op">=</span> <span class="va">utility</span><span class="op">$</span><span class="va">theta</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>, <span class="co"># Under the alternative hypothesis</span>
+  corr <span class="op">=</span> <span class="va">utility</span><span class="op">$</span><span class="va">corr</span>
+<span class="op">)</span> <span class="co"># Correlation</span>
+
+<span class="va">bound</span></code></pre></div>
+<pre><code>#&gt;      upper      lower
+#&gt; 1 6.175397 -2.6568642
+#&gt; 2 2.798651  0.8266125
+#&gt; 3 2.097704  2.0977039</code></pre>
+<ul>
+<li>Repeat proceduce above until the sample size and lower bound converge</li>
+</ul>
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="maxcombo.html"><span class="header-section-number">9</span> MaxCombo test</a></div>
+<div class="next"><a href="references.html">References</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#maxcombo-boundary"><span class="header-section-number">10</span> Group sequential design boundary with MaxCombo test</a></li>
+<li><a class="nav-link" href="#sample-size-calculation-based-on-spending-function"><span class="header-section-number">10.1</span> Sample size calculation based on spending function</a></li>
+<li><a class="nav-link" href="#information-fraction-1"><span class="header-section-number">10.2</span> Information fraction</a></li>
+<li><a class="nav-link" href="#spending-function"><span class="header-section-number">10.3</span> Spending function</a></li>
+<li><a class="nav-link" href="#technical-details-2"><span class="header-section-number">10.4</span> Technical details</a></li>
+<li>
+<a class="nav-link" href="#upper-bound-in-group-sequential-design"><span class="header-section-number">10.5</span> Upper bound in group sequential design</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#one-test-in-each-interim-analysis"><span class="header-section-number">10.5.1</span> One test in each interim analysis</a></li>
+<li><a class="nav-link" href="#maxcombo-upper-bound"><span class="header-section-number">10.5.2</span> MaxCombo upper bound</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#lower-bound-in-group-sequential-design"><span class="header-section-number">10.6</span> Lower bound in group sequential design</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#one-test-in-each-interim-analysis-1"><span class="header-section-number">10.6.1</span> One test in each interim analysis</a></li>
+<li><a class="nav-link" href="#maxcombo-lower-bound"><span class="header-section-number">10.6.2</span> MaxCombo lower bound</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#sample-size-calculation-2"><span class="header-section-number">10.7</span> Sample size calculation</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#initiate-the-calculation-from-lower-bound-derived-at-n-400"><span class="header-section-number">10.7.1</span> Initiate the calculation from lower bound derived at \(N = 400\)</a></li>
+<li><a class="nav-link" href="#update-bound-based-on-newly-calculated-sample-size"><span class="header-section-number">10.7.2</span> Update bound based on newly calculated sample size</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://stash.merck.com/projects/BARDS/repos/groupsequentialdesigntraining/browse/blob/master/09-maxcombo-boundary.Rmd">View source <i class="fab fa-gitlab"></i></a></li>
+          <li><a id="book-edit" href="https://stash.merck.com/projects/BARDS/repos/groupsequentialdesigntraining/browse/edit/master/09-maxcombo-boundary.Rmd">Edit this page <i class="fab fa-gitlab"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Group Sequential Design Under Non-Proportional Hazards</strong>: Deming Conference Course, December 6, 2021" was written by Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao. It was last built on 2021-11-24.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
