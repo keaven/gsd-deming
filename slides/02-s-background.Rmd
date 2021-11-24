@@ -328,6 +328,7 @@ plot(x, xlab = "Events", main = "Futility bounds testing if experimental trendin
       - O'Brien and Fleming boundary [@o1979multiple]
     - Slud and Wei [@SludWei, @FHO] set fixed IA probabilities
       - Hybrid of boundary family/spending approach
+      
 # Boundary families
 
 ## Boundary family - Haybittle-Peto boundary
