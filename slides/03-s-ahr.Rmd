@@ -483,7 +483,7 @@ where
 $$
   \mathcal{I}=\sum_{m=1}^M (1/E(D_{0m}) + 1/E(D_{1m}))^{-1}
 $$
-- Under null hypothesis, this is like the @Schoenfeld1981 approximation
+- Under null hypothesis, this is like the @schoenfeld1981 approximation
 $$
   \mathcal{I}=\xi\sum_{m=1}^M E(D_{0m})
 $$
@@ -535,7 +535,7 @@ ggplot(
 
 ## Power by AHR
 
-- @Schoenfeld1981 approximation works well plugging in average hazard ratio
+- @schoenfeld1981 approximation works well plugging in average hazard ratio
 - Use `gsDesign::nEvents()`
 
 ```{r, eval = FALSE}
@@ -758,7 +758,7 @@ Question: Do you really want to adapt sample size based on an early interim esti
 ## Asymptotic approximation
 
 - Use of @Tsiatis (also extends to weighted logrank)
-- Statistical information proportional to expected event counts as in @Schoenfeld1981
+- Statistical information proportional to expected event counts as in @schoenfeld1981
 - Natural parameter: $\log(\hbox{AHR})$
 - Statistical information still proportional to number of events
 - Correlation still computed based on statistical information

@@ -30,7 +30,7 @@
   - Fixed enrollment and follow-up period
     - increase enrollment rates to obtain power
   - Proportional hazards: $\theta_k=\theta$ (constant)
-  - $I_k$ ~proportional to event count @Schoenfeld1981
+  - $I_k$ ~proportional to event count @schoenfeld1981
 - We generalize to average hazard ratio (AHR; @Mukhopadhyay2020) for non-proportional hazards (NPH) tested with logrank ($\theta_k$ varies with $k$)
 - Generalized to cover weighted logrank as in @YungLiu in final section today
   - Fixed design only for RMST
