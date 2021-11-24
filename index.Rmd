@@ -69,6 +69,12 @@ x$packages$simtrial <- NULL
 x$packages$gsdmvn <- NULL
 jsonlite::write_json(x, path = "manifest.json", pretty = TRUE, auto_unbox = TRUE, null = "null")
 rm(x)
+
+# Remove the packages from renv.lock
+x <- jsonlite::read_json("renv.lock")
+x$Packages$mkdocs <- NULL
+jsonlite::write_json(x, path = "renv.lock", pretty = TRUE, auto_unbox = TRUE, null = "null")
+rm(x)
 ```
 
 # Welcome! {-}

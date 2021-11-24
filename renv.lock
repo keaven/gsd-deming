@@ -142,6 +142,13 @@
       "Repository": "RSPM",
       "Hash": "0f22be39ec1d141fd03683c06f3a6e67"
     },
+    "corpcor": {
+      "Package": "corpcor",
+      "Version": "1.6.10",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "17ebe3b6d75d09c5bab3891880b34237"
+    },
     "cpp11": {
       "Package": "cpp11",
       "Version": "0.4.1",
@@ -288,6 +295,32 @@
       "Source": "Repository",
       "Repository": "RSPM",
       "Hash": "7e205a1cda23528a18d8037053947ce6"
+    },
+    "gsDesign2": {
+      "Package": "gsDesign2",
+      "Version": "0.1.0",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "merck",
+      "RemoteRepo": "gsDesign2",
+      "RemoteRef": "main",
+      "RemoteSha": "371ac84480ceb38b6e99c3b4b4ad803fa657810e",
+      "Remotes": "Merck/simtrial",
+      "Hash": "d567e6ab718cd6ac8ebab0492a98e5d8"
+    },
+    "gsdmvn": {
+      "Package": "gsdmvn",
+      "Version": "0.1.1.9000",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "merck",
+      "RemoteRepo": "gsdmvn",
+      "RemoteRef": "main",
+      "RemoteSha": "af34897bb307873b0a23145911c9c89d6d5f31c1",
+      "Remotes": "Merck/simtrial, Merck/gsDesign2",
+      "Hash": "d5f4e40abc49ea5999141fe747c64218"
     },
     "gt": {
       "Package": "gt",
