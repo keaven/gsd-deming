@@ -554,7 +554,7 @@ plot(1:36, gsdmvn::wlr_weight_fh(x = 1:36, arm0, arm1, rho = -1, gamma = 0, tau 
 $$\Delta=\int_{0}^{\tau}w(s)\frac{p_{0}\pi_{0}(s)p_{1}\pi_{1}(s)}{\pi(s)}\{\lambda_{1}(s)-\lambda_{0}(s)\}ds$$
 
 - Taylor expansion builds connection between $\Delta$ and weighted average of log hazard ratio (AHR).
-  It is a generalization of the @schoenfeld1981asymptotic asymptotic expansion.
+  It is a generalization of the @Schoenfeld1981 asymptotic expansion.
 
 $$\Delta\approx\int_{0}^{\tau}w(s)\log\left(\frac{\lambda_1(s)}{\lambda_0(s)}\right)\frac{p_{0}\pi_{0}(s)p_{1}\pi_{1}(s)}{\pi(s)^2}v'(s)ds$$
 
