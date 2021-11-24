@@ -63,7 +63,7 @@
 </ul>
 
         <div class="book-extra">
-          <p><a id="book-repo" href="https://stash.merck.com/projects/BARDS/repos/groupsequentialdesigntraining/browse">View book source <i class="fab fa-gitlab"></i></a></p>
+          <p><a id="book-repo" href="https://github.com/keaven/gsd-deming">View book source <i class="fab fa-github"></i></a></p>
         </div>
       </nav>
 </div>
@@ -192,7 +192,7 @@
 <pre><code>#&gt;   Analysis Bound Time      N Events     Z Probability Probability_Null (%)
 #&gt; 1        1 Upper   12 444.81  95.54  3.71        0.00                 0.01
 #&gt; 3        2 Upper   24 444.81 219.10  2.51        0.47                 0.61
-#&gt; 5        3 Upper   36 444.81 294.72  1.99        0.80                 3.26
+#&gt; 5        3 Upper   36 444.81 294.72  1.99        0.80                 3.25
 #&gt; 2        1 Lower   12 444.81  95.54 -0.24        0.14                   NA
 #&gt; 4        2 Lower   24 444.81 219.10  1.17        0.19                   NA
 #&gt; 6        3 Lower   36 444.81 294.72  1.99        0.20                   NA</code></pre>
@@ -244,12 +244,12 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">Probability_Null</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_if</a></span><span class="op">(</span><span class="va">is.numeric</span>, <span class="va">round</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
 <pre><code>#&gt;   Analysis Bound Time      N Events     Z Probability Probability_Null (%)
-#&gt; 1        1 Upper   12 348.22  74.79  3.71        0.00                 0.02
-#&gt; 3        2 Upper   24 348.22 171.52  2.51        0.49                 0.83
-#&gt; 5        3 Upper   36 348.22 230.72  1.99        0.80                 3.28
-#&gt; 2        1 Lower   12 348.22  74.79 -0.24        0.10                   NA
-#&gt; 4        2 Lower   24 348.22 171.52  1.17        0.15                   NA
-#&gt; 6        3 Lower   36 348.22 230.72  1.99        0.20                   NA</code></pre>
+#&gt; 1        1 Upper   12 348.21  74.79  3.71        0.00                 0.02
+#&gt; 3        2 Upper   24 348.21 171.51  2.51        0.49                 0.83
+#&gt; 5        3 Upper   36 348.21 230.72  1.99        0.80                 3.28
+#&gt; 2        1 Lower   12 348.21  74.79 -0.24        0.10                   NA
+#&gt; 4        2 Lower   24 348.21 171.51  1.17        0.15                   NA
+#&gt; 6        3 Lower   36 348.21 230.72  1.99        0.20                   NA</code></pre>
 <ul>
 <li>Simulation results based on 10,000 replications.</li>
 </ul>
@@ -582,7 +582,7 @@ the sample size and events required for WLR under fixed design.</p>
 <ul>
 <li>Compared with Simulation results based on 10,000 replications.</li>
 </ul>
-<div class="inline-figure"><img src="GroupSequentialDesignTraining_files/figure-html/unnamed-chunk-206-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-206-1.png" width="80%" style="display: block; margin: auto;"></div>
 </div>
 <div id="example-2-4" class="section level3">
 <h3>
@@ -618,7 +618,7 @@ the sample size and events required for WLR under fixed design.</p>
 <ul>
 <li>Compared with Simulation results based on 10,000 replications.</li>
 </ul>
-<div class="inline-figure"><img src="GroupSequentialDesignTraining_files/figure-html/unnamed-chunk-208-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-208-1.png" width="80%" style="display: block; margin: auto;"></div>
 </div>
 </div>
 <div id="power-1" class="section level2">
@@ -669,10 +669,10 @@ the sample size and events required for WLR under fixed design.</p>
 <pre><code>#&gt;   Bound Probability
 #&gt; 1 Upper 0.002411474
 #&gt; 2 Upper 0.525796329
-#&gt; 3 Upper 0.828234479
+#&gt; 3 Upper 0.828232129
 #&gt; 4 Lower 0.129688918
 #&gt; 5 Lower 0.162696908
-#&gt; 6 Lower 0.171763663</code></pre>
+#&gt; 6 Lower 0.171764349</code></pre>
 </div>
 <div id="example-2-5" class="section level3">
 <h3>
@@ -697,11 +697,11 @@ the sample size and events required for WLR under fixed design.</p>
 <span class="va">power</span></code></pre></div>
 <pre><code>#&gt;   Bound Probability
 #&gt; 1 Upper 0.006333066
-#&gt; 2 Upper 0.674436947
-#&gt; 3 Upper 0.896140224
+#&gt; 2 Upper 0.674438094
+#&gt; 3 Upper 0.896135871
 #&gt; 4 Lower 0.068860093
-#&gt; 5 Lower 0.089483581
-#&gt; 6 Lower 0.103869578</code></pre>
+#&gt; 5 Lower 0.089485817
+#&gt; 6 Lower 0.103863862</code></pre>
 </div>
 </div>
 <div id="sample-size-1" class="section level2">
@@ -734,7 +734,7 @@ the sample size and events required for WLR under fixed design.</p>
 <span class="op">}</span>
 
 <span class="fu"><a href="https://rdrr.io/r/stats/uniroot.html">uniroot</a></span><span class="op">(</span><span class="va">fun</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1000</span><span class="op">)</span>, extendInt <span class="op">=</span> <span class="st">"yes"</span><span class="op">)</span><span class="op">$</span><span class="va">root</span></code></pre></div>
-<pre><code>#&gt; [1] 444.8071</code></pre>
+<pre><code>#&gt; [1] 444.8043</code></pre>
 </div>
 <div id="example-2-6" class="section level3">
 <h3>
@@ -760,7 +760,7 @@ the sample size and events required for WLR under fixed design.</p>
 <span class="op">}</span>
 
 <span class="fu"><a href="https://rdrr.io/r/stats/uniroot.html">uniroot</a></span><span class="op">(</span><span class="va">fun</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1000</span><span class="op">)</span>, extendInt <span class="op">=</span> <span class="st">"yes"</span><span class="op">)</span><span class="op">$</span><span class="va">root</span></code></pre></div>
-<pre><code>#&gt; [1] 348.214</code></pre>
+<pre><code>#&gt; [1] 348.2092</code></pre>
 
 </div>
 </div>
@@ -823,8 +823,8 @@ the sample size and events required for WLR under fixed design.</p>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://stash.merck.com/projects/BARDS/repos/groupsequentialdesigntraining/browse/blob/master/08-maxcombo.Rmd">View source <i class="fab fa-gitlab"></i></a></li>
-          <li><a id="book-edit" href="https://stash.merck.com/projects/BARDS/repos/groupsequentialdesigntraining/browse/edit/master/08-maxcombo.Rmd">Edit this page <i class="fab fa-gitlab"></i></a></li>
+<li><a id="book-source" href="https://github.com/keaven/gsd-deming/blob/master/08-maxcombo.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/keaven/gsd-deming/edit/master/08-maxcombo.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>
