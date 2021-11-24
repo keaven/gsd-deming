@@ -245,7 +245,7 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_if</a></span><span class="op">(</span><span class="va">is.numeric</span>, <span class="va">round</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
 <pre><code>#&gt;   Analysis Bound Time      N Events     Z Probability Probability_Null (%)
 #&gt; 1        1 Upper   12 348.21  74.79  3.71        0.00                 0.02
-#&gt; 3        2 Upper   24 348.21 171.52  2.51        0.49                 0.83
+#&gt; 3        2 Upper   24 348.21 171.52  2.51        0.49                 0.84
 #&gt; 5        3 Upper   36 348.21 230.72  1.99        0.80                 3.27
 #&gt; 2        1 Lower   12 348.21  74.79 -0.24        0.10                   NA
 #&gt; 4        2 Lower   24 348.21 171.52  1.17        0.15                   NA
@@ -669,10 +669,10 @@ the sample size and events required for WLR under fixed design.</p>
 <pre><code>#&gt;   Bound Probability
 #&gt; 1 Upper 0.002411474
 #&gt; 2 Upper 0.525796329
-#&gt; 3 Upper 0.828237696
+#&gt; 3 Upper 0.828233650
 #&gt; 4 Lower 0.129688918
 #&gt; 5 Lower 0.162696908
-#&gt; 6 Lower 0.171757436</code></pre>
+#&gt; 6 Lower 0.171764670</code></pre>
 </div>
 <div id="example-2-5" class="section level3">
 <h3>
@@ -697,11 +697,11 @@ the sample size and events required for WLR under fixed design.</p>
 <span class="va">power</span></code></pre></div>
 <pre><code>#&gt;   Bound Probability
 #&gt; 1 Upper 0.006333066
-#&gt; 2 Upper 0.674439991
-#&gt; 3 Upper 0.896138322
+#&gt; 2 Upper 0.674436526
+#&gt; 3 Upper 0.896148507
 #&gt; 4 Lower 0.068860093
-#&gt; 5 Lower 0.089484055
-#&gt; 6 Lower 0.103881329</code></pre>
+#&gt; 5 Lower 0.089482778
+#&gt; 6 Lower 0.103852118</code></pre>
 </div>
 </div>
 <div id="sample-size-1" class="section level2">
@@ -734,7 +734,7 @@ the sample size and events required for WLR under fixed design.</p>
 <span class="op">}</span>
 
 <span class="fu"><a href="https://rdrr.io/r/stats/uniroot.html">uniroot</a></span><span class="op">(</span><span class="va">fun</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1000</span><span class="op">)</span>, extendInt <span class="op">=</span> <span class="st">"yes"</span><span class="op">)</span><span class="op">$</span><span class="va">root</span></code></pre></div>
-<pre><code>#&gt; [1] 444.8055</code></pre>
+<pre><code>#&gt; [1] 444.8021</code></pre>
 </div>
 <div id="example-2-6" class="section level3">
 <h3>
@@ -760,7 +760,7 @@ the sample size and events required for WLR under fixed design.</p>
 <span class="op">}</span>
 
 <span class="fu"><a href="https://rdrr.io/r/stats/uniroot.html">uniroot</a></span><span class="op">(</span><span class="va">fun</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1000</span><span class="op">)</span>, extendInt <span class="op">=</span> <span class="st">"yes"</span><span class="op">)</span><span class="op">$</span><span class="va">root</span></code></pre></div>
-<pre><code>#&gt; [1] 348.2163</code></pre>
+<pre><code>#&gt; [1] 348.23</code></pre>
 
 </div>
 </div>
