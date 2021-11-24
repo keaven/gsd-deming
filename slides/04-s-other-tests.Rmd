@@ -72,8 +72,8 @@ $$ n = \frac{4 (z_{\alpha}+z_{\beta})^{2}}{\theta^2} $$
 
 ## Examples
 
-- [Two-sample t-test](https://rconnect.merck.com:3939/gsd-training/fixed.html#two-sample-t-test)
-- [Logrank test](https://rconnect.merck.com:3939/gsd-training/fixed.html#logrank-test)
+- [Two-sample t-test](https://keaven.github.io/gsd-deming/fixed.html#two-sample-t-test)
+- [Logrank test](https://keaven.github.io/gsd-deming/fixed.html#logrank-test)
 
 ## Sample size calculation under non-proportional hazards
 
@@ -81,12 +81,12 @@ $$ n = \frac{4 (z_{\alpha}+z_{\beta})^{2}}{\theta^2} $$
 
 ## Fixed design with weighted logrank test
 
-- [Examples](https://rconnect.merck.com:3939/gsd-training/fixed.html#weighted-logrank-test)
-- [Technical details](https://rconnect.merck.com:3939/gsd-training/fixed.html#technical-details) are skipped
+- [Examples](https://keaven.github.io/gsd-deming/fixed.html#weighted-logrank-test)
+- [Technical details](https://keaven.github.io/gsd-deming/fixed.html#technical-details) are skipped
 
 ## Fixed design with MaxCombo test
 
-- [Examples](https://rconnect.merck.com:3939/gsd-training/fixed.html#maxcombo-test)
+- [Examples](https://keaven.github.io/gsd-deming/fixed.html#maxcombo-test)
 
 
 ## Weighted logrank test
@@ -99,12 +99,12 @@ Note, the only difference is that the test statistics fixed analysis up to $t_k$
 
 ## Group sequential design with weighted logrank test
 
-- [Examples with pre-defined boundary](https://rconnect.merck.com:3939/gsd-training/wlr.html#example-scenario)
-- [Examples with calculated boundary](https://rconnect.merck.com:3939/gsd-training/wlr-boundary.html)
-- [Technical details](https://rconnect.merck.com:3939/gsd-training/wlr.html#technical-details-1) are skipped
+- [Examples with pre-defined boundary](https://keaven.github.io/gsd-deming/wlr.html#example-scenario)
+- [Examples with calculated boundary](https://keaven.github.io/gsd-deming/wlr-boundary.html)
+- [Technical details](https://keaven.github.io/gsd-deming/wlr.html#technical-details-1) are skipped
 
 ## Group sequential design with MaxCombo test
 
-- [Examples with pre-defined boundary](https://rconnect.merck.com:3939/gsd-training/wlr.html#example-scenario)
-- [Examples with calculated boundary](https://rconnect.merck.com:3939/gsd-training/maxcombo-boundary.html)
-- [Technical details](https://rconnect.merck.com:3939/gsd-training/maxcombo.html#outline-of-technical-details) are skipped
+- [Examples with pre-defined boundary](https://keaven.github.io/gsd-deming/wlr.html#example-scenario)
+- [Examples with calculated boundary](https://keaven.github.io/gsd-deming/maxcombo-boundary.html)
+- [Technical details](https://keaven.github.io/gsd-deming/maxcombo.html#outline-of-technical-details) are skipped
