@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 10 Group sequential design boundary with MaxCombo test | Group Sequential Design Under Non-Proportional Hazards</title>
 <meta name="author" content="Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao">
-<meta name="description" content="In this chapter, we calculate boundary based on the error spending approach following (???). We continue use the same example scenario in the last chapter. enrollRates &lt;- tibble::tibble(Stratum =...">
+<meta name="description" content="In this chapter, we calculate boundary based on the error spending approach following Gordon Lan and DeMets (1983). We continue use the same example scenario in the last chapter. enrollRates &lt;-...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
 <meta property="og:title" content="Chapter 10 Group sequential design boundary with MaxCombo test | Group Sequential Design Under Non-Proportional Hazards">
 <meta property="og:type" content="book">
-<meta property="og:description" content="In this chapter, we calculate boundary based on the error spending approach following (???). We continue use the same example scenario in the last chapter. enrollRates &lt;- tibble::tibble(Stratum =...">
+<meta property="og:description" content="In this chapter, we calculate boundary based on the error spending approach following Gordon Lan and DeMets (1983). We continue use the same example scenario in the last chapter. enrollRates &lt;-...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 10 Group sequential design boundary with MaxCombo test | Group Sequential Design Under Non-Proportional Hazards">
-<meta name="twitter:description" content="In this chapter, we calculate boundary based on the error spending approach following (???). We continue use the same example scenario in the last chapter. enrollRates &lt;- tibble::tibble(Stratum =...">
+<meta name="twitter:description" content="In this chapter, we calculate boundary based on the error spending approach following Gordon Lan and DeMets (1983). We continue use the same example scenario in the last chapter. enrollRates &lt;-...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -71,7 +71,7 @@
 <h1>
 <span class="header-section-number">10</span> Group sequential design boundary with MaxCombo test<a class="anchor" aria-label="anchor" href="#maxcombo-boundary"><i class="fas fa-link"></i></a>
 </h1>
-<p>In this chapter, we calculate boundary based on the error spending approach following <span class="citation">(<span class="citeproc-not-found" data-reference-id="gordon1983discrete"><strong>???</strong></span>)</span>.</p>
+<p>In this chapter, we calculate boundary based on the error spending approach following <span class="citation">Gordon Lan and DeMets (<a href="references.html#ref-gordon1983discrete" role="doc-biblioref">1983</a>)</span>.</p>
 <p>We continue use the same example scenario in the last chapter.</p>
 <div class="sourceCode" id="cb302"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">enrollRates</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>Stratum <span class="op">=</span> <span class="st">"All"</span>, duration <span class="op">=</span> <span class="fl">12</span>, rate <span class="op">=</span> <span class="fl">500</span> <span class="op">/</span> <span class="fl">12</span><span class="op">)</span>
@@ -145,12 +145,12 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">Probability_Null</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_if</a></span><span class="op">(</span><span class="va">is.numeric</span>, <span class="va">round</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
 <pre><code>#&gt;   Analysis Bound Time      N Events     Z Probability Probability_Null (%)
-#&gt; 1        1 Upper   12 301.24  64.70  6.18        0.00                 0.00
-#&gt; 3        2 Upper   24 301.24 148.38  2.80        0.22                 0.26
-#&gt; 5        3 Upper   36 301.24 199.60  2.10        0.80                 2.50
-#&gt; 2        1 Lower   12 301.24  64.70 -2.72        0.00                   NA
-#&gt; 4        2 Lower   24 301.24 148.38  0.65        0.08                   NA
-#&gt; 6        3 Lower   36 301.24 199.60  2.10        0.20                   NA</code></pre>
+#&gt; 1        1 Upper   12 301.26  64.71  6.18        0.00                 0.00
+#&gt; 3        2 Upper   24 301.26 148.39  2.80        0.22                 0.26
+#&gt; 5        3 Upper   36 301.26 199.61  2.10        0.80                 2.50
+#&gt; 2        1 Lower   12 301.26  64.71 -2.72        0.00                   NA
+#&gt; 4        2 Lower   24 301.26 148.39  0.65        0.08                   NA
+#&gt; 6        3 Lower   36 301.26 199.61  2.10        0.20                   NA</code></pre>
 <ul>
 <li>Simulation results based on 10,000 replications.</li>
 </ul>
@@ -305,7 +305,7 @@
 <code>test.type=4</code>: A two-sided, asymmetric, beta-spending with non-binding lower bound.</li>
 </ul>
 </li>
-<li><p>Lan-DeMets spending function to approximate an O’Brien-Fleming bound <span class="citation">(<span class="citeproc-not-found" data-reference-id="gordon1983discrete"><strong>???</strong></span>)</span>. (<code><a href="https://rdrr.io/pkg/gsDesign/man/sfLDOF.html">gsDesign::sfLDOF</a></code>)</p></li>
+<li><p>Lan-DeMets spending function to approximate an O’Brien-Fleming bound <span class="citation">Gordon Lan and DeMets (<a href="references.html#ref-gordon1983discrete" role="doc-biblioref">1983</a>)</span>. (<code><a href="https://rdrr.io/pkg/gsDesign/man/sfLDOF.html">gsDesign::sfLDOF</a></code>)</p></li>
 <li><p><span class="math inline">\(t\)</span> is information fraction in the formula below.</p></li>
 </ul>
 <p><span class="math display">\[f(t; \alpha)=2-2\Phi\left(\Phi^{-1}\left(\frac{1-\alpha/2}{t^{\rho/2}}\right)\right)\]</span></p>
@@ -382,7 +382,7 @@ It can be skipped for the first read of this training material.</p>
   theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">fh_test</span><span class="op">)</span><span class="op">)</span>, <span class="co"># Under the null hypothesis</span>
   corr <span class="op">=</span> <span class="va">utility</span><span class="op">$</span><span class="va">corr</span>
 <span class="op">)</span><span class="op">$</span><span class="va">upper</span> <span class="co"># Correlation</span></code></pre></div>
-<pre><code>#&gt; [1] 6.175397 2.798651 2.097048</code></pre>
+<pre><code>#&gt; [1] 6.175397 2.798651 2.097538</code></pre>
 <ul>
 <li>Compared with upper bound calculated from <code>gsDesign</code>
 </li>
@@ -455,7 +455,7 @@ It can be skipped for the first read of this training material.</p>
 <span class="op">)</span> <span class="co"># Correlation</span>
 
 <span class="va">bound</span><span class="op">$</span><span class="va">lower</span></code></pre></div>
-<pre><code>#&gt; [1] -2.6106678  0.9619422  2.0966043</code></pre>
+<pre><code>#&gt; [1] -2.6106678  0.9619422  2.0972641</code></pre>
 <ul>
 <li>Compared with lower bound calculated from <code>gsDesign</code>
 </li>
@@ -481,7 +481,7 @@ It can be skipped for the first read of this training material.</p>
 <pre><code>#&gt;      upper      lower
 #&gt; 1 6.175397 -2.6106678
 #&gt; 2 2.798651  0.9619422
-#&gt; 3 2.096604  2.0966043</code></pre>
+#&gt; 3 2.097264  2.0972641</code></pre>
 <div class="sourceCode" id="cb342"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_design_combo.html">gs_design_combo</a></span><span class="op">(</span><span class="va">enrollRates</span>,
   <span class="va">failRates</span>,
@@ -494,12 +494,12 @@ It can be skipped for the first read of this training material.</p>
   lpar <span class="op">=</span> <span class="va">bound</span><span class="op">$</span><span class="va">lower</span>,
 <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_if</a></span><span class="op">(</span><span class="va">is.numeric</span>, <span class="va">round</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
 <pre><code>#&gt;   Analysis Bound Time      N Events     Z Probability Probability_Null
-#&gt; 1        1 Upper   12 324.86  69.78  6.18        0.00             0.00
-#&gt; 3        2 Upper   24 324.86 160.01  2.80        0.24             0.00
-#&gt; 5        3 Upper   36 324.86 215.24  2.10        0.80             0.03
-#&gt; 2        1 Lower   12 324.86  69.78 -2.61        0.00               NA
-#&gt; 4        2 Lower   24 324.86 160.01  0.96        0.13               NA
-#&gt; 6        3 Lower   36 324.86 215.24  2.10        0.20               NA</code></pre>
+#&gt; 1        1 Upper   12 324.95  69.80  6.18        0.00             0.00
+#&gt; 3        2 Upper   24 324.95 160.06  2.80        0.24             0.00
+#&gt; 5        3 Upper   36 324.95 215.31  2.10        0.80             0.03
+#&gt; 2        1 Lower   12 324.95  69.80 -2.61        0.00               NA
+#&gt; 4        2 Lower   24 324.95 160.06  0.96        0.13               NA
+#&gt; 6        3 Lower   36 324.95 215.31  2.10        0.20               NA</code></pre>
 </div>
 <div id="update-bound-based-on-newly-calculated-sample-size" class="section level3">
 <h3>
@@ -518,7 +518,7 @@ It can be skipped for the first read of this training material.</p>
 <pre><code>#&gt;      upper      lower
 #&gt; 1 6.175397 -2.6568642
 #&gt; 2 2.798651  0.8266125
-#&gt; 3 2.097518  2.0975182</code></pre>
+#&gt; 3 2.097405  2.0974052</code></pre>
 <ul>
 <li>Repeat proceduce above until the sample size and lower bound converge</li>
 </ul>

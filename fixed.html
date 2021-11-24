@@ -90,7 +90,7 @@ will be the tool for this training.</p>
 <ul>
 <li>Piecewise uniform using <code><a href="https://rdrr.io/pkg/npsurvSS/man/create_arm.html">npsurvSS::create_arm()</a></code>
 </li>
-<li>Poisson process with piecewise uniform enrollment using <code><a href="https://rdrr.io/pkg/gsDesign/man/nSurv.html">gsDesign::nSurv()</a></code> <span class="citation">(<span class="citeproc-not-found" data-reference-id="lachin1986evaluation"><strong>???</strong></span>)</span> and <code><a href="https://merck.github.io/gsdmvn/reference/gs_design_ahr.html">gsdmvn::gs_design_ahr()</a></code>
+<li>Poisson process with piecewise uniform enrollment using <code><a href="https://rdrr.io/pkg/gsDesign/man/nSurv.html">gsDesign::nSurv()</a></code> <span class="citation">Lachin and Foulkes (<a href="references.html#ref-lachin1986evaluation" role="doc-biblioref">1986</a><a href="references.html#ref-lachin1986evaluation" role="doc-biblioref">b</a>)</span> and <code><a href="https://merck.github.io/gsdmvn/reference/gs_design_ahr.html">gsdmvn::gs_design_ahr()</a></code>
 </li>
 </ul>
 </li>
@@ -212,7 +212,7 @@ survival distribution loss to follow-up distribution and study duration.</p>
 </ul>
 <div class="rmdnote">
 <p>For simplicity, we skip the detail of sample size calculation,
-interested readers can refer <span class="citation">(<span class="citeproc-not-found" data-reference-id="lachin1986evaluation"><strong>???</strong></span>)</span>.</p>
+interested readers can refer <span class="citation">Lachin and Foulkes (<a href="references.html#ref-lachin1986evaluation" role="doc-biblioref">1986</a><a href="references.html#ref-lachin1986evaluation" role="doc-biblioref">b</a>)</span>.</p>
 </div>
 <p>Let’s make connection between math formula and R code by considering a scenarios with
 hazard ratio at 0.6.</p>
@@ -249,7 +249,7 @@ The key argument in <code><a href="https://rdrr.io/pkg/npsurvSS/man/create_arm.h
 <pre><code>#&gt;        n0        n1         n        d0        d1         d 
 #&gt;  68.12167  68.12167 136.24335  61.92878  58.38693 120.31570</code></pre>
 <p>The number of events from <code><a href="https://rdrr.io/pkg/gsDesign/man/nSurv.html">gsDesign::nSurv()</a></code> is slighted smaller,
-because, <code><a href="https://rdrr.io/pkg/gsDesign/man/nSurv.html">gsDesign::nSurv()</a></code> follows <span class="citation">(<span class="citeproc-not-found" data-reference-id="lachin1986evaluation"><strong>???</strong></span>)</span>
+because, <code><a href="https://rdrr.io/pkg/gsDesign/man/nSurv.html">gsDesign::nSurv()</a></code> follows <span class="citation">Lachin and Foulkes (<a href="references.html#ref-lachin1986evaluation" role="doc-biblioref">1986</a><a href="references.html#ref-lachin1986evaluation" role="doc-biblioref">b</a>)</span>
 that relax the local alternative assumption and is recommended in practice.</p>
 <div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">gsDesign</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gsDesign/man/nSurv.html">nSurv</a></span><span class="op">(</span>
@@ -675,7 +675,7 @@ where <span class="math inline">\(\theta = \Delta/\sigma\)</span> is the effect 
 <p><span class="math display">\[\Delta=\int_{0}^{\tau}w(s)\frac{p_{0}\pi_{0}(s)p_{1}\pi_{1}(s)}{\pi(s)}\{\lambda_{1}(s)-\lambda_{0}(s)\}ds\]</span></p>
 <ul>
 <li>Taylor expansion builds connection between <span class="math inline">\(\Delta\)</span> and weighted average of log hazard ratio (AHR).
-It is a generalization of the <span class="citation">Schoenfeld (<a href="references.html#ref-schoenfeld1981asymptotic" role="doc-biblioref">1981</a><a href="references.html#ref-schoenfeld1981asymptotic" role="doc-biblioref">b</a>)</span> asymptotic expansion.</li>
+It is a generalization of the <span class="citation">Schoenfeld (<a href="references.html#ref-schoenfeld1981asymptotic" role="doc-biblioref">1981</a>)</span> asymptotic expansion.</li>
 </ul>
 <p><span class="math display">\[\Delta\approx\int_{0}^{\tau}w(s)\log\left(\frac{\lambda_1(s)}{\lambda_0(s)}\right)\frac{p_{0}\pi_{0}(s)p_{1}\pi_{1}(s)}{\pi(s)^2}v'(s)ds\]</span></p>
 <ul>
@@ -736,7 +736,7 @@ We focus on Fleming and Harrington weight function <span class="math inline">\(F
 <p>To calculate sample size for the MaxCombo test,
 we will need to know the variance-covariance of multiple WLR test statistics.</p>
 <p>For Fleming and Harrington weight function, the covariance of different WLR test statistics can be calculated.
-Based on <span class="citation">(<span class="citeproc-not-found" data-reference-id="karrison2016versatile"><strong>???</strong></span>)</span> and <span class="citation">Wang et al (<a href="references.html#ref-wang2019simulation" role="doc-biblioref">2019</a>)</span>,
+Based on <span class="citation">Karrison (<a href="references.html#ref-karrison2016versatile" role="doc-biblioref">2016</a>)</span> and <span class="citation">Wang et al (<a href="references.html#ref-wang2019simulation" role="doc-biblioref">2019</a>)</span>,
 the covariance of two test statistics <span class="math inline">\(Z_1 = Z(\rho_1, \gamma_1), Z_2 = Z(\rho_2, \gamma_2)\)</span> is</p>
 <p><span class="math display">\[\text{Cov}(Z_1, Z_2) = \text{Var}(Z(\frac{\rho_1 + \rho_2}{2}, \frac{\gamma_1 + \gamma_2}{2}))\]</span></p>
 <ul>
