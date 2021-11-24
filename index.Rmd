@@ -40,16 +40,6 @@ library(fs)
 library(gt)
 ```
 
-```{r, pkglite}
-library(pkglite)
-
-path <- file.path(tempdir(), "gsd-training/")
-pkglite::unpack(input = "rpkgs/modestWLRT.txt", output = path, quiet = TRUE, install = TRUE, upgrade = "never")
-pkglite::unpack(input = "rpkgs/gsDesign2.txt", output = path, quiet = TRUE, install = TRUE, upgrade = "never")
-pkglite::unpack(input = "rpkgs/simtrial.txt", output = path, quiet = TRUE, install = TRUE, upgrade = "never")
-pkglite::unpack(input = "rpkgs/gsdmvn.txt", output = path, quiet = TRUE, install = TRUE, upgrade = "never")
-```
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(comment = "#>", echo = TRUE, message = FALSE, out.width = "80%", fig.align = "center")
 ```
