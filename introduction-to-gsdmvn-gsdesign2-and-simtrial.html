@@ -224,7 +224,7 @@ The details of this simulation can be found in Section <a href="introduction-to-
 The simulated power is calculated by <code><a href="https://merck.github.io/simtrial/reference/simfix.html">simtrial::simfix()</a></code>, and the asymptotic power is calculated by <code><a href="https://merck.github.io/gsdmvn/reference/gs_power_ahr.html">gsdmvn::gs_power_ahr()</a></code>.
 To conduct the comparison, we first save the output of <code><a href="https://merck.github.io/simtrial/reference/simfix.html">simtrial::simfix()</a></code> by running the following code chunk.
 After that, we simply load the simulation results and compare it with the asymptotic power.</p>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">gsDesign</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://merck.github.io/simtrial/">simtrial</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
@@ -316,7 +316,7 @@ After that, we simply load the simulation results and compare it with the asympt
 <span class="co"># Save the simulation data</span>
 <span class="fu"><a href="https://rdrr.io/r/base/save.html">save</a></span><span class="op">(</span><span class="va">my_gsDesign</span>, file <span class="op">=</span> <span class="st">"./data/simulation_gs_power_ahr_my_gsDesign.Rdata"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/save.html">save</a></span><span class="op">(</span><span class="va">my_simfix</span>, file <span class="op">=</span> <span class="st">"./data/simulation_gs_power_ahr_my_simfix.Rdata"</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">gsDesign</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://merck.github.io/simtrial/">simtrial</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
@@ -361,7 +361,7 @@ After that, we simply load the simulation results and compare it with the asympt
 
 <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"The power at the 1st IA by gs_power_ahr() is:"</span>, <span class="va">my_ahr_IA_power</span>, <span class="st">"\n"</span><span class="op">)</span></code></pre></div>
 <pre><code>#&gt; The power at the 1st IA by gs_power_ahr() is: 0.4605649</code></pre>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"The power at the 1st IA by"</span>, <span class="va">my_nsim</span>, <span class="st">"simulation is:"</span>, <span class="va">my_sim_IA_power</span>, <span class="st">"\n"</span><span class="op">)</span></code></pre></div>
 <pre><code>#&gt; The power at the 1st IA by 1e+05 simulation is: 0.46655</code></pre>
 </div>
@@ -373,7 +373,7 @@ After that, we simply load the simulation results and compare it with the asympt
 The simulated power is calculated by <code><a href="https://merck.github.io/simtrial/reference/simPWSurv.html">simtrial::simPWSurv()</a></code>, and the asymptotic power is calculated by <code><a href="https://merck.github.io/gsDesign2/reference/AHR.html">gsDesign2::AHR()</a></code>.
 To conduct the comparison, we first save the output of <code><a href="https://merck.github.io/simtrial/reference/simPWSurv.html">simtrial::simPWSurv()</a></code> by running the following code chunk.
 After that, we simply load the simulation results and compare it with the asymptotic AHR</p>
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/therneau/survival">survival</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://merck.github.io/simtrial/">simtrial</a></span><span class="op">)</span>
@@ -458,7 +458,7 @@ After that, we simply load the simulation results and compare it with the asympt
   <span class="op">}</span>
 <span class="op">}</span>
 <span class="fu"><a href="https://rdrr.io/r/base/save.html">save</a></span><span class="op">(</span><span class="va">results</span>, file <span class="op">=</span> <span class="st">"./data/simulation_AHR_simPRSurv.Rdata"</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Calculate the simulated AHR</span>
 <span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"./data/simulation_AHR_simPRSurv.Rdata"</span><span class="op">)</span>
 <span class="va">AHR_simulated</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
@@ -509,12 +509,12 @@ After that, we simply load the simulation results and compare it with the asympt
   <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">8</span>, <span class="fl">9</span><span class="op">)</span>, decimals <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">7</span><span class="op">)</span>, decimals <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
-<div id="rysklqnevo" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="ofhpzttaat" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#rysklqnevo .gt_table {
+#ofhpzttaat .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -539,7 +539,7 @@ After that, we simply load the simulation results and compare it with the asympt
   border-left-color: #D3D3D3;
 }
 
-#rysklqnevo .gt_heading {
+#ofhpzttaat .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -551,7 +551,7 @@ After that, we simply load the simulation results and compare it with the asympt
   border-right-color: #D3D3D3;
 }
 
-#rysklqnevo .gt_title {
+#ofhpzttaat .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -561,7 +561,7 @@ After that, we simply load the simulation results and compare it with the asympt
   border-bottom-width: 0;
 }
 
-#rysklqnevo .gt_subtitle {
+#ofhpzttaat .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -571,13 +571,13 @@ After that, we simply load the simulation results and compare it with the asympt
   border-top-width: 0;
 }
 
-#rysklqnevo .gt_bottom_border {
+#ofhpzttaat .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#rysklqnevo .gt_col_headings {
+#ofhpzttaat .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -592,7 +592,7 @@ After that, we simply load the simulation results and compare it with the asympt
   border-right-color: #D3D3D3;
 }
 
-#rysklqnevo .gt_col_heading {
+#ofhpzttaat .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -612,7 +612,7 @@ After that, we simply load the simulation results and compare it with the asympt
   overflow-x: hidden;
 }
 
-#rysklqnevo .gt_column_spanner_outer {
+#ofhpzttaat .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -624,15 +624,15 @@ After that, we simply load the simulation results and compare it with the asympt
   padding-right: 4px;
 }
 
-#rysklqnevo .gt_column_spanner_outer:first-child {
+#ofhpzttaat .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#rysklqnevo .gt_column_spanner_outer:last-child {
+#ofhpzttaat .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#rysklqnevo .gt_column_spanner {
+#ofhpzttaat .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -644,7 +644,7 @@ After that, we simply load the simulation results and compare it with the asympt
   width: 100%;
 }
 
-#rysklqnevo .gt_group_heading {
+#ofhpzttaat .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -666,7 +666,7 @@ After that, we simply load the simulation results and compare it with the asympt
   vertical-align: middle;
 }
 
-#rysklqnevo .gt_empty_group_heading {
+#ofhpzttaat .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -681,15 +681,15 @@ After that, we simply load the simulation results and compare it with the asympt
   vertical-align: middle;
 }
 
-#rysklqnevo .gt_from_md > :first-child {
+#ofhpzttaat .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#rysklqnevo .gt_from_md > :last-child {
+#ofhpzttaat .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#rysklqnevo .gt_row {
+#ofhpzttaat .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -708,7 +708,7 @@ After that, we simply load the simulation results and compare it with the asympt
   overflow-x: hidden;
 }
 
-#rysklqnevo .gt_stub {
+#ofhpzttaat .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -720,7 +720,7 @@ After that, we simply load the simulation results and compare it with the asympt
   padding-left: 12px;
 }
 
-#rysklqnevo .gt_summary_row {
+#ofhpzttaat .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -730,7 +730,7 @@ After that, we simply load the simulation results and compare it with the asympt
   padding-right: 5px;
 }
 
-#rysklqnevo .gt_first_summary_row {
+#ofhpzttaat .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -740,7 +740,7 @@ After that, we simply load the simulation results and compare it with the asympt
   border-top-color: #D3D3D3;
 }
 
-#rysklqnevo .gt_grand_summary_row {
+#ofhpzttaat .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -750,7 +750,7 @@ After that, we simply load the simulation results and compare it with the asympt
   padding-right: 5px;
 }
 
-#rysklqnevo .gt_first_grand_summary_row {
+#ofhpzttaat .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -760,11 +760,11 @@ After that, we simply load the simulation results and compare it with the asympt
   border-top-color: #D3D3D3;
 }
 
-#rysklqnevo .gt_striped {
+#ofhpzttaat .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#rysklqnevo .gt_table_body {
+#ofhpzttaat .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -773,7 +773,7 @@ After that, we simply load the simulation results and compare it with the asympt
   border-bottom-color: #D3D3D3;
 }
 
-#rysklqnevo .gt_footnotes {
+#ofhpzttaat .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -787,13 +787,13 @@ After that, we simply load the simulation results and compare it with the asympt
   border-right-color: #D3D3D3;
 }
 
-#rysklqnevo .gt_footnote {
+#ofhpzttaat .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#rysklqnevo .gt_sourcenotes {
+#ofhpzttaat .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -807,41 +807,41 @@ After that, we simply load the simulation results and compare it with the asympt
   border-right-color: #D3D3D3;
 }
 
-#rysklqnevo .gt_sourcenote {
+#ofhpzttaat .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#rysklqnevo .gt_left {
+#ofhpzttaat .gt_left {
   text-align: left;
 }
 
-#rysklqnevo .gt_center {
+#ofhpzttaat .gt_center {
   text-align: center;
 }
 
-#rysklqnevo .gt_right {
+#ofhpzttaat .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#rysklqnevo .gt_font_normal {
+#ofhpzttaat .gt_font_normal {
   font-weight: normal;
 }
 
-#rysklqnevo .gt_font_bold {
+#ofhpzttaat .gt_font_bold {
   font-weight: bold;
 }
 
-#rysklqnevo .gt_font_italic {
+#ofhpzttaat .gt_font_italic {
   font-style: italic;
 }
 
-#rysklqnevo .gt_super {
+#ofhpzttaat .gt_super {
   font-size: 65%;
 }
 
-#rysklqnevo .gt_footnote_marks {
+#ofhpzttaat .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -913,7 +913,7 @@ After that, we simply load the simulation results and compare it with the asympt
 <span class="header-section-number">4.4.3</span> Simulation 3: Compare <span class="math inline">\(\beta\)</span> by MLE and weighted summation<a class="anchor" aria-label="anchor" href="#secAhrSimMleWs"><i class="fas fa-link"></i></a>
 </h3>
 <p>This section compares the AHR estimated by MLE (see theoretical details in Section <a href="average-hazard-ratio.html#secAhrMLE">3.2.1</a>) and weighted summation (see theoretical details in Section <a href="average-hazard-ratio.html#secAhrWeightedSum">3.2.2</a>).</p>
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gt.rstudio.com/">gt</a></span><span class="op">)</span>
 <span class="va">my_nsim</span> <span class="op">&lt;-</span> <span class="fl">10</span>
@@ -996,7 +996,7 @@ After that, we simply load the simulation results and compare it with the asympt
 
 <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">compare_results</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Weighted Summation"</span>, <span class="st">"MLE"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/save.html">save</a></span><span class="op">(</span><span class="va">compare_results</span>, file <span class="op">=</span> <span class="st">"./data/simulation_MLE_vs_WS.Rdata"</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"./data/simulation_MLE_vs_WS.Rdata"</span><span class="op">)</span>
 <span class="va">my_nsim</span> <span class="op">&lt;-</span> <span class="fl">1e+5</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">compare_results</span><span class="op">)</span></code></pre></div>
@@ -1007,7 +1007,7 @@ After that, we simply load the simulation results and compare it with the asympt
 #&gt; [4,]         -0.5409583 -0.5530679
 #&gt; [5,]         -0.4247562 -0.4252013
 #&gt; [6,]         -0.7252355 -0.7411065</code></pre>
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span>
   <span class="st">"The MSE between MLE and weighted summation is "</span>,
   <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">compare_results</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="va">compare_results</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> <span class="op">/</span> <span class="va">my_nsim</span>, <span class="st">"\n"</span>
