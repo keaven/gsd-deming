@@ -57,8 +57,7 @@ knitr::opts_chunk$set(comment = "#>", echo = TRUE, message = FALSE, out.width = 
 ```{r, eval = FALSE, include=FALSE}
 # Update manifest.json
 options(repos = c(
-  "https://rspm.merck.com/open_risk/latest",
-  "https://rspm.merck.com/bardsdev/latest"
+  "https://packagemanager.rstudio.com/cran/latest"
 ))
 rsconnect::writeManifest(appPrimaryDoc = "index.Rmd", contentCategory = "site")
 
