@@ -1,0 +1,58 @@
+# Summary
+
+## Where to start for NPH?
+
+- Understand your control group
+  - Get *simple* assumptions to approximate published results?
+- Understand AHR
+  - Consider treatment effect that is clinically meaningful, but conservative
+  - Consider a treatment effect delay that is *intermediate*
+  - Understand likely enrollment pattern and dropout rate
+  - Plot AHR, underying survival differences and expected accrual of patients and events
+  
+## Where to start for NPH? 
+
+- Follow-up (trial duration)
+  - Get to *good* part of AHR could (it will plateau under above assumptions)
+  - Ensure follow-up long enough to ensure *tail* characterization
+  - Require both minimum follow-up and sufficient events for final analysis
+  
+## Simplest design approach
+
+- Start with AHR from above evaluation
+- Design under proportional hazards assuming constant AHR
+- Ensure early futility bounds are not too aggressive
+   - No futility (risk that data monitoring committee will overrule)
+   - $\beta$-spending: be conservative for early bounds
+   - Asymmetric 2-sided test; e.g., Pocock-like bound with *moderate* total boundary crossing probability
+- Efficacy bounds: O'Brien-Fleming always acceptable to regulators
+- This is easy to do with gsDesign Shiny app!
+
+## More advanced needs: **gsdmvn**
+
+- For primary analysis, may wish to stick with logrank test
+  - Well-accepted by regulatory agencies
+- Futility bounds and power take into account changing effect over time
+  - NPH will also impact expected timing of analyses
+- More easily allows interim timing based on calendar time
+- More options for setting boundaries
+  - Fixed futility bounds
+  - Haybittle-Peto bounds
+  - Futility or efficacy bounds can be eliminated from selected analyses
+
+
+## Less conventional tests
+
+- RMST has been heavily promoted
+  - For delayed effect, power is generally no better than logrank
+  - However, some advocate these for primary analysis
+- Sensitivity analyses with better power assuming delayed effect
+  - Weighted logrank with FH(0, 0.5) or Magirr-Burman test
+  - MaxCombo test at final analysis only
+- There can be substantial power gains
+
+
+## Thank you!
+
+- Feedback and questions are welcome!
+- May wish to submit by issues at github repositories, but e-mail also OK.

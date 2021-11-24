@@ -1,0 +1,547 @@
+# MaxCombo test {#maxcombo}
+
+```{r, include=FALSE}
+library(dplyr)
+library(gsDesign)
+library(gsdmvn)
+library(mvtnorm)
+```
+
+In this chapter, we discuss group sequential design for MaxCombo test.
+
+## MaxCombo test with interim analysis
+
+- $G_k = \max\{Z_{1k}, Z_{2k}, \ldots \}$
+
+- Test statistics: analysis at $t_k$ for weight $w_i(t)$
+
+$$ Z_{ik}=\sqrt{\frac{n_{0}+n_{1}}{n_{0}n_{1}}}\int_{0}^{t_k}w_i(t)\frac{\overline{Y}_{0}(t)\overline{Y}_{1}(t)}{\overline{Y}_{0}(t)+\overline{Y}_{0}(t)}\left\{ \frac{d\overline{N}_{1}(t)}{\overline{Y}_{1}(t)}-\frac{d\overline{N}_{0}(t)}{\overline{Y}_{0}(t)}\right\} $$
+
+- Not necessary to have same number of tests in each interim analysis
+
+## Examples
+
+We continue use the same example scenario in the last chapter.
+
+```{r, include=FALSE}
+enrollRates <- tibble::tibble(Stratum = "All", duration = 12, rate = 500 / 12)
+
+failRates <- tibble::tibble(
+  Stratum = "All",
+  duration = c(4, 100),
+  failRate = log(2) / 15, # Median survival is 15 months
+  hr = c(1, .6),
+  dropoutRate = 0.001
+)
+```
+
+```{r, include=FALSE}
+## Randomization Ratio is 1:1
+ratio <- 1
+
+## Type 1 error (one-sided)
+alpha <- 0.025
+
+## Power (1 - beta)
+beta <- 0.2
+power <- 1 - beta
+
+# Interim Analysis Time
+analysisTimes <- c(12, 24, 36)
+```
+
+```{r, include=FALSE}
+# Define study design object in each arm
+gs_arm <- gsdmvn:::gs_create_arm(enrollRates, failRates,
+  ratio = 1, # Randomization ratio
+  total_time = 36
+) # Total study duration
+arm0 <- gs_arm[["arm0"]]
+arm1 <- gs_arm[["arm1"]]
+```
+
+### Example 1
+
+- Using logrank test in all interim analysis and a MaxCombo test $Z_{1k}: FH(0,0)$, $Z_{2k}: FH(0,0.5)$, $Z_{3k}: FH(0.5,0.5)$ in final analysis.
+
+```{r}
+fh_test1 <- rbind(
+  data.frame(
+    rho = 0, gamma = 0, tau = -1,
+    test = 1,
+    Analysis = 1:3,
+    analysisTimes = c(12, 24, 36)
+  ),
+  data.frame(
+    rho = c(0, 0.5), gamma = 0.5, tau = -1,
+    test = 2:3,
+    Analysis = 3, analysisTimes = 36
+  )
+)
+fh_test1
+```
+
+### Example 2
+
+- Using $Z_{1k}: FH(0,0)$ and $Z_{2k}: FH(0,0.5)$.
+
+```{r}
+fh_test2 <- data.frame(
+  rho = c(0, 0), gamma = c(0, 0.5), tau = -1,
+  analysisTimes = rep(c(12, 24, 36), each = 2),
+  Analysis = rep(1:3, each = 2),
+  test = rep(1:2, 3)
+)
+fh_test2
+```
+
+## Sample size calculation
+
+We first consider a user defined lower and upper bound using `gsDesign` bound
+
+In general, `gsDesign` bound can not be directly used for MaxCombo test:
+
+- Multiple test statistics are considered in interim analysis or final analysis.
+
+We will explain the way to derive bound using spending function in the next chapter.
+
+```{r}
+x <- gsDesign::gsSurv(
+  k = 3, test.type = 4, alpha = 0.025,
+  beta = 0.2, astar = 0, timing = c(1),
+  sfu = sfLDOF, sfupar = c(0), sfl = sfLDOF,
+  sflpar = c(0), lambdaC = c(0.1),
+  hr = 0.6, hr0 = 1, eta = 0.01,
+  gamma = c(10),
+  R = c(12), S = NULL,
+  T = 36, minfup = 24, ratio = 1
+)
+```
+
+```{r}
+x$upper$bound
+```
+
+```{r}
+x$lower$bound
+```
+
+### Example 1
+
+Sample size can be calculated using `gsdmvn::gs_design_combo`.
+
+```{r}
+gsdmvn::gs_design_combo(enrollRates,
+  failRates,
+  fh_test1,
+  alpha = 0.025,
+  beta = 0.2,
+  ratio = 1,
+  binding = FALSE,
+  upar = x$upper$bound,
+  lpar = x$lower$bound
+) %>%
+  mutate(`Probability_Null (%)` = Probability_Null * 100) %>%
+  select(-Probability_Null) %>%
+  mutate_if(is.numeric, round, digits = 2)
+```
+
+- Simulation results based on 10,000 replications.
+
+```{r, echo = FALSE}
+load("simulation/simu_gsd_combo.Rdata")
+sim_res_combo %>%
+  subset(scenario == "s01") %>%
+  select(-scenario, -Analysis, -z, -lower_bound, -upper_bound) %>%
+  mutate_if(is.numeric, round, digits = 2)
+```
+
+- Compared with group sequential design with log rank test (based on AHR).
+
+```{r}
+gsdmvn::gs_design_ahr(
+  enrollRates = enrollRates, failRates = failRates,
+  ratio = ratio, alpha = alpha, beta = beta,
+  upar = x$upper$bound,
+  lpar = x$lower$bound,
+  analysisTimes = analysisTimes
+)$bounds %>%
+  mutate_if(is.numeric, round, digits = 2)
+```
+
+### Example 2
+
+```{r}
+gs_design_combo(enrollRates,
+  failRates,
+  fh_test2,
+  alpha = 0.025,
+  beta = 0.2,
+  ratio = 1,
+  binding = FALSE,
+  upar = x$upper$bound,
+  lpar = x$lower$bound
+) %>%
+  mutate(`Probability_Null (%)` = Probability_Null * 100) %>%
+  select(-Probability_Null) %>%
+  mutate_if(is.numeric, round, digits = 2)
+```
+
+- Simulation results based on 10,000 replications.
+
+```{r, echo = FALSE}
+load("simulation/simu_gsd_combo.Rdata")
+sim_res_combo %>%
+  subset(scenario == "s02") %>%
+  select(-scenario, -Analysis, -z, -lower_bound, -upper_bound) %>%
+  mutate_if(is.numeric, round, digits = 2)
+```
+
+- Compared with group sequential design with FH(0, 0.5)
+
+```{r}
+gsdmvn::gs_design_wlr(
+  enrollRates = enrollRates, failRates = failRates,
+  weight = function(x, arm0, arm1) {
+    gsdmvn::wlr_weight_fh(x, arm0, arm1, rho = 0, gamma = 0.5)
+  },
+  ratio = ratio, alpha = alpha, beta = beta,
+  upar = x$upper$bound,
+  lpar = x$lower$bound,
+  analysisTimes = analysisTimes
+)$bounds %>%
+  mutate_if(is.numeric, round, digits = 2)
+```
+
+- Compared with group sequential design with FH(0.5, 0.5)
+
+```{r}
+gsdmvn::gs_design_wlr(
+  enrollRates = enrollRates, failRates = failRates,
+  weight = function(x, arm0, arm1) {
+    gsdmvn::wlr_weight_fh(x, arm0, arm1, rho = 0.5, gamma = 0.5)
+  },
+  ratio = ratio, alpha = alpha, beta = beta,
+  upar = x$upper$bound,
+  lpar = x$lower$bound,
+  analysisTimes = analysisTimes
+)$bounds %>%
+  mutate_if(is.numeric, round, digits = 2)
+```
+
+## Outline of technical details
+
+We described the details of calculating
+the sample size and events required for WLR under fixed design.
+
+It can be skipped for the first read of this training material.
+
+### With a pre-defined upper and lower bound
+
+- Derive correlations between test and analysis time point
+- Derive effect size
+- Power and sample size calculation
+
+## MaxCombo sequential test correlation matrix
+
+- Reference: Section 3.1 of @wang2019simulation
+- $Z_{ij}$: $i$-th test in $j$-th analysis.
+
+```{r, echo = FALSE, out.width = "60%"}
+knitr::include_graphics("images/corr_combo.png")
+```
+
+## Between test correlation
+
+- Within each interim analysis, the correlation between tests.
+  - Recall the discussion in fixed design
+
+$$\hbox{Cov}(Z_{1k}, Z_{2k}) = \hbox{Var}(Z_k(\frac{\rho_1 + \rho_{2}}{2}, \frac{\gamma_1 + \gamma_2}{2}, \tau))$$
+
+- Even through one test is used in all interim analysis, correlation of all tests are needed in each interim analysis.
+
+### Example 1
+
+```{r}
+u_fh_test1 <- unique(fh_test1[, c("test", "rho", "gamma", "tau")])
+u_fh_test1
+```
+
+```{r}
+corr_test1 <- with(
+  u_fh_test1,
+  lapply(analysisTimes, function(tmax) {
+    cov2cor(gsdmvn:::gs_sigma2_combo(arm0, arm1,
+      tmax = tmax,
+      rho = rho, gamma = gamma, tau = tau
+    ))
+  })
+)
+names(corr_test1) <- analysisTimes
+corr_test1
+```
+
+### Example 2
+
+```{r}
+u_fh_test2 <- unique(fh_test2[, c("test", "rho", "gamma", "tau")])
+u_fh_test2
+```
+
+```{r}
+corr_test2 <- with(
+  unique(fh_test2[, c("rho", "gamma", "tau")]),
+  lapply(analysisTimes, function(tmax) {
+    cov2cor(gsdmvn:::gs_sigma2_combo(arm0, arm1,
+      tmax = tmax,
+      rho = rho, gamma = gamma, tau = tau
+    ))
+  })
+)
+names(corr_test2) <- analysisTimes
+corr_test2
+```
+
+## Between analysis correlation
+
+- Within each test, the correlation among interim analysis.
+  - recall the discussion in group sequential design for weighted log rank test.
+
+### Example 1
+
+```{r}
+info1 <- gsdmvn:::gs_info_combo(enrollRates, failRates, ratio,
+  analysisTimes = analysisTimes,
+  rho = u_fh_test1$rho,
+  gamma = u_fh_test1$gamma
+)
+info1 %>% round(digits = 2)
+```
+
+```{r}
+info <- info1
+info_split <- split(info, info$test)
+corr_time1 <- lapply(info_split, function(x) {
+  corr <- with(x, outer(sqrt(info), sqrt(info), function(x, y) pmin(x, y) / pmax(x, y)))
+  rownames(corr) <- analysisTimes
+  colnames(corr) <- analysisTimes
+  corr
+})
+corr_time1
+```
+
+### Example 2
+
+```{r}
+info2 <- gsdmvn:::gs_info_combo(enrollRates, failRates, ratio,
+  analysisTimes = analysisTimes,
+  rho = u_fh_test2$rho,
+  gamma = u_fh_test2$gamma
+)
+info2 %>% round(digits = 2)
+```
+
+```{r}
+info <- info2
+info_split <- split(info, info$test)
+corr_time2 <- lapply(info_split, function(x) {
+  corr <- with(x, outer(sqrt(info), sqrt(info), function(x, y) pmin(x, y) / pmax(x, y)))
+  rownames(corr) <- analysisTimes
+  colnames(corr) <- analysisTimes
+  corr
+})
+corr_time2
+```
+
+## Correlation matrix for all tests across analysis
+
+- Reference: Section 3.1 of @wang2019simulation
+- $Z_{ij}$: $i$-th test in $j$-th analysis.
+
+$$ \hbox{Cor}(Z_{11}, Z_{22}) = \hbox{Cor}(Z_{22}, Z_{11}) \approx \hbox{Cor}(Z_{11}, Z_{21}) \hbox{Cor}(Z_{21}Z_{22}) $$
+
+which implies
+
+$$ \hbox{Cor}(Z_{11}, Z_{22}) = \frac{\hbox{Cov}(Z_{11}, Z_{21})} {\sqrt{\hbox{Var}(Z_{11})\hbox{Var}(Z_{22})}}$$
+
+### Example 1
+
+```{r}
+corr_test <- corr_test1
+corr_time <- corr_time1
+info <- info1
+# Overall Correlation
+corr_combo <- diag(1, nrow = nrow(info))
+for (i in 1:nrow(info)) {
+  for (j in 1:nrow(info)) {
+    t1 <- as.numeric(info$Analysis[i])
+    t2 <- as.numeric(info$Analysis[j])
+    if (t1 <= t2) {
+      test1 <- as.numeric(info$test[i])
+      test2 <- as.numeric(info$test[j])
+      corr_combo[i, j] <- corr_test[[t1]][test1, test2] * corr_time[[test2]][t1, t2]
+      corr_combo[j, i] <- corr_combo[i, j]
+    }
+  }
+}
+corr_combo1 <- corr_combo
+corr_combo1 %>% round(2)
+```
+
+- Compared with Simulation results based on 10,000 replications.
+
+```{r, echo = FALSE}
+plot(corr_combo1, corr_combo1 - corr1,
+  xlab = "Asymp. Estimated Correlation",
+  ylab = "Asymp. Estimated - Simulated Correlation"
+)
+```
+
+### Example 2
+
+```{r}
+corr_test <- corr_test2
+corr_time <- corr_time2
+info <- info2
+# Overall Correlation
+corr_combo <- diag(1, nrow = nrow(info))
+for (i in 1:nrow(info)) {
+  for (j in 1:nrow(info)) {
+    t1 <- as.numeric(info$Analysis[i])
+    t2 <- as.numeric(info$Analysis[j])
+    if (t1 <= t2) {
+      test1 <- as.numeric(info$test[i])
+      test2 <- as.numeric(info$test[j])
+      corr_combo[i, j] <- corr_test[[t1]][test1, test2] * corr_time[[test2]][t1, t2]
+      corr_combo[j, i] <- corr_combo[i, j]
+    }
+  }
+}
+corr_combo2 <- corr_combo
+corr_combo2 %>% round(2)
+```
+
+- Compared with Simulation results based on 10,000 replications.
+
+```{r, echo = FALSE}
+plot(corr_combo2, corr_combo2 - corr2,
+  xlab = "Asymp. Estimated Correlation",
+  ylab = "Asymp. Estimated - Simulated Correlation"
+)
+```
+
+## Power
+
+- First interim analysis
+
+$$\text{Pr}( G_1 > b_1 \mid H_1) = 1 - \text{Pr}(G_1 < b_1 \mid H_1) $$
+
+- Second interim analysis
+
+$$\text{Pr}( a_1 < G_1 < b_1, G_2 > b_2  \mid H_1) = \text{Pr}(G_1 < a_1, G_2 < b_2 \mid H_1)$$
+$$- \text{Pr}(G_1 < b_1, G_2 < b_2 \mid H_1) - \text{Pr}(G_1 < a_1, G_2 < \infty \mid H_1)$$
+$$ + \text{Pr}(G_1 < b_1, G_2 < \infty \mid H_1)$$
+
+- General interim analysis
+
+- Denote $l = (a_1, a_{k-1}, b_k)$ and $u = (b_1, b_{k-1}, \infty)$
+- $\xi = \{\xi_j; \; j=1,\dots, 2^k\}$: is all $2^k$ possible combination of the elements in $l$ and $u$
+
+$$\text{Pr}( \cap_{i=1}^{k-1} a_i < G_i < b_i, G_k > b_k \mid H_1)  = \sum_{j=1}^{2^k} (-1)^{\sum_{i=1}^{k} I(\xi_i = l_i)} \text{Pr}(\cap_{i=1}^k G_k < \xi_i) $$
+
+- The computation can be simplified if $a_i = - \infty$ up to $k$-th interim analysis.
+
+- The computation can be simplified if $G_i$ contains only one test up to $k$-th interim analysis
+
+### Example 1
+
+```{r}
+n <- 500
+# Restricted to actual analysis
+info_fh <- merge(info1, fh_test1, all = TRUE)
+corr_fh <- corr_combo1[!is.na(info_fh$gamma), !is.na(info_fh$gamma)]
+info_fh <- subset(info_fh, !is.na(gamma))
+theta_fh <- abs(info_fh$delta) / sqrt(info_fh$sigma2)
+
+power <- gsdmvn:::gs_prob_combo(
+  upper_bound = x$upper$bound,
+  lower_bound = x$lower$bound,
+  fh_test = fh_test1,
+  analysis = info_fh$Analysis,
+  theta = theta_fh * sqrt(n),
+  corr = corr_fh
+)
+power
+```
+
+### Example 2
+
+```{r}
+n <- 500
+# Restricted to actual analysis
+info_fh <- merge(info2, fh_test2, all = TRUE)
+corr_fh <- corr_combo2[!is.na(info_fh$gamma), !is.na(info_fh$gamma)]
+info_fh <- subset(info_fh, !is.na(gamma))
+theta_fh <- abs(info_fh$delta) / sqrt(info_fh$sigma2)
+
+power <- gsdmvn:::gs_prob_combo(
+  upper_bound = x$upper$bound,
+  lower_bound = x$lower$bound,
+  fh_test = fh_test2,
+  analysis = info_fh$Analysis,
+  theta = theta_fh * sqrt(n),
+  corr = corr_fh
+)
+power
+```
+
+## Sample size
+
+- Root finding based on target power
+
+### Example 1
+
+```{r}
+fun <- function(n) {
+  info_fh <- merge(info1, fh_test1, all = TRUE)
+  corr_fh <- corr_combo1[!is.na(info_fh$gamma), !is.na(info_fh$gamma)]
+  info_fh <- subset(info_fh, !is.na(gamma))
+  theta_fh <- abs(info_fh$delta) / sqrt(info_fh$sigma2)
+
+  power <- gsdmvn:::gs_prob_combo(
+    upper_bound = x$upper$bound,
+    lower_bound = x$lower$bound,
+    fh_test = fh_test1,
+    analysis = info_fh$Analysis,
+    theta = theta_fh * sqrt(n),
+    corr = corr_fh
+  )
+  1 - beta - max(subset(power, Bound == "Upper")$Probability)
+}
+
+uniroot(fun, c(1, 1000), extendInt = "yes")$root
+```
+
+### Example 2
+
+```{r}
+fun <- function(n) {
+  info_fh <- merge(info2, fh_test2, all = TRUE)
+  corr_fh <- corr_combo2[!is.na(info_fh$gamma), !is.na(info_fh$gamma)]
+  info_fh <- subset(info_fh, !is.na(gamma))
+  theta_fh <- abs(info_fh$delta) / sqrt(info_fh$sigma2)
+
+  power <- gsdmvn:::gs_prob_combo(
+    upper_bound = x$upper$bound,
+    lower_bound = x$lower$bound,
+    fh_test = fh_test2,
+    analysis = info_fh$Analysis,
+    theta = theta_fh * sqrt(n),
+    corr = corr_fh
+  )
+
+  1 - beta - max(subset(power, Bound == "Upper")$Probability)
+}
+
+uniroot(fun, c(1, 1000), extendInt = "yes")$root
+```

@@ -1,0 +1,249 @@
+# (PART) General methods and proportional hazards {-}
+
+
+# Proportional hazards approach
+
+
+## @LachinFoulkes method {#lachin-foulkes}
+
+- Sample size and power derivation
+- Time-to-event endpoint
+- 2-arm trial
+- Logrank (or Cox model coefficient) to test treatment effect
+- Constant treatment effect over time (proportional hazards or PH)
+- Number of events drives power, regardless of study duration
+
+## Shiny app for proportional hazards
+
+- Shiny app available at: <https://rinpharma.shinyapps.io/gsdesign/> (preferred), <https://gsdesign.shinyapps.io/devel/> (not preferred)
+- Allows broad specification of designs
+- Much simpler than writing code
+- It will write code and reports for you
+- Saves and re-loads designs
+- Some flexibility of **gsDesign** not in app to simplify interface
+
+## Metastatic oncology example {#mediansurvival}
+
+- KEYNOTE 189 trial (@KEYNOTE189)
+   - Endpoints: progression free survival (PFS) and overall survival (OS) in patients
+   - Indication: previously untreated metastatic non-small cell lung cancer (NSCLC)
+   - Treatments: chemotherapy +/- pembrolizumab
+   - Randomized 2:1 to an add-on of pembrolizumab or placebo
+   - Type I error (1-sided): 0.025 familywise error rate (FWER) split between PFS ($\alpha=0.0095$) and OS ($\alpha=0.0155$)
+   - Graphical method $\alpha$-control for group sequential design of @MaurerBretz2013 used
+
+Key aspects of the design as documented in the protocol accompanying @KEYNOTE189.
+
+## Metastatic oncology: OS design approximation (continued)
+
+- $\alpha=0.0155$
+- Control group survival: exponential median=13 months
+- Exponential dropout rate of 0.133% per month
+- 90% power to detect a hazard ratio (HR) of 0.70025
+- 2:1 randomization, experimental:control
+- Enrollment over 1 year
+- While not specified in the protocol, we have further assumed:
+  - Trial duration: 35 months.
+  - Observed deaths of 240, 332 and 416 at the 3 planned analyses
+  - A one-sided bound using the @LanDeMets spending approximating an O'Brien-Fleming bound.
+
+
+## Cardiovascular outcomes reduction
+
+- AFCAPS/TEXCAPS trial: use of lovastatin to reduce cardiovascular outcomes
+- Design described in @AFCAPSdesign 
+- Results reported in @AFCAPSresults
+- Reproduction here not exact mainly due to choice of @LachinFoulkes
+  - Little difference between methods
+  - Efficacy bounds will be exactly as proposed
+
+## Cardiovascular outcomes: key parameters
+
+- 5 years minimum follow-up of all patients enrolled
+- Interim analyses after 0.375 and 0.75 of final planned event count has accrued
+- 2-sided bound using the @HSD spending function with parameter $\gamma = -4$ to approximate an O'Brien-Fleming bound
+- We arbitrarily set the following parameters to match design:
+  - Power of 90% for a hazard ratio of 0.6921846; this is slightly different than the 0.7 hazard ratio suggested in @AFCAPSdesign
+  - Enrollment duration of 1/2 year with constant enrollment.
+  - An exponential failure rate of 0.01131 per year which is nearly identical to the annual dropout rate of `r round(1 - exp(-.01131),5)`.
+  - An exponential dropout rate of 0.004 per year which is nearly identical to the annual dropout rate of `r round(1 - exp(-.004),5)`.
+
+
+## Cardiovascular outcomes non-inferiority: EXAMINE trial
+
+- Indication: treatment of diabetes
+- Treatments: DPP4 inhibitor alogliptin compared to placebo
+- Primary endpoint: major cardiovascular outcomes (MACE)
+- Objective: establish non-inferiority
+- Results in @EXAMINEresults
+- Design in @EXAMINEdesign
+- We approximate the design and primary analysis evaluation here.
+- Software and design assumptions not completely clear; not exact design reproduction
+
+## EXAMINE trial: Key assumptions
+
+- Primary analysis: stratified Cox model for MACE
+  - 1-sided repeated confidence interval for HR at each analysis.
+  - Analysis to rule out HR > 1.3, but also tests superiority.
+  - Analyses planned after 550, 600, 650 MACE events.
+  - O'Brien-Fleming-like spending function @LanDeMets.
+  - 2.5% Type I error.
+  - Approximately 91% power.
+  - 3.5% annual MACE event rate.
+  - Uniform enrollment over 2 years.
+  - 4.75 years trial duration.
+  - 1% annual loss-to-follow-up rate.
+  - Software: EAST 5 (Cytel).
+
+## Cure model {#poissonmixture}
+
+Poisson mixture cure model we consider:
+
+$$S(t)= \exp(-\theta (1 - \exp(-\lambda t)).$$
+
+Note that:
+
+- $1-\exp(-\lambda t)$ is the CDF for an exponential distribution
+  - can be replaced by arbitrary continuous CDF.
+- As $t\rightarrow \infty$, $S(t)\rightarrow\exp(-\theta)$ (cure rate).
+- Model useful when historical data suggests plateau in survival. 
+- PH model: experimental survival $S_E(t)=S_C(t)^{HR}$.
+
+## Survival model assumptions
+
+```{r, echo=FALSE}
+library(ggplot2)
+library(dplyr)
+library(gsDesign)
+library(gt)
+# Assumed long-term survival rate
+cureRate <- 0.7
+# Survival rate at specific time
+survRate <- 0.75
+survRateTime <- 18
+# Maximum time for plot and study duration
+maxTime <- 60
+# Assumed hazard ratio to power trial
+hr <- 0.72
+# Compute theta for Poisson mixture cure rate model
+theta <- -log(cureRate)
+# Compute rate parameter lambda for Poisson mixture cure rate model
+lambda <- -log(1 + log(survRate) / theta) / survRateTime
+Month <- 0:maxTime
+# Control survival
+S <- exp(-theta * (1 - exp(-lambda * Month)))
+# Experimental survival
+S_E <- S^hr
+# Put in a data frame and plot
+cure_model <- rbind(
+  data.frame(Treatment = "Control", Month = Month, Survival = S),
+  data.frame(Treatment = "Experimental", Month = Month, Survival = S_E)
+)
+ggplot(cure_model, aes(x = Month, y = Survival, col = Treatment)) +
+  geom_line() +
+  annotate("text", x = 36, y = .68, label = "Long term survival (cure) rate: 0.7 for control") +
+  annotate("text", x = 36, y = .66, label = "0.75 control survival at 18 months") +
+  annotate("text", x = 36, y = .9, label = "Hazard ratio (experimental/contrl) = 0.72") +
+  scale_x_continuous(breaks = seq(0, maxTime, 6)) +
+  scale_y_continuous(breaks = seq(.6, 1, .1), limits = c(.6, 1))+
+  ggtitle("Underlying survival assumptions for cure model design example")
+cure_model <- cure_model %>%
+  mutate(
+    H = -log(Survival),
+    duration = Month - lag(Month, default = 0),
+    h = (H - lag(H, default = 0) / duration)
+  ) 
+```
+
+More details in book.
+
+
+## Cure model: Expected event accumulation over time
+
+- Event accumulation over time can be very sensitive to many trial design assumptions.
+- Generally, we are trying to mimic a slowing of event accumulation over time.
+- Assume 18 month enrollment with 6-month ramp-up.
+
+```{r, echo=FALSE}
+# Relative enrollment rates
+enrollRates <- 1:4
+# Total duration for each enrollment rate
+# Here they total 18 months planned to complete enrollment
+enrollDurations <- c(2, 2, 2, 12)
+```
+
+## Expected event accrual over time
+
+
+```{r, out.width="100%", echo=FALSE}
+# Calendar times
+ti <- seq(0, maxTime, 1) # maxTime is study duration from above
+# Placeholder for expected event counts
+n <- ti
+## Begin with putting parameters into a design with no interim analysis
+## This will enable calculation of expected event accumulation
+xx <- nSurv(
+  alpha = 0.025, # 1-sided Type I error
+  beta = NULL, # here we will NOT compute sample size
+  # Control group exponential failure rate to get median OS of 13 months
+  lambdaC = cure_model$h[-1],
+  # Time period durations for cure model; length 1 less than lambdaC
+  S = cure_model$duration[-c(1, nrow(cure_model))],
+  # Alternate hypothesis hazard ratio
+  hr = hr,
+  # Dropout rate per month (exponential rate)
+  eta = 0.001,
+  # Enrollment rates during ramp-up period
+  gamma = enrollRates,
+  # Relative enrollment rate time period durations
+  R = enrollDurations,
+  # Calendar time of final analysis
+  T = maxTime,
+  # Minimum follow-up time after enrollment complete
+  minfup = maxTime - sum(enrollDurations)
+)
+for (i in seq_along(ti[-1])) {
+  n[i + 1] <- nEventsIA(tIA = ti[i + 1], x = xx)
+}
+# Now do a line plot of % of final events and % of final time by month
+ev <- rbind(tibble(Month = ti, ev = n / max(n) * 100, s = "Event fraction"),
+            tibble(Month = ti, ev = ti/max(ti) * 100, s = "Calendar fraction")
+)
+p <- ggplot(ev, aes(x = Month, y = ev, col = factor(s))) +
+  geom_line() +
+  ylab("Spending time (%)") +
+  xlab("Study Time") +
+  scale_x_continuous(breaks = seq(0, maxTime, 12)) +
+  scale_y_continuous(breaks = seq(0, 100, 20)) + 
+  guides(col=guide_legend(title="Spending type"))
+# Add text overlay at targeted analysis times
+subti <- c(12, 18, 24, 36, 48, 60)
+subpct <- n[subti + 1] / n[maxTime + 1] * 100
+subtipct <- subti / max(subti) * 100
+txt <- rbind(
+  tibble(Month = subti, ev = subpct,   s = "Event fraction", txt = paste(as.character(round(subpct, 1)), "%", sep = "")),
+  tibble(Month = subti, ev = subtipct, s = "Calendar fraction", txt = paste(as.character(round(subtipct, 1)), "%", sep = ""))
+)
+p + geom_label(data = txt, aes(x = Month, y = ev, col = factor(s), label = txt))+ 
+  ggtitle("Calendar vs. event fraction spending for cure model example") +
+  annotate("text", x=8, y=2, size = 4, color = "black", label = "- Calendar spending preserves more alpha to final analysis", hjust=0) 
+```
+
+## Potential advantages/disadvantages of calendar spending
+
+- Quite possible that event rate design assumptions incorrect
+- Good to ensure duration of follow-up is adequate evaluate tail behavior/plateau in survival
+- Ensures adequate follow-up to estimate relevant parts of survival curve
+- Limits trial to relevant clinical and practical 
+- May be underpowered if events accrue slowly
+- Probably less useful for high-risk endpoints (e.g., metastatic cancer)
+- Regulatory resistance?
+
+## Exercise
+
+See the following link for the Moderna COVID-19 design replication: <https://medium.com/@yipeng_39244/reverse-engineering-the-statistical-analyses-in-the-moderna-protocol-2c9fd7544326>
+
+Can you reproduce this using the Shiny interface?
+
+
+# Break (15 minutes)

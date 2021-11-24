@@ -1,0 +1,72 @@
+# Preface {-}
+
+## Training overview
+
+In this course, we will present concepts, theory, software and a Shiny interface.
+Mainly we will focus on designs that you might consider for time-to-event endpoints.
+In addition to *classical* approaches assuming a proportional hazards assumption, we will provide methods for designing under non-proportional hazards assumptions.
+While most studies still use a logrank test, we will also touch on some alternatives along with their potential advantages and disadvantages.
+
+::: {.rmdnote}
+**Disclaimer**
+
+All opinions expressed are those of the presenters and not Merck & Co., Inc., Kenilworth, NJ, USA.
+:::
+
+## Chapters and training sections {-}
+
+- Background theory (30 minutes)
+  - Extension to non-proportional hazards
+  - Group sequential design asymptotic distribution
+  - Spending function bounds
+
+- Proportional hazards applications with Shiny app (40 minutes)
+  - Lachin and Foulkes method for sample size derivation
+  - Design setup with exponential distribution
+  - Design setup with cure model
+  - Updating bounds at time of analysis
+  - Event-based and calendar-based spending bounds
+  - Exercise
+
+- Break (15 minutes)
+
+- Non-proportional hazards model with logrank test (60 minutes)
+  - Piecewise model
+  - Average hazard ratio
+  - Statistical information and time
+  - Introduction to gsdmvn, gsDesign2 and simtrial
+
+- Break (10 minutes)
+
+- Weighted logrank, RMST and combination tests (55 minutes)
+  - Introduction to methods
+  - Weighted logrank
+  - MaxCombo
+  - Exercise
+
+## Software and supporting materials
+
+- Useful directories in course repository at *LINK*:
+  - `data/`: contains design files for examples; also simulation results
+  - `vignettes/`: reports produced by Shiny app to summarize designs
+  - `simulation/`: R code and simulation data for the last part of the course
+
+## Installing R packages
+
+If you choose to install R packages locally:
+
+- The **gsDesign** package (v3.2.1) is available at CRAN
+
+```{r, eval=FALSE}
+install.packages("gsDesign")
+```
+
+- For non-proportional hazards, the following 3 packages would be useful to install
+
+```{r, eval=FALSE}
+remotes::install_github("Merck/gsdmvn")
+remotes::install_github("Merck/gsDesign2")
+remotes::install_github("Merck/simtrial")
+```
+
+You will need reasonably recent versions of R and packages.

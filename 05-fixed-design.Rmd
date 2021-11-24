@@ -1,0 +1,736 @@
+# (PART) Others tests {-}
+
+```{r, include=FALSE}
+library(dplyr)
+library(gsDesign)
+library(gsdmvn)
+library(mvtnorm)
+```
+
+# Overview {#overview-other-tests}
+
+We consider other alternative tests for group sequential design.
+
+- Weighted logrank tests such as the @FHRhoGamma and @MagirrBurman tests.
+- Combination tests such as the MaxCombo test by @NPHWG2020sim, @NPHWG2021Design.
+
+We will illustrate the concepts based on an experimental R packages.
+
+- [gsdmvn](https://merck.github.io/gsdmvn/): analytically based group sequential design.
+
+In this part, we will cover
+
+- Review of fixed design based on weighted logrank test and MaxCombo test
+- Group sequential design with weighted logrank test
+- Group sequential design with MaxCombo test
+
+# Fixed design {#fixed}
+
+We will briefly review fixed design based on weighted logrank test and MaxCombo test.
+
+::: {.rmdnote}
+For fixed design, [`npsurvSS`](https://cran.r-project.org/package=npsurvSS)
+will be the tool for this training.
+:::
+
+The fixed design part is largely follow the concept described in @yung2019sample.
+
+## Summary of assumptions
+
+For simplicity, we made a few key assumptions.
+
+- Balanced design (1:1 randomization ratio).
+- 1-sided test.
+- Local alternative: variance under null and alternative are approximately equal.
+- Accrual distribution:
+  - Piecewise uniform using `npsurvSS::create_arm()`
+  - Poisson process with piecewise uniform enrollment using `gsDesign::nSurv()` @lachin1986evaluation and `gsdmvn::gs_design_ahr()`
+- Survival distribution: piecewise exponential
+- Loss to follow-up: exponential
+- No stratification
+- No cure fraction
+
+::: {.rmdnote}
+Some of these assumptions have been generalized in the literature and the R package `gsdmvn`.
+These assumptions will be used unless other clarification is made in specific section.
+:::
+
+## Notation
+
+We also define some commonly used notation as below.
+
+- $\alpha$: Type I error
+- $\beta$: Type II error or power (1 - $\beta$)
+- $z_\alpha$: upper $\alpha$ percentile of standard normal distribution
+- $z_\beta$: upper $\beta$ percentile of standard normal distribution
+
+For illustration purpose, we considered a 1-sided test with type I error at $\alpha=0.025$ and $1-\beta=80\%$ power.
+In R, it is easy to calculate $z_\alpha$ and $z_\beta$ as below.
+
+```{r}
+z_alpha <- abs(qnorm(0.025))
+z_alpha
+```
+
+```{r}
+z_beta <- abs(qnorm(0.2))
+z_beta
+```
+
+## Sample size calculation
+
+- $\theta$: effect size.
+
+The key step to calculate sample size is to define the effect size.
+For example, the effect size in two-sample t-test is $(\mu_1 - \mu_2)/\sigma$,
+where $\mu_1$ and $\mu_2$ are group mean and $\sigma$ is pooled standard deviation.
+
+- $n$: total sample size.
+
+- $Z$: test statistics is asymptotic normal.
+  - Under null hypothesis: $Z \sim \mathcal{N}(0, \sigma_0^2)$
+  - Under alternative hypothesis: $Z \sim \mathcal{N}(\sqrt{n}\theta, \sigma_1^2)$
+
+By assuming local alternative, we have
+
+$$\sigma_0^2 \approx \sigma_1^2 = \sigma^2$$
+In this simplified case, the sample size can be calculated as
+
+$$ n = \frac{4 (z_{\alpha}+z_{\beta})^{2}}{\theta^2} $$
+
+## Two-sample t-test
+
+Let's revisit two sample t-test to make connection between math formula and R code.
+
+If we consider a scenarios with treatment effect at 0.5 with pooled standard deviation at 2.
+Let's calculate the sample size using the formula above.
+
+```{r}
+# Effect size
+theta <- 0.5 / 2
+```
+
+```{r}
+# Sample size formula
+4 * (z_alpha + z_beta)^2 / theta^2
+```
+The same assumption is used in `gsDesign::nNormal()`.
+
+```{r}
+gsDesign::nNormal(delta1 = 0.5, sd = 2, alpha = 0.025, beta = 0.2)
+```
+
+The `stats::power.t.test()` uses the t-distribution for test statistics that is recommended in practice.
+It provides a slightly larger sample size under the same study design scenario.
+
+```{r}
+stats::power.t.test(delta = 0.5, sd = 2, sig.level = 0.05, power = 0.8)$n * 2
+```
+
+## Logrank test
+
+Let's also explore the number of events required for logrank test under the proportional hazards assumption.
+
+You may hear the sample size calculation is "event-driven".
+This is a nice feature under the **proportional hazards assumption**. because the effect size for number of events is only depends on the hazard ratio.
+
+$$\theta = \log{\text{HR}} / 2$$
+
+- $\text{HR}$ is the hazard ratio.
+- $d$ is the number of events.
+
+::: {.rmdnote}
+As an exercise, the readers can derive the effect size in formula (9.3) of the
+Section 9.5 for the [NCSU ST520 course notes](https://www4.stat.ncsu.edu/~dzhang2/st520/520notes.pdf).
+:::
+
+With the effect size, we can use the same formula to calculate the number of events as below.
+
+$$ d = \frac{4 (z_{\alpha}+z_{\beta})^{2}}{(\log{\text{HR}/2})^2} $$
+
+After the total number of events is defined,
+the sample size ($n$) can be determined based on accrual distribution,
+survival distribution loss to follow-up distribution and study duration.
+
+The sample size calculation has been implemented in
+
+- `gsDesign::nSurv()`
+- `npsurvSS::size_two_arm()`
+
+::: {.rmdnote}
+For simplicity, we skip the detail of sample size calculation,
+interested readers can refer @lachin1986evaluation.
+:::
+
+Let's make connection between math formula and R code by considering a scenarios with
+hazard ratio at 0.6.
+
+```{r}
+# Effect size
+theta <- log(0.6) / 2
+```
+
+```{r}
+# Number of Events
+(z_alpha + z_beta)^2 / theta^2
+```
+
+We compare the results using `npsurvSS`.
+The key argument in `npsurvSS::create_arm()` is `surv_scale` that defines the hazard rates in each arm.
+
+```{r}
+# Define study design assumption for each arm
+arm0 <- npsurvSS::create_arm(
+  size = 1, accr_time = 6, surv_scale = 1,
+  loss_scale = 0.1, follow_time = 12
+)
+
+arm1 <- npsurvSS::create_arm(
+  size = 1, accr_time = 6, surv_scale = 0.6,
+  loss_scale = 0.1, follow_time = 12
+)
+```
+
+Then we can use `npsurvSS::size_two_arm()` to calculate number of events and sample size.
+
+```{r}
+# Sample size for logrank test
+npsurvSS::size_two_arm(arm0, arm1,
+  power = 0.8, alpha = 0.025,
+  test = list(
+    test = "weighted logrank", weight = "1",
+    mean.approx = "event driven"
+  )
+)
+```
+
+The number of events from `gsDesign::nSurv()` is slighted smaller,
+because, `gsDesign::nSurv()` follows @lachin1986evaluation
+that relax the local alternative assumption and is recommended in practice.
+
+```{r}
+gsDesign::nSurv(
+  lambdaC = 1,
+  hr = 0.6,
+  eta = 0.1,
+  alpha = 0.025,
+  beta = 0.2,
+  T = 18,
+  minfup = 12
+)
+```
+
+## Non-proportional hazards
+
+Under proportional hazard assumption, we commonly used event driven approach for sample size calculation.
+(i.e. calculate number of events then derive the sample size.)
+
+- Event ($d$) to Sample size ($n$) or `d->n`
+
+```{r, echo = FALSE, out.width= "100%"}
+knitr::include_graphics("images/ch2_d_to_n.png")
+```
+
+Under Non-proportional Hazards, the event driven approach is not applicable.
+We need to derive the sample size first.
+
+- Sample size ($n$) to Event ($d$) or `n->d`
+
+```{r, echo = FALSE, out.width= "100%"}
+knitr::include_graphics("images/ch2_n_to_d.png")
+```
+
+- $\tau_a$: accrual time
+- $\tau_f$: follow-up time
+
+::: {.rmdnote}
+The two figures above are copied from @yung2019sample.
+:::
+
+Let's considered a delay effect scenario below to illustrate NPH and sample size calculation.
+
+- Duration of enrollment: 12 month
+- Enrollment rate: 500/12 per month
+
+```{r}
+enrollRates <- tibble::tibble(Stratum = "All", duration = 12, rate = 500 / 12)
+enrollRates
+```
+
+- Failure rate in control group: `log(2) / 15`
+  + Median survival time: 15 months.
+- Hazard ratio:
+  + First 4 months: 1
+  + After 4 months: 0.6
+- Dropout Rate: 0.001
+
+```{r}
+failRates <- tibble::tibble(
+  Stratum = "All",
+  duration = c(4, 100),
+  failRate = log(2) / 15, # Median survival 15 months
+  hr = c(1, .6), # Delay effect after 4 months
+  dropoutRate = 0.001
+)
+failRates
+```
+
+The figure below illustrated the survival probability over time in two treatment groups.
+
+```{r, echo=FALSE, out.width= "100%"}
+knitr::include_graphics("images/delay_effect_survival.png")
+```
+
+## Weighted logrank test
+
+For weighted logrank test, we first illustrated it by using the Fleming-Harrington weight.
+
+$$FH^{\rho, \gamma}(t) = S(t)^\rho(1 - S(t))^\gamma$$
+
+To demonstrate the weight function, we covert the input of `enrollRates` and `failRates` as required by `npsurvSS`.
+
+```{r}
+# Define study design object in each arm
+gs_arm <- gsdmvn:::gs_create_arm(
+  enrollRates,
+  failRates,
+  ratio = 1, # Randomization ratio
+  total_time = 36 # Total study duration
+)
+arm0 <- gs_arm[["arm0"]]
+arm1 <- gs_arm[["arm1"]]
+```
+
+::: {.rmdnote}
+Note: in `npsurvSS`, p1_q0 is for $\rho=q=0$ and $\gamma=p=1$
+:::
+
+- FH(0,1): Place more weights on later time points
+
+```{r}
+npsurvSS::size_two_arm(arm0, arm1,
+  power = 0.8, alpha = 0.025,
+  test = list(test = "weighted logrank", weight = "FH_p1_q0")
+)
+```
+
+- FH(1,1): Place more weights on middle time points
+
+```{r}
+npsurvSS::size_two_arm(arm0, arm1,
+  power = 0.8, alpha = 0.025,
+  test = list(test = "weighted logrank", weight = "FH_p1_q1")
+)
+```
+
+- FH(1,0): Place more weights on earlier time points
+
+```{r}
+npsurvSS::size_two_arm(arm0, arm1,
+  power = 0.8, alpha = 0.025,
+  test = list(test = "weighted logrank", weight = "FH_p0_q1")
+)
+```
+
+- FH(0,0) or logrank test
+
+```{r}
+# Sample size for logrank test
+npsurvSS::size_two_arm(arm0, arm1,
+  power = 0.8, alpha = 0.025,
+  test = list(test = "weighted logrank", weight = "FH_p0_q0")
+)
+```
+
+### Effect size
+
+In Yung and Liu (2019), section 2.3.3, it is shown that， the test statistics $Z\rightarrow_d\mathcal{N}(\sqrt{n}\theta, 1)$ approximately,
+where $\theta = \Delta/\sigma$ is the effect size. Here the test statistics for weighted logrank test is:
+
+$$ Z=\sqrt{\frac{n_{0}+n_{1}}{n_{0}n_{1}}}\int_{0}^{\tau}w(t)\frac{\overline{Y}_{0}(t)\overline{Y}_{1}(t)}{\overline{Y}_{0}(t)+\overline{Y}_{0}(t)}\left\{ \frac{d\overline{N}_{1}(t)}{\overline{Y}_{1}(t)}-\frac{d\overline{N}_{0}(t)}{\overline{Y}_{0}(t)}\right\} $$
+
+- Weight $w(t)$: implemented in `gsdmvn`.
+- Integration up to total follow-up time $\tau$.
+
+```{r}
+weight <- function(x, arm0, arm1) {
+  gsdmvn::wlr_weight_fh(x, arm0, arm1, rho = 0, gamma = 1)
+}
+```
+
+$$\Delta=\int_{0}^{\tau}w(s)\frac{p_{0}\pi_{0}(s)p_{1}\pi_{1}(s)}{\pi(s)}\{\lambda_{1}(s)-\lambda_{0}(s)\}ds$$,
+
+```{r}
+delta <- abs(gsdmvn:::gs_delta_wlr(arm0, arm1, tmax = arm0$total_time, weight = weight))
+delta
+```
+
+$$\sigma^{2}=\int_{0}^{\tau}w(s)^{2}\frac{p_{0}\pi_{0}(s)p_{1}\pi_{1}(s)}{\pi(s)^{2}}dv(s)$$
+
+```{r}
+sigma2 <- gsdmvn:::gs_sigma2_wlr(arm0, arm1, tmax = arm0$total_time, weight = weight)
+sigma2
+```
+
+Below are definitions of each components.
+
+- $n = n_0 + n_1$: Total sample size
+- $p_0 = n_0/n$, $p_1 = n_1/n$: Randomization probability inferred by randomization ratio
+- $\pi_0(t) = E\{N_0(t)\}$, $\pi_1(t) = E\{N_1(t)\}$
+- $\pi(t) = p_0\pi_0(t)+p_1\pi_1(t)$: Probability of events
+- $v(t) = p_0E\{Y_0(t)\}+p_1E\{Y_1(t)\}$: Probability of people at risk
+
+### Sample size and number of events
+
+We can calculate sample size after deriving the effect size.
+
+$$ n = \frac{\sigma^{2}(z_{\alpha}+z_{\beta})^{2}}{\Delta^2} = \frac{(z_{\alpha}+z_{\beta})^{2}}{\theta^2} $$
+
+```{r}
+z_alpha <- qnorm(1 - 0.025)
+z_beta <- qnorm(1 - 0.2)
+n <- sigma2 * (z_alpha + z_beta)^2 / delta^2
+n
+```
+
+```{r}
+# Sample size for FH(0,1)
+npsurvSS::size_two_arm(arm0, arm1,
+  power = 0.8, alpha = 0.025,
+  test = list(test = "weighted logrank", weight = "FH_p1_q0")
+)
+```
+
+The number of events can also be calculated as below. More details can be found in the technical details.
+
+```{r}
+n0 <- n1 <- n / 2
+gsdmvn:::prob_event.arm(arm0, tmax = arm0$total_time) * n0 +
+  gsdmvn:::prob_event.arm(arm1, tmax = arm0$total_time) * n1
+```
+
+## Technical details
+
+### Accrual and follow-up time
+
+- $R$: time of study entry
+- $F_R(\cdot)$ CDF of $R$
+
+```{r}
+x <- seq(0, arm0$total_time, 0.1)
+# Piecewise Uniform Distribution
+plot(x, npsurvSS::daccr(x, arm = arm0),
+  type = "s",
+  xlab = "Calendar time (month)", ylab = "Accrual Probability"
+)
+```
+
+- $\tau_a$: accrual time
+
+```{r}
+arm0$accr_time
+```
+
+- $\tau_f$: follow-up time
+
+```{r}
+arm0$follow_time
+```
+
+- $\tau = \tau_a + \tau_f$: total study duration
+
+```{r}
+arm0$total_time
+```
+
+### Event time
+
+- $T$: time to event from study entry.
+- $S_T(\cdot)$: Survival function
+- $F_T(\cdot)$: CDF of $T$
+- $f_T(\cdot)$: Density function
+
+```{r}
+# Survival function of time to event from study entry
+# Piecewise Exponential distribution
+plot(x, 1 - npsurvSS::psurv(x, arm0),
+  type = "l",
+  xlab = "Calendar time (month)", ylab = "Survival Probability", ylim = c(0, 1)
+)
+lines(x, 1 - npsurvSS::psurv(x, arm1), lty = 2)
+legend("topright", lty = c(1, 2), legend = c("control", "experiment"))
+```
+
+### Censoring time
+
+- $L$: time to loss of follow-up from study entry
+- $S_L(\cdot)$: Survival function of $L$
+
+```{r}
+# PDF of the time to loss of follow-up from study entry
+# Exponential Distribution
+plot(x, 1 - pexp(x),
+  type = "l",
+  xlab = "Calendar time (month)", ylab = "Loss to Follow-up Probability"
+)
+```
+
+  - $C = \min(L, \tau - R)$: time to censoring from study entry.
+
+### Observed time
+
+- $U = \min(T,C)$: observed time.
+- $\delta = I(T<C)$: event indicator
+
+### Expected events
+
+- $N(t) = I(U \le t, \delta = 1)$: counting process
+- $E\{N(t)\}$: expected probability of events
+
+$$E\{N(t)\} = \int_{0}^{t}f_{T}(s)S_{L}(s)F_{R}(\tau_{a}\land(\tau-s))ds$$
+```{r}
+# Probability of Events
+x_int <- 0:arm0$total_time
+plot(x_int, gsdmvn:::prob_event.arm(arm0, tmax = x_int),
+  type = "l",
+  xlab = "Calendar time (month)", ylab = "Event Probability",
+  ylim = c(0, 1)
+)
+```
+
+- $Y(t) = I(U\ge t)$: at-risk process
+- $E\{Y(t)\}$: expected probability at risk
+
+$$E\{Y(t)\} = S_{T}(s)S_{L}(s)F_{R}(\tau_{a}\land(\tau-s))$$
+
+```{r}
+# Probability of People at risk
+plot(x_int, gsdmvn:::prob_risk(arm0, x_int, arm0$total_time),
+  type = "l",
+  xlab = "Calendar time (month)", ylab = "Probability at Risk", ylim = c(0, 1)
+)
+```
+
+### Weight function in weighted logrank test
+
+- Define different weight functions in `gsdmvn`
+- Weight function: $w(t)$
+- Constant weight (logrank test): $1$
+
+```{r}
+gsdmvn::wlr_weight_1(x = c(12, 24, 36), arm0, arm1)
+```
+
+- Fleming-Harrington weight: $w(t) = FH^{\rho, \gamma}(t) = S(t)^\rho(1 - S(t))^\gamma$
+
+```{r}
+weight_legend <- apply(expand.grid(c("rho=0", "rho=1"), c("gamma=0", "gamma=1")), 1, paste0, collapse = "; ")
+plot(1:36, gsdmvn::wlr_weight_fh(x = 1:36, arm0, arm1, rho = 0, gamma = 0),
+  xlab = "Calendar time (month)", col = 1,
+  ylab = "Weight", type = "l", ylim = c(-0.5, 1.2)
+)
+lines(1:36, gsdmvn::wlr_weight_fh(x = 1:36, arm0, arm1, rho = 1, gamma = 0), col = 2)
+lines(1:36, gsdmvn::wlr_weight_fh(x = 1:36, arm0, arm1, rho = 0, gamma = 1), col = 3)
+lines(1:36, gsdmvn::wlr_weight_fh(x = 1:36, arm0, arm1, rho = 1, gamma = 1), col = 4)
+legend("bottomright", legend = weight_legend, lty = 1, col = 1:4)
+```
+
+- Modestly WLR: $S^{-1}(t\land\tau_m)$ @magirr2019modestly
+
+- Choose $\tau_m$ around the change point in delay effect scenario
+
+- Only down-weight early event. Constant weight after change point.
+
+```{r}
+plot(1:36, gsdmvn::wlr_weight_fh(x = 1:36, arm0, arm1, rho = -1, gamma = 0, tau = 4),
+  xlab = "Calendar time (month)", ylab = "Weight", type = "l"
+)
+```
+
+### Average hazard ratio
+
+- $\Delta$ is a weighted average of hazard function difference $\lambda_{1}(\cdot)-\lambda_{0}(\cdot)$.
+
+$$\Delta=\int_{0}^{\tau}w(s)\frac{p_{0}\pi_{0}(s)p_{1}\pi_{1}(s)}{\pi(s)}\{\lambda_{1}(s)-\lambda_{0}(s)\}ds$$
+
+- Taylor expansion builds connection between $\Delta$ and weighted average of log hazard ratio (AHR).
+  It is a generalization of the @schoenfeld1981asymptotic asymptotic expansion.
+
+$$\Delta\approx\int_{0}^{\tau}w(s)\log\left(\frac{\lambda_1(s)}{\lambda_0(s)}\right)\frac{p_{0}\pi_{0}(s)p_{1}\pi_{1}(s)}{\pi(s)^2}v'(s)ds$$
+
+- Log of AHR can be estimated after normalizing the weights in $\Delta$
+
+$$ \log{AHR} = \frac{\Delta}{\int_{0}^{\tau}w(s)\frac{p_{0}\pi_{0}(s)p_{1}\pi_{1}(s)}{\pi(s)^2}v'(s)ds} $$
+
+```{r}
+t <- 1:36
+log_ahr <- sapply(t, function(t) {
+  gsdmvn:::gs_delta_wlr(arm0, arm1, tmax = t, weight = weight) /
+    gsdmvn:::gs_delta_wlr(arm0, arm1,
+      tmax = t, weight = weight,
+      approx = "generalized schoenfeld", normalization = TRUE
+    )
+})
+plot(t, exp(log_ahr),
+  ylim = c(0.6, 1),
+  xlab = "Calendar time (month)",
+  ylab = "Average Hazard Ratio",
+  type = "l"
+)
+```
+
+- Note the AHR depends on the choice of weight function $w(\cdot)$.
+
+- Under logrank test with piecewise exponential distribution and 1:1 randomization ratio,
+it can be simplified to
+
+$$\log(AHR) = \frac{\sum d_i \log{HR_i}}{\sum d_i}$$
+```{r}
+gsDesign2::AHR(enrollRates, failRates, totalDuration = arm0$total_time)
+```
+
+```{r}
+log_ahr <- gsdmvn:::gs_delta_wlr(arm0, arm1,
+  tmax = arm0$total_time,
+  weight = gsdmvn:::wlr_weight_1
+) /
+  gsdmvn:::gs_delta_wlr(arm0, arm1,
+    tmax = arm0$total_time,
+    weight = gsdmvn:::wlr_weight_1,
+    approx = "generalized schoenfeld",
+    normalization = TRUE
+  )
+exp(log_ahr)
+```
+
+Also computed by `gsDesign2::AHR()`.
+
+## MaxCombo test
+
+MaxCombo test statistics is the maximum of multiple WLR test statistics using different weight functions.
+We focus on Fleming and Harrington weight function $FH(\rho, \gamma)$ defined in `gsdmvn::wlr_weight_fh()`.
+
+To calculate sample size for the MaxCombo test,
+we will need to know the variance-covariance of multiple WLR test statistics.
+
+For Fleming and Harrington weight function, the covariance of different WLR test statistics can be calculated.
+Based on @karrison2016versatile and @wang2019simulation,
+the covariance of two test statistics $Z_1 = Z(\rho_1, \gamma_1), Z_2 = Z(\rho_2, \gamma_2)$ is
+
+$$\text{Cov}(Z_1, Z_2) = \text{Var}(Z(\frac{\rho_1 + \rho_2}{2}, \frac{\gamma_1 + \gamma_2}{2}))$$
+
+- We illustrate the idea based on $FH(0, 0.5)$ and $FH(0.5, 0.5)$
+
+- All weight functions
+
+```{r}
+weight_combo <- list(
+  function(x, arm0, arm1) {
+    gsdmvn::wlr_weight_fh(
+      x, arm0, arm1,
+      rho = 0, gamma = 0.5
+    )
+  },
+  function(x, arm0, arm1) {
+    gsdmvn::wlr_weight_fh(
+      x, arm0, arm1,
+      rho = 0.25, gamma = 0.5
+    )
+  },
+  function(x, arm0, arm1) {
+    gsdmvn::wlr_weight_fh(
+      x, arm0, arm1,
+      rho = 0.25, gamma = 0.5
+    )
+  },
+  function(x, arm0, arm1) {
+    gsdmvn::wlr_weight_fh(
+      x, arm0, arm1,
+      rho = 0.5, gamma = 0.5
+    )
+  }
+)
+```
+
+- $\Delta$
+
+```{r}
+delta_combo <- sapply(weight_combo[c(1, 4)], function(x) {
+  gsdmvn:::gs_delta_wlr(arm0, arm1, tmax = arm0$total_time, weight = x)
+})
+delta_combo
+```
+
+- Covariance
+
+```{r}
+sigma2_combo <- sapply(weight_combo, function(x) {
+  gsdmvn:::gs_sigma2_wlr(arm0, arm1, tmax = arm0$total_time, weight = x)
+})
+sigma2_combo <- matrix(sigma2_combo, nrow = 2)
+sigma2_combo
+```
+
+- Correlation
+
+```{r}
+corr_combo <- cov2cor(sigma2_combo)
+corr_combo
+```
+
+### Type I error and power
+
+The formula to calculate sample size based on effect size does not directly apply,
+because the test statistic for MaxCombo is not asymptotically normal.
+
+The type I Error shall be:
+
+$$\alpha = \text{Pr}(\max(Z_1, Z_2) > z_{\alpha} \, | \, H_0) = 1 - \text{Pr}(Z_1 < z_{\alpha}, Z_2 < z_{\alpha} \, | \, H_0)$$
+
+```{r}
+library(mvtnorm)
+
+z_alpha <- qmvnorm(p = 1 - 0.025, corr = corr_combo)
+z_alpha$quantile
+```
+
+The power shall be
+
+$$\beta = \text{Pr}(\max(Z_1, Z_2) > z_{\alpha} \, | \, H_1) = 1 - \text{Pr}(Z_1 < z_{\alpha}, Z_2 < z_{\alpha} \, | \, H_1)$$
+
+```{r}
+#' @param n Sample size
+#' @param power Target power. Use power=0 to calculate the actual power.
+power_combo <- function(n, power = 0) {
+  theta <- abs(delta_combo) / sqrt(diag(sigma2_combo))
+  power_combo <- 1 - pmvnorm(
+    upper = z_alpha$quantile,
+    mean = sqrt(n) * theta, corr = corr_combo
+  )
+  as.numeric(power_combo) - power
+}
+power_combo(n = 150)
+```
+
+### Sample size
+
+To calculate the sample size, we can solve the power function with a giving Type I error and power.
+
+```{r}
+n_combo <- uniroot(power_combo, interval = c(0, 500), power = 0.8)$root
+n_combo
+```
+
+```{r}
+c(z = z_alpha$quantile, n = n_combo, power = power_combo(n_combo))
+```
+
+### Number of events
+
+The number of events required can be calculated accordingly as in weighted logrank test.
+
+```{r}
+n0 <- n1 <- n_combo / 2
+gsdmvn:::prob_event.arm(arm0, tmax = arm0$total_time) * n0 +
+  gsdmvn:::prob_event.arm(arm1, tmax = arm0$total_time) * n1
+```

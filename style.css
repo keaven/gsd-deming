@@ -1,0 +1,12 @@
+div.csl-entry {
+    display: flex;
+}
+
+div.csl-left-margin {
+    padding-right: 1rem;
+}
+
+img.cover {
+    float: center;
+    margin: 0 0 0 0;
+}

@@ -1,0 +1,246 @@
+---
+title: Time-to-Event Endpoint Design (Cure Model)
+output: html_document
+---
+
+# Overview
+
+This report documents a group sequential design for a time-to-event endpoint
+and two treatment groups.
+The assumptions for the trial are that survival follows a Poisson mixture model
+which assumes a long-term survival (cure) rate.
+The Lachin and Foulkes method for sample size derivation is used along with
+standard group sequential assumptions for the asymptotic joint distribution
+of test statistics.
+Bounds are derived using the Lan-DeMets spending function methodology.
+
+```{r}
+library(gsDesign)
+```
+
+# Design assumptions
+
+```{r}
+# Number of analyses
+k <- 4
+# See gsDesign() help for description of boundary types
+test.type <- 4
+# 1-sided Type I error
+alpha <- 0.025
+# Type 2 error (1 - targeted power)
+beta <- 0.1
+# If test.type = 5 or 6, this sets maximum spending for futility
+# under the null hypothesis. Otherwise, this is ignored.
+astar <- 0
+# Timing (information fraction) at interim analyses
+timing <- c(0.3, 0.65, 0.9)
+# Efficacy bound spending function
+sfu <- sfLDOF
+# Upper bound spending function parameters, if any
+sfupar <- c(0)
+# Lower bound spending function, if used (test.type > 2)
+sfl <- sfHSD
+# Lower bound spending function parameters, if any
+sflpar <- c(-8)
+# Assumed hazard ratio under alternate hypothesis
+hr <- 0.72
+# Null hypothesis hazard ratio
+hr0 <- 1
+# Dropout rate (exponential rate)
+eta <- 0.01
+# Enrollment rate (normally will be inflated to achieve power)
+gamma <- c(2.5, 5, 7.5, 10)
+# Relative enrollment rates by time period
+R <- c(1.33333333333333, 1.33333333333333, 1.33333333333333, 14)
+# Calendar time of final analysis
+T <- 42
+# Minimum follow-up time after enrollment complete
+minfup <- 24
+# Relative enrollment (experimental/placebo)
+ratio <- 1
+```
+
+# Cure model parameters
+
+```{r}
+# This is used for inputting failure rate assumptions only
+maxTime <- 42
+# Assumed long-term survival rate
+cureRate <- 0.7
+# Survival rate at specific time
+survRate <- 0.75
+survRateTime <- 18
+# Number of equally sized bins from 0 to maxTime to provide stepwise hazard rates
+bins <- 20
+# Compute theta for Poisson mixture cure rate model
+theta <- -log(cureRate)
+# Compute rate parameter lambda for Poisson mixture cure rate model
+lambda <- -log(1 + log(survRate) / theta) / survRateTime
+# Compute piecewise intervals for constant hazard approximation
+ti <- (0:bins) / bins * maxTime
+# Compute cumulative hazard based on actual Poisson mixture cure rate model
+Hi <- theta * (1 - exp(-lambda * ti))
+# Compute hazard rates corresponding to cumulative hazard rate assumptions
+lambdaC <- (Hi[2:(bins + 1)] - Hi[1:bins]) / maxTime * bins
+# Number of rate
+len <- bins - 1
+# equal length intervals for piecewise hazard rate approximation
+S <- array(maxTime / bins, len)
+```
+
+- Control cure rate: `r cureRate`
+- Control survival rate at time `r survRateTime`: `r survRate`
+
+# Design derivation
+
+# Derive fixed design
+
+We derive sample size and event count requirements for a fixed design with
+a single analysis (no interim analysis).
+
+```{r}
+fixed_design <-
+  nSurv(
+    lambdaC = lambdaC,
+    hr = hr,
+    hr0 = hr0,
+    eta = eta,
+    gamma = gamma,
+    R = R,
+    S = S,
+    T = T,
+    minfup = minfup,
+    ratio = ratio,
+    alpha = alpha,
+    beta = beta
+  )
+cat("Sample size:", ceiling(fixed_design$n), "Events: ", ceiling(fixed_design$d))
+```
+
+## Derive group sequential design
+
+The following code derives the group sequential design using the method of
+Lachin and Foulkes.
+
+```{r}
+x <- gsSurv(
+  k = k,
+  test.type = test.type,
+  alpha = alpha,
+  beta = beta,
+  astar = astar,
+  timing = timing,
+  sfu = sfu,
+  sfupar = sfupar,
+  sfl = sfl,
+  sflpar = sflpar,
+  lambdaC = lambdaC,
+  hr = hr,
+  hr0 = hr0,
+  eta = eta,
+  gamma = gamma,
+  R = R,
+  S = S,
+  T = T,
+  minfup = minfup,
+  ratio = ratio
+)
+```
+
+# Group sequential design summaries 
+
+## Textual design summary
+
+A textual summary for the design is:
+
+```{r}
+cat(summary(x, timeunit = 'months'))
+```
+
+## Tabular bound summary
+
+The group sequential design boundaries and properties are summarized
+in the following table. We further describe the information as follows:
+
+- The IA percent is the percent of statistical information (planned events)
+  at the interim analysis relative to the final analysis. This matches the timing input.
+- We note that while sample size (N) and events are rounded up in the table,
+  the design stores continuous values for these numbers to exactly match
+  the input timing of analyses. Thus, calculating with rounded up numbers
+  in the table may not exactly match the IA % in the table.
+- The calendar timing of the analysis is the expected timing relative to
+  opening of enrollment.
+- Z-values are for standard normal test statistics with positive values
+  representing a treatment benefit for the experimental group.
+- p-values are nominal p-values corresponding to the Z-values.
+- ~HR at bound is an asymptotic approximation for the hazard ratio required
+  to cross a bound. This is not a criterion that must be met for Type I error control.
+- P(Cross) if HR=1 is the cumulative probability of crossing a bound
+  (efficacy or futility) at or before a given analysis. We note that
+  for the default non-binding Type I error option that P(Cross) if HR=1
+  will be less than the specified Type I error. This is because Type I error
+  is computed ignoring the futility bound since it is advisory only.
+  The actual cumulative Type I error spending is
+  `r round(cumsum(x$upper$spend), 6)`.
+- P(Cross) if HR=`r round(x$hr, 2)` is the cumulative probability of crossing
+  a bound under the alternate hypothesis.
+
+```{r}
+gsBoundSummary(x, ratio = 1, digits = 4, ddigits = 2, tdigits = 1, timename = 'Month')
+```
+
+# Other design characteristics
+
+## Design plot: Hazard ratio
+
+```{r}
+plot(x, plottype = 8, xlab = 'Events', ylab = 'Estimated hazard ratio')
+```
+
+## Underlying survival
+
+Following is a plot of the assumed control and experimental survival curves
+under the alternate hypothesis assumptions over the planned course of the trial.
+
+```{r}
+xtime <- (0:50) / 50 * max(x$T)
+control_survival <- exp(-theta * (1 - exp(-lambda * xtime)))
+df <- rbind(
+  data.frame(Treatment = "Control", Time = xtime, Survival = control_survival),
+  data.frame(Treatment = "Experimental", Time = xtime, Survival = control_survival^hr)
+)
+ggplot(df, aes(x = Time, y = Survival, col = Treatment)) +
+  geom_line() +
+  ylim(0, 1)
+```
+
+## Sample size and event accrual
+
+Following is a plot of expected accrual of subjects and events over time
+under design assumptions for the alternate hypothesis.
+
+```{r}
+accrual_fn <- function(Time, x) {
+  xx <- nEventsIA(tIA = Time, x = x, simple = FALSE)
+  data.frame(
+    Time = Time,
+    Accrual = c(xx$eNC + xx$eNE, xx$eDC + xx$eDE),
+    Count = c("Sample size", "Events")
+  )
+}
+accrual <- data.frame(Time = 0, Accrual = c(0, 0), Count = c("Sample size", "Events"))
+
+for (i in seq_along(xtime[xtime > 0])) {
+  accrual <- rbind(accrual, accrual_fn(Time = xtime[i + 1], x = x))
+}
+
+ggplot(accrual, aes(x = Time, y = Accrual, col = Count)) +
+  geom_line() +
+  ylab("Expected Accrual")
+```
+
+# Environment information
+
+- Run date: `r Sys.time()`
+- R version: `r R.version.string`
+- gsDesign version: `r as.character(packageVersion("gsDesign"))`

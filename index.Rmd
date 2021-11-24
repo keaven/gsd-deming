@@ -1,0 +1,80 @@
+---
+title: "Group Sequential Design Under Non-Proportional Hazards"
+author: "Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao"
+institution: "Merck & Co., Inc., Kenilworth, NJ, USA"
+date: "`r Sys.Date()`"
+subtitle: "Deming Conference Course, December 6, 2021"
+site: bookdown::bookdown_site
+documentclass: book
+biblio-style: apalike
+bibliography: [Deming2021.bib, packages.bib]
+csl: ims.csl
+link-citations: yes
+description: 'We consider group sequential design for time-to-event endpoints under
+  both proportional and non-proportional hazards assumptions for randomized clinical
+  trials. While the primary focus will be on logrank testing due to its regulatory
+  acceptance, weighted logrank test, combination tests and RMST will also be considered.
+  Timing of analyses and boundary setting for efficacy and futility are critical topics
+  to be discussed at length. A simple, piecewise model that can be used to approximate
+  arbitrary scenarios is proposed. In addition to 2-arm comparisons for a single endpoint,
+  we will also discuss graphical methods for strong control of Type I error when there
+  are hypotheses for multiple endpoints and/or multiple populations. Asymptotic theory
+  will be briefly noted as background, but the focus will be on applications, including
+  software to quickly compare designs and scenarios. Throughout the course, we will
+  develop designs incorporating each key new concept. '
+---
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c("gsDesign"), "packages.bib")
+```
+
+```{r, include = FALSE}
+library(bookdown)
+library(bslib)
+library(downlit)
+library(kableExtra)
+library(knitr)
+library(formatR)
+library(fs)
+library(gt)
+```
+
+```{r, pkglite}
+library(pkglite)
+
+path <- file.path(tempdir(), "gsd-training/")
+pkglite::unpack(input = "rpkgs/modestWLRT.txt", output = path, quiet = TRUE, install = TRUE, upgrade = "never")
+pkglite::unpack(input = "rpkgs/gsDesign2.txt", output = path, quiet = TRUE, install = TRUE, upgrade = "never")
+pkglite::unpack(input = "rpkgs/simtrial.txt", output = path, quiet = TRUE, install = TRUE, upgrade = "never")
+pkglite::unpack(input = "rpkgs/gsdmvn.txt", output = path, quiet = TRUE, install = TRUE, upgrade = "never")
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(comment = "#>", echo = TRUE, message = FALSE, out.width = "80%", fig.align = "center")
+```
+
+```{r, eval = FALSE, include=FALSE}
+# Update manifest.json
+options(repos = c(
+  "https://rspm.merck.com/open_risk/latest",
+  "https://rspm.merck.com/bardsdev/latest"
+))
+rsconnect::writeManifest(appPrimaryDoc = "index.Rmd", contentCategory = "site")
+
+# Remove the packages from manifest
+x <- jsonlite::read_json("manifest.json")
+x$packages$gsDesign2 <- NULL
+x$packages$simtrial <- NULL
+x$packages$gsdmvn <- NULL
+jsonlite::write_json(x, path = "manifest.json", pretty = TRUE, auto_unbox = TRUE, null = "null")
+rm(x)
+```
+
+# Welcome! {-}
+
+<img src="images/cover.jpg" width="100%" alt="" class="cover" />
+
+Welcome to the 2021 Deming Conference course on group sequential design.
+
+We consider group sequential design for time-to-event endpoints under both proportional and non-proportional hazards assumptions for randomized clinical trials. While the primary focus will be on logrank testing due to its regulatory acceptance, weighted logrank test, combination tests and RMST will also be considered. Timing of analyses and boundary setting for efficacy and futility are critical topics to be discussed at length. A simple, piecewise model that can be used to approximate arbitrary scenarios is proposed. In addition to 2-arm comparisons for a single endpoint, we will also discuss graphical methods for strong control of Type I error when there are hypotheses for multiple endpoints and/or multiple populations. Asymptotic theory will be briefly noted as background, but the focus will be on applications, including software to quickly compare designs and scenarios. Throughout the course, we will develop designs incorporating each key new concept. 
