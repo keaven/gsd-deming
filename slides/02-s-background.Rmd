@@ -15,13 +15,13 @@
 - Asymptotic normal assumption works well for most trials
 - @scharfstein1997semiparametric demonstrated $Z = (Z_1, \dots, Z_K)$ is asymptotically normal with independent increments.
 - We extend the canonical distribution notation of @JTBook:
-  - $Z_k$ is test statistic for treatment effect at analysis $k=1,\ldots,K$
+  - $Z_k$ is test statistics for treatment effect at analysis $k=1,\ldots,K$
   - $(Z_1,\ldots,Z_K)$ is multivariate normal
   - $E(Z_k) = \theta_k \sqrt{I_k}, k=1,\ldots,K$
   - $\hbox{Cov}(Z_{k_1}, Z_{k_2})=\sqrt{I_{k_1}/I_{k_2}},$ $1\le k_1\le k_2\le K$
 - $I_k$ is the Fisher information for $\theta_k, k=1,\ldots, K$. 
 - For most of this training $\theta_k=-E(\log(HR_k))$
-- Simulation can be used examine accuracy of normal approximation
+- Simulation can be used to examine accuracy of normal approximation
 
 
 ## Assumptions for time-to-event endpoints
