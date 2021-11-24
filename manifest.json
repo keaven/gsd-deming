@@ -1443,36 +1443,6 @@
         "Built": "R 4.0.1; x86_64-pc-linux-gnu; 2021-04-03 08:04:27 UTC; unix"
       }
     },
-    "mkdocs": {
-      "Source": "repo_NTCVMTUJ",
-      "Repository": "https://rspm.merck.com/bardsdev/latest",
-      "description": {
-        "Package": "mkdocs",
-        "Type": "Package",
-        "Title": "Merck Themed R Markdown Templates",
-        "Authors@R": "c(\n    person(\"Nan\", \"Xiao\", email = \"nan.xiao1@merck.com\", role = c(\"aut\", \"cre\")),\n    person(\"Merck Sharp & Dohme Corp\", role = \"cph\")\n    )",
-        "Description": "Merck themed R Markdown document templates.",
-        "License": "file LICENSE",
-        "URL": "https://stash.merck.com/projects/BARDS/repos/mkdocs/browse,\nhttps://lctcvp7236.merck.com:3838/content/591/",
-        "Encoding": "UTF-8",
-        "LazyData": "true",
-        "VignetteBuilder": "knitr",
-        "Depends": "R (>= 3.5.0)",
-        "Imports": "htmltools, rmarkdown (>= 2.6), stringr, xfun",
-        "Suggests": "knitr",
-        "Roxygen": "list(markdown = TRUE)",
-        "RoxygenNote": "7.1.1",
-        "Repository": "RSPM",
-        "RemoteSha": "ff2f4b7e0ae9d83b5b5c163d55f8fedd48e9c2fc",
-        "Version": "0.1.0.0.0.0.1634605477",
-        "Date": "2021-10-18",
-        "NeedsCompilation": "no",
-        "Packaged": "2021-10-22 13:56:48 UTC; rstudio-pm",
-        "Author": "Nan Xiao [aut, cre],\n  Merck Sharp & Dohme Corp [cph]",
-        "Maintainer": "Nan Xiao <nan.xiao1@merck.com>",
-        "Built": "R 4.0.1; ; 2021-11-04 23:22:30 UTC; unix"
-      }
-    },
     "munsell": {
       "Source": "repo_SFGDNUPC",
       "Repository": "https://rspm.merck.com/open_risk/latest",
