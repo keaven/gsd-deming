@@ -204,21 +204,21 @@ gsDesign::nSurv(
 ## Non-proportional hazards
 
 Under proportional hazard assumption, we commonly used event driven approach for sample size calculation.
-(i.e. calculate number of events then derive the sample size.)
+(i.e., calculate number of events then derive the sample size.)
 
 - Event ($d$) to Sample size ($n$) or `d->n`
 
 ```{r, echo = FALSE, out.width= "100%"}
-knitr::include_graphics("images/ch2_d_to_n.png")
+knitr::include_graphics("images/ch2_d_to_n.svg")
 ```
 
-Under Non-proportional Hazards, the event driven approach is not applicable.
+Under non-proportional hazards, the event driven approach is not applicable.
 We need to derive the sample size first.
 
 - Sample size ($n$) to Event ($d$) or `n->d`
 
 ```{r, echo = FALSE, out.width= "100%"}
-knitr::include_graphics("images/ch2_n_to_d.png")
+knitr::include_graphics("images/ch2_n_to_d.svg")
 ```
 
 - $\tau_a$: accrual time
