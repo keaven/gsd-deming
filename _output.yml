@@ -5,5 +5,3 @@ bookdown::bs4_book:
     bg: "#ffffff"
   repo: https://github.com/keaven/gsd-deming
   css: "style.css"
-  includes:
-    in_header: tweak-link.html
