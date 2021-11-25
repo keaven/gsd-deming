@@ -70,3 +70,23 @@ remotes::install_github("Merck/simtrial")
 ```
 
 You will need reasonably recent versions of R and packages.
+
+## Authors and contributors
+
+The document is maintained by a community.
+While reading the document, you can be a contributor as well.
+The quality of this document relies on you.
+
+- Authors: contributed the majority of content to at least one chapter.
+
+  Keaven Anderson <<keaven_anderson@merck.com>>, Yilong Zhang, Nan Xiao, Yujie Zhao
+
+- Contributors: contributed at least one commit to the [source code](https://github.com/keaven/gsd-deming).
+
+```{r, results = "asis", echo = FALSE, message = FALSE}
+contributors <- read.csv("contributors.csv", stringsAsFactors = FALSE, na.strings = "")
+contributors$desc <- with(contributors, ifelse(is.na(username), name, paste0(name, " (\\@", username, ")")))
+cat("  We are grateful for all the improvements brought by these contributors (in chronological order): ", sep = "")
+cat(paste0(contributors$desc, collapse = ", "))
+cat(".\n")
+```
