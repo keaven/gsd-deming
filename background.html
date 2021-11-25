@@ -317,7 +317,6 @@ And the joint distribution of B-process <span class="math inline">\(\{B_k\}_{k =
 where <span class="math inline">\(t_i = n_i / N\)</span> with <span class="math inline">\(N \triangleq n_K\)</span> as the final number of observations at the last look.
 If a statistics have the above distribution, we declare that it has the canonical joint distribution with information levels <span class="math inline">\(\{\mathcal I_1, \ldots, \mathcal I_K \}\)</span> for the parameter <span class="math inline">\(\theta\)</span>.</p>
 </div>
-<p>General multivariate normal theory and bound derivation from Yilong’s WLR chapter.</p>
 </div>
 </div>
 <div id="sf" class="section level2">
@@ -351,7 +350,7 @@ The commonly applied boundary family include:</p>
 </h3>
 The main idea of haybittle boundary is to set the interim Z-score boundary as 3 and the final boundary as 1.96, which is visualized as the figure below.
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-9"></span>
+<span style="display:block;" id="fig:unnamed-chunk-10"></span>
 <img src="images/background_SF_Haybittle_boundary.png" alt="Haybittle boundary" width="50%"><p class="caption">
 FIGURE 1.4: Haybittle boundary
 </p>
@@ -388,7 +387,7 @@ When <span class="math inline">\(\Delta = 0\)</span>, it is the O’Brien-Flemin
 \]</span>
 where <span class="math inline">\(c_P(K)\)</span> is fixed given the number of total looks <span class="math inline">\(K\)</span> and chosen such that <span class="math inline">\(\text{Pr}(\cup_{k=1}^{K} |Z(k/K)| &gt; c_P(K)) = \alpha\)</span>.</p>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-10"></span>
+<span style="display:block;" id="fig:unnamed-chunk-11"></span>
 <img src="images/background_SF_Pocock_boundary.png" alt="Pocock boundary" width="50%"><p class="caption">
 FIGURE 1.5: Pocock boundary
 </p>
@@ -447,7 +446,7 @@ Its main weakness is the high price for the end of the trial and requirement of 
 But it gives nominal value close to the overall value of the design <span class="math inline">\(\approx 1.96\)</span> for the final stage.
 Its visualization can be found as follows.</p>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-11"></span>
+<span style="display:block;" id="fig:unnamed-chunk-12"></span>
 <img src="images/background_SF_OBF_boundary.png" alt="OBrien-Fleming boundary" width="50%"><p class="caption">
 FIGURE 1.6: OBrien-Fleming boundary
 </p>
@@ -514,7 +513,7 @@ But there are two differences between them.</p>
 Accordingly, the O’Brien-Fleming boundary makes it much more difficult to stop early than the Pocock boundary.
 However, the O’Brien-Fleming boundary extracts a much smaller price at the end.</p>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-12"></span>
+<span style="display:block;" id="fig:unnamed-chunk-13"></span>
 <img src="images/background_SF_OF_P_t.png" alt="Pocock (circles) and O'Brien-Fleming (squares) z-score boundaries for four looks" width="50%"><p class="caption">
 FIGURE 1.7: Pocock (circles) and O’Brien-Fleming (squares) z-score boundaries for four looks
 </p>
@@ -525,14 +524,14 @@ FIGURE 1.7: Pocock (circles) and O’Brien-Fleming (squares) z-score boundaries 
 <li>The O’Brien-Fleming behaves in just the opposite way.</li>
 </ul>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-13"></span>
+<span style="display:block;" id="fig:unnamed-chunk-14"></span>
 <img src="images/background_SF_cumType1_t.png" alt="Cumulative type 1 error rate used by the Pocock (circles) and O'Brien-Fleming (squares) procedures with four looks." width="50%"><p class="caption">
 FIGURE 1.8: Cumulative type 1 error rate used by the Pocock (circles) and O’Brien-Fleming (squares) procedures with four looks.
 </p>
 </div>
 <p>In conclusion, we visualize the three spending function in the following figure.</p>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-14"></span>
+<span style="display:block;" id="fig:unnamed-chunk-15"></span>
 <img src="images/background_SF_ThreeBoundary.png" alt="Three boundaries" width="50%"><p class="caption">
 FIGURE 1.9: Three boundaries
 </p>

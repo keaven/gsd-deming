@@ -8,12 +8,12 @@ def:DefBprocess
 eq:DefBprocess
 thm:ThmZprocessDistCF
 thm:ThmBprocessDistCF
-fig:unnamed-chunk-9
 fig:unnamed-chunk-10
 fig:unnamed-chunk-11
 fig:unnamed-chunk-12
 fig:unnamed-chunk-13
 fig:unnamed-chunk-14
+fig:unnamed-chunk-15
 eq:AhrLambdaGamma
 eq:AhrRateEstimation
 eq:AhrIndividualHazardRateDist
