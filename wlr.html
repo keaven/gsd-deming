@@ -17,13 +17,7 @@
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script><script type="text/javascript">
-      window.onload = function () {
-          document.body.innerHTML = document.body.innerHTML.replace(/https:\/\/rdrr.io\/pkg\/gsDesign2\/man\//g, 'https://merck.github.io/gsDesign2/reference/');
-          document.body.innerHTML = document.body.innerHTML.replace(/https:\/\/rdrr.io\/pkg\/simtrial\/man\//g, 'https://merck.github.io/simtrial/reference/');
-          document.body.innerHTML = document.body.innerHTML.replace(/https:\/\/rdrr.io\/pkg\/gsdmvn\/man\//g, 'https://merck.github.io/gsdmvn/reference/');
-      }
-  </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="style.css">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="style.css">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -594,7 +588,7 @@ by</p>
   <span class="va">x</span><span class="op">$</span><span class="va">lower</span><span class="op">$</span><span class="va">bound</span>, 
   <span class="va">x</span><span class="op">$</span><span class="va">upper</span><span class="op">$</span><span class="va">bound</span>
 <span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; [1] 0.00854411 0.69113520 0.93587372</code></pre>
+<pre><code>#&gt; [1] 0.00854411 0.69113520 0.93587719</code></pre>
 <ul>
 <li><strong>Type I error</strong></li>
 </ul>
@@ -605,7 +599,7 @@ by</p>
   <span class="va">corr</span>, 
   <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="op">-</span><span class="cn">Inf</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">delta</span><span class="op">)</span><span class="op">)</span>, 
   <span class="va">x</span><span class="op">$</span><span class="va">upper</span><span class="op">$</span><span class="va">bound</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; [1] 0.0001035057 0.0061027684 0.0266386286</code></pre>
+<pre><code>#&gt; [1] 0.0001035057 0.0061027684 0.0266396068</code></pre>
 <ul>
 <li><strong>Futility probability</strong></li>
 </ul>
@@ -634,7 +628,7 @@ by</p>
   <span class="va">delta</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">sigma2</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">gs_n_ratio</span> <span class="op">*</span> <span class="va">n</span><span class="op">)</span>,
   <span class="va">corr</span>, <span class="va">x</span><span class="op">$</span><span class="va">lower</span><span class="op">$</span><span class="va">bound</span>, <span class="va">x</span><span class="op">$</span><span class="va">upper</span><span class="op">$</span><span class="va">bound</span>
 <span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; [1] 0.02168739 0.04054411 0.06413108</code></pre>
+<pre><code>#&gt; [1] 0.02168739 0.04054411 0.06411741</code></pre>
 <ul>
 <li><strong>Sample size</strong></li>
 </ul>
@@ -656,7 +650,7 @@ by</p>
 <div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">n_subject</span> <span class="op">&lt;-</span> <span class="va">n</span> <span class="op">*</span> <span class="va">ratio</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">ratio</span><span class="op">)</span>
 <span class="va">n_subject</span> <span class="op">*</span> <span class="va">gs_n_ratio</span></code></pre></div>
-<pre><code>#&gt; [1] 316.4489 316.4489 316.4489</code></pre>
+<pre><code>#&gt; [1] 316.4456 316.4456 316.4456</code></pre>
 <ul>
 <li><strong>Number of events</strong></li>
 </ul>
@@ -665,7 +659,7 @@ by</p>
 <code class="sourceCode R"><span class="va">n0</span> <span class="op">&lt;-</span> <span class="va">n1</span> <span class="op">&lt;-</span> <span class="va">n_subject</span> <span class="op">/</span> <span class="fl">2</span>
 <span class="fu">gsdmvn</span><span class="fu">:::</span><span class="fu">prob_event.arm</span><span class="op">(</span><span class="va">arm0</span>, tmax <span class="op">=</span> <span class="va">analysisTimes</span><span class="op">)</span> <span class="op">*</span> <span class="va">n0</span> <span class="op">+</span>
   <span class="fu">gsdmvn</span><span class="fu">:::</span><span class="fu">prob_event.arm</span><span class="op">(</span><span class="va">arm1</span>, tmax <span class="op">=</span> <span class="va">analysisTimes</span><span class="op">)</span> <span class="op">*</span> <span class="va">n1</span></code></pre></div>
-<pre><code>#&gt; [1]  67.96961 155.87224 209.67331</code></pre>
+<pre><code>#&gt; [1]  67.96889 155.87060 209.67110</code></pre>
 <ul>
 <li><strong>Average hazard ratio</strong></li>
 </ul>
@@ -689,7 +683,7 @@ Taylor series expansion.</p>
 </ul>
 <div class="sourceCode" id="cb179"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">n_subject</span> <span class="op">*</span> <span class="va">sigma2</span></code></pre></div>
-<pre><code>#&gt; [1] 0.4466856 3.3047901 7.6793914</code></pre>
+<pre><code>#&gt; [1] 0.4466809 3.3047552 7.6793104</code></pre>
 <ul>
 <li>
 <code>info0</code> column is <span class="math inline">\(\sigma^2_k\)</span> times <span class="math inline">\(N\)</span> under the null where we both use <code>arm0</code> for calculation in active and control group.</li>
