@@ -14,4 +14,4 @@ The quality of this document relies on you.
 
 - Authors: contributed the majority of content to at least one chapter.
 - Contributors: contributed at least one commit to the source code.
-- [List of authors and contributors](#)
+- [List of authors and contributors](https://keaven.github.io/gsd-deming/preface.html#authors-and-contributors)

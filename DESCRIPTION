@@ -5,7 +5,7 @@ Authors@R: c(
     person("Keaven", "Anderson", email = "keaven_anderson@merck.com", role = c("aut","cre")),
     person("Yilong", "Zhang", role = c("aut")),
     person("Nan", "Xiao", role = "aut"),
-    person("Keaven", "Anderson", role = c("aut"))
+    person("Yujie", "Zhao", role = c("aut"))
     )
 Imports:
   bslib,
