@@ -46,7 +46,7 @@ All opinions expressed are those of the presenters and not Merck & Co., Inc., Ke
 
 ## Software and supporting materials
 
-- Useful directories in course repository at *LINK*:
+- Useful directories in course repository at <https://github.com/keaven/gsd-deming>:
   - `data/`: contains design files for examples; also simulation results
   - `vignettes/`: reports produced by Shiny app to summarize designs
   - `simulation/`: R code and simulation data for the last part of the course
