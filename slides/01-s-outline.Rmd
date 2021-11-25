@@ -12,7 +12,7 @@
 
 - Break (10 minutes)
 
-- Weighted logrank, RMST, and combination tests (55 minutes)
+- Weighted logrank and combination tests (55 minutes)
 
 ## Disclaimer
 
@@ -28,7 +28,7 @@ This is also available at <https://gsdesign.shinyapps.io/prod/>, but this site i
 
 ## Course resources
 
-- Book at <keaven.github.io/gsd-deming/>
+- Book at <https://keaven.github.io/gsd-deming/>
     - Instructions there to install software, download repositories at <https://github.com/keaven/gsd-deming>
     - Directories there we will use:
         - data: contains design files for examples; also simulation results

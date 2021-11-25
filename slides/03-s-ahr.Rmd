@@ -176,8 +176,8 @@ Power and design functions extending the @JTBook computational model to non-cons
 - Bound support
   - `gsb()`: direct input of bounds
   - `gs_spending_bound()`: spending function bounds
-- Session 2
-  - Design and power with weighted logrank and MaxCombo (Yilong)
+- Other tests
+  - Design and power with weighted logrank and MaxCombo will be discussed in next section. 
 
 # The piecewise model
 
@@ -645,8 +645,7 @@ ahr <- gsDesign2::AHR(
   - Code here is detailed, but (hopefully) not complicated
   - AHR changes if event-based
   - Number of events variable if time-based
-  - Amin Shirazi wrote a function for one version of this as 2020 intern
-
+  
 ## Simulation code
 
 ```{r, eval=FALSE}

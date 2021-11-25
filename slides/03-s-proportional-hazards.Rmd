@@ -15,7 +15,9 @@
 
 ## Shiny app for proportional hazards
 
-- Shiny app available at: <https://rinpharma.shinyapps.io/gsdesign/> (preferred), <https://gsdesign.shinyapps.io/devel/> (not preferred)
+- Shiny app available at: 
+  + <https://rinpharma.shinyapps.io/gsdesign/> (preferred) 
+  + <https://gsdesign.shinyapps.io/devel/> (not preferred)
 - Allows broad specification of designs
 - Much simpler than writing code
 - It will write code and reports for you

@@ -23,18 +23,16 @@ We consider other alternative tests for group sequential design.
 
 For simplicity, we made a few key assumptions.
 
-- Balanced design (1:1 randomization ratio)
-- 1-sided test
-- Local alternative: variance under null and alternative are approximately equal
-- Accrual distribution:
-  - Piecewise uniform using `npsurvSS::create_arm()`
-  - Poisson process with piecewise uniform enrollment using `gsDesign::nSurv()` @LachinFoulkes and `gsdmvn::gs_design_ahr()`
-- Survival distribution: piecewise exponential
-- Loss to follow-up: exponential
-- No stratification
-- No cure fraction
+- Balanced design (1:1 randomization ratio).
+- 1-sided test.
+- Local alternative: variance under null and alternative are approximately equal.
+- Accrual distribution: Piecewise uniform. 
+- Survival distribution: piecewise exponential.
+- Loss to follow-up: exponential.
+- No stratification.
+- No cure fraction.
 
-The fixed design part is largely follow the concept described in @yung2019sample.
+The fixed design part largely follow the concept described in @yung2019sample.
 
 ## Notation
 

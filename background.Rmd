@@ -254,8 +254,10 @@ where $t_i = n_i / N$ with $N \triangleq n_K$ as the final number of observation
 If a statistics have the above distribution, we declare that it has the canonical joint distribution with information levels $\{\mathcal I_1, \ldots, \mathcal I_K \}$ for the parameter $\theta$.
 :::
 
+```{r, include=FALSE}
+# General multivariate normal theory and bound derivation from Yilong's WLR chapter.
+```
 
-General multivariate normal theory and bound derivation from Yilong's WLR chapter.
 
 ## Spending function bounds {#sf}
 
