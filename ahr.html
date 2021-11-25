@@ -49,12 +49,12 @@
 <li><a class="" href="index.html">Welcome!</a></li>
 <li><a class="" href="preface.html">Preface</a></li>
 <li><a class="" href="background.html"><span class="header-section-number">1</span> Background</a></li>
-<li><a class="" href="ph.html"><span class="header-section-number">2</span> Proportional hazards</a></li>
-<li><a class="active" href="average-hazard-ratio.html"><span class="header-section-number">3</span> Average hazard ratio</a></li>
-<li><a class="" href="introduction-to-gsdmvn-gsdesign2-and-simtrial.html"><span class="header-section-number">4</span> Introduction to gsdmvn, gsDesign2, and simtrial</a></li>
+<li><a class="" href="proportional-hazards.html"><span class="header-section-number">2</span> Proportional hazards</a></li>
+<li><a class="active" href="ahr.html"><span class="header-section-number">3</span> Average hazard ratio</a></li>
+<li><a class="" href="pkgs.html"><span class="header-section-number">4</span> Introduction to gsdmvn, gsDesign2, and simtrial</a></li>
 <li class="book-part">Others tests</li>
 <li><a class="" href="overview-other-tests.html"><span class="header-section-number">5</span> Overview</a></li>
-<li><a class="" href="fixed.html"><span class="header-section-number">6</span> Fixed design</a></li>
+<li><a class="" href="fixed-design.html"><span class="header-section-number">6</span> Fixed design</a></li>
 <li><a class="" href="wlr.html"><span class="header-section-number">7</span> Weighted logrank test</a></li>
 <li><a class="" href="wlr-boundary.html"><span class="header-section-number">8</span> Group sequential design boundary with weighted logrank test</a></li>
 <li><a class="" href="maxcombo.html"><span class="header-section-number">9</span> MaxCombo test</a></li>
@@ -67,9 +67,9 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="average-hazard-ratio" class="section level1">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="ahr" class="section level1">
 <h1>
-<span class="header-section-number">3</span> Average hazard ratio<a class="anchor" aria-label="anchor" href="#average-hazard-ratio"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3</span> Average hazard ratio<a class="anchor" aria-label="anchor" href="#ahr"><i class="fas fa-link"></i></a>
 </h1>
 <p>We consider designs for non-proportional hazards in this chapter.
 Because of its importance for regulatory applications, we focus here on the logrank tests.
@@ -183,12 +183,12 @@ Recall that
   =
   \log(\lambda_{1,m}) - \log(\lambda_{0,m}).
 \end{equation}\]</span>
-For both <span class="math inline">\(\lambda_{1,m}\)</span> and <span class="math inline">\(\lambda_{0,m}\)</span> above, by equation <a href="average-hazard-ratio.html#eq:AhrRateEstimation">(3.2)</a>, we know they can be estimated by
+For both <span class="math inline">\(\lambda_{1,m}\)</span> and <span class="math inline">\(\lambda_{0,m}\)</span> above, by equation <a href="ahr.html#eq:AhrRateEstimation">(3.2)</a>, we know they can be estimated by
 <span class="math display">\[
   \widehat\lambda_{i,m} = \frac{d_{i,m}}{T_{i, m}} \;\; i \in\{0, 1\}
 \]</span>
 where <span class="math inline">\(d_{0,m}, d_{1,m}\)</span> are number of events in <span class="math inline">\((t_{m-1}, t_m]\)</span> for group <span class="math inline">\(0,1\)</span>, respectively.</p>
-<p>By plugging the asymptotic distribution of <span class="math inline">\(\{\lambda_{0, m}, \lambda_{1,m}\}\)</span> in equation <a href="average-hazard-ratio.html#eq:AhrIndividualHazardRateDist">(3.3)</a> into <a href="average-hazard-ratio.html#eq:AhrSingleHazardRatioDef">(3.4)</a>, we can derive the asymptotic distribution of <span class="math inline">\(\beta_m\)</span>:
+<p>By plugging the asymptotic distribution of <span class="math inline">\(\{\lambda_{0, m}, \lambda_{1,m}\}\)</span> in equation <a href="ahr.html#eq:AhrIndividualHazardRateDist">(3.3)</a> into <a href="ahr.html#eq:AhrSingleHazardRatioDef">(3.4)</a>, we can derive the asymptotic distribution of <span class="math inline">\(\beta_m\)</span>:
 <span class="math display" id="eq:AhrSignleLogHazardRatio">\[\begin{equation}
   \tag{3.5}
   \widehat\beta_m
@@ -201,19 +201,19 @@ where <span class="math inline">\(d_{0,m}, d_{1,m}\)</span> are number of events
   \;\; \forall m = 1,\ldots, M .
 \end{equation}\]</span></p>
 </div>
-<div id="ahr" class="section level2">
+<div id="secAhr" class="section level2">
 <h2>
-<span class="header-section-number">3.2</span> Average hazard ratio<a class="anchor" aria-label="anchor" href="#ahr"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.2</span> Average hazard ratio<a class="anchor" aria-label="anchor" href="#secAhr"><i class="fas fa-link"></i></a>
 </h2>
 <p>In this section, we discuss the estimation of AHR.
 Generally speaking, there are two estimations of AHR.
 One is the maximal likelihood estimation (MLE) under standard proportional hazards assumption, and the other utilizes the weighted summation of individual hazard ratio to approximate AHR.
-We introduce both of two estimations, with Section <a href="average-hazard-ratio.html#secAhrMLE">3.2.1</a> introducing MLE and Section <a href="average-hazard-ratio.html#secAhrWeightedSum">3.2.2</a> introducing weighted summation estimation.</p>
+We introduce both of two estimations, with Section <a href="ahr.html#secAhrMLE">3.2.1</a> introducing MLE and Section <a href="ahr.html#secAhrWeightedSum">3.2.2</a> introducing weighted summation estimation.</p>
 <div id="secAhrMLE" class="section level3">
 <h3>
 <span class="header-section-number">3.2.1</span> MLE of AHR<a class="anchor" aria-label="anchor" href="#secAhrMLE"><i class="fas fa-link"></i></a>
 </h3>
-<p>If we set <span class="math inline">\(\beta_1 = \beta_2 = \ldots = \beta_m = \beta\)</span> in equation <a href="average-hazard-ratio.html#eq:AhrSingleHazardRatioDef">(3.4)</a>, it implies that
+<p>If we set <span class="math inline">\(\beta_1 = \beta_2 = \ldots = \beta_m = \beta\)</span> in equation <a href="ahr.html#eq:AhrSingleHazardRatioDef">(3.4)</a>, it implies that
 <span class="math display">\[
   \left\{
   \begin{array}{ccl}
@@ -222,7 +222,7 @@ We introduce both of two estimations, with Section <a href="average-hazard-ratio
   \end{array}
   \right.,
 \]</span>
-where <span class="math inline">\(\gamma_m\)</span> is defined in equation <a href="average-hazard-ratio.html#eq:AhrLambdaGamma">(3.1)</a>.
+where <span class="math inline">\(\gamma_m\)</span> is defined in equation <a href="ahr.html#eq:AhrLambdaGamma">(3.1)</a>.
 The above equation reduce the unknown parameter from <span class="math inline">\(\left\{\beta \cup \{ \lambda_{0,m}, \lambda_{1,m}, \gamma_m,\}_{m = 1, \ldots, M} \right\}\)</span> into <span class="math inline">\(\left\{\beta \cup \{\gamma_m,\}_{m = 1, \ldots, M} \right\}\)</span>.
 In the remaining of this section, we target on the estimation of parameters <span class="math inline">\(\left\{\beta \cup \{\gamma_m \}_{m = 1, \ldots, M} \right\}\)</span>.</p>
 <p>The log-likelihood of parameters <span class="math inline">\(\left\{\beta \cup \{\gamma_m,\}_{m = 1, \ldots, M} \right\}\)</span> is
@@ -253,7 +253,7 @@ By taking the first partial derivatives with respect to <span class="math inline
     e^{\gamma_m}= \frac{d_{0,m}+d_{1,m}}{T_{0,m}+T_{1,m}e^\beta}.
   \end{array}
 \]</span>
-By plugging the above equation into equation <a href="average-hazard-ratio.html#eq:AhrLikelihoodBetaGamma">(3.6)</a>, we can re-write our log-likelihood as only a function of the parameter <span class="math inline">\(\beta\)</span> as follows:
+By plugging the above equation into equation <a href="ahr.html#eq:AhrLikelihoodBetaGamma">(3.6)</a>, we can re-write our log-likelihood as only a function of the parameter <span class="math inline">\(\beta\)</span> as follows:
 <span class="math display">\[
   \ell(\beta)
   =
@@ -318,7 +318,7 @@ For the selection of weight <span class="math inline">\(\{w_m\}_{m = 1, \ldots, 
     \frac{1}{1/d_{0,i}+1/d_{1,i}}
   \right)^{-1}.
 \]</span>
-By plugging the above weight into equation <a href="average-hazard-ratio.html#eq:AhrBetaEstimation">(3.7)</a>, <span class="math inline">\(\beta\)</span> can be estimated as
+By plugging the above weight into equation <a href="ahr.html#eq:AhrBetaEstimation">(3.7)</a>, <span class="math inline">\(\beta\)</span> can be estimated as
 <span class="math display">\[
   \widehat\beta_{WS}
   =
@@ -337,20 +337,20 @@ The corresponding variance estimate is:
   =
   \left(\sum_{m=1}^M(1/d_{0,m} + 1/d_{1,m})^{-1}\right)^{-1}.
 \]</span></p>
-<p>By plugging the asymptotic distribution of <span class="math inline">\(\widehat\beta_m\)</span> in equation <a href="average-hazard-ratio.html#eq:AhrSignleLogHazardRatio">(3.5)</a>, one gets the asymptotic distribution of <span class="math inline">\(\widehat\beta_{WS}\)</span> as
+<p>By plugging the asymptotic distribution of <span class="math inline">\(\widehat\beta_m\)</span> in equation <a href="ahr.html#eq:AhrSignleLogHazardRatio">(3.5)</a>, one gets the asymptotic distribution of <span class="math inline">\(\widehat\beta_{WS}\)</span> as
 <span class="math display">\[
   \widehat\beta_{WS}
   \overset{\cdot}{\sim}
   \hbox{Normal}(\beta, \; \mathcal{I}^{-1}),
 \]</span>
 where <span class="math inline">\(\mathcal{I} = \sum_{m = 1}^M \left( \frac{1}{d_{0,m}} + \frac{1}{d_{1,m}} \right)^{-1}\)</span>.</p>
-<p>After reviewing the MLE (see Section <a href="average-hazard-ratio.html#secAhrMLE">3.2.1</a>) and weighted summation estimation (see Section <a href="average-hazard-ratio.html#secAhrWeightedSum">3.2.2</a>) of AHR, we summarize their difference in the following table.</p>
-<div id="qaozgpmpbf" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<p>After reviewing the MLE (see Section <a href="ahr.html#secAhrMLE">3.2.1</a>) and weighted summation estimation (see Section <a href="ahr.html#secAhrWeightedSum">3.2.2</a>) of AHR, we summarize their difference in the following table.</p>
+<div id="cnbtrjftxa" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#qaozgpmpbf .gt_table {
+#cnbtrjftxa .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -375,7 +375,7 @@ where <span class="math inline">\(\mathcal{I} = \sum_{m = 1}^M \left( \frac{1}{d
   border-left-color: #D3D3D3;
 }
 
-#qaozgpmpbf .gt_heading {
+#cnbtrjftxa .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -387,7 +387,7 @@ where <span class="math inline">\(\mathcal{I} = \sum_{m = 1}^M \left( \frac{1}{d
   border-right-color: #D3D3D3;
 }
 
-#qaozgpmpbf .gt_title {
+#cnbtrjftxa .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -397,7 +397,7 @@ where <span class="math inline">\(\mathcal{I} = \sum_{m = 1}^M \left( \frac{1}{d
   border-bottom-width: 0;
 }
 
-#qaozgpmpbf .gt_subtitle {
+#cnbtrjftxa .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -407,13 +407,13 @@ where <span class="math inline">\(\mathcal{I} = \sum_{m = 1}^M \left( \frac{1}{d
   border-top-width: 0;
 }
 
-#qaozgpmpbf .gt_bottom_border {
+#cnbtrjftxa .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qaozgpmpbf .gt_col_headings {
+#cnbtrjftxa .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -428,7 +428,7 @@ where <span class="math inline">\(\mathcal{I} = \sum_{m = 1}^M \left( \frac{1}{d
   border-right-color: #D3D3D3;
 }
 
-#qaozgpmpbf .gt_col_heading {
+#cnbtrjftxa .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -448,7 +448,7 @@ where <span class="math inline">\(\mathcal{I} = \sum_{m = 1}^M \left( \frac{1}{d
   overflow-x: hidden;
 }
 
-#qaozgpmpbf .gt_column_spanner_outer {
+#cnbtrjftxa .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -460,15 +460,15 @@ where <span class="math inline">\(\mathcal{I} = \sum_{m = 1}^M \left( \frac{1}{d
   padding-right: 4px;
 }
 
-#qaozgpmpbf .gt_column_spanner_outer:first-child {
+#cnbtrjftxa .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qaozgpmpbf .gt_column_spanner_outer:last-child {
+#cnbtrjftxa .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qaozgpmpbf .gt_column_spanner {
+#cnbtrjftxa .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -480,7 +480,7 @@ where <span class="math inline">\(\mathcal{I} = \sum_{m = 1}^M \left( \frac{1}{d
   width: 100%;
 }
 
-#qaozgpmpbf .gt_group_heading {
+#cnbtrjftxa .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -502,7 +502,7 @@ where <span class="math inline">\(\mathcal{I} = \sum_{m = 1}^M \left( \frac{1}{d
   vertical-align: middle;
 }
 
-#qaozgpmpbf .gt_empty_group_heading {
+#cnbtrjftxa .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -517,15 +517,15 @@ where <span class="math inline">\(\mathcal{I} = \sum_{m = 1}^M \left( \frac{1}{d
   vertical-align: middle;
 }
 
-#qaozgpmpbf .gt_from_md > :first-child {
+#cnbtrjftxa .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qaozgpmpbf .gt_from_md > :last-child {
+#cnbtrjftxa .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qaozgpmpbf .gt_row {
+#cnbtrjftxa .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -544,7 +544,7 @@ where <span class="math inline">\(\mathcal{I} = \sum_{m = 1}^M \left( \frac{1}{d
   overflow-x: hidden;
 }
 
-#qaozgpmpbf .gt_stub {
+#cnbtrjftxa .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -556,7 +556,7 @@ where <span class="math inline">\(\mathcal{I} = \sum_{m = 1}^M \left( \frac{1}{d
   padding-left: 12px;
 }
 
-#qaozgpmpbf .gt_summary_row {
+#cnbtrjftxa .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -566,7 +566,7 @@ where <span class="math inline">\(\mathcal{I} = \sum_{m = 1}^M \left( \frac{1}{d
   padding-right: 5px;
 }
 
-#qaozgpmpbf .gt_first_summary_row {
+#cnbtrjftxa .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -576,7 +576,7 @@ where <span class="math inline">\(\mathcal{I} = \sum_{m = 1}^M \left( \frac{1}{d
   border-top-color: #D3D3D3;
 }
 
-#qaozgpmpbf .gt_grand_summary_row {
+#cnbtrjftxa .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -586,7 +586,7 @@ where <span class="math inline">\(\mathcal{I} = \sum_{m = 1}^M \left( \frac{1}{d
   padding-right: 5px;
 }
 
-#qaozgpmpbf .gt_first_grand_summary_row {
+#cnbtrjftxa .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -596,11 +596,11 @@ where <span class="math inline">\(\mathcal{I} = \sum_{m = 1}^M \left( \frac{1}{d
   border-top-color: #D3D3D3;
 }
 
-#qaozgpmpbf .gt_striped {
+#cnbtrjftxa .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qaozgpmpbf .gt_table_body {
+#cnbtrjftxa .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -609,7 +609,7 @@ where <span class="math inline">\(\mathcal{I} = \sum_{m = 1}^M \left( \frac{1}{d
   border-bottom-color: #D3D3D3;
 }
 
-#qaozgpmpbf .gt_footnotes {
+#cnbtrjftxa .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -623,13 +623,13 @@ where <span class="math inline">\(\mathcal{I} = \sum_{m = 1}^M \left( \frac{1}{d
   border-right-color: #D3D3D3;
 }
 
-#qaozgpmpbf .gt_footnote {
+#cnbtrjftxa .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#qaozgpmpbf .gt_sourcenotes {
+#cnbtrjftxa .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -643,41 +643,41 @@ where <span class="math inline">\(\mathcal{I} = \sum_{m = 1}^M \left( \frac{1}{d
   border-right-color: #D3D3D3;
 }
 
-#qaozgpmpbf .gt_sourcenote {
+#cnbtrjftxa .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#qaozgpmpbf .gt_left {
+#cnbtrjftxa .gt_left {
   text-align: left;
 }
 
-#qaozgpmpbf .gt_center {
+#cnbtrjftxa .gt_center {
   text-align: center;
 }
 
-#qaozgpmpbf .gt_right {
+#cnbtrjftxa .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qaozgpmpbf .gt_font_normal {
+#cnbtrjftxa .gt_font_normal {
   font-weight: normal;
 }
 
-#qaozgpmpbf .gt_font_bold {
+#cnbtrjftxa .gt_font_bold {
   font-weight: bold;
 }
 
-#qaozgpmpbf .gt_font_italic {
+#cnbtrjftxa .gt_font_italic {
   font-style: italic;
 }
 
-#qaozgpmpbf .gt_super {
+#cnbtrjftxa .gt_super {
   font-size: 65%;
 }
 
-#qaozgpmpbf .gt_footnote_marks {
+#cnbtrjftxa .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -704,19 +704,20 @@ where <span class="math inline">\(\mathcal{I} = \sum_{m = 1}^M \left( \frac{1}{d
 </table></div>
 </div>
 <p>We note that the weighted summation <span class="math inline">\(\widehat\beta_{WS}\)</span> is not a maximum likelihood estimate, but in our experience it provides a good approximation of MLE <span class="math inline">\(\widehat\beta_{ML}\)</span>.</p>
+
 </div>
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="ph.html"><span class="header-section-number">2</span> Proportional hazards</a></div>
-<div class="next"><a href="introduction-to-gsdmvn-gsdesign2-and-simtrial.html"><span class="header-section-number">4</span> Introduction to gsdmvn, gsDesign2, and simtrial</a></div>
+<div class="prev"><a href="proportional-hazards.html"><span class="header-section-number">2</span> Proportional hazards</a></div>
+<div class="next"><a href="pkgs.html"><span class="header-section-number">4</span> Introduction to gsdmvn, gsDesign2, and simtrial</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#average-hazard-ratio"><span class="header-section-number">3</span> Average hazard ratio</a></li>
+<li><a class="nav-link" href="#ahr"><span class="header-section-number">3</span> Average hazard ratio</a></li>
 <li><a class="nav-link" href="#piecewise-model"><span class="header-section-number">3.1</span> Piecewise model</a></li>
 <li>
-<a class="nav-link" href="#ahr"><span class="header-section-number">3.2</span> Average hazard ratio</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#secAhr"><span class="header-section-number">3.2</span> Average hazard ratio</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#secAhrMLE"><span class="header-section-number">3.2.1</span> MLE of AHR</a></li>
 <li><a class="nav-link" href="#secAhrWeightedSum"><span class="header-section-number">3.2.2</span> Commonly used estimation of AHR</a></li>
 </ul>
@@ -725,8 +726,8 @@ where <span class="math inline">\(\mathcal{I} = \sum_{m = 1}^M \left( \frac{1}{d
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/keaven/gsd-deming/blob/master/04-ahr.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/keaven/gsd-deming/edit/master/04-ahr.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/keaven/gsd-deming/blob/master/ahr.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/keaven/gsd-deming/edit/master/ahr.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>
@@ -738,7 +739,7 @@ where <span class="math inline">\(\mathcal{I} = \sum_{m = 1}^M \left( \frac{1}{d
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Group Sequential Design Under Non-Proportional Hazards</strong>: Deming Conference Course, December 6, 2021" was written by Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao. It was last built on 2021-11-24.</p>
+    <p>"<strong>Group Sequential Design Under Non-Proportional Hazards</strong>: Deming Conference Course, December 6, 2021" was written by Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao. It was last built on 2021-11-25.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

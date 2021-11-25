@@ -49,12 +49,12 @@
 <li><a class="" href="index.html">Welcome!</a></li>
 <li><a class="" href="preface.html">Preface</a></li>
 <li><a class="" href="background.html"><span class="header-section-number">1</span> Background</a></li>
-<li><a class="active" href="ph.html"><span class="header-section-number">2</span> Proportional hazards</a></li>
-<li><a class="" href="average-hazard-ratio.html"><span class="header-section-number">3</span> Average hazard ratio</a></li>
-<li><a class="" href="introduction-to-gsdmvn-gsdesign2-and-simtrial.html"><span class="header-section-number">4</span> Introduction to gsdmvn, gsDesign2, and simtrial</a></li>
+<li><a class="active" href="proportional-hazards.html"><span class="header-section-number">2</span> Proportional hazards</a></li>
+<li><a class="" href="ahr.html"><span class="header-section-number">3</span> Average hazard ratio</a></li>
+<li><a class="" href="pkgs.html"><span class="header-section-number">4</span> Introduction to gsdmvn, gsDesign2, and simtrial</a></li>
 <li class="book-part">Others tests</li>
 <li><a class="" href="overview-other-tests.html"><span class="header-section-number">5</span> Overview</a></li>
-<li><a class="" href="fixed.html"><span class="header-section-number">6</span> Fixed design</a></li>
+<li><a class="" href="fixed-design.html"><span class="header-section-number">6</span> Fixed design</a></li>
 <li><a class="" href="wlr.html"><span class="header-section-number">7</span> Weighted logrank test</a></li>
 <li><a class="" href="wlr-boundary.html"><span class="header-section-number">8</span> Group sequential design boundary with weighted logrank test</a></li>
 <li><a class="" href="maxcombo.html"><span class="header-section-number">9</span> MaxCombo test</a></li>
@@ -67,9 +67,9 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="ph" class="section level1">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="proportional-hazards" class="section level1">
 <h1>
-<span class="header-section-number">2</span> Proportional hazards<a class="anchor" aria-label="anchor" href="#ph"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2</span> Proportional hazards<a class="anchor" aria-label="anchor" href="#proportional-hazards"><i class="fas fa-link"></i></a>
 </h1>
 <p>We consider designs under the assumption of proportional hazards in this chapter applying the <strong>gsDesign</strong> package.
 These will be most easily be developed using the gsDesign Shiny app at <a href="https://rinpharma.shinyapps.io/gsdesign/" class="uri">https://rinpharma.shinyapps.io/gsdesign/</a>.
@@ -161,12 +161,12 @@ This sort of adjustment can limit any confusion over computation of interim boun
   <span class="fu"><a href="https://rdrr.io/pkg/gsDesign/man/gsBoundSummary.html">gsBoundSummary</a></span><span class="op">(</span>ratio <span class="op">=</span> <span class="fl">2</span>, digits <span class="op">=</span> <span class="fl">5</span>, ddigits <span class="op">=</span> <span class="fl">2</span>, tdigits <span class="op">=</span> <span class="fl">1</span>, timename <span class="op">=</span> <span class="st">"Month"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"KEYNOTE189 OS design"</span><span class="op">)</span></code></pre></div>
-<div id="rnurpxabvx" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="elrsoiewhd" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#rnurpxabvx .gt_table {
+#elrsoiewhd .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -191,7 +191,7 @@ This sort of adjustment can limit any confusion over computation of interim boun
   border-left-color: #D3D3D3;
 }
 
-#rnurpxabvx .gt_heading {
+#elrsoiewhd .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -203,7 +203,7 @@ This sort of adjustment can limit any confusion over computation of interim boun
   border-right-color: #D3D3D3;
 }
 
-#rnurpxabvx .gt_title {
+#elrsoiewhd .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -213,7 +213,7 @@ This sort of adjustment can limit any confusion over computation of interim boun
   border-bottom-width: 0;
 }
 
-#rnurpxabvx .gt_subtitle {
+#elrsoiewhd .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -223,13 +223,13 @@ This sort of adjustment can limit any confusion over computation of interim boun
   border-top-width: 0;
 }
 
-#rnurpxabvx .gt_bottom_border {
+#elrsoiewhd .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#rnurpxabvx .gt_col_headings {
+#elrsoiewhd .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -244,7 +244,7 @@ This sort of adjustment can limit any confusion over computation of interim boun
   border-right-color: #D3D3D3;
 }
 
-#rnurpxabvx .gt_col_heading {
+#elrsoiewhd .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -264,7 +264,7 @@ This sort of adjustment can limit any confusion over computation of interim boun
   overflow-x: hidden;
 }
 
-#rnurpxabvx .gt_column_spanner_outer {
+#elrsoiewhd .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -276,15 +276,15 @@ This sort of adjustment can limit any confusion over computation of interim boun
   padding-right: 4px;
 }
 
-#rnurpxabvx .gt_column_spanner_outer:first-child {
+#elrsoiewhd .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#rnurpxabvx .gt_column_spanner_outer:last-child {
+#elrsoiewhd .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#rnurpxabvx .gt_column_spanner {
+#elrsoiewhd .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -296,7 +296,7 @@ This sort of adjustment can limit any confusion over computation of interim boun
   width: 100%;
 }
 
-#rnurpxabvx .gt_group_heading {
+#elrsoiewhd .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -318,7 +318,7 @@ This sort of adjustment can limit any confusion over computation of interim boun
   vertical-align: middle;
 }
 
-#rnurpxabvx .gt_empty_group_heading {
+#elrsoiewhd .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -333,15 +333,15 @@ This sort of adjustment can limit any confusion over computation of interim boun
   vertical-align: middle;
 }
 
-#rnurpxabvx .gt_from_md > :first-child {
+#elrsoiewhd .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#rnurpxabvx .gt_from_md > :last-child {
+#elrsoiewhd .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#rnurpxabvx .gt_row {
+#elrsoiewhd .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -360,7 +360,7 @@ This sort of adjustment can limit any confusion over computation of interim boun
   overflow-x: hidden;
 }
 
-#rnurpxabvx .gt_stub {
+#elrsoiewhd .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -372,7 +372,7 @@ This sort of adjustment can limit any confusion over computation of interim boun
   padding-left: 12px;
 }
 
-#rnurpxabvx .gt_summary_row {
+#elrsoiewhd .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -382,7 +382,7 @@ This sort of adjustment can limit any confusion over computation of interim boun
   padding-right: 5px;
 }
 
-#rnurpxabvx .gt_first_summary_row {
+#elrsoiewhd .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -392,7 +392,7 @@ This sort of adjustment can limit any confusion over computation of interim boun
   border-top-color: #D3D3D3;
 }
 
-#rnurpxabvx .gt_grand_summary_row {
+#elrsoiewhd .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -402,7 +402,7 @@ This sort of adjustment can limit any confusion over computation of interim boun
   padding-right: 5px;
 }
 
-#rnurpxabvx .gt_first_grand_summary_row {
+#elrsoiewhd .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -412,11 +412,11 @@ This sort of adjustment can limit any confusion over computation of interim boun
   border-top-color: #D3D3D3;
 }
 
-#rnurpxabvx .gt_striped {
+#elrsoiewhd .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#rnurpxabvx .gt_table_body {
+#elrsoiewhd .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -425,7 +425,7 @@ This sort of adjustment can limit any confusion over computation of interim boun
   border-bottom-color: #D3D3D3;
 }
 
-#rnurpxabvx .gt_footnotes {
+#elrsoiewhd .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -439,13 +439,13 @@ This sort of adjustment can limit any confusion over computation of interim boun
   border-right-color: #D3D3D3;
 }
 
-#rnurpxabvx .gt_footnote {
+#elrsoiewhd .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#rnurpxabvx .gt_sourcenotes {
+#elrsoiewhd .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -459,41 +459,41 @@ This sort of adjustment can limit any confusion over computation of interim boun
   border-right-color: #D3D3D3;
 }
 
-#rnurpxabvx .gt_sourcenote {
+#elrsoiewhd .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#rnurpxabvx .gt_left {
+#elrsoiewhd .gt_left {
   text-align: left;
 }
 
-#rnurpxabvx .gt_center {
+#elrsoiewhd .gt_center {
   text-align: center;
 }
 
-#rnurpxabvx .gt_right {
+#elrsoiewhd .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#rnurpxabvx .gt_font_normal {
+#elrsoiewhd .gt_font_normal {
   font-weight: normal;
 }
 
-#rnurpxabvx .gt_font_bold {
+#elrsoiewhd .gt_font_bold {
   font-weight: bold;
 }
 
-#rnurpxabvx .gt_font_italic {
+#elrsoiewhd .gt_font_italic {
   font-style: italic;
 }
 
-#rnurpxabvx .gt_super {
+#elrsoiewhd .gt_super {
   font-size: 65%;
 }
 
-#rnurpxabvx .gt_footnote_marks {
+#elrsoiewhd .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -650,12 +650,12 @@ Note that the <code><a href="https://rdrr.io/pkg/gsDesign/man/gsBoundSummary.htm
   <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Updated bounds for interim analysis"</span>,
                       subtitle <span class="op">=</span> <span class="st">"KEYNOTE 189 trial"</span><span class="op">)</span></code></pre></div>
-<div id="qhrrfrdlhr" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="vexoxtvxyd" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#qhrrfrdlhr .gt_table {
+#vexoxtvxyd .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -680,7 +680,7 @@ Note that the <code><a href="https://rdrr.io/pkg/gsDesign/man/gsBoundSummary.htm
   border-left-color: #D3D3D3;
 }
 
-#qhrrfrdlhr .gt_heading {
+#vexoxtvxyd .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -692,7 +692,7 @@ Note that the <code><a href="https://rdrr.io/pkg/gsDesign/man/gsBoundSummary.htm
   border-right-color: #D3D3D3;
 }
 
-#qhrrfrdlhr .gt_title {
+#vexoxtvxyd .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -702,7 +702,7 @@ Note that the <code><a href="https://rdrr.io/pkg/gsDesign/man/gsBoundSummary.htm
   border-bottom-width: 0;
 }
 
-#qhrrfrdlhr .gt_subtitle {
+#vexoxtvxyd .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -712,13 +712,13 @@ Note that the <code><a href="https://rdrr.io/pkg/gsDesign/man/gsBoundSummary.htm
   border-top-width: 0;
 }
 
-#qhrrfrdlhr .gt_bottom_border {
+#vexoxtvxyd .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qhrrfrdlhr .gt_col_headings {
+#vexoxtvxyd .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -733,7 +733,7 @@ Note that the <code><a href="https://rdrr.io/pkg/gsDesign/man/gsBoundSummary.htm
   border-right-color: #D3D3D3;
 }
 
-#qhrrfrdlhr .gt_col_heading {
+#vexoxtvxyd .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -753,7 +753,7 @@ Note that the <code><a href="https://rdrr.io/pkg/gsDesign/man/gsBoundSummary.htm
   overflow-x: hidden;
 }
 
-#qhrrfrdlhr .gt_column_spanner_outer {
+#vexoxtvxyd .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -765,15 +765,15 @@ Note that the <code><a href="https://rdrr.io/pkg/gsDesign/man/gsBoundSummary.htm
   padding-right: 4px;
 }
 
-#qhrrfrdlhr .gt_column_spanner_outer:first-child {
+#vexoxtvxyd .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qhrrfrdlhr .gt_column_spanner_outer:last-child {
+#vexoxtvxyd .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qhrrfrdlhr .gt_column_spanner {
+#vexoxtvxyd .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -785,7 +785,7 @@ Note that the <code><a href="https://rdrr.io/pkg/gsDesign/man/gsBoundSummary.htm
   width: 100%;
 }
 
-#qhrrfrdlhr .gt_group_heading {
+#vexoxtvxyd .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -807,7 +807,7 @@ Note that the <code><a href="https://rdrr.io/pkg/gsDesign/man/gsBoundSummary.htm
   vertical-align: middle;
 }
 
-#qhrrfrdlhr .gt_empty_group_heading {
+#vexoxtvxyd .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -822,15 +822,15 @@ Note that the <code><a href="https://rdrr.io/pkg/gsDesign/man/gsBoundSummary.htm
   vertical-align: middle;
 }
 
-#qhrrfrdlhr .gt_from_md > :first-child {
+#vexoxtvxyd .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qhrrfrdlhr .gt_from_md > :last-child {
+#vexoxtvxyd .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qhrrfrdlhr .gt_row {
+#vexoxtvxyd .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -849,7 +849,7 @@ Note that the <code><a href="https://rdrr.io/pkg/gsDesign/man/gsBoundSummary.htm
   overflow-x: hidden;
 }
 
-#qhrrfrdlhr .gt_stub {
+#vexoxtvxyd .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -861,7 +861,7 @@ Note that the <code><a href="https://rdrr.io/pkg/gsDesign/man/gsBoundSummary.htm
   padding-left: 12px;
 }
 
-#qhrrfrdlhr .gt_summary_row {
+#vexoxtvxyd .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -871,7 +871,7 @@ Note that the <code><a href="https://rdrr.io/pkg/gsDesign/man/gsBoundSummary.htm
   padding-right: 5px;
 }
 
-#qhrrfrdlhr .gt_first_summary_row {
+#vexoxtvxyd .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -881,7 +881,7 @@ Note that the <code><a href="https://rdrr.io/pkg/gsDesign/man/gsBoundSummary.htm
   border-top-color: #D3D3D3;
 }
 
-#qhrrfrdlhr .gt_grand_summary_row {
+#vexoxtvxyd .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -891,7 +891,7 @@ Note that the <code><a href="https://rdrr.io/pkg/gsDesign/man/gsBoundSummary.htm
   padding-right: 5px;
 }
 
-#qhrrfrdlhr .gt_first_grand_summary_row {
+#vexoxtvxyd .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -901,11 +901,11 @@ Note that the <code><a href="https://rdrr.io/pkg/gsDesign/man/gsBoundSummary.htm
   border-top-color: #D3D3D3;
 }
 
-#qhrrfrdlhr .gt_striped {
+#vexoxtvxyd .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qhrrfrdlhr .gt_table_body {
+#vexoxtvxyd .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -914,7 +914,7 @@ Note that the <code><a href="https://rdrr.io/pkg/gsDesign/man/gsBoundSummary.htm
   border-bottom-color: #D3D3D3;
 }
 
-#qhrrfrdlhr .gt_footnotes {
+#vexoxtvxyd .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -928,13 +928,13 @@ Note that the <code><a href="https://rdrr.io/pkg/gsDesign/man/gsBoundSummary.htm
   border-right-color: #D3D3D3;
 }
 
-#qhrrfrdlhr .gt_footnote {
+#vexoxtvxyd .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#qhrrfrdlhr .gt_sourcenotes {
+#vexoxtvxyd .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -948,41 +948,41 @@ Note that the <code><a href="https://rdrr.io/pkg/gsDesign/man/gsBoundSummary.htm
   border-right-color: #D3D3D3;
 }
 
-#qhrrfrdlhr .gt_sourcenote {
+#vexoxtvxyd .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#qhrrfrdlhr .gt_left {
+#vexoxtvxyd .gt_left {
   text-align: left;
 }
 
-#qhrrfrdlhr .gt_center {
+#vexoxtvxyd .gt_center {
   text-align: center;
 }
 
-#qhrrfrdlhr .gt_right {
+#vexoxtvxyd .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qhrrfrdlhr .gt_font_normal {
+#vexoxtvxyd .gt_font_normal {
   font-weight: normal;
 }
 
-#qhrrfrdlhr .gt_font_bold {
+#vexoxtvxyd .gt_font_bold {
   font-weight: bold;
 }
 
-#qhrrfrdlhr .gt_font_italic {
+#vexoxtvxyd .gt_font_italic {
   font-style: italic;
 }
 
-#qhrrfrdlhr .gt_super {
+#vexoxtvxyd .gt_super {
   font-size: 65%;
 }
 
-#qhrrfrdlhr .gt_footnote_marks {
+#vexoxtvxyd .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -1226,12 +1226,12 @@ You can see how much this changes by trying different event counts in the update
     <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"P(Cross) if HR="</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">hr0</span>, <span class="va">hr</span><span class="op">)</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
   <span class="op">)</span>
 <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html">tab_header</a></span><span class="op">(</span>title<span class="op">=</span><span class="st">"Updated AFCAPS bounds at IA 2"</span><span class="op">)</span></code></pre></div>
-<div id="uhpokeyvad" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="iebfmiojwp" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#uhpokeyvad .gt_table {
+#iebfmiojwp .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1256,7 +1256,7 @@ You can see how much this changes by trying different event counts in the update
   border-left-color: #D3D3D3;
 }
 
-#uhpokeyvad .gt_heading {
+#iebfmiojwp .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1268,7 +1268,7 @@ You can see how much this changes by trying different event counts in the update
   border-right-color: #D3D3D3;
 }
 
-#uhpokeyvad .gt_title {
+#iebfmiojwp .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1278,7 +1278,7 @@ You can see how much this changes by trying different event counts in the update
   border-bottom-width: 0;
 }
 
-#uhpokeyvad .gt_subtitle {
+#iebfmiojwp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1288,13 +1288,13 @@ You can see how much this changes by trying different event counts in the update
   border-top-width: 0;
 }
 
-#uhpokeyvad .gt_bottom_border {
+#iebfmiojwp .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#uhpokeyvad .gt_col_headings {
+#iebfmiojwp .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1309,7 +1309,7 @@ You can see how much this changes by trying different event counts in the update
   border-right-color: #D3D3D3;
 }
 
-#uhpokeyvad .gt_col_heading {
+#iebfmiojwp .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1329,7 +1329,7 @@ You can see how much this changes by trying different event counts in the update
   overflow-x: hidden;
 }
 
-#uhpokeyvad .gt_column_spanner_outer {
+#iebfmiojwp .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1341,15 +1341,15 @@ You can see how much this changes by trying different event counts in the update
   padding-right: 4px;
 }
 
-#uhpokeyvad .gt_column_spanner_outer:first-child {
+#iebfmiojwp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#uhpokeyvad .gt_column_spanner_outer:last-child {
+#iebfmiojwp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#uhpokeyvad .gt_column_spanner {
+#iebfmiojwp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1361,7 +1361,7 @@ You can see how much this changes by trying different event counts in the update
   width: 100%;
 }
 
-#uhpokeyvad .gt_group_heading {
+#iebfmiojwp .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1383,7 +1383,7 @@ You can see how much this changes by trying different event counts in the update
   vertical-align: middle;
 }
 
-#uhpokeyvad .gt_empty_group_heading {
+#iebfmiojwp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1398,15 +1398,15 @@ You can see how much this changes by trying different event counts in the update
   vertical-align: middle;
 }
 
-#uhpokeyvad .gt_from_md > :first-child {
+#iebfmiojwp .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#uhpokeyvad .gt_from_md > :last-child {
+#iebfmiojwp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#uhpokeyvad .gt_row {
+#iebfmiojwp .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1425,7 +1425,7 @@ You can see how much this changes by trying different event counts in the update
   overflow-x: hidden;
 }
 
-#uhpokeyvad .gt_stub {
+#iebfmiojwp .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1437,7 +1437,7 @@ You can see how much this changes by trying different event counts in the update
   padding-left: 12px;
 }
 
-#uhpokeyvad .gt_summary_row {
+#iebfmiojwp .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1447,7 +1447,7 @@ You can see how much this changes by trying different event counts in the update
   padding-right: 5px;
 }
 
-#uhpokeyvad .gt_first_summary_row {
+#iebfmiojwp .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1457,7 +1457,7 @@ You can see how much this changes by trying different event counts in the update
   border-top-color: #D3D3D3;
 }
 
-#uhpokeyvad .gt_grand_summary_row {
+#iebfmiojwp .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1467,7 +1467,7 @@ You can see how much this changes by trying different event counts in the update
   padding-right: 5px;
 }
 
-#uhpokeyvad .gt_first_grand_summary_row {
+#iebfmiojwp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1477,11 +1477,11 @@ You can see how much this changes by trying different event counts in the update
   border-top-color: #D3D3D3;
 }
 
-#uhpokeyvad .gt_striped {
+#iebfmiojwp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#uhpokeyvad .gt_table_body {
+#iebfmiojwp .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1490,7 +1490,7 @@ You can see how much this changes by trying different event counts in the update
   border-bottom-color: #D3D3D3;
 }
 
-#uhpokeyvad .gt_footnotes {
+#iebfmiojwp .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1504,13 +1504,13 @@ You can see how much this changes by trying different event counts in the update
   border-right-color: #D3D3D3;
 }
 
-#uhpokeyvad .gt_footnote {
+#iebfmiojwp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#uhpokeyvad .gt_sourcenotes {
+#iebfmiojwp .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1524,41 +1524,41 @@ You can see how much this changes by trying different event counts in the update
   border-right-color: #D3D3D3;
 }
 
-#uhpokeyvad .gt_sourcenote {
+#iebfmiojwp .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#uhpokeyvad .gt_left {
+#iebfmiojwp .gt_left {
   text-align: left;
 }
 
-#uhpokeyvad .gt_center {
+#iebfmiojwp .gt_center {
   text-align: center;
 }
 
-#uhpokeyvad .gt_right {
+#iebfmiojwp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#uhpokeyvad .gt_font_normal {
+#iebfmiojwp .gt_font_normal {
   font-weight: normal;
 }
 
-#uhpokeyvad .gt_font_bold {
+#iebfmiojwp .gt_font_bold {
   font-weight: bold;
 }
 
-#uhpokeyvad .gt_font_italic {
+#iebfmiojwp .gt_font_italic {
   font-style: italic;
 }
 
-#uhpokeyvad .gt_super {
+#iebfmiojwp .gt_super {
   font-size: 65%;
 }
 
-#uhpokeyvad .gt_footnote_marks {
+#iebfmiojwp .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -1697,12 +1697,12 @@ endpoint MACE stratified by geographic region and screening renal function.
 <span class="fu"><a href="https://rdrr.io/pkg/gsDesign/man/gsBoundSummary.html">gsBoundSummary</a></span><span class="op">(</span><span class="va">EXAMINEdesign</span>, digits <span class="op">=</span> <span class="fl">4</span>, ddigits <span class="op">=</span> <span class="fl">2</span>, tdigits <span class="op">=</span> <span class="fl">2</span>, timename <span class="op">=</span> <span class="st">"Year"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"EXAMINE non-inferiority design bounds"</span><span class="op">)</span></code></pre></div>
-<div id="kcumeziuis" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="sjchpmkdhq" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#kcumeziuis .gt_table {
+#sjchpmkdhq .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1727,7 +1727,7 @@ endpoint MACE stratified by geographic region and screening renal function.
   border-left-color: #D3D3D3;
 }
 
-#kcumeziuis .gt_heading {
+#sjchpmkdhq .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1739,7 +1739,7 @@ endpoint MACE stratified by geographic region and screening renal function.
   border-right-color: #D3D3D3;
 }
 
-#kcumeziuis .gt_title {
+#sjchpmkdhq .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1749,7 +1749,7 @@ endpoint MACE stratified by geographic region and screening renal function.
   border-bottom-width: 0;
 }
 
-#kcumeziuis .gt_subtitle {
+#sjchpmkdhq .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1759,13 +1759,13 @@ endpoint MACE stratified by geographic region and screening renal function.
   border-top-width: 0;
 }
 
-#kcumeziuis .gt_bottom_border {
+#sjchpmkdhq .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kcumeziuis .gt_col_headings {
+#sjchpmkdhq .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1780,7 +1780,7 @@ endpoint MACE stratified by geographic region and screening renal function.
   border-right-color: #D3D3D3;
 }
 
-#kcumeziuis .gt_col_heading {
+#sjchpmkdhq .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1800,7 +1800,7 @@ endpoint MACE stratified by geographic region and screening renal function.
   overflow-x: hidden;
 }
 
-#kcumeziuis .gt_column_spanner_outer {
+#sjchpmkdhq .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1812,15 +1812,15 @@ endpoint MACE stratified by geographic region and screening renal function.
   padding-right: 4px;
 }
 
-#kcumeziuis .gt_column_spanner_outer:first-child {
+#sjchpmkdhq .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kcumeziuis .gt_column_spanner_outer:last-child {
+#sjchpmkdhq .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kcumeziuis .gt_column_spanner {
+#sjchpmkdhq .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1832,7 +1832,7 @@ endpoint MACE stratified by geographic region and screening renal function.
   width: 100%;
 }
 
-#kcumeziuis .gt_group_heading {
+#sjchpmkdhq .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1854,7 +1854,7 @@ endpoint MACE stratified by geographic region and screening renal function.
   vertical-align: middle;
 }
 
-#kcumeziuis .gt_empty_group_heading {
+#sjchpmkdhq .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1869,15 +1869,15 @@ endpoint MACE stratified by geographic region and screening renal function.
   vertical-align: middle;
 }
 
-#kcumeziuis .gt_from_md > :first-child {
+#sjchpmkdhq .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kcumeziuis .gt_from_md > :last-child {
+#sjchpmkdhq .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kcumeziuis .gt_row {
+#sjchpmkdhq .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1896,7 +1896,7 @@ endpoint MACE stratified by geographic region and screening renal function.
   overflow-x: hidden;
 }
 
-#kcumeziuis .gt_stub {
+#sjchpmkdhq .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1908,7 +1908,7 @@ endpoint MACE stratified by geographic region and screening renal function.
   padding-left: 12px;
 }
 
-#kcumeziuis .gt_summary_row {
+#sjchpmkdhq .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1918,7 +1918,7 @@ endpoint MACE stratified by geographic region and screening renal function.
   padding-right: 5px;
 }
 
-#kcumeziuis .gt_first_summary_row {
+#sjchpmkdhq .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1928,7 +1928,7 @@ endpoint MACE stratified by geographic region and screening renal function.
   border-top-color: #D3D3D3;
 }
 
-#kcumeziuis .gt_grand_summary_row {
+#sjchpmkdhq .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1938,7 +1938,7 @@ endpoint MACE stratified by geographic region and screening renal function.
   padding-right: 5px;
 }
 
-#kcumeziuis .gt_first_grand_summary_row {
+#sjchpmkdhq .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1948,11 +1948,11 @@ endpoint MACE stratified by geographic region and screening renal function.
   border-top-color: #D3D3D3;
 }
 
-#kcumeziuis .gt_striped {
+#sjchpmkdhq .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kcumeziuis .gt_table_body {
+#sjchpmkdhq .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1961,7 +1961,7 @@ endpoint MACE stratified by geographic region and screening renal function.
   border-bottom-color: #D3D3D3;
 }
 
-#kcumeziuis .gt_footnotes {
+#sjchpmkdhq .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1975,13 +1975,13 @@ endpoint MACE stratified by geographic region and screening renal function.
   border-right-color: #D3D3D3;
 }
 
-#kcumeziuis .gt_footnote {
+#sjchpmkdhq .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#kcumeziuis .gt_sourcenotes {
+#sjchpmkdhq .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1995,41 +1995,41 @@ endpoint MACE stratified by geographic region and screening renal function.
   border-right-color: #D3D3D3;
 }
 
-#kcumeziuis .gt_sourcenote {
+#sjchpmkdhq .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#kcumeziuis .gt_left {
+#sjchpmkdhq .gt_left {
   text-align: left;
 }
 
-#kcumeziuis .gt_center {
+#sjchpmkdhq .gt_center {
   text-align: center;
 }
 
-#kcumeziuis .gt_right {
+#sjchpmkdhq .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kcumeziuis .gt_font_normal {
+#sjchpmkdhq .gt_font_normal {
   font-weight: normal;
 }
 
-#kcumeziuis .gt_font_bold {
+#sjchpmkdhq .gt_font_bold {
   font-weight: bold;
 }
 
-#kcumeziuis .gt_font_italic {
+#sjchpmkdhq .gt_font_italic {
   font-style: italic;
 }
 
-#kcumeziuis .gt_super {
+#sjchpmkdhq .gt_super {
   font-size: 65%;
 }
 
-#kcumeziuis .gt_footnote_marks {
+#sjchpmkdhq .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -2146,7 +2146,7 @@ You may choose to ignore the code until you need to do a plot like this.</p>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Expected Accrual"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"Expected accrual of enrollment and events for EXAMINE trial"</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-27-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-28-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>Findings for the trial: <em>the primary end point occurred at similar rates in the alogliptin and placebo groups (in 11.3% and 11.8% of patients, respectively, after a median exposure of 18 months; hazard ratio, 0.96; upper boundary of the one-sided repeated CI, 1.16; P&lt;0.001 for noninferiority</em> <span class="citation">(White et al <a href="references.html#ref-EXAMINEresults" role="doc-biblioref">2013</a>)</span>. This was the first interim for testing the non-inferiority hypothesis to rule out an excess risk with HR=1.3. This analysis was performed with 621 events rather than the planned 550. Such an overrun is not atypical when setting a database cutoff prior to final data cleanup and (blinded) endpoint review.
 In any case, here is the updated design.
 We enter the events at the interim analysis for the trial.
@@ -2204,12 +2204,12 @@ The first code line here is needed for any case where <code>hr0 != 1</code>; i.e
     title <span class="op">=</span> <span class="st">"EXAMINE trial design"</span>,
     subtitle <span class="op">=</span> <span class="st">"Update at time of analysis"</span>
   <span class="op">)</span></code></pre></div>
-<div id="mibpsfkfsw" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="rcjjsmuojf" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#mibpsfkfsw .gt_table {
+#rcjjsmuojf .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2234,7 +2234,7 @@ The first code line here is needed for any case where <code>hr0 != 1</code>; i.e
   border-left-color: #D3D3D3;
 }
 
-#mibpsfkfsw .gt_heading {
+#rcjjsmuojf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2246,7 +2246,7 @@ The first code line here is needed for any case where <code>hr0 != 1</code>; i.e
   border-right-color: #D3D3D3;
 }
 
-#mibpsfkfsw .gt_title {
+#rcjjsmuojf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2256,7 +2256,7 @@ The first code line here is needed for any case where <code>hr0 != 1</code>; i.e
   border-bottom-width: 0;
 }
 
-#mibpsfkfsw .gt_subtitle {
+#rcjjsmuojf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2266,13 +2266,13 @@ The first code line here is needed for any case where <code>hr0 != 1</code>; i.e
   border-top-width: 0;
 }
 
-#mibpsfkfsw .gt_bottom_border {
+#rcjjsmuojf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#mibpsfkfsw .gt_col_headings {
+#rcjjsmuojf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2287,7 +2287,7 @@ The first code line here is needed for any case where <code>hr0 != 1</code>; i.e
   border-right-color: #D3D3D3;
 }
 
-#mibpsfkfsw .gt_col_heading {
+#rcjjsmuojf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2307,7 +2307,7 @@ The first code line here is needed for any case where <code>hr0 != 1</code>; i.e
   overflow-x: hidden;
 }
 
-#mibpsfkfsw .gt_column_spanner_outer {
+#rcjjsmuojf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2319,15 +2319,15 @@ The first code line here is needed for any case where <code>hr0 != 1</code>; i.e
   padding-right: 4px;
 }
 
-#mibpsfkfsw .gt_column_spanner_outer:first-child {
+#rcjjsmuojf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#mibpsfkfsw .gt_column_spanner_outer:last-child {
+#rcjjsmuojf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#mibpsfkfsw .gt_column_spanner {
+#rcjjsmuojf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2339,7 +2339,7 @@ The first code line here is needed for any case where <code>hr0 != 1</code>; i.e
   width: 100%;
 }
 
-#mibpsfkfsw .gt_group_heading {
+#rcjjsmuojf .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2361,7 +2361,7 @@ The first code line here is needed for any case where <code>hr0 != 1</code>; i.e
   vertical-align: middle;
 }
 
-#mibpsfkfsw .gt_empty_group_heading {
+#rcjjsmuojf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2376,15 +2376,15 @@ The first code line here is needed for any case where <code>hr0 != 1</code>; i.e
   vertical-align: middle;
 }
 
-#mibpsfkfsw .gt_from_md > :first-child {
+#rcjjsmuojf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#mibpsfkfsw .gt_from_md > :last-child {
+#rcjjsmuojf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#mibpsfkfsw .gt_row {
+#rcjjsmuojf .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2403,7 +2403,7 @@ The first code line here is needed for any case where <code>hr0 != 1</code>; i.e
   overflow-x: hidden;
 }
 
-#mibpsfkfsw .gt_stub {
+#rcjjsmuojf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2415,7 +2415,7 @@ The first code line here is needed for any case where <code>hr0 != 1</code>; i.e
   padding-left: 12px;
 }
 
-#mibpsfkfsw .gt_summary_row {
+#rcjjsmuojf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2425,7 +2425,7 @@ The first code line here is needed for any case where <code>hr0 != 1</code>; i.e
   padding-right: 5px;
 }
 
-#mibpsfkfsw .gt_first_summary_row {
+#rcjjsmuojf .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2435,7 +2435,7 @@ The first code line here is needed for any case where <code>hr0 != 1</code>; i.e
   border-top-color: #D3D3D3;
 }
 
-#mibpsfkfsw .gt_grand_summary_row {
+#rcjjsmuojf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2445,7 +2445,7 @@ The first code line here is needed for any case where <code>hr0 != 1</code>; i.e
   padding-right: 5px;
 }
 
-#mibpsfkfsw .gt_first_grand_summary_row {
+#rcjjsmuojf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2455,11 +2455,11 @@ The first code line here is needed for any case where <code>hr0 != 1</code>; i.e
   border-top-color: #D3D3D3;
 }
 
-#mibpsfkfsw .gt_striped {
+#rcjjsmuojf .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#mibpsfkfsw .gt_table_body {
+#rcjjsmuojf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2468,7 +2468,7 @@ The first code line here is needed for any case where <code>hr0 != 1</code>; i.e
   border-bottom-color: #D3D3D3;
 }
 
-#mibpsfkfsw .gt_footnotes {
+#rcjjsmuojf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2482,13 +2482,13 @@ The first code line here is needed for any case where <code>hr0 != 1</code>; i.e
   border-right-color: #D3D3D3;
 }
 
-#mibpsfkfsw .gt_footnote {
+#rcjjsmuojf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#mibpsfkfsw .gt_sourcenotes {
+#rcjjsmuojf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2502,41 +2502,41 @@ The first code line here is needed for any case where <code>hr0 != 1</code>; i.e
   border-right-color: #D3D3D3;
 }
 
-#mibpsfkfsw .gt_sourcenote {
+#rcjjsmuojf .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#mibpsfkfsw .gt_left {
+#rcjjsmuojf .gt_left {
   text-align: left;
 }
 
-#mibpsfkfsw .gt_center {
+#rcjjsmuojf .gt_center {
   text-align: center;
 }
 
-#mibpsfkfsw .gt_right {
+#rcjjsmuojf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#mibpsfkfsw .gt_font_normal {
+#rcjjsmuojf .gt_font_normal {
   font-weight: normal;
 }
 
-#mibpsfkfsw .gt_font_bold {
+#rcjjsmuojf .gt_font_bold {
   font-weight: bold;
 }
 
-#mibpsfkfsw .gt_font_italic {
+#rcjjsmuojf .gt_font_italic {
   font-style: italic;
 }
 
-#mibpsfkfsw .gt_super {
+#rcjjsmuojf .gt_super {
   font-size: 65%;
 }
 
-#mibpsfkfsw .gt_footnote_marks {
+#rcjjsmuojf .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -2706,7 +2706,7 @@ We use a fairly refined grid to ensure the plot is smooth.</p>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">maxTime</span>, <span class="fl">6</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">.6</span>, <span class="fl">1</span>, <span class="fl">.1</span><span class="op">)</span>, limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.6</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-33-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-34-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>To perform asymptotic calculations we approximate the survival rates in the above matrix with piecewise constant hazard rates that match the survival rates just computed at discrete points above.
 Since the cumulative hazard <span class="math inline">\(H(t)= - \log(S(t))\)</span> and <span class="math inline">\(H(t)=\int_0^t h(s)ds\)</span> where <span class="math inline">\(h()\)</span> is the hazard rate, we approximate with
 <span class="math display">\[\tilde h(t)=(H(t_m)-H(t_{m-1}))/(t_m - t_{m-1}), m=1,\ldots,M.\]</span></p>
@@ -2780,7 +2780,7 @@ This actual number of events and sample size will increase proportionately as lo
 <span class="va">subpct</span> <span class="op">&lt;-</span> <span class="va">n</span><span class="op">[</span><span class="va">subti</span> <span class="op">+</span> <span class="fl">1</span><span class="op">]</span> <span class="op">/</span> <span class="va">n</span><span class="op">[</span><span class="va">maxTime</span> <span class="op">+</span> <span class="fl">1</span><span class="op">]</span> <span class="op">*</span> <span class="fl">100</span>
 <span class="va">txt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>Month <span class="op">=</span> <span class="va">subti</span>, ev <span class="op">=</span> <span class="va">subpct</span>, txt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">subpct</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>, <span class="st">"%"</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span><span class="op">)</span>
 <span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_label</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">txt</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Month</span>, y <span class="op">=</span> <span class="va">ev</span>, label <span class="op">=</span> <span class="va">txt</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-37-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-38-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>We note that we will use calendar time as above for spending:</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Spending fraction at interim analyses</span>
@@ -2832,12 +2832,12 @@ This actual number of events and sample size will increase proportionately as lo
   <span class="fu"><a href="https://rdrr.io/pkg/gsDesign/man/gsBoundSummary.html">gsBoundSummary</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Calendar-based spending"</span>, subtitle <span class="op">=</span> <span class="st">"Design with cure model"</span><span class="op">)</span></code></pre></div>
-<div id="lgwmryqbse" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="ycbdzdvson" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#lgwmryqbse .gt_table {
+#ycbdzdvson .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2862,7 +2862,7 @@ This actual number of events and sample size will increase proportionately as lo
   border-left-color: #D3D3D3;
 }
 
-#lgwmryqbse .gt_heading {
+#ycbdzdvson .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2874,7 +2874,7 @@ This actual number of events and sample size will increase proportionately as lo
   border-right-color: #D3D3D3;
 }
 
-#lgwmryqbse .gt_title {
+#ycbdzdvson .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2884,7 +2884,7 @@ This actual number of events and sample size will increase proportionately as lo
   border-bottom-width: 0;
 }
 
-#lgwmryqbse .gt_subtitle {
+#ycbdzdvson .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2894,13 +2894,13 @@ This actual number of events and sample size will increase proportionately as lo
   border-top-width: 0;
 }
 
-#lgwmryqbse .gt_bottom_border {
+#ycbdzdvson .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#lgwmryqbse .gt_col_headings {
+#ycbdzdvson .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2915,7 +2915,7 @@ This actual number of events and sample size will increase proportionately as lo
   border-right-color: #D3D3D3;
 }
 
-#lgwmryqbse .gt_col_heading {
+#ycbdzdvson .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2935,7 +2935,7 @@ This actual number of events and sample size will increase proportionately as lo
   overflow-x: hidden;
 }
 
-#lgwmryqbse .gt_column_spanner_outer {
+#ycbdzdvson .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2947,15 +2947,15 @@ This actual number of events and sample size will increase proportionately as lo
   padding-right: 4px;
 }
 
-#lgwmryqbse .gt_column_spanner_outer:first-child {
+#ycbdzdvson .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#lgwmryqbse .gt_column_spanner_outer:last-child {
+#ycbdzdvson .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#lgwmryqbse .gt_column_spanner {
+#ycbdzdvson .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2967,7 +2967,7 @@ This actual number of events and sample size will increase proportionately as lo
   width: 100%;
 }
 
-#lgwmryqbse .gt_group_heading {
+#ycbdzdvson .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2989,7 +2989,7 @@ This actual number of events and sample size will increase proportionately as lo
   vertical-align: middle;
 }
 
-#lgwmryqbse .gt_empty_group_heading {
+#ycbdzdvson .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3004,15 +3004,15 @@ This actual number of events and sample size will increase proportionately as lo
   vertical-align: middle;
 }
 
-#lgwmryqbse .gt_from_md > :first-child {
+#ycbdzdvson .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#lgwmryqbse .gt_from_md > :last-child {
+#ycbdzdvson .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#lgwmryqbse .gt_row {
+#ycbdzdvson .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3031,7 +3031,7 @@ This actual number of events and sample size will increase proportionately as lo
   overflow-x: hidden;
 }
 
-#lgwmryqbse .gt_stub {
+#ycbdzdvson .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3043,7 +3043,7 @@ This actual number of events and sample size will increase proportionately as lo
   padding-left: 12px;
 }
 
-#lgwmryqbse .gt_summary_row {
+#ycbdzdvson .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3053,7 +3053,7 @@ This actual number of events and sample size will increase proportionately as lo
   padding-right: 5px;
 }
 
-#lgwmryqbse .gt_first_summary_row {
+#ycbdzdvson .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3063,7 +3063,7 @@ This actual number of events and sample size will increase proportionately as lo
   border-top-color: #D3D3D3;
 }
 
-#lgwmryqbse .gt_grand_summary_row {
+#ycbdzdvson .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3073,7 +3073,7 @@ This actual number of events and sample size will increase proportionately as lo
   padding-right: 5px;
 }
 
-#lgwmryqbse .gt_first_grand_summary_row {
+#ycbdzdvson .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3083,11 +3083,11 @@ This actual number of events and sample size will increase proportionately as lo
   border-top-color: #D3D3D3;
 }
 
-#lgwmryqbse .gt_striped {
+#ycbdzdvson .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#lgwmryqbse .gt_table_body {
+#ycbdzdvson .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3096,7 +3096,7 @@ This actual number of events and sample size will increase proportionately as lo
   border-bottom-color: #D3D3D3;
 }
 
-#lgwmryqbse .gt_footnotes {
+#ycbdzdvson .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3110,13 +3110,13 @@ This actual number of events and sample size will increase proportionately as lo
   border-right-color: #D3D3D3;
 }
 
-#lgwmryqbse .gt_footnote {
+#ycbdzdvson .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#lgwmryqbse .gt_sourcenotes {
+#ycbdzdvson .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3130,41 +3130,41 @@ This actual number of events and sample size will increase proportionately as lo
   border-right-color: #D3D3D3;
 }
 
-#lgwmryqbse .gt_sourcenote {
+#ycbdzdvson .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#lgwmryqbse .gt_left {
+#ycbdzdvson .gt_left {
   text-align: left;
 }
 
-#lgwmryqbse .gt_center {
+#ycbdzdvson .gt_center {
   text-align: center;
 }
 
-#lgwmryqbse .gt_right {
+#ycbdzdvson .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#lgwmryqbse .gt_font_normal {
+#ycbdzdvson .gt_font_normal {
   font-weight: normal;
 }
 
-#lgwmryqbse .gt_font_bold {
+#ycbdzdvson .gt_font_bold {
   font-weight: bold;
 }
 
-#lgwmryqbse .gt_font_italic {
+#ycbdzdvson .gt_font_italic {
   font-style: italic;
 }
 
-#lgwmryqbse .gt_super {
+#ycbdzdvson .gt_super {
   font-size: 65%;
 }
 
-#lgwmryqbse .gt_footnote_marks {
+#ycbdzdvson .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -3427,12 +3427,12 @@ Analysis times are also assumed to deviate from plan which can be due to operati
     title <span class="op">=</span> <span class="st">"Calendar-based spending design"</span>,
     subtitle <span class="op">=</span> <span class="st">"Update at time of analysis"</span>
   <span class="op">)</span></code></pre></div>
-<div id="yodhigxdiw" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="imhabcagsp" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#yodhigxdiw .gt_table {
+#imhabcagsp .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -3457,7 +3457,7 @@ Analysis times are also assumed to deviate from plan which can be due to operati
   border-left-color: #D3D3D3;
 }
 
-#yodhigxdiw .gt_heading {
+#imhabcagsp .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3469,7 +3469,7 @@ Analysis times are also assumed to deviate from plan which can be due to operati
   border-right-color: #D3D3D3;
 }
 
-#yodhigxdiw .gt_title {
+#imhabcagsp .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3479,7 +3479,7 @@ Analysis times are also assumed to deviate from plan which can be due to operati
   border-bottom-width: 0;
 }
 
-#yodhigxdiw .gt_subtitle {
+#imhabcagsp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3489,13 +3489,13 @@ Analysis times are also assumed to deviate from plan which can be due to operati
   border-top-width: 0;
 }
 
-#yodhigxdiw .gt_bottom_border {
+#imhabcagsp .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#yodhigxdiw .gt_col_headings {
+#imhabcagsp .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3510,7 +3510,7 @@ Analysis times are also assumed to deviate from plan which can be due to operati
   border-right-color: #D3D3D3;
 }
 
-#yodhigxdiw .gt_col_heading {
+#imhabcagsp .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3530,7 +3530,7 @@ Analysis times are also assumed to deviate from plan which can be due to operati
   overflow-x: hidden;
 }
 
-#yodhigxdiw .gt_column_spanner_outer {
+#imhabcagsp .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3542,15 +3542,15 @@ Analysis times are also assumed to deviate from plan which can be due to operati
   padding-right: 4px;
 }
 
-#yodhigxdiw .gt_column_spanner_outer:first-child {
+#imhabcagsp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#yodhigxdiw .gt_column_spanner_outer:last-child {
+#imhabcagsp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#yodhigxdiw .gt_column_spanner {
+#imhabcagsp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3562,7 +3562,7 @@ Analysis times are also assumed to deviate from plan which can be due to operati
   width: 100%;
 }
 
-#yodhigxdiw .gt_group_heading {
+#imhabcagsp .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3584,7 +3584,7 @@ Analysis times are also assumed to deviate from plan which can be due to operati
   vertical-align: middle;
 }
 
-#yodhigxdiw .gt_empty_group_heading {
+#imhabcagsp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3599,15 +3599,15 @@ Analysis times are also assumed to deviate from plan which can be due to operati
   vertical-align: middle;
 }
 
-#yodhigxdiw .gt_from_md > :first-child {
+#imhabcagsp .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#yodhigxdiw .gt_from_md > :last-child {
+#imhabcagsp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#yodhigxdiw .gt_row {
+#imhabcagsp .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3626,7 +3626,7 @@ Analysis times are also assumed to deviate from plan which can be due to operati
   overflow-x: hidden;
 }
 
-#yodhigxdiw .gt_stub {
+#imhabcagsp .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3638,7 +3638,7 @@ Analysis times are also assumed to deviate from plan which can be due to operati
   padding-left: 12px;
 }
 
-#yodhigxdiw .gt_summary_row {
+#imhabcagsp .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3648,7 +3648,7 @@ Analysis times are also assumed to deviate from plan which can be due to operati
   padding-right: 5px;
 }
 
-#yodhigxdiw .gt_first_summary_row {
+#imhabcagsp .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3658,7 +3658,7 @@ Analysis times are also assumed to deviate from plan which can be due to operati
   border-top-color: #D3D3D3;
 }
 
-#yodhigxdiw .gt_grand_summary_row {
+#imhabcagsp .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3668,7 +3668,7 @@ Analysis times are also assumed to deviate from plan which can be due to operati
   padding-right: 5px;
 }
 
-#yodhigxdiw .gt_first_grand_summary_row {
+#imhabcagsp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3678,11 +3678,11 @@ Analysis times are also assumed to deviate from plan which can be due to operati
   border-top-color: #D3D3D3;
 }
 
-#yodhigxdiw .gt_striped {
+#imhabcagsp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#yodhigxdiw .gt_table_body {
+#imhabcagsp .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3691,7 +3691,7 @@ Analysis times are also assumed to deviate from plan which can be due to operati
   border-bottom-color: #D3D3D3;
 }
 
-#yodhigxdiw .gt_footnotes {
+#imhabcagsp .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3705,13 +3705,13 @@ Analysis times are also assumed to deviate from plan which can be due to operati
   border-right-color: #D3D3D3;
 }
 
-#yodhigxdiw .gt_footnote {
+#imhabcagsp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#yodhigxdiw .gt_sourcenotes {
+#imhabcagsp .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3725,41 +3725,41 @@ Analysis times are also assumed to deviate from plan which can be due to operati
   border-right-color: #D3D3D3;
 }
 
-#yodhigxdiw .gt_sourcenote {
+#imhabcagsp .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#yodhigxdiw .gt_left {
+#imhabcagsp .gt_left {
   text-align: left;
 }
 
-#yodhigxdiw .gt_center {
+#imhabcagsp .gt_center {
   text-align: center;
 }
 
-#yodhigxdiw .gt_right {
+#imhabcagsp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#yodhigxdiw .gt_font_normal {
+#imhabcagsp .gt_font_normal {
   font-weight: normal;
 }
 
-#yodhigxdiw .gt_font_bold {
+#imhabcagsp .gt_font_bold {
   font-weight: bold;
 }
 
-#yodhigxdiw .gt_font_italic {
+#imhabcagsp .gt_font_italic {
   font-style: italic;
 }
 
-#yodhigxdiw .gt_super {
+#imhabcagsp .gt_super {
   font-size: 65%;
 }
 
-#yodhigxdiw .gt_footnote_marks {
+#imhabcagsp .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -3934,11 +3934,11 @@ Analysis times are also assumed to deviate from plan which can be due to operati
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="background.html"><span class="header-section-number">1</span> Background</a></div>
-<div class="next"><a href="average-hazard-ratio.html"><span class="header-section-number">3</span> Average hazard ratio</a></div>
+<div class="next"><a href="ahr.html"><span class="header-section-number">3</span> Average hazard ratio</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#ph"><span class="header-section-number">2</span> Proportional hazards</a></li>
+<li><a class="nav-link" href="#proportional-hazards"><span class="header-section-number">2</span> Proportional hazards</a></li>
 <li><a class="nav-link" href="#lachin-foulkes"><span class="header-section-number">2.1</span> Lachin and Foulkes method</a></li>
 <li><a class="nav-link" href="#mediansurvival"><span class="header-section-number">2.2</span> Metastatic oncology example</a></li>
 <li><a class="nav-link" href="#cardiovascular-outcomes-reduction"><span class="header-section-number">2.3</span> Cardiovascular outcomes reduction</a></li>
@@ -3957,8 +3957,8 @@ Analysis times are also assumed to deviate from plan which can be due to operati
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/keaven/gsd-deming/blob/master/03-proportional-hazards.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/keaven/gsd-deming/edit/master/03-proportional-hazards.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/keaven/gsd-deming/blob/master/proportional-hazards.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/keaven/gsd-deming/edit/master/proportional-hazards.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>
@@ -3970,7 +3970,7 @@ Analysis times are also assumed to deviate from plan which can be due to operati
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Group Sequential Design Under Non-Proportional Hazards</strong>: Deming Conference Course, December 6, 2021" was written by Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao. It was last built on 2021-11-24.</p>
+    <p>"<strong>Group Sequential Design Under Non-Proportional Hazards</strong>: Deming Conference Course, December 6, 2021" was written by Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao. It was last built on 2021-11-25.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

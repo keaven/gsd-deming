@@ -1,0 +1,108 @@
+# Other tests
+
+## Outline
+
+We consider other alternative tests for group sequential design.
+
+- Review fixed design
+  - Weighted logrank test
+  - MaxCombo test
+  - Illustration using [`npsurvSS`](https://cran.r-project.org/package=npsurvSS)
+
+- Group sequential design with weighted logrank test
+  - Under a given boundary
+  - Boundary calculation
+  - Illustration using [`gsdmvn`](https://merck.github.io/gsdmvn/)
+
+- Group sequential design with MaxCombo test
+  - Under a given boundary
+  - Boundary calculation
+  - Illustration using [`gsdmvn`](https://merck.github.io/gsdmvn/)
+
+## Fixed design
+
+For simplicity, we made a few key assumptions.
+
+- Balanced design (1:1 randomization ratio).
+- 1-sided test.
+- Local alternative: variance under null and alternative are approximately equal.
+- Accrual distribution: Piecewise uniform. 
+- Survival distribution: piecewise exponential.
+- Loss to follow-up: exponential.
+- No stratification.
+- No cure fraction.
+
+The fixed design part largely follow the concept described in @yung2019sample.
+
+## Notation
+
+- $\alpha$: Type I error
+- $\beta$: Type II error or power (1 - $\beta$)
+- $z_\alpha$: upper $\alpha$ percentile of standard normal distribution
+- $z_\beta$: upper $\beta$ percentile of standard normal distribution
+
+We considered a 1-sided test with type I error at $\alpha=0.025$ and $1-\beta=80\%$ power.
+
+```{r}
+z_alpha <- abs(qnorm(0.025))
+z_alpha
+```
+
+```{r}
+z_beta <- abs(qnorm(0.2))
+z_beta
+```
+
+## Sample size calculation
+
+- $\theta$: effect size
+- $n$: total sample size
+- $Z$: test statistics is asymptotic normal
+  - Under null hypothesis: $Z \sim \mathcal{N}(0, \sigma_0^2)$
+  - Under alternative hypothesis: $Z \sim \mathcal{N}(\sqrt{n}\theta, \sigma_1^2)$
+
+By assuming local alternative, we have
+
+$$\sigma_0^2 \approx \sigma_1^2 = \sigma^2$$
+In this simplified case, the sample size can be calculated as
+
+$$ n = \frac{4 (z_{\alpha}+z_{\beta})^{2}}{\theta^2} $$
+
+## Examples
+
+- [Two-sample t-test](https://keaven.github.io/gsd-deming/fixed.html#two-sample-t-test)
+- [Logrank test](https://keaven.github.io/gsd-deming/fixed.html#logrank-test)
+
+## Sample size calculation under non-proportional hazards
+
+- <https://rconnect.merck.com:3939/gsd-training/fixed.html#non-proportional-hazards>
+
+## Fixed design with weighted logrank test
+
+- [Examples](https://keaven.github.io/gsd-deming/fixed.html#weighted-logrank-test)
+- [Technical details](https://keaven.github.io/gsd-deming/fixed.html#technical-details) are skipped
+
+## Fixed design with MaxCombo test
+
+- [Examples](https://keaven.github.io/gsd-deming/fixed.html#maxcombo-test)
+
+
+## Weighted logrank test
+
+Similar to the fixed design, we can define the test statistics for weighted logrank test using counting process formula
+
+$$ Z_k=\sqrt{\frac{n_{0}+n_{1}}{n_{0}n_{1}}}\int_{0}^{t_k}w(t)\frac{\overline{Y}_{0}(t)\overline{Y}_{1}(t)}{\overline{Y}_{0}(t)+\overline{Y}_{0}(t)}\left\{ \frac{d\overline{N}_{1}(t)}{\overline{Y}_{1}(t)}-\frac{d\overline{N}_{0}(t)}{\overline{Y}_{0}(t)}\right\} $$
+
+Note, the only difference is that the test statistics fixed analysis up to $t_k$ at $k$-th interim analysis
+
+## Group sequential design with weighted logrank test
+
+- [Examples with pre-defined boundary](https://keaven.github.io/gsd-deming/wlr.html#example-scenario)
+- [Examples with calculated boundary](https://keaven.github.io/gsd-deming/wlr-boundary.html)
+- [Technical details](https://keaven.github.io/gsd-deming/wlr.html#technical-details-1) are skipped
+
+## Group sequential design with MaxCombo test
+
+- [Examples with pre-defined boundary](https://keaven.github.io/gsd-deming/wlr.html#example-scenario)
+- [Examples with calculated boundary](https://keaven.github.io/gsd-deming/maxcombo-boundary.html)
+- [Technical details](https://keaven.github.io/gsd-deming/maxcombo.html#outline-of-technical-details) are skipped

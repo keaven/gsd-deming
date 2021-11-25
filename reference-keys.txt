@@ -1,6 +1,6 @@
-fig:unnamed-chunk-6
 fig:unnamed-chunk-7
 fig:unnamed-chunk-8
+fig:unnamed-chunk-9
 def:DefZprocess
 eq:DefZprocess
 eq:DefThetaK
@@ -8,12 +8,12 @@ def:DefBprocess
 eq:DefBprocess
 thm:ThmZprocessDistCF
 thm:ThmBprocessDistCF
-fig:unnamed-chunk-10
 fig:unnamed-chunk-11
 fig:unnamed-chunk-12
 fig:unnamed-chunk-13
 fig:unnamed-chunk-14
 fig:unnamed-chunk-15
+fig:unnamed-chunk-16
 eq:AhrLambdaGamma
 eq:AhrRateEstimation
 eq:AhrIndividualHazardRateDist
@@ -24,6 +24,7 @@ eq:AhrBetaEstimation
 training-overview
 software-and-supporting-materials
 installing-r-packages
+authors-and-contributors
 background
 nph
 gsd
@@ -36,7 +37,7 @@ wang-tsiatis-boundary
 pocock-boundary
 obrien-fleming-boundary
 statistical-information-and-time
-ph
+proportional-hazards
 lachin-foulkes
 mediansurvival
 cardiovascular-outcomes-reduction
@@ -47,12 +48,12 @@ cure-model-parameters
 expected-event-accumulation-over-time
 the-design
 updating-calendar-based-spending-bounds-at-analysis
-average-hazard-ratio
-piecewise-model
 ahr
+piecewise-model
+secAhr
 secAhrMLE
 secAhrWeightedSum
-introduction-to-gsdmvn-gsdesign2-and-simtrial
+pkgs
 simtrial
 gsdesign2
 gsdmvn
@@ -61,7 +62,7 @@ secAhrSimSimfix
 secAhrSimSimPWSurv
 secAhrSimMleWs
 overview-other-tests
-fixed
+fixed-design
 summary-of-assumptions
 notation
 sample-size-calculation
@@ -78,7 +79,7 @@ censoring-time
 observed-time
 expected-events
 weight-function-in-weighted-logrank-test
-average-hazard-ratio-1
+average-hazard-ratio
 maxcombo-test
 type-i-error-and-power
 sample-size

@@ -49,12 +49,12 @@
 <li><a class="" href="index.html">Welcome!</a></li>
 <li><a class="" href="preface.html">Preface</a></li>
 <li><a class="" href="background.html"><span class="header-section-number">1</span> Background</a></li>
-<li><a class="" href="ph.html"><span class="header-section-number">2</span> Proportional hazards</a></li>
-<li><a class="" href="average-hazard-ratio.html"><span class="header-section-number">3</span> Average hazard ratio</a></li>
-<li><a class="" href="introduction-to-gsdmvn-gsdesign2-and-simtrial.html"><span class="header-section-number">4</span> Introduction to gsdmvn, gsDesign2, and simtrial</a></li>
+<li><a class="" href="proportional-hazards.html"><span class="header-section-number">2</span> Proportional hazards</a></li>
+<li><a class="" href="ahr.html"><span class="header-section-number">3</span> Average hazard ratio</a></li>
+<li><a class="" href="pkgs.html"><span class="header-section-number">4</span> Introduction to gsdmvn, gsDesign2, and simtrial</a></li>
 <li class="book-part">Others tests</li>
 <li><a class="" href="overview-other-tests.html"><span class="header-section-number">5</span> Overview</a></li>
-<li><a class="" href="fixed.html"><span class="header-section-number">6</span> Fixed design</a></li>
+<li><a class="" href="fixed-design.html"><span class="header-section-number">6</span> Fixed design</a></li>
 <li><a class="active" href="wlr.html"><span class="header-section-number">7</span> Weighted logrank test</a></li>
 <li><a class="" href="wlr-boundary.html"><span class="header-section-number">8</span> Group sequential design boundary with weighted logrank test</a></li>
 <li><a class="" href="maxcombo.html"><span class="header-section-number">9</span> MaxCombo test</a></li>
@@ -594,7 +594,7 @@ by</p>
   <span class="va">x</span><span class="op">$</span><span class="va">lower</span><span class="op">$</span><span class="va">bound</span>, 
   <span class="va">x</span><span class="op">$</span><span class="va">upper</span><span class="op">$</span><span class="va">bound</span>
 <span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; [1] 0.00854411 0.69113520 0.93587671</code></pre>
+<pre><code>#&gt; [1] 0.00854411 0.69113520 0.93587790</code></pre>
 <ul>
 <li><strong>Type I error</strong></li>
 </ul>
@@ -605,7 +605,7 @@ by</p>
   <span class="va">corr</span>, 
   <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="op">-</span><span class="cn">Inf</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">delta</span><span class="op">)</span><span class="op">)</span>, 
   <span class="va">x</span><span class="op">$</span><span class="va">upper</span><span class="op">$</span><span class="va">bound</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; [1] 0.0001035057 0.0061027684 0.0266341717</code></pre>
+<pre><code>#&gt; [1] 0.0001035057 0.0061027684 0.0266443101</code></pre>
 <ul>
 <li><strong>Futility probability</strong></li>
 </ul>
@@ -634,7 +634,7 @@ by</p>
   <span class="va">delta</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">sigma2</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">gs_n_ratio</span> <span class="op">*</span> <span class="va">n</span><span class="op">)</span>,
   <span class="va">corr</span>, <span class="va">x</span><span class="op">$</span><span class="va">lower</span><span class="op">$</span><span class="va">bound</span>, <span class="va">x</span><span class="op">$</span><span class="va">upper</span><span class="op">$</span><span class="va">bound</span>
 <span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; [1] 0.02168739 0.04054411 0.06414094</code></pre>
+<pre><code>#&gt; [1] 0.02168739 0.04054411 0.06411686</code></pre>
 <ul>
 <li><strong>Sample size</strong></li>
 </ul>
@@ -656,7 +656,7 @@ by</p>
 <div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">n_subject</span> <span class="op">&lt;-</span> <span class="va">n</span> <span class="op">*</span> <span class="va">ratio</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">ratio</span><span class="op">)</span>
 <span class="va">n_subject</span> <span class="op">*</span> <span class="va">gs_n_ratio</span></code></pre></div>
-<pre><code>#&gt; [1] 316.4481 316.4481 316.4481</code></pre>
+<pre><code>#&gt; [1] 316.4479 316.4479 316.4479</code></pre>
 <ul>
 <li><strong>Number of events</strong></li>
 </ul>
@@ -665,7 +665,7 @@ by</p>
 <code class="sourceCode R"><span class="va">n0</span> <span class="op">&lt;-</span> <span class="va">n1</span> <span class="op">&lt;-</span> <span class="va">n_subject</span> <span class="op">/</span> <span class="fl">2</span>
 <span class="fu">gsdmvn</span><span class="fu">:::</span><span class="fu">prob_event.arm</span><span class="op">(</span><span class="va">arm0</span>, tmax <span class="op">=</span> <span class="va">analysisTimes</span><span class="op">)</span> <span class="op">*</span> <span class="va">n0</span> <span class="op">+</span>
   <span class="fu">gsdmvn</span><span class="fu">:::</span><span class="fu">prob_event.arm</span><span class="op">(</span><span class="va">arm1</span>, tmax <span class="op">=</span> <span class="va">analysisTimes</span><span class="op">)</span> <span class="op">*</span> <span class="va">n1</span></code></pre></div>
-<pre><code>#&gt; [1]  67.96943 155.87184 209.67277</code></pre>
+<pre><code>#&gt; [1]  67.96938 155.87173 209.67263</code></pre>
 <ul>
 <li><strong>Average hazard ratio</strong></li>
 </ul>
@@ -689,7 +689,7 @@ Taylor series expansion.</p>
 </ul>
 <div class="sourceCode" id="cb179"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">n_subject</span> <span class="op">*</span> <span class="va">sigma2</span></code></pre></div>
-<pre><code>#&gt; [1] 0.4466845 3.3047816 7.6793715</code></pre>
+<pre><code>#&gt; [1] 0.4466842 3.3047794 7.6793665</code></pre>
 <ul>
 <li>
 <code>info0</code> column is <span class="math inline">\(\sigma^2_k\)</span> times <span class="math inline">\(N\)</span> under the null where we both use <code>arm0</code> for calculation in active and control group.</li>
@@ -797,7 +797,7 @@ Taylor series expansion.</p>
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="fixed.html"><span class="header-section-number">6</span> Fixed design</a></div>
+<div class="prev"><a href="fixed-design.html"><span class="header-section-number">6</span> Fixed design</a></div>
 <div class="next"><a href="wlr-boundary.html"><span class="header-section-number">8</span> Group sequential design boundary with weighted logrank test</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
@@ -832,8 +832,8 @@ Taylor series expansion.</p>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/keaven/gsd-deming/blob/master/06-wlr.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/keaven/gsd-deming/edit/master/06-wlr.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/keaven/gsd-deming/blob/master/wlr.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/keaven/gsd-deming/edit/master/wlr.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>
@@ -845,7 +845,7 @@ Taylor series expansion.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Group Sequential Design Under Non-Proportional Hazards</strong>: Deming Conference Course, December 6, 2021" was written by Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao. It was last built on 2021-11-24.</p>
+    <p>"<strong>Group Sequential Design Under Non-Proportional Hazards</strong>: Deming Conference Course, December 6, 2021" was written by Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao. It was last built on 2021-11-25.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -49,12 +49,12 @@
 <li><a class="" href="index.html">Welcome!</a></li>
 <li><a class="" href="preface.html">Preface</a></li>
 <li><a class="" href="background.html"><span class="header-section-number">1</span> Background</a></li>
-<li><a class="" href="ph.html"><span class="header-section-number">2</span> Proportional hazards</a></li>
-<li><a class="" href="average-hazard-ratio.html"><span class="header-section-number">3</span> Average hazard ratio</a></li>
-<li><a class="active" href="introduction-to-gsdmvn-gsdesign2-and-simtrial.html"><span class="header-section-number">4</span> Introduction to gsdmvn, gsDesign2, and simtrial</a></li>
+<li><a class="" href="proportional-hazards.html"><span class="header-section-number">2</span> Proportional hazards</a></li>
+<li><a class="" href="ahr.html"><span class="header-section-number">3</span> Average hazard ratio</a></li>
+<li><a class="active" href="pkgs.html"><span class="header-section-number">4</span> Introduction to gsdmvn, gsDesign2, and simtrial</a></li>
 <li class="book-part">Others tests</li>
 <li><a class="" href="overview-other-tests.html"><span class="header-section-number">5</span> Overview</a></li>
-<li><a class="" href="fixed.html"><span class="header-section-number">6</span> Fixed design</a></li>
+<li><a class="" href="fixed-design.html"><span class="header-section-number">6</span> Fixed design</a></li>
 <li><a class="" href="wlr.html"><span class="header-section-number">7</span> Weighted logrank test</a></li>
 <li><a class="" href="wlr-boundary.html"><span class="header-section-number">8</span> Group sequential design boundary with weighted logrank test</a></li>
 <li><a class="" href="maxcombo.html"><span class="header-section-number">9</span> MaxCombo test</a></li>
@@ -67,9 +67,9 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="introduction-to-gsdmvn-gsdesign2-and-simtrial" class="section level1">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="pkgs" class="section level1">
 <h1>
-<span class="header-section-number">4</span> Introduction to gsdmvn, gsDesign2, and simtrial<a class="anchor" aria-label="anchor" href="#introduction-to-gsdmvn-gsdesign2-and-simtrial"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4</span> Introduction to gsdmvn, gsDesign2, and simtrial<a class="anchor" aria-label="anchor" href="#pkgs"><i class="fas fa-link"></i></a>
 </h1>
 <p><code>simtrial</code>, <code>gsDesign2</code> and <code>gsdmvn</code> are under development and hosted on GitHub/Merck.
 Below is the Github repo link to the source code</p>
@@ -177,7 +177,7 @@ The bound supports functions include</p>
 </ul>
 <p>Besides, it covers three models for analysis.</p>
 <ul>
-<li>average hazard ratio model (see detailed description in Section <a href="average-hazard-ratio.html#ahr">3.2</a>)
+<li>average hazard ratio model (see detailed description in Section <a href="ahr.html#secAhr">3.2</a>)
 <ul>
 <li>
 <code><a href="https://merck.github.io/gsdmvn/reference/gs_power_ahr.html">gs_power_ahr()</a></code>: Power computation</li>
@@ -210,12 +210,12 @@ The bound supports functions include</p>
 <p>In this section, we conduct three simulations.</p>
 <p>The first simulation is to compare the simulated power and asymptotic power.
 Specifically speaking, we compare the results from <code><a href="https://merck.github.io/gsdmvn/reference/gs_power_ahr.html">gsdmvn::gs_power_ahr()</a></code> with that from <code><a href="https://merck.github.io/simtrial/reference/simfix.html">simtrial::simfix()</a></code>
-The details of this simulation can be found in Section <a href="introduction-to-gsdmvn-gsdesign2-and-simtrial.html#secAhrSimSimfix">4.4.1</a></p>
+The details of this simulation can be found in Section <a href="pkgs.html#secAhrSimSimfix">4.4.1</a></p>
 <p>The second simulation is to compare the simulated power and asymptotic power.
 Specifically speaking, we compare the results from <code><a href="https://merck.github.io/gsDesign2/reference/AHR.html">gsDesign2::AHR()</a></code> with that from <code><a href="https://merck.github.io/simtrial/reference/simPWSurv.html">simtrial::simPWSurv()</a></code>.
-The details of this simulation can be found in Section <a href="introduction-to-gsdmvn-gsdesign2-and-simtrial.html#secAhrSimSimPWSurv">4.4.2</a>.</p>
-<p>The third simulation is to compare the estimation of <span class="math inline">\(\beta\)</span> by MLE as in Section <a href="average-hazard-ratio.html#secAhrMLE">3.2.1</a> and weighted summation as in Section <a href="average-hazard-ratio.html#secAhrWeightedSum">3.2.2</a>.
-The details of this simulation can be found in Section <a href="introduction-to-gsdmvn-gsdesign2-and-simtrial.html#secAhrSimMleWs">4.4.3</a>.</p>
+The details of this simulation can be found in Section <a href="pkgs.html#secAhrSimSimPWSurv">4.4.2</a>.</p>
+<p>The third simulation is to compare the estimation of <span class="math inline">\(\beta\)</span> by MLE as in Section <a href="ahr.html#secAhrMLE">3.2.1</a> and weighted summation as in Section <a href="ahr.html#secAhrWeightedSum">3.2.2</a>.
+The details of this simulation can be found in Section <a href="pkgs.html#secAhrSimMleWs">4.4.3</a>.</p>
 <div id="secAhrSimSimfix" class="section level3">
 <h3>
 <span class="header-section-number">4.4.1</span> Simulation 1: Compare the IA power by <code>gs_power_ahr()</code> and simulation <code>sim_fix()</code><a class="anchor" aria-label="anchor" href="#secAhrSimSimfix"><i class="fas fa-link"></i></a>
@@ -509,12 +509,12 @@ After that, we simply load the simulation results and compare it with the asympt
   <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">8</span>, <span class="fl">9</span><span class="op">)</span>, decimals <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">7</span><span class="op">)</span>, decimals <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
-<div id="zhbqjqrdtn" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="hxvcpcwswp" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#zhbqjqrdtn .gt_table {
+#hxvcpcwswp .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -539,7 +539,7 @@ After that, we simply load the simulation results and compare it with the asympt
   border-left-color: #D3D3D3;
 }
 
-#zhbqjqrdtn .gt_heading {
+#hxvcpcwswp .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -551,7 +551,7 @@ After that, we simply load the simulation results and compare it with the asympt
   border-right-color: #D3D3D3;
 }
 
-#zhbqjqrdtn .gt_title {
+#hxvcpcwswp .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -561,7 +561,7 @@ After that, we simply load the simulation results and compare it with the asympt
   border-bottom-width: 0;
 }
 
-#zhbqjqrdtn .gt_subtitle {
+#hxvcpcwswp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -571,13 +571,13 @@ After that, we simply load the simulation results and compare it with the asympt
   border-top-width: 0;
 }
 
-#zhbqjqrdtn .gt_bottom_border {
+#hxvcpcwswp .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#zhbqjqrdtn .gt_col_headings {
+#hxvcpcwswp .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -592,7 +592,7 @@ After that, we simply load the simulation results and compare it with the asympt
   border-right-color: #D3D3D3;
 }
 
-#zhbqjqrdtn .gt_col_heading {
+#hxvcpcwswp .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -612,7 +612,7 @@ After that, we simply load the simulation results and compare it with the asympt
   overflow-x: hidden;
 }
 
-#zhbqjqrdtn .gt_column_spanner_outer {
+#hxvcpcwswp .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -624,15 +624,15 @@ After that, we simply load the simulation results and compare it with the asympt
   padding-right: 4px;
 }
 
-#zhbqjqrdtn .gt_column_spanner_outer:first-child {
+#hxvcpcwswp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#zhbqjqrdtn .gt_column_spanner_outer:last-child {
+#hxvcpcwswp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#zhbqjqrdtn .gt_column_spanner {
+#hxvcpcwswp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -644,7 +644,7 @@ After that, we simply load the simulation results and compare it with the asympt
   width: 100%;
 }
 
-#zhbqjqrdtn .gt_group_heading {
+#hxvcpcwswp .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -666,7 +666,7 @@ After that, we simply load the simulation results and compare it with the asympt
   vertical-align: middle;
 }
 
-#zhbqjqrdtn .gt_empty_group_heading {
+#hxvcpcwswp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -681,15 +681,15 @@ After that, we simply load the simulation results and compare it with the asympt
   vertical-align: middle;
 }
 
-#zhbqjqrdtn .gt_from_md > :first-child {
+#hxvcpcwswp .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#zhbqjqrdtn .gt_from_md > :last-child {
+#hxvcpcwswp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#zhbqjqrdtn .gt_row {
+#hxvcpcwswp .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -708,7 +708,7 @@ After that, we simply load the simulation results and compare it with the asympt
   overflow-x: hidden;
 }
 
-#zhbqjqrdtn .gt_stub {
+#hxvcpcwswp .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -720,7 +720,7 @@ After that, we simply load the simulation results and compare it with the asympt
   padding-left: 12px;
 }
 
-#zhbqjqrdtn .gt_summary_row {
+#hxvcpcwswp .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -730,7 +730,7 @@ After that, we simply load the simulation results and compare it with the asympt
   padding-right: 5px;
 }
 
-#zhbqjqrdtn .gt_first_summary_row {
+#hxvcpcwswp .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -740,7 +740,7 @@ After that, we simply load the simulation results and compare it with the asympt
   border-top-color: #D3D3D3;
 }
 
-#zhbqjqrdtn .gt_grand_summary_row {
+#hxvcpcwswp .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -750,7 +750,7 @@ After that, we simply load the simulation results and compare it with the asympt
   padding-right: 5px;
 }
 
-#zhbqjqrdtn .gt_first_grand_summary_row {
+#hxvcpcwswp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -760,11 +760,11 @@ After that, we simply load the simulation results and compare it with the asympt
   border-top-color: #D3D3D3;
 }
 
-#zhbqjqrdtn .gt_striped {
+#hxvcpcwswp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#zhbqjqrdtn .gt_table_body {
+#hxvcpcwswp .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -773,7 +773,7 @@ After that, we simply load the simulation results and compare it with the asympt
   border-bottom-color: #D3D3D3;
 }
 
-#zhbqjqrdtn .gt_footnotes {
+#hxvcpcwswp .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -787,13 +787,13 @@ After that, we simply load the simulation results and compare it with the asympt
   border-right-color: #D3D3D3;
 }
 
-#zhbqjqrdtn .gt_footnote {
+#hxvcpcwswp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#zhbqjqrdtn .gt_sourcenotes {
+#hxvcpcwswp .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -807,41 +807,41 @@ After that, we simply load the simulation results and compare it with the asympt
   border-right-color: #D3D3D3;
 }
 
-#zhbqjqrdtn .gt_sourcenote {
+#hxvcpcwswp .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#zhbqjqrdtn .gt_left {
+#hxvcpcwswp .gt_left {
   text-align: left;
 }
 
-#zhbqjqrdtn .gt_center {
+#hxvcpcwswp .gt_center {
   text-align: center;
 }
 
-#zhbqjqrdtn .gt_right {
+#hxvcpcwswp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#zhbqjqrdtn .gt_font_normal {
+#hxvcpcwswp .gt_font_normal {
   font-weight: normal;
 }
 
-#zhbqjqrdtn .gt_font_bold {
+#hxvcpcwswp .gt_font_bold {
   font-weight: bold;
 }
 
-#zhbqjqrdtn .gt_font_italic {
+#hxvcpcwswp .gt_font_italic {
   font-style: italic;
 }
 
-#zhbqjqrdtn .gt_super {
+#hxvcpcwswp .gt_super {
   font-size: 65%;
 }
 
-#zhbqjqrdtn .gt_footnote_marks {
+#hxvcpcwswp .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -912,7 +912,7 @@ After that, we simply load the simulation results and compare it with the asympt
 <h3>
 <span class="header-section-number">4.4.3</span> Simulation 3: Compare <span class="math inline">\(\beta\)</span> by MLE and weighted summation<a class="anchor" aria-label="anchor" href="#secAhrSimMleWs"><i class="fas fa-link"></i></a>
 </h3>
-<p>This section compares the AHR estimated by MLE (see theoretical details in Section <a href="average-hazard-ratio.html#secAhrMLE">3.2.1</a>) and weighted summation (see theoretical details in Section <a href="average-hazard-ratio.html#secAhrWeightedSum">3.2.2</a>).</p>
+<p>This section compares the AHR estimated by MLE (see theoretical details in Section <a href="ahr.html#secAhrMLE">3.2.1</a>) and weighted summation (see theoretical details in Section <a href="ahr.html#secAhrWeightedSum">3.2.2</a>).</p>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gt.rstudio.com/">gt</a></span><span class="op">)</span>
@@ -1021,12 +1021,12 @@ After that, we simply load the simulation results and compare it with the asympt
 
 
   <div class="chapter-nav">
-<div class="prev"><a href="average-hazard-ratio.html"><span class="header-section-number">3</span> Average hazard ratio</a></div>
+<div class="prev"><a href="ahr.html"><span class="header-section-number">3</span> Average hazard ratio</a></div>
 <div class="next"><a href="overview-other-tests.html"><span class="header-section-number">5</span> Overview</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#introduction-to-gsdmvn-gsdesign2-and-simtrial"><span class="header-section-number">4</span> Introduction to gsdmvn, gsDesign2, and simtrial</a></li>
+<li><a class="nav-link" href="#pkgs"><span class="header-section-number">4</span> Introduction to gsdmvn, gsDesign2, and simtrial</a></li>
 <li><a class="nav-link" href="#simtrial"><span class="header-section-number">4.1</span> simtrial</a></li>
 <li><a class="nav-link" href="#gsdesign2"><span class="header-section-number">4.2</span> gsDesign2</a></li>
 <li><a class="nav-link" href="#gsdmvn"><span class="header-section-number">4.3</span> gsdmvn</a></li>
@@ -1041,8 +1041,8 @@ After that, we simply load the simulation results and compare it with the asympt
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/keaven/gsd-deming/blob/master/04-ahr.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/keaven/gsd-deming/edit/master/04-ahr.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/keaven/gsd-deming/blob/master/pkgs.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/keaven/gsd-deming/edit/master/pkgs.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>
@@ -1054,7 +1054,7 @@ After that, we simply load the simulation results and compare it with the asympt
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Group Sequential Design Under Non-Proportional Hazards</strong>: Deming Conference Course, December 6, 2021" was written by Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao. It was last built on 2021-11-24.</p>
+    <p>"<strong>Group Sequential Design Under Non-Proportional Hazards</strong>: Deming Conference Course, December 6, 2021" was written by Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao. It was last built on 2021-11-25.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
