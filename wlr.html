@@ -594,7 +594,7 @@ by</p>
   <span class="va">x</span><span class="op">$</span><span class="va">lower</span><span class="op">$</span><span class="va">bound</span>, 
   <span class="va">x</span><span class="op">$</span><span class="va">upper</span><span class="op">$</span><span class="va">bound</span>
 <span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; [1] 0.00854411 0.69113520 0.93587230</code></pre>
+<pre><code>#&gt; [1] 0.00854411 0.69113520 0.93587136</code></pre>
 <ul>
 <li><strong>Type I error</strong></li>
 </ul>
@@ -605,7 +605,7 @@ by</p>
   <span class="va">corr</span>, 
   <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="op">-</span><span class="cn">Inf</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">delta</span><span class="op">)</span><span class="op">)</span>, 
   <span class="va">x</span><span class="op">$</span><span class="va">upper</span><span class="op">$</span><span class="va">bound</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; [1] 0.0001035057 0.0061027684 0.0266460159</code></pre>
+<pre><code>#&gt; [1] 0.0001035057 0.0061027684 0.0266500095</code></pre>
 <ul>
 <li><strong>Futility probability</strong></li>
 </ul>
@@ -634,7 +634,7 @@ by</p>
   <span class="va">delta</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">sigma2</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">gs_n_ratio</span> <span class="op">*</span> <span class="va">n</span><span class="op">)</span>,
   <span class="va">corr</span>, <span class="va">x</span><span class="op">$</span><span class="va">lower</span><span class="op">$</span><span class="va">bound</span>, <span class="va">x</span><span class="op">$</span><span class="va">upper</span><span class="op">$</span><span class="va">bound</span>
 <span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; [1] 0.02168739 0.04054411 0.06412009</code></pre>
+<pre><code>#&gt; [1] 0.02168739 0.04054411 0.06412957</code></pre>
 <ul>
 <li><strong>Sample size</strong></li>
 </ul>
@@ -656,7 +656,7 @@ by</p>
 <div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">n_subject</span> <span class="op">&lt;-</span> <span class="va">n</span> <span class="op">*</span> <span class="va">ratio</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">ratio</span><span class="op">)</span>
 <span class="va">n_subject</span> <span class="op">*</span> <span class="va">gs_n_ratio</span></code></pre></div>
-<pre><code>#&gt; [1] 316.4476 316.4476 316.4476</code></pre>
+<pre><code>#&gt; [1] 316.449 316.449 316.449</code></pre>
 <ul>
 <li><strong>Number of events</strong></li>
 </ul>
@@ -665,7 +665,7 @@ by</p>
 <code class="sourceCode R"><span class="va">n0</span> <span class="op">&lt;-</span> <span class="va">n1</span> <span class="op">&lt;-</span> <span class="va">n_subject</span> <span class="op">/</span> <span class="fl">2</span>
 <span class="fu">gsdmvn</span><span class="fu">:::</span><span class="fu">prob_event.arm</span><span class="op">(</span><span class="va">arm0</span>, tmax <span class="op">=</span> <span class="va">analysisTimes</span><span class="op">)</span> <span class="op">*</span> <span class="va">n0</span> <span class="op">+</span>
   <span class="fu">gsdmvn</span><span class="fu">:::</span><span class="fu">prob_event.arm</span><span class="op">(</span><span class="va">arm1</span>, tmax <span class="op">=</span> <span class="va">analysisTimes</span><span class="op">)</span> <span class="op">*</span> <span class="va">n1</span></code></pre></div>
-<pre><code>#&gt; [1]  67.96933 155.87161 209.67246</code></pre>
+<pre><code>#&gt; [1]  67.96962 155.87227 209.67335</code></pre>
 <ul>
 <li><strong>Average hazard ratio</strong></li>
 </ul>
@@ -689,7 +689,7 @@ Taylor series expansion.</p>
 </ul>
 <div class="sourceCode" id="cb179"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">n_subject</span> <span class="op">*</span> <span class="va">sigma2</span></code></pre></div>
-<pre><code>#&gt; [1] 0.4466838 3.3047767 7.6793601</code></pre>
+<pre><code>#&gt; [1] 0.4466857 3.3047906 7.6793926</code></pre>
 <ul>
 <li>
 <code>info0</code> column is <span class="math inline">\(\sigma^2_k\)</span> times <span class="math inline">\(N\)</span> under the null where we both use <code>arm0</code> for calculation in active and control group.</li>

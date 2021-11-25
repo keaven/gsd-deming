@@ -504,7 +504,7 @@ where <span class="math inline">\(\theta = \Delta/\sigma\)</span> is the effect 
   type <span class="op">=</span> <span class="st">"s"</span>,
   xlab <span class="op">=</span> <span class="st">"Calendar time (month)"</span>, ylab <span class="op">=</span> <span class="st">"Accrual Probability"</span>
 <span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-78-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-79-1.png" width="80%" style="display: block; margin: auto;"></div>
 <ul>
 <li>
 <span class="math inline">\(\tau_a\)</span>: accrual time</li>
@@ -551,7 +551,7 @@ where <span class="math inline">\(\theta = \Delta/\sigma\)</span> is the effect 
 <span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">1</span> <span class="op">-</span> <span class="fu">npsurvSS</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/npsurvSS/man/dsurv.html">psurv</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">arm1</span><span class="op">)</span>, lty <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topright"</span>, lty <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"control"</span>, <span class="st">"experiment"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-82-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-83-1.png" width="80%" style="display: block; margin: auto;"></div>
 </div>
 <div id="censoring-time" class="section level3">
 <h3>
@@ -571,7 +571,7 @@ where <span class="math inline">\(\theta = \Delta/\sigma\)</span> is the effect 
   type <span class="op">=</span> <span class="st">"l"</span>,
   xlab <span class="op">=</span> <span class="st">"Calendar time (month)"</span>, ylab <span class="op">=</span> <span class="st">"Loss to Follow-up Probability"</span>
 <span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-83-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-84-1.png" width="80%" style="display: block; margin: auto;"></div>
 <ul>
 <li>
 <span class="math inline">\(C = \min(L, \tau - R)\)</span>: time to censoring from study entry.</li>
@@ -607,7 +607,7 @@ where <span class="math inline">\(\theta = \Delta/\sigma\)</span> is the effect 
   xlab <span class="op">=</span> <span class="st">"Calendar time (month)"</span>, ylab <span class="op">=</span> <span class="st">"Event Probability"</span>,
   ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>
 <span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-84-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-85-1.png" width="80%" style="display: block; margin: auto;"></div>
 <ul>
 <li>
 <span class="math inline">\(Y(t) = I(U\ge t)\)</span>: at-risk process</li>
@@ -621,7 +621,7 @@ where <span class="math inline">\(\theta = \Delta/\sigma\)</span> is the effect 
   type <span class="op">=</span> <span class="st">"l"</span>,
   xlab <span class="op">=</span> <span class="st">"Calendar time (month)"</span>, ylab <span class="op">=</span> <span class="st">"Probability at Risk"</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>
 <span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-85-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-86-1.png" width="80%" style="display: block; margin: auto;"></div>
 </div>
 <div id="weight-function-in-weighted-logrank-test" class="section level3">
 <h3>
@@ -652,7 +652,7 @@ where <span class="math inline">\(\theta = \Delta/\sigma\)</span> is the effect 
 <span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">36</span>, <span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/wlr_weight.html">wlr_weight_fh</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">36</span>, <span class="va">arm0</span>, <span class="va">arm1</span>, rho <span class="op">=</span> <span class="fl">0</span>, gamma <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, col <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">36</span>, <span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/wlr_weight.html">wlr_weight_fh</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">36</span>, <span class="va">arm0</span>, <span class="va">arm1</span>, rho <span class="op">=</span> <span class="fl">1</span>, gamma <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, col <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"bottomright"</span>, legend <span class="op">=</span> <span class="va">weight_legend</span>, lty <span class="op">=</span> <span class="fl">1</span>, col <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-87-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-88-1.png" width="80%" style="display: block; margin: auto;"></div>
 <ul>
 <li><p>Modestly WLR: <span class="math inline">\(S^{-1}(t\land\tau_m)\)</span> <span class="citation">Magirr and Burman (<a href="references.html#ref-magirr2019modestly" role="doc-biblioref">2019</a><a href="references.html#ref-magirr2019modestly" role="doc-biblioref">b</a>)</span></p></li>
 <li><p>Choose <span class="math inline">\(\tau_m\)</span> around the change point in delay effect scenario</p></li>
@@ -662,7 +662,7 @@ where <span class="math inline">\(\theta = \Delta/\sigma\)</span> is the effect 
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">36</span>, <span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/wlr_weight.html">wlr_weight_fh</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">36</span>, <span class="va">arm0</span>, <span class="va">arm1</span>, rho <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>, gamma <span class="op">=</span> <span class="fl">0</span>, tau <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>,
   xlab <span class="op">=</span> <span class="st">"Calendar time (month)"</span>, ylab <span class="op">=</span> <span class="st">"Weight"</span>, type <span class="op">=</span> <span class="st">"l"</span>
 <span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-88-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-89-1.png" width="80%" style="display: block; margin: auto;"></div>
 </div>
 <div id="average-hazard-ratio" class="section level3">
 <h3>
@@ -698,7 +698,7 @@ It is a generalization of the <span class="citation">Schoenfeld (<a href="refere
   ylab <span class="op">=</span> <span class="st">"Average Hazard Ratio"</span>,
   type <span class="op">=</span> <span class="st">"l"</span>
 <span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-89-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-90-1.png" width="80%" style="display: block; margin: auto;"></div>
 <ul>
 <li><p>Note the AHR depends on the choice of weight function <span class="math inline">\(w(\cdot)\)</span>.</p></li>
 <li><p>Under logrank test with piecewise exponential distribution and 1:1 randomization ratio,

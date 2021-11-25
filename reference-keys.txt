@@ -1,6 +1,6 @@
-fig:unnamed-chunk-6
 fig:unnamed-chunk-7
 fig:unnamed-chunk-8
+fig:unnamed-chunk-9
 def:DefZprocess
 eq:DefZprocess
 eq:DefThetaK
@@ -8,12 +8,12 @@ def:DefBprocess
 eq:DefBprocess
 thm:ThmZprocessDistCF
 thm:ThmBprocessDistCF
-fig:unnamed-chunk-10
 fig:unnamed-chunk-11
 fig:unnamed-chunk-12
 fig:unnamed-chunk-13
 fig:unnamed-chunk-14
 fig:unnamed-chunk-15
+fig:unnamed-chunk-16
 eq:AhrLambdaGamma
 eq:AhrRateEstimation
 eq:AhrIndividualHazardRateDist
@@ -24,6 +24,7 @@ eq:AhrBetaEstimation
 training-overview
 software-and-supporting-materials
 installing-r-packages
+authors-and-contributors
 background
 nph
 gsd
