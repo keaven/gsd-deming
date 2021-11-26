@@ -4,7 +4,7 @@
 
 - Analyze a trial repeatedly at planned intervals
 - Group of data added at each analysis
-- Group sequential design derives boundaries and sample size to 
+- Group sequential design derives boundaries and sample size to
   - Control Type I error
   - Ensure power
   - Stop early for futility or efficacy finding
@@ -19,10 +19,9 @@
   - $(Z_1,\ldots,Z_K)$ is multivariate normal
   - $E(Z_k) = \theta_k \sqrt{I_k}, k=1,\ldots,K$
   - $\hbox{Cov}(Z_{k_1}, Z_{k_2})=\sqrt{I_{k_1}/I_{k_2}},$ $1\le k_1\le k_2\le K$
-- $I_k$ is the Fisher information for $\theta_k, k=1,\ldots, K$. 
+- $I_k$ is the Fisher information for $\theta_k, k=1,\ldots, K$.
 - For most of this training $\theta_k=-E(\log(HR_k))$
 - Simulation can be used to examine accuracy of normal approximation
-
 
 ## Assumptions for time-to-event endpoints
 
@@ -36,17 +35,16 @@
   - Fixed design only for RMST
   - Combination tests with multiple weighted logrank tests have more complex correlation structure (@Karrison2016)
 
-## Testing bounds 
+## Testing bounds
 
 - Bounds $-\infty \le a_k \le b_k \le \infty$ for $k=1,\dots,K$
 - Null hypothesis $H_0:$ $\theta_k=0, k=1,\ldots,K$
 - Alternate hypothesis $H_1:$ $\theta_k > 0$ for some $k=1,\ldots,K$
 - Actions at analysis $k=1,\ldots,K$:
-   - Reject $H_0$ at analysis $k$ if $Z_k\ge b_k$
-   - Do not reject $H_0$ and consider stopping if $Z_k<a_k$, $k<K$
-   - Continue trial if $a_k\le Z_k\le b_k$, $k<K$
+  - Reject $H_0$ at analysis $k$ if $Z_k\ge b_k$
+  - Do not reject $H_0$ and consider stopping if $Z_k<a_k$, $k<K$
+  - Continue trial if $a_k\le Z_k\le b_k$, $k<K$
 - Bounds are generally considered advisory for stopping trial, not binding
-
 
 ## Boundary crossing probabilities
 
@@ -65,9 +63,9 @@
 
   $$-\infty\le a_k<b_k, k=1,\ldots,K-1,$$
   $$a_K\le b_K$$
-  
+
   $$1 - \beta =  \sum_{k=1}^{K} l_k = \sum_{k=1}^{K} \text{Pr}(\{Z_k < a_k\} \cap_{j=1}^{k-1} \{a_j \le Z_j \le b_j\}\mid H_1)$$
-  
+
 ## Symmetric bounds
 
 Test each treatment for superiority vs the other
@@ -140,9 +138,9 @@ x <- gsSurv(
   minfup = minfup,
   ratio = ratio
 )
-plot(x, xlab = "Events", main = "Symmetric bounds testing best of 2 treatments", col=c("red", "black")) +
-  annotate("text", x=225, y=-.5, size = 5, color = "red", label = "Futility bound crossed with low probability under H0") +
-  annotate("text", x=225, y=4.5, size = 5, label = "Efficacy bound crossed with low probability under H0")
+plot(x, xlab = "Events", main = "Symmetric bounds testing best of 2 treatments", col = c("red", "black")) +
+  annotate("text", x = 225, y = -.5, size = 5, color = "red", label = "Futility bound crossed with low probability under H0") +
+  annotate("text", x = 225, y = 4.5, size = 5, label = "Efficacy bound crossed with low probability under H0")
 ```
 
 Usually not of interest in pharmaceutical industry
@@ -155,7 +153,7 @@ Give up if experimental arm not trending in favor of control?
 # Number of analyses
 k <- 5
 # See gsDesign() help for description of boundary types
-test.type <-4
+test.type <- 4
 # 1-sided Type I error
 alpha <- 0.025
 # Type II error (1 - targeted power)
@@ -219,14 +217,13 @@ x <- gsSurv(
   minfup = minfup,
   ratio = ratio
 )
-plot(x, xlab = "Events", main = "Futility bounds only testing if experimental better", col=c("red", "black")) +
-  annotate("text", x=240, y=-1.5, size = 5, color = "red", label = "Futility bound crossed with low probability under H1") +
-  annotate("text", x=240, y=4.5, size = 5, label = "Efficacy bound crossed with low probability under H0")
+plot(x, xlab = "Events", main = "Futility bounds only testing if experimental better", col = c("red", "black")) +
+  annotate("text", x = 240, y = -1.5, size = 5, color = "red", label = "Futility bound crossed with low probability under H1") +
+  annotate("text", x = 240, y = 4.5, size = 5, label = "Efficacy bound crossed with low probability under H0")
 ```
 
 - Ethics of continuing trial if unlikely to show superiority?
 - Excess risk of crossing lower bound too soon?
-
 
 ## Asymmetric 2-sided testing
 
@@ -300,19 +297,19 @@ x <- gsSurv(
   minfup = minfup,
   ratio = ratio
 )
-plot(x, xlab = "Events", main = "Futility bounds testing if experimental trending worse than control", col=c("red", "black")) +
-  annotate("text", x=200, y=-.5, size = 5, color = "red", label = "Futility bound crossed with moderate probability under H0") +
-  annotate("text", x=200, y=1.6, size = 5, label = "Efficacy bound crossed with low probability under H0")
+plot(x, xlab = "Events", main = "Futility bounds testing if experimental trending worse than control", col = c("red", "black")) +
+  annotate("text", x = 200, y = -.5, size = 5, color = "red", label = "Futility bound crossed with moderate probability under H0") +
+  annotate("text", x = 200, y = 1.6, size = 5, label = "Efficacy bound crossed with low probability under H0")
 ```
 
 ## Sample size
 
 - Given boundary computation, sample size solves for enrollment rate
 - Fixing relative enrollment rates, dropout rates and trial duration enable @LachinFoulkes and our AHR methods
-- Under proportional hazards,  you can also fix max enrollment rate and solve for trial duration [@kim1990study]
-    - You can easily create scenarios here for which there is no solution 
-    - Error message *An error has occurred. Check your logs or contact the app author for clarification.*
-    - Need to adjust parameters until a solution is found or use @LachinFoulkes
+- Under proportional hazards, you can also fix max enrollment rate and solve for trial duration [@kim1990study]
+  - You can easily create scenarios here for which there is no solution
+  - Error message *An error has occurred. Check your logs or contact the app author for clarification.*
+  - Need to adjust parameters until a solution is found or use @LachinFoulkes
 
 ## Boundary types
 
@@ -328,7 +325,7 @@ plot(x, xlab = "Events", main = "Futility bounds testing if experimental trendin
       - O'Brien and Fleming boundary [@o1979multiple]
     - Slud and Wei [@SludWei, @FHO] set fixed IA probabilities
       - Hybrid of boundary family/spending approach
-      
+
 # Boundary families
 
 ## Boundary family - Haybittle-Peto boundary
@@ -342,7 +339,7 @@ plot(x, xlab = "Events", main = "Futility bounds testing if experimental trendin
 ![](../images/background_SF_Haybittle_boundary.png){ width=45% }
 </div>
 
-## Boundary family -  Haybittle-Peto (cont'd)
+## Boundary family - Haybittle-Peto (cont'd)
 
 - **Modified Haybittle-Peto procedure 1:**
 
@@ -354,7 +351,6 @@ plot(x, xlab = "Events", main = "Futility bounds testing if experimental trendin
 - **Advantages:**
   - Avoid type I error inflation
   - Does not require equally spaced analyses
-
 
 ## Boundary family - Wang-Tsiatis bounds
 
@@ -376,7 +372,6 @@ plot(x, xlab = "Events", main = "Futility bounds testing if experimental trendin
   For 2-sided testing, the Pocock procedure rejects at the $k$-th equally-spaced of $K$ looks if
   $$|Z_k| > c_P(K),$$
   where $c_P(K)$ is fixed given $K$ such that $\text{Pr}(\cup_{k=1}^{K} |Z_k| > c_P(K)) = \alpha$.
-
 
 ## Wang-Tsiatis example - Pocock boundary (cont'd)
 
@@ -417,11 +412,9 @@ plot(x, xlab = "Events", main = "Futility bounds testing if experimental trendin
 
 <div align="center">
   ![](../images/background_SF_OBF_boundary.png){ width=45% }
-
 </div>
 
-
-## Wang-Tsiatis example -  O'Brien-Fleming boundary (cont'd)
+## Wang-Tsiatis example - O'Brien-Fleming boundary (cont'd)
 
 <div style="float: left; width: 45%;">
 |total number of looks(K)| $\alpha = 0.01$ | $\alpha = 0.05$ | $\alpha = 0.1$ |
@@ -461,72 +454,82 @@ plot(x, xlab = "Events", main = "Futility bounds testing if experimental trendin
 |Pocock| a constant decision boundary for Z-score| | (1) requires the same level of evidence for early and late looks at the data, so it pays larger price for the final analysis ;<br> (2) requires equally spaced looks
 |O'Brien-Fleming| constant B-value boundaries, steep decrease in Z-boundaries |pay smaller price for the final analysis| too conservative in the early stages? |
 
-
 # Spending function boundaries
-
 
 ## Spending function
 
 ```{r,echo=FALSE}
 library(ggrepel)
-ts <- (0:100)/100
-spend <- sfHSD(alpha=.025, t = ts, param = -3)$spend
+ts <- (0:100) / 100
+spend <- sfHSD(alpha = .025, t = ts, param = -3)$spend
 timing <- c(.15, .3, .6, .8, .9, 1)
 spendb <- sfHSD(alpha = .025, t = timing, param = -3)$spend
 ds <- tibble::tibble(ts = timing, spend = spendb, txt = as.character(round(spendb, 5)))
-qplot(x=ts, y=spend, geom="line") + ylab("Cumulative alpha-spending") + xlab("Spending time") +
+qplot(x = ts, y = spend, geom = "line") + ylab("Cumulative alpha-spending") + xlab("Spending time") +
   geom_point(data = ds) + ggtitle("Spending function to specify boundary crossing probabilities") +
-  geom_label(data = ds, aes(x=ts, y= spend, label=txt)) + 
-  annotate(x=.02,y=.025,   geom="text", size=5, hjust=0, label = "- Cumulative probability of boundary crossing") +
-  annotate(x=.02,y=.0225,  geom="text", size=5, hjust=0, label = "- Timing does not have to be equally spaced") +
-  annotate(x=.02,y=.02,    geom="text", size=5, hjust=0, label = "- Timing and number of analyses can be changed during trial") + 
-  annotate(x=.06, y=.0175, geom="text", size=5, hjust=0, label= "- Requires treatment effect not revealed") +
-  annotate(x=.02, y=.015,  geom="text", size=5, hjust=0, label= "- Z-values solved by inverse multivariate normal distribution")
+  geom_label(data = ds, aes(x = ts, y = spend, label = txt)) +
+  annotate(x = .02, y = .025, geom = "text", size = 5, hjust = 0, label = "- Cumulative probability of boundary crossing") +
+  annotate(x = .02, y = .0225, geom = "text", size = 5, hjust = 0, label = "- Timing does not have to be equally spaced") +
+  annotate(x = .02, y = .02, geom = "text", size = 5, hjust = 0, label = "- Timing and number of analyses can be changed during trial") +
+  annotate(x = .06, y = .0175, geom = "text", size = 5, hjust = 0, label = "- Requires treatment effect not revealed") +
+  annotate(x = .02, y = .015, geom = "text", size = 5, hjust = 0, label = "- Z-values solved by inverse multivariate normal distribution")
 ```
 
 ## Lan-DeMets spending functions to approximate boundary families
 
 ```{r,echo=FALSE}
 library(ggrepel)
-ts <- (0:100)/100
-spendO <- sfLDOF(alpha=.025, t = ts)$spend
-spendP <- sfLDPocock(alpha=.025, t = ts)$spend
+ts <- (0:100) / 100
+spendO <- sfLDOF(alpha = .025, t = ts)$spend
+spendP <- sfLDPocock(alpha = .025, t = ts)$spend
 timing <- c(.15, .3, .6, .8, .9, 1)
 spendOBF <- sfLDOF(alpha = .025, t = timing)$spend
 spendPocock <- sfLDPocock(alpha = .025, t = timing)$spend
-ds <- rbind(tibble::tibble(ts = ts, spend = spendO, g="O'Brien-Fleming"),
-            tibble::tibble(ts = ts, spend = spendP, g="Pocock")
+ds <- rbind(
+  tibble::tibble(ts = ts, spend = spendO, g = "O'Brien-Fleming"),
+  tibble::tibble(ts = ts, spend = spendP, g = "Pocock")
 )
-dspend <- rbind(tibble::tibble(ts = timing, spend = spendOBF, txt = as.character(round(spendOBF, 5)), g="O'Brien-Fleming"),
-                tibble::tibble(ts = timing, spend = spendPocock, txt = as.character(round(spendPocock, 5)), g="Pocock")
+dspend <- rbind(
+  tibble::tibble(ts = timing, spend = spendOBF, txt = as.character(round(spendOBF, 5)), g = "O'Brien-Fleming"),
+  tibble::tibble(ts = timing, spend = spendPocock, txt = as.character(round(spendPocock, 5)), g = "Pocock")
 )
-ggplot(ds, aes(x=ts, y=spend, col=g)) +geom_line() + ylab("Cumulative alpha-spending") + xlab("Spending time") +
-  geom_point(data = dspend) + ggtitle("Lan-DeMets (1981) spending functions approximating boundary families") +
-  geom_label_repel(data = dspend, aes(x=ts, y= spend, label=txt)) +
-  guides(col = guide_legend(title="Spending function"))
+ggplot(ds, aes(x = ts, y = spend, col = g)) +
+  geom_line() +
+  ylab("Cumulative alpha-spending") +
+  xlab("Spending time") +
+  geom_point(data = dspend) +
+  ggtitle("Lan-DeMets (1981) spending functions approximating boundary families") +
+  geom_label_repel(data = dspend, aes(x = ts, y = spend, label = txt)) +
+  guides(col = guide_legend(title = "Spending function"))
 ```
 
 ## Hwang-Shih-DeCani (gamma) spending functions
 
 ```{r,echo=FALSE}
 g <- c(1, -2, -4, -8)
-ts <- (0:100)/100
+ts <- (0:100) / 100
 timing <- c(.15, .3, .6, .8, .9, 1)
 ds <- NULL
 dspend <- NULL
-for(gamma in g){
-    spend <- sfHSD(alpha=.025, t = ts, param = gamma)$spend
-    spendt <- sfHSD(alpha = .025, t = timing, param = gamma)$spend
-    ds <- rbind(ds,
-                tibble::tibble(ts = ts, spend = spend, gamma=gamma)
-    )
-    dspend <- rbind(dspend,
-                    tibble::tibble(ts = timing, spend = spendt, txt = as.character(round(spendt, 5)), gamma=gamma)
-    )
+for (gamma in g) {
+  spend <- sfHSD(alpha = .025, t = ts, param = gamma)$spend
+  spendt <- sfHSD(alpha = .025, t = timing, param = gamma)$spend
+  ds <- rbind(
+    ds,
+    tibble::tibble(ts = ts, spend = spend, gamma = gamma)
+  )
+  dspend <- rbind(
+    dspend,
+    tibble::tibble(ts = timing, spend = spendt, txt = as.character(round(spendt, 5)), gamma = gamma)
+  )
 }
-ggplot(ds, aes(x=ts, y=spend, col=factor(gamma))) + geom_line() + ylab("Cumulative alpha-spending") + xlab("Spending time") +
-  geom_point(data = dspend) + ggtitle("Hwang-Shih-DeCani spending functions") + 
-  guides(col=guide_legend(title="gamma"))
+ggplot(ds, aes(x = ts, y = spend, col = factor(gamma))) +
+  geom_line() +
+  ylab("Cumulative alpha-spending") +
+  xlab("Spending time") +
+  geom_point(data = dspend) +
+  ggtitle("Hwang-Shih-DeCani spending functions") +
+  guides(col = guide_legend(title = "gamma"))
 ```
 
 ## What is spending time?
@@ -535,7 +538,7 @@ ggplot(ds, aes(x=ts, y=spend, col=factor(gamma))) + geom_line() + ylab("Cumulati
   - Time-to-event: fraction of planned final events in analysis
   - Normal or continuous: fraction of planned final sample size in analysis
   - Usually expected by regulators
-- Calendar fraction, @LanDeMets1989 
+- Calendar fraction, @LanDeMets1989
   - Fraction of trial planned calendar duration at analysis
 - Minimum of planned and actual information fraction
   - Probably not advised yet

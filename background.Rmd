@@ -11,42 +11,40 @@ The detailed design can be referred to the [protocol](https://ars.els-cdn.com/co
 
 There are two interim analysis planned, one at 144 deaths (with information fraction as 0.42) and the other at 216 deaths (with information fraction as 0.64).
 The efficacy boundary is Hwang-Shih-DeCani (HSD) spending with $\gamma=-4$, and the futility boundary is non-binding $\beta$-spending HSD with $\gamma = -16$.
-The final analysis finds there are 388 deaths, compared with 340 planned death. 
+The final analysis finds there are 388 deaths, compared with 340 planned death.
 The 1-sided nominal p-value for OS at the final analysis is 0.0161.
 
 ```{r, echo=FALSE, fig.cap="KEYNOTE040",out.width = '100%'}
 knitr::include_graphics("./images/ahr_slides_KEYNOTE040.PNG")
 ```
 
-From the figure above, we can see there is a delay of the treatment effect. 
+From the figure above, we can see there is a delay of the treatment effect.
 
 The delayed effect is not just in oncology, it also lies in other TA.
-For example, in cholesterol lowering and mortality [@simva4s], there is also a delayed effect. 
+For example, in cholesterol lowering and mortality [@simva4s], there is also a delayed effect.
+
 ```{r, echo=FALSE, fig.cap="Scandinavian Simvistatin Survival Study", out.width = '80%'}
 knitr::include_graphics("./images/ahr_slides_SSSS.jpeg")
 ```
 
-
 In addition to delayed effect, NPH also exists when there is a cross over of survival curves.
-For example, in KEYNOTE061 (recurrent advanced gastric or gastro-oesophageal junction cancer), there is a cross over of the pembrolizumab arm and paclitaxel arm (see figure below). 
+For example, in KEYNOTE061 (recurrent advanced gastric or gastro-oesophageal junction cancer), there is a cross over of the pembrolizumab arm and paclitaxel arm (see figure below).
 It is 1:1 randomization with 360 planned events (395 actual events) at the end of the trial in CPS $\ge$ 1 population.
 The first primary endpoints is OS in PD-L1 CPS $\ge$ 1.
-Its power is 91\% for HR=0.67 with 1-sided $\alpha=0.0215$. 
+Its power is 91\% for HR=0.67 with 1-sided $\alpha=0.0215$.
 The secondary primary endpoints is PFS in PD-L1 CPS $\ge$ 1.
 The detailed design can be found in the  [protocol](https://ars.els-cdn.com/content/image/1-s2.0-S0140673618312571-mmc1.pdf)
 
 When it proceeded to final analysis, there are 326 deaths with 290 planned.
 One interim analysis is conducted with 240 events at information fraction of 0.83.
 During the group sequential design, the efficacy boundary is Hwang-Shih-DeCani (HSD) spending with $\gamma=-4$ and there is not a futility boundary.
-The 1-sided nominal p-value for OS is 0.0421 (threshold: p=0.0135). 
+The 1-sided nominal p-value for OS is 0.0421 (threshold: p=0.0135).
 And *Post hoc* FH($\rho=1,\gamma=1$) is  p=0.0009.
-
 
 KEYNOTE 061: Overall Survival in CPS 1
 ```{r, echo=FALSE, fig.cap="KEYNOTE061",out.width = '100%'}
 knitr::include_graphics("./images/ahr_slides_KEYNOTE061OS.PNG")
 ```
-
 
 The above two examples motivate us to think about following questions:
 
@@ -58,10 +56,9 @@ The above two examples motivate us to think about following questions:
 - Updating bounds
 - Multiplicity adjustments
 
-
 ### Group sequential design {#gsd}
 
-In group sequential design, groups of observations are collected and repeatedly analyzed, while controlling error rates. 
+In group sequential design, groups of observations are collected and repeatedly analyzed, while controlling error rates.
 While the group sequential design in ongoing, a stopping rule specifies when and why a trial might be halted at these points.
 This stopping rule usually consists two components, a test statistics and a threshold.
 The threshold is usually decided by the spending functions, which we introduced in Section \@ref(sf).
@@ -71,67 +68,65 @@ If a Z-process (B-process) cross the boundary, the the trail is stopped.
 ### Z-process and B-process
 
 In this Section, we will introduce the Z-process and B-process.
-Suppose in the group sequential design, there are totally $K$ looks. 
-In the $k$-th look, there are $n_k$ available observations. 
+Suppose in the group sequential design, there are totally $K$ looks.
+In the $k$-th look, there are $n_k$ available observations.
 For notation simplicity, we denote the final number of available observation as $N$, i.e., $N \triangleq n_K$.
 
 :::{.definition #DefZprocess}
 The Z-process is defined as the standardized treatment effect, i.e.,
-\begin{equation} 
-  Z_{k} 
-  = 
+\begin{equation}
+  Z_{k}
+  =
   \frac{\widehat\theta_k}{\sqrt{\hbox{Var}(\hat\theta_k)}},
   (\#eq:DefZprocess)
-\end{equation} 
+\end{equation}
 where $k$ is the index of the looks, and we assume there are totally $K$ number of looks, i.e., $k = 1, 2, \ldots, K$.
-The numerator $\widehat\theta_k$ is the treatment effect estimated at the $k$-th look. 
+The numerator $\widehat\theta_k$ is the treatment effect estimated at the $k$-th look.
 :::
 
 For $\widehat\theta_k$, its form depends on the outcome of the clinical trials.
-In clinical trails with continuous outcome $X_1, X_2, \ldots \in \mathbb R$, the treatment effect estimated at the $k$-th look is 
+In clinical trails with continuous outcome $X_1, X_2, \ldots \in \mathbb R$, the treatment effect estimated at the $k$-th look is
 \begin{equation}
-  \widehat{\theta}_k 
-  = 
+  \widehat{\theta}_k
+  =
   \frac{\sum_{i=1}^{n_k} X_{i}}{n_k}\equiv \bar X_{k},
   (\#eq:DefThetaK)
-\end{equation} 
+\end{equation}
 where $n_k$ is the number of available observations at the $k$-th look.
 In clinical trials with binary outcome  $X_1, X_2, \ldots \in \mathbb \{0, 1\}$, $\widehat\theta_k$ can be estimated the same as in equation \@ref(eq:DefThetaK).
-In clinical trials with survival outcome, $\widehat\theta_k$ would typically represent a Cox model coefficient representing the logarithm of the hazard ratio for experimental vs. control treatment. 
+In clinical trials with survival outcome, $\widehat\theta_k$ would typically represent a Cox model coefficient representing the logarithm of the hazard ratio for experimental vs. control treatment.
 And $n_k$ would represent the planned number of events at $k$-th look.
 
 After discussing the Z-process, let us take a look at the B-process.
 
 :::{.definition #DefBprocess}
-The B-process is defined as 
+The B-process is defined as
 \begin{equation}
   B_{k} = \sqrt{t_k} Z_k,
   (\#eq:DefBprocess)
 \end{equation}
-where $Z_k$ is defined in Definition \@ref(def:DefZprocess) and $t_k$ is the information fraction at the $k$-th look, i.e., 
+where $Z_k$ is defined in Definition \@ref(def:DefZprocess) and $t_k$ is the information fraction at the $k$-th look, i.e.,
 $$
   t_k = \mathcal I_k / \mathcal I_K,
 $$
-where $\mathcal I_k$ is the information at the $k$-th look, defined as 
+where $\mathcal I_k$ is the information at the $k$-th look, defined as
 $$
   \mathcal I_k \triangleq \frac{1}{\text{Var}(\widehat\theta_k)}.
 $$
 :::
 
-The information sequence plays an important role in the group sequential design. 
+The information sequence plays an important role in the group sequential design.
 For example, in a clinical trial with continuous outcome $X_1, X_2, \ldots \overset{i.i.d.}{\sim} N(\mu, \sigma^2)$, the information at the $k$-th look is $\mathcal I_k = n_k$ with $n_k$ as the number of available observations at the $k$-th look.
 The same logic applies to the binary outcome.
 Another example is a clinical trial with survival outcome. In this case, the information at the $k$-th look is $\mathcal I_k = n_k$ with $n_k$ as the number of events at the $k$-th look.
 
-
-
-### Canonical Form {#sec:EcfCf}
+### Canonical form {#sec:EcfCf}
 
 In the group sequential design, given the total $K$ look, there are sequences of Z-process and B-process, i.e., $\{Z_k\}_{k = 1, \ldots, K}$ and $\{B_k\}_{k = 1, \ldots, K}$.
 The CF refers to the joint distribution of $\{Z_k\}_{k = 1, \ldots, K}$ and $\{B_k\}_{k = 1, \ldots, K}$, including the distribution, the expectation mean, variance and covariance.
-Please note that this distribution is asymptotic, and the asymptotic conditions usually requires the sample size to be relative large. 
-Properly speaking, both $\{Z_k\}_{k = 1, \ldots, K}$ and $\{B_k\}_{k = 1, \ldots, K}$ depends on the sample size, which can be re-denoted as $\{ Z_{k,N} \}_{k = 1, \ldots, K}$ and $\{ B_{k, N} \}_{k = 1, \ldots, K}$. 
-When the sample size is relatively large, we can get rid of the sample size, i.e., 
+Please note that this distribution is asymptotic, and the asymptotic conditions usually requires the sample size to be relative large.
+Properly speaking, both $\{Z_k\}_{k = 1, \ldots, K}$ and $\{B_k\}_{k = 1, \ldots, K}$ depends on the sample size, which can be re-denoted as $\{ Z_{k,N} \}_{k = 1, \ldots, K}$ and $\{ B_{k, N} \}_{k = 1, \ldots, K}$.
+When the sample size is relatively large, we can get rid of the sample size, i.e.,
 $$
   Z_k = \lim\limits_{N \to \infty} Z_{k,N}.
 $$
@@ -140,11 +135,11 @@ This asymptotic assumed throughout this book.
 An important assumption of CF is $E(\widehat\theta_k) = \theta$, where $\theta$ is a constant and $\widehat\theta$ is defined in equation \@ref(eq:DefThetaK).
 
 ::: {.theorem #ThmZprocessDistCF}
-Suppose in a group sequential design, there are totally $K$ looks. 
-At the $k$-th look, there are $n_k$ available observations, i.e., $\{X_i\}_{i = 1, \ldots, n_k}$. 
+Suppose in a group sequential design, there are totally $K$ looks.
+At the $k$-th look, there are $n_k$ available observations, i.e., $\{X_i\}_{i = 1, \ldots, n_k}$.
 Assume that $\text{Var}(X_i) = 1$ for $i = 1, 2, \ldots, N$.
 And denote $\mathcal I_k \triangleq \frac{1}{\text{Var}(\widehat\theta(t_k))}$ and $E(\widehat\theta_k) = \theta$.
-The joint distribution of Z-process $\{Z_k\}_{k = 1, \ldots, K}$ is 
+The joint distribution of Z-process $\{Z_k\}_{k = 1, \ldots, K}$ is
 $$
 \left\{
 \begin{array}{l}
@@ -164,7 +159,7 @@ Following the similar, we can also summarize the distribution of B-process.
 
 ::: {.theorem #ThmBprocessDistCF}
 Following the same setting of Theorem \@ref(thm:ThmZprocessDistCF)
-The distribution of B-process is 
+The distribution of B-process is
 $$
 \left\{
 \begin{array}{l}
@@ -182,21 +177,21 @@ It should be noted that the correlation of B-process is the same as the covarian
 \begin{equation}
   Corr(B_i, B_j) = Cov(Z_i, Z_j) = \sqrt{t_i/t_j} \;\; \forall 1 \leq i \leq j \leq K.
 \end{equation}
-To learn this covariance/correlation better, let us take the continuous outcome as an example. 
+To learn this covariance/correlation better, let us take the continuous outcome as an example.
 Suppose there are $K$ looks in a clinical trial, and at the $k$-th look, there are $n_k$ available observations with outcome $\{ X_i \}_{i = 1, \ldots, n_k}$.
-In this example, we have 
-\begin{eqnarray} 
-  B_k 
-  & = & 
-  \sqrt{t_k} Z_k 
-  = 
-  \sqrt{\mathcal I_k / \mathcal I_K} \frac{\widehat\theta_k}{\sqrt{Var(\widehat\theta_k)}} 
+In this example, we have
+\begin{eqnarray}
+  B_k
+  & = &
+  \sqrt{t_k} Z_k
+  =
+  \sqrt{\mathcal I_k / \mathcal I_K} \frac{\widehat\theta_k}{\sqrt{Var(\widehat\theta_k)}}
   =
   \mathcal I_k\sqrt{ 1 / \mathcal I_K}  \widehat\theta_k \\
   & = &
   \mathcal I_k\sqrt{ 1 / \mathcal I_K}  \frac{\sum_{i=1}^{n_k} X_i}{n_k}
   =
-  \frac{\sum_{i=1}^{n_k} X_i}{\sqrt{I_K}} 
+  \frac{\sum_{i=1}^{n_k} X_i}{\sqrt{I_K}}
   =
   \frac{\sum_{i=1}^{n_k} X_i}{\sqrt{N}}.
 \end{eqnarray}
@@ -207,28 +202,27 @@ $$
 independent of $B_1, B_2, \ldots, B_i$.
 So we have
 \begin{eqnarray}
-  Corr(B_i, B_j) 
-  & = & 
+  Corr(B_i, B_j)
+  & = &
   Cov(B_i, B_j) \bigg / \sqrt{Var(B_i) Var(B_j)} \\
   & = &
   t_i \bigg / \sqrt{t_i t_j} = \sqrt{t_i / t_j}   \\
-  & = & 
+  & = &
   Cov(Z_i, Z_j)
 \end{eqnarray}
 
+### Extended canonical form {#sec:EcfEcf}
 
-### Extended Canonical Form {#sec:EcfEcf}
-
-The main difference between extended canonical form (ECF) and canonical form (CF) is that, ECF treats $E(\widehat\theta_k)$ as a time-varying parameter, i.e., $\theta(t_k)$. 
+The main difference between extended canonical form (ECF) and canonical form (CF) is that, ECF treats $E(\widehat\theta_k)$ as a time-varying parameter, i.e., $\theta(t_k)$.
 While CF treats it as a constant $\theta$.
 So we summarize the joint distribution of Z-process and B-process under ECF as follows
 
 ::: {.theorem #ThmZprocessDistCF}
-Suppose in a group sequential design, there are totally $K$ looks. 
-At the $k$-th look, there are $n_k$ available observations, i.e., $\{X_i\}_{i = 1, \ldots, n_k}$. 
+Suppose in a group sequential design, there are totally $K$ looks.
+At the $k$-th look, there are $n_k$ available observations, i.e., $\{X_i\}_{i = 1, \ldots, n_k}$.
 Assume that $\text{Var}(X_i) = 1$ for $i = 1, 2, \ldots, N$.
 And denote $\mathcal I_k \triangleq \frac{1}{\text{Var}(\widehat\theta(t_k))}$ and $E(\widehat\theta_k) = \theta(t_k)$.
-The joint distribution of Z-process $\{Z_k\}_{k = 1, \ldots, K}$ is 
+The joint distribution of Z-process $\{Z_k\}_{k = 1, \ldots, K}$ is
 $$
 \left\{
 \begin{array}{l}
@@ -257,7 +251,6 @@ If a statistics have the above distribution, we declare that it has the canonica
 ```{r, include=FALSE}
 # General multivariate normal theory and bound derivation from Yilong's WLR chapter.
 ```
-
 
 ## Spending function bounds {#sf}
 
@@ -325,6 +318,7 @@ where $c_P(K)$ is fixed given the number of total looks $K$ and chosen such that
 ```{r, echo=FALSE, fig.cap="Pocock boundary",out.width = '50%'}
 knitr::include_graphics("images/background_SF_Pocock_boundary.png")
 ```
+
 Here is an example of Pocock boundary.
 
 |total number of looks(K)| $\alpha = 0.01$ | $\alpha = 0.05$ | $\alpha = 0.1$ |
@@ -336,7 +330,6 @@ Here is an example of Pocock boundary.
 |$\infty$|$\infty$|$\infty$|$\infty$|
 
 We will reject $H_0$ if $|Z(k/4)| > 2.361$ for $k = 1,2,3,4$ (final analysis).
-
 
 In summary, the Pocock boundary is a special case of Wang-Tsiatis boundary ($\Delta = 0.5$) and has constant Z-score boundaries, i.e., $|Z(k/K)| > c_P(K)$.
 And the constant boundary $c_P(K)$ is decided by the type I error rate and the total number of looks.
@@ -386,8 +379,8 @@ knitr::include_graphics("images/background_SF_OF_P_t.png")
 
 The second difference is that, they have different performance in cumulative type I error rate (the probability of rejection at or before $t_j$, i.e., $\text{Pr}(\cup_{i=1}^j |Z(t_i)| > c_i)$).
 
-  - The Pocock cumulative type I error rate increases sharply at first, but much less so toward the end.
-  - The O'Brien-Fleming behaves in just the opposite way.
+- The Pocock cumulative type I error rate increases sharply at first, but much less so toward the end.
+- The O'Brien-Fleming behaves in just the opposite way.
 
 ```{r, echo=FALSE, fig.cap="Cumulative type I error rate used by the Pocock (circles) and O'Brien-Fleming (squares) procedures with four looks.",out.width = '50%'}
 knitr::include_graphics("images/background_SF_cumType1_t.png")
@@ -460,4 +453,3 @@ Comparing survival outcome and continuous/binary outcome, we found the informati
 
 If there are multiple interim analysis at $\tau_1$-th, $\tau_2$-th, $\ldots$, $\tau_K$-th month, we get a sequence of information as $I(\tau_1), I(\tau_2), \ldots, I(\tau_K)$ and a sequence of information fraction $t_1, t_2, \ldots, t_K$.
 Please note that, the information sequence is sometimes simplified as $I_1, I_2, \ldots, I_K$ [@JTBook].
-

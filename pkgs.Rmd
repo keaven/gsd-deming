@@ -7,33 +7,33 @@ Below is the Github repo link to the source code
 - `gsDesign2`: <https://github.com/Merck/gsDesign2>
 - `gsdmvn`: <https://github.com/Merck/gsdmvn>
 
-## `simtrial` 
+## `simtrial`
 
 The R package `simtrial` targets on time-to-event trial simulation under the piecewise model.
 It uses logrank and weighted logrank for analysis.
-It can simulates both fixed and group sequential design, also potential to simulate adaptive design.
-Its validation near completion (thanks to AP colleagues and Amin Shirazi).
+It can simulate both fixed and group sequential design, also potential to simulate adaptive design.
+Its validation is near completion (thanks to AP colleagues and Amin Shirazi).
 
 In `simtrial`, there are several functions to generate simulated datasets:
 
 - `simfix()`: Simulation of fixed sample size design for time-to-event endpoint
-- `simfix2simPWSurv()`: Conversion of enrollment and failure rates from simfix() to simPWSurv() format
+- `simfix2simPWSurv()`: Conversion of enrollment and failure rates from `simfix()` to `simPWSurv()` format
 - `simPWSurv()`: Simulate a stratified time-to-event outcome randomized trial
 
 There are also functions to cut data for analysis:
 
-- `cutData()`: Cut a Dataset for Analysis at a Specified Date
-- `cutDataAtCount()`: Cut a Dataset for Analysis at a Specified Event Count
-- `getCutDateForCount()`: Get Date at Which an Event Count is Reached
+- `cutData()`: Cut a dataset for analysis at a specified date
+- `cutDataAtCount()`: Cut a dataset for analysis at a specified event count
+- `getCutDateForCount()`: Get date at which an event count is reached
 
 Most importantly, there are functions for analysis:
 
-- `tenFH()`: Fleming-Harrington Weighted Logrank Tests
-- `tenFHcorr()`: Fleming-Harrington Weighted Logrank Tests plus Correlations
-- `tensurv()`: Process Survival Data into Counting Process Format
+- `tenFH()`: Fleming-Harrington weighted logrank tests
+- `tenFHcorr()`: Fleming-Harrington weighted logrank tests plus correlations
+- `tensurv()`: Process survival data into counting process format
 - `pMaxCombo()`: MaxCombo p-value
 - `pwexpfit()`: Piecewise exponential survival estimation
-- `wMB()`: Magirr and Burman Modestly Weighted Logrank Tests
+- `wMB()`: Magirr and Burman modestly weighted logrank tests
 
 In `simtrial`, there are reverse engineered datasets:
 
@@ -47,7 +47,7 @@ In `simtrial`, there are reverse engineered datasets:
 
 ## `gsDesign2`
 
-The R package `gsDesigns` has the main functions listed as follows.
+The R package `gsDesign2` has the main functions listed as follows.
 
 - `AHR()`: Average hazard ratio under non-proportional hazards (test version)
 - `eAccrual()`: Piecewise constant expected accrual
@@ -56,28 +56,25 @@ The R package `gsDesigns` has the main functions listed as follows.
 - `s2pwe()`: Approximate survival distribution with piecewise exponential distribution
 - `tEvents()`: Predict time at which a targeted event count is achieved
 
-
 ## `gsdmvn`
 
 The R package `gsdmvn` extends the @JTBook computational model to non-constant treatment effects.
 The bound supports functions include
 
-- `gsb()`: direct input of bounds;
+- `gs_b()`: direct input of bounds;
 - `gs_spending_bound()`: spending function bounds.
-
 
 Besides, it covers three models for analysis.
 
-- average hazard ratio model (see detailed description in Section \@ref(secAhr))
-  + `gs_power_ahr()`: Power computation
-  + `gs_design_ahr()`: Design computations
-- weighted logrank model (see detailed description in Section \@ref(wlr))
-  + `gs_power_wlr()`: Power computation
-  + `gs_design_wlr()`: Design computations 
-- max combo model (see detailed description in Section \@ref(maxcombo))
-  + `gs_power_combo()`: Power computation
-  + `gs_design_combo()`: Design computations
-
+- Average hazard ratio model (see detailed description in Section \@ref(secAhr))
+  - `gs_power_ahr()`: Power computation
+  - `gs_design_ahr()`: Design computations
+- Weighted logrank model (see detailed description in Section \@ref(wlr))
+  - `gs_power_wlr()`: Power computation
+  - `gs_design_wlr()`: Design computations
+- MaxCombo model (see detailed description in Section \@ref(maxcombo))
+  - `gs_power_combo()`: Power computation
+  - `gs_design_combo()`: Design computations
 
 ## Simulation
 
@@ -106,6 +103,7 @@ library(gsDesign)
 library(simtrial)
 library(dplyr)
 library(gsdmvn)
+
 ## Set the enrollment rates
 my_enrollRates <- tibble::tibble(
   Stratum = "All",
@@ -200,8 +198,10 @@ library(gsDesign)
 library(simtrial)
 library(dplyr)
 library(gsdmvn)
+
 load("./data/simulation_gs_power_ahr_my_simfix.Rdata")
 load("./data/simulation_gs_power_ahr_my_gsDesign.Rdata")
+
 ## Set the enrollment rates
 my_enrollRates <- tibble::tibble(
   Stratum = "All",
@@ -278,7 +278,6 @@ my_failRates <- tibble(
   hr = c(1, 0.6),
   dropoutRate = 0.001
 )
-
 
 # Set number of simulations
 my_nsim <- 10

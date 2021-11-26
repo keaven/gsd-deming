@@ -11,18 +11,18 @@ In this chapter, we start to discuss group sequential design for weighted logran
 
 ## Assumptions
 
-For a group sequential design, we assume there are there are total $K$ analyses in a trial.
+For a group sequential design, we assume there are total $K$ analyses in a trial.
 The **calendar** time of the analyses are $t_k, k =1,\dots, K$.
 
 We define the test statistic at analysis $k=1,2,\dots,K$ as
 
 $$Z_k =  \frac{\widehat{\Delta}_k}{\sigma(\widehat{\Delta}_k)}$$
-where $\widehat{\Delta}_k$ is a statistics to characterize group difference and 
+where $\widehat{\Delta}_k$ is a statistics to characterize group difference and
 $\sigma(\widehat{\Delta}_k)$ is the standard deviation of $\widehat{\Delta}_k$.
 
 ### Asymptotic normality
 
-In group sequential design, we considered the test statistics are asymptotic normal.
+In group sequential design, we consider the test statistics are asymptotically normal.
 
 - Under the null hypothesis
 
@@ -108,7 +108,7 @@ x$upper$bound
 
 Given the lower and upper bound of a group sequential design, we can calculate the overall power of the design.
 
-- Power: under an (local) alternative hypothesis, the probability to reject the null hypothesis.
+- Power: under a (local) alternative hypothesis, the probability to reject the null hypothesis.
 
 $$1 - \beta =\sum_{k=1}^{K} u_k = \sum_{k=1}^{K} \text{Pr}(\{Z_k \ge b_k\} \cap_{j=1}^{k-1} \{a_j \le Z_j \le b_j\} \mid H_1)$$
 
@@ -125,14 +125,13 @@ $$\sum_{k=1}^{K} l_k = \sum_{k=1}^{K} \text{Pr}(\{Z_k < a_k\} \cap_{j=1}^{k-1} \
 
 ## Weighted logrank test
 
-Similar to the fixed design, we can define the test statistics for weighted logrank test using counting process formula as 
+Similar to the fixed design, we can define the test statistics for weighted logrank test using counting process formula as
 
 $$ Z_k=\sqrt{\frac{n_{0}+n_{1}}{n_{0}n_{1}}}\int_{0}^{t_k}w(t)\frac{\overline{Y}_{0}(t)\overline{Y}_{1}(t)}{\overline{Y}_{0}(t)+\overline{Y}_{0}(t)}\left\{ \frac{d\overline{N}_{1}(t)}{\overline{Y}_{1}(t)}-\frac{d\overline{N}_{0}(t)}{\overline{Y}_{0}(t)}\right\} $$
 
-Here $n_i$ are number of subjects in group $i$.
-$\overline{Y}_{i}(t)$ are number of subjects in group $i$ at risk at time $t$.
-$\overline{N}_{i}(t)$ are number of events in group $i$ up to and including time $t$.
-
+Here $n_i$ are the number of subjects in group $i$.
+$\overline{Y}_{i}(t)$ are the number of subjects in group $i$ at risk at time $t$.
+$\overline{N}_{i}(t)$ are the number of events in group $i$ up to and including time $t$.
 
 Note, the only difference is that the test statistics fixed analysis up to $t_k$ at $k$th interim analysis
 
@@ -195,8 +194,8 @@ gsdmvn::gs_design_ahr(
   lpar = x$lower$bound,
   analysisTimes = analysisTimes
 )$bounds %>%
-  mutate_if(is.numeric, round, digits = 2) %>% 
-  select(Analysis, Bound, Time, N, Events, AHR, Probability) %>% 
+  mutate_if(is.numeric, round, digits = 2) %>%
+  select(Analysis, Bound, Time, N, Events, AHR, Probability) %>%
   tidyr::pivot_wider(names_from = Bound, values_from = Probability)
 ```
 
@@ -207,7 +206,7 @@ load("simulation/simu_gsd_wlr.Rdata")
 res %>%
   subset(n == 386 & rho == 0 & gamma == 0) %>%
   select(-scenario, -rho, -gamma) %>%
-  mutate_if(is.numeric, round, digits = 2) 
+  mutate_if(is.numeric, round, digits = 2)
 ```
 
 - $FH(0,0)$
@@ -223,8 +222,8 @@ gsdmvn::gs_design_wlr(
   lpar = x$lower$bound,
   analysisTimes = c(12, 24, 36)
 )$bounds %>%
-  mutate_if(is.numeric, round, digits = 2) %>% 
-  select(Analysis, Bound, Time, N, Events, AHR, Probability) %>% 
+  mutate_if(is.numeric, round, digits = 2) %>%
+  select(Analysis, Bound, Time, N, Events, AHR, Probability) %>%
   tidyr::pivot_wider(names_from = Bound, values_from = Probability)
 ```
 
@@ -238,7 +237,7 @@ res %>%
   mutate_if(is.numeric, round, digits = 2)
 ```
 
-## Sample size under modesetly WLR cut at 4 months
+## Sample size under modestly WLR cut at 4 months
 
 - Modestly WLR: $S^{-1}(t\land\tau_m)$ @magirr2019modestly
 
@@ -269,8 +268,8 @@ gsdmvn::gs_design_wlr(
   lpar = x$lower$bound,
   analysisTimes = analysisTimes
 )$bounds %>%
-  mutate_if(is.numeric, round, digits = 2) %>% 
-  select(Analysis, Bound, Time, N, Events, AHR, Probability) %>% 
+  mutate_if(is.numeric, round, digits = 2) %>%
+  select(Analysis, Bound, Time, N, Events, AHR, Probability) %>%
   tidyr::pivot_wider(names_from = Bound, values_from = Probability)
 ```
 
@@ -297,8 +296,8 @@ gsdmvn::gs_design_wlr(
   lpar = x$lower$bound,
   analysisTimes = analysisTimes
 )$bounds %>%
-  mutate_if(is.numeric, round, digits = 2) %>% 
-  select(Analysis, Bound, Time, N, Events, AHR, Probability) %>% 
+  mutate_if(is.numeric, round, digits = 2) %>%
+  select(Analysis, Bound, Time, N, Events, AHR, Probability) %>%
   tidyr::pivot_wider(names_from = Bound, values_from = Probability)
 ```
 
@@ -325,8 +324,8 @@ gsdmvn::gs_design_wlr(
   lpar = x$lower$bound,
   analysisTimes = analysisTimes
 )$bounds %>%
-  mutate_if(is.numeric, round, digits = 2) %>% 
-  select(Analysis, Bound, Time, N, Events, AHR, Probability) %>% 
+  mutate_if(is.numeric, round, digits = 2) %>%
+  select(Analysis, Bound, Time, N, Events, AHR, Probability) %>%
   tidyr::pivot_wider(names_from = Bound, values_from = Probability)
 ```
 
@@ -340,7 +339,7 @@ res %>%
   mutate_if(is.numeric, round, digits = 2)
 ```
 
-## Average hazard ratio comparision
+## Average hazard ratio comparison
 
 The average hazard ratio depends on the weight used in the WLR.
 We illustrate the difference in the figure below.
@@ -351,9 +350,9 @@ knitr::include_graphics("images/g_ahr.png")
 
 Note that average hazard ratio is weighted by corresponding weighted logrank weights.
 
-## Standardized effect size comparision
+## Standardized effect size comparison
 
-Standardized effect size of $FH(0, 0.5)$ is larger than other weight function at 36 Month.
+Standardized effect size of $FH(0, 0.5)$ is larger than other weight function at month 36.
 The reason $FH(0.5, 0.5)$ provides slightly smaller sample size compared with $FH(0, 1)$ and $FH(0, 0.5)$
 is mainly due to smaller weight when variance becomes larger than $FH(0, 1)$ with later events.
 
@@ -361,9 +360,9 @@ is mainly due to smaller weight when variance becomes larger than $FH(0, 1)$ wit
 knitr::include_graphics("images/g_theta.png")
 ```
 
-## Information fraction comparision
+## Information fraction comparison
 
-logrank test information fraction curve is close to linear function of time (the boundary calculation approach we used).
+The logrank test information fraction curve is close to linear function of time (the boundary calculation approach we used).
 Other WLR test information fraction curves are convex functions.
 Information Fraction under null hypothesis is smaller than information fraction under alternative at the same time.
 
@@ -396,7 +395,8 @@ arm0 <- gs_arm[["arm0"]]
 arm1 <- gs_arm[["arm1"]]
 ```
 
-The calculation of power is essentially the multiple integration of multivariate normal distribution, and we implement it into a function `gs_power()` where `mvtnorm::pmvnorm()` is used to take care of the multiple integration. 
+The calculation of power is essentially the multiple integration of multivariate normal distribution, and we implement it into a function `gs_power()` where `mvtnorm::pmvnorm()` is used to take care of the multiple integration.
+
 ```{r}
 #' Power and futility of group sequential design
 #'
@@ -430,7 +430,7 @@ To utilize `gs_power()`, four important blocks are required.
 1. The numerical vector of futility bound for multiple integration.
 1. The numerical vector of efficacy bound for multiple integration.
 
-First, we calculate 
+First, we calculate
 $$
   \Delta_k
   =
@@ -438,9 +438,10 @@ $$
 $$
 where $p_0 = n_0/(n_0 + n_1), p_1 = n_1/(n_0 + n_1)$ are the randomization ratio of the control and treatment arm, respectively.
 $\pi_0(t) = E(N_0(t)), \pi_1(t) = E(N_1(t))$ are the expected number of failures of the control and treatment arm, respectively.
-$\pi(t) = p_0 \pi_0(t) + p_1 \pi_1(t)$ is the probability of events. 
+$\pi(t) = p_0 \pi_0(t) + p_1 \pi_1(t)$ is the probability of events.
 $\lambda_0(t), \lambda_1(t)$ are hazard functions.
 The detailed calculation of $\Delta_k$ is implemented in `gsdmvn:::gs_delta_wlr()`:
+
 ```{r}
 delta <- abs(sapply(analysisTimes, function(x) {
   gsdmvn:::gs_delta_wlr(arm0, arm1, tmax = x, weight = weight)
@@ -448,10 +449,11 @@ delta <- abs(sapply(analysisTimes, function(x) {
 delta
 ```
 
-Second, we calculate 
+Second, we calculate
 $$\sigma_k^{2}=\int_{0}^{t_k}w(s)^{2}\frac{p_{0}\pi_{0}(s)p_{1}\pi_{1}(s)}{\pi(s)^{2}}dv(s), $$
 where $v(t)= p_0 E(Y_0(t)) + p_1 E(Y_1(t))$ is the probability of people at risk.
 The detailed calculation of $\sigma_k^{2}$ is implemented in `gsdmvn:::gs_sigma2_wlr()`:
+
 ```{r}
 sigma2 <- abs(sapply(analysisTimes, function(x) {
   gsdmvn:::gs_sigma2_wlr(arm0, arm1, tmax = x, weight = weight)
@@ -460,14 +462,16 @@ sigma2
 ```
 
 Third, we calculate the sample size ratio at each interim analysis can be calculated by
+
 ```{r}
 # Group sequential sample size ratio over time
 gs_n_ratio <- (npsurvSS::paccr(analysisTimes, arm0) +
-                 npsurvSS::paccr(analysisTimes, arm1)) / 2
+  npsurvSS::paccr(analysisTimes, arm1)) / 2
 gs_n_ratio
 ```
 
-After getting $\Delta_k$, $\sigma_k^{2}$ and the sample size ratio, one can calculate the expectation mean of Z statistics as 
+After getting $\Delta_k$, $\sigma_k^{2}$ and the sample size ratio, one can calculate the expectation mean of Z statistics as
+
 ```{r}
 n <- 500 # Assume a sample size to get power
 delta / sqrt(sigma2) * sqrt(gs_n_ratio * n)
@@ -480,28 +484,30 @@ corr <- outer(sqrt(sigma2), sqrt(sigma2), function(x, y) pmin(x, y) / pmax(x, y)
 corr
 ```
 
-Finally, for numerical vector of futility and bound, they are simply 
+Finally, for numerical vector of futility and bound, they are simply
+
 ```{r}
 x$lower$bound
 x$upper$bound
 ```
+
 ### Power and sample size calculation
 
-- **Power** 
+- **Power**
 
-With all blocks prepared, one can calculate the power 
+With all blocks prepared, one can calculate the power
 $$
-  1 -\beta 
+  1 -\beta
   =
   \sum_{k=1}^{K} u_k = \sum_{k=1}^{K} \text{Pr}(\{Z_k \ge b_k\} \cap_{j=1}^{k-1} \{a_j \le Z_j \le b_j\})
 $$
 by
-```{r}
 
+```{r}
 cumsum(gs_power(
   delta / sqrt(sigma2) * sqrt(gs_n_ratio * n),
-  corr, 
-  x$lower$bound, 
+  corr,
+  x$lower$bound,
   x$upper$bound
 ))
 ```
@@ -512,10 +518,11 @@ One can also calculate the type I error by
 
 ```{r}
 cumsum(gs_power(
-  rep(0, length(delta)), 
-  corr, 
-  rep(-Inf, length(delta)), 
-  x$upper$bound))
+  rep(0, length(delta)),
+  corr,
+  rep(-Inf, length(delta)),
+  x$upper$bound
+))
 ```
 
 - **Futility probability**
@@ -524,6 +531,7 @@ Similarly, we can calculate the futility probability
 
 $$\sum_{k=1}^{K} l_k = \sum_{k=1}^{K} \text{Pr}(\{Z_k < a_k\} \cap_{j=1}^{k-1} \{a_j \le Z_j \le b_j\})$$
 by
+
 ```{r}
 #' @rdname power_futility
 gs_futility <- function(z, corr, futility_bound, efficacy_bound) {
@@ -552,7 +560,7 @@ cumsum(gs_futility(
 
 - **Sample size**
 
-In additional to power and futility probability, one can also calculate the sample size by 
+In additional to power and futility probability, one can also calculate the sample size by
 
 ```{r}
 efficacy_bound <- x$upper$bound
@@ -577,7 +585,8 @@ n_subject * gs_n_ratio
 
 - **Number of events**
 
-With the sample size available, one can calculate the number of events by 
+With the sample size available, one can calculate the number of events by
+
 ```{r}
 n0 <- n1 <- n_subject / 2
 gsdmvn:::prob_event.arm(arm0, tmax = analysisTimes) * n0 +
@@ -586,7 +595,7 @@ gsdmvn:::prob_event.arm(arm0, tmax = analysisTimes) * n0 +
 
 - **Average hazard ratio**
 
-The function below implement the connection between $\Delta$ and average hazard ratio using 
+The function below implement the connection between $\Delta$ and average hazard ratio using
 Taylor series expansion.
 
 ```{r}
