@@ -81,7 +81,7 @@
 <code class="sourceCode R"><span class="co"># Randomization Ratio is 1:1</span>
 <span class="va">ratio</span> <span class="op">&lt;-</span> <span class="fl">1</span>
 
-<span class="co"># Type I error (one-sided)</span>
+<span class="co"># Type 1 error (one-sided)</span>
 <span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fl">0.025</span>
 
 <span class="co"># Power (1 - beta)</span>
@@ -376,7 +376,7 @@ It can be skipped for the first read of this training material.</p>
   theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">fh_test</span><span class="op">)</span><span class="op">)</span>, <span class="co"># Under the null hypothesis</span>
   corr <span class="op">=</span> <span class="va">utility</span><span class="op">$</span><span class="va">corr</span> <span class="co"># Correlation</span>
 <span class="op">)</span><span class="op">$</span><span class="va">upper</span></code></pre></div>
-<pre><code>#&gt; [1] 6.175397 2.798651 2.097073</code></pre>
+<pre><code>#&gt; [1] 6.175397 2.798651 2.097833</code></pre>
 <ul>
 <li>Compared with upper bound calculated from <code>gsDesign</code>
 </li>
@@ -449,7 +449,7 @@ It can be skipped for the first read of this training material.</p>
 <span class="op">)</span>
 
 <span class="va">bound</span><span class="op">$</span><span class="va">lower</span></code></pre></div>
-<pre><code>#&gt; [1] -2.6106678  0.9619422  2.0968804</code></pre>
+<pre><code>#&gt; [1] -2.6106678  0.9619422  2.0977086</code></pre>
 <ul>
 <li>Compared with lower bound calculated from <code>gsDesign</code>
 </li>
@@ -475,7 +475,7 @@ It can be skipped for the first read of this training material.</p>
 <pre><code>#&gt;      upper      lower
 #&gt; 1 6.175397 -2.6106678
 #&gt; 2 2.798651  0.9619422
-#&gt; 3 2.096880  2.0968804</code></pre>
+#&gt; 3 2.097709  2.0977086</code></pre>
 <div class="sourceCode" id="cb334"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_design_combo.html">gs_design_combo</a></span><span class="op">(</span><span class="va">enrollRates</span>,
   <span class="va">failRates</span>,
@@ -487,13 +487,13 @@ It can be skipped for the first read of this training material.</p>
   upar <span class="op">=</span> <span class="va">bound</span><span class="op">$</span><span class="va">upper</span>,
   lpar <span class="op">=</span> <span class="va">bound</span><span class="op">$</span><span class="va">lower</span>,
 <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_if</a></span><span class="op">(</span><span class="va">is.numeric</span>, <span class="va">round</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt;   Analysis Bound Time     N Events     Z Probability Probability_Null
-#&gt; 1        1 Upper   12 324.9  69.78  6.18        0.00             0.00
-#&gt; 3        2 Upper   24 324.9 160.03  2.80        0.24             0.00
-#&gt; 5        3 Upper   36 324.9 215.27  2.10        0.80             0.03
-#&gt; 2        1 Lower   12 324.9  69.78 -2.61        0.00               NA
-#&gt; 4        2 Lower   24 324.9 160.03  0.96        0.13               NA
-#&gt; 6        3 Lower   36 324.9 215.27  2.10        0.20               NA</code></pre>
+<pre><code>#&gt;   Analysis Bound Time      N Events     Z Probability Probability_Null
+#&gt; 1        1 Upper   12 325.01  69.81  6.18        0.00             0.00
+#&gt; 3        2 Upper   24 325.01 160.09  2.80        0.24             0.00
+#&gt; 5        3 Upper   36 325.01 215.35  2.10        0.80             0.02
+#&gt; 2        1 Lower   12 325.01  69.81 -2.61        0.00               NA
+#&gt; 4        2 Lower   24 325.01 160.09  0.96        0.13               NA
+#&gt; 6        3 Lower   36 325.01 215.35  2.10        0.20               NA</code></pre>
 </div>
 <div id="update-bound-based-on-newly-calculated-sample-size" class="section level3">
 <h3>
@@ -512,7 +512,7 @@ It can be skipped for the first read of this training material.</p>
 <pre><code>#&gt;      upper      lower
 #&gt; 1 6.175397 -2.6568642
 #&gt; 2 2.798651  0.8266125
-#&gt; 3 2.097477  2.0974775</code></pre>
+#&gt; 3 2.097341  2.0973409</code></pre>
 <ul>
 <li>Repeat proceduce above until the sample size and lower bound converge</li>
 </ul>
