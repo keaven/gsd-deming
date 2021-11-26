@@ -15,11 +15,9 @@ fig:unnamed-chunk-14
 fig:unnamed-chunk-15
 fig:unnamed-chunk-16
 eq:AhrLambdaGamma
-eq:AhrRateEstimation
 eq:AhrIndividualHazardRateDist
 eq:AhrSingleHazardRatioDef
 eq:AhrSignleLogHazardRatio
-eq:AhrLikelihoodBetaGamma
 eq:AhrBetaEstimation
 training-overview
 software-and-supporting-materials
@@ -51,8 +49,6 @@ updating-calendar-based-spending-bounds-at-analysis
 ahr
 piecewise-model
 secAhr
-secAhrMLE
-secAhrWeightedSum
 pkgs
 simtrial
 gsdesign2

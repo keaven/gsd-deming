@@ -72,8 +72,10 @@ Others tests will be considered in Chapter <a href="overview-other-tests.html#ov
 <h2>
 <span class="header-section-number">3.1</span> Piecewise model<a class="anchor" aria-label="anchor" href="#piecewise-model"><i class="fas fa-link"></i></a>
 </h2>
-<p>To model the time-varying hazard ratio, AHR commonly assumes that the hazard ratio is piecewise constant.
-Suppose the piecewise constant changes at the change points <span class="math inline">\(0 = t_0 &lt; t_1 &lt; \cdots &lt; t_M \le \infty\)</span>, and for each individual interval <span class="math inline">\((t_{m-1}, t_m]\)</span> for <span class="math inline">\(m = 1, \ldots, M\)</span>, the hazard ratio is a constant <span class="math inline">\(HR_m\)</span> (experimental: control) , i.e.,
+<p>To model a time-varying hazard ratio, we consider a model where failure rates for experimental and control groups are piecewise constant.
+Since this model can use arbitrarily small piecewise intervals, this is not really a restriction.
+In concept, this is an extension of the piecewise proportional hazards model of <span class="citation">Lachin and Foulkes (<a href="references.html#ref-LachinFoulkes" role="doc-biblioref">1986</a><a href="references.html#ref-LachinFoulkes" role="doc-biblioref">a</a>)</span>.
+Suppose the piecewise constant changes at the change points <span class="math inline">\(0 = t_0 &lt; t_1 &lt; \cdots &lt; t_M \le \infty\)</span>, and for each individual interval <span class="math inline">\((t_{m-1}, t_m]\)</span> for <span class="math inline">\(m = 1, \ldots, M\)</span>, the hazard ratio is a constant <span class="math inline">\(HR_m\)</span> (experimental:control) , i.e.,
 <span class="math display">\[
   \text{hazard ratio}
   =
@@ -90,71 +92,17 @@ For any <span class="math inline">\(m = 1, \ldots, M\)</span>,
 <span class="math display">\[
   HR_m = \lambda_{1,m} / \lambda_{0,m},
 \]</span>
-where the subscript <span class="math inline">\(i\)</span> indexes the group, i.e., <span class="math inline">\(i = 0\)</span> for control arm and <span class="math inline">\(i=1\)</span> for treatment arm.
-From the assumption of the piecewise AHR model, we know the <span class="math inline">\(\lambda_{i,m}\)</span> is a constant in <span class="math inline">\((t_{m-1}, t_m]\)</span>.
-Its likelihood is
-<span class="math display">\[
-  L(\lambda_{i,m})
-  =
-  \exp(-\lambda_{i,m}T_{i,m})\;
-  \lambda_{i,m}^{d_{i,m}},
-\]</span>
-where <span class="math inline">\(d_{i,m}\)</span> is the number of observed events in <span class="math inline">\((t_{m-1}, t_m]\)</span> and <span class="math inline">\(T_{i,m}\)</span> is the follow-up time (total time on test) in in <span class="math inline">\((t_{m-1}, t_m]\)</span>.
-If we denote
+where the subscript <span class="math inline">\(i\)</span> indexes the treatment group with <span class="math inline">\(i = 0\)</span> for control arm and <span class="math inline">\(i=1\)</span> for treatment arm.
+As in <span class="citation">Lachin and Foulkes (<a href="references.html#ref-LachinFoulkes" role="doc-biblioref">1986</a><a href="references.html#ref-LachinFoulkes" role="doc-biblioref">a</a>)</span>, we will also assume an exponential dropout rate <span class="math inline">\(\eta_{i,m}\)</span> for treatment arm <span class="math inline">\(i=0,1, m=1,\ldots,M\)</span>.
+While not necessary, in software implementation in the <strong>gsDesign2</strong> and <strong>gsdmvn</strong> packages we simplified to <span class="math inline">\(\eta_{0,m}=\eta_{1,m}=\eta_m, m=1,\ldots,M\)</span>.</p>
+<p>We will denote
 <span class="math display" id="eq:AhrLambdaGamma">\[\begin{equation}
    \tag{3.1}
-   \lambda_{i,m} = e^{\gamma_{i, m}},
-\end{equation}\]</span>
-the above likelihood function of <span class="math inline">\(\lambda_{i,m}\)</span> can be re-written into the likelihood function of <span class="math inline">\(\gamma_{i, m}\)</span>, i.e.,
-<span class="math display">\[
-  L(\gamma_{i,m})
-  =
-  \exp(-e^{\gamma_{i,m}}T_{i,m})\;
-  e^{\gamma_{i,m}d_{i,m}}.
-\]</span>
-This leads to a log-likelihood:
-<span class="math display">\[
-  \ell(\gamma_{i,m})
-  \triangleq
-  \log\left( L(\gamma_{i,m}) \right)
-  =
-  -e^{\gamma_{i,m}}T_{i,m}
-  +
-  \gamma_{i,m}d_{i,m}.
-\]</span>
-By setting its first derivative with respect to <span class="math inline">\(\gamma_{i,m}\)</span> as zero,
-<span class="math display">\[
-  \frac{\partial}{\partial \gamma_{i,m}}
-  \ell(\gamma_{i,m})
-  =
-  -e^{\gamma_{i,m}}T_{i,m} + d_{i,m}
-  =
-  0
-\]</span>
-one gets its maximum likelihood estimation as
-<span class="math display" id="eq:AhrRateEstimation">\[\begin{equation}
-  \tag{3.2}
-  \hat\gamma_{i,m}
-  =
-  \log(d_{i,m}/T_{i,m}).
-\end{equation}\]</span>
-By taking the second derivative of <span class="math inline">\(\ell(\gamma_{i,m})\)</span>, one gets the variance of <span class="math inline">\(\hat\gamma_{i,m}\)</span> as
-<span class="math display">\[
-  \widehat{\hbox{Var}(\hat\gamma_{i,m})}
-  =
-  \left(
-    -\frac{\partial^2}{\partial \gamma_{i,m}^2} \ell(\hat\gamma_{i,m})
-  \right)^{-1}
-  =
-  \left(
-    e^{\hat\gamma_{i,m}}T_{i,m}
-  \right)^{-1}
-  =
-  \frac{1}{d_{i,m}}.
-\]</span></p>
-<p>By using the delta method (see details in <a href="https://web.stanford.edu/~lutian/stat331.HTML">Dr. Lu Tian’s slides</a>), we get the asymptotic distribution of <span class="math inline">\(\widehat\lambda_{i,m}\)</span> as
+   \lambda_{i,m} = e^{\gamma_{i, m}}.
+\end{equation}\]</span></p>
+<p>By using the delta method, we get the asymptotic distribution of <span class="math inline">\(\widehat\lambda_{i,m}\)</span> as
 <span class="math display" id="eq:AhrIndividualHazardRateDist">\[\begin{equation}
-  \tag{3.3}
+  \tag{3.2}
   \log(\widehat\lambda_{i,m})
   \overset{\cdot}{\sim}
   \text{Normal}
@@ -168,7 +116,7 @@ By taking the second derivative of <span class="math inline">\(\ell(\gamma_{i,m}
 In this chapter, we are interested in the logarithm of <span class="math inline">\(HR_m\)</span> and denote it as <span class="math inline">\(\beta_m\)</span>.
 Recall that
 <span class="math display" id="eq:AhrSingleHazardRatioDef">\[\begin{equation}
-  \tag{3.4}
+  \tag{3.3}
   \beta_m
   \triangleq
   \log(HR_m)
@@ -177,14 +125,14 @@ Recall that
   =
   \log(\lambda_{1,m}) - \log(\lambda_{0,m}).
 \end{equation}\]</span>
-For both <span class="math inline">\(\lambda_{1,m}\)</span> and <span class="math inline">\(\lambda_{0,m}\)</span> above, by equation <a href="ahr.html#eq:AhrRateEstimation">(3.2)</a>, we know they can be estimated by
+For both <span class="math inline">\(\lambda_{1,m}\)</span> and <span class="math inline">\(\lambda_{0,m}\)</span> above, by equation <a href="#eq:AhrRateEstimation">(<strong>??</strong>)</a>, we know they can be estimated by
 <span class="math display">\[
   \widehat\lambda_{i,m} = \frac{d_{i,m}}{T_{i, m}} \;\; i \in\{0, 1\}
 \]</span>
 where <span class="math inline">\(d_{0,m}, d_{1,m}\)</span> are number of events in <span class="math inline">\((t_{m-1}, t_m]\)</span> for group <span class="math inline">\(0,1\)</span>, respectively.</p>
-<p>By plugging the asymptotic distribution of <span class="math inline">\(\{\lambda_{0, m}, \lambda_{1,m}\}\)</span> in equation <a href="ahr.html#eq:AhrIndividualHazardRateDist">(3.3)</a> into <a href="ahr.html#eq:AhrSingleHazardRatioDef">(3.4)</a>, we can derive the asymptotic distribution of <span class="math inline">\(\beta_m\)</span>:
+<p>By plugging the asymptotic distribution of <span class="math inline">\(\{\lambda_{0, m}, \lambda_{1,m}\}\)</span> in equation <a href="ahr.html#eq:AhrIndividualHazardRateDist">(3.2)</a> into <a href="ahr.html#eq:AhrSingleHazardRatioDef">(3.3)</a>, we can derive the asymptotic distribution of <span class="math inline">\(\beta_m\)</span>:
 <span class="math display" id="eq:AhrSignleLogHazardRatio">\[\begin{equation}
-  \tag{3.5}
+  \tag{3.4}
   \widehat\beta_m
   \overset{\cdot}{\sim}
   \text{Normal}
@@ -199,108 +147,36 @@ where <span class="math inline">\(d_{0,m}, d_{1,m}\)</span> are number of events
 <h2>
 <span class="header-section-number">3.2</span> Average hazard ratio<a class="anchor" aria-label="anchor" href="#secAhr"><i class="fas fa-link"></i></a>
 </h2>
-<p>In this section, we discuss the estimation of AHR.
-Generally speaking, there are two estimations of AHR.
-One is the maximal likelihood estimation (MLE) under standard proportional hazards assumption, and the other utilizes the weighted summation of individual hazard ratio to approximate AHR.
-We introduce both of two estimations, with Section <a href="ahr.html#secAhrMLE">3.2.1</a> introducing MLE and Section <a href="ahr.html#secAhrWeightedSum">3.2.2</a> introducing weighted summation estimation.</p>
-<div id="secAhrMLE" class="section level3">
-<h3>
-<span class="header-section-number">3.2.1</span> MLE of AHR<a class="anchor" aria-label="anchor" href="#secAhrMLE"><i class="fas fa-link"></i></a>
-</h3>
-<p>If we set <span class="math inline">\(\beta_1 = \beta_2 = \ldots = \beta_m = \beta\)</span> in equation <a href="ahr.html#eq:AhrSingleHazardRatioDef">(3.4)</a>, it implies that
-<span class="math display">\[
-  \left\{
-  \begin{array}{ccl}
-  \lambda_{0,m} &amp;=&amp; \exp(\gamma_m) \\
-  \lambda_{1,m} &amp;=&amp; \exp(\gamma_m + \beta)
-  \end{array}
-  \right.,
-\]</span>
-where <span class="math inline">\(\gamma_m\)</span> is defined in equation <a href="ahr.html#eq:AhrLambdaGamma">(3.1)</a>.
-The above equation reduce the unknown parameter from <span class="math inline">\(\left\{\beta \cup \{ \lambda_{0,m}, \lambda_{1,m}, \gamma_m,\}_{m = 1, \ldots, M} \right\}\)</span> into <span class="math inline">\(\left\{\beta \cup \{\gamma_m,\}_{m = 1, \ldots, M} \right\}\)</span>.
-In the remaining of this section, we target on the estimation of parameters <span class="math inline">\(\left\{\beta \cup \{\gamma_m \}_{m = 1, \ldots, M} \right\}\)</span>.</p>
-<p>The log-likelihood of parameters <span class="math inline">\(\left\{\beta \cup \{\gamma_m,\}_{m = 1, \ldots, M} \right\}\)</span> is
-<span class="math display" id="eq:AhrLikelihoodBetaGamma">\[\begin{equation}
-  \tag{3.6}
-  \ell(\beta,{\gamma_1,\cdots,\gamma_M})
-  =
-  \sum_{m=1}^M
-  \left(
-    -e^{\gamma_m}(T_{0,m}+e^\beta T_{1,m}) + \gamma_m(d_{0,m} + d_{1,m}) +d_{1,m}\beta
-  \right).
-\end{equation}\]</span>
-By taking the first partial derivatives with respect to <span class="math inline">\(\gamma_m\)</span> and set it as <span class="math inline">\(0\)</span>, one has
-<span class="math display">\[
-  \begin{array}{cl}
-    &amp;
-    \frac{\partial}{\partial\gamma_m}
-    \ell(\beta,{\gamma_1,\ldots,\gamma_M})
-    =
-    -e^{\gamma_m}
-    (T_{0,m}+T_{1,m}e^\beta)
-    +
-    d_{0,m}
-    +
-    d_{1,m}
-    =0 \\
-    \Rightarrow &amp;
-    e^{\gamma_m}= \frac{d_{0,m}+d_{1,m}}{T_{0,m}+T_{1,m}e^\beta}.
-  \end{array}
-\]</span>
-By plugging the above equation into equation <a href="ahr.html#eq:AhrLikelihoodBetaGamma">(3.6)</a>, we can re-write our log-likelihood as only a function of the parameter <span class="math inline">\(\beta\)</span> as follows:
-<span class="math display">\[
-  \ell(\beta)
-  =
-  \sum_{m=1}^M(d_{0,m}+d_{1,m})\left(\log(d_{0,m}+d_{1,m})-\log(T_{0,m}+T_{1,m}e^\beta)-1\right) +d_{1,m}\beta,
-\]</span>
-with first and second partial derivatives as
-<span class="math display">\[
-  \begin{array}{rcl}
-  \frac{\partial}{\partial\beta}\ell(\beta)
-  &amp; = &amp;
-  \sum_{m=1}^M
-  \left(
-    -\frac{(d_{0,m}+d_{1,m})T_{1,m}e^\beta}{T_{0,m}+T_{1,m}e^\beta} + d_{1,m}
-  \right), \\
-  \frac{\partial^2}{\partial\beta^2}\ell(\beta)
-  &amp; = &amp;
-  -\sum_{m=1}^M
-  \frac{(d_{0,m}+d_{1,m})T_{1,m}e^\beta(T_{0,m}+T_{1,m}e^\beta)-
-(T_{1,m}e^\beta)^2(d_{0,m}+d_{1,m})}{(T_{0,m}+T_{1,m}e^\beta)^2}\\
-  &amp; = &amp;
-  \sum_{m=1}^M
-  \left(
-    \frac{(T_{1,m}e^\beta)^2(d_{0,m}+d_{1,m})}{(T_{0,m}+T_{1,m}e^\beta)^2}
-    -
-    \frac{(d_{0,m}+d_{1,m})T_{1,m}e^\beta}{T_{0,m}+T_{1,m}e^\beta}
-  \right).
-  \end{array}
-\]</span>
-With these, it should be straightforward to apply a Newton-Raphson iteration to get a maximum likelihood estimate of <span class="math inline">\(\beta\)</span> and we denote it as <span class="math inline">\(\widehat\beta_{MLE}\)</span>.</p>
-</div>
-<div id="secAhrWeightedSum" class="section level3">
-<h3>
-<span class="header-section-number">3.2.2</span> Commonly used estimation of AHR<a class="anchor" aria-label="anchor" href="#secAhrWeightedSum"><i class="fas fa-link"></i></a>
-</h3>
-<p>We can also define the logarithm of AHR as a weighted summation of the individual logarithm hazard ratio <span class="math inline">\(\{\beta_m\}_{m = 1, \ldots, M}\)</span>, i.e.,
+<p>In this section, we define the the average hazard ratio (AHR) and use it to derive the asymptotic normal distribution of the logrank test.
+This is actually a weighted geometric mean of the hazard ratio in piecewise intervals we defined above.
+Defining <span class="math inline">\(\beta_m=\log(\lambda_{1,m}/\lambda_{0,m})= \log(\lambda_{1,m})-\log(\lambda_{0,m}), m=1,\ldots,M\)</span>, we define the logarithm of AHR as a weighted sum of the individual log hazard ratios:
 <span class="math display">\[
   \beta
   =
-  \sum_{m=1}^M w_m \beta_m,
+  \sum_{m=1}^M w_m \log(HR_m)=\sum_{m=1}^M w_m \beta_m=\sum_{m=1}^Mw_m(\log(\lambda_{1,m})-\log(\lambda_{0,m})).
 \]</span>
-We propose to estimate <span class="math inline">\(\beta\)</span> as a solution to maximize the likelihood under the proportional hazards model.
-This is actually a geometric weighted mean of the hazard ratio as defined from the full (NPH) piecewise log-hazard ratio estimates:
+For <span class="math inline">\(w_m\)</span> we propose inverse variance weighting which is based on expected number of events expected in each treatment group in <span class="math inline">\((t_{m-1},t_m],\)</span> <span class="math inline">\(m=1,\ldots,M\)</span>.
+We denote <span class="math inline">\(d_{i,m}, T_{i,m},\)</span> <span class="math inline">\(i=0,1,\)</span> <span class="math inline">\(m=1,\ldots,M\)</span> the observed events and total time at risk in treatment group <span class="math inline">\(i\)</span> during period <span class="math inline">\((t_{m-1},t_m]\)</span>.
+Thus, for <span class="math inline">\(m=1,\ldots,M\)</span> we have</p>
+<p><span class="math display">\[w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,j}))^{-1}}.\]</span>
+The corresponding estimate of <span class="math inline">\(\log(\lambda_{i,m}), i=0,1, m=1,\ldots,M\)</span> is
+<span class="math display">\[\hat{\gamma}_{i,m}=\log\hat\lambda_{i,m} = \log(d_{i,m}/T_{i,m})\]</span>
+which is asymptotically normal with variance
+<span class="math display">\[\text{Var}(\hat\gamma_{i,m})=1/E(d_{i,m})\]</span>
+and variance estimate
+<span class="math display">\[\widehat{\text{Var}}(\hat\gamma_{i,m})=1/d_{i,m}.\]</span>
+We propose to estimate <span class="math inline">\(\beta\)</span> using estimated weights under the piecewise model.
 <span class="math display" id="eq:AhrBetaEstimation">\[\begin{equation}
-  \tag{3.7}
-  \widehat\beta_{WS}
+  \tag{3.5}
+  \tilde\beta
   =
   \sum_{m=1}^M
-  w_m
-  \left(\hat\gamma_{1,m} - \hat\gamma_{0,m}\right).
-\end{equation}\]</span>
-For the selection of weight <span class="math inline">\(\{w_m\}_{m = 1, \ldots, M}\)</span>, we use inverse variance weighting
+  \hat{w}_m
+  \left(\hat\gamma_{1,m} - \hat\gamma_{0,m}\right)
+\end{equation}\]</span></p>
+<p>For the selection of weight <span class="math inline">\(\hat{w}_m,\)</span> <span class="math inline">\(m = 1, \ldots, M\)</span>, we use inverse variance weighting
 <span class="math display">\[
-  w_m
+  \hat{w}_m
   =
   \left.
   \left(
@@ -312,9 +188,9 @@ For the selection of weight <span class="math inline">\(\{w_m\}_{m = 1, \ldots, 
     \frac{1}{1/d_{0,i}+1/d_{1,i}}
   \right)^{-1}.
 \]</span>
-By plugging the above weight into equation <a href="ahr.html#eq:AhrBetaEstimation">(3.7)</a>, <span class="math inline">\(\beta\)</span> can be estimated as
+By plugging the above weights into equation <a href="ahr.html#eq:AhrBetaEstimation">(3.5)</a>, <span class="math inline">\(\beta\)</span> can be estimated as
 <span class="math display">\[
-  \widehat\beta_{WS}
+  \tilde\beta
   =
   \frac{
     \sum_{m=1}^M
@@ -327,379 +203,21 @@ By plugging the above weight into equation <a href="ahr.html#eq:AhrBetaEstimatio
 \]</span>
 The corresponding variance estimate is:
 <span class="math display">\[
-  \widehat{\hbox{Var}(\widehat\beta_{WS})}
+  \widehat{\hbox{Var}}(\tilde\beta)
   =
   \left(\sum_{m=1}^M(1/d_{0,m} + 1/d_{1,m})^{-1}\right)^{-1}.
 \]</span></p>
-<p>By plugging the asymptotic distribution of <span class="math inline">\(\widehat\beta_m\)</span> in equation <a href="ahr.html#eq:AhrSignleLogHazardRatio">(3.5)</a>, one gets the asymptotic distribution of <span class="math inline">\(\widehat\beta_{WS}\)</span> as
-<span class="math display">\[
-  \widehat\beta_{WS}
+<p>By plugging the asymptotic distribution of <span class="math inline">\(\hat\beta_m\)</span> in equation <a href="ahr.html#eq:AhrSignleLogHazardRatio">(3.4)</a>, one gets the asymptotic distribution of <span class="math inline">\(\tilde\beta\)</span> as</p>
+<p><span class="math display">\[
+  \tilde\beta
   \overset{\cdot}{\sim}
   \hbox{Normal}(\beta, \; \mathcal{I}^{-1}),
 \]</span>
-where <span class="math inline">\(\mathcal{I} = \sum_{m = 1}^M \left( \frac{1}{d_{0,m}} + \frac{1}{d_{1,m}} \right)^{-1}\)</span>.</p>
-<p>After reviewing the MLE (see Section <a href="ahr.html#secAhrMLE">3.2.1</a>) and weighted summation estimation (see Section <a href="ahr.html#secAhrWeightedSum">3.2.2</a>) of AHR, we summarize their difference in the following table.</p>
-<div id="incmllgedw" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>html {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
-}
+where <span class="math display">\[\mathcal{I} = \sum_{m = 1}^M \left( \frac{1}{E(d_{0,m})} + \frac{1}{E(d_{1,m})} \right)^{-1}.\]</span></p>
+<p>Not shown here is that this is the asymptotic distribution of the logrank test under the piecewise model which follows by the results of <span class="citation">Schoenfeld (<a href="references.html#ref-Schoenfeld1981" role="doc-biblioref">1981</a>)</span>.
+The details for computing <span class="math inline">\(E(d_{i,m}),\)</span>, <span class="math inline">\(i=0,1\)</span>, <span class="math inline">\(m=1,\ldots,M\)</span> under the piecewise model are demonstrated in a vignette in the <strong>gsDesign2</strong> package.
+These computations form the basis for the asymptotic approximations for power and sample size implemented in the <strong>gsdmvn</strong> package using the functions <code><a href="https://merck.github.io/gsdmvn/reference/gs_power_ahr.html">gsdmvn::gs_power_ahr()</a></code> and <code><a href="https://merck.github.io/gsdmvn/reference/gs_design_ahr.html">gsdmvn::gs_design_ahr()</a></code>.</p>
 
-#incmllgedw .gt_table {
-  display: table;
-  border-collapse: collapse;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#incmllgedw .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#incmllgedw .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#incmllgedw .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 0;
-  padding-bottom: 6px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#incmllgedw .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#incmllgedw .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#incmllgedw .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#incmllgedw .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#incmllgedw .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#incmllgedw .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#incmllgedw .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#incmllgedw .gt_group_heading {
-  padding: 8px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#incmllgedw .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#incmllgedw .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#incmllgedw .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#incmllgedw .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#incmllgedw .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 12px;
-}
-
-#incmllgedw .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#incmllgedw .gt_first_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-}
-
-#incmllgedw .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#incmllgedw .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#incmllgedw .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#incmllgedw .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#incmllgedw .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#incmllgedw .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding: 4px;
-}
-
-#incmllgedw .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#incmllgedw .gt_sourcenote {
-  font-size: 90%;
-  padding: 4px;
-}
-
-#incmllgedw .gt_left {
-  text-align: left;
-}
-
-#incmllgedw .gt_center {
-  text-align: center;
-}
-
-#incmllgedw .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#incmllgedw .gt_font_normal {
-  font-weight: normal;
-}
-
-#incmllgedw .gt_font_bold {
-  font-weight: bold;
-}
-
-#incmllgedw .gt_font_italic {
-  font-style: italic;
-}
-
-#incmllgedw .gt_super {
-  font-size: 65%;
-}
-
-#incmllgedw .gt_footnote_marks {
-  font-style: italic;
-  font-weight: normal;
-  font-size: 65%;
-}
-</style>
-<div class="inline-table"><table class="gt_table">
-<thead class="gt_col_headings"><tr>
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"> </th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">MLE</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Weighted Summation</th>
-    </tr></thead>
-<tbody class="gt_table_body">
-<tr>
-<td class="gt_row gt_left">Idea</td>
-<td class="gt_row gt_left">To maximize the log-likelihood function under standard proportional hazards assumption</td>
-<td class="gt_row gt_left">Sum individual hazard ratios with weights</td>
-</tr>
-<tr>
-<td class="gt_row gt_left">Computation</td>
-<td class="gt_row gt_left">Newton-Raphson iterations are required</td>
-<td class="gt_row gt_left">Closed-form</td>
-</tr>
-</tbody>
-</table></div>
-</div>
-<p>We note that the weighted summation <span class="math inline">\(\widehat\beta_{WS}\)</span> is not a maximum likelihood estimate, but in our experience it provides a good approximation of MLE <span class="math inline">\(\widehat\beta_{ML}\)</span>.</p>
-
-</div>
 </div>
 </div>
   <div class="chapter-nav">
@@ -710,12 +228,7 @@ where <span class="math inline">\(\mathcal{I} = \sum_{m = 1}^M \left( \frac{1}{d
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#ahr"><span class="header-section-number">3</span> Average hazard ratio</a></li>
 <li><a class="nav-link" href="#piecewise-model"><span class="header-section-number">3.1</span> Piecewise model</a></li>
-<li>
-<a class="nav-link" href="#secAhr"><span class="header-section-number">3.2</span> Average hazard ratio</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#secAhrMLE"><span class="header-section-number">3.2.1</span> MLE of AHR</a></li>
-<li><a class="nav-link" href="#secAhrWeightedSum"><span class="header-section-number">3.2.2</span> Commonly used estimation of AHR</a></li>
-</ul>
-</li>
+<li><a class="nav-link" href="#secAhr"><span class="header-section-number">3.2</span> Average hazard ratio</a></li>
 </ul>
 
       <div class="book-extra">
