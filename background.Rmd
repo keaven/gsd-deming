@@ -382,7 +382,7 @@ The second difference is that, they have different performance in cumulative typ
 - The Pocock cumulative type I error rate increases sharply at first, but much less so toward the end.
 - The O'Brien-Fleming behaves in just the opposite way.
 
-```{r, echo=FALSE, fig.cap="Cumulative type 1 error rate used by the Pocock (circles) and O'Brien-Fleming (squares) procedures with four looks.",out.width = '50%'}
+```{r, echo=FALSE, fig.cap="Cumulative type I error rate used by the Pocock (circles) and O'Brien-Fleming (squares) procedures with four looks.",out.width = '50%'}
 knitr::include_graphics("images/background_SF_cumType1_t.png")
 ```
 
@@ -404,7 +404,7 @@ Thus, the treatment effect can be estimated as
 $$
   \widehat\delta(\tau) = \frac{\sum_{i=1}^n (Y_i - X_i)}{n}.
 $$
-For $Y_i - X_i$, we commonly assume that $Y_i - X_i \overset{i.i.d.}{\sim} \text{Normal}(\mu, \sigma^2)$ for any $i = 1, \ldots, n$, with $\mu = 0$ under the null hypothesis and $mu \neq 0$ under the alternative hypothesis.
+For $Y_i - X_i$, we commonly assume that $Y_i - X_i \overset{i.i.d.}{\sim} \text{Normal}(\mu, \sigma^2)$ for any $i = 1, \ldots, n$, with $\mu = 0$ under the null hypothesis and $\mu \neq 0$ under the alternative hypothesis.
 
 The _information_ at the $\tau$-th month is
 $$

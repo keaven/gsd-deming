@@ -36,13 +36,13 @@ failRates <- tibble::tibble(
 ```
 
 ```{r, include=FALSE}
-## Randomization Ratio is 1:1
+# Randomization Ratio is 1:1
 ratio <- 1
 
-## Type 1 error (one-sided)
+# Type I error (one-sided)
 alpha <- 0.025
 
-## Power (1 - beta)
+# Power (1 - beta)
 beta <- 0.2
 power <- 1 - beta
 
