@@ -100,7 +100,7 @@ By using the delta method (see details in [Dr. Lu Tian's slides](https://web.sta
   \forall i \in \{0, 1\}
 \end{equation}
 
-Withe the estimation of $\{\lambda_{i,m}\}_{i=0,1 \text{ and } m = 1, \ldots, M}$, it is not complicated to get the estimation and the asymptotic distribution of $HR_m$, which is defined as $HR_m = \lambda_{1,m}/\lambda_{0,m}$.
+With the estimation of $\{\lambda_{i,m}\}_{i=0,1 \text{ and } m = 1, \ldots, M}$, it is not complicated to get the estimation and the asymptotic distribution of $HR_m$, which is defined as $HR_m = \lambda_{1,m}/\lambda_{0,m}$.
 In this chapter, we are interested in the logarithm of $HR_m$ and denote it as $\beta_m$.
 Recall that
 \begin{equation}

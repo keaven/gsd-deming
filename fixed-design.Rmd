@@ -14,7 +14,7 @@ For fixed design, [`npsurvSS`](https://cran.r-project.org/package=npsurvSS)
 will be the tool for this training.
 :::
 
-The fixed design part is largely follow the concept described in @yung2019sample.
+The fixed design part largely follows the concept described in @yung2019sample.
 
 ## Summary of assumptions
 
@@ -113,7 +113,7 @@ stats::power.t.test(delta = 0.5, sd = 2, sig.level = 0.05, power = 0.8)$n * 2
 Let's also explore the number of events required for logrank test under the proportional hazards assumption.
 
 You may hear the sample size calculation is "event-driven".
-This is a nice feature under the **proportional hazards assumption**. because the effect size for number of events is only depends on the hazard ratio.
+This is a nice feature under the **proportional hazards assumption** because the effect size for number of events is only depends on the hazard ratio.
 
 $$\theta = \log{\text{HR}} / 2$$
 
@@ -143,7 +143,7 @@ For simplicity, we skip the detail of sample size calculation,
 interested readers can refer @lachin1986evaluation.
 :::
 
-Let's make connection between math formula and R code by considering a scenarios with
+Let's make connection between math formula and R code by considering a scenario with
 hazard ratio at 0.6.
 
 ```{r}
@@ -185,8 +185,8 @@ npsurvSS::size_two_arm(arm0, arm1,
 )
 ```
 
-The number of events from `gsDesign::nSurv()` is slighted smaller,
-because, `gsDesign::nSurv()` follows @lachin1986evaluation
+The number of events from `gsDesign::nSurv()` is slightly smaller
+because `gsDesign::nSurv()` follows @lachin1986evaluation
 that relax the local alternative assumption and is recommended in practice.
 
 ```{r}
@@ -228,9 +228,9 @@ knitr::include_graphics("images/ch2_n_to_d.svg")
 The two figures above are copied from @yung2019sample.
 :::
 
-Let's considered a delay effect scenario below to illustrate NPH and sample size calculation.
+Let's consider a delayed effect scenario below to illustrate NPH and sample size calculation.
 
-- Duration of enrollment: 12 month
+- Duration of enrollment: 12 months
 - Enrollment rate: 500/12 per month
 
 ```{r}
@@ -239,10 +239,10 @@ enrollRates
 ```
 
 - Failure rate in control group: `log(2) / 15`
-  + Median survival time: 15 months.
+  - Median survival time: 15 months.
 - Hazard ratio:
-  + First 4 months: 1
-  + After 4 months: 0.6
+  - First 4 months: 1
+  - After 4 months: 0.6
 - Dropout Rate: 0.001
 
 ```{r}
@@ -325,7 +325,7 @@ npsurvSS::size_two_arm(arm0, arm1,
 
 ### Effect size
 
-In Yung and Liu (2019), section 2.3.3, it is shown that， the test statistics $Z\rightarrow_d\mathcal{N}(\sqrt{n}\theta, 1)$ approximately,
+In @yung2019sample, section 2.3.3, it is shown that, the test statistics $Z\rightarrow_d\mathcal{N}(\sqrt{n}\theta, 1)$ approximately,
 where $\theta = \Delta/\sigma$ is the effect size. Here the test statistics for weighted logrank test is:
 
 $$ Z=\sqrt{\frac{n_{0}+n_{1}}{n_{0}n_{1}}}\int_{0}^{\tau}w(t)\frac{\overline{Y}_{0}(t)\overline{Y}_{1}(t)}{\overline{Y}_{0}(t)+\overline{Y}_{0}(t)}\left\{ \frac{d\overline{N}_{1}(t)}{\overline{Y}_{1}(t)}-\frac{d\overline{N}_{0}(t)}{\overline{Y}_{0}(t)}\right\} $$
@@ -353,7 +353,7 @@ sigma2 <- gsdmvn:::gs_sigma2_wlr(arm0, arm1, tmax = arm0$total_time, weight = we
 sigma2
 ```
 
-Below are definitions of each components.
+Below are definitions of each component.
 
 - $n = n_0 + n_1$: Total sample size
 - $p_0 = n_0/n$, $p_1 = n_1/n$: Randomization probability inferred by randomization ratio
@@ -469,6 +469,7 @@ plot(x, 1 - pexp(x),
 - $E\{N(t)\}$: expected probability of events
 
 $$E\{N(t)\} = \int_{0}^{t}f_{T}(s)S_{L}(s)F_{R}(\tau_{a}\land(\tau-s))ds$$
+
 ```{r}
 # Probability of Events
 x_int <- 0:arm0$total_time
@@ -566,6 +567,7 @@ plot(t, exp(log_ahr),
 it can be simplified to
 
 $$\log(AHR) = \frac{\sum d_i \log{HR_i}}{\sum d_i}$$
+
 ```{r}
 gsDesign2::AHR(enrollRates, failRates, totalDuration = arm0$total_time)
 ```
@@ -664,7 +666,7 @@ corr_combo
 The formula to calculate sample size based on effect size does not directly apply,
 because the test statistic for MaxCombo is not asymptotically normal.
 
-The type I Error shall be:
+The type I Error should be:
 
 $$\alpha = \text{Pr}(\max(Z_1, Z_2) > z_{\alpha} \, | \, H_0) = 1 - \text{Pr}(Z_1 < z_{\alpha}, Z_2 < z_{\alpha} \, | \, H_0)$$
 
@@ -675,7 +677,7 @@ z_alpha <- qmvnorm(p = 1 - 0.025, corr = corr_combo)
 z_alpha$quantile
 ```
 
-The power shall be
+The power should be
 
 $$\beta = \text{Pr}(\max(Z_1, Z_2) > z_{\alpha} \, | \, H_1) = 1 - \text{Pr}(Z_1 < z_{\alpha}, Z_2 < z_{\alpha} \, | \, H_1)$$
 

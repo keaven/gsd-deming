@@ -248,8 +248,8 @@ $$ = \text{Pr}(\cap_{i=1}^{i=k-1} G_i < b_i \mid H_0) - \text{Pr}(\cap_{i=1}^{i=
 gsdmvn:::gs_bound(alpha_spend, beta_spend,
   analysis = utility$info$Analysis, # Analysis indicator
   theta = rep(0, nrow(fh_test)), # Under the null hypothesis
-  corr = utility$corr
-)$upper # Correlation
+  corr = utility$corr # Correlation
+)$upper
 ```
 
 - Compared with upper bound calculated from `gsDesign`
@@ -310,8 +310,8 @@ utility <- gsdmvn:::gs_utility_combo(enrollRates, failRates, fh_test = fh_test, 
 bound <- gsdmvn:::gs_bound(alpha_spend, beta_spend,
   analysis = utility$info$Analysis, # Analysis indicator
   theta = utility$theta * sqrt(n), # Under the alternative hypothesis
-  corr = utility$corr
-) # Correlation
+  corr = utility$corr # Correlation
+)
 
 bound$lower
 ```
@@ -353,8 +353,8 @@ utility <- gsdmvn:::gs_utility_combo(enrollRates, failRates, fh_test = fh_test, 
 bound <- gsdmvn:::gs_bound(alpha_spend, beta_spend,
   analysis = utility$info$Analysis, # Analysis indicator
   theta = utility$theta * sqrt(n), # Under the alternative hypothesis
-  corr = utility$corr
-) # Correlation
+  corr = utility$corr # Correlation
+)
 
 bound
 ```
