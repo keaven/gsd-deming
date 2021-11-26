@@ -76,20 +76,20 @@
 </ul>
 <p><span class="math display">\[ Z_{ik}=\sqrt{\frac{n_{0}+n_{1}}{n_{0}n_{1}}}\int_{0}^{t_k}w_i(t)\frac{\overline{Y}_{0}(t)\overline{Y}_{1}(t)}{\overline{Y}_{0}(t)+\overline{Y}_{0}(t)}\left\{ \frac{d\overline{N}_{1}(t)}{\overline{Y}_{1}(t)}-\frac{d\overline{N}_{0}(t)}{\overline{Y}_{0}(t)}\right\} \]</span></p>
 <ul>
-<li>Not necessary to have same number of tests in each interim analysis</li>
+<li>Not necessary to have the same number of tests in each interim analysis</li>
 </ul>
 </div>
 <div id="examples" class="section level2">
 <h2>
 <span class="header-section-number">9.2</span> Examples<a class="anchor" aria-label="anchor" href="#examples"><i class="fas fa-link"></i></a>
 </h2>
-<p>We continue use the same example scenario in the last chapter.</p>
+<p>We continue to use the same example scenario from the last chapter.</p>
 <div id="example-1" class="section level3">
 <h3>
 <span class="header-section-number">9.2.1</span> Example 1<a class="anchor" aria-label="anchor" href="#example-1"><i class="fas fa-link"></i></a>
 </h3>
 <ul>
-<li>Using logrank test in all interim analysis and a MaxCombo test <span class="math inline">\(Z_{1k}: FH(0,0)\)</span>, <span class="math inline">\(Z_{2k}: FH(0,0.5)\)</span>, <span class="math inline">\(Z_{3k}: FH(0.5,0.5)\)</span> in final analysis.</li>
+<li>Using logrank test in all interim analyses and a MaxCombo test <span class="math inline">\(Z_{1k}: FH(0,0)\)</span>, <span class="math inline">\(Z_{2k}: FH(0,0.5)\)</span>, <span class="math inline">\(Z_{3k}: FH(0.5,0.5)\)</span> in final analysis.</li>
 </ul>
 <div class="sourceCode" id="cb245"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">fh_test1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span>
@@ -141,8 +141,8 @@
 <h2>
 <span class="header-section-number">9.3</span> Sample size calculation<a class="anchor" aria-label="anchor" href="#sample-size-calculation-1"><i class="fas fa-link"></i></a>
 </h2>
-<p>We first consider a user defined lower and upper bound using <code>gsDesign</code> bound</p>
-<p>In general, <code>gsDesign</code> bound can not be directly used for MaxCombo test:</p>
+<p>We first consider a user-defined lower and upper bound using <code>gsDesign</code> bound</p>
+<p>In general, <code>gsDesign</code> bound cannot be directly used for MaxCombo test:</p>
 <ul>
 <li>Multiple test statistics are considered in interim analysis or final analysis.</li>
 </ul>
@@ -168,7 +168,7 @@
 <h3>
 <span class="header-section-number">9.3.1</span> Example 1<a class="anchor" aria-label="anchor" href="#example-1-1"><i class="fas fa-link"></i></a>
 </h3>
-<p>Sample size can be calculated using <code><a href="https://merck.github.io/gsdmvn/reference/gs_design_combo.html">gsdmvn::gs_design_combo</a></code>.</p>
+<p>Sample size can be calculated using <code><a href="https://merck.github.io/gsdmvn/reference/gs_design_combo.html">gsdmvn::gs_design_combo()</a></code>.</p>
 <div class="sourceCode" id="cb254"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_design_combo.html">gs_design_combo</a></span><span class="op">(</span><span class="va">enrollRates</span>,
   <span class="va">failRates</span>,
@@ -183,13 +183,13 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>`Probability_Null (%)` <span class="op">=</span> <span class="va">Probability_Null</span> <span class="op">*</span> <span class="fl">100</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">Probability_Null</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_if</a></span><span class="op">(</span><span class="va">is.numeric</span>, <span class="va">round</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt;   Analysis Bound Time     N Events     Z Probability Probability_Null (%)
-#&gt; 1        1 Upper   12 444.8  95.54  3.71        0.00                 0.01
-#&gt; 3        2 Upper   24 444.8 219.10  2.51        0.47                 0.61
-#&gt; 5        3 Upper   36 444.8 294.72  1.99        0.80                 3.25
-#&gt; 2        1 Lower   12 444.8  95.54 -0.24        0.14                   NA
-#&gt; 4        2 Lower   24 444.8 219.10  1.17        0.19                   NA
-#&gt; 6        3 Lower   36 444.8 294.72  1.99        0.20                   NA</code></pre>
+<pre><code>#&gt;   Analysis Bound Time      N Events     Z Probability Probability_Null (%)
+#&gt; 1        1 Upper   12 444.81  95.54  3.71        0.00                 0.01
+#&gt; 3        2 Upper   24 444.81 219.10  2.51        0.47                 0.61
+#&gt; 5        3 Upper   36 444.81 294.72  1.99        0.80                 3.26
+#&gt; 2        1 Lower   12 444.81  95.54 -0.24        0.14                   NA
+#&gt; 4        2 Lower   24 444.81 219.10  1.17        0.19                   NA
+#&gt; 6        3 Lower   36 444.81 294.72  1.99        0.20                   NA</code></pre>
 <ul>
 <li>Simulation results based on 10,000 replications.</li>
 </ul>
@@ -305,7 +305,7 @@
 <h2>
 <span class="header-section-number">9.4</span> Outline of technical details<a class="anchor" aria-label="anchor" href="#outline-of-technical-details"><i class="fas fa-link"></i></a>
 </h2>
-<p>We described the details of calculating
+<p>We describe the details of calculating
 the sample size and events required for WLR under fixed design.</p>
 <p>It can be skipped for the first read of this training material.</p>
 <div id="with-a-pre-defined-upper-and-lower-bound" class="section level3">
@@ -329,7 +329,7 @@ the sample size and events required for WLR under fixed design.</p>
 <li>
 <span class="math inline">\(Z_{ij}\)</span>: <span class="math inline">\(i\)</span>-th test in <span class="math inline">\(j\)</span>-th analysis.</li>
 </ul>
-<div class="inline-figure"><img src="images/corr_combo.png" width="60%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="images/corr_combo.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 <div id="between-test-correlation" class="section level2">
 <h2>
@@ -574,7 +574,7 @@ the sample size and events required for WLR under fixed design.</p>
 #&gt;  [8,] 0.50 0.96 0.83 0.53 1.00 0.75 0.53 1.00 0.82
 #&gt;  [9,] 0.41 0.79 0.97 0.44 0.82 0.99 0.44 0.82 1.00</code></pre>
 <ul>
-<li>Compared with Simulation results based on 10,000 replications.</li>
+<li>Compared with simulation results based on 10,000 replications.</li>
 </ul>
 <div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-208-1.png" width="80%" style="display: block; margin: auto;"></div>
 </div>
@@ -610,7 +610,7 @@ the sample size and events required for WLR under fixed design.</p>
 #&gt; [5,] 0.45 0.94 0.81 0.48 1.00 0.75
 #&gt; [6,] 0.34 0.71 0.94 0.36 0.75 1.00</code></pre>
 <ul>
-<li>Compared with Simulation results based on 10,000 replications.</li>
+<li>Compared with simulation results based on 10,000 replications.</li>
 </ul>
 <div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-210-1.png" width="80%" style="display: block; margin: auto;"></div>
 </div>
@@ -663,10 +663,10 @@ the sample size and events required for WLR under fixed design.</p>
 <pre><code>#&gt;   Bound Probability
 #&gt; 1 Upper 0.002411474
 #&gt; 2 Upper 0.525796329
-#&gt; 3 Upper 0.828240488
+#&gt; 3 Upper 0.828238743
 #&gt; 4 Lower 0.129688918
 #&gt; 5 Lower 0.162696908
-#&gt; 6 Lower 0.171766056</code></pre>
+#&gt; 6 Lower 0.171768278</code></pre>
 </div>
 <div id="example-2-5" class="section level3">
 <h3>
@@ -691,11 +691,11 @@ the sample size and events required for WLR under fixed design.</p>
 <span class="va">power</span></code></pre></div>
 <pre><code>#&gt;   Bound Probability
 #&gt; 1 Upper 0.006333066
-#&gt; 2 Upper 0.674437060
-#&gt; 3 Upper 0.896134837
+#&gt; 2 Upper 0.674440407
+#&gt; 3 Upper 0.896140556
 #&gt; 4 Lower 0.068860093
-#&gt; 5 Lower 0.089482523
-#&gt; 6 Lower 0.103861146</code></pre>
+#&gt; 5 Lower 0.089482766
+#&gt; 6 Lower 0.103870424</code></pre>
 </div>
 </div>
 <div id="sample-size-1" class="section level2">
@@ -728,7 +728,7 @@ the sample size and events required for WLR under fixed design.</p>
 <span class="op">}</span>
 
 <span class="fu"><a href="https://rdrr.io/r/stats/uniroot.html">uniroot</a></span><span class="op">(</span><span class="va">fun</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1000</span><span class="op">)</span>, extendInt <span class="op">=</span> <span class="st">"yes"</span><span class="op">)</span><span class="op">$</span><span class="va">root</span></code></pre></div>
-<pre><code>#&gt; [1] 444.8081</code></pre>
+<pre><code>#&gt; [1] 444.8064</code></pre>
 </div>
 <div id="example-2-6" class="section level3">
 <h3>
@@ -754,7 +754,7 @@ the sample size and events required for WLR under fixed design.</p>
 <span class="op">}</span>
 
 <span class="fu"><a href="https://rdrr.io/r/stats/uniroot.html">uniroot</a></span><span class="op">(</span><span class="va">fun</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1000</span><span class="op">)</span>, extendInt <span class="op">=</span> <span class="st">"yes"</span><span class="op">)</span><span class="op">$</span><span class="va">root</span></code></pre></div>
-<pre><code>#&gt; [1] 348.219</code></pre>
+<pre><code>#&gt; [1] 348.2248</code></pre>
 
 </div>
 </div>
@@ -830,7 +830,7 @@ the sample size and events required for WLR under fixed design.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Group Sequential Design Under Non-Proportional Hazards</strong>: Deming Conference Course, December 6, 2021" was written by Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao. It was last built on 2021-11-25.</p>
+    <p>"<strong>Group Sequential Design Under Non-Proportional Hazards</strong>: Deming Conference Course, December 6, 2021" was written by Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao. It was last built on 2021-11-26.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

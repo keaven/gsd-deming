@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 6 Fixed design | Group Sequential Design Under Non-Proportional Hazards</title>
 <meta name="author" content="Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao">
-<meta name="description" content="We will briefly review fixed design based on weighted logrank test and MaxCombo test. For fixed design, npsurvSS will be the tool for this training. The fixed design part is largely follow the...">
+<meta name="description" content="We will briefly review fixed design based on weighted logrank test and MaxCombo test. For fixed design, npsurvSS will be the tool for this training. The fixed design part largely follows the...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
 <meta property="og:title" content="Chapter 6 Fixed design | Group Sequential Design Under Non-Proportional Hazards">
 <meta property="og:type" content="book">
-<meta property="og:description" content="We will briefly review fixed design based on weighted logrank test and MaxCombo test. For fixed design, npsurvSS will be the tool for this training. The fixed design part is largely follow the...">
+<meta property="og:description" content="We will briefly review fixed design based on weighted logrank test and MaxCombo test. For fixed design, npsurvSS will be the tool for this training. The fixed design part largely follows the...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 6 Fixed design | Group Sequential Design Under Non-Proportional Hazards">
-<meta name="twitter:description" content="We will briefly review fixed design based on weighted logrank test and MaxCombo test. For fixed design, npsurvSS will be the tool for this training. The fixed design part is largely follow the...">
+<meta name="twitter:description" content="We will briefly review fixed design based on weighted logrank test and MaxCombo test. For fixed design, npsurvSS will be the tool for this training. The fixed design part largely follows the...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -70,7 +70,7 @@
 <p>For fixed design, <a href="https://cran.r-project.org/package=npsurvSS"><code>npsurvSS</code></a>
 will be the tool for this training.</p>
 </div>
-<p>The fixed design part is largely follow the concept described in <span class="citation">Yung and Liu (<a href="references.html#ref-yung2019sample" role="doc-biblioref">2019</a>)</span>.</p>
+<p>The fixed design part largely follows the concept described in <span class="citation">Yung and Liu (<a href="references.html#ref-yung2019sample" role="doc-biblioref">2019</a>)</span>.</p>
 <div id="summary-of-assumptions" class="section level2">
 <h2>
 <span class="header-section-number">6.1</span> Summary of assumptions<a class="anchor" aria-label="anchor" href="#summary-of-assumptions"><i class="fas fa-link"></i></a>
@@ -182,7 +182,7 @@ It provides a slightly larger sample size under the same study design scenario.<
 </h2>
 <p>Let’s also explore the number of events required for logrank test under the proportional hazards assumption.</p>
 <p>You may hear the sample size calculation is “event-driven”.
-This is a nice feature under the <strong>proportional hazards assumption</strong>. because the effect size for number of events is only depends on the hazard ratio.</p>
+This is a nice feature under the <strong>proportional hazards assumption</strong> because the effect size for number of events is only depends on the hazard ratio.</p>
 <p><span class="math display">\[\theta = \log{\text{HR}} / 2\]</span></p>
 <ul>
 <li>
@@ -208,7 +208,7 @@ survival distribution loss to follow-up distribution and study duration.</p>
 <p>For simplicity, we skip the detail of sample size calculation,
 interested readers can refer <span class="citation">Lachin and Foulkes (<a href="references.html#ref-lachin1986evaluation" role="doc-biblioref">1986</a><a href="references.html#ref-lachin1986evaluation" role="doc-biblioref">b</a>)</span>.</p>
 </div>
-<p>Let’s make connection between math formula and R code by considering a scenarios with
+<p>Let’s make connection between math formula and R code by considering a scenario with
 hazard ratio at 0.6.</p>
 <div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Effect size</span>
@@ -242,8 +242,8 @@ The key argument in <code><a href="https://rdrr.io/pkg/npsurvSS/man/create_arm.h
 <span class="op">)</span></code></pre></div>
 <pre><code>#&gt;        n0        n1         n        d0        d1         d 
 #&gt;  68.12167  68.12167 136.24335  61.92878  58.38693 120.31570</code></pre>
-<p>The number of events from <code><a href="https://rdrr.io/pkg/gsDesign/man/nSurv.html">gsDesign::nSurv()</a></code> is slighted smaller,
-because, <code><a href="https://rdrr.io/pkg/gsDesign/man/nSurv.html">gsDesign::nSurv()</a></code> follows <span class="citation">Lachin and Foulkes (<a href="references.html#ref-lachin1986evaluation" role="doc-biblioref">1986</a><a href="references.html#ref-lachin1986evaluation" role="doc-biblioref">b</a>)</span>
+<p>The number of events from <code><a href="https://rdrr.io/pkg/gsDesign/man/nSurv.html">gsDesign::nSurv()</a></code> is slightly smaller
+because <code><a href="https://rdrr.io/pkg/gsDesign/man/nSurv.html">gsDesign::nSurv()</a></code> follows <span class="citation">Lachin and Foulkes (<a href="references.html#ref-lachin1986evaluation" role="doc-biblioref">1986</a><a href="references.html#ref-lachin1986evaluation" role="doc-biblioref">b</a>)</span>
 that relax the local alternative assumption and is recommended in practice.</p>
 <div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">gsDesign</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gsDesign/man/nSurv.html">nSurv</a></span><span class="op">(</span>
@@ -304,9 +304,9 @@ We need to derive the sample size first.</p>
 <div class="rmdnote">
 <p>The two figures above are copied from <span class="citation">Yung and Liu (<a href="references.html#ref-yung2019sample" role="doc-biblioref">2019</a>)</span>.</p>
 </div>
-<p>Let’s considered a delay effect scenario below to illustrate NPH and sample size calculation.</p>
+<p>Let’s consider a delayed effect scenario below to illustrate NPH and sample size calculation.</p>
 <ul>
-<li>Duration of enrollment: 12 month</li>
+<li>Duration of enrollment: 12 months</li>
 <li>Enrollment rate: 500/12 per month</li>
 </ul>
 <div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
@@ -412,7 +412,7 @@ We need to derive the sample size first.</p>
 <h3>
 <span class="header-section-number">6.7.1</span> Effect size<a class="anchor" aria-label="anchor" href="#effect-size"><i class="fas fa-link"></i></a>
 </h3>
-<p>In Yung and Liu (2019), section 2.3.3, it is shown that， the test statistics <span class="math inline">\(Z\rightarrow_d\mathcal{N}(\sqrt{n}\theta, 1)\)</span> approximately,
+<p>In <span class="citation">Yung and Liu (<a href="references.html#ref-yung2019sample" role="doc-biblioref">2019</a>)</span>, section 2.3.3, it is shown that, the test statistics <span class="math inline">\(Z\rightarrow_d\mathcal{N}(\sqrt{n}\theta, 1)\)</span> approximately,
 where <span class="math inline">\(\theta = \Delta/\sigma\)</span> is the effect size. Here the test statistics for weighted logrank test is:</p>
 <p><span class="math display">\[ Z=\sqrt{\frac{n_{0}+n_{1}}{n_{0}n_{1}}}\int_{0}^{\tau}w(t)\frac{\overline{Y}_{0}(t)\overline{Y}_{1}(t)}{\overline{Y}_{0}(t)+\overline{Y}_{0}(t)}\left\{ \frac{d\overline{N}_{1}(t)}{\overline{Y}_{1}(t)}-\frac{d\overline{N}_{0}(t)}{\overline{Y}_{0}(t)}\right\} \]</span></p>
 <ul>
@@ -433,7 +433,7 @@ where <span class="math inline">\(\theta = \Delta/\sigma\)</span> is the effect 
 <code class="sourceCode R"><span class="va">sigma2</span> <span class="op">&lt;-</span> <span class="fu">gsdmvn</span><span class="fu">:::</span><span class="fu">gs_sigma2_wlr</span><span class="op">(</span><span class="va">arm0</span>, <span class="va">arm1</span>, tmax <span class="op">=</span> <span class="va">arm0</span><span class="op">$</span><span class="va">total_time</span>, weight <span class="op">=</span> <span class="va">weight</span><span class="op">)</span>
 <span class="va">sigma2</span></code></pre></div>
 <pre><code>#&gt; [1] 0.0242674</code></pre>
-<p>Below are definitions of each components.</p>
+<p>Below are definitions of each component.</p>
 <ul>
 <li>
 <span class="math inline">\(n = n_0 + n_1\)</span>: Total sample size</li>
@@ -800,7 +800,7 @@ the covariance of two test statistics <span class="math inline">\(Z_1 = Z(\rho_1
 </h3>
 <p>The formula to calculate sample size based on effect size does not directly apply,
 because the test statistic for MaxCombo is not asymptotically normal.</p>
-<p>The type I Error shall be:</p>
+<p>The type I Error should be:</p>
 <p><span class="math display">\[\alpha = \text{Pr}(\max(Z_1, Z_2) &gt; z_{\alpha} \, | \, H_0) = 1 - \text{Pr}(Z_1 &lt; z_{\alpha}, Z_2 &lt; z_{\alpha} \, | \, H_0)\]</span></p>
 <div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://mvtnorm.R-forge.R-project.org">mvtnorm</a></span><span class="op">)</span>
@@ -808,7 +808,7 @@ because the test statistic for MaxCombo is not asymptotically normal.</p>
 <span class="va">z_alpha</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mvtnorm/man/qmvnorm.html">qmvnorm</a></span><span class="op">(</span>p <span class="op">=</span> <span class="fl">1</span> <span class="op">-</span> <span class="fl">0.025</span>, corr <span class="op">=</span> <span class="va">corr_combo</span><span class="op">)</span>
 <span class="va">z_alpha</span><span class="op">$</span><span class="va">quantile</span></code></pre></div>
 <pre><code>#&gt; [1] 2.014555</code></pre>
-<p>The power shall be</p>
+<p>The power should be</p>
 <p><span class="math display">\[\beta = \text{Pr}(\max(Z_1, Z_2) &gt; z_{\alpha} \, | \, H_1) = 1 - \text{Pr}(Z_1 &lt; z_{\alpha}, Z_2 &lt; z_{\alpha} \, | \, H_1)\]</span></p>
 <div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#' @param n Sample size</span>
@@ -906,7 +906,7 @@ because the test statistic for MaxCombo is not asymptotically normal.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Group Sequential Design Under Non-Proportional Hazards</strong>: Deming Conference Course, December 6, 2021" was written by Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao. It was last built on 2021-11-25.</p>
+    <p>"<strong>Group Sequential Design Under Non-Proportional Hazards</strong>: Deming Conference Course, December 6, 2021" was written by Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao. It was last built on 2021-11-26.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

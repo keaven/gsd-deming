@@ -8,7 +8,7 @@
   - Consider treatment effect that is clinically meaningful, but conservative
   - Consider a treatment effect delay that is *intermediate*
   - Understand likely enrollment pattern and dropout rate
-  - Plot AHR, underying survival differences and expected accrual of patients and events
+  - Plot AHR, underlying survival differences and expected accrual of patients and events
   
 ## Where to start for NPH? 
 
@@ -16,15 +16,15 @@
   - Get to *good* part of AHR could (it will plateau under above assumptions)
   - Ensure follow-up long enough to ensure *tail* characterization
   - Require both minimum follow-up and sufficient events for final analysis
-  
+
 ## Simplest design approach
 
 - Start with AHR from above evaluation
 - Design under proportional hazards assuming constant AHR
 - Ensure early futility bounds are not too aggressive
-   - No futility (risk that data monitoring committee will overrule)
-   - $\beta$-spending: be conservative for early bounds
-   - Asymmetric 2-sided test; e.g., Pocock-like bound with *moderate* total boundary crossing probability
+  - No futility (risk that data monitoring committee will overrule)
+  - $\beta$-spending: be conservative for early bounds
+  - Asymmetric 2-sided test; e.g., Pocock-like bound with *moderate* total boundary crossing probability
 - Efficacy bounds: O'Brien-Fleming always acceptable to regulators
 - This is easy to do with gsDesign Shiny app!
 
@@ -40,7 +40,6 @@
   - Haybittle-Peto bounds
   - Futility or efficacy bounds can be eliminated from selected analyses
 
-
 ## Less conventional tests
 
 - RMST has been heavily promoted
@@ -51,8 +50,7 @@
   - MaxCombo test at final analysis only
 - There can be substantial power gains
 
-
 ## Thank you!
 
 - Feedback and questions are welcome!
-- May wish to submit by issues at github repositories, but e-mail also OK.
+- May wish to submit by issues at GitHub repositories, but e-mail also OK.

@@ -93,13 +93,13 @@ power
 weighted-logrank-test-1
 example-scenario
 sample-size-under-logrank-test-or-fh0-0
-sample-size-under-modesetly-wlr-cut-at-4-months
+sample-size-under-modestly-wlr-cut-at-4-months
 sample-size-under-fh0-1
 sample-size-under-fh0-0.5
 sample-size-under-fh0.5-0.5
-average-hazard-ratio-comparision
-standardized-effect-size-comparision
-information-fraction-comparision
+average-hazard-ratio-comparison
+standardized-effect-size-comparison
+information-fraction-comparison
 technical-details-1
 power-and-sample-size-calculation
 cross-comparison-with-gs_design_wlr

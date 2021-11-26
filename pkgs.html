@@ -84,40 +84,40 @@ Below is the Github repo link to the source code</p>
 </h2>
 <p>The R package <code>simtrial</code> targets on time-to-event trial simulation under the piecewise model.
 It uses logrank and weighted logrank for analysis.
-It can simulates both fixed and group sequential design, also potential to simulate adaptive design.
-Its validation near completion (thanks to AP colleagues and Amin Shirazi).</p>
+It can simulate both fixed and group sequential design, also potential to simulate adaptive design.
+Its validation is near completion (thanks to AP colleagues and Amin Shirazi).</p>
 <p>In <code>simtrial</code>, there are several functions to generate simulated datasets:</p>
 <ul>
 <li>
 <code><a href="https://merck.github.io/simtrial/reference/simfix.html">simfix()</a></code>: Simulation of fixed sample size design for time-to-event endpoint</li>
 <li>
-<code><a href="https://merck.github.io/simtrial/reference/simfix2simPWSurv.html">simfix2simPWSurv()</a></code>: Conversion of enrollment and failure rates from simfix() to simPWSurv() format</li>
+<code><a href="https://merck.github.io/simtrial/reference/simfix2simPWSurv.html">simfix2simPWSurv()</a></code>: Conversion of enrollment and failure rates from <code><a href="https://merck.github.io/simtrial/reference/simfix.html">simfix()</a></code> to <code><a href="https://merck.github.io/simtrial/reference/simPWSurv.html">simPWSurv()</a></code> format</li>
 <li>
 <code><a href="https://merck.github.io/simtrial/reference/simPWSurv.html">simPWSurv()</a></code>: Simulate a stratified time-to-event outcome randomized trial</li>
 </ul>
 <p>There are also functions to cut data for analysis:</p>
 <ul>
 <li>
-<code><a href="https://merck.github.io/simtrial/reference/cutData.html">cutData()</a></code>: Cut a Dataset for Analysis at a Specified Date</li>
+<code><a href="https://merck.github.io/simtrial/reference/cutData.html">cutData()</a></code>: Cut a dataset for analysis at a specified date</li>
 <li>
-<code><a href="https://merck.github.io/simtrial/reference/cutDataAtCount.html">cutDataAtCount()</a></code>: Cut a Dataset for Analysis at a Specified Event Count</li>
+<code><a href="https://merck.github.io/simtrial/reference/cutDataAtCount.html">cutDataAtCount()</a></code>: Cut a dataset for analysis at a specified event count</li>
 <li>
-<code><a href="https://merck.github.io/simtrial/reference/getCutDateForCount.html">getCutDateForCount()</a></code>: Get Date at Which an Event Count is Reached</li>
+<code><a href="https://merck.github.io/simtrial/reference/getCutDateForCount.html">getCutDateForCount()</a></code>: Get date at which an event count is reached</li>
 </ul>
 <p>Most importantly, there are functions for analysis:</p>
 <ul>
 <li>
-<code><a href="https://merck.github.io/simtrial/reference/tenFH.html">tenFH()</a></code>: Fleming-Harrington Weighted Logrank Tests</li>
+<code><a href="https://merck.github.io/simtrial/reference/tenFH.html">tenFH()</a></code>: Fleming-Harrington weighted logrank tests</li>
 <li>
-<code><a href="https://merck.github.io/simtrial/reference/tenFHcorr.html">tenFHcorr()</a></code>: Fleming-Harrington Weighted Logrank Tests plus Correlations</li>
+<code><a href="https://merck.github.io/simtrial/reference/tenFHcorr.html">tenFHcorr()</a></code>: Fleming-Harrington weighted logrank tests plus correlations</li>
 <li>
-<code><a href="https://merck.github.io/simtrial/reference/tensurv.html">tensurv()</a></code>: Process Survival Data into Counting Process Format</li>
+<code><a href="https://merck.github.io/simtrial/reference/tensurv.html">tensurv()</a></code>: Process survival data into counting process format</li>
 <li>
 <code><a href="https://merck.github.io/simtrial/reference/pMaxCombo.html">pMaxCombo()</a></code>: MaxCombo p-value</li>
 <li>
 <code><a href="https://merck.github.io/simtrial/reference/pwexpfit.html">pwexpfit()</a></code>: Piecewise exponential survival estimation</li>
 <li>
-<code><a href="https://merck.github.io/simtrial/reference/wMB.html">wMB()</a></code>: Magirr and Burman Modestly Weighted Logrank Tests</li>
+<code><a href="https://merck.github.io/simtrial/reference/wMB.html">wMB()</a></code>: Magirr and Burman modestly weighted logrank tests</li>
 </ul>
 <p>In <code>simtrial</code>, there are reverse engineered datasets:</p>
 <ul>
@@ -141,7 +141,7 @@ Its validation near completion (thanks to AP colleagues and Amin Shirazi).</p>
 <h2>
 <span class="header-section-number">4.2</span> <code>gsDesign2</code><a class="anchor" aria-label="anchor" href="#gsdesign2"><i class="fas fa-link"></i></a>
 </h2>
-<p>The R package <code>gsDesigns</code> has the main functions listed as follows.</p>
+<p>The R package <code>gsDesign2</code> has the main functions listed as follows.</p>
 <ul>
 <li>
 <code>AHR()</code>: Average hazard ratio under non-proportional hazards (test version)</li>
@@ -165,13 +165,13 @@ Its validation near completion (thanks to AP colleagues and Amin Shirazi).</p>
 The bound supports functions include</p>
 <ul>
 <li>
-<code>gsb()</code>: direct input of bounds;</li>
+<code><a href="https://merck.github.io/gsdmvn/reference/gs_b.html">gs_b()</a></code>: direct input of bounds;</li>
 <li>
 <code><a href="https://merck.github.io/gsdmvn/reference/gs_spending_bound.html">gs_spending_bound()</a></code>: spending function bounds.</li>
 </ul>
 <p>Besides, it covers three models for analysis.</p>
 <ul>
-<li>average hazard ratio model (see detailed description in Section <a href="ahr.html#secAhr">3.2</a>)
+<li>Average hazard ratio model (see detailed description in Section <a href="ahr.html#secAhr">3.2</a>)
 <ul>
 <li>
 <code><a href="https://merck.github.io/gsdmvn/reference/gs_power_ahr.html">gs_power_ahr()</a></code>: Power computation</li>
@@ -179,7 +179,7 @@ The bound supports functions include</p>
 <code><a href="https://merck.github.io/gsdmvn/reference/gs_design_ahr.html">gs_design_ahr()</a></code>: Design computations</li>
 </ul>
 </li>
-<li>weighted logrank model (see detailed description in Section <a href="wlr.html#wlr">7</a>)
+<li>Weighted logrank model (see detailed description in Section <a href="wlr.html#wlr">7</a>)
 <ul>
 <li>
 <code><a href="https://merck.github.io/gsdmvn/reference/gs_power_wlr.html">gs_power_wlr()</a></code>: Power computation</li>
@@ -187,7 +187,7 @@ The bound supports functions include</p>
 <code><a href="https://merck.github.io/gsdmvn/reference/gs_design_wlr.html">gs_design_wlr()</a></code>: Design computations</li>
 </ul>
 </li>
-<li>max combo model (see detailed description in Section <a href="maxcombo.html#maxcombo">9</a>)
+<li>MaxCombo model (see detailed description in Section <a href="maxcombo.html#maxcombo">9</a>)
 <ul>
 <li>
 <code><a href="https://merck.github.io/gsdmvn/reference/gs_power_combo.html">gs_power_combo()</a></code>: Power computation</li>
@@ -223,6 +223,7 @@ After that, we simply load the simulation results and compare it with the asympt
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://merck.github.io/simtrial/">simtrial</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://merck.github.io/gsdmvn/">gsdmvn</a></span><span class="op">)</span>
+
 <span class="co">## Set the enrollment rates</span>
 <span class="va">my_enrollRates</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>
   Stratum <span class="op">=</span> <span class="st">"All"</span>,
@@ -315,8 +316,10 @@ After that, we simply load the simulation results and compare it with the asympt
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://merck.github.io/simtrial/">simtrial</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://merck.github.io/gsdmvn/">gsdmvn</a></span><span class="op">)</span>
+
 <span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"./data/simulation_gs_power_ahr_my_simfix.Rdata"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"./data/simulation_gs_power_ahr_my_gsDesign.Rdata"</span><span class="op">)</span>
+
 <span class="co">## Set the enrollment rates</span>
 <span class="va">my_enrollRates</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>
   Stratum <span class="op">=</span> <span class="st">"All"</span>,
@@ -396,7 +399,6 @@ After that, we simply load the simulation results and compare it with the asympt
   hr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0.6</span><span class="op">)</span>,
   dropoutRate <span class="op">=</span> <span class="fl">0.001</span>
 <span class="op">)</span>
-
 
 <span class="co"># Set number of simulations</span>
 <span class="va">my_nsim</span> <span class="op">&lt;-</span> <span class="fl">10</span>
@@ -503,12 +505,12 @@ After that, we simply load the simulation results and compare it with the asympt
   <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">8</span>, <span class="fl">9</span><span class="op">)</span>, decimals <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">7</span><span class="op">)</span>, decimals <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
-<div id="gnulkrnlfl" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="tkkkepdjon" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#gnulkrnlfl .gt_table {
+#tkkkepdjon .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -533,7 +535,7 @@ After that, we simply load the simulation results and compare it with the asympt
   border-left-color: #D3D3D3;
 }
 
-#gnulkrnlfl .gt_heading {
+#tkkkepdjon .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -545,7 +547,7 @@ After that, we simply load the simulation results and compare it with the asympt
   border-right-color: #D3D3D3;
 }
 
-#gnulkrnlfl .gt_title {
+#tkkkepdjon .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -555,7 +557,7 @@ After that, we simply load the simulation results and compare it with the asympt
   border-bottom-width: 0;
 }
 
-#gnulkrnlfl .gt_subtitle {
+#tkkkepdjon .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -565,13 +567,13 @@ After that, we simply load the simulation results and compare it with the asympt
   border-top-width: 0;
 }
 
-#gnulkrnlfl .gt_bottom_border {
+#tkkkepdjon .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#gnulkrnlfl .gt_col_headings {
+#tkkkepdjon .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -586,7 +588,7 @@ After that, we simply load the simulation results and compare it with the asympt
   border-right-color: #D3D3D3;
 }
 
-#gnulkrnlfl .gt_col_heading {
+#tkkkepdjon .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -606,7 +608,7 @@ After that, we simply load the simulation results and compare it with the asympt
   overflow-x: hidden;
 }
 
-#gnulkrnlfl .gt_column_spanner_outer {
+#tkkkepdjon .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -618,15 +620,15 @@ After that, we simply load the simulation results and compare it with the asympt
   padding-right: 4px;
 }
 
-#gnulkrnlfl .gt_column_spanner_outer:first-child {
+#tkkkepdjon .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#gnulkrnlfl .gt_column_spanner_outer:last-child {
+#tkkkepdjon .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#gnulkrnlfl .gt_column_spanner {
+#tkkkepdjon .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -638,7 +640,7 @@ After that, we simply load the simulation results and compare it with the asympt
   width: 100%;
 }
 
-#gnulkrnlfl .gt_group_heading {
+#tkkkepdjon .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -660,7 +662,7 @@ After that, we simply load the simulation results and compare it with the asympt
   vertical-align: middle;
 }
 
-#gnulkrnlfl .gt_empty_group_heading {
+#tkkkepdjon .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -675,15 +677,15 @@ After that, we simply load the simulation results and compare it with the asympt
   vertical-align: middle;
 }
 
-#gnulkrnlfl .gt_from_md > :first-child {
+#tkkkepdjon .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#gnulkrnlfl .gt_from_md > :last-child {
+#tkkkepdjon .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#gnulkrnlfl .gt_row {
+#tkkkepdjon .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -702,7 +704,7 @@ After that, we simply load the simulation results and compare it with the asympt
   overflow-x: hidden;
 }
 
-#gnulkrnlfl .gt_stub {
+#tkkkepdjon .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -714,7 +716,7 @@ After that, we simply load the simulation results and compare it with the asympt
   padding-left: 12px;
 }
 
-#gnulkrnlfl .gt_summary_row {
+#tkkkepdjon .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -724,7 +726,7 @@ After that, we simply load the simulation results and compare it with the asympt
   padding-right: 5px;
 }
 
-#gnulkrnlfl .gt_first_summary_row {
+#tkkkepdjon .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -734,7 +736,7 @@ After that, we simply load the simulation results and compare it with the asympt
   border-top-color: #D3D3D3;
 }
 
-#gnulkrnlfl .gt_grand_summary_row {
+#tkkkepdjon .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -744,7 +746,7 @@ After that, we simply load the simulation results and compare it with the asympt
   padding-right: 5px;
 }
 
-#gnulkrnlfl .gt_first_grand_summary_row {
+#tkkkepdjon .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -754,11 +756,11 @@ After that, we simply load the simulation results and compare it with the asympt
   border-top-color: #D3D3D3;
 }
 
-#gnulkrnlfl .gt_striped {
+#tkkkepdjon .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#gnulkrnlfl .gt_table_body {
+#tkkkepdjon .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -767,7 +769,7 @@ After that, we simply load the simulation results and compare it with the asympt
   border-bottom-color: #D3D3D3;
 }
 
-#gnulkrnlfl .gt_footnotes {
+#tkkkepdjon .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -781,13 +783,13 @@ After that, we simply load the simulation results and compare it with the asympt
   border-right-color: #D3D3D3;
 }
 
-#gnulkrnlfl .gt_footnote {
+#tkkkepdjon .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#gnulkrnlfl .gt_sourcenotes {
+#tkkkepdjon .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -801,41 +803,41 @@ After that, we simply load the simulation results and compare it with the asympt
   border-right-color: #D3D3D3;
 }
 
-#gnulkrnlfl .gt_sourcenote {
+#tkkkepdjon .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#gnulkrnlfl .gt_left {
+#tkkkepdjon .gt_left {
   text-align: left;
 }
 
-#gnulkrnlfl .gt_center {
+#tkkkepdjon .gt_center {
   text-align: center;
 }
 
-#gnulkrnlfl .gt_right {
+#tkkkepdjon .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#gnulkrnlfl .gt_font_normal {
+#tkkkepdjon .gt_font_normal {
   font-weight: normal;
 }
 
-#gnulkrnlfl .gt_font_bold {
+#tkkkepdjon .gt_font_bold {
   font-weight: bold;
 }
 
-#gnulkrnlfl .gt_font_italic {
+#tkkkepdjon .gt_font_italic {
   font-style: italic;
 }
 
-#gnulkrnlfl .gt_super {
+#tkkkepdjon .gt_super {
   font-size: 65%;
 }
 
-#gnulkrnlfl .gt_footnote_marks {
+#tkkkepdjon .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -1048,7 +1050,7 @@ After that, we simply load the simulation results and compare it with the asympt
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Group Sequential Design Under Non-Proportional Hazards</strong>: Deming Conference Course, December 6, 2021" was written by Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao. It was last built on 2021-11-25.</p>
+    <p>"<strong>Group Sequential Design Under Non-Proportional Hazards</strong>: Deming Conference Course, December 6, 2021" was written by Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao. It was last built on 2021-11-26.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
