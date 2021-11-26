@@ -6,8 +6,10 @@ Others tests will be considered in Chapter \@ref(overview-other-tests).
 
 ## Piecewise model
 
-To model the time-varying hazard ratio, AHR commonly assumes that the hazard ratio is piecewise constant.
-Suppose the piecewise constant changes at the change points $0 = t_0 < t_1 < \cdots < t_M \le \infty$, and for each individual interval $(t_{m-1}, t_m]$ for $m = 1, \ldots, M$, the hazard ratio is a constant $HR_m$ (experimental: control) , i.e.,
+To model a time-varying hazard ratio, we consider a model where failure rates for experimental and control groups are piecewise constant.
+Since this model can use arbitrarily small piecewise intervals, this is not really a restriction.
+In concept, this is an extension of the piecewise proportional hazards model of @LachinFoulkes.
+Suppose the piecewise constant changes at the change points $0 = t_0 < t_1 < \cdots < t_M \le \infty$, and for each individual interval $(t_{m-1}, t_m]$ for $m = 1, \ldots, M$, the hazard ratio is a constant $HR_m$ (experimental:control) , i.e.,
 $$
   \text{hazard ratio}
   =
@@ -24,70 +26,19 @@ For any $m = 1, \ldots, M$,
 $$
   HR_m = \lambda_{1,m} / \lambda_{0,m},
 $$
-where the subscript $i$ indexes the group, i.e., $i = 0$ for control arm and $i=1$ for treatment arm.
-From the assumption of the piecewise AHR model, we know the $\lambda_{i,m}$ is a constant in $(t_{m-1}, t_m]$.
-Its likelihood is
-$$
-  L(\lambda_{i,m})
-  =
-  \exp(-\lambda_{i,m}T_{i,m})\;
-  \lambda_{i,m}^{d_{i,m}},
-$$
-where $d_{i,m}$ is the number of observed events in $(t_{m-1}, t_m]$ and $T_{i,m}$ is the follow-up time (total time on test) in in $(t_{m-1}, t_m]$.
-If we denote
+where the subscript $i$ indexes the treatment group with $i = 0$ for control arm and $i=1$ for treatment arm.
+As in @LachinFoulkes, we will also assume an exponential dropout rate $\eta_{i,m}$ for treatment arm $i=0,1, m=1,\ldots,M$.
+While not necessary, in software implementation in the **gsDesign2** and **gsdmvn** packages we simplified to $\eta_{0,m}=\eta_{1,m}=\eta_m, m=1,\ldots,M$.
+
+We will denote
 \begin{equation}
    (\#eq:AhrLambdaGamma)
-   \lambda_{i,m} = e^{\gamma_{i, m}},
+   \lambda_{i,m} = e^{\gamma_{i, m}}.
 \end{equation}
-the above likelihood function of $\lambda_{i,m}$ can be re-written into the likelihood function of $\gamma_{i, m}$, i.e.,
-$$
-  L(\gamma_{i,m})
-  =
-  \exp(-e^{\gamma_{i,m}}T_{i,m})\;
-  e^{\gamma_{i,m}d_{i,m}}.
-$$
-This leads to a log-likelihood:
-$$
-  \ell(\gamma_{i,m})
-  \triangleq
-  \log\left( L(\gamma_{i,m}) \right)
-  =
-  -e^{\gamma_{i,m}}T_{i,m}
-  +
-  \gamma_{i,m}d_{i,m}.
-$$
-By setting its first derivative with respect to $\gamma_{i,m}$ as zero,
-$$
-  \frac{\partial}{\partial \gamma_{i,m}}
-  \ell(\gamma_{i,m})
-  =
-  -e^{\gamma_{i,m}}T_{i,m} + d_{i,m}
-  =
-  0
-$$
-one gets its maximum likelihood estimation as
-\begin{equation}
-  (\#eq:AhrRateEstimation)
-  \hat\gamma_{i,m}
-  =
-  \log(d_{i,m}/T_{i,m}).
-\end{equation}
-By taking the second derivative of $\ell(\gamma_{i,m})$, one gets the variance of $\hat\gamma_{i,m}$ as
-$$
-  \widehat{\hbox{Var}(\hat\gamma_{i,m})}
-  =
-  \left(
-    -\frac{\partial^2}{\partial \gamma_{i,m}^2} \ell(\hat\gamma_{i,m})
-  \right)^{-1}
-  =
-  \left(
-    e^{\hat\gamma_{i,m}}T_{i,m}
-  \right)^{-1}
-  =
-  \frac{1}{d_{i,m}}.
-$$
 
-By using the delta method (see details in [Dr. Lu Tian's slides](https://web.stanford.edu/~lutian/stat331.HTML)), we get the asymptotic distribution of $\widehat\lambda_{i,m}$ as
+
+
+By using the delta method, we get the asymptotic distribution of $\widehat\lambda_{i,m}$ as
 \begin{equation}
   (\#eq:AhrIndividualHazardRateDist)
   \log(\widehat\lambda_{i,m})
@@ -100,7 +51,7 @@ By using the delta method (see details in [Dr. Lu Tian's slides](https://web.sta
   \forall i \in \{0, 1\}
 \end{equation}
 
-Withe the estimation of $\{\lambda_{i,m}\}_{i=0,1 \text{ and } m = 1, \ldots, M}$, it is not complicated to get the estimation and the asymptotic distribution of $HR_m$, which is defined as $HR_m = \lambda_{1,m}/\lambda_{0,m}$.
+With the estimation of $\{\lambda_{i,m}\}_{i=0,1 \text{ and } m = 1, \ldots, M}$, it is not complicated to get the estimation and the asymptotic distribution of $HR_m$, which is defined as $HR_m = \lambda_{1,m}/\lambda_{0,m}$.
 In this chapter, we are interested in the logarithm of $HR_m$ and denote it as $\beta_m$.
 Recall that
 \begin{equation}
@@ -134,106 +85,38 @@ By plugging the asymptotic distribution of $\{\lambda_{0, m}, \lambda_{1,m}\}$ i
 
 ## Average hazard ratio {#secAhr}
 
-In this section, we discuss the estimation of AHR.
-Generally speaking, there are two estimations of AHR.
-One is the maximal likelihood estimation (MLE) under standard proportional hazards assumption, and the other utilizes the weighted summation of individual hazard ratio to approximate AHR.
-We introduce both of two estimations, with Section \@ref(secAhrMLE) introducing MLE and Section \@ref(secAhrWeightedSum) introducing weighted summation estimation.
-
-### MLE of AHR {#secAhrMLE}
-
-If we set $\beta_1 = \beta_2 = \ldots = \beta_m = \beta$ in equation \@ref(eq:AhrSingleHazardRatioDef), it implies that
-$$
-  \left\{
-  \begin{array}{ccl}
-  \lambda_{0,m} &=& \exp(\gamma_m) \\
-  \lambda_{1,m} &=& \exp(\gamma_m + \beta)
-  \end{array}
-  \right.,
-$$
-where $\gamma_m$ is defined in equation \@ref(eq:AhrLambdaGamma).
-The above equation reduce the unknown parameter from $\left\{\beta \cup \{ \lambda_{0,m}, \lambda_{1,m}, \gamma_m,\}_{m = 1, \ldots, M} \right\}$ into $\left\{\beta \cup \{\gamma_m,\}_{m = 1, \ldots, M} \right\}$.
-In the remaining of this section, we target on the estimation of parameters $\left\{\beta \cup \{\gamma_m \}_{m = 1, \ldots, M} \right\}$.
-
-The log-likelihood of parameters $\left\{\beta \cup \{\gamma_m,\}_{m = 1, \ldots, M} \right\}$ is
-\begin{equation}
-  (#eq:AhrLikelihoodBetaGamma)
-  \ell(\beta,{\gamma_1,\cdots,\gamma_M})
-  =
-  \sum_{m=1}^M
-  \left(
-    -e^{\gamma_m}(T_{0,m}+e^\beta T_{1,m}) + \gamma_m(d_{0,m} + d_{1,m}) +d_{1,m}\beta
-  \right).
-\end{equation}
-By taking the first partial derivatives with respect to $\gamma_m$ and set it as $0$, one has
-$$
-  \begin{array}{cl}
-    &
-    \frac{\partial}{\partial\gamma_m}
-    \ell(\beta,{\gamma_1,\ldots,\gamma_M})
-    =
-    -e^{\gamma_m}
-    (T_{0,m}+T_{1,m}e^\beta)
-    +
-    d_{0,m}
-    +
-    d_{1,m}
-    =0 \\
-    \Rightarrow &
-    e^{\gamma_m}= \frac{d_{0,m}+d_{1,m}}{T_{0,m}+T_{1,m}e^\beta}.
-  \end{array}
-$$
-By plugging the above equation into equation \@ref(eq:AhrLikelihoodBetaGamma), we can re-write our log-likelihood as only a function of the parameter $\beta$ as follows:
-$$
-  \ell(\beta)
-  =
-  \sum_{m=1}^M(d_{0,m}+d_{1,m})\left(\log(d_{0,m}+d_{1,m})-\log(T_{0,m}+T_{1,m}e^\beta)-1\right) +d_{1,m}\beta,
-$$
-with first and second partial derivatives as
-$$
-  \begin{array}{rcl}
-  \frac{\partial}{\partial\beta}\ell(\beta)
-  & = &
-  \sum_{m=1}^M
-  \left(
-    -\frac{(d_{0,m}+d_{1,m})T_{1,m}e^\beta}{T_{0,m}+T_{1,m}e^\beta} + d_{1,m}
-  \right), \\
-  \frac{\partial^2}{\partial\beta^2}\ell(\beta)
-  & = &
-  -\sum_{m=1}^M
-  \frac{(d_{0,m}+d_{1,m})T_{1,m}e^\beta(T_{0,m}+T_{1,m}e^\beta)-
-(T_{1,m}e^\beta)^2(d_{0,m}+d_{1,m})}{(T_{0,m}+T_{1,m}e^\beta)^2}\\
-  & = &
-  \sum_{m=1}^M
-  \left(
-    \frac{(T_{1,m}e^\beta)^2(d_{0,m}+d_{1,m})}{(T_{0,m}+T_{1,m}e^\beta)^2}
-    -
-    \frac{(d_{0,m}+d_{1,m})T_{1,m}e^\beta}{T_{0,m}+T_{1,m}e^\beta}
-  \right).
-  \end{array}
-$$
-With these, it should be straightforward to apply a Newton-Raphson iteration to get a maximum likelihood estimate of $\beta$ and we denote it as $\widehat\beta_{MLE}$.
-
-### Commonly used estimation of AHR {#secAhrWeightedSum}
-
-We can also define the logarithm of AHR as a weighted summation of the individual logarithm hazard ratio $\{\beta_m\}_{m = 1, \ldots, M}$, i.e.,
+In this section, we define the the average hazard ratio (AHR) and use it  to derive the asymptotic normal distribution of the logrank test.
+This is actually a weighted geometric mean of the hazard ratio in piecewise intervals we defined above.
+Defining $\beta_m=\log(\lambda_{1,m}/\lambda_{0,m})= \log(\lambda_{1,m})-\log(\lambda_{0,m}), m=1,\ldots,M$, we define the logarithm of AHR as a weighted sum of the individual log hazard ratios:
 $$
   \beta
   =
-  \sum_{m=1}^M w_m \beta_m,
+  \sum_{m=1}^M w_m \log(HR_m)=\sum_{m=1}^M w_m \beta_m=\sum_{m=1}^Mw_m(\log(\lambda_{1,m})-\log(\lambda_{0,m})).
 $$
-We propose to estimate $\beta$ as a solution to maximize the likelihood under the proportional hazards model.
-This is actually a geometric weighted mean of the hazard ratio as defined from the full (NPH) piecewise log-hazard ratio estimates:
+For $w_m$ we propose inverse variance weighting which is based on expected number of events expected in each treatment group in $(t_{m-1},t_m],$ $m=1,\ldots,M$.
+We denote $d_{i,m}, T_{i,m},$ $i=0,1,$ $m=1,\ldots,M$ the observed events and total time at risk in treatment group $i$ during period $(t_{m-1},t_m]$.
+Thus, for $m=1,\ldots,M$ we have
+
+$$w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,j}))^{-1}}.$$
+The corresponding estimate of $\log(\lambda_{i,m}), i=0,1, m=1,\ldots,M$  is
+$$\hat{\gamma}_{i,m}=\log\hat\lambda_{i,m} = \log(d_{i,m}/T_{i,m})$$
+which is asymptotically normal with variance
+$$\text{Var}(\hat\gamma_{i,m})=1/E(d_{i,m})$$
+and variance estimate
+$$\widehat{\text{Var}}(\hat\gamma_{i,m})=1/d_{i,m}.$$
+We propose to estimate $\beta$ using estimated weights under the piecewise model.
 \begin{equation}
   (#eq:AhrBetaEstimation)
-  \widehat\beta_{WS}
+  \tilde\beta
   =
   \sum_{m=1}^M
-  w_m
-  \left(\hat\gamma_{1,m} - \hat\gamma_{0,m}\right).
+  \hat{w}_m
+  \left(\hat\gamma_{1,m} - \hat\gamma_{0,m}\right)
 \end{equation}
-For the selection of weight $\{w_m\}_{m = 1, \ldots, M}$, we use inverse variance weighting
+
+For the selection of weight $\hat{w}_m,$ $m = 1, \ldots, M$, we use inverse variance weighting
 $$
-  w_m
+  \hat{w}_m
   =
   \left.
   \left(
@@ -245,9 +128,9 @@ $$
     \frac{1}{1/d_{0,i}+1/d_{1,i}}
   \right)^{-1}.
 $$
-By plugging the above weight into equation \@ref(eq:AhrBetaEstimation), $\beta$ can be estimated as
+By plugging the above weights into equation \@ref(eq:AhrBetaEstimation), $\beta$ can be estimated as
 $$
-  \widehat\beta_{WS}
+  \tilde\beta
   =
   \frac{
     \sum_{m=1}^M
@@ -260,28 +143,21 @@ $$
 $$
 The corresponding variance estimate is:
 $$
-  \widehat{\hbox{Var}(\widehat\beta_{WS})}
+  \widehat{\hbox{Var}}(\tilde\beta)
   =
   \left(\sum_{m=1}^M(1/d_{0,m} + 1/d_{1,m})^{-1}\right)^{-1}.
 $$
 
-By plugging the asymptotic distribution of $\widehat\beta_m$ in equation \@ref(eq:AhrSignleLogHazardRatio), one gets the asymptotic distribution of $\widehat\beta_{WS}$ as
+By plugging the asymptotic distribution of $\hat\beta_m$ in equation \@ref(eq:AhrSignleLogHazardRatio), one gets the asymptotic distribution of $\tilde\beta$ as
+
 $$
-  \widehat\beta_{WS}
+  \tilde\beta
   \overset{\cdot}{\sim}
   \hbox{Normal}(\beta, \; \mathcal{I}^{-1}),
 $$
-where $\mathcal{I} = \sum_{m = 1}^M \left( \frac{1}{d_{0,m}} + \frac{1}{d_{1,m}} \right)^{-1}$.
+where $$\mathcal{I} = \sum_{m = 1}^M \left( \frac{1}{E(d_{0,m})} + \frac{1}{E(d_{1,m})} \right)^{-1}.$$
 
-After reviewing the MLE (see Section \@ref(secAhrMLE)) and weighted summation estimation (see Section \@ref(secAhrWeightedSum)) of AHR, we summarize their difference in the following table.
+Not shown here is that this is the asymptotic distribution of the logrank test under the piecewise model which follows by the results of @Schoenfeld1981.
+The details for computing $E(d_{i,m}),$, $i=0,1$, $m=1,\ldots,M$ under the piecewise model are demonstrated in a vignette in the **gsDesign2** package.
+These computations form the basis for the asymptotic approximations for power and sample size implemented in the **gsdmvn** package using the functions `gsdmvn::gs_power_ahr()` and `gsdmvn::gs_design_ahr()`.
 
-```{r, echo=FALSE}
-temp <- tibble::tribble(
-  ~" ", ~"MLE", ~"Weighted Summation",
-  "Idea", "To maximize the log-likelihood function under standard proportional hazards assumption", "Sum individual hazard ratios with weights",
-  "Computation", "Newton-Raphson iterations are required", "Closed-form"
-)
-gt::gt(temp)
-```
-
-We note that the weighted summation $\widehat\beta_{WS}$ is not a maximum likelihood estimate, but in our experience it provides a good approximation of MLE $\widehat\beta_{ML}$.
