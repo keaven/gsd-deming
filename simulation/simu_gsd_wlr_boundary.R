@@ -32,7 +32,7 @@ library(gsdmvn)
 # ## Randomization Ratio is 1:1
 # ratio = 1
 #
-# ## Type 1 error (one-sided)
+# ## Type I error (one-sided)
 # alpha = 0.025
 #
 # ## Power (1 - beta)

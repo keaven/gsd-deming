@@ -196,7 +196,7 @@ k <- 3
 test.type <- 2 # This indicates a 2-sided design
 # 1-sided Type I error
 alpha <- 0.025
-# Type 2 error (1 - targeted power)
+# Type II error (1 - targeted power)
 beta <- 0.1
 # If test.type = 5 or 6, this sets maximum spending for futility
 # under the null hypothesis. Otherwise, this is ignored.

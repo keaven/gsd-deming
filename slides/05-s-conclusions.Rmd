@@ -8,7 +8,7 @@
   - Consider treatment effect that is clinically meaningful, but conservative
   - Consider a treatment effect delay that is *intermediate*
   - Understand likely enrollment pattern and dropout rate
-  - Plot AHR, underying survival differences and expected accrual of patients and events
+  - Plot AHR, underlying survival differences and expected accrual of patients and events
   
 ## Where to start for NPH? 
 
