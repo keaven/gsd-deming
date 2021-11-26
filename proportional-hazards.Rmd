@@ -8,7 +8,7 @@ if you copy the repository to your local PC, you will be able to easily access t
 After a brief review of methodology, we recreate designs and evaluate final inference for multiple published trials:
 
 - We begin with the KEYNOTE 189 trial [@KEYNOTE189] to show a straightforward, common application in metastatic (high-risk) cancer.
-- We proceeed to the AFCAPS/TEXCAPS trial [@AFCAPSdesign] [@AFCAPSresults], a cardiovascular endpoint trial with much lower risk than a metastatic oncology trial.
+- We proceed to the AFCAPS/TEXCAPS trial [@AFCAPSdesign] [@AFCAPSresults], a cardiovascular endpoint trial with much lower risk than a metastatic oncology trial.
 - Next we look at the EXAMINE trial [@EXAMINEresults], a trial in diabetic patients evaluating a non-inferiority hypothesis for cardiovascular outcomes.
 
 We also create a design for a hypothetical trial in oncology where a long-term plateau in endpoints is likely. We approach this with a proportional hazards cure model.
@@ -25,8 +25,7 @@ The number of events drives power, regardless of study duration, as noted by @Sc
 
 One place where we deviate from the Lachin and Foulkes method is when we approximate the hazard ratio at study bounds.
 This should always be considered an approximation that is informative to those reviewing the design rather than a requirement to cross a bound.
-In any case, the approximation is that of @Schoenfeld1981 which is quite simple and implemented in the function `gsDesign::gsHR()`. 
-
+In any case, the approximation is that of @Schoenfeld1981 which is quite simple and implemented in the function `gsDesign::gsHR()`.
 
 ## Metastatic oncology example {#mediansurvival}
 
@@ -58,6 +57,7 @@ The design is derived as:
 library(gsDesign)
 library(dplyr)
 library(gt)
+
 KEYNOTE189design <- gsSurv(
   # Number of analyses
   k = 3,
@@ -120,7 +120,6 @@ We further describe the information in this table as follows:
 - P(Cross) if HR =`r round(KEYNOTE189design$hr, 3)` is the cumulative probability of crossing
   a bound under the alternate hypothesis.
 
-
 The design is updated at the interim analysis with 235 deaths as follows.
 The code can be written by the app for you, this is provided only if you wish to dive into details.
 We note that the function `gsDesign()` is used for the update while `gsSurv()` was used for the original design.
@@ -142,25 +141,28 @@ xu <- gsDesign(
   sfl = x$lower$sf, sflpar = x$lower$param,
   delta = x$delta, delta1 = x$delta1, delta0 = x$delta0
 )
+
 # Now we summarize bounds in a table
 xu %>%
   gsBoundSummary(
-  deltaname = "HR", # Name of treatment difference measure
-  logdelta = TRUE,  # For survival, delta is on a log scale; this transforms
-  Nname = "Events", # "N" for analyses is events for survival analysis
-  digits = 5,       # decimals for numbers in body of table
-  ddigits = 2,      # decimals for natural parameter; HR in this case
-  tdigits = 1,      # Time digits (not needed here)
-  # We select key parameters for printing
-  exclude = c(
-    "B-value", "CP", "CP H1", "PP",
-    paste0("P(Cross) if HR=", round(c(x$hr0, x$hr), digits = 2))
-  )
+    deltaname = "HR", # Name of treatment difference measure
+    logdelta = TRUE, # For survival, delta is on a log scale; this transforms
+    Nname = "Events", # "N" for analyses is events for survival analysis
+    digits = 5, # decimals for numbers in body of table
+    ddigits = 2, # decimals for natural parameter; HR in this case
+    tdigits = 1, # Time digits (not needed here)
+    # We select key parameters for printing
+    exclude = c(
+      "B-value", "CP", "CP H1", "PP",
+      paste0("P(Cross) if HR=", round(c(x$hr0, x$hr), digits = 2))
+    )
   ) %>%
-  gt() %>% tab_header(title = "Updated bounds for interim analysis",
-                      subtitle = "KEYNOTE 189 trial")
+  gt() %>%
+  tab_header(
+    title = "Updated bounds for interim analysis",
+    subtitle = "KEYNOTE 189 trial"
+  )
 ```
-
 
 The p-value reported at interim 1 was <0.001 [@KEYNOTE189], establishing statistical significance relative to the bound of 0.00128 in the summary table above as well as in the publication.
 
@@ -188,7 +190,6 @@ More parameters than needed are given than sometimes needed when code is generat
 Comments indicate where this is the case.
 Code and comments are largely copied from the app, so this may help the reader interpret what they see there.
 
-
 ```{r, message=FALSE}
 # Number of analyses
 k <- 3
@@ -196,7 +197,7 @@ k <- 3
 test.type <- 2 # This indicates a 2-sided design
 # 1-sided Type I error
 alpha <- 0.025
-# Type 2 error (1 - targeted power)
+# Type II error (1 - targeted power)
 beta <- 0.1
 # If test.type = 5 or 6, this sets maximum spending for futility
 # under the null hypothesis. Otherwise, this is ignored.
@@ -208,7 +209,7 @@ timing <- c(0.375, 0.75)
 sfu <- sfHSD
 # Upper bound spending function parameters, if any
 sfupar <- -4
-# NOTE THAT THE NEXT 2 PARAMETERS ARE NOT NEEDED AS THE 
+# NOTE THAT THE NEXT 2 PARAMETERS ARE NOT NEEDED AS THE
 # LOWER BOUND WAS SPECIFIED IN sfu and sfupar SINCE test.type=2 was specified.
 # Lower bound spending function, if used (test.type > 2)
 sfl <- sfLDOF
@@ -246,9 +247,10 @@ Now we plug the above parameters into `gsSurv()` to generate the design.
 See comments above for interpretation of the parameters.
 
 ```{r, message = FALSE}
-x <- gsSurv(k = k, test.type = test.type, alpha = alpha, beta = beta, 
-  astar = astar, timing = timing, sfu = sfu, sfupar = sfupar, sfl = sfl, 
-  sflpar = sflpar, lambdaC = lambdaC, hr = hr, hr0 = hr0, eta = eta, 
+x <- gsSurv(
+  k = k, test.type = test.type, alpha = alpha, beta = beta,
+  astar = astar, timing = timing, sfu = sfu, sfupar = sfupar, sfl = sfl,
+  sflpar = sflpar, lambdaC = lambdaC, hr = hr, hr0 = hr0, eta = eta,
   gamma = gamma, R = R, S = S, T = T, minfup = minfup, ratio = ratio
 )
 ```
@@ -256,7 +258,7 @@ x <- gsSurv(k = k, test.type = test.type, alpha = alpha, beta = beta,
 The reader can see summaries of the above with following commands which we do not run here:
 
 ```{r, eval = FALSE}
-summary(x)        # Textual summary of design
+summary(x) # Textual summary of design
 gsBoundSummary(x) # Tabular summary of design
 ```
 
@@ -269,6 +271,7 @@ This is not required, but can limit misinterpretations.
 ```{r}
 x$n.I # Events at planned analyses
 ```
+
 Here are the nominal 1-sided p-value bounds which could also be seen with the `gsBoundSummary(x)` command above.
 
 ```{r}
@@ -279,7 +282,7 @@ Doubling these 1-sided bounds, we can compare to bounds from @AFCAPSdesign: *The
 
 From @AFCAPSresults we have *After an average follow-up of 5.2 years, lovastatin reduced the incidence of first acute major coronary events (183 vs 116 first events; relative risk [RR], 0.63; 95% confidence interval [CI], 0.50-0.79; P<.001).` This was at the second interim analysis. We see immediately that the 299 events were less than the second planned analysis after 332 events.
 The bounds are easily adapted in the app. We provide the code generated with the design update provided by the app. We assumed the first interim was performed with the planned 240 events.
-First, we enter the updated event counts. 
+First, we enter the updated event counts.
 
 ```{r}
 n.I <- c(120, 299, 320)
@@ -298,15 +301,15 @@ Note that we are now using `gsDesign()` rather than `gsSurv()` as calendar time 
 ```{r}
 xu <- gsDesign(
   # Updated parameters
-  k = ku, # Number of analyses 
-  n.I = n.I,  # Number of events
-  # Spending time; you don't really need this if you are just using 
+  k = ku, # Number of analyses
+  n.I = n.I, # Number of events
+  # Spending time; you don't really need this if you are just using
   # information (event) fraction
   usTime = usTime,
   lsTime = lsTime,
   # Remaining parameters from original design
-  test.type = x$test.type, alpha = x$alpha, beta = x$beta, 
-  astar = x$astar, sfu = x$upper$sf, sfupar = x$upper$param, 
+  test.type = x$test.type, alpha = x$alpha, beta = x$beta,
+  astar = x$astar, sfu = x$upper$sf, sfupar = x$upper$param,
   sfl = x$lower$sf, sflpar = x$lower$param,
   # maxn.IPlan is key for update to set max planned information
   maxn.IPlan = x$n.I[x$k],
@@ -324,20 +327,23 @@ You can see how much this changes by trying different event counts in the update
 ```{r, message = FALSE}
 library(dplyr)
 library(gt)
+
 gsBoundSummary(
   xu, # Updated design
   deltaname = "HR", # Name of treatment difference measure
-  logdelta = TRUE,  # For survival, delta is on a log scale; this transforms
+  logdelta = TRUE, # For survival, delta is on a log scale; this transforms
   Nname = "Events", # "N" for analyses is events for survival analysis
-  digits = 4,       # decimals for numbers in body of table
-  ddigits = 2,      # decimals for natural parameter; HR in this case
-  tdigits = 1,      # Time digits (not needed here)
+  digits = 4, # decimals for numbers in body of table
+  ddigits = 2, # decimals for natural parameter; HR in this case
+  tdigits = 1, # Time digits (not needed here)
   # We select key parameters for printing
   exclude = c(
     "B-value", "CP", "CP H1", "PP",
     paste0("P(Cross) if HR=", round(c(hr0, hr), digits = 2))
   )
-) %>% gt() %>% tab_header(title="Updated AFCAPS bounds at IA 2")
+) %>%
+  gt() %>%
+  tab_header(title = "Updated AFCAPS bounds at IA 2")
 ```
 
 ## Cardiovascular outcomes non-inferiority
@@ -361,7 +367,6 @@ endpoint MACE stratified by geographic region and screening renal function.
   - 4.75 years trial duration.
   - 1\% annual loss-to-follow-up rate.
   - Software: EAST 5 (Cytel).
-
 
 ```{r}
 EXAMINEdesign <- gsSurv(
@@ -420,7 +425,7 @@ n.I <- c(621, 650)
 ku <- length(n.I)
 # This is just specifying event fraction vs final planned
 # is used for computing spending.
-# If calendar spending were specified, calendar fraction 
+# If calendar spending were specified, calendar fraction
 # would be used here.
 usTime <- n.I / EXAMINEdesign$n.I[x$k]
 lsTime <- usTime
@@ -468,7 +473,9 @@ gsBoundSummary(
   ddigits = 2,
   tdigits = 1,
   exclude = c(
-    "B-value", "CP", "CP H1", "PP")) %>%
+    "B-value", "CP", "CP H1", "PP"
+  )
+) %>%
   gt() %>%
   tab_header(
     title = "EXAMINE trial design",
@@ -482,7 +489,6 @@ See the following link for the Moderna COVID-19 design replication: <https://med
 
 Can you reproduce this using the Shiny interface?
 
-
 ## Cure model {#poissonmixture}
 
 We consider a Poisson mixture model @deCastroGAMLSS which has also been referred to as a transformation cure model @Zhang2018 or promotion time cure model @Zeng2006.
@@ -495,7 +501,6 @@ Part of the suggested rationale is that the trial needs to be completed in a cer
 Much simpler models such as a 2- or 3-piece piecewise exponential model could be equally effective for a design of this nature, so this is just one example of an approach to a situation of this nature.
 This is our longest example; a simpler version of this is demonstrated in the app.
 Readers not immediately interested in the approach can simply skip the rest of this chapter.
-
 
 ### Cure model parameters
 

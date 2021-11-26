@@ -17,11 +17,11 @@ In this chapter, we discuss group sequential design for MaxCombo test.
 
 $$ Z_{ik}=\sqrt{\frac{n_{0}+n_{1}}{n_{0}n_{1}}}\int_{0}^{t_k}w_i(t)\frac{\overline{Y}_{0}(t)\overline{Y}_{1}(t)}{\overline{Y}_{0}(t)+\overline{Y}_{0}(t)}\left\{ \frac{d\overline{N}_{1}(t)}{\overline{Y}_{1}(t)}-\frac{d\overline{N}_{0}(t)}{\overline{Y}_{0}(t)}\right\} $$
 
-- Not necessary to have same number of tests in each interim analysis
+- Not necessary to have the same number of tests in each interim analysis
 
 ## Examples
 
-We continue use the same example scenario in the last chapter.
+We continue to use the same example scenario from the last chapter.
 
 ```{r, include=FALSE}
 enrollRates <- tibble::tibble(Stratum = "All", duration = 12, rate = 500 / 12)
@@ -36,13 +36,13 @@ failRates <- tibble::tibble(
 ```
 
 ```{r, include=FALSE}
-## Randomization Ratio is 1:1
+# Randomization Ratio is 1:1
 ratio <- 1
 
-## Type 1 error (one-sided)
+# Type I error (one-sided)
 alpha <- 0.025
 
-## Power (1 - beta)
+# Power (1 - beta)
 beta <- 0.2
 power <- 1 - beta
 
@@ -54,15 +54,15 @@ analysisTimes <- c(12, 24, 36)
 # Define study design object in each arm
 gs_arm <- gsdmvn:::gs_create_arm(enrollRates, failRates,
   ratio = 1, # Randomization ratio
-  total_time = 36
-) # Total study duration
+  total_time = 36 # Total study duration
+)
 arm0 <- gs_arm[["arm0"]]
 arm1 <- gs_arm[["arm1"]]
 ```
 
 ### Example 1
 
-- Using logrank test in all interim analysis and a MaxCombo test $Z_{1k}: FH(0,0)$, $Z_{2k}: FH(0,0.5)$, $Z_{3k}: FH(0.5,0.5)$ in final analysis.
+- Using logrank test in all interim analyses and a MaxCombo test $Z_{1k}: FH(0,0)$, $Z_{2k}: FH(0,0.5)$, $Z_{3k}: FH(0.5,0.5)$ in final analysis.
 
 ```{r}
 fh_test1 <- rbind(
@@ -97,9 +97,9 @@ fh_test2
 
 ## Sample size calculation
 
-We first consider a user defined lower and upper bound using `gsDesign` bound
+We first consider a user-defined lower and upper bound using `gsDesign` bound
 
-In general, `gsDesign` bound can not be directly used for MaxCombo test:
+In general, `gsDesign` bound cannot be directly used for MaxCombo test:
 
 - Multiple test statistics are considered in interim analysis or final analysis.
 
@@ -128,7 +128,7 @@ x$lower$bound
 
 ### Example 1
 
-Sample size can be calculated using `gsdmvn::gs_design_combo`.
+Sample size can be calculated using `gsdmvn::gs_design_combo()`.
 
 ```{r}
 gsdmvn::gs_design_combo(enrollRates,
@@ -231,7 +231,7 @@ gsdmvn::gs_design_wlr(
 
 ## Outline of technical details
 
-We described the details of calculating
+We describe the details of calculating
 the sample size and events required for WLR under fixed design.
 
 It can be skipped for the first read of this training material.
@@ -247,7 +247,7 @@ It can be skipped for the first read of this training material.
 - Reference: Section 3.1 of @wang2019simulation
 - $Z_{ij}$: $i$-th test in $j$-th analysis.
 
-```{r, echo = FALSE, out.width = "60%"}
+```{r, echo = FALSE, out.width = "100%"}
 knitr::include_graphics("images/corr_combo.png")
 ```
 
@@ -388,7 +388,7 @@ corr_combo1 <- corr_combo
 corr_combo1 %>% round(2)
 ```
 
-- Compared with Simulation results based on 10,000 replications.
+- Compared with simulation results based on 10,000 replications.
 
 ```{r, echo = FALSE}
 plot(corr_combo1, corr_combo1 - corr1,
@@ -421,7 +421,7 @@ corr_combo2 <- corr_combo
 corr_combo2 %>% round(2)
 ```
 
-- Compared with Simulation results based on 10,000 replications.
+- Compared with simulation results based on 10,000 replications.
 
 ```{r, echo = FALSE}
 plot(corr_combo2, corr_combo2 - corr2,

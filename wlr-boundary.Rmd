@@ -19,7 +19,7 @@ The spending function has been implemented in `gsDesign`.
 - `gsDesign::sfLDOF()` (O'Brien-Fleming bound approximation) or other functions starting with `sf` in `gsDesign`
 - The boundary family approach. @pocock1977group, @o1979multiple, @wang1987approximately
 
-There are other way to derive boundary but will not be covered:
+There are other ways to derive boundary but will not be covered:
 
 - Conditional power. @lachin2005review
 
