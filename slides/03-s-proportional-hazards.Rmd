@@ -1,8 +1,6 @@
-# (PART) General methods and proportional hazards {-}
-
+# General methods and proportional hazards
 
 # Proportional hazards approach
-
 
 ## @LachinFoulkes method {#lachin-foulkes}
 
@@ -15,9 +13,9 @@
 
 ## Shiny app for proportional hazards
 
-- Shiny app available at: 
-  + <https://rinpharma.shinyapps.io/gsdesign/> (preferred) 
-  + <https://gsdesign.shinyapps.io/devel/> (not preferred)
+- Shiny app available at:
+  - <https://rinpharma.shinyapps.io/gsdesign/> (preferred)
+  - <https://gsdesign.shinyapps.io/devel/> (not preferred)
 - Allows broad specification of designs
 - Much simpler than writing code
 - It will write code and reports for you
@@ -27,12 +25,12 @@
 ## Metastatic oncology example {#mediansurvival}
 
 - KEYNOTE 189 trial (@KEYNOTE189)
-   - Endpoints: progression free survival (PFS) and overall survival (OS) in patients
-   - Indication: previously untreated metastatic non-small cell lung cancer (NSCLC)
-   - Treatments: chemotherapy +/- pembrolizumab
-   - Randomized 2:1 to an add-on of pembrolizumab or placebo
-   - Type I error (1-sided): 0.025 familywise error rate (FWER) split between PFS ($\alpha=0.0095$) and OS ($\alpha=0.0155$)
-   - Graphical method $\alpha$-control for group sequential design of @MaurerBretz2013 used
+  - Endpoints: progression free survival (PFS) and overall survival (OS) in patients
+  - Indication: previously untreated metastatic non-small cell lung cancer (NSCLC)
+  - Treatments: chemotherapy +/- pembrolizumab
+  - Randomized 2:1 to an add-on of pembrolizumab or placebo
+  - Type I error (1-sided): 0.025 familywise error rate (FWER) split between PFS ($\alpha=0.0095$) and OS ($\alpha=0.0155$)
+  - Graphical method $\alpha$-control for group sequential design of @MaurerBretz2013 used
 
 Key aspects of the design as documented in the protocol accompanying @KEYNOTE189.
 
@@ -49,11 +47,10 @@ Key aspects of the design as documented in the protocol accompanying @KEYNOTE189
   - Observed deaths of 240, 332 and 416 at the 3 planned analyses
   - A one-sided bound using the @LanDeMets spending approximating an O'Brien-Fleming bound.
 
-
 ## Cardiovascular outcomes reduction
 
 - AFCAPS/TEXCAPS trial: use of lovastatin to reduce cardiovascular outcomes
-- Design described in @AFCAPSdesign 
+- Design described in @AFCAPSdesign
 - Results reported in @AFCAPSresults
 - Reproduction here not exact mainly due to choice of @LachinFoulkes
   - Little difference between methods
@@ -69,7 +66,6 @@ Key aspects of the design as documented in the protocol accompanying @KEYNOTE189
   - Enrollment duration of 1/2 year with constant enrollment.
   - An exponential failure rate of 0.01131 per year which is nearly identical to the annual dropout rate of `r round(1 - exp(-.01131),5)`.
   - An exponential dropout rate of 0.004 per year which is nearly identical to the annual dropout rate of `r round(1 - exp(-.004),5)`.
-
 
 ## Cardiovascular outcomes non-inferiority: EXAMINE trial
 
@@ -108,7 +104,7 @@ Note that:
 - $1-\exp(-\lambda t)$ is the CDF for an exponential distribution
   - can be replaced by arbitrary continuous CDF.
 - As $t\rightarrow \infty$, $S(t)\rightarrow\exp(-\theta)$ (cure rate).
-- Model useful when historical data suggests plateau in survival. 
+- Model useful when historical data suggests plateau in survival.
 - PH model: experimental survival $S_E(t)=S_C(t)^{HR}$.
 
 ## Survival model assumptions
@@ -118,6 +114,7 @@ library(ggplot2)
 library(dplyr)
 library(gsDesign)
 library(gt)
+
 # Assumed long-term survival rate
 cureRate <- 0.7
 # Survival rate at specific time
@@ -147,18 +144,17 @@ ggplot(cure_model, aes(x = Month, y = Survival, col = Treatment)) +
   annotate("text", x = 36, y = .66, label = "0.75 control survival at 18 months") +
   annotate("text", x = 36, y = .9, label = "Hazard ratio (experimental/contrl) = 0.72") +
   scale_x_continuous(breaks = seq(0, maxTime, 6)) +
-  scale_y_continuous(breaks = seq(.6, 1, .1), limits = c(.6, 1))+
+  scale_y_continuous(breaks = seq(.6, 1, .1), limits = c(.6, 1)) +
   ggtitle("Underlying survival assumptions for cure model design example")
 cure_model <- cure_model %>%
   mutate(
     H = -log(Survival),
     duration = Month - lag(Month, default = 0),
     h = (H - lag(H, default = 0) / duration)
-  ) 
+  )
 ```
 
 More details in book.
-
 
 ## Cure model: Expected event accumulation over time
 
@@ -175,7 +171,6 @@ enrollDurations <- c(2, 2, 2, 12)
 ```
 
 ## Expected event accrual over time
-
 
 ```{r, out.width="100%", echo=FALSE}
 # Calendar times
@@ -208,27 +203,28 @@ for (i in seq_along(ti[-1])) {
   n[i + 1] <- nEventsIA(tIA = ti[i + 1], x = xx)
 }
 # Now do a line plot of % of final events and % of final time by month
-ev <- rbind(tibble(Month = ti, ev = n / max(n) * 100, s = "Event fraction"),
-            tibble(Month = ti, ev = ti/max(ti) * 100, s = "Calendar fraction")
+ev <- rbind(
+  tibble(Month = ti, ev = n / max(n) * 100, s = "Event fraction"),
+  tibble(Month = ti, ev = ti / max(ti) * 100, s = "Calendar fraction")
 )
 p <- ggplot(ev, aes(x = Month, y = ev, col = factor(s))) +
   geom_line() +
   ylab("Spending time (%)") +
   xlab("Study Time") +
   scale_x_continuous(breaks = seq(0, maxTime, 12)) +
-  scale_y_continuous(breaks = seq(0, 100, 20)) + 
-  guides(col=guide_legend(title="Spending type"))
+  scale_y_continuous(breaks = seq(0, 100, 20)) +
+  guides(col = guide_legend(title = "Spending type"))
 # Add text overlay at targeted analysis times
 subti <- c(12, 18, 24, 36, 48, 60)
 subpct <- n[subti + 1] / n[maxTime + 1] * 100
 subtipct <- subti / max(subti) * 100
 txt <- rbind(
-  tibble(Month = subti, ev = subpct,   s = "Event fraction", txt = paste(as.character(round(subpct, 1)), "%", sep = "")),
+  tibble(Month = subti, ev = subpct, s = "Event fraction", txt = paste(as.character(round(subpct, 1)), "%", sep = "")),
   tibble(Month = subti, ev = subtipct, s = "Calendar fraction", txt = paste(as.character(round(subtipct, 1)), "%", sep = ""))
 )
-p + geom_label(data = txt, aes(x = Month, y = ev, col = factor(s), label = txt))+ 
+p + geom_label(data = txt, aes(x = Month, y = ev, col = factor(s), label = txt)) +
   ggtitle("Calendar vs. event fraction spending for cure model example") +
-  annotate("text", x=8, y=2, size = 4, color = "black", label = "- Calendar spending preserves more alpha to final analysis", hjust=0) 
+  annotate("text", x = 8, y = 2, size = 4, color = "black", label = "- Calendar spending preserves more alpha to final analysis", hjust = 0)
 ```
 
 ## Potential advantages/disadvantages of calendar spending
@@ -236,7 +232,7 @@ p + geom_label(data = txt, aes(x = Month, y = ev, col = factor(s), label = txt))
 - Quite possible that event rate design assumptions incorrect
 - Good to ensure duration of follow-up is adequate evaluate tail behavior/plateau in survival
 - Ensures adequate follow-up to estimate relevant parts of survival curve
-- Limits trial to relevant clinical and practical 
+- Limits trial to relevant clinical and practical
 - May be underpowered if events accrue slowly
 - Probably less useful for high-risk endpoints (e.g., metastatic cancer)
 - Regulatory resistance?
@@ -246,6 +242,5 @@ p + geom_label(data = txt, aes(x = Month, y = ev, col = factor(s), label = txt))
 See the following link for the Moderna COVID-19 design replication: <https://medium.com/@yipeng_39244/reverse-engineering-the-statistical-analyses-in-the-moderna-protocol-2c9fd7544326>
 
 Can you reproduce this using the Shiny interface?
-
 
 # Break (15 minutes)

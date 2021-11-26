@@ -26,13 +26,13 @@ For simplicity, we made a few key assumptions.
 - Balanced design (1:1 randomization ratio).
 - 1-sided test.
 - Local alternative: variance under null and alternative are approximately equal.
-- Accrual distribution: Piecewise uniform. 
+- Accrual distribution: Piecewise uniform.
 - Survival distribution: piecewise exponential.
 - Loss to follow-up: exponential.
 - No stratification.
 - No cure fraction.
 
-The fixed design part largely follow the concept described in @yung2019sample.
+The fixed design part largely follows the concept described in @yung2019sample.
 
 ## Notation
 
