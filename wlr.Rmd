@@ -116,7 +116,7 @@ If there is no lower bound, the formula can be simplified as
 
 $$\beta = \text{Pr}(\cap_{j=1}^{K} \{Z_j \le b_j\} \mid H_1)$$
 
-We can calculate sample size required for a group sequential design by solving
+We can calculate the sample size required for a group sequential design by solving
 the power equation with a given lower and upper bound and power, type I error and power.
 
 As a note, we can calculate futility probability similarly:
@@ -125,7 +125,7 @@ $$\sum_{k=1}^{K} l_k = \sum_{k=1}^{K} \text{Pr}(\{Z_k < a_k\} \cap_{j=1}^{k-1} \
 
 ## Weighted logrank test
 
-Similar to the fixed design, we can define the test statistics for weighted logrank test using counting process formula as
+Similar to the fixed design, we can define the test statistics for weighted logrank test using the counting process formula as
 
 $$ Z_k=\sqrt{\frac{n_{0}+n_{1}}{n_{0}n_{1}}}\int_{0}^{t_k}w(t)\frac{\overline{Y}_{0}(t)\overline{Y}_{1}(t)}{\overline{Y}_{0}(t)+\overline{Y}_{0}(t)}\left\{ \frac{d\overline{N}_{1}(t)}{\overline{Y}_{1}(t)}-\frac{d\overline{N}_{0}(t)}{\overline{Y}_{0}(t)}\right\} $$
 
@@ -136,8 +136,8 @@ $\overline{N}_{i}(t)$ are the number of events in group $i$ up to and including 
 Note, the only difference is that the test statistics fixed analysis up to $t_k$ at $k$th interim analysis
 
 ::: {.rmdnote}
-For simplicity, we illustrate the sample size and power calculation based on the boundary from logrank test.
-The same boundary for different type of analysis for fair comparison.
+For simplicity, we illustrate the sample size and power calculation based on the boundary from the logrank test.
+The same boundary for different types of analysis for a fair comparison.
 However, different WLR can have different information fraction for the same interim analysis time.
 Further discussion of the spending function based on actual information fraction will be provided later.
 :::
@@ -145,7 +145,7 @@ Further discussion of the spending function based on actual information fraction
 ## Example scenario
 
 We considered an example scenario that is similar to the fixed design.
-The key difference is that we considered 2 interim analysis at 12 and 24 month before the final analysis at 36 month.
+The key difference is that we considered 2 interim analysis at 12 and 24 months before the final analysis at 36 months.
 
 ```{r}
 enrollRates <- tibble::tibble(Stratum = "All", duration = 12, rate = 500 / 12)
@@ -176,8 +176,8 @@ analysisTimes <- c(12, 24, 36)
 
 ## Sample size under logrank test or $FH(0, 0)$
 
-In `gsdmvn`, the sample size can be calculated using `gsdmvn::gs_design_wlr()` for WLR test.
-For comparison purposes, we also provided the sample size calculation using `gsdmvn::gs_design_ahr()` for logrank test.
+In `gsdmvn`, the sample size can be calculated using `gsdmvn::gs_design_wlr()` for the WLR test.
+For comparison purposes, we also provided the sample size calculation using `gsdmvn::gs_design_ahr()` for the logrank test.
 In each calculation, we compare the analytical results with the simulation results with 10,000 replications.
 
 ::: {.rmdnote}
@@ -348,7 +348,7 @@ We illustrate the difference in the figure below.
 knitr::include_graphics("images/g_ahr.png")
 ```
 
-Note that average hazard ratio is weighted by corresponding weighted logrank weights.
+Note that the average hazard ratio is weighted by corresponding weighted logrank weights.
 
 ## Standardized effect size comparison
 
@@ -362,9 +362,9 @@ knitr::include_graphics("images/g_theta.png")
 
 ## Information fraction comparison
 
-The logrank test information fraction curve is close to linear function of time (the boundary calculation approach we used).
+The logrank test information fraction curve is close to a linear function of time (the boundary calculation approach we used).
 Other WLR test information fraction curves are convex functions.
-Information Fraction under null hypothesis is smaller than information fraction under alternative at the same time.
+Information fraction under the null hypothesis is smaller than information fraction under alternative at the same time.
 
 ```{r, echo = FALSE, out.width = "60%"}
 knitr::include_graphics("images/g_info.png")
@@ -461,7 +461,7 @@ sigma2 <- abs(sapply(analysisTimes, function(x) {
 sigma2
 ```
 
-Third, we calculate the sample size ratio at each interim analysis can be calculated by
+Third, the sample size ratio at each interim analysis can be calculated by
 
 ```{r}
 # Group sequential sample size ratio over time
@@ -470,7 +470,7 @@ gs_n_ratio <- (npsurvSS::paccr(analysisTimes, arm0) +
 gs_n_ratio
 ```
 
-After getting $\Delta_k$, $\sigma_k^{2}$ and the sample size ratio, one can calculate the expectation mean of Z statistics as
+After getting $\Delta_k$, $\sigma_k^{2}$, and the sample size ratio, one can calculate the expectation mean of Z statistics as
 
 ```{r}
 n <- 500 # Assume a sample size to get power
@@ -560,7 +560,7 @@ cumsum(gs_futility(
 
 - **Sample size**
 
-In additional to power and futility probability, one can also calculate the sample size by
+In addition to power and futility probability, one can also calculate the sample size by
 
 ```{r}
 efficacy_bound <- x$upper$bound
@@ -595,7 +595,7 @@ gsdmvn:::prob_event.arm(arm0, tmax = analysisTimes) * n0 +
 
 - **Average hazard ratio**
 
-The function below implement the connection between $\Delta$ and average hazard ratio using
+The function below implements the connection between $\Delta$ and average hazard ratio using
 Taylor series expansion.
 
 ```{r}
@@ -610,13 +610,13 @@ log_ahr <- sapply(analysisTimes, function(t_k) {
 exp(log_ahr)
 ```
 
-- `info` column is $\sigma^2_k$ times $N$
+- The `info` column is $\sigma^2_k$ times $N$
 
 ```{r}
 n_subject * sigma2
 ```
 
-- `info0` column is $\sigma^2_k$ times $N$ under the null where we both use `arm0` for calculation in active and control group.
+- The `info0` column is $\sigma^2_k$ times $N$ under the null where we both use `arm0` for calculation in active and control group.
 
 ### Cross comparison with `gs_design_wlr()`
 
@@ -685,10 +685,10 @@ exp(log_ahr)
 delta / sigma2
 ```
 
-- `info` column is $\sigma^2_k$ times $N$
+- The `info` column is $\sigma^2_k$ times $N$
 
 ```{r}
 N * sigma2
 ```
 
-- `info0` column is $\sigma^2_k$ times $N$ under the null.
+- The `info0` column is $\sigma^2_k$ times $N$ under the null.

@@ -81,8 +81,8 @@ Besides, it covers three models for analysis.
 In this section, we conduct three simulations.
 
 The first simulation is to compare the simulated power and asymptotic power.
-Specifically speaking, we compare the results from `gsdmvn::gs_power_ahr()` with that from `simtrial::simfix()`
-The details of this simulation can be found in Section \@ref(secAhrSimSimfix)
+Specifically speaking, we compare the results from `gsdmvn::gs_power_ahr()` with that from `simtrial::simfix()`.
+The details of this simulation can be found in Section \@ref(secAhrSimSimfix).
 
 The second simulation is to compare the simulated power and asymptotic power.
 Specifically speaking, we compare the results from `gsDesign2::AHR()` with that from `simtrial::simPWSurv()`.

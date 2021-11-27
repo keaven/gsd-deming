@@ -156,7 +156,7 @@ sim_res_combo %>%
   mutate_if(is.numeric, round, digits = 2)
 ```
 
-- Compared with group sequential design with log rank test (based on AHR).
+- Compared with group sequential design with logrank test (based on AHR).
 
 ```{r}
 gsdmvn::gs_design_ahr(
@@ -258,7 +258,7 @@ knitr::include_graphics("images/corr_combo.png")
 
 $$\hbox{Cov}(Z_{1k}, Z_{2k}) = \hbox{Var}(Z_k(\frac{\rho_1 + \rho_{2}}{2}, \frac{\gamma_1 + \gamma_2}{2}, \tau))$$
 
-- Even through one test is used in all interim analysis, correlation of all tests are needed in each interim analysis.
+- Even though one test is used in all interim analysis, correlation of all tests are needed in each interim analysis.
 
 ### Example 1
 
@@ -305,7 +305,7 @@ corr_test2
 ## Between analysis correlation
 
 - Within each test, the correlation among interim analysis.
-  - recall the discussion in group sequential design for weighted log rank test.
+  - Recall the discussion in group sequential design for weighted logrank test.
 
 ### Example 1
 

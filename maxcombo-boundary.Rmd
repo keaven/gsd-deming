@@ -7,7 +7,7 @@ library(gsdmvn)
 library(mvtnorm)
 ```
 
-In this chapter, we calculate boundary based on the error spending approach following @gordon1983discrete.
+In this chapter, we calculate boundaries based on the error spending approach following @gordon1983discrete.
 
 We continue use the same example scenario in the last chapter.
 
@@ -148,12 +148,12 @@ x
 
 ## Information fraction
 
-Under same design assumption, information fraction is different from different weight parameters in WLR.
+Under the same design assumption, information fraction is different from different weight parameters in WLR.
 
 There are two potential strategies to calculate the information fraction:
 
-- Option 1: Use minimal information fraction of all candidate test (implemented in `gsdmvn`).
-- Option 2: Use weighted average of information fraction.
+- Option 1: Use minimal information fraction of all candidate tests (implemented in `gsdmvn`).
+- Option 2: Use the weighted average of information fraction.
 
 ```{r, echo = FALSE, out.width = "60%"}
 knitr::include_graphics("images/g_info.png")
@@ -324,7 +324,7 @@ x$lower$bound
 
 ## Sample size calculation
 
-- sample size and boundaries are set simultaneously using an iterative algorithm.
+- Sample size and boundaries are set simultaneously using an iterative algorithm.
 
 ### Initiate the calculation from lower bound derived at $N = 400$
 
@@ -359,4 +359,4 @@ bound <- gsdmvn:::gs_bound(alpha_spend, beta_spend,
 bound
 ```
 
-- Repeat proceduce above until the sample size and lower bound converge
+- Repeat the procedure above until the sample size and lower bound converge.

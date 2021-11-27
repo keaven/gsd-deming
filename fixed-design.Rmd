@@ -33,12 +33,12 @@ For simplicity, we made a few key assumptions.
 
 ::: {.rmdnote}
 Some of these assumptions have been generalized in the literature and the R package `gsdmvn`.
-These assumptions will be used unless other clarification is made in specific section.
+These assumptions will be used unless another clarification is made in specific sections.
 :::
 
 ## Notation
 
-We also define some commonly used notation as below.
+We also define some commonly used notations as below.
 
 - $\alpha$: Type I error
 - $\beta$: Type II error or power (1 - $\beta$)
@@ -62,7 +62,7 @@ z_beta
 
 - $\theta$: effect size.
 
-The key step to calculate sample size is to define the effect size.
+To calculate sample size, a key step is to define the effect size.
 For example, the effect size in two-sample t-test is $(\mu_1 - \mu_2)/\sigma$,
 where $\mu_1$ and $\mu_2$ are group mean and $\sigma$ is pooled standard deviation.
 
@@ -81,9 +81,9 @@ $$ n = \frac{4 (z_{\alpha}+z_{\beta})^{2}}{\theta^2} $$
 
 ## Two-sample t-test
 
-Let's revisit two sample t-test to make connection between math formula and R code.
+Let's revisit the two-sample t-test to make a connection between the math formula and R code.
 
-If we consider a scenarios with treatment effect at 0.5 with pooled standard deviation at 2.
+Assume a scenario with treatment effect at 0.5 with pooled standard deviation at 2.
 Let's calculate the sample size using the formula above.
 
 ```{r}
@@ -110,10 +110,10 @@ stats::power.t.test(delta = 0.5, sd = 2, sig.level = 0.05, power = 0.8)$n * 2
 
 ## Logrank test
 
-Let's also explore the number of events required for logrank test under the proportional hazards assumption.
+Let's also explore the number of events required for the logrank test under the proportional hazards assumption.
 
 You may hear the sample size calculation is "event-driven".
-This is a nice feature under the **proportional hazards assumption** because the effect size for number of events is only depends on the hazard ratio.
+This is a nice feature under the **proportional hazards assumption** because the effect size for the number of events only depends on the hazard ratio.
 
 $$\theta = \log{\text{HR}} / 2$$
 
@@ -121,8 +121,8 @@ $$\theta = \log{\text{HR}} / 2$$
 - $d$ is the number of events.
 
 ::: {.rmdnote}
-As an exercise, the readers can derive the effect size in formula (9.3) of the
-Section 9.5 for the [NCSU ST520 course notes](https://www4.stat.ncsu.edu/~dzhang2/st520/520notes.pdf).
+As an exercise, the readers can derive the effect size in formula (9.3) of
+Section 9.5 from the [NCSU ST520 course notes](https://www4.stat.ncsu.edu/~dzhang2/st520/520notes.pdf).
 :::
 
 With the effect size, we can use the same formula to calculate the number of events as below.
@@ -139,8 +139,8 @@ The sample size calculation has been implemented in
 - `npsurvSS::size_two_arm()`
 
 ::: {.rmdnote}
-For simplicity, we skip the detail of sample size calculation,
-interested readers can refer @lachin1986evaluation.
+For simplicity, we skip the detail of the sample size calculation.
+Interested readers can refer to @lachin1986evaluation.
 :::
 
 Let's make connection between math formula and R code by considering a scenario with
@@ -203,8 +203,8 @@ gsDesign::nSurv(
 
 ## Non-proportional hazards
 
-Under proportional hazard assumption, we commonly used event driven approach for sample size calculation.
-(i.e., calculate number of events then derive the sample size.)
+Under proportional hazard assumption, we commonly used an event-driven approach for sample size calculation.
+(i.e., calculate the number of events, then derive the sample size.)
 
 - Event ($d$) to Sample size ($n$) or `d->n`
 
@@ -212,7 +212,7 @@ Under proportional hazard assumption, we commonly used event driven approach for
 knitr::include_graphics("images/ch2_d_to_n.svg")
 ```
 
-Under non-proportional hazards, the event driven approach is not applicable.
+Under non-proportional hazards, the event-driven approach is not applicable.
 We need to derive the sample size first.
 
 - Sample size ($n$) to Event ($d$) or `n->d`
@@ -256,7 +256,7 @@ failRates <- tibble::tibble(
 failRates
 ```
 
-The figure below illustrated the survival probability over time in two treatment groups.
+The figure below illustrates the survival probability over time in two treatment groups.
 
 ```{r, echo=FALSE, out.width= "100%"}
 knitr::include_graphics("images/delay_effect_survival.png")
@@ -264,7 +264,7 @@ knitr::include_graphics("images/delay_effect_survival.png")
 
 ## Weighted logrank test
 
-For weighted logrank test, we first illustrated it by using the Fleming-Harrington weight.
+For the weighted logrank test, we first illustrate it by using the Fleming-Harrington weight.
 
 $$FH^{\rho, \gamma}(t) = S(t)^\rho(1 - S(t))^\gamma$$
 
@@ -325,7 +325,7 @@ npsurvSS::size_two_arm(arm0, arm1,
 
 ### Effect size
 
-In @yung2019sample, section 2.3.3, it is shown that, the test statistics $Z\rightarrow_d\mathcal{N}(\sqrt{n}\theta, 1)$ approximately,
+In @yung2019sample, section 2.3.3, it is shown that the test statistics $Z\rightarrow_d\mathcal{N}(\sqrt{n}\theta, 1)$ approximately,
 where $\theta = \Delta/\sigma$ is the effect size. Here the test statistics for weighted logrank test is:
 
 $$ Z=\sqrt{\frac{n_{0}+n_{1}}{n_{0}n_{1}}}\int_{0}^{\tau}w(t)\frac{\overline{Y}_{0}(t)\overline{Y}_{1}(t)}{\overline{Y}_{0}(t)+\overline{Y}_{0}(t)}\left\{ \frac{d\overline{N}_{1}(t)}{\overline{Y}_{1}(t)}-\frac{d\overline{N}_{0}(t)}{\overline{Y}_{0}(t)}\right\} $$
@@ -535,7 +535,7 @@ plot(1:36, gsdmvn::wlr_weight_fh(x = 1:36, arm0, arm1, rho = -1, gamma = 0, tau 
 
 $$\Delta=\int_{0}^{\tau}w(s)\frac{p_{0}\pi_{0}(s)p_{1}\pi_{1}(s)}{\pi(s)}\{\lambda_{1}(s)-\lambda_{0}(s)\}ds$$
 
-- Taylor expansion builds connection between $\Delta$ and weighted average of log hazard ratio (AHR).
+- Taylor expansion builds a connection between $\Delta$ and weighted average of log hazard ratio (AHR).
   It is a generalization of the @Schoenfeld1981 asymptotic expansion.
 
 $$\Delta\approx\int_{0}^{\tau}w(s)\log\left(\frac{\lambda_1(s)}{\lambda_0(s)}\right)\frac{p_{0}\pi_{0}(s)p_{1}\pi_{1}(s)}{\pi(s)^2}v'(s)ds$$
@@ -593,7 +593,7 @@ Also computed by `gsDesign2::AHR()`.
 MaxCombo test statistics is the maximum of multiple WLR test statistics using different weight functions.
 We focus on Fleming and Harrington weight function $FH(\rho, \gamma)$ defined in `gsdmvn::wlr_weight_fh()`.
 
-To calculate sample size for the MaxCombo test,
+To calculate the sample size for the MaxCombo test,
 we will need to know the variance-covariance of multiple WLR test statistics.
 
 For Fleming and Harrington weight function, the covariance of different WLR test statistics can be calculated.

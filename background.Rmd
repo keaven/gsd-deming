@@ -2,7 +2,7 @@
 
 ## Non-proportional hazards {#nph}
 
-Non-proportional hazards (NPH) is very common to see when there is a delayed effect.
+Non-proportional hazards (NPH) are very common to see when there is a delayed effect.
 One example is given by KEYNOTE040, which targets to cure recurrent head and neck squamous cell carcinoma.
 There are two arms, one is pembrolizumab, and the other is standard of care (SOC).
 The randomization ratio is 1:1 and the total sample size is 495.
@@ -23,7 +23,7 @@ From the figure above, we can see there is a delay of the treatment effect.
 The delayed effect is not just in oncology, it also lies in other TA.
 For example, in cholesterol lowering and mortality [@simva4s], there is also a delayed effect.
 
-```{r, echo=FALSE, fig.cap="Scandinavian Simvistatin Survival Study", out.width = '80%'}
+```{r, echo=FALSE, fig.cap="Scandinavian Simvastatin Survival Study", out.width = '80%'}
 knitr::include_graphics("./images/ahr_slides_SSSS.jpeg")
 ```
 
@@ -46,11 +46,11 @@ KEYNOTE 061: Overall Survival in CPS 1
 knitr::include_graphics("./images/ahr_slides_KEYNOTE061OS.PNG")
 ```
 
-The above two examples motivate us to think about following questions:
+The above two examples motivate us to think about the following questions:
 
 - The impact of (potentially) delayed treatment effect on trial design and analysis.
-- Test statistics used (logrank, weighted logrank test and max combo test)
-- Sample size vs duration of follow-up
+- Test statistics used (logrank, weighted logrank test, and max-combo test)
+- Sample size vs. duration of follow-up
 - Timing of analyses
 - Futility bounds
 - Updating bounds
@@ -59,18 +59,18 @@ The above two examples motivate us to think about following questions:
 ### Group sequential design {#gsd}
 
 In group sequential design, groups of observations are collected and repeatedly analyzed, while controlling error rates.
-While the group sequential design in ongoing, a stopping rule specifies when and why a trial might be halted at these points.
-This stopping rule usually consists two components, a test statistics and a threshold.
+While the group sequential design is ongoing, a stopping rule specifies when and why a trial might be halted at these points.
+This stopping rule usually consists of two components, a test statistic and a threshold.
 The threshold is usually decided by the spending functions, which we introduced in Section \@ref(sf).
-And the test statistics is usually the Z-process and B-process, which are used to monitor the treatment effect under group sequential design.
-If a Z-process (B-process) cross the boundary, the the trail is stopped.
+And the test statistics are usually the Z-process and B-process, which are used to monitor the treatment effect under group sequential design.
+If a Z-process (B-process) cross the boundary, the trial is stopped.
 
 ### Z-process and B-process
 
-In this Section, we will introduce the Z-process and B-process.
+In this section, we will introduce the Z-process and B-process.
 Suppose in the group sequential design, there are totally $K$ looks.
 In the $k$-th look, there are $n_k$ available observations.
-For notation simplicity, we denote the final number of available observation as $N$, i.e., $N \triangleq n_K$.
+For notation simplicity, we denote the final number of available observations as $N$, i.e., $N \triangleq n_K$.
 
 :::{.definition #DefZprocess}
 The Z-process is defined as the standardized treatment effect, i.e.,
@@ -85,7 +85,7 @@ The numerator $\widehat\theta_k$ is the treatment effect estimated at the $k$-th
 :::
 
 For $\widehat\theta_k$, its form depends on the outcome of the clinical trials.
-In clinical trails with continuous outcome $X_1, X_2, \ldots \in \mathbb R$, the treatment effect estimated at the $k$-th look is
+In clinical trials with continuous outcome $X_1, X_2, \ldots \in \mathbb R$, the treatment effect estimated at the $k$-th look is
 \begin{equation}
   \widehat{\theta}_k
   =
@@ -263,9 +263,9 @@ We call the $\{a_k, b_k \}_{k = 1,\ldots, K}$ as the decision boundaries, if we 
 And we call $\{b_k\}_{k=1,\ldots,K}$ as the _efficiency boundary_, which are decided by the control of type I error, and $\{a_k\}_{k=1,\ldots,K}$ as the _futility boundary_, which are used to control boundary crossing probabilities.
 
 For the calculation of boundaries, there are typically two methods.
-The first one is so called the error spending approach, which specifies boundary crossing probabilities at each analysis.
+The first one is the so-called error spending approach, which specifies boundary crossing probabilities at each analysis.
 This is most commonly done with the error spending function approach [@LanDeMets].
-The second one is so called the boundary family approach, which specifies how big boundary values should be relative to each other and adjust these relative values by a constant multiple to control overall error rates.
+The second one is the so-called boundary family approach, which specifies how big boundary values should be relative to each other and adjust these relative values by a constant multiple to control overall error rates.
 The commonly applied boundary family include:
 
 - Haybittle boundary [@haybittle1971repeated];
@@ -273,27 +273,28 @@ The commonly applied boundary family include:
   - Pocock boundary [@pocock1977group];
   - O'Brien and Fleming boundary [@o1979multiple].
 
-In the remaining of this section, we will introduce the above spending functions one by one.
+In the remainder of this section, we will introduce the above spending functions one by one.
 
 ### Haybittle boundary
 
-The main idea of haybittle boundary is to set the interim Z-score boundary as 3 and the final boundary as 1.96, which is visualized as the figure below.
+The main idea of the Haybittle boundary is to set the interim Z-score boundary as 3 and the final boundary as 1.96, which is visualized in the figure below.
+
 ```{r, echo=FALSE, fig.cap="Haybittle boundary",out.width = '50%'}
 knitr::include_graphics("images/background_SF_Haybittle_boundary.png")
 ```
 
 The above Haybittle boundary has three modified versions.
 
-The first modified version uses Bonferroni adjustment: for the first $K-1$ analyses, significant p-value is set as 0.001; and for the final analysis, significant p-value is set as $0.05 - 0.01 \times (K-1)$.
+The first modified version uses Bonferroni adjustment: for the first $K-1$ analyses, the significant p-value is set as 0.001; and for the final analysis, the significant p-value is set as $0.05 - 0.01 \times (K-1)$.
 This modification helps to avoid type I error inflation.
 Besides, it does not require them to be equally spaced in terms of information and can be used regardless of the joint distribution of Z-score, i.e., $Z(t_1),...,Z(t_k)$.
 
-The second modified version sets the Z-score as 4 for the first half of the study and set the Z-score boundary as 3 thereafter.
+The second modified version sets the Z-score as 4 for the first half of the study and sets the Z-score boundary as 3 thereafter.
 
 The third modified version requires crossing the boundary at two successive looks.
 
-In summary, Haybittle boundary uses piecewise constant boundary, which make it very easy to implement.
-But it is kind of conservative and the selection of the constant boundary (e.g., 3 and 1.96) needs justifications.
+In summary, the Haybittle boundary uses a piecewise constant boundary, which makes it very easy to implement.
+But it is kind of conservative, and the selection of the constant boundary (e.g., 3 and 1.96) needs justifications.
 
 ### Wang-Tsiatis boundary
 
@@ -319,7 +320,7 @@ where $c_P(K)$ is fixed given the number of total looks $K$ and chosen such that
 knitr::include_graphics("images/background_SF_Pocock_boundary.png")
 ```
 
-Here is an example of Pocock boundary.
+Here is an example of the Pocock boundary.
 
 |total number of looks(K)| $\alpha = 0.01$ | $\alpha = 0.05$ | $\alpha = 0.1$ |
 |:--:|:-:|:-:|:-:|
@@ -333,19 +334,19 @@ We will reject $H_0$ if $|Z(k/4)| > 2.361$ for $k = 1,2,3,4$ (final analysis).
 
 In summary, the Pocock boundary is a special case of Wang-Tsiatis boundary ($\Delta = 0.5$) and has constant Z-score boundaries, i.e., $|Z(k/K)| > c_P(K)$.
 And the constant boundary $c_P(K)$ is decided by the type I error rate and the total number of looks.
-Its main weakness is the high price for the end of the trial and requirement of equally spaced looks.
+Its main weakness is the high price for the end of the trial and the requirement of equally spaced looks.
 
 ### O'Brien-Fleming boundary
 
-O'Brien-Fleming boundary is very conservative at the beginning, which gives realtively large boundary first.
-But it gives nominal value close to the overall value of the design $\approx 1.96$ for the final stage.
+O'Brien-Fleming boundary is very conservative at the beginning, which gives a relatively large boundary first.
+But it gives a nominal value close to the overall value of the design $\approx 1.96$ for the final stage.
 Its visualization can be found as follows.
 
 ```{r, echo=FALSE, fig.cap="OBrien-Fleming boundary",out.width = '50%'}
 knitr::include_graphics("images/background_SF_OBF_boundary.png")
 ```
 
-Here is an example of O'Brien-Fleming boundary.
+Here is an example of the O'Brien-Fleming boundary.
 
 |total number of looks(K)| $\alpha = 0.01$ | $\alpha = 0.05$ | $\alpha = 0.1$ |
 |:--:|:-:|:-:|:-:|
@@ -366,10 +367,10 @@ The B-value boundary can be easily transformed into decreasing Z-score boundary 
 
 In summary, the O'Brien-Fleming boundary designs a decreasing Z-score boundary, with large boundaries at the early stage but ~1.96 boundary when it approaches the final stage.
 
-Although both Pocock boundary and OBF boundary are belonging to Wang-Tsiatis boundary's family.
-But there are two differences between them.
+Although both the Pocock boundary and OBF boundary belong to the Wang-Tsiatis boundary's family,
+there are two differences between them.
 
-The first difference is that, the Pocock boundary has flat Z-score boundaries; while the O'Brien-Fleming has decreasing Z-score boundary.
+The first difference is, the Pocock boundary has flat Z-score boundaries, while the O'Brien-Fleming has decreasing Z-score boundary.
 Accordingly, the O'Brien-Fleming boundary makes it much more difficult to stop early than the Pocock boundary.
 However, the O'Brien-Fleming boundary extracts a much smaller price at the end.
 
@@ -377,7 +378,7 @@ However, the O'Brien-Fleming boundary extracts a much smaller price at the end.
 knitr::include_graphics("images/background_SF_OF_P_t.png")
 ```
 
-The second difference is that, they have different performance in cumulative type I error rate (the probability of rejection at or before $t_j$, i.e., $\text{Pr}(\cup_{i=1}^j |Z(t_i)| > c_i)$).
+The second difference is, they have different performance in cumulative type I error rate (the probability of rejection at or before $t_j$, i.e., $\text{Pr}(\cup_{i=1}^j |Z(t_i)| > c_i)$).
 
 - The Pocock cumulative type I error rate increases sharply at first, but much less so toward the end.
 - The O'Brien-Fleming behaves in just the opposite way.
@@ -386,7 +387,7 @@ The second difference is that, they have different performance in cumulative typ
 knitr::include_graphics("images/background_SF_cumType1_t.png")
 ```
 
-In conclusion, we visualize the three spending function in the following figure.
+In conclusion, we visualize the three spending functions in the following figure.
 
 ```{r, echo=FALSE, fig.cap="Three boundaries",out.width = '50%'}
 knitr::include_graphics("images/background_SF_ThreeBoundary.png")
@@ -428,7 +429,7 @@ $$
 
 For survival outcome, it is a little bit complicated.
 Suppose the interim analysis is conducted after $\tau$ month with $d$ of $D$ planned events evaluated in each arm.
-The treatment effect under survival outcome is usually measured by log rank test, i.e.,
+The treatment effect under survival outcome is usually measured by logrank test, i.e.,
 $$
   \widehat\delta(\tau)
   =
@@ -452,4 +453,4 @@ $$
 Comparing survival outcome and continuous/binary outcome, we found the information (fraction) of survival outcome is decided by the number of events, while it is decided by the number of available observations under continuous/binary outcome.
 
 If there are multiple interim analysis at $\tau_1$-th, $\tau_2$-th, $\ldots$, $\tau_K$-th month, we get a sequence of information as $I(\tau_1), I(\tau_2), \ldots, I(\tau_K)$ and a sequence of information fraction $t_1, t_2, \ldots, t_K$.
-Please note that, the information sequence is sometimes simplified as $I_1, I_2, \ldots, I_K$ [@JTBook].
+Please note that the information sequence is sometimes simplified as $I_1, I_2, \ldots, I_K$ [@JTBook].
