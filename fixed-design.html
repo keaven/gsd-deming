@@ -95,14 +95,14 @@ will be the tool for this training.</p>
 </ul>
 <div class="rmdnote">
 <p>Some of these assumptions have been generalized in the literature and the R package <code>gsdmvn</code>.
-These assumptions will be used unless other clarification is made in specific section.</p>
+These assumptions will be used unless another clarification is made in specific sections.</p>
 </div>
 </div>
 <div id="notation" class="section level2">
 <h2>
 <span class="header-section-number">6.2</span> Notation<a class="anchor" aria-label="anchor" href="#notation"><i class="fas fa-link"></i></a>
 </h2>
-<p>We also define some commonly used notation as below.</p>
+<p>We also define some commonly used notations as below.</p>
 <ul>
 <li>
 <span class="math inline">\(\alpha\)</span>: Type I error</li>
@@ -132,7 +132,7 @@ In R, it is easy to calculate <span class="math inline">\(z_\alpha\)</span> and 
 <li>
 <span class="math inline">\(\theta\)</span>: effect size.</li>
 </ul>
-<p>The key step to calculate sample size is to define the effect size.
+<p>To calculate sample size, a key step is to define the effect size.
 For example, the effect size in two-sample t-test is <span class="math inline">\((\mu_1 - \mu_2)/\sigma\)</span>,
 where <span class="math inline">\(\mu_1\)</span> and <span class="math inline">\(\mu_2\)</span> are group mean and <span class="math inline">\(\sigma\)</span> is pooled standard deviation.</p>
 <ul>
@@ -156,8 +156,8 @@ In this simplified case, the sample size can be calculated as</p>
 <h2>
 <span class="header-section-number">6.4</span> Two-sample t-test<a class="anchor" aria-label="anchor" href="#two-sample-t-test"><i class="fas fa-link"></i></a>
 </h2>
-<p>Let’s revisit two sample t-test to make connection between math formula and R code.</p>
-<p>If we consider a scenarios with treatment effect at 0.5 with pooled standard deviation at 2.
+<p>Let’s revisit the two-sample t-test to make a connection between the math formula and R code.</p>
+<p>Assume a scenario with treatment effect at 0.5 with pooled standard deviation at 2.
 Let’s calculate the sample size using the formula above.</p>
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Effect size</span>
@@ -180,9 +180,9 @@ It provides a slightly larger sample size under the same study design scenario.<
 <h2>
 <span class="header-section-number">6.5</span> Logrank test<a class="anchor" aria-label="anchor" href="#logrank-test"><i class="fas fa-link"></i></a>
 </h2>
-<p>Let’s also explore the number of events required for logrank test under the proportional hazards assumption.</p>
+<p>Let’s also explore the number of events required for the logrank test under the proportional hazards assumption.</p>
 <p>You may hear the sample size calculation is “event-driven”.
-This is a nice feature under the <strong>proportional hazards assumption</strong> because the effect size for number of events is only depends on the hazard ratio.</p>
+This is a nice feature under the <strong>proportional hazards assumption</strong> because the effect size for the number of events only depends on the hazard ratio.</p>
 <p><span class="math display">\[\theta = \log{\text{HR}} / 2\]</span></p>
 <ul>
 <li>
@@ -191,8 +191,8 @@ This is a nice feature under the <strong>proportional hazards assumption</strong
 <span class="math inline">\(d\)</span> is the number of events.</li>
 </ul>
 <div class="rmdnote">
-<p>As an exercise, the readers can derive the effect size in formula (9.3) of the
-Section 9.5 for the <a href="https://www4.stat.ncsu.edu/~dzhang2/st520/520notes.pdf">NCSU ST520 course notes</a>.</p>
+<p>As an exercise, the readers can derive the effect size in formula (9.3) of
+Section 9.5 from the <a href="https://www4.stat.ncsu.edu/~dzhang2/st520/520notes.pdf">NCSU ST520 course notes</a>.</p>
 </div>
 <p>With the effect size, we can use the same formula to calculate the number of events as below.</p>
 <p><span class="math display">\[ d = \frac{4 (z_{\alpha}+z_{\beta})^{2}}{(\log{\text{HR}/2})^2} \]</span></p>
@@ -205,8 +205,8 @@ survival distribution loss to follow-up distribution and study duration.</p>
 <li><code><a href="https://rdrr.io/pkg/npsurvSS/man/size_two_arm.html">npsurvSS::size_two_arm()</a></code></li>
 </ul>
 <div class="rmdnote">
-<p>For simplicity, we skip the detail of sample size calculation,
-interested readers can refer <span class="citation">Lachin and Foulkes (<a href="references.html#ref-lachin1986evaluation" role="doc-biblioref">1986</a><a href="references.html#ref-lachin1986evaluation" role="doc-biblioref">b</a>)</span>.</p>
+<p>For simplicity, we skip the detail of the sample size calculation.
+Interested readers can refer to <span class="citation">Lachin and Foulkes (<a href="references.html#ref-lachin1986evaluation" role="doc-biblioref">1986</a><a href="references.html#ref-lachin1986evaluation" role="doc-biblioref">b</a>)</span>.</p>
 </div>
 <p>Let’s make connection between math formula and R code by considering a scenario with
 hazard ratio at 0.6.</p>
@@ -281,14 +281,14 @@ that relax the local alternative assumption and is recommended in practice.</p>
 <h2>
 <span class="header-section-number">6.6</span> Non-proportional hazards<a class="anchor" aria-label="anchor" href="#non-proportional-hazards"><i class="fas fa-link"></i></a>
 </h2>
-<p>Under proportional hazard assumption, we commonly used event driven approach for sample size calculation.
-(i.e., calculate number of events then derive the sample size.)</p>
+<p>Under proportional hazard assumption, we commonly used an event-driven approach for sample size calculation.
+(i.e., calculate the number of events, then derive the sample size.)</p>
 <ul>
 <li>Event (<span class="math inline">\(d\)</span>) to Sample size (<span class="math inline">\(n\)</span>) or <code>d-&gt;n</code>
 </li>
 </ul>
 <div class="inline-figure"><img src="images/ch2_d_to_n.svg" width="100%" style="display: block; margin: auto;"></div>
-<p>Under non-proportional hazards, the event driven approach is not applicable.
+<p>Under non-proportional hazards, the event-driven approach is not applicable.
 We need to derive the sample size first.</p>
 <ul>
 <li>Sample size (<span class="math inline">\(n\)</span>) to Event (<span class="math inline">\(d\)</span>) or <code>n-&gt;d</code>
@@ -344,14 +344,14 @@ We need to derive the sample size first.</p>
 #&gt;   &lt;chr&gt;      &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;
 #&gt; 1 All            4   0.0462   1         0.001
 #&gt; 2 All          100   0.0462   0.6       0.001</code></pre>
-<p>The figure below illustrated the survival probability over time in two treatment groups.</p>
+<p>The figure below illustrates the survival probability over time in two treatment groups.</p>
 <div class="inline-figure"><img src="images/delay_effect_survival.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 <div id="weighted-logrank-test" class="section level2">
 <h2>
 <span class="header-section-number">6.7</span> Weighted logrank test<a class="anchor" aria-label="anchor" href="#weighted-logrank-test"><i class="fas fa-link"></i></a>
 </h2>
-<p>For weighted logrank test, we first illustrated it by using the Fleming-Harrington weight.</p>
+<p>For the weighted logrank test, we first illustrate it by using the Fleming-Harrington weight.</p>
 <p><span class="math display">\[FH^{\rho, \gamma}(t) = S(t)^\rho(1 - S(t))^\gamma\]</span></p>
 <p>To demonstrate the weight function, we covert the input of <code>enrollRates</code> and <code>failRates</code> as required by <code>npsurvSS</code>.</p>
 <div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
@@ -412,7 +412,7 @@ We need to derive the sample size first.</p>
 <h3>
 <span class="header-section-number">6.7.1</span> Effect size<a class="anchor" aria-label="anchor" href="#effect-size"><i class="fas fa-link"></i></a>
 </h3>
-<p>In <span class="citation">Yung and Liu (<a href="references.html#ref-yung2019sample" role="doc-biblioref">2019</a>)</span>, section 2.3.3, it is shown that, the test statistics <span class="math inline">\(Z\rightarrow_d\mathcal{N}(\sqrt{n}\theta, 1)\)</span> approximately,
+<p>In <span class="citation">Yung and Liu (<a href="references.html#ref-yung2019sample" role="doc-biblioref">2019</a>)</span>, section 2.3.3, it is shown that the test statistics <span class="math inline">\(Z\rightarrow_d\mathcal{N}(\sqrt{n}\theta, 1)\)</span> approximately,
 where <span class="math inline">\(\theta = \Delta/\sigma\)</span> is the effect size. Here the test statistics for weighted logrank test is:</p>
 <p><span class="math display">\[ Z=\sqrt{\frac{n_{0}+n_{1}}{n_{0}n_{1}}}\int_{0}^{\tau}w(t)\frac{\overline{Y}_{0}(t)\overline{Y}_{1}(t)}{\overline{Y}_{0}(t)+\overline{Y}_{0}(t)}\left\{ \frac{d\overline{N}_{1}(t)}{\overline{Y}_{1}(t)}-\frac{d\overline{N}_{0}(t)}{\overline{Y}_{0}(t)}\right\} \]</span></p>
 <ul>
@@ -668,7 +668,7 @@ where <span class="math inline">\(\theta = \Delta/\sigma\)</span> is the effect 
 </ul>
 <p><span class="math display">\[\Delta=\int_{0}^{\tau}w(s)\frac{p_{0}\pi_{0}(s)p_{1}\pi_{1}(s)}{\pi(s)}\{\lambda_{1}(s)-\lambda_{0}(s)\}ds\]</span></p>
 <ul>
-<li>Taylor expansion builds connection between <span class="math inline">\(\Delta\)</span> and weighted average of log hazard ratio (AHR).
+<li>Taylor expansion builds a connection between <span class="math inline">\(\Delta\)</span> and weighted average of log hazard ratio (AHR).
 It is a generalization of the <span class="citation">Schoenfeld (<a href="references.html#ref-Schoenfeld1981" role="doc-biblioref">1981</a>)</span> asymptotic expansion.</li>
 </ul>
 <p><span class="math display">\[\Delta\approx\int_{0}^{\tau}w(s)\log\left(\frac{\lambda_1(s)}{\lambda_0(s)}\right)\frac{p_{0}\pi_{0}(s)p_{1}\pi_{1}(s)}{\pi(s)^2}v'(s)ds\]</span></p>
@@ -727,7 +727,7 @@ it can be simplified to</p></li>
 </h2>
 <p>MaxCombo test statistics is the maximum of multiple WLR test statistics using different weight functions.
 We focus on Fleming and Harrington weight function <span class="math inline">\(FH(\rho, \gamma)\)</span> defined in <code><a href="https://merck.github.io/gsdmvn/reference/wlr_weight.html">gsdmvn::wlr_weight_fh()</a></code>.</p>
-<p>To calculate sample size for the MaxCombo test,
+<p>To calculate the sample size for the MaxCombo test,
 we will need to know the variance-covariance of multiple WLR test statistics.</p>
 <p>For Fleming and Harrington weight function, the covariance of different WLR test statistics can be calculated.
 Based on <span class="citation">Karrison (<a href="references.html#ref-karrison2016versatile" role="doc-biblioref">2016</a>)</span> and <span class="citation">Wang et al (<a href="references.html#ref-wang2019simulation" role="doc-biblioref">2019</a>)</span>,
@@ -906,7 +906,7 @@ because the test statistic for MaxCombo is not asymptotically normal.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Group Sequential Design Under Non-Proportional Hazards</strong>: Deming Conference Course, December 6, 2021" was written by Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao. It was last built on 2021-11-26.</p>
+    <p>"<strong>Group Sequential Design Under Non-Proportional Hazards</strong>: Deming Conference Course, December 6, 2021" was written by Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao. It was last built on 2021-11-29.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

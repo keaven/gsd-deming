@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 1 Background | Group Sequential Design Under Non-Proportional Hazards</title>
 <meta name="author" content="Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao">
-<meta name="description" content="1.1 Non-proportional hazards Non-proportional hazards (NPH) is very common to see when there is a delayed effect. One example is given by KEYNOTE040, which targets to cure recurrent head and neck...">
+<meta name="description" content="1.1 Non-proportional hazards Non-proportional hazards (NPH) are very common to see when there is a delayed effect. One example is given by KEYNOTE040, which targets to cure recurrent head and neck...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
 <meta property="og:title" content="Chapter 1 Background | Group Sequential Design Under Non-Proportional Hazards">
 <meta property="og:type" content="book">
-<meta property="og:description" content="1.1 Non-proportional hazards Non-proportional hazards (NPH) is very common to see when there is a delayed effect. One example is given by KEYNOTE040, which targets to cure recurrent head and neck...">
+<meta property="og:description" content="1.1 Non-proportional hazards Non-proportional hazards (NPH) are very common to see when there is a delayed effect. One example is given by KEYNOTE040, which targets to cure recurrent head and neck...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 1 Background | Group Sequential Design Under Non-Proportional Hazards">
-<meta name="twitter:description" content="1.1 Non-proportional hazards Non-proportional hazards (NPH) is very common to see when there is a delayed effect. One example is given by KEYNOTE040, which targets to cure recurrent head and neck...">
+<meta name="twitter:description" content="1.1 Non-proportional hazards Non-proportional hazards (NPH) are very common to see when there is a delayed effect. One example is given by KEYNOTE040, which targets to cure recurrent head and neck...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -69,7 +69,7 @@
 <h2>
 <span class="header-section-number">1.1</span> Non-proportional hazards<a class="anchor" aria-label="anchor" href="#nph"><i class="fas fa-link"></i></a>
 </h2>
-<p>Non-proportional hazards (NPH) is very common to see when there is a delayed effect.
+<p>Non-proportional hazards (NPH) are very common to see when there is a delayed effect.
 One example is given by KEYNOTE040, which targets to cure recurrent head and neck squamous cell carcinoma.
 There are two arms, one is pembrolizumab, and the other is standard of care (SOC).
 The randomization ratio is 1:1 and the total sample size is 495.
@@ -90,8 +90,8 @@ FIGURE 1.1: KEYNOTE040
 For example, in cholesterol lowering and mortality <span class="citation">(Miettinen et al <a href="references.html#ref-simva4s" role="doc-biblioref">1997</a>)</span>, there is also a delayed effect.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-8"></span>
-<img src="images/ahr_slides_SSSS.jpeg" alt="Scandinavian Simvistatin Survival Study" width="80%"><p class="caption">
-FIGURE 1.2: Scandinavian Simvistatin Survival Study
+<img src="images/ahr_slides_SSSS.jpeg" alt="Scandinavian Simvastatin Survival Study" width="80%"><p class="caption">
+FIGURE 1.2: Scandinavian Simvastatin Survival Study
 </p>
 </div>
 <p>In addition to delayed effect, NPH also exists when there is a cross over of survival curves.
@@ -113,11 +113,11 @@ KEYNOTE 061: Overall Survival in CPS 1
 FIGURE 1.3: KEYNOTE061
 </p>
 </div>
-<p>The above two examples motivate us to think about following questions:</p>
+<p>The above two examples motivate us to think about the following questions:</p>
 <ul>
 <li>The impact of (potentially) delayed treatment effect on trial design and analysis.</li>
-<li>Test statistics used (logrank, weighted logrank test and max combo test)</li>
-<li>Sample size vs duration of follow-up</li>
+<li>Test statistics used (logrank, weighted logrank test, and max-combo test)</li>
+<li>Sample size vs. duration of follow-up</li>
 <li>Timing of analyses</li>
 <li>Futility bounds</li>
 <li>Updating bounds</li>
@@ -128,20 +128,20 @@ FIGURE 1.3: KEYNOTE061
 <span class="header-section-number">1.1.1</span> Group sequential design<a class="anchor" aria-label="anchor" href="#gsd"><i class="fas fa-link"></i></a>
 </h3>
 <p>In group sequential design, groups of observations are collected and repeatedly analyzed, while controlling error rates.
-While the group sequential design in ongoing, a stopping rule specifies when and why a trial might be halted at these points.
-This stopping rule usually consists two components, a test statistics and a threshold.
+While the group sequential design is ongoing, a stopping rule specifies when and why a trial might be halted at these points.
+This stopping rule usually consists of two components, a test statistic and a threshold.
 The threshold is usually decided by the spending functions, which we introduced in Section <a href="background.html#sf">1.2</a>.
-And the test statistics is usually the Z-process and B-process, which are used to monitor the treatment effect under group sequential design.
-If a Z-process (B-process) cross the boundary, the the trail is stopped.</p>
+And the test statistics are usually the Z-process and B-process, which are used to monitor the treatment effect under group sequential design.
+If a Z-process (B-process) cross the boundary, the trial is stopped.</p>
 </div>
 <div id="z-process-and-b-process" class="section level3">
 <h3>
 <span class="header-section-number">1.1.2</span> Z-process and B-process<a class="anchor" aria-label="anchor" href="#z-process-and-b-process"><i class="fas fa-link"></i></a>
 </h3>
-<p>In this Section, we will introduce the Z-process and B-process.
+<p>In this section, we will introduce the Z-process and B-process.
 Suppose in the group sequential design, there are totally <span class="math inline">\(K\)</span> looks.
 In the <span class="math inline">\(k\)</span>-th look, there are <span class="math inline">\(n_k\)</span> available observations.
-For notation simplicity, we denote the final number of available observation as <span class="math inline">\(N\)</span>, i.e., <span class="math inline">\(N \triangleq n_K\)</span>.</p>
+For notation simplicity, we denote the final number of available observations as <span class="math inline">\(N\)</span>, i.e., <span class="math inline">\(N \triangleq n_K\)</span>.</p>
 <div class="definition">
 <p><span id="def:DefZprocess" class="definition"><strong>Definition 1.1  </strong></span>The Z-process is defined as the standardized treatment effect, i.e.,
 <span class="math display" id="eq:DefZprocess">\[\begin{equation}
@@ -154,7 +154,7 @@ where <span class="math inline">\(k\)</span> is the index of the looks, and we a
 The numerator <span class="math inline">\(\widehat\theta_k\)</span> is the treatment effect estimated at the <span class="math inline">\(k\)</span>-th look.</p>
 </div>
 <p>For <span class="math inline">\(\widehat\theta_k\)</span>, its form depends on the outcome of the clinical trials.
-In clinical trails with continuous outcome <span class="math inline">\(X_1, X_2, \ldots \in \mathbb R\)</span>, the treatment effect estimated at the <span class="math inline">\(k\)</span>-th look is
+In clinical trials with continuous outcome <span class="math inline">\(X_1, X_2, \ldots \in \mathbb R\)</span>, the treatment effect estimated at the <span class="math inline">\(k\)</span>-th look is
 <span class="math display" id="eq:DefThetaK">\[\begin{equation}
   \widehat{\theta}_k
   =
@@ -324,9 +324,9 @@ And then introduce three frequently used spending functions, (1) Haybittle bound
 We call the <span class="math inline">\(\{a_k, b_k \}_{k = 1,\ldots, K}\)</span> as the decision boundaries, if we reject <span class="math inline">\(H_0\)</span> when <span class="math inline">\(Z(t_k) &lt; a_k\)</span> or <span class="math inline">\(Z(t_k) &gt; b_k\)</span>.
 And we call <span class="math inline">\(\{b_k\}_{k=1,\ldots,K}\)</span> as the <em>efficiency boundary</em>, which are decided by the control of type I error, and <span class="math inline">\(\{a_k\}_{k=1,\ldots,K}\)</span> as the <em>futility boundary</em>, which are used to control boundary crossing probabilities.</p>
 <p>For the calculation of boundaries, there are typically two methods.
-The first one is so called the error spending approach, which specifies boundary crossing probabilities at each analysis.
+The first one is the so-called error spending approach, which specifies boundary crossing probabilities at each analysis.
 This is most commonly done with the error spending function approach <span class="citation">(Lan and DeMets <a href="references.html#ref-LanDeMets" role="doc-biblioref">1983</a>)</span>.
-The second one is so called the boundary family approach, which specifies how big boundary values should be relative to each other and adjust these relative values by a constant multiple to control overall error rates.
+The second one is the so-called boundary family approach, which specifies how big boundary values should be relative to each other and adjust these relative values by a constant multiple to control overall error rates.
 The commonly applied boundary family include:</p>
 <ul>
 <li>Haybittle boundary <span class="citation">(Haybittle <a href="references.html#ref-haybittle1971repeated" role="doc-biblioref">1971</a>)</span>;</li>
@@ -337,12 +337,12 @@ The commonly applied boundary family include:</p>
 </ul>
 </li>
 </ul>
-<p>In the remaining of this section, we will introduce the above spending functions one by one.</p>
+<p>In the remainder of this section, we will introduce the above spending functions one by one.</p>
 <div id="haybittle-boundary" class="section level3">
 <h3>
 <span class="header-section-number">1.2.1</span> Haybittle boundary<a class="anchor" aria-label="anchor" href="#haybittle-boundary"><i class="fas fa-link"></i></a>
 </h3>
-The main idea of haybittle boundary is to set the interim Z-score boundary as 3 and the final boundary as 1.96, which is visualized as the figure below.
+<p>The main idea of the Haybittle boundary is to set the interim Z-score boundary as 3 and the final boundary as 1.96, which is visualized in the figure below.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-11"></span>
 <img src="images/background_SF_Haybittle_boundary.png" alt="Haybittle boundary" width="50%"><p class="caption">
@@ -350,13 +350,13 @@ FIGURE 1.4: Haybittle boundary
 </p>
 </div>
 <p>The above Haybittle boundary has three modified versions.</p>
-<p>The first modified version uses Bonferroni adjustment: for the first <span class="math inline">\(K-1\)</span> analyses, significant p-value is set as 0.001; and for the final analysis, significant p-value is set as <span class="math inline">\(0.05 - 0.01 \times (K-1)\)</span>.
+<p>The first modified version uses Bonferroni adjustment: for the first <span class="math inline">\(K-1\)</span> analyses, the significant p-value is set as 0.001; and for the final analysis, the significant p-value is set as <span class="math inline">\(0.05 - 0.01 \times (K-1)\)</span>.
 This modification helps to avoid type I error inflation.
 Besides, it does not require them to be equally spaced in terms of information and can be used regardless of the joint distribution of Z-score, i.e., <span class="math inline">\(Z(t_1),...,Z(t_k)\)</span>.</p>
-<p>The second modified version sets the Z-score as 4 for the first half of the study and set the Z-score boundary as 3 thereafter.</p>
+<p>The second modified version sets the Z-score as 4 for the first half of the study and sets the Z-score boundary as 3 thereafter.</p>
 <p>The third modified version requires crossing the boundary at two successive looks.</p>
-<p>In summary, Haybittle boundary uses piecewise constant boundary, which make it very easy to implement.
-But it is kind of conservative and the selection of the constant boundary (e.g., 3 and 1.96) needs justifications.</p>
+<p>In summary, the Haybittle boundary uses a piecewise constant boundary, which makes it very easy to implement.
+But it is kind of conservative, and the selection of the constant boundary (e.g., 3 and 1.96) needs justifications.</p>
 </div>
 <div id="wang-tsiatis-boundary" class="section level3">
 <h3>
@@ -386,7 +386,7 @@ where <span class="math inline">\(c_P(K)\)</span> is fixed given the number of t
 FIGURE 1.5: Pocock boundary
 </p>
 </div>
-<p>Here is an example of Pocock boundary.</p>
+<p>Here is an example of the Pocock boundary.</p>
 <div class="inline-table"><table class="table table-sm">
 <thead><tr class="header">
 <th align="center">total number of looks(K)</th>
@@ -430,14 +430,14 @@ FIGURE 1.5: Pocock boundary
 <p>We will reject <span class="math inline">\(H_0\)</span> if <span class="math inline">\(|Z(k/4)| &gt; 2.361\)</span> for <span class="math inline">\(k = 1,2,3,4\)</span> (final analysis).</p>
 <p>In summary, the Pocock boundary is a special case of Wang-Tsiatis boundary (<span class="math inline">\(\Delta = 0.5\)</span>) and has constant Z-score boundaries, i.e., <span class="math inline">\(|Z(k/K)| &gt; c_P(K)\)</span>.
 And the constant boundary <span class="math inline">\(c_P(K)\)</span> is decided by the type I error rate and the total number of looks.
-Its main weakness is the high price for the end of the trial and requirement of equally spaced looks.</p>
+Its main weakness is the high price for the end of the trial and the requirement of equally spaced looks.</p>
 </div>
 <div id="obrien-fleming-boundary" class="section level3">
 <h3>
 <span class="header-section-number">1.2.4</span> O’Brien-Fleming boundary<a class="anchor" aria-label="anchor" href="#obrien-fleming-boundary"><i class="fas fa-link"></i></a>
 </h3>
-<p>O’Brien-Fleming boundary is very conservative at the beginning, which gives realtively large boundary first.
-But it gives nominal value close to the overall value of the design <span class="math inline">\(\approx 1.96\)</span> for the final stage.
+<p>O’Brien-Fleming boundary is very conservative at the beginning, which gives a relatively large boundary first.
+But it gives a nominal value close to the overall value of the design <span class="math inline">\(\approx 1.96\)</span> for the final stage.
 Its visualization can be found as follows.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-13"></span>
@@ -445,7 +445,7 @@ Its visualization can be found as follows.</p>
 FIGURE 1.6: OBrien-Fleming boundary
 </p>
 </div>
-<p>Here is an example of O’Brien-Fleming boundary.</p>
+<p>Here is an example of the O’Brien-Fleming boundary.</p>
 <div class="inline-table"><table class="table table-sm">
 <thead><tr class="header">
 <th align="center">total number of looks(K)</th>
@@ -501,9 +501,9 @@ The B-value boundary can be easily transformed into decreasing Z-score boundary 
 <li><span class="math inline">\(2.024/\sqrt{4/4} = 2.02\)</span></li>
 </ul>
 <p>In summary, the O’Brien-Fleming boundary designs a decreasing Z-score boundary, with large boundaries at the early stage but ~1.96 boundary when it approaches the final stage.</p>
-<p>Although both Pocock boundary and OBF boundary are belonging to Wang-Tsiatis boundary’s family.
-But there are two differences between them.</p>
-<p>The first difference is that, the Pocock boundary has flat Z-score boundaries; while the O’Brien-Fleming has decreasing Z-score boundary.
+<p>Although both the Pocock boundary and OBF boundary belong to the Wang-Tsiatis boundary’s family,
+there are two differences between them.</p>
+<p>The first difference is, the Pocock boundary has flat Z-score boundaries, while the O’Brien-Fleming has decreasing Z-score boundary.
 Accordingly, the O’Brien-Fleming boundary makes it much more difficult to stop early than the Pocock boundary.
 However, the O’Brien-Fleming boundary extracts a much smaller price at the end.</p>
 <div class="figure" style="text-align: center">
@@ -512,7 +512,7 @@ However, the O’Brien-Fleming boundary extracts a much smaller price at the end
 FIGURE 1.7: Pocock (circles) and O’Brien-Fleming (squares) z-score boundaries for four looks
 </p>
 </div>
-<p>The second difference is that, they have different performance in cumulative type I error rate (the probability of rejection at or before <span class="math inline">\(t_j\)</span>, i.e., <span class="math inline">\(\text{Pr}(\cup_{i=1}^j |Z(t_i)| &gt; c_i)\)</span>).</p>
+<p>The second difference is, they have different performance in cumulative type I error rate (the probability of rejection at or before <span class="math inline">\(t_j\)</span>, i.e., <span class="math inline">\(\text{Pr}(\cup_{i=1}^j |Z(t_i)| &gt; c_i)\)</span>).</p>
 <ul>
 <li>The Pocock cumulative type I error rate increases sharply at first, but much less so toward the end.</li>
 <li>The O’Brien-Fleming behaves in just the opposite way.</li>
@@ -523,7 +523,7 @@ FIGURE 1.7: Pocock (circles) and O’Brien-Fleming (squares) z-score boundaries 
 FIGURE 1.8: Cumulative type I error rate used by the Pocock (circles) and O’Brien-Fleming (squares) procedures with four looks.
 </p>
 </div>
-<p>In conclusion, we visualize the three spending function in the following figure.</p>
+<p>In conclusion, we visualize the three spending functions in the following figure.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-16"></span>
 <img src="images/background_SF_ThreeBoundary.png" alt="Three boundaries" width="50%"><p class="caption">
@@ -566,7 +566,7 @@ Accordingly, the <em>information fraction</em> is
 \]</span></p>
 <p>For survival outcome, it is a little bit complicated.
 Suppose the interim analysis is conducted after <span class="math inline">\(\tau\)</span> month with <span class="math inline">\(d\)</span> of <span class="math inline">\(D\)</span> planned events evaluated in each arm.
-The treatment effect under survival outcome is usually measured by log rank test, i.e.,
+The treatment effect under survival outcome is usually measured by logrank test, i.e.,
 <span class="math display">\[
   \widehat\delta(\tau)
   =
@@ -588,7 +588,7 @@ Accordingly, the <em>information fraction</em> is
 \]</span></p>
 <p>Comparing survival outcome and continuous/binary outcome, we found the information (fraction) of survival outcome is decided by the number of events, while it is decided by the number of available observations under continuous/binary outcome.</p>
 <p>If there are multiple interim analysis at <span class="math inline">\(\tau_1\)</span>-th, <span class="math inline">\(\tau_2\)</span>-th, <span class="math inline">\(\ldots\)</span>, <span class="math inline">\(\tau_K\)</span>-th month, we get a sequence of information as <span class="math inline">\(I(\tau_1), I(\tau_2), \ldots, I(\tau_K)\)</span> and a sequence of information fraction <span class="math inline">\(t_1, t_2, \ldots, t_K\)</span>.
-Please note that, the information sequence is sometimes simplified as <span class="math inline">\(I_1, I_2, \ldots, I_K\)</span> <span class="citation">(Jennison and Turnbull <a href="references.html#ref-JTBook" role="doc-biblioref">2000</a>)</span>.</p>
+Please note that the information sequence is sometimes simplified as <span class="math inline">\(I_1, I_2, \ldots, I_K\)</span> <span class="citation">(Jennison and Turnbull <a href="references.html#ref-JTBook" role="doc-biblioref">2000</a>)</span>.</p>
 
 </div>
 </div>
@@ -633,7 +633,7 @@ Please note that, the information sequence is sometimes simplified as <span clas
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Group Sequential Design Under Non-Proportional Hazards</strong>: Deming Conference Course, December 6, 2021" was written by Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao. It was last built on 2021-11-26.</p>
+    <p>"<strong>Group Sequential Design Under Non-Proportional Hazards</strong>: Deming Conference Course, December 6, 2021" was written by Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao. It was last built on 2021-11-29.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

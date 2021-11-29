@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 8 Group sequential design boundary with weighted logrank test | Group Sequential Design Under Non-Proportional Hazards</title>
 <meta name="author" content="Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao">
-<meta name="description" content="8.1 Group sequential design boundary calculation strategy In the last chapter, we pre-specified boundary derived from gsDesign. The Type I error may be inflated because the information fraction is...">
+<meta name="description" content="8.1 Group sequential design boundary calculation strategy In the last chapter, we pre-specified boundary derived from gsDesign. Therefore, the Type I error may be inflated because the information...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
 <meta property="og:title" content="Chapter 8 Group sequential design boundary with weighted logrank test | Group Sequential Design Under Non-Proportional Hazards">
 <meta property="og:type" content="book">
-<meta property="og:description" content="8.1 Group sequential design boundary calculation strategy In the last chapter, we pre-specified boundary derived from gsDesign. The Type I error may be inflated because the information fraction is...">
+<meta property="og:description" content="8.1 Group sequential design boundary calculation strategy In the last chapter, we pre-specified boundary derived from gsDesign. Therefore, the Type I error may be inflated because the information...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 8 Group sequential design boundary with weighted logrank test | Group Sequential Design Under Non-Proportional Hazards">
-<meta name="twitter:description" content="8.1 Group sequential design boundary calculation strategy In the last chapter, we pre-specified boundary derived from gsDesign. The Type I error may be inflated because the information fraction is...">
+<meta name="twitter:description" content="8.1 Group sequential design boundary calculation strategy In the last chapter, we pre-specified boundary derived from gsDesign. Therefore, the Type I error may be inflated because the information...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -70,8 +70,8 @@
 <span class="header-section-number">8.1</span> Group sequential design boundary calculation strategy<a class="anchor" aria-label="anchor" href="#group-sequential-design-boundary-calculation-strategy"><i class="fas fa-link"></i></a>
 </h2>
 <p>In the last chapter, we pre-specified boundary derived from <code>gsDesign</code>.
-The Type I error may be inflated because the information fraction is different for different WLR.</p>
-<p>In this chapter we calculate boundary based on the error spending approach following <span class="citation">Gordon Lan and DeMets (<a href="references.html#ref-gordon1983discrete" role="doc-biblioref">1983</a>)</span>.</p>
+Therefore, the Type I error may be inflated because the information fraction is different for different WLR.</p>
+<p>In this chapter, we calculate boundaries based on the error spending approach following <span class="citation">Gordon Lan and DeMets (<a href="references.html#ref-gordon1983discrete" role="doc-biblioref">1983</a>)</span>.</p>
 <p>The spending function has been implemented in <code>gsDesign</code>.</p>
 <ul>
 <li>
@@ -80,9 +80,9 @@ The Type I error may be inflated because the information fraction is different f
 <li>The boundary family approach. <span class="citation">Pocock (<a href="references.html#ref-pocock1977group" role="doc-biblioref">1977</a>)</span>, <span class="citation">O’Brien and Fleming (<a href="references.html#ref-o1979multiple" role="doc-biblioref">1979</a>)</span>, <span class="citation">Wang and Tsiatis (<a href="references.html#ref-wang1987approximately" role="doc-biblioref">1987</a>)</span>
 </li>
 </ul>
-<p>There are other ways to derive boundary but will not be covered:</p>
+<p>There are other ways to derive boundaries but will not be covered:</p>
 <ul>
-<li>Conditional power. <span class="citation">Lachin (<a href="references.html#ref-lachin2005review" role="doc-biblioref">2005</a>)</span>
+<li>Conditional power <span class="citation">(Lachin <a href="references.html#ref-lachin2005review" role="doc-biblioref">2005</a>)</span>
 </li>
 </ul>
 </div>
@@ -90,7 +90,7 @@ The Type I error may be inflated because the information fraction is different f
 <h2>
 <span class="header-section-number">8.2</span> Types of error probability<a class="anchor" aria-label="anchor" href="#types-of-error-probability"><i class="fas fa-link"></i></a>
 </h2>
-<p>There are 6 different type of error probability that have been implemented in <code>gsdmvn</code>.
+<p>There are 6 different types of error probability that have been implemented in <code>gsdmvn</code>.
 In this training material, we focus on <code>test.type = 4</code>.</p>
 <ul>
 <li>
@@ -163,7 +163,7 @@ In this training material, we focus on <code>test.type = 4</code>.</p>
 </h2>
 <p>Under the same design assumption,
 information fraction is different from different weight parameters in WLR.</p>
-<p>We continue use the same example scenario in the last chapter.</p>
+<p>We continue using the same example scenario in the last chapter.</p>
 <div class="inline-figure"><img src="images/g_info.png" width="60%" style="display: block; margin: auto;"></div>
 </div>
 <div id="spending-function-based-on-information-fraction" class="section level2">
@@ -181,13 +181,13 @@ We considered the Lan-DeMets spending function to approximate an O’Brien-Flemi
 <p>After the spending function is selected, we can calculate the lower and upper bound of a
 group sequential design.</p>
 <p>In test type 4, the lower bound is non-binding. So we set lower bound are all <code>-Inf</code> when we calculate the probability to cross upper bound.</p>
-<p>We first use the alpha spending function to determine upper bound of a group sequential design</p>
+<p>We first use the alpha spending function to determine the upper bound of a group sequential design</p>
 <ul>
 <li>Let <span class="math inline">\((a_k, b_k), k=1,\dots, K\)</span> denotes the lower and upper bound.</li>
 </ul>
 <p>For gsDesign with logrank test,
-we considered a equal increments of information fraction at <code>t = 1:3 / 3</code> is.</p>
-<p>The upper bound and lower bound based on Lan-DeMets spending function
+we considered equal increments of information fraction at <code>t = 1:3 / 3</code> is.</p>
+<p>The upper bound and lower bound based on the Lan-DeMets spending function
 can be calculated using <code><a href="https://rdrr.io/pkg/gsDesign/man/sfLDOF.html">gsDesign::sfLDOF()</a></code>.</p>
 <ul>
 <li>Upper bound:</li>
@@ -314,9 +314,9 @@ based on information fraction at 12, 24 and 36 months</p>
 <span class="va">mean</span> <span class="op">&lt;-</span> <span class="va">gs_spend</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">theta</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="va">gs_spend</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">beta</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, mean <span class="op">=</span> <span class="va">mean</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <pre><code>#&gt; [1] -1.065469</code></pre>
-<p>The figure below illustrate the lower and upper bound in different sample size</p>
+<p>The figure below illustrates the lower and upper bound in different sample size</p>
 <ul>
-<li>Larger sample size have a larger lower bound (solid line compared with dashed line)</li>
+<li>A larger sample size has a larger lower bound (solid line compared with dashed line)</li>
 <li>Iteration is required to find proper sample size and boundary.</li>
 </ul>
 <div class="inline-figure"><img src="images/g_bound.png" width="60%" style="display: block; margin: auto;"></div>
@@ -699,7 +699,7 @@ based on information fraction at 12, 24 and 36 months</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Group Sequential Design Under Non-Proportional Hazards</strong>: Deming Conference Course, December 6, 2021" was written by Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao. It was last built on 2021-11-26.</p>
+    <p>"<strong>Group Sequential Design Under Non-Proportional Hazards</strong>: Deming Conference Course, December 6, 2021" was written by Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao. It was last built on 2021-11-29.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
