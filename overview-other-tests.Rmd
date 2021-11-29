@@ -7,7 +7,7 @@ We consider other alternative tests for group sequential design.
 - Weighted logrank tests such as the @FHRhoGamma and @MagirrBurman tests.
 - Combination tests such as the MaxCombo test by @NPHWG2020sim, @NPHWG2021Design.
 
-We will illustrate the concepts based on an experimental R packages.
+We will illustrate the concepts based on an experimental R package.
 
 - [gsdmvn](https://merck.github.io/gsdmvn/): analytically based group sequential design.
 
