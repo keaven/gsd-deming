@@ -39,6 +39,8 @@ library(knitr)
 library(formatR)
 library(fs)
 library(gt)
+library(tibble)
+library(ggplot2)
 ```
 
 ```{r setup, include=FALSE}

@@ -1012,7 +1012,7 @@ $$
   f_1(s_k,\alpha)-f_1(s_{k-1},\alpha)
   & = P_0(\{Z_{k}\geq b_{k}(\alpha)\}\cap_{j=1}^{k-1}\{Z_{j}< b_{j}(\alpha)\}\\
   f_2(s_k,\gamma)-f_2(s_{k-1},\gamma)
-  & = P_0(\{Z_{k}< a_{k}(\gamma)\}\cap_{j=1}^{k-1}\{a_{j}(\gamma)\le Z_{j}< b_{j}(\alpha)\}
+  & = P_\theta(\{Z_{k}< a_{k}(\gamma)\}\cap_{j=1}^{k-1}\{a_{j}(\gamma)\le Z_{j}< b_{j}(\alpha)\}
   \end{align}
 $$
 
