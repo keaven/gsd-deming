@@ -115,11 +115,11 @@ These assumptions will be used unless another clarification is made in specific 
 </ul>
 <p>For illustration purpose, we considered a 1-sided test with type I error at <span class="math inline">\(\alpha=0.025\)</span> and <span class="math inline">\(1-\beta=80\%\)</span> power.
 In R, it is easy to calculate <span class="math inline">\(z_\alpha\)</span> and <span class="math inline">\(z_\beta\)</span> as below.</p>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">z_alpha</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.025</span><span class="op">)</span><span class="op">)</span>
 <span class="va">z_alpha</span></code></pre></div>
 <pre><code>#&gt; [1] 1.959964</code></pre>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">z_beta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.2</span><span class="op">)</span><span class="op">)</span>
 <span class="va">z_beta</span></code></pre></div>
 <pre><code>#&gt; [1] 0.8416212</code></pre>
@@ -159,20 +159,20 @@ In this simplified case, the sample size can be calculated as</p>
 <p>Let’s revisit the two-sample t-test to make a connection between the math formula and R code.</p>
 <p>Assume a scenario with treatment effect at 0.5 with pooled standard deviation at 2.
 Let’s calculate the sample size using the formula above.</p>
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Effect size</span>
 <span class="va">theta</span> <span class="op">&lt;-</span> <span class="fl">0.5</span> <span class="op">/</span> <span class="fl">2</span></code></pre></div>
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Sample size formula</span>
 <span class="fl">4</span> <span class="op">*</span> <span class="op">(</span><span class="va">z_alpha</span> <span class="op">+</span> <span class="va">z_beta</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span> <span class="op">/</span> <span class="va">theta</span><span class="op">^</span><span class="fl">2</span></code></pre></div>
 <pre><code>#&gt; [1] 502.3283</code></pre>
 <p>The same assumption is used in <code><a href="https://rdrr.io/pkg/gsDesign/man/nNormal.html">gsDesign::nNormal()</a></code>.</p>
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">gsDesign</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gsDesign/man/nNormal.html">nNormal</a></span><span class="op">(</span>delta1 <span class="op">=</span> <span class="fl">0.5</span>, sd <span class="op">=</span> <span class="fl">2</span>, alpha <span class="op">=</span> <span class="fl">0.025</span>, beta <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></code></pre></div>
 <pre><code>#&gt; [1] 502.3283</code></pre>
 <p>The <code><a href="https://rdrr.io/r/stats/power.t.test.html">stats::power.t.test()</a></code> uses the t-distribution for test statistics that is recommended in practice.
 It provides a slightly larger sample size under the same study design scenario.</p>
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/power.t.test.html">power.t.test</a></span><span class="op">(</span>delta <span class="op">=</span> <span class="fl">0.5</span>, sd <span class="op">=</span> <span class="fl">2</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span><span class="op">$</span><span class="va">n</span> <span class="op">*</span> <span class="fl">2</span></code></pre></div>
 <pre><code>#&gt; [1] 504.2562</code></pre>
 </div>
@@ -210,16 +210,16 @@ Interested readers can refer to <span class="citation">Lachin and Foulkes (<a hr
 </div>
 <p>Let’s make connection between math formula and R code by considering a scenario with
 hazard ratio at 0.6.</p>
-<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Effect size</span>
 <span class="va">theta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fl">0.6</span><span class="op">)</span> <span class="op">/</span> <span class="fl">2</span></code></pre></div>
-<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Number of Events</span>
 <span class="op">(</span><span class="va">z_alpha</span> <span class="op">+</span> <span class="va">z_beta</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span> <span class="op">/</span> <span class="va">theta</span><span class="op">^</span><span class="fl">2</span></code></pre></div>
 <pre><code>#&gt; [1] 120.3157</code></pre>
 <p>We compare the results using <code>npsurvSS</code>.
 The key argument in <code><a href="https://rdrr.io/pkg/npsurvSS/man/create_arm.html">npsurvSS::create_arm()</a></code> is <code>surv_scale</code> that defines the hazard rates in each arm.</p>
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Define study design assumption for each arm</span>
 <span class="va">arm0</span> <span class="op">&lt;-</span> <span class="fu">npsurvSS</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/npsurvSS/man/create_arm.html">create_arm</a></span><span class="op">(</span>
   size <span class="op">=</span> <span class="fl">1</span>, accr_time <span class="op">=</span> <span class="fl">6</span>, surv_scale <span class="op">=</span> <span class="fl">1</span>,
@@ -231,7 +231,7 @@ The key argument in <code><a href="https://rdrr.io/pkg/npsurvSS/man/create_arm.h
   loss_scale <span class="op">=</span> <span class="fl">0.1</span>, follow_time <span class="op">=</span> <span class="fl">12</span>
 <span class="op">)</span></code></pre></div>
 <p>Then we can use <code><a href="https://rdrr.io/pkg/npsurvSS/man/size_two_arm.html">npsurvSS::size_two_arm()</a></code> to calculate number of events and sample size.</p>
-<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Sample size for logrank test</span>
 <span class="fu">npsurvSS</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/npsurvSS/man/size_two_arm.html">size_two_arm</a></span><span class="op">(</span><span class="va">arm0</span>, <span class="va">arm1</span>,
   power <span class="op">=</span> <span class="fl">0.8</span>, alpha <span class="op">=</span> <span class="fl">0.025</span>,
@@ -245,7 +245,7 @@ The key argument in <code><a href="https://rdrr.io/pkg/npsurvSS/man/create_arm.h
 <p>The number of events from <code><a href="https://rdrr.io/pkg/gsDesign/man/nSurv.html">gsDesign::nSurv()</a></code> is slightly smaller
 because <code><a href="https://rdrr.io/pkg/gsDesign/man/nSurv.html">gsDesign::nSurv()</a></code> follows <span class="citation">Lachin and Foulkes (<a href="references.html#ref-lachin1986evaluation" role="doc-biblioref">1986</a><a href="references.html#ref-lachin1986evaluation" role="doc-biblioref">b</a>)</span>
 that relax the local alternative assumption and is recommended in practice.</p>
-<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">gsDesign</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gsDesign/man/nSurv.html">nSurv</a></span><span class="op">(</span>
   lambdaC <span class="op">=</span> <span class="fl">1</span>,
   hr <span class="op">=</span> <span class="fl">0.6</span>,
@@ -309,7 +309,7 @@ We need to derive the sample size first.</p>
 <li>Duration of enrollment: 12 months</li>
 <li>Enrollment rate: 500/12 per month</li>
 </ul>
-<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">enrollRates</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>Stratum <span class="op">=</span> <span class="st">"All"</span>, duration <span class="op">=</span> <span class="fl">12</span>, rate <span class="op">=</span> <span class="fl">500</span> <span class="op">/</span> <span class="fl">12</span><span class="op">)</span>
 <span class="va">enrollRates</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 1 × 3
@@ -330,7 +330,7 @@ We need to derive the sample size first.</p>
 </li>
 <li>Dropout Rate: 0.001</li>
 </ul>
-<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">failRates</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>
   Stratum <span class="op">=</span> <span class="st">"All"</span>,
   duration <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">100</span><span class="op">)</span>,
@@ -354,7 +354,7 @@ We need to derive the sample size first.</p>
 <p>For the weighted logrank test, we first illustrate it by using the Fleming-Harrington weight.</p>
 <p><span class="math display">\[FH^{\rho, \gamma}(t) = S(t)^\rho(1 - S(t))^\gamma\]</span></p>
 <p>To demonstrate the weight function, we covert the input of <code>enrollRates</code> and <code>failRates</code> as required by <code>npsurvSS</code>.</p>
-<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Define study design object in each arm</span>
 <span class="va">gs_arm</span> <span class="op">&lt;-</span> <span class="fu">gsdmvn</span><span class="fu">:::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_create_arm.html">gs_create_arm</a></span><span class="op">(</span>
   <span class="va">enrollRates</span>,
@@ -370,7 +370,7 @@ We need to derive the sample size first.</p>
 <ul>
 <li>FH(0,1): Place more weights on later time points</li>
 </ul>
-<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">npsurvSS</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/npsurvSS/man/size_two_arm.html">size_two_arm</a></span><span class="op">(</span><span class="va">arm0</span>, <span class="va">arm1</span>,
   power <span class="op">=</span> <span class="fl">0.8</span>, alpha <span class="op">=</span> <span class="fl">0.025</span>,
   test <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>test <span class="op">=</span> <span class="st">"weighted logrank"</span>, weight <span class="op">=</span> <span class="st">"FH_p1_q0"</span><span class="op">)</span>
@@ -380,7 +380,7 @@ We need to derive the sample size first.</p>
 <ul>
 <li>FH(1,1): Place more weights on middle time points</li>
 </ul>
-<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">npsurvSS</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/npsurvSS/man/size_two_arm.html">size_two_arm</a></span><span class="op">(</span><span class="va">arm0</span>, <span class="va">arm1</span>,
   power <span class="op">=</span> <span class="fl">0.8</span>, alpha <span class="op">=</span> <span class="fl">0.025</span>,
   test <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>test <span class="op">=</span> <span class="st">"weighted logrank"</span>, weight <span class="op">=</span> <span class="st">"FH_p1_q1"</span><span class="op">)</span>
@@ -390,7 +390,7 @@ We need to derive the sample size first.</p>
 <ul>
 <li>FH(1,0): Place more weights on earlier time points</li>
 </ul>
-<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">npsurvSS</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/npsurvSS/man/size_two_arm.html">size_two_arm</a></span><span class="op">(</span><span class="va">arm0</span>, <span class="va">arm1</span>,
   power <span class="op">=</span> <span class="fl">0.8</span>, alpha <span class="op">=</span> <span class="fl">0.025</span>,
   test <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>test <span class="op">=</span> <span class="st">"weighted logrank"</span>, weight <span class="op">=</span> <span class="st">"FH_p0_q1"</span><span class="op">)</span>
@@ -400,7 +400,7 @@ We need to derive the sample size first.</p>
 <ul>
 <li>FH(0,0) or logrank test</li>
 </ul>
-<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Sample size for logrank test</span>
 <span class="fu">npsurvSS</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/npsurvSS/man/size_two_arm.html">size_two_arm</a></span><span class="op">(</span><span class="va">arm0</span>, <span class="va">arm1</span>,
   power <span class="op">=</span> <span class="fl">0.8</span>, alpha <span class="op">=</span> <span class="fl">0.025</span>,
@@ -419,17 +419,17 @@ where <span class="math inline">\(\theta = \Delta/\sigma\)</span> is the effect 
 <li>Weight <span class="math inline">\(w(t)\)</span>: implemented in <code>gsdmvn</code>.</li>
 <li>Integration up to total follow-up time <span class="math inline">\(\tau\)</span>.</li>
 </ul>
-<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">weight</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">arm0</span>, <span class="va">arm1</span><span class="op">)</span> <span class="op">{</span>
   <span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/wlr_weight.html">wlr_weight_fh</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">arm0</span>, <span class="va">arm1</span>, rho <span class="op">=</span> <span class="fl">0</span>, gamma <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
 <p><span class="math display">\[\Delta=\int_{0}^{\tau}w(s)\frac{p_{0}\pi_{0}(s)p_{1}\pi_{1}(s)}{\pi(s)}\{\lambda_{1}(s)-\lambda_{0}(s)\}ds\]</span>,</p>
-<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">delta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="fu">gsdmvn</span><span class="fu">:::</span><span class="fu">gs_delta_wlr</span><span class="op">(</span><span class="va">arm0</span>, <span class="va">arm1</span>, tmax <span class="op">=</span> <span class="va">arm0</span><span class="op">$</span><span class="va">total_time</span>, weight <span class="op">=</span> <span class="va">weight</span><span class="op">)</span><span class="op">)</span>
 <span class="va">delta</span></code></pre></div>
 <pre><code>#&gt; [1] 0.02623776</code></pre>
 <p><span class="math display">\[\sigma^{2}=\int_{0}^{\tau}w(s)^{2}\frac{p_{0}\pi_{0}(s)p_{1}\pi_{1}(s)}{\pi(s)^{2}}dv(s)\]</span></p>
-<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sigma2</span> <span class="op">&lt;-</span> <span class="fu">gsdmvn</span><span class="fu">:::</span><span class="fu">gs_sigma2_wlr</span><span class="op">(</span><span class="va">arm0</span>, <span class="va">arm1</span>, tmax <span class="op">=</span> <span class="va">arm0</span><span class="op">$</span><span class="va">total_time</span>, weight <span class="op">=</span> <span class="va">weight</span><span class="op">)</span>
 <span class="va">sigma2</span></code></pre></div>
 <pre><code>#&gt; [1] 0.0242674</code></pre>
@@ -454,13 +454,13 @@ where <span class="math inline">\(\theta = \Delta/\sigma\)</span> is the effect 
 </h3>
 <p>We can calculate sample size after deriving the effect size.</p>
 <p><span class="math display">\[ n = \frac{\sigma^{2}(z_{\alpha}+z_{\beta})^{2}}{\Delta^2} = \frac{(z_{\alpha}+z_{\beta})^{2}}{\theta^2} \]</span></p>
-<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">z_alpha</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="fl">0.025</span><span class="op">)</span>
 <span class="va">z_beta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="fl">0.2</span><span class="op">)</span>
 <span class="va">n</span> <span class="op">&lt;-</span> <span class="va">sigma2</span> <span class="op">*</span> <span class="op">(</span><span class="va">z_alpha</span> <span class="op">+</span> <span class="va">z_beta</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span> <span class="op">/</span> <span class="va">delta</span><span class="op">^</span><span class="fl">2</span>
 <span class="va">n</span></code></pre></div>
 <pre><code>#&gt; [1] 276.6798</code></pre>
-<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Sample size for FH(0,1)</span>
 <span class="fu">npsurvSS</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/npsurvSS/man/size_two_arm.html">size_two_arm</a></span><span class="op">(</span><span class="va">arm0</span>, <span class="va">arm1</span>,
   power <span class="op">=</span> <span class="fl">0.8</span>, alpha <span class="op">=</span> <span class="fl">0.025</span>,
@@ -469,7 +469,7 @@ where <span class="math inline">\(\theta = \Delta/\sigma\)</span> is the effect 
 <pre><code>#&gt;        n0        n1         n        d0        d1         d 
 #&gt; 138.39353 138.39353 276.78707 102.15617  81.23792 183.39408</code></pre>
 <p>The number of events can also be calculated as below. More details can be found in the technical details.</p>
-<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">n0</span> <span class="op">&lt;-</span> <span class="va">n1</span> <span class="op">&lt;-</span> <span class="va">n</span> <span class="op">/</span> <span class="fl">2</span>
 <span class="fu">gsdmvn</span><span class="fu">:::</span><span class="fu">prob_event.arm</span><span class="op">(</span><span class="va">arm0</span>, tmax <span class="op">=</span> <span class="va">arm0</span><span class="op">$</span><span class="va">total_time</span><span class="op">)</span> <span class="op">*</span> <span class="va">n0</span> <span class="op">+</span>
   <span class="fu">gsdmvn</span><span class="fu">:::</span><span class="fu">prob_event.arm</span><span class="op">(</span><span class="va">arm1</span>, tmax <span class="op">=</span> <span class="va">arm0</span><span class="op">$</span><span class="va">total_time</span><span class="op">)</span> <span class="op">*</span> <span class="va">n1</span></code></pre></div>
@@ -491,33 +491,33 @@ where <span class="math inline">\(\theta = \Delta/\sigma\)</span> is the effect 
 <span class="math inline">\(F_R(\cdot)\)</span> CDF of <span class="math inline">\(R\)</span>
 </li>
 </ul>
-<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">arm0</span><span class="op">$</span><span class="va">total_time</span>, <span class="fl">0.1</span><span class="op">)</span>
 <span class="co"># Piecewise Uniform Distribution</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x</span>, <span class="fu">npsurvSS</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/npsurvSS/man/daccr.html">daccr</a></span><span class="op">(</span><span class="va">x</span>, arm <span class="op">=</span> <span class="va">arm0</span><span class="op">)</span>,
   type <span class="op">=</span> <span class="st">"s"</span>,
   xlab <span class="op">=</span> <span class="st">"Calendar time (month)"</span>, ylab <span class="op">=</span> <span class="st">"Accrual Probability"</span>
 <span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-78-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-91-1.png" width="80%" style="display: block; margin: auto;"></div>
 <ul>
 <li>
 <span class="math inline">\(\tau_a\)</span>: accrual time</li>
 </ul>
-<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">arm0</span><span class="op">$</span><span class="va">accr_time</span></code></pre></div>
 <pre><code>#&gt; [1] 12</code></pre>
 <ul>
 <li>
 <span class="math inline">\(\tau_f\)</span>: follow-up time</li>
 </ul>
-<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">arm0</span><span class="op">$</span><span class="va">follow_time</span></code></pre></div>
 <pre><code>#&gt; [1] 24</code></pre>
 <ul>
 <li>
 <span class="math inline">\(\tau = \tau_a + \tau_f\)</span>: total study duration</li>
 </ul>
-<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">arm0</span><span class="op">$</span><span class="va">total_time</span></code></pre></div>
 <pre><code>#&gt; [1] 36</code></pre>
 </div>
@@ -536,7 +536,7 @@ where <span class="math inline">\(\theta = \Delta/\sigma\)</span> is the effect 
 <li>
 <span class="math inline">\(f_T(\cdot)\)</span>: Density function</li>
 </ul>
-<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Survival function of time to event from study entry</span>
 <span class="co"># Piecewise Exponential distribution</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">1</span> <span class="op">-</span> <span class="fu">npsurvSS</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/npsurvSS/man/dsurv.html">psurv</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">arm0</span><span class="op">)</span>,
@@ -545,7 +545,7 @@ where <span class="math inline">\(\theta = \Delta/\sigma\)</span> is the effect 
 <span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">1</span> <span class="op">-</span> <span class="fu">npsurvSS</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/npsurvSS/man/dsurv.html">psurv</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">arm1</span><span class="op">)</span>, lty <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topright"</span>, lty <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"control"</span>, <span class="st">"experiment"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-82-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-95-1.png" width="80%" style="display: block; margin: auto;"></div>
 </div>
 <div id="censoring-time" class="section level3">
 <h3>
@@ -558,14 +558,14 @@ where <span class="math inline">\(\theta = \Delta/\sigma\)</span> is the effect 
 <span class="math inline">\(S_L(\cdot)\)</span>: Survival function of <span class="math inline">\(L\)</span>
 </li>
 </ul>
-<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># PDF of the time to loss of follow-up from study entry</span>
 <span class="co"># Exponential Distribution</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">pexp</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,
   type <span class="op">=</span> <span class="st">"l"</span>,
   xlab <span class="op">=</span> <span class="st">"Calendar time (month)"</span>, ylab <span class="op">=</span> <span class="st">"Loss to Follow-up Probability"</span>
 <span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-83-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-96-1.png" width="80%" style="display: block; margin: auto;"></div>
 <ul>
 <li>
 <span class="math inline">\(C = \min(L, \tau - R)\)</span>: time to censoring from study entry.</li>
@@ -593,7 +593,7 @@ where <span class="math inline">\(\theta = \Delta/\sigma\)</span> is the effect 
 <span class="math inline">\(E\{N(t)\}\)</span>: expected probability of events</li>
 </ul>
 <p><span class="math display">\[E\{N(t)\} = \int_{0}^{t}f_{T}(s)S_{L}(s)F_{R}(\tau_{a}\land(\tau-s))ds\]</span></p>
-<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Probability of Events</span>
 <span class="va">x_int</span> <span class="op">&lt;-</span> <span class="fl">0</span><span class="op">:</span><span class="va">arm0</span><span class="op">$</span><span class="va">total_time</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x_int</span>, <span class="fu">gsdmvn</span><span class="fu">:::</span><span class="fu">prob_event.arm</span><span class="op">(</span><span class="va">arm0</span>, tmax <span class="op">=</span> <span class="va">x_int</span><span class="op">)</span>,
@@ -601,7 +601,7 @@ where <span class="math inline">\(\theta = \Delta/\sigma\)</span> is the effect 
   xlab <span class="op">=</span> <span class="st">"Calendar time (month)"</span>, ylab <span class="op">=</span> <span class="st">"Event Probability"</span>,
   ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>
 <span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-84-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-97-1.png" width="80%" style="display: block; margin: auto;"></div>
 <ul>
 <li>
 <span class="math inline">\(Y(t) = I(U\ge t)\)</span>: at-risk process</li>
@@ -609,13 +609,13 @@ where <span class="math inline">\(\theta = \Delta/\sigma\)</span> is the effect 
 <span class="math inline">\(E\{Y(t)\}\)</span>: expected probability at risk</li>
 </ul>
 <p><span class="math display">\[E\{Y(t)\} = S_{T}(s)S_{L}(s)F_{R}(\tau_{a}\land(\tau-s))\]</span></p>
-<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Probability of People at risk</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x_int</span>, <span class="fu">gsdmvn</span><span class="fu">:::</span><span class="fu">prob_risk</span><span class="op">(</span><span class="va">arm0</span>, <span class="va">x_int</span>, <span class="va">arm0</span><span class="op">$</span><span class="va">total_time</span><span class="op">)</span>,
   type <span class="op">=</span> <span class="st">"l"</span>,
   xlab <span class="op">=</span> <span class="st">"Calendar time (month)"</span>, ylab <span class="op">=</span> <span class="st">"Probability at Risk"</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>
 <span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-85-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-98-1.png" width="80%" style="display: block; margin: auto;"></div>
 </div>
 <div id="weight-function-in-weighted-logrank-test" class="section level3">
 <h3>
@@ -629,14 +629,14 @@ where <span class="math inline">\(\theta = \Delta/\sigma\)</span> is the effect 
 <li>Constant weight (logrank test): <span class="math inline">\(1\)</span>
 </li>
 </ul>
-<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/wlr_weight.html">wlr_weight_1</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">12</span>, <span class="fl">24</span>, <span class="fl">36</span><span class="op">)</span>, <span class="va">arm0</span>, <span class="va">arm1</span><span class="op">)</span></code></pre></div>
 <pre><code>#&gt; [1] 1</code></pre>
 <ul>
 <li>Fleming-Harrington weight: <span class="math inline">\(w(t) = FH^{\rho, \gamma}(t) = S(t)^\rho(1 - S(t))^\gamma\)</span>
 </li>
 </ul>
-<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">weight_legend</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html">expand.grid</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"rho=0"</span>, <span class="st">"rho=1"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"gamma=0"</span>, <span class="st">"gamma=1"</span><span class="op">)</span><span class="op">)</span>, <span class="fl">1</span>, <span class="va">paste0</span>, collapse <span class="op">=</span> <span class="st">"; "</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">36</span>, <span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/wlr_weight.html">wlr_weight_fh</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">36</span>, <span class="va">arm0</span>, <span class="va">arm1</span>, rho <span class="op">=</span> <span class="fl">0</span>, gamma <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>,
   xlab <span class="op">=</span> <span class="st">"Calendar time (month)"</span>, col <span class="op">=</span> <span class="fl">1</span>,
@@ -646,17 +646,17 @@ where <span class="math inline">\(\theta = \Delta/\sigma\)</span> is the effect 
 <span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">36</span>, <span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/wlr_weight.html">wlr_weight_fh</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">36</span>, <span class="va">arm0</span>, <span class="va">arm1</span>, rho <span class="op">=</span> <span class="fl">0</span>, gamma <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, col <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">36</span>, <span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/wlr_weight.html">wlr_weight_fh</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">36</span>, <span class="va">arm0</span>, <span class="va">arm1</span>, rho <span class="op">=</span> <span class="fl">1</span>, gamma <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, col <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"bottomright"</span>, legend <span class="op">=</span> <span class="va">weight_legend</span>, lty <span class="op">=</span> <span class="fl">1</span>, col <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-87-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-100-1.png" width="80%" style="display: block; margin: auto;"></div>
 <ul>
 <li><p>Modestly WLR: <span class="math inline">\(S^{-1}(t\land\tau_m)\)</span> <span class="citation">Magirr and Burman (<a href="references.html#ref-magirr2019modestly" role="doc-biblioref">2019</a><a href="references.html#ref-magirr2019modestly" role="doc-biblioref">b</a>)</span></p></li>
 <li><p>Choose <span class="math inline">\(\tau_m\)</span> around the change point in delay effect scenario</p></li>
 <li><p>Only down-weight early event. Constant weight after change point.</p></li>
 </ul>
-<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">36</span>, <span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/wlr_weight.html">wlr_weight_fh</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">36</span>, <span class="va">arm0</span>, <span class="va">arm1</span>, rho <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>, gamma <span class="op">=</span> <span class="fl">0</span>, tau <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>,
   xlab <span class="op">=</span> <span class="st">"Calendar time (month)"</span>, ylab <span class="op">=</span> <span class="st">"Weight"</span>, type <span class="op">=</span> <span class="st">"l"</span>
 <span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-88-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-101-1.png" width="80%" style="display: block; margin: auto;"></div>
 </div>
 <div id="average-hazard-ratio" class="section level3">
 <h3>
@@ -677,7 +677,7 @@ It is a generalization of the <span class="citation">Schoenfeld (<a href="refere
 </li>
 </ul>
 <p><span class="math display">\[ \log{AHR} = \frac{\Delta}{\int_{0}^{\tau}w(s)\frac{p_{0}\pi_{0}(s)p_{1}\pi_{1}(s)}{\pi(s)^2}v'(s)ds} \]</span></p>
-<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">t</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">36</span>
 <span class="va">log_ahr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">t</span>, <span class="kw">function</span><span class="op">(</span><span class="va">t</span><span class="op">)</span> <span class="op">{</span>
   <span class="fu">gsdmvn</span><span class="fu">:::</span><span class="fu">gs_delta_wlr</span><span class="op">(</span><span class="va">arm0</span>, <span class="va">arm1</span>, tmax <span class="op">=</span> <span class="va">t</span>, weight <span class="op">=</span> <span class="va">weight</span><span class="op">)</span> <span class="op">/</span>
@@ -692,20 +692,20 @@ It is a generalization of the <span class="citation">Schoenfeld (<a href="refere
   ylab <span class="op">=</span> <span class="st">"Average Hazard Ratio"</span>,
   type <span class="op">=</span> <span class="st">"l"</span>
 <span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-89-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-102-1.png" width="80%" style="display: block; margin: auto;"></div>
 <ul>
 <li><p>Note the AHR depends on the choice of weight function <span class="math inline">\(w(\cdot)\)</span>.</p></li>
 <li><p>Under logrank test with piecewise exponential distribution and 1:1 randomization ratio,
 it can be simplified to</p></li>
 </ul>
 <p><span class="math display">\[\log(AHR) = \frac{\sum d_i \log{HR_i}}{\sum d_i}\]</span></p>
-<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">gsDesign2</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsDesign2/reference/AHR.html">AHR</a></span><span class="op">(</span><span class="va">enrollRates</span>, <span class="va">failRates</span>, totalDuration <span class="op">=</span> <span class="va">arm0</span><span class="op">$</span><span class="va">total_time</span><span class="op">)</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 1 × 5
 #&gt;    Time   AHR Events  info info0
 #&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 #&gt; 1    36 0.683   331.  81.4  82.8</code></pre>
-<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">log_ahr</span> <span class="op">&lt;-</span> <span class="fu">gsdmvn</span><span class="fu">:::</span><span class="fu">gs_delta_wlr</span><span class="op">(</span><span class="va">arm0</span>, <span class="va">arm1</span>,
   tmax <span class="op">=</span> <span class="va">arm0</span><span class="op">$</span><span class="va">total_time</span>,
   weight <span class="op">=</span> <span class="fu">gsdmvn</span><span class="fu">:::</span><span class="va"><a href="https://merck.github.io/gsdmvn/reference/wlr_weight.html">wlr_weight_1</a></span>
@@ -737,7 +737,7 @@ the covariance of two test statistics <span class="math inline">\(Z_1 = Z(\rho_1
 <li><p>We illustrate the idea based on <span class="math inline">\(FH(0, 0.5)\)</span> and <span class="math inline">\(FH(0.5, 0.5)\)</span></p></li>
 <li><p>All weight functions</p></li>
 </ul>
-<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">weight_combo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
   <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">arm0</span>, <span class="va">arm1</span><span class="op">)</span> <span class="op">{</span>
     <span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/wlr_weight.html">wlr_weight_fh</a></span><span class="op">(</span>
@@ -767,7 +767,7 @@ the covariance of two test statistics <span class="math inline">\(Z_1 = Z(\rho_1
 <ul>
 <li><span class="math inline">\(\Delta\)</span></li>
 </ul>
-<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">delta_combo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">weight_combo</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span><span class="op">]</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
   <span class="fu">gsdmvn</span><span class="fu">:::</span><span class="fu">gs_delta_wlr</span><span class="op">(</span><span class="va">arm0</span>, <span class="va">arm1</span>, tmax <span class="op">=</span> <span class="va">arm0</span><span class="op">$</span><span class="va">total_time</span>, weight <span class="op">=</span> <span class="va">x</span><span class="op">)</span>
 <span class="op">}</span><span class="op">)</span>
@@ -776,7 +776,7 @@ the covariance of two test statistics <span class="math inline">\(Z_1 = Z(\rho_1
 <ul>
 <li>Covariance</li>
 </ul>
-<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sigma2_combo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">weight_combo</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
   <span class="fu">gsdmvn</span><span class="fu">:::</span><span class="fu">gs_sigma2_wlr</span><span class="op">(</span><span class="va">arm0</span>, <span class="va">arm1</span>, tmax <span class="op">=</span> <span class="va">arm0</span><span class="op">$</span><span class="va">total_time</span>, weight <span class="op">=</span> <span class="va">x</span><span class="op">)</span>
 <span class="op">}</span><span class="op">)</span>
@@ -788,7 +788,7 @@ the covariance of two test statistics <span class="math inline">\(Z_1 = Z(\rho_1
 <ul>
 <li>Correlation</li>
 </ul>
-<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">corr_combo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cov2cor</a></span><span class="op">(</span><span class="va">sigma2_combo</span><span class="op">)</span>
 <span class="va">corr_combo</span></code></pre></div>
 <pre><code>#&gt;          [,1]     [,2]
@@ -802,7 +802,7 @@ the covariance of two test statistics <span class="math inline">\(Z_1 = Z(\rho_1
 because the test statistic for MaxCombo is not asymptotically normal.</p>
 <p>The type I Error should be:</p>
 <p><span class="math display">\[\alpha = \text{Pr}(\max(Z_1, Z_2) &gt; z_{\alpha} \, | \, H_0) = 1 - \text{Pr}(Z_1 &lt; z_{\alpha}, Z_2 &lt; z_{\alpha} \, | \, H_0)\]</span></p>
-<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://mvtnorm.R-forge.R-project.org">mvtnorm</a></span><span class="op">)</span>
 
 <span class="va">z_alpha</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mvtnorm/man/qmvnorm.html">qmvnorm</a></span><span class="op">(</span>p <span class="op">=</span> <span class="fl">1</span> <span class="op">-</span> <span class="fl">0.025</span>, corr <span class="op">=</span> <span class="va">corr_combo</span><span class="op">)</span>
@@ -810,7 +810,7 @@ because the test statistic for MaxCombo is not asymptotically normal.</p>
 <pre><code>#&gt; [1] 2.014555</code></pre>
 <p>The power should be</p>
 <p><span class="math display">\[\beta = \text{Pr}(\max(Z_1, Z_2) &gt; z_{\alpha} \, | \, H_1) = 1 - \text{Pr}(Z_1 &lt; z_{\alpha}, Z_2 &lt; z_{\alpha} \, | \, H_1)\]</span></p>
-<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#' @param n Sample size</span>
 <span class="co">#' @param power Target power. Use power=0 to calculate the actual power.</span>
 <span class="va">power_combo</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">n</span>, <span class="va">power</span> <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span>
@@ -829,11 +829,11 @@ because the test statistic for MaxCombo is not asymptotically normal.</p>
 <span class="header-section-number">6.9.2</span> Sample size<a class="anchor" aria-label="anchor" href="#sample-size"><i class="fas fa-link"></i></a>
 </h3>
 <p>To calculate the sample size, we can solve the power function with a giving Type I error and power.</p>
-<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">n_combo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/uniroot.html">uniroot</a></span><span class="op">(</span><span class="va">power_combo</span>, interval <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">500</span><span class="op">)</span>, power <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span><span class="op">$</span><span class="va">root</span>
 <span class="va">n_combo</span></code></pre></div>
 <pre><code>#&gt; [1] 271.0453</code></pre>
-<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>z <span class="op">=</span> <span class="va">z_alpha</span><span class="op">$</span><span class="va">quantile</span>, n <span class="op">=</span> <span class="va">n_combo</span>, power <span class="op">=</span> <span class="fu">power_combo</span><span class="op">(</span><span class="va">n_combo</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>#&gt;          z          n      power 
 #&gt;   2.014555 271.045320   0.800000</code></pre>
@@ -843,7 +843,7 @@ because the test statistic for MaxCombo is not asymptotically normal.</p>
 <span class="header-section-number">6.9.3</span> Number of events<a class="anchor" aria-label="anchor" href="#number-of-events"><i class="fas fa-link"></i></a>
 </h3>
 <p>The number of events required can be calculated accordingly as in weighted logrank test.</p>
-<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">n0</span> <span class="op">&lt;-</span> <span class="va">n1</span> <span class="op">&lt;-</span> <span class="va">n_combo</span> <span class="op">/</span> <span class="fl">2</span>
 <span class="fu">gsdmvn</span><span class="fu">:::</span><span class="fu">prob_event.arm</span><span class="op">(</span><span class="va">arm0</span>, tmax <span class="op">=</span> <span class="va">arm0</span><span class="op">$</span><span class="va">total_time</span><span class="op">)</span> <span class="op">*</span> <span class="va">n0</span> <span class="op">+</span>
   <span class="fu">gsdmvn</span><span class="fu">:::</span><span class="fu">prob_event.arm</span><span class="op">(</span><span class="va">arm1</span>, tmax <span class="op">=</span> <span class="va">arm0</span><span class="op">$</span><span class="va">total_time</span><span class="op">)</span> <span class="op">*</span> <span class="va">n1</span></code></pre></div>

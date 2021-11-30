@@ -79,9 +79,9 @@
 <li>Not necessary to have the same number of tests in each interim analysis</li>
 </ul>
 </div>
-<div id="examples" class="section level2">
+<div id="examples-1" class="section level2">
 <h2>
-<span class="header-section-number">9.2</span> Examples<a class="anchor" aria-label="anchor" href="#examples"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.2</span> Examples<a class="anchor" aria-label="anchor" href="#examples-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>We continue to use the same example scenario from the last chapter.</p>
 <div id="example-1" class="section level3">
@@ -91,7 +91,7 @@
 <ul>
 <li>Using logrank test in all interim analyses and a MaxCombo test <span class="math inline">\(Z_{1k}: FH(0,0)\)</span>, <span class="math inline">\(Z_{2k}: FH(0,0.5)\)</span>, <span class="math inline">\(Z_{3k}: FH(0.5,0.5)\)</span> in final analysis.</li>
 </ul>
-<div class="sourceCode" id="cb245"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb259"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">fh_test1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span>
   <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
     rho <span class="op">=</span> <span class="fl">0</span>, gamma <span class="op">=</span> <span class="fl">0</span>, tau <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>,
@@ -120,7 +120,7 @@
 <ul>
 <li>Using <span class="math inline">\(Z_{1k}: FH(0,0)\)</span> and <span class="math inline">\(Z_{2k}: FH(0,0.5)\)</span>.</li>
 </ul>
-<div class="sourceCode" id="cb247"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb261"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">fh_test2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
   rho <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>, gamma <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.5</span><span class="op">)</span>, tau <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>,
   analysisTimes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">12</span>, <span class="fl">24</span>, <span class="fl">36</span><span class="op">)</span>, each <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,
@@ -147,7 +147,7 @@
 <li>Multiple test statistics are considered in interim analysis or final analysis.</li>
 </ul>
 <p>We will explain the way to derive bound using spending function in the next chapter.</p>
-<div class="sourceCode" id="cb249"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb263"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">gsDesign</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gsDesign/man/nSurv.html">gsSurv</a></span><span class="op">(</span>
   k <span class="op">=</span> <span class="fl">3</span>, test.type <span class="op">=</span> <span class="fl">4</span>, alpha <span class="op">=</span> <span class="fl">0.025</span>,
   beta <span class="op">=</span> <span class="fl">0.2</span>, astar <span class="op">=</span> <span class="fl">0</span>, timing <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>,
@@ -158,10 +158,10 @@
   R <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span>, S <span class="op">=</span> <span class="cn">NULL</span>,
   T <span class="op">=</span> <span class="fl">36</span>, minfup <span class="op">=</span> <span class="fl">24</span>, ratio <span class="op">=</span> <span class="fl">1</span>
 <span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb250"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb264"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span><span class="op">$</span><span class="va">upper</span><span class="op">$</span><span class="va">bound</span></code></pre></div>
 <pre><code>#&gt; [1] 3.710303 2.511407 1.992970</code></pre>
-<div class="sourceCode" id="cb252"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb266"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span><span class="op">$</span><span class="va">lower</span><span class="op">$</span><span class="va">bound</span></code></pre></div>
 <pre><code>#&gt; [1] -0.2361874  1.1703638  1.9929702</code></pre>
 <div id="example-1-1" class="section level3">
@@ -169,7 +169,7 @@
 <span class="header-section-number">9.3.1</span> Example 1<a class="anchor" aria-label="anchor" href="#example-1-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>Sample size can be calculated using <code><a href="https://merck.github.io/gsdmvn/reference/gs_design_combo.html">gsdmvn::gs_design_combo()</a></code>.</p>
-<div class="sourceCode" id="cb254"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb268"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_design_combo.html">gs_design_combo</a></span><span class="op">(</span><span class="va">enrollRates</span>,
   <span class="va">failRates</span>,
   <span class="va">fh_test1</span>,
@@ -183,13 +183,13 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>`Probability_Null (%)` <span class="op">=</span> <span class="va">Probability_Null</span> <span class="op">*</span> <span class="fl">100</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">Probability_Null</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_if</a></span><span class="op">(</span><span class="va">is.numeric</span>, <span class="va">round</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt;   Analysis Bound Time      N Events     Z Probability Probability_Null (%)
-#&gt; 1        1 Upper   12 444.81  95.54  3.71        0.00                 0.01
-#&gt; 3        2 Upper   24 444.81 219.10  2.51        0.47                 0.61
-#&gt; 5        3 Upper   36 444.81 294.72  1.99        0.80                 3.26
-#&gt; 2        1 Lower   12 444.81  95.54 -0.24        0.14                   NA
-#&gt; 4        2 Lower   24 444.81 219.10  1.17        0.19                   NA
-#&gt; 6        3 Lower   36 444.81 294.72  1.99        0.20                   NA</code></pre>
+<pre><code>#&gt;   Analysis Bound Time     N Events     Z Probability Probability_Null (%)
+#&gt; 1        1 Upper   12 444.8  95.54  3.71        0.00                 0.01
+#&gt; 3        2 Upper   24 444.8 219.09  2.51        0.47                 0.61
+#&gt; 5        3 Upper   36 444.8 294.72  1.99        0.80                 3.26
+#&gt; 2        1 Lower   12 444.8  95.54 -0.24        0.14                   NA
+#&gt; 4        2 Lower   24 444.8 219.09  1.17        0.19                   NA
+#&gt; 6        3 Lower   36 444.8 294.72  1.99        0.20                   NA</code></pre>
 <ul>
 <li>Simulation results based on 10,000 replications.</li>
 </ul>
@@ -200,7 +200,7 @@
 <ul>
 <li>Compared with group sequential design with logrank test (based on AHR).</li>
 </ul>
-<div class="sourceCode" id="cb257"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb271"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_design_ahr.html">gs_design_ahr</a></span><span class="op">(</span>
   enrollRates <span class="op">=</span> <span class="va">enrollRates</span>, failRates <span class="op">=</span> <span class="va">failRates</span>,
   ratio <span class="op">=</span> <span class="va">ratio</span>, alpha <span class="op">=</span> <span class="va">alpha</span>, beta <span class="op">=</span> <span class="va">beta</span>,
@@ -223,7 +223,7 @@
 <h3>
 <span class="header-section-number">9.3.2</span> Example 2<a class="anchor" aria-label="anchor" href="#example-2-1"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb259"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb273"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_design_combo.html">gs_design_combo</a></span><span class="op">(</span><span class="va">enrollRates</span>,
   <span class="va">failRates</span>,
   <span class="va">fh_test2</span>,
@@ -238,12 +238,12 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">Probability_Null</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_if</a></span><span class="op">(</span><span class="va">is.numeric</span>, <span class="va">round</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
 <pre><code>#&gt;   Analysis Bound Time      N Events     Z Probability Probability_Null (%)
-#&gt; 1        1 Upper   12 348.21  74.79  3.71        0.00                 0.02
-#&gt; 3        2 Upper   24 348.21 171.52  2.51        0.49                 0.84
-#&gt; 5        3 Upper   36 348.21 230.72  1.99        0.80                 3.28
-#&gt; 2        1 Lower   12 348.21  74.79 -0.24        0.10                   NA
-#&gt; 4        2 Lower   24 348.21 171.52  1.17        0.15                   NA
-#&gt; 6        3 Lower   36 348.21 230.72  1.99        0.20                   NA</code></pre>
+#&gt; 1        1 Upper   12 348.22  74.79  3.71        0.00                 0.02
+#&gt; 3        2 Upper   24 348.22 171.52  2.51        0.49                 0.83
+#&gt; 5        3 Upper   36 348.22 230.72  1.99        0.80                 3.28
+#&gt; 2        1 Lower   12 348.22  74.79 -0.24        0.10                   NA
+#&gt; 4        2 Lower   24 348.22 171.52  1.17        0.15                   NA
+#&gt; 6        3 Lower   36 348.22 230.72  1.99        0.20                   NA</code></pre>
 <ul>
 <li>Simulation results based on 10,000 replications.</li>
 </ul>
@@ -254,7 +254,7 @@
 <ul>
 <li>Compared with group sequential design with FH(0, 0.5)</li>
 </ul>
-<div class="sourceCode" id="cb262"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb276"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_design_wlr.html">gs_design_wlr</a></span><span class="op">(</span>
   enrollRates <span class="op">=</span> <span class="va">enrollRates</span>, failRates <span class="op">=</span> <span class="va">failRates</span>,
   weight <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">arm0</span>, <span class="va">arm1</span><span class="op">)</span> <span class="op">{</span>
@@ -278,7 +278,7 @@
 <ul>
 <li>Compared with group sequential design with FH(0.5, 0.5)</li>
 </ul>
-<div class="sourceCode" id="cb264"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb278"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_design_wlr.html">gs_design_wlr</a></span><span class="op">(</span>
   enrollRates <span class="op">=</span> <span class="va">enrollRates</span>, failRates <span class="op">=</span> <span class="va">failRates</span>,
   weight <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">arm0</span>, <span class="va">arm1</span><span class="op">)</span> <span class="op">{</span>
@@ -350,14 +350,14 @@ the sample size and events required for WLR under fixed design.</p>
 <h3>
 <span class="header-section-number">9.6.1</span> Example 1<a class="anchor" aria-label="anchor" href="#example-1-2"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb266"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb280"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">u_fh_test1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">fh_test1</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"test"</span>, <span class="st">"rho"</span>, <span class="st">"gamma"</span>, <span class="st">"tau"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>
 <span class="va">u_fh_test1</span></code></pre></div>
 <pre><code>#&gt;   test rho gamma tau
 #&gt; 1    1 0.0   0.0  -1
 #&gt; 4    2 0.0   0.5  -1
 #&gt; 5    3 0.5   0.5  -1</code></pre>
-<div class="sourceCode" id="cb268"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb282"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">corr_test1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span>
   <span class="va">u_fh_test1</span>,
   <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">analysisTimes</span>, <span class="kw">function</span><span class="op">(</span><span class="va">tmax</span><span class="op">)</span> <span class="op">{</span>
@@ -391,13 +391,13 @@ the sample size and events required for WLR under fixed design.</p>
 <h3>
 <span class="header-section-number">9.6.2</span> Example 2<a class="anchor" aria-label="anchor" href="#example-2-2"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb270"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb284"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">u_fh_test2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">fh_test2</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"test"</span>, <span class="st">"rho"</span>, <span class="st">"gamma"</span>, <span class="st">"tau"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>
 <span class="va">u_fh_test2</span></code></pre></div>
 <pre><code>#&gt;   test rho gamma tau
 #&gt; 1    1   0   0.0  -1
 #&gt; 2    2   0   0.5  -1</code></pre>
-<div class="sourceCode" id="cb272"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb286"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">corr_test2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span>
   <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">fh_test2</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"rho"</span>, <span class="st">"gamma"</span>, <span class="st">"tau"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>,
   <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">analysisTimes</span>, <span class="kw">function</span><span class="op">(</span><span class="va">tmax</span><span class="op">)</span> <span class="op">{</span>
@@ -440,7 +440,7 @@ the sample size and events required for WLR under fixed design.</p>
 <h3>
 <span class="header-section-number">9.7.1</span> Example 1<a class="anchor" aria-label="anchor" href="#example-1-3"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb274"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb288"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">info1</span> <span class="op">&lt;-</span> <span class="fu">gsdmvn</span><span class="fu">:::</span><span class="fu">gs_info_combo</span><span class="op">(</span><span class="va">enrollRates</span>, <span class="va">failRates</span>, <span class="va">ratio</span>,
   analysisTimes <span class="op">=</span> <span class="va">analysisTimes</span>,
   rho <span class="op">=</span> <span class="va">u_fh_test1</span><span class="op">$</span><span class="va">rho</span>,
@@ -457,7 +457,7 @@ the sample size and events required for WLR under fixed design.</p>
 #&gt; 7    3        1   12 500 107.39 0.79  0.00   0.01  0.68  2.90  2.91
 #&gt; 8    3        2   24 500 246.28 0.68 -0.02   0.02  0.93 10.15 10.33
 #&gt; 9    3        3   36 500 331.29 0.65 -0.03   0.03  0.97 15.07 15.53</code></pre>
-<div class="sourceCode" id="cb276"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb290"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">info</span> <span class="op">&lt;-</span> <span class="va">info1</span>
 <span class="va">info_split</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/split.html">split</a></span><span class="op">(</span><span class="va">info</span>, <span class="va">info</span><span class="op">$</span><span class="va">test</span><span class="op">)</span>
 <span class="va">corr_time1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">info_split</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
@@ -489,7 +489,7 @@ the sample size and events required for WLR under fixed design.</p>
 <h3>
 <span class="header-section-number">9.7.2</span> Example 2<a class="anchor" aria-label="anchor" href="#example-2-3"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb278"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb292"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">info2</span> <span class="op">&lt;-</span> <span class="fu">gsdmvn</span><span class="fu">:::</span><span class="fu">gs_info_combo</span><span class="op">(</span><span class="va">enrollRates</span>, <span class="va">failRates</span>, <span class="va">ratio</span>,
   analysisTimes <span class="op">=</span> <span class="va">analysisTimes</span>,
   rho <span class="op">=</span> <span class="va">u_fh_test2</span><span class="op">$</span><span class="va">rho</span>,
@@ -503,7 +503,7 @@ the sample size and events required for WLR under fixed design.</p>
 #&gt; 4    2        1   12 500 107.39 0.78  0.00   0.01  0.63  3.60  3.62
 #&gt; 5    2        2   24 500 246.28 0.67 -0.02   0.03  0.77 15.37 15.74
 #&gt; 6    2        3   36 500 331.29 0.64 -0.04   0.05  0.73 27.21 28.48</code></pre>
-<div class="sourceCode" id="cb280"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb294"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">info</span> <span class="op">&lt;-</span> <span class="va">info2</span>
 <span class="va">info_split</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/split.html">split</a></span><span class="op">(</span><span class="va">info</span>, <span class="va">info</span><span class="op">$</span><span class="va">test</span><span class="op">)</span>
 <span class="va">corr_time2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">info_split</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
@@ -543,7 +543,7 @@ the sample size and events required for WLR under fixed design.</p>
 <h3>
 <span class="header-section-number">9.8.1</span> Example 1<a class="anchor" aria-label="anchor" href="#example-1-4"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb282"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb296"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">corr_test</span> <span class="op">&lt;-</span> <span class="va">corr_test1</span>
 <span class="va">corr_time</span> <span class="op">&lt;-</span> <span class="va">corr_time1</span>
 <span class="va">info</span> <span class="op">&lt;-</span> <span class="va">info1</span>
@@ -576,13 +576,13 @@ the sample size and events required for WLR under fixed design.</p>
 <ul>
 <li>Compared with simulation results based on 10,000 replications.</li>
 </ul>
-<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-207-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-220-1.png" width="80%" style="display: block; margin: auto;"></div>
 </div>
 <div id="example-2-4" class="section level3">
 <h3>
 <span class="header-section-number">9.8.2</span> Example 2<a class="anchor" aria-label="anchor" href="#example-2-4"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb284"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb298"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">corr_test</span> <span class="op">&lt;-</span> <span class="va">corr_test2</span>
 <span class="va">corr_time</span> <span class="op">&lt;-</span> <span class="va">corr_time2</span>
 <span class="va">info</span> <span class="op">&lt;-</span> <span class="va">info2</span>
@@ -612,7 +612,7 @@ the sample size and events required for WLR under fixed design.</p>
 <ul>
 <li>Compared with simulation results based on 10,000 replications.</li>
 </ul>
-<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-209-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-222-1.png" width="80%" style="display: block; margin: auto;"></div>
 </div>
 </div>
 <div id="power-1" class="section level2">
@@ -643,7 +643,7 @@ the sample size and events required for WLR under fixed design.</p>
 <h3>
 <span class="header-section-number">9.9.1</span> Example 1<a class="anchor" aria-label="anchor" href="#example-1-5"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb286"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb300"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">500</span>
 <span class="co"># Restricted to actual analysis</span>
 <span class="va">info_fh</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/merge.html">merge</a></span><span class="op">(</span><span class="va">info1</span>, <span class="va">fh_test1</span>, all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
@@ -663,16 +663,16 @@ the sample size and events required for WLR under fixed design.</p>
 <pre><code>#&gt;   Bound Probability
 #&gt; 1 Upper 0.002411474
 #&gt; 2 Upper 0.525796329
-#&gt; 3 Upper 0.828231093
+#&gt; 3 Upper 0.828234313
 #&gt; 4 Lower 0.129688918
 #&gt; 5 Lower 0.162696908
-#&gt; 6 Lower 0.171762473</code></pre>
+#&gt; 6 Lower 0.171768408</code></pre>
 </div>
 <div id="example-2-5" class="section level3">
 <h3>
 <span class="header-section-number">9.9.2</span> Example 2<a class="anchor" aria-label="anchor" href="#example-2-5"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb288"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb302"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">500</span>
 <span class="co"># Restricted to actual analysis</span>
 <span class="va">info_fh</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/merge.html">merge</a></span><span class="op">(</span><span class="va">info2</span>, <span class="va">fh_test2</span>, all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
@@ -691,11 +691,11 @@ the sample size and events required for WLR under fixed design.</p>
 <span class="va">power</span></code></pre></div>
 <pre><code>#&gt;   Bound Probability
 #&gt; 1 Upper 0.006333066
-#&gt; 2 Upper 0.674436325
-#&gt; 3 Upper 0.896146423
+#&gt; 2 Upper 0.674437793
+#&gt; 3 Upper 0.896125773
 #&gt; 4 Lower 0.068860093
-#&gt; 5 Lower 0.089485172
-#&gt; 6 Lower 0.103860440</code></pre>
+#&gt; 5 Lower 0.089487804
+#&gt; 6 Lower 0.103857657</code></pre>
 </div>
 </div>
 <div id="sample-size-1" class="section level2">
@@ -709,7 +709,7 @@ the sample size and events required for WLR under fixed design.</p>
 <h3>
 <span class="header-section-number">9.10.1</span> Example 1<a class="anchor" aria-label="anchor" href="#example-1-6"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb290"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb304"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="op">{</span>
   <span class="va">info_fh</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/merge.html">merge</a></span><span class="op">(</span><span class="va">info1</span>, <span class="va">fh_test1</span>, all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
   <span class="va">corr_fh</span> <span class="op">&lt;-</span> <span class="va">corr_combo1</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">info_fh</span><span class="op">$</span><span class="va">gamma</span><span class="op">)</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">info_fh</span><span class="op">$</span><span class="va">gamma</span><span class="op">)</span><span class="op">]</span>
@@ -728,13 +728,13 @@ the sample size and events required for WLR under fixed design.</p>
 <span class="op">}</span>
 
 <span class="fu"><a href="https://rdrr.io/r/stats/uniroot.html">uniroot</a></span><span class="op">(</span><span class="va">fun</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1000</span><span class="op">)</span>, extendInt <span class="op">=</span> <span class="st">"yes"</span><span class="op">)</span><span class="op">$</span><span class="va">root</span></code></pre></div>
-<pre><code>#&gt; [1] 444.8075</code></pre>
+<pre><code>#&gt; [1] 444.8052</code></pre>
 </div>
 <div id="example-2-6" class="section level3">
 <h3>
 <span class="header-section-number">9.10.2</span> Example 2<a class="anchor" aria-label="anchor" href="#example-2-6"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb292"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb306"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="op">{</span>
   <span class="va">info_fh</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/merge.html">merge</a></span><span class="op">(</span><span class="va">info2</span>, <span class="va">fh_test2</span>, all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
   <span class="va">corr_fh</span> <span class="op">&lt;-</span> <span class="va">corr_combo2</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">info_fh</span><span class="op">$</span><span class="va">gamma</span><span class="op">)</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">info_fh</span><span class="op">$</span><span class="va">gamma</span><span class="op">)</span><span class="op">]</span>
@@ -754,7 +754,7 @@ the sample size and events required for WLR under fixed design.</p>
 <span class="op">}</span>
 
 <span class="fu"><a href="https://rdrr.io/r/stats/uniroot.html">uniroot</a></span><span class="op">(</span><span class="va">fun</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1000</span><span class="op">)</span>, extendInt <span class="op">=</span> <span class="st">"yes"</span><span class="op">)</span><span class="op">$</span><span class="va">root</span></code></pre></div>
-<pre><code>#&gt; [1] 348.2113</code></pre>
+<pre><code>#&gt; [1] 348.2387</code></pre>
 
 </div>
 </div>
@@ -768,7 +768,7 @@ the sample size and events required for WLR under fixed design.</p>
 <li><a class="nav-link" href="#maxcombo"><span class="header-section-number">9</span> MaxCombo test</a></li>
 <li><a class="nav-link" href="#maxcombo-test-with-interim-analysis"><span class="header-section-number">9.1</span> MaxCombo test with interim analysis</a></li>
 <li>
-<a class="nav-link" href="#examples"><span class="header-section-number">9.2</span> Examples</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#examples-1"><span class="header-section-number">9.2</span> Examples</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#example-1"><span class="header-section-number">9.2.1</span> Example 1</a></li>
 <li><a class="nav-link" href="#example-2"><span class="header-section-number">9.2.2</span> Example 2</a></li>
 </ul>

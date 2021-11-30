@@ -49,6 +49,14 @@ updating-calendar-based-spending-bounds-at-analysis
 ahr
 piecewise-model
 secAhr
+examples
+SecAhrEgAhrVsTime
+SecAhrEgAhrVsPower
+SecAhrEgCalcTiming
+SecAhrEgPhNphOneSided
+SecAhrEgPhNphSymmetric
+SecAhrEgPhNphAsymmetric
+SecAhrEgPhNphSpecStop
 pkgs
 simtrial
 gsdesign2
@@ -114,7 +122,7 @@ sample-size-calculation-fh0-0.5
 sample-size-calculation-fh0.5-0.5
 maxcombo
 maxcombo-test-with-interim-analysis
-examples
+examples-1
 example-1
 example-2
 sample-size-calculation-1
