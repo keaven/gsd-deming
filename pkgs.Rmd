@@ -338,6 +338,26 @@ save(results, file = "./data/simulation_AHR_simPRSurv.Rdata")
 ```{r}
 # Calculate the simulated AHR
 load("./data/simulation_AHR_simPRSurv.Rdata")
+
+# Distribution of Cox coefficient
+ggplot(tibble::as_tibble(results), 
+       aes(x = factor(Analysis), y = beta)) +
+  geom_violin() +
+  ggtitle("Distribution of Cox Coefficient by Analysis") +
+  xlab("Analysis") +
+  ylab("Cox coefficient")
+
+# Variability of results
+library(dplyr)
+ggplot(filter(tibble::as_tibble(results), Sim < 10) %>% 
+         mutate(Sim = factor(Sim), Analysis = factor(Analysis)), 
+       aes(x = Analysis, y = exp(beta), group = Sim, col = Sim)) +
+  geom_line(show.legend = FALSE) +
+  geom_point(aes(shape = Analysis), show.legend = FALSE) +
+  scale_y_log10(breaks = seq(.6, 1.1, .1)) +
+  ylab("HR")
+
+# Comparison of asymptotic vs simulation
 AHR_simulated <- tibble::as_tibble(results) %>%
   group_by(Analysis) %>%
   summarize(
