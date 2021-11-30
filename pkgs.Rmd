@@ -88,7 +88,7 @@ The second simulation is to compare the simulated power and asymptotic power.
 Specifically speaking, we compare the results from `gsDesign2::AHR()` with that from `simtrial::simPWSurv()`.
 The details of this simulation can be found in Section \@ref(secAhrSimSimPWSurv).
 
-The third simulation is to compare the estimation of $\beta$ by MLE as in Section \@ref(secAhrMLE) and weighted summation as in Section \@ref(secAhrWeightedSum).
+The third simulation is to compare the estimation of $\beta$ by MLE and weighted summation as in Section \@ref(secAhr).
 The details of this simulation can be found in Section \@ref(secAhrSimMleWs).
 
 ### Simulation 1: Compare the IA power by `gs_power_ahr()` and simulation `sim_fix()` {#secAhrSimSimfix}
