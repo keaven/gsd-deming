@@ -61,7 +61,7 @@ If you choose to install R packages locally:
 install.packages("gsDesign")
 ```
 
-- For non-proportional hazards, the following 3 packages would be useful to install
+- For non-proportional hazards, the following 3 R packages would be useful to install
 
 ```{r, eval=FALSE}
 remotes::install_github("Merck/gsdmvn")
