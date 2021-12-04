@@ -38,7 +38,7 @@ All opinions expressed are those of the presenters and not Merck & Co., Inc., Ke
 
 - Break (10 minutes)
 
-- Weighted logrank, RMST and combination tests (55 minutes)
+- Weighted logrank and combination tests (55 minutes)
   - Introduction to methods
   - Weighted logrank
   - MaxCombo
@@ -61,7 +61,7 @@ If you choose to install R packages locally:
 install.packages("gsDesign")
 ```
 
-- For non-proportional hazards, the following 3 packages would be useful to install
+- For non-proportional hazards, the following 3 R packages would be useful to install
 
 ```{r, eval=FALSE}
 remotes::install_github("Merck/gsdmvn")
