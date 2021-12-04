@@ -38,7 +38,7 @@ All opinions expressed are those of the presenters and not Merck & Co., Inc., Ke
 
 - Break (10 minutes)
 
-- Weighted logrank, RMST and combination tests (55 minutes)
+- Weighted logrank and combination tests (55 minutes)
   - Introduction to methods
   - Weighted logrank
   - MaxCombo
