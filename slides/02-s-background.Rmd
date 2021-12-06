@@ -63,8 +63,8 @@
 
   $$-\infty\le a_k<b_k, k=1,\ldots,K-1,$$
   $$a_K\le b_K$$
-
-  $$1 - \beta =  \sum_{k=1}^{K} l_k = \sum_{k=1}^{K} \text{Pr}(\{Z_k < a_k\} \cap_{j=1}^{k-1} \{a_j \le Z_j \le b_j\}\mid H_1)$$
+If $a_K = b_K$ then total Type II error is 
+  $$\beta =  \sum_{k=1}^{K} l_k = \sum_{k=1}^{K} \text{Pr}(\{Z_k < a_k\} \cap_{j=1}^{k-1} \{a_j \le Z_j \le b_j\}\mid H_1)$$
 
 ## Symmetric bounds
 
@@ -323,7 +323,7 @@ plot(x, xlab = "Events", main = "Futility bounds testing if experimental trendin
     - Wang-Tsiatis boundary [@wang1987approximately]
       - Pocock boundary [@pocock1977group]
       - O'Brien and Fleming boundary [@o1979multiple]
-    - Slud and Wei [@SludWei, @FHO] set fixed IA probabilities
+    - @SludWei and @FHO set fixed IA boundary crossing probabilities
       - Hybrid of boundary family/spending approach
 
 # Boundary families

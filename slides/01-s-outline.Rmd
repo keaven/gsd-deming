@@ -2,17 +2,25 @@
 
 ## Outline
 
-- Background theory (30 minutes)
 
-- Proportional hazards applications with Shiny app (40 minutes)
 
-- Break (15 minutes)
+- 3:30: Introduction and background theory (30 minutes)
 
-- Non-proportional hazards model with logrank test (60 minutes)
+- 4:00: Proportional hazards applications with Shiny app (25 minutes)
 
-- Break (10 minutes)
+- 4:25: Intro to non-proportional hazards (NPH; 5 minutes)
 
-- Weighted logrank and combination tests (55 minutes)
+- 4:30: Software and piecewise model (15 min)
+
+- 4:45: Average hazard ratio (AHR; 20 minutes)
+
+- 5:05: Break (10 minutes)
+
+- 5:15: NPH design with logrank test (25 minutes)
+
+- 5:40: Weighted logrank and combination tests (40 minutes)
+
+- 6:20 Summary and questions (10 minutes)
 
 ## Disclaimer
 
