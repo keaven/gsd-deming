@@ -150,15 +150,19 @@ where <span class="math inline">\(\mu_1\)</span> and <span class="math inline">\
 <p>By assuming local alternative, we have</p>
 <p><span class="math display">\[\sigma_0^2 \approx \sigma_1^2 = \sigma^2\]</span>
 In this simplified case, the sample size can be calculated as</p>
-<p><span class="math display">\[ n = \frac{4 (z_{\alpha}+z_{\beta})^{2}}{\theta^2} \]</span></p>
+<p><span class="math display">\[ n = \frac{4 (z_{\alpha}+z_{\beta})^{2}}{\theta^2} \]</span>
+Here <span class="math inline">\(\theta\)</span> is standardized treatment effect.</p>
 </div>
 <div id="two-sample-t-test" class="section level2">
 <h2>
 <span class="header-section-number">6.4</span> Two-sample t-test<a class="anchor" aria-label="anchor" href="#two-sample-t-test"><i class="fas fa-link"></i></a>
 </h2>
 <p>Let’s revisit the two-sample t-test to make a connection between the math formula and R code.</p>
-<p>Assume a scenario with treatment effect at 0.5 with pooled standard deviation at 2.
-Let’s calculate the sample size using the formula above.</p>
+<p>In two-sample t-test, we have</p>
+<p><span class="math display">\[\theta = \frac{\Delta}{\sigma}\]</span>,
+where <span class="math inline">\(\theta\)</span> is difference of mean in two groups and <span class="math inline">\(\sigma\)</span> is standard divation of <span class="math inline">\(\theta\)</span>.</p>
+<p>If we consider a scenarios with treatment effect at 0.5 with pooled standard deviation at 2.</p>
+<p>Let’s calculate the sample size using the formula above.</p>
 <div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Effect size</span>
 <span class="va">theta</span> <span class="op">&lt;-</span> <span class="fl">0.5</span> <span class="op">/</span> <span class="fl">2</span></code></pre></div>
@@ -180,21 +184,22 @@ It provides a slightly larger sample size under the same study design scenario.<
 <h2>
 <span class="header-section-number">6.5</span> Logrank test<a class="anchor" aria-label="anchor" href="#logrank-test"><i class="fas fa-link"></i></a>
 </h2>
-<p>Let’s also explore the number of events required for the logrank test under the proportional hazards assumption.</p>
-<p>You may hear the sample size calculation is “event-driven”.
-This is a nice feature under the <strong>proportional hazards assumption</strong> because the effect size for the number of events only depends on the hazard ratio.</p>
-<p><span class="math display">\[\theta = \log{\text{HR}} / 2\]</span></p>
-<ul>
-<li>
-<span class="math inline">\(\text{HR}\)</span> is the hazard ratio.</li>
-<li>
-<span class="math inline">\(d\)</span> is the number of events.</li>
-</ul>
+<p>Let’s also explore the number of events required for logrank test under the proportional hazards assumption.
+It is well known that the sample size calculation is “event-driven” in this special case.</p>
+<p>This is a nice feature under the <strong>proportional hazards assumption</strong>. because the effect size for number of events is only depends on the hazard ratio.</p>
 <div class="rmdnote">
-<p>As an exercise, the readers can derive the effect size in formula (9.3) of
-Section 9.5 from the <a href="https://www4.stat.ncsu.edu/~dzhang2/st520/520notes.pdf">NCSU ST520 course notes</a>.</p>
+<p>Notation:
+- <span class="math inline">\(\text{HR}\)</span> is the hazard ratio.
+- <span class="math inline">\(d\)</span> is the number of events.</p>
 </div>
-<p>With the effect size, we can use the same formula to calculate the number of events as below.</p>
+<p>The effect size is:
+<span class="math display">\[\theta = \log{\text{HR}} / 2\]</span></p>
+<div class="rmdnote">
+<p>As an exercise, the readers can derive the effect size following
+Section 9.5 of the <a href="https://www4.stat.ncsu.edu/~dzhang2/st520/520notes.pdf">NCSU ST520 course notes</a>.
+The effect size is in formula (9.3) of the course notes.</p>
+</div>
+<p>With the effect size, we can use the same formula to calculate the number of events (<span class="math inline">\(d\)</span>) as below.</p>
 <p><span class="math display">\[ d = \frac{4 (z_{\alpha}+z_{\beta})^{2}}{(\log{\text{HR}/2})^2} \]</span></p>
 <p>After the total number of events is defined,
 the sample size (<span class="math inline">\(n\)</span>) can be determined based on accrual distribution,
@@ -205,8 +210,8 @@ survival distribution loss to follow-up distribution and study duration.</p>
 <li><code><a href="https://rdrr.io/pkg/npsurvSS/man/size_two_arm.html">npsurvSS::size_two_arm()</a></code></li>
 </ul>
 <div class="rmdnote">
-<p>For simplicity, we skip the detail of the sample size calculation.
-Interested readers can refer to <span class="citation">Lachin and Foulkes (<a href="references.html#ref-lachin1986evaluation" role="doc-biblioref">1986</a><a href="references.html#ref-lachin1986evaluation" role="doc-biblioref">b</a>)</span>.</p>
+<p>For simplicity, we skip the details of sample size calculation
+discussed in <span class="citation">Lachin and Foulkes (<a href="references.html#ref-lachin1986evaluation" role="doc-biblioref">1986</a><a href="references.html#ref-lachin1986evaluation" role="doc-biblioref">b</a>)</span>.</p>
 </div>
 <p>Let’s make connection between math formula and R code by considering a scenario with
 hazard ratio at 0.6.</p>
@@ -906,7 +911,7 @@ because the test statistic for MaxCombo is not asymptotically normal.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Group Sequential Design Under Non-Proportional Hazards</strong>: Deming Conference Course, December 6, 2021" was written by Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao. It was last built on 2021-12-05.</p>
+    <p>"<strong>Group Sequential Design Under Non-Proportional Hazards</strong>: Deming Conference Course, December 6, 2021" was written by Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao. It was last built on 2021-12-06.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
