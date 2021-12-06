@@ -86,8 +86,8 @@ $$ n = \frac{4 (z_{\alpha}+z_{\beta})^{2}}{\theta^2} $$
 
 - [Examples](https://keaven.github.io/gsd-deming/fixed.html#maxcombo-test)
 
-
-## Weighted logrank test
+ 
+## Group sequential design with weighted logrank test
 
 Similar to the fixed design, we can define the test statistics for weighted logrank test using counting process formula
 
