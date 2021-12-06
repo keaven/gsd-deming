@@ -19,10 +19,6 @@ eq:AhrIndividualHazardRateDist
 eq:AhrSingleHazardRatioDef
 eq:AhrSignleLogHazardRatio
 eq:AhrBetaEstimation
-training-overview
-software-and-supporting-materials
-installing-r-packages
-authors-and-contributors
 background
 nph
 gsd
