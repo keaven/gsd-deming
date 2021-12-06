@@ -16,6 +16,7 @@
 - Shiny app available at:
   - <https://rinpharma.shinyapps.io/gsdesign/> (preferred)
   - <https://gsdesign.shinyapps.io/prod/> (not preferred)
+  - [Video intro](https://www.youtube.com/watch?v=8uZRuvzma9)
 - Allows broad specification of designs
 - Much simpler than writing code
 - It will write code and reports for you
@@ -64,7 +65,7 @@ Key aspects of the design as documented in the protocol accompanying @KEYNOTE189
 - We arbitrarily set the following parameters to match design:
   - Power of 90% for a hazard ratio of 0.6921846; this is slightly different than the 0.7 hazard ratio suggested in @AFCAPSdesign
   - Enrollment duration of 1/2 year with constant enrollment.
-  - An exponential failure rate of 0.01131 per year which is nearly identical to the annual dropout rate of `r round(1 - exp(-.01131),5)`.
+  - An exponential failure rate of 0.01131 per year which is nearly identical to the annual failure rate of `r round(1 - exp(-.01131),5)`.
   - An exponential dropout rate of 0.004 per year which is nearly identical to the annual dropout rate of `r round(1 - exp(-.004),5)`.
 
 ## Cardiovascular outcomes non-inferiority: EXAMINE trial
@@ -232,7 +233,7 @@ p + geom_label(data = txt, aes(x = Month, y = ev, col = factor(s), label = txt))
 - Quite possible that event rate design assumptions incorrect
 - Good to ensure duration of follow-up is adequate evaluate tail behavior/plateau in survival
 - Ensures adequate follow-up to estimate relevant parts of survival curve
-- Limits trial to relevant clinical and practical
+- Limits trial to relevant clinical and practical duration
 - May be underpowered if events accrue slowly
 - Probably less useful for high-risk endpoints (e.g., metastatic cancer)
 - Regulatory resistance?
@@ -242,5 +243,3 @@ p + geom_label(data = txt, aes(x = Month, y = ev, col = factor(s), label = txt))
 See the following link for the Moderna COVID-19 design replication: <https://medium.com/@yipeng_39244/reverse-engineering-the-statistical-analyses-in-the-moderna-protocol-2c9fd7544326>
 
 Can you reproduce this using the Shiny interface?
-
-# Break (15 minutes)

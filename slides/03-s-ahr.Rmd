@@ -412,6 +412,8 @@ ggplot(xx, aes(x = Time, y = Survival, col = Value, fill = Value)) +
 ```
 </div>
 
+# Break (10 minutes)
+
 # Average hazard ratio
 
 ## Overview

@@ -536,7 +536,7 @@ ggplot(ds, aes(x = ts, y = spend, col = factor(gamma))) +
 
 - Information fraction, @LanDeMets
   - Time-to-event: fraction of planned final events in analysis
-  - Normal or continuous: fraction of planned final sample size in analysis
+  - Normal or binomial: fraction of planned final sample size in analysis
   - Usually expected by regulators
 - Calendar fraction, @LanDeMets1989
   - Fraction of trial planned calendar duration at analysis
