@@ -78,12 +78,19 @@ $$\sigma_0^2 \approx \sigma_1^2 = \sigma^2$$
 In this simplified case, the sample size can be calculated as
 
 $$ n = \frac{4 (z_{\alpha}+z_{\beta})^{2}}{\theta^2} $$
+Here $\theta$ is standardized treatment effect. 
 
 ## Two-sample t-test
 
 Let's revisit the two-sample t-test to make a connection between the math formula and R code.
 
-Assume a scenario with treatment effect at 0.5 with pooled standard deviation at 2.
+In two-sample t-test, we have 
+
+$$\theta = \frac{\Delta}{\sigma}$$, 
+where $\theta$ is difference of mean in two groups and $\sigma$ is standard divation of $\theta$.
+
+If we consider a scenarios with treatment effect at 0.5 with pooled standard deviation at 2.
+
 Let's calculate the sample size using the formula above.
 
 ```{r}
@@ -110,22 +117,29 @@ stats::power.t.test(delta = 0.5, sd = 2, sig.level = 0.05, power = 0.8)$n * 2
 
 ## Logrank test
 
-Let's also explore the number of events required for the logrank test under the proportional hazards assumption.
+Let's also explore the number of events required for logrank test under the proportional hazards assumption.
+It is well known that the sample size calculation is "event-driven" in this special case.
 
-You may hear the sample size calculation is "event-driven".
-This is a nice feature under the **proportional hazards assumption** because the effect size for the number of events only depends on the hazard ratio.
-
-$$\theta = \log{\text{HR}} / 2$$
-
-- $\text{HR}$ is the hazard ratio.
-- $d$ is the number of events.
+This is a nice feature under the **proportional hazards assumption**. because the effect size for number of events is only depends on the hazard ratio.
 
 ::: {.rmdnote}
-As an exercise, the readers can derive the effect size in formula (9.3) of
-Section 9.5 from the [NCSU ST520 course notes](https://www4.stat.ncsu.edu/~dzhang2/st520/520notes.pdf).
+Notation: 
+- $\text{HR}$ is the hazard ratio.
+- $d$ is the number of events.
 :::
 
-With the effect size, we can use the same formula to calculate the number of events as below.
+The effect size is:
+$$\theta = \log{\text{HR}} / 2$$
+
+
+
+::: {.rmdnote}
+As an exercise, the readers can derive the effect size following
+Section 9.5 of the [NCSU ST520 course notes](https://www4.stat.ncsu.edu/~dzhang2/st520/520notes.pdf).
+The effect size is in formula (9.3) of the course notes.
+:::
+
+With the effect size, we can use the same formula to calculate the number of events ($d$) as below.
 
 $$ d = \frac{4 (z_{\alpha}+z_{\beta})^{2}}{(\log{\text{HR}/2})^2} $$
 
@@ -139,8 +153,8 @@ The sample size calculation has been implemented in
 - `npsurvSS::size_two_arm()`
 
 ::: {.rmdnote}
-For simplicity, we skip the detail of the sample size calculation.
-Interested readers can refer to @lachin1986evaluation.
+For simplicity, we skip the details of sample size calculation
+discussed in @lachin1986evaluation.
 :::
 
 Let's make connection between math formula and R code by considering a scenario with
