@@ -1,6 +1,6 @@
 # Preface {-}
 
-## Training overview
+## Training overview {.unnumbered}
 
 In this course, we will present concepts, theory, software and a Shiny interface.
 Mainly we will focus on designs that you might consider for time-to-event endpoints.
@@ -13,7 +13,7 @@ While most studies still use a logrank test, we will also touch on some alternat
 All opinions expressed are those of the presenters and not Merck & Co., Inc., Kenilworth, NJ, USA.
 :::
 
-## Chapters and training sections {-}
+## Chapters and training sections {.unnumbered}
 
 - Background theory (30 minutes)
   - Extension to non-proportional hazards
@@ -44,14 +44,14 @@ All opinions expressed are those of the presenters and not Merck & Co., Inc., Ke
   - MaxCombo
   - Exercise
 
-## Software and supporting materials
+## Software and supporting materials {.unnumbered}
 
 - Useful directories in course repository at <https://github.com/keaven/gsd-deming>:
   - `data/`: contains design files for examples; also simulation results
   - `vignettes/`: reports produced by Shiny app to summarize designs
   - `simulation/`: R code and simulation data for the last part of the course
 
-## Installing R packages
+## Installing R packages {.unnumbered}
 
 If you choose to install R packages locally:
 
@@ -71,7 +71,7 @@ remotes::install_github("Merck/simtrial")
 
 You will need reasonably recent versions of R and packages.
 
-## Authors and contributors
+## Authors and contributors {.unnumbered}
 
 The document is maintained by a community.
 While reading the document, you can be a contributor as well.
