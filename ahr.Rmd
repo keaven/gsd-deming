@@ -85,7 +85,7 @@ By plugging the asymptotic distribution of $\{\lambda_{0, m}, \lambda_{1,m}\}$ i
 
 ## Average hazard ratio {#secAhr}
 
-In this section, we define the the average hazard ratio (AHR) and use it  to derive the asymptotic normal distribution of the logrank test.
+In this section, we define the average hazard ratio (AHR) and use it  to derive the asymptotic normal distribution of the logrank test.
 This is actually a weighted geometric mean of the hazard ratio in piecewise intervals we defined above.
 Defining $\beta_m=\log(\lambda_{1,m}/\lambda_{0,m})= \log(\lambda_{1,m})-\log(\lambda_{0,m}), m=1,\ldots,M$, we define the logarithm of AHR as a weighted sum of the individual log hazard ratios:
 $$
@@ -374,7 +374,7 @@ PH1sided <- gsDesign::gsSurv(
 gsBoundSummary(PH1sided) %>%  gt()
 ```
 
-Second, we calculate the the sample size and crossing probability under non-proportional hazard.
+Second, we calculate the sample size and crossing probability under non-proportional hazard.
 And we find the sample size is $465$ with $308$ events (you will want to round up events and sample size). 
 The crossing probabilities at the first, second, third and final interim analysis are $0.0019, 0.3024, 0.7329, 0.9000$ under $H_1$.
 ```{r, echo=TRUE}
@@ -467,7 +467,7 @@ PHsymmetric <- gsDesign::gsSurv(
 gsBoundSummary(PHsymmetric) %>% gt()
 ```
 
-Second, we calculate the the sample size and crossing probability under non-proportional hazard by `gsdmvn::gs_design_ahr()`.
+Second, we calculate the sample size and crossing probability under non-proportional hazard by `gsdmvn::gs_design_ahr()`.
 And we find the sample size is $465$ with $308$ events (you will want to round up events and sample size). 
 The probabilities to cross the upper boundaries at the first, second, third and final interim analysis are $0.0019, 0.3024, 0.7329, 0.9000$ under $H_1$.
 The probabilities to cross the lower boundaries at the first, second, third and final interim analysis are $0.0000, 0.0000, 0.0000, 0.0000$ under $H_0$.
@@ -562,7 +562,7 @@ PHasymmetric <- gsDesign::gsSurv(
 gsBoundSummary(PHasymmetric) %>% gt()
 ```
 
-Second, we calculate the the sample size and crossing probability under non-proportional hazard by `gsdmvn::gs_design_ahr()`.
+Second, we calculate the sample size and crossing probability under non-proportional hazard by `gsdmvn::gs_design_ahr()`.
 And we find the sample size is $502$ with $333$ events (you will want to round up events and sample size). 
 The probabilities to cross the upper boundaries at the first, second, third and final interim analysis are $0.0021, 0.3318, 0.7660, 0.9000$ under $H_1$.
 The probabilities to cross the lower boundaries at the first, second, third and final interim analysis are $0.0143, 0.0387, 0.0681, 0.1000$ under $H_0$.
