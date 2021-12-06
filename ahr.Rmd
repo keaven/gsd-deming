@@ -591,6 +591,9 @@ NPHasymmetric$bounds %>%
   fmt_number(col = 8:9, decimals = 3)
 ```
 
+This does important adjustment to futility bounds based on possibly delayed effect!
+- Note IA 1 futility bound under PH with `gsDesign()`: $Z=-0.25$
+
 ### Example 7 {#SecAhrEgPhNphSpecStop}
 
 In this example, we discuss the design with interims at specified times, say, there are futility boundary only at the first interim analysis (look for $p=0.05$ in the wrong direction) and there are efficacy boundaries only after the first interim.

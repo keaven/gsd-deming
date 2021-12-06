@@ -49,7 +49,7 @@ In `simtrial`, there are reverse engineered datasets:
 
 The R package `gsDesign2` has the main functions listed as follows.
 
-- `AHR()`: Average hazard ratio under non-proportional hazards (test version)
+- `AHR()`: Average hazard ratio under non-proportional hazards
 - `eAccrual()`: Piecewise constant expected accrual
 - `eEvents_df()`: Expected events observed under piecewise exponential model
 - `ppwe()`: Estimate piecewise exponential cumulative distribution function
