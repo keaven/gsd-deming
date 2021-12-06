@@ -26,7 +26,7 @@ knitr::include_graphics("../images/ahr_slides_KEYNOTE040.PNG")
 
 ## Delayed effect not just in oncology
 
-  Cholesterol lowering and mortality @simva4s
+Cholesterol lowering and mortality @simva4s
 
 ```{r, echo=FALSE, fig.cap="Scandinavian Simvistatin Survival Study", out.width = '80%'}
 knitr::include_graphics("../images/ahr_slides_SSSS.jpeg")
@@ -84,7 +84,6 @@ knitr::include_graphics("../images/ahr_slides_KEYNOTE061OS.PNG")
 
 </div>
 
-
 ## Summary of issues
 
 - What is the impact of (potentially) delayed treatment effect on trial design and analysis?
@@ -99,7 +98,7 @@ knitr::include_graphics("../images/ahr_slides_KEYNOTE061OS.PNG")
 
 `simtrial`, `gsDesign2` and `gsdmvn` are under development and hosted on GitHub/Merck.
 
-Below is the Github repo link to the source code
+Below is the GitHub repo link to the source code
 
 - `simtrial`: <https://github.com/Merck/simtrial>
 - `gsDesign2`: <https://github.com/Merck/gsDesign2>
@@ -124,24 +123,24 @@ How to report issues?
 
 - Generating simulated datasets
   - `simfix()`: Simulation of fixed sample size design for time-to-event endpoint
-  - `simfix2simPWSurv()`: Conversion of enrollment and failure rates from simfix() to simPWSurv() format
+  - `simfix2simPWSurv()`: Conversion of enrollment and failure rates from `simfix()` to `simPWSurv()` format
   - `simPWSurv()`: Simulate a stratified time-to-event outcome randomized trial
 
 - Cutting data for analysis
-  - `cutData()`: Cut a Dataset for Analysis at a Specified Date
-  - `cutDataAtCount()`: Cut a Dataset for Analysis at a Specified Event Count
-  - `getCutDateForCount()`: Get Date at Which an Event Count is Reached
+  - `cutData()`: Cut a dataset for analysis at a specified date
+  - `cutDataAtCount()`: Cut a dataset for analysis at a specified event count
+  - `getCutDateForCount()`: Get date at which an event count is reached
 - Analysis functions
-  - `tenFH()`: Fleming-Harrington Weighted Logrank Tests
-  - `tenFHcorr()`: Fleming-Harrington Weighted Logrank Tests plus Correlations
-  - `tensurv()`: Process Survival Data into Counting Process Format
+  - `tenFH()`: Fleming-Harrington weighted logrank tests
+  - `tenFHcorr()`: Fleming-Harrington weighted logrank tests plus correlations
+  - `tensurv()`: Process survival data into counting process format
   - `pMaxCombo()`: MaxCombo p-value
   - `pwexpfit()`: Piecewise exponential survival estimation
-  - `wMB()`: Magirr and Burman Modestly Weighted Logrank Tests
+  - `wMB()`: Magirr and Burman modestly weighted logrank tests
 - Lower level functions
   - `fixedBlockRand()`: Permuted fixed block randomization
-  - `rpwenroll()`: Generate Piecewise Exponential Enrollment
-  - `rpwexp()`: The Piecewise Exponential Distribution
+  - `rpwenroll()`: Generate piecewise exponential enrollment
+  - `rpwexp()`: The piecewise exponential distribution
 
 ## simtrial: reverse engineered datasets
 
@@ -164,7 +163,7 @@ From NPH Working Group
 - `s2pwe()`: Approximate survival distribution with piecewise exponential distribution
 - `tEvents()`: Predict time at which a targeted event count is achieved
 
-We will focus on `AHR()`, `ppwe()` and `s2pwe()` in this training.
+We will focus on `AHR()`, `ppwe()`, and `s2pwe()` in this training.
 
 ## gsdmvn
 
@@ -174,10 +173,10 @@ Power and design functions extending the @JTBook computational model to non-cons
   - `gs_power_ahr()`: Power computation
   - `gs_design_ahr()`: Design computations
 - Bound support
-  - `gsb()`: direct input of bounds
+  - `gs_b()`: direct input of bounds
   - `gs_spending_bound()`: spending function bounds
 - Other tests
-  - Design and power with weighted logrank and MaxCombo will be discussed in next section. 
+  - Design and power with weighted logrank and MaxCombo will be discussed in next section.
 
 # The piecewise model
 
@@ -190,7 +189,7 @@ Power and design functions extending the @JTBook computational model to non-cons
 - Combined tools for designing and evaluating designs
   - Asymptotic approach using average hazard ratio (AHR)
   - Simulation tools to confirm asymptotic approximations
-  - No requirement for for proportional hazards
+  - No requirement for proportional hazards
   - Stick with logrank for this section
 
 ## Piecewise constant enrollment
@@ -250,7 +249,7 @@ ggplot(enroll, aes(x = Month, y = Enrollment)) +
 - **simtrial** package assumes the latter
   - Also used in AHR approach here
 - **npsurvSS** package assumes the former
-   - Used for weighted logrank and combination tests in next section 
+  - Used for weighted logrank and combination tests in next section
 
 ## Failure rates
 
@@ -264,7 +263,6 @@ $$
     \lambda=&\log(2)/m \\
   \end{align}
 $$
-
 
 Specify failure rates and dropout rates in same table
 
@@ -427,7 +425,6 @@ ggplot(xx, aes(x = Time, y = Survival, col = Value, fill = Value)) +
 
 - Geometric mean hazard ratio (@Mukhopadhyay2020)
 - Exponentiate: average $\log(\hbox{HR})$ weighted by expected events per interval
-
 
 ```{r, warning=FALSE, message=FALSE, echo=FALSE}
 library(dplyr)
@@ -645,7 +642,7 @@ ahr <- gsDesign2::AHR(
   - Code here is detailed, but (hopefully) not complicated
   - AHR changes if event-based
   - Number of events variable if time-based
-  
+
 ## Simulation code
 
 ```{r, eval=FALSE}
@@ -786,7 +783,6 @@ $$\hbox{Corr}(Z_j,Z_k)=\sqrt{t_j/t_k}$$
     - Compute expected Cox coefficient $\beta$ ($=\log(AHR)$) as before and set $\theta(t_k)=\beta$
 - We now have *canonical form* for the piecewise model
 
-
 # Group sequential design with spending bounds
 
 ## Recalling assumptions
@@ -852,7 +848,6 @@ timing
 
 ## One-sided design with proportional hazards (gsDesign)
 
-
 ```{r}
 PH1sided <- gsDesign::gsSurv( # Derive Group Sequential Design
   k = 4, # Number of analyses (interim + final)
@@ -873,11 +868,10 @@ PH1sided <- gsDesign::gsSurv( # Derive Group Sequential Design
 )
 ```
 
-
 ## One-sided design with gsSurv() {.smaller}
 
 ```{r, echo=FALSE}
-gsBoundSummary(PH1sided) %>%  gt() 
+gsBoundSummary(PH1sided) %>%  gt()
 ```
 
 ## One-sided design with gsSurv()
@@ -909,9 +903,7 @@ NPH1sided <- gs_design_ahr(
 )
 ```
 
-
 ## One-sided design with gs_design_ahr()
-
 
 ```{r, echo=FALSE}
 NPH1sided$bounds %>%
@@ -927,7 +919,6 @@ NPH1sided$bounds %>%
 - Interim boundary crossing probability much lower than with PH bounds
   - IA 2 crossing probability 50% under PH
 - Sample size larger than for PH (N=444, 297 events)
-
 
 # Symmetric bounds
 
@@ -946,7 +937,6 @@ $$
 $$
 
 ## Symmetric design with gsSurv() {.smaller}
-
 
 ```{r, echo=FALSE}
 # Derive Group Sequential Design
@@ -969,7 +959,6 @@ PHsymmetric <- gsDesign::gsSurv(
   ratio = 1 # Experimental:Control randomization ratio
 )
 ```
-
 
 ```{r, echo=FALSE}
 gsBoundSummary(PHsymmetric) %>%
@@ -1023,7 +1012,7 @@ $$
   f_1(s_k,\alpha)-f_1(s_{k-1},\alpha)
   & = P_0(\{Z_{k}\geq b_{k}(\alpha)\}\cap_{j=1}^{k-1}\{Z_{j}< b_{j}(\alpha)\}\\
   f_2(s_k,\gamma)-f_2(s_{k-1},\gamma)
-  & = P_0(\{Z_{k}< a_{k}(\gamma)\}\cap_{j=1}^{k-1}\{a_{j}(\gamma)\le Z_{j}< b_{j}(\alpha)\}
+  & = P_\theta(\{Z_{k}< a_{k}(\gamma)\}\cap_{j=1}^{k-1}\{a_{j}(\gamma)\le Z_{j}< b_{j}(\alpha)\}
   \end{align}
 $$
 
@@ -1068,7 +1057,6 @@ PHasymmetric <- gsDesign::gsSurv(
   minfup = max(analysisTimes) - sum(enrollRates$duration),
   ratio = 1) # Experimental:Control randomization ratio
 ```
-
 
 ```{r, echo=FALSE}
 gsBoundSummary(PHasymmetric) %>% gt()

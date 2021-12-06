@@ -1,4 +1,4 @@
-# (PART) Others tests {-}
+# Fixed design {#fixed-design}
 
 ```{r, include=FALSE}
 library(dplyr)
@@ -7,25 +7,6 @@ library(gsdmvn)
 library(mvtnorm)
 ```
 
-# Overview {#overview-other-tests}
-
-We consider other alternative tests for group sequential design.
-
-- Weighted logrank tests such as the @FHRhoGamma and @MagirrBurman tests.
-- Combination tests such as the MaxCombo test by @NPHWG2020sim, @NPHWG2021Design.
-
-We will illustrate the concepts based on an experimental R packages.
-
-- [gsdmvn](https://merck.github.io/gsdmvn/): analytically based group sequential design.
-
-In this part, we will cover
-
-- Review of fixed design based on weighted logrank test and MaxCombo test
-- Group sequential design with weighted logrank test
-- Group sequential design with MaxCombo test
-
-# Fixed design {#fixed}
-
 We will briefly review fixed design based on weighted logrank test and MaxCombo test.
 
 ::: {.rmdnote}
@@ -33,7 +14,7 @@ For fixed design, [`npsurvSS`](https://cran.r-project.org/package=npsurvSS)
 will be the tool for this training.
 :::
 
-The fixed design part is largely follow the concept described in @yung2019sample.
+The fixed design part largely follows the concept described in @yung2019sample.
 
 ## Summary of assumptions
 
@@ -52,12 +33,12 @@ For simplicity, we made a few key assumptions.
 
 ::: {.rmdnote}
 Some of these assumptions have been generalized in the literature and the R package `gsdmvn`.
-These assumptions will be used unless other clarification is made in specific section.
+These assumptions will be used unless another clarification is made in specific sections.
 :::
 
 ## Notation
 
-We also define some commonly used notation as below.
+We also define some commonly used notations as below.
 
 - $\alpha$: Type I error
 - $\beta$: Type II error or power (1 - $\beta$)
@@ -81,7 +62,7 @@ z_beta
 
 - $\theta$: effect size.
 
-The key step to calculate sample size is to define the effect size.
+To calculate sample size, a key step is to define the effect size.
 For example, the effect size in two-sample t-test is $(\mu_1 - \mu_2)/\sigma$,
 where $\mu_1$ and $\mu_2$ are group mean and $\sigma$ is pooled standard deviation.
 
@@ -101,7 +82,7 @@ Here $\theta$ is standardized treatment effect.
 
 ## Two-sample t-test
 
-Let's revisit two sample t-test to make connection between math formula and R code.
+Let's revisit the two-sample t-test to make a connection between the math formula and R code.
 
 In two-sample t-test, we have 
 
@@ -109,6 +90,7 @@ $$\theta = \frac{\Delta}{\sigma}$$,
 where $\theta$ is difference of mean in two groups and $\sigma$ is standard divation of $\theta$.
 
 If we consider a scenarios with treatment effect at 0.5 with pooled standard deviation at 2.
+
 Let's calculate the sample size using the formula above.
 
 ```{r}
@@ -175,7 +157,7 @@ For simplicity, we skip the details of sample size calculation
 discussed in @lachin1986evaluation.
 :::
 
-Let's make connection between math formula and R code by considering a scenarios with
+Let's make connection between math formula and R code by considering a scenario with
 hazard ratio at 0.6.
 
 ```{r}
@@ -217,8 +199,8 @@ npsurvSS::size_two_arm(arm0, arm1,
 )
 ```
 
-The number of events from `gsDesign::nSurv()` is slighted smaller,
-because, `gsDesign::nSurv()` follows @lachin1986evaluation
+The number of events from `gsDesign::nSurv()` is slightly smaller
+because `gsDesign::nSurv()` follows @lachin1986evaluation
 that relax the local alternative assumption and is recommended in practice.
 
 ```{r}
@@ -235,22 +217,22 @@ gsDesign::nSurv(
 
 ## Non-proportional hazards
 
-Under proportional hazard assumption, we commonly used event driven approach for sample size calculation.
-(i.e. calculate number of events then derive the sample size.)
+Under proportional hazard assumption, we commonly used an event-driven approach for sample size calculation.
+(i.e., calculate the number of events, then derive the sample size.)
 
 - Event ($d$) to Sample size ($n$) or `d->n`
 
 ```{r, echo = FALSE, out.width= "100%"}
-knitr::include_graphics("images/ch2_d_to_n.png")
+knitr::include_graphics("images/ch2_d_to_n.svg")
 ```
 
-Under Non-proportional Hazards, the event driven approach is not applicable.
+Under non-proportional hazards, the event-driven approach is not applicable.
 We need to derive the sample size first.
 
 - Sample size ($n$) to Event ($d$) or `n->d`
 
 ```{r, echo = FALSE, out.width= "100%"}
-knitr::include_graphics("images/ch2_n_to_d.png")
+knitr::include_graphics("images/ch2_n_to_d.svg")
 ```
 
 - $\tau_a$: accrual time
@@ -260,9 +242,9 @@ knitr::include_graphics("images/ch2_n_to_d.png")
 The two figures above are copied from @yung2019sample.
 :::
 
-Let's considered a delay effect scenario below to illustrate NPH and sample size calculation.
+Let's consider a delayed effect scenario below to illustrate NPH and sample size calculation.
 
-- Duration of enrollment: 12 month
+- Duration of enrollment: 12 months
 - Enrollment rate: 500/12 per month
 
 ```{r}
@@ -271,10 +253,10 @@ enrollRates
 ```
 
 - Failure rate in control group: `log(2) / 15`
-  + Median survival time: 15 months.
+  - Median survival time: 15 months.
 - Hazard ratio:
-  + First 4 months: 1
-  + After 4 months: 0.6
+  - First 4 months: 1
+  - After 4 months: 0.6
 - Dropout Rate: 0.001
 
 ```{r}
@@ -288,7 +270,7 @@ failRates <- tibble::tibble(
 failRates
 ```
 
-The figure below illustrated the survival probability over time in two treatment groups.
+The figure below illustrates the survival probability over time in two treatment groups.
 
 ```{r, echo=FALSE, out.width= "100%"}
 knitr::include_graphics("images/delay_effect_survival.png")
@@ -296,7 +278,7 @@ knitr::include_graphics("images/delay_effect_survival.png")
 
 ## Weighted logrank test
 
-For weighted logrank test, we first illustrated it by using the Fleming-Harrington weight.
+For the weighted logrank test, we first illustrate it by using the Fleming-Harrington weight.
 
 $$FH^{\rho, \gamma}(t) = S(t)^\rho(1 - S(t))^\gamma$$
 
@@ -357,7 +339,7 @@ npsurvSS::size_two_arm(arm0, arm1,
 
 ### Effect size
 
-In Yung and Liu (2019), section 2.3.3, it is shown that， the test statistics $Z\rightarrow_d\mathcal{N}(\sqrt{n}\theta, 1)$ approximately,
+In @yung2019sample, section 2.3.3, it is shown that the test statistics $Z\rightarrow_d\mathcal{N}(\sqrt{n}\theta, 1)$ approximately,
 where $\theta = \Delta/\sigma$ is the effect size. Here the test statistics for weighted logrank test is:
 
 $$ Z=\sqrt{\frac{n_{0}+n_{1}}{n_{0}n_{1}}}\int_{0}^{\tau}w(t)\frac{\overline{Y}_{0}(t)\overline{Y}_{1}(t)}{\overline{Y}_{0}(t)+\overline{Y}_{0}(t)}\left\{ \frac{d\overline{N}_{1}(t)}{\overline{Y}_{1}(t)}-\frac{d\overline{N}_{0}(t)}{\overline{Y}_{0}(t)}\right\} $$
@@ -385,7 +367,7 @@ sigma2 <- gsdmvn:::gs_sigma2_wlr(arm0, arm1, tmax = arm0$total_time, weight = we
 sigma2
 ```
 
-Below are definitions of each components.
+Below are definitions of each component.
 
 - $n = n_0 + n_1$: Total sample size
 - $p_0 = n_0/n$, $p_1 = n_1/n$: Randomization probability inferred by randomization ratio
@@ -501,6 +483,7 @@ plot(x, 1 - pexp(x),
 - $E\{N(t)\}$: expected probability of events
 
 $$E\{N(t)\} = \int_{0}^{t}f_{T}(s)S_{L}(s)F_{R}(\tau_{a}\land(\tau-s))ds$$
+
 ```{r}
 # Probability of Events
 x_int <- 0:arm0$total_time
@@ -566,7 +549,7 @@ plot(1:36, gsdmvn::wlr_weight_fh(x = 1:36, arm0, arm1, rho = -1, gamma = 0, tau 
 
 $$\Delta=\int_{0}^{\tau}w(s)\frac{p_{0}\pi_{0}(s)p_{1}\pi_{1}(s)}{\pi(s)}\{\lambda_{1}(s)-\lambda_{0}(s)\}ds$$
 
-- Taylor expansion builds connection between $\Delta$ and weighted average of log hazard ratio (AHR).
+- Taylor expansion builds a connection between $\Delta$ and weighted average of log hazard ratio (AHR).
   It is a generalization of the @Schoenfeld1981 asymptotic expansion.
 
 $$\Delta\approx\int_{0}^{\tau}w(s)\log\left(\frac{\lambda_1(s)}{\lambda_0(s)}\right)\frac{p_{0}\pi_{0}(s)p_{1}\pi_{1}(s)}{\pi(s)^2}v'(s)ds$$
@@ -598,6 +581,7 @@ plot(t, exp(log_ahr),
 it can be simplified to
 
 $$\log(AHR) = \frac{\sum d_i \log{HR_i}}{\sum d_i}$$
+
 ```{r}
 gsDesign2::AHR(enrollRates, failRates, totalDuration = arm0$total_time)
 ```
@@ -623,7 +607,7 @@ Also computed by `gsDesign2::AHR()`.
 MaxCombo test statistics is the maximum of multiple WLR test statistics using different weight functions.
 We focus on Fleming and Harrington weight function $FH(\rho, \gamma)$ defined in `gsdmvn::wlr_weight_fh()`.
 
-To calculate sample size for the MaxCombo test,
+To calculate the sample size for the MaxCombo test,
 we will need to know the variance-covariance of multiple WLR test statistics.
 
 For Fleming and Harrington weight function, the covariance of different WLR test statistics can be calculated.
@@ -696,7 +680,7 @@ corr_combo
 The formula to calculate sample size based on effect size does not directly apply,
 because the test statistic for MaxCombo is not asymptotically normal.
 
-The type I Error shall be:
+The type I Error should be:
 
 $$\alpha = \text{Pr}(\max(Z_1, Z_2) > z_{\alpha} \, | \, H_0) = 1 - \text{Pr}(Z_1 < z_{\alpha}, Z_2 < z_{\alpha} \, | \, H_0)$$
 
@@ -707,7 +691,7 @@ z_alpha <- qmvnorm(p = 1 - 0.025, corr = corr_combo)
 z_alpha$quantile
 ```
 
-The power shall be
+The power should be
 
 $$\beta = \text{Pr}(\max(Z_1, Z_2) > z_{\alpha} \, | \, H_1) = 1 - \text{Pr}(Z_1 < z_{\alpha}, Z_2 < z_{\alpha} \, | \, H_1)$$
 

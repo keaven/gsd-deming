@@ -602,6 +602,19 @@
       "Repository": "RSPM",
       "Hash": "3838071b66e0c566d55cc26bd6e27bf4"
     },
+    "simtrial": {
+      "Package": "simtrial",
+      "Version": "0.2.0",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "merck",
+      "RemoteRepo": "simtrial",
+      "RemoteRef": "main",
+      "RemoteSha": "b513e32cbc71ff184e94de4d7d3503fe454ec236",
+      "Remotes": "dominicmagirr/modestWLRT",
+      "Hash": "fa6fb30ca135e7712ed32715e5385199"
+    },
     "stringi": {
       "Package": "stringi",
       "Version": "1.7.5",

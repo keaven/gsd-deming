@@ -1,293 +1,4 @@
-# Average hazard ratio
-
-We consider designs for non-proportional hazards in this chapter.
-Because of its importance for regulatory applications, we focus here on the logrank tests.
-Others tests will be considered in Chapter \@ref(overview-other-tests).
-
-## Piecewise model
-
-To model the time-varying hazard ratio, AHR commonly assumes that the hazard ratio is piecewise constant.
-Suppose the piecewise constant changes at the change points $0 = t_0 < t_1 < \cdots < t_M \le \infty$, and for each individual interval $(t_{m-1}, t_m]$ for $m = 1, \ldots, M$, the hazard ratio is a constant $HR_m$ (experimental: control) , i.e.,
-$$
-  \text{hazard ratio}
-  =
-  \left\{
-  \begin{array}{ll}
-    HR_1  & \text{for } t \in (0, t_1] \\
-    HR_2  & \text{for } t \in (t_1, t_2] \\
-    \vdots \\
-    HR_M  & \text{for } t \in (t_{M-1}, t_M] \\
-  \end{array}
-  \right..
-$$
-For any $m = 1, \ldots, M$,
-$$
-  HR_m = \lambda_{1,m} / \lambda_{0,m},
-$$
-where the subscript $i$ indexes the group, i.e., $i = 0$ for control arm and $i=1$ for treatment arm.
-From the assumption of the piecewise AHR model, we know the $\lambda_{i,m}$ is a constant in $(t_{m-1}, t_m]$.
-Its likelihood is
-$$
-  L(\lambda_{i,m})
-  =
-  \exp(-\lambda_{i,m}T_{i,m})\;
-  \lambda_{i,m}^{d_{i,m}},
-$$
-where $d_{i,m}$ is the number of observed events in $(t_{m-1}, t_m]$ and $T_{i,m}$ is the follow-up time (total time on test) in in $(t_{m-1}, t_m]$.
-If we denote
-\begin{equation}
-   (\#eq:AhrLambdaGamma)
-   \lambda_{i,m} = e^{\gamma_{i, m}},
-\end{equation}
-the above likelihood function of $\lambda_{i,m}$ can be re-written into the likelihood function of $\gamma_{i, m}$, i.e.,
-$$
-  L(\gamma_{i,m})
-  =
-  \exp(-e^{\gamma_{i,m}}T_{i,m})\;
-  e^{\gamma_{i,m}d_{i,m}}.
-$$
-This leads to a log-likelihood:
-$$
-  \ell(\gamma_{i,m})
-  \triangleq
-  \log\left( L(\gamma_{i,m}) \right)
-  =
-  -e^{\gamma_{i,m}}T_{i,m}
-  +
-  \gamma_{i,m}d_{i,m}.
-$$
-By setting its first derivative with respect to $\gamma_{i,m}$ as zero,
-$$
-  \frac{\partial}{\partial \gamma_{i,m}}
-  \ell(\gamma_{i,m})
-  =
-  -e^{\gamma_{i,m}}T_{i,m} + d_{i,m}
-  =
-  0
-$$
-one gets its maximum likelihood estimation as
-\begin{equation}
-  (\#eq:AhrRateEstimation)
-  \hat\gamma_{i,m}
-  =
-  \log(d_{i,m}/T_{i,m}).
-\end{equation}
-By taking the second derivative of $\ell(\gamma_{i,m})$, one gets the variance of $\hat\gamma_{i,m}$ as
-$$
-  \widehat{\hbox{Var}(\hat\gamma_{i,m})}
-  =
-  \left(
-    -\frac{\partial^2}{\partial \gamma_{i,m}^2} \ell(\hat\gamma_{i,m})
-  \right)^{-1}
-  =
-  \left(
-    e^{\hat\gamma_{i,m}}T_{i,m}
-  \right)^{-1}
-  =
-  \frac{1}{d_{i,m}}.
-$$
-
-By using the delta method (see details in [Dr. Lu Tian's slides](https://web.stanford.edu/~lutian/stat331.HTML)), we get the asymptotic distribution of $\widehat\lambda_{i,m}$ as
-\begin{equation}
-  (\#eq:AhrIndividualHazardRateDist)
-  \log(\widehat\lambda_{i,m})
-  \overset{\cdot}{\sim}
-  \text{Normal}
-  \left(
-    \log(\lambda_{i,m}), \; 1/d_{i,m}
-  \right),
-  \;\;
-  \forall i \in \{0, 1\}
-\end{equation}
-
-Withe the estimation of $\{\lambda_{i,m}\}_{i=0,1 \text{ and } m = 1, \ldots, M}$, it is not complicated to get the estimation and the asymptotic distribution of $HR_m$, which is defined as $HR_m = \lambda_{1,m}/\lambda_{0,m}$.
-In this chapter, we are interested in the logarithm of $HR_m$ and denote it as $\beta_m$.
-Recall that
-\begin{equation}
-  (\#eq:AhrSingleHazardRatioDef)
-  \beta_m
-  \triangleq
-  \log(HR_m)
-  =
-  \log\left( \frac{\lambda_{1,m}}{\lambda_{0,m}} \right)
-  =
-  \log(\lambda_{1,m}) - \log(\lambda_{0,m}).
-\end{equation}
-For both $\lambda_{1,m}$ and $\lambda_{0,m}$ above, by equation \@ref(eq:AhrRateEstimation), we know they can be estimated by
-$$
-  \widehat\lambda_{i,m} = \frac{d_{i,m}}{T_{i, m}} \;\; i \in\{0, 1\}
-$$
-where $d_{0,m}, d_{1,m}$ are number of events in $(t_{m-1}, t_m]$ for group $0,1$, respectively.
-
-By plugging the asymptotic distribution of $\{\lambda_{0, m}, \lambda_{1,m}\}$ in equation \@ref(eq:AhrIndividualHazardRateDist) into \@ref(eq:AhrSingleHazardRatioDef), we can derive the asymptotic distribution of $\beta_m$:
-\begin{equation}
-  (\#eq:AhrSignleLogHazardRatio)
-  \widehat\beta_m
-  \overset{\cdot}{\sim}
-  \text{Normal}
-  \left(
-    \beta_m,
-    \frac{1}{D_{0m}} + \frac{1}{D_{1m}}
-  \right)
-  \;\; \forall m = 1,\ldots, M .
-\end{equation}
-
-## Average hazard ratio {#ahr}
-
-In this section, we discuss the estimation of AHR.
-Generally speaking, there are two estimations of AHR.
-One is the maximal likelihood estimation (MLE) under standard proportional hazards assumption, and the other utilizes the weighted summation of individual hazard ratio to approximate AHR.
-We introduce both of two estimations, with Section \@ref(secAhrMLE) introducing MLE and Section \@ref(secAhrWeightedSum) introducing weighted summation estimation.
-
-### MLE of AHR {#secAhrMLE}
-
-If we set $\beta_1 = \beta_2 = \ldots = \beta_m = \beta$ in equation \@ref(eq:AhrSingleHazardRatioDef), it implies that
-$$
-  \left\{
-  \begin{array}{ccl}
-  \lambda_{0,m} &=& \exp(\gamma_m) \\
-  \lambda_{1,m} &=& \exp(\gamma_m + \beta)
-  \end{array}
-  \right.,
-$$
-where $\gamma_m$ is defined in equation \@ref(eq:AhrLambdaGamma).
-The above equation reduce the unknown parameter from $\left\{\beta \cup \{ \lambda_{0,m}, \lambda_{1,m}, \gamma_m,\}_{m = 1, \ldots, M} \right\}$ into $\left\{\beta \cup \{\gamma_m,\}_{m = 1, \ldots, M} \right\}$.
-In the remaining of this section, we target on the estimation of parameters $\left\{\beta \cup \{\gamma_m \}_{m = 1, \ldots, M} \right\}$.
-
-The log-likelihood of parameters $\left\{\beta \cup \{\gamma_m,\}_{m = 1, \ldots, M} \right\}$ is
-\begin{equation}
-  (#eq:AhrLikelihoodBetaGamma)
-  \ell(\beta,{\gamma_1,\cdots,\gamma_M})
-  =
-  \sum_{m=1}^M
-  \left(
-    -e^{\gamma_m}(T_{0,m}+e^\beta T_{1,m}) + \gamma_m(d_{0,m} + d_{1,m}) +d_{1,m}\beta
-  \right).
-\end{equation}
-By taking the first partial derivatives with respect to $\gamma_m$ and set it as $0$, one has
-$$
-  \begin{array}{cl}
-    &
-    \frac{\partial}{\partial\gamma_m}
-    \ell(\beta,{\gamma_1,\ldots,\gamma_M})
-    =
-    -e^{\gamma_m}
-    (T_{0,m}+T_{1,m}e^\beta)
-    +
-    d_{0,m}
-    +
-    d_{1,m}
-    =0 \\
-    \Rightarrow &
-    e^{\gamma_m}= \frac{d_{0,m}+d_{1,m}}{T_{0,m}+T_{1,m}e^\beta}.
-  \end{array}
-$$
-By plugging the above equation into equation \@ref(eq:AhrLikelihoodBetaGamma), we can re-write our log-likelihood as only a function of the parameter $\beta$ as follows:
-$$
-  \ell(\beta)
-  =
-  \sum_{m=1}^M(d_{0,m}+d_{1,m})\left(\log(d_{0,m}+d_{1,m})-\log(T_{0,m}+T_{1,m}e^\beta)-1\right) +d_{1,m}\beta,
-$$
-with first and second partial derivatives as
-$$
-  \begin{array}{rcl}
-  \frac{\partial}{\partial\beta}\ell(\beta)
-  & = &
-  \sum_{m=1}^M
-  \left(
-    -\frac{(d_{0,m}+d_{1,m})T_{1,m}e^\beta}{T_{0,m}+T_{1,m}e^\beta} + d_{1,m}
-  \right), \\
-  \frac{\partial^2}{\partial\beta^2}\ell(\beta)
-  & = &
-  -\sum_{m=1}^M
-  \frac{(d_{0,m}+d_{1,m})T_{1,m}e^\beta(T_{0,m}+T_{1,m}e^\beta)-
-(T_{1,m}e^\beta)^2(d_{0,m}+d_{1,m})}{(T_{0,m}+T_{1,m}e^\beta)^2}\\
-  & = &
-  \sum_{m=1}^M
-  \left(
-    \frac{(T_{1,m}e^\beta)^2(d_{0,m}+d_{1,m})}{(T_{0,m}+T_{1,m}e^\beta)^2}
-    -
-    \frac{(d_{0,m}+d_{1,m})T_{1,m}e^\beta}{T_{0,m}+T_{1,m}e^\beta}
-  \right).
-  \end{array}
-$$
-With these, it should be straightforward to apply a Newton-Raphson iteration to get a maximum likelihood estimate of $\beta$ and we denote it as $\widehat\beta_{MLE}$.
-
-### Commonly used estimation of AHR {#secAhrWeightedSum}
-
-We can also define the logarithm of AHR as a weighted summation of the individual logarithm hazard ratio $\{\beta_m\}_{m = 1, \ldots, M}$, i.e.,
-$$
-  \beta
-  =
-  \sum_{m=1}^M w_m \beta_m,
-$$
-We propose to estimate $\beta$ as a solution to maximize the likelihood under the proportional hazards model.
-This is actually a geometric weighted mean of the hazard ratio as defined from the full (NPH) piecewise log-hazard ratio estimates:
-\begin{equation}
-  (#eq:AhrBetaEstimation)
-  \widehat\beta_{WS}
-  =
-  \sum_{m=1}^M
-  w_m
-  \left(\hat\gamma_{1,m} - \hat\gamma_{0,m}\right).
-\end{equation}
-For the selection of weight $\{w_m\}_{m = 1, \ldots, M}$, we use inverse variance weighting
-$$
-  w_m
-  =
-  \left.
-  \left(
-    \frac{1}{1/d_{0,m}+1/d_{1,m}}
-  \right)^{-1}
-  \right/
-  \sum_{i=1}^M
-  \left(
-    \frac{1}{1/d_{0,i}+1/d_{1,i}}
-  \right)^{-1}.
-$$
-By plugging the above weight into equation \@ref(eq:AhrBetaEstimation), $\beta$ can be estimated as
-$$
-  \widehat\beta_{WS}
-  =
-  \frac{
-    \sum_{m=1}^M
-    \left( \frac{1}{d_{0,m}}+\frac{1}{d_{1,m}} \right)^{-1}
-    \left( \log(d_{1,m} / T_{1,m}) - \log(d_{0,m}/T_{0,m}) \right)
-  }{
-    \sum_{m=1}^M
-    \left( \frac{1}{d_{0,m}}+\frac{1}{d_{1,m}} \right)^{-1}
-  }.
-$$
-The corresponding variance estimate is:
-$$
-  \widehat{\hbox{Var}(\widehat\beta_{WS})}
-  =
-  \left(\sum_{m=1}^M(1/d_{0,m} + 1/d_{1,m})^{-1}\right)^{-1}.
-$$
-
-By plugging the asymptotic distribution of $\widehat\beta_m$ in equation \@ref(eq:AhrSignleLogHazardRatio), one gets the asymptotic distribution of $\widehat\beta_{WS}$ as
-$$
-  \widehat\beta_{WS}
-  \overset{\cdot}{\sim}
-  \hbox{Normal}(\beta, \; \mathcal{I}^{-1}),
-$$
-where $\mathcal{I} = \sum_{m = 1}^M \left( \frac{1}{d_{0,m}} + \frac{1}{d_{1,m}} \right)^{-1}$.
-
-After reviewing the MLE (see Section \@ref(secAhrMLE)) and weighted summation estimation (see Section \@ref(secAhrWeightedSum)) of AHR, we summarize their difference in the following table.
-
-```{r, echo=FALSE}
-temp <- tibble::tribble(
-  ~" ", ~"MLE", ~"Weighted Summation",
-  "Idea", "To maximize the log-likelihood function under standard proportional hazards assumption", "Sum individual hazard ratios with weights",
-  "Computation", "Newton-Raphson iterations are required", "Closed-form"
-)
-gt::gt(temp)
-```
-
-We note that the weighted summation $\widehat\beta_{WS}$ is not a maximum likelihood estimate, but in our experience it provides a good approximation of MLE $\widehat\beta_{ML}$.
-
-
-# Introduction to gsdmvn, gsDesign2, and simtrial
+# Introduction to gsdmvn, gsDesign2, and simtrial {#pkgs}
 
 `simtrial`, `gsDesign2` and `gsdmvn` are under development and hosted on GitHub/Merck.
 Below is the Github repo link to the source code
@@ -296,33 +7,33 @@ Below is the Github repo link to the source code
 - `gsDesign2`: <https://github.com/Merck/gsDesign2>
 - `gsdmvn`: <https://github.com/Merck/gsdmvn>
 
-## `simtrial` 
+## `simtrial`
 
 The R package `simtrial` targets on time-to-event trial simulation under the piecewise model.
 It uses logrank and weighted logrank for analysis.
-It can simulates both fixed and group sequential design, also potential to simulate adaptive design.
-Its validation near completion (thanks to AP colleagues and Amin Shirazi).
+It can simulate both fixed and group sequential design, also potential to simulate adaptive design.
+Its validation is near completion (thanks to AP colleagues and Amin Shirazi).
 
 In `simtrial`, there are several functions to generate simulated datasets:
 
 - `simfix()`: Simulation of fixed sample size design for time-to-event endpoint
-- `simfix2simPWSurv()`: Conversion of enrollment and failure rates from simfix() to simPWSurv() format
+- `simfix2simPWSurv()`: Conversion of enrollment and failure rates from `simfix()` to `simPWSurv()` format
 - `simPWSurv()`: Simulate a stratified time-to-event outcome randomized trial
 
 There are also functions to cut data for analysis:
 
-- `cutData()`: Cut a Dataset for Analysis at a Specified Date
-- `cutDataAtCount()`: Cut a Dataset for Analysis at a Specified Event Count
-- `getCutDateForCount()`: Get Date at Which an Event Count is Reached
+- `cutData()`: Cut a dataset for analysis at a specified date
+- `cutDataAtCount()`: Cut a dataset for analysis at a specified event count
+- `getCutDateForCount()`: Get date at which an event count is reached
 
 Most importantly, there are functions for analysis:
 
-- `tenFH()`: Fleming-Harrington Weighted Logrank Tests
-- `tenFHcorr()`: Fleming-Harrington Weighted Logrank Tests plus Correlations
-- `tensurv()`: Process Survival Data into Counting Process Format
+- `tenFH()`: Fleming-Harrington weighted logrank tests
+- `tenFHcorr()`: Fleming-Harrington weighted logrank tests plus correlations
+- `tensurv()`: Process survival data into counting process format
 - `pMaxCombo()`: MaxCombo p-value
 - `pwexpfit()`: Piecewise exponential survival estimation
-- `wMB()`: Magirr and Burman Modestly Weighted Logrank Tests
+- `wMB()`: Magirr and Burman modestly weighted logrank tests
 
 In `simtrial`, there are reverse engineered datasets:
 
@@ -336,7 +47,7 @@ In `simtrial`, there are reverse engineered datasets:
 
 ## `gsDesign2`
 
-The R package `gsDesigns` has the main functions listed as follows.
+The R package `gsDesign2` has the main functions listed as follows.
 
 - `AHR()`: Average hazard ratio under non-proportional hazards (test version)
 - `eAccrual()`: Piecewise constant expected accrual
@@ -345,42 +56,39 @@ The R package `gsDesigns` has the main functions listed as follows.
 - `s2pwe()`: Approximate survival distribution with piecewise exponential distribution
 - `tEvents()`: Predict time at which a targeted event count is achieved
 
-
 ## `gsdmvn`
 
 The R package `gsdmvn` extends the @JTBook computational model to non-constant treatment effects.
 The bound supports functions include
 
-- `gsb()`: direct input of bounds;
+- `gs_b()`: direct input of bounds;
 - `gs_spending_bound()`: spending function bounds.
-
 
 Besides, it covers three models for analysis.
 
-- average hazard ratio model (see detailed description in Section \@ref(ahr))
-  + `gs_power_ahr()`: Power computation
-  + `gs_design_ahr()`: Design computations
-- weighted logrank model (see detailed description in Section \@ref(wlr))
-  + `gs_power_wlr()`: Power computation
-  + `gs_design_wlr()`: Design computations 
-- max combo model (see detailed description in Section \@ref(maxcombo))
-  + `gs_power_combo()`: Power computation
-  + `gs_design_combo()`: Design computations
-
+- Average hazard ratio model (see detailed description in Section \@ref(secAhr))
+  - `gs_power_ahr()`: Power computation
+  - `gs_design_ahr()`: Design computations
+- Weighted logrank model (see detailed description in Section \@ref(wlr))
+  - `gs_power_wlr()`: Power computation
+  - `gs_design_wlr()`: Design computations
+- MaxCombo model (see detailed description in Section \@ref(maxcombo))
+  - `gs_power_combo()`: Power computation
+  - `gs_design_combo()`: Design computations
 
 ## Simulation
 
 In this section, we conduct three simulations.
 
 The first simulation is to compare the simulated power and asymptotic power.
-Specifically speaking, we compare the results from `gsdmvn::gs_power_ahr()` with that from `simtrial::simfix()`
-The details of this simulation can be found in Section \@ref(secAhrSimSimfix)
+Specifically speaking, we compare the results from `gsdmvn::gs_power_ahr()` with that from `simtrial::simfix()`.
+The details of this simulation can be found in Section \@ref(secAhrSimSimfix).
 
 The second simulation is to compare the simulated power and asymptotic power.
 Specifically speaking, we compare the results from `gsDesign2::AHR()` with that from `simtrial::simPWSurv()`.
 The details of this simulation can be found in Section \@ref(secAhrSimSimPWSurv).
 
-The third simulation is to compare the estimation of $\beta$ by MLE as in Section \@ref(secAhrMLE) and weighted summation as in Section \@ref(secAhrWeightedSum).
+The third simulation is to compare the estimation of $\beta$ by MLE and weighted summation as in Section \@ref(secAhr).
 The details of this simulation can be found in Section \@ref(secAhrSimMleWs).
 
 ### Simulation 1: Compare the IA power by `gs_power_ahr()` and simulation `sim_fix()` {#secAhrSimSimfix}
@@ -395,6 +103,7 @@ library(gsDesign)
 library(simtrial)
 library(dplyr)
 library(gsdmvn)
+
 ## Set the enrollment rates
 my_enrollRates <- tibble::tibble(
   Stratum = "All",
@@ -489,8 +198,10 @@ library(gsDesign)
 library(simtrial)
 library(dplyr)
 library(gsdmvn)
+
 load("./data/simulation_gs_power_ahr_my_simfix.Rdata")
 load("./data/simulation_gs_power_ahr_my_gsDesign.Rdata")
+
 ## Set the enrollment rates
 my_enrollRates <- tibble::tibble(
   Stratum = "All",
@@ -568,7 +279,6 @@ my_failRates <- tibble(
   dropoutRate = 0.001
 )
 
-
 # Set number of simulations
 my_nsim <- 10
 # Set up matrix for simulation results
@@ -628,6 +338,26 @@ save(results, file = "./data/simulation_AHR_simPRSurv.Rdata")
 ```{r}
 # Calculate the simulated AHR
 load("./data/simulation_AHR_simPRSurv.Rdata")
+
+# Distribution of Cox coefficient
+ggplot(tibble::as_tibble(results), 
+       aes(x = factor(Analysis), y = beta)) +
+  geom_violin() +
+  ggtitle("Distribution of Cox Coefficient by Analysis") +
+  xlab("Analysis") +
+  ylab("Cox coefficient")
+
+# Variability of results
+library(dplyr)
+ggplot(filter(tibble::as_tibble(results), Sim < 10) %>% 
+         mutate(Sim = factor(Sim), Analysis = factor(Analysis)), 
+       aes(x = Analysis, y = exp(beta), group = Sim, col = Sim)) +
+  geom_line(show.legend = FALSE) +
+  geom_point(aes(shape = Analysis), show.legend = FALSE) +
+  scale_y_log10(breaks = seq(.6, 1.1, .1)) +
+  ylab("HR")
+
+# Comparison of asymptotic vs simulation
 AHR_simulated <- tibble::as_tibble(results) %>%
   group_by(Analysis) %>%
   summarize(
@@ -776,4 +506,3 @@ cat(
   sum((compare_results[, 1] - compare_results[, 2])^2) / my_nsim, "\n"
 )
 ```
-

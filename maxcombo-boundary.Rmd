@@ -7,7 +7,7 @@ library(gsdmvn)
 library(mvtnorm)
 ```
 
-In this chapter, we calculate boundary based on the error spending approach following @gordon1983discrete.
+In this chapter, we calculate boundaries based on the error spending approach following @gordon1983discrete.
 
 We continue use the same example scenario in the last chapter.
 
@@ -27,7 +27,7 @@ failRates <- tibble::tibble(
 # Randomization Ratio is 1:1
 ratio <- 1
 
-# Type 1 error (one-sided)
+# Type I error (one-sided)
 alpha <- 0.025
 
 # Power (1 - beta)
@@ -148,12 +148,12 @@ x
 
 ## Information fraction
 
-Under same design assumption, information fraction is different from different weight parameters in WLR.
+Under the same design assumption, information fraction is different from different weight parameters in WLR.
 
 There are two potential strategies to calculate the information fraction:
 
-- Option 1: Use minimal information fraction of all candidate test (implemented in `gsdmvn`).
-- Option 2: Use weighted average of information fraction.
+- Option 1: Use minimal information fraction of all candidate tests (implemented in `gsdmvn`).
+- Option 2: Use the weighted average of information fraction.
 
 ```{r, echo = FALSE, out.width = "60%"}
 knitr::include_graphics("images/g_info.png")
@@ -248,8 +248,8 @@ $$ = \text{Pr}(\cap_{i=1}^{i=k-1} G_i < b_i \mid H_0) - \text{Pr}(\cap_{i=1}^{i=
 gsdmvn:::gs_bound(alpha_spend, beta_spend,
   analysis = utility$info$Analysis, # Analysis indicator
   theta = rep(0, nrow(fh_test)), # Under the null hypothesis
-  corr = utility$corr
-)$upper # Correlation
+  corr = utility$corr # Correlation
+)$upper
 ```
 
 - Compared with upper bound calculated from `gsDesign`
@@ -310,8 +310,8 @@ utility <- gsdmvn:::gs_utility_combo(enrollRates, failRates, fh_test = fh_test, 
 bound <- gsdmvn:::gs_bound(alpha_spend, beta_spend,
   analysis = utility$info$Analysis, # Analysis indicator
   theta = utility$theta * sqrt(n), # Under the alternative hypothesis
-  corr = utility$corr
-) # Correlation
+  corr = utility$corr # Correlation
+)
 
 bound$lower
 ```
@@ -324,7 +324,7 @@ x$lower$bound
 
 ## Sample size calculation
 
-- sample size and boundaries are set simultaneously using an iterative algorithm.
+- Sample size and boundaries are set simultaneously using an iterative algorithm.
 
 ### Initiate the calculation from lower bound derived at $N = 400$
 
@@ -353,10 +353,10 @@ utility <- gsdmvn:::gs_utility_combo(enrollRates, failRates, fh_test = fh_test, 
 bound <- gsdmvn:::gs_bound(alpha_spend, beta_spend,
   analysis = utility$info$Analysis, # Analysis indicator
   theta = utility$theta * sqrt(n), # Under the alternative hypothesis
-  corr = utility$corr
-) # Correlation
+  corr = utility$corr # Correlation
+)
 
 bound
 ```
 
-- Repeat proceduce above until the sample size and lower bound converge
+- Repeat the procedure above until the sample size and lower bound converge.

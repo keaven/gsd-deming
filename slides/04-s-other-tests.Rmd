@@ -26,13 +26,13 @@ For simplicity, we made a few key assumptions.
 - Balanced design (1:1 randomization ratio).
 - 1-sided test.
 - Local alternative: variance under null and alternative are approximately equal.
-- Accrual distribution: Piecewise uniform. 
+- Accrual distribution: Piecewise uniform.
 - Survival distribution: piecewise exponential.
 - Loss to follow-up: exponential.
 - No stratification.
 - No cure fraction.
 
-The fixed design part largely follow the concept described in @yung2019sample.
+The fixed design part largely follows the concept described in @yung2019sample.
 
 ## Notation
 
@@ -70,21 +70,21 @@ $$ n = \frac{4 (z_{\alpha}+z_{\beta})^{2}}{\theta^2} $$
 
 ## Examples
 
-- [Two-sample t-test](https://keaven.github.io/gsd-deming/fixed.html#two-sample-t-test)
-- [Logrank test](https://keaven.github.io/gsd-deming/fixed.html#logrank-test)
+- [Two-sample t-test](https://keaven.github.io/gsd-deming/fixed-design.html#two-sample-t-test)
+- [Logrank test](https://keaven.github.io/gsd-deming/fixed-design.html#logrank-test)
 
 ## Sample size calculation under non-proportional hazards
 
-- <https://rconnect.merck.com:3939/gsd-training/fixed.html#non-proportional-hazards>
+- <https://keaven.github.io/gsd-deming/fixed-design.html#non-proportional-hazards>
 
 ## Fixed design with weighted logrank test
 
-- [Examples](https://keaven.github.io/gsd-deming/fixed.html#weighted-logrank-test)
-- [Technical details](https://keaven.github.io/gsd-deming/fixed.html#technical-details) are skipped
+- [Examples](https://keaven.github.io/gsd-deming/fixed-design.html#weighted-logrank-test)
+- [Technical details](https://keaven.github.io/gsd-deming/fixed-design.html#technical-details) are skipped
 
 ## Fixed design with MaxCombo test
 
-- [Examples](https://keaven.github.io/gsd-deming/fixed.html#maxcombo-test)
+- [Examples](https://keaven.github.io/gsd-deming/fixed-design.html#maxcombo-test)
 
  
 ## Group sequential design with weighted logrank test

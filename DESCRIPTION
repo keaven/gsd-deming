@@ -1,11 +1,11 @@
 Package: gsd.deming
-Title: Course presented at the Deming Conference in December, 2021.
+Title: Course presented at the Deming Conference in December 2021
 Version: 0.1.0
 Authors@R: c(
     person("Keaven", "Anderson", email = "keaven_anderson@merck.com", role = c("aut","cre")),
     person("Yilong", "Zhang", role = c("aut")),
     person("Nan", "Xiao", role = "aut"),
-    person("Keaven", "Anderson", role = c("aut"))
+    person("Yujie", "Zhao", role = c("aut"))
     )
 Imports:
   bslib,
