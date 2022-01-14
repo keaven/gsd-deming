@@ -1,8 +1,8 @@
 ---
 title: "Group Sequential Design <br> Under Non-Proportional Hazards"
 subtitle: "Deming Conference Course"
-author: "Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao"
-date: "Merck & Co., Inc., Kenilworth, NJ, USA <br >December 6, 2021"
+author: "Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao <br> Merck & Co., Inc., Kenilworth, NJ, USA"
+date: "December 6, 2021"
 bibliography: "../Deming2021.bib"
 csl: "../ims.csl"
 output:
