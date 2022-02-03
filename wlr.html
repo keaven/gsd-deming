@@ -588,7 +588,7 @@ by</p>
   <span class="va">x</span><span class="op">$</span><span class="va">lower</span><span class="op">$</span><span class="va">bound</span>,
   <span class="va">x</span><span class="op">$</span><span class="va">upper</span><span class="op">$</span><span class="va">bound</span>
 <span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; [1] 0.00854411 0.69113520 0.93587504</code></pre>
+<pre><code>#&gt; [1] 0.00854411 0.69113520 0.93587418</code></pre>
 <ul>
 <li><strong>Type I error</strong></li>
 </ul>
@@ -600,7 +600,7 @@ by</p>
   <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="op">-</span><span class="cn">Inf</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">delta</span><span class="op">)</span><span class="op">)</span>,
   <span class="va">x</span><span class="op">$</span><span class="va">upper</span><span class="op">$</span><span class="va">bound</span>
 <span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; [1] 0.0001035057 0.0061027684 0.0266323780</code></pre>
+<pre><code>#&gt; [1] 0.0001035057 0.0061027684 0.0266433520</code></pre>
 <ul>
 <li><strong>Futility probability</strong></li>
 </ul>
@@ -629,7 +629,7 @@ by</p>
   <span class="va">delta</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">sigma2</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">gs_n_ratio</span> <span class="op">*</span> <span class="va">n</span><span class="op">)</span>,
   <span class="va">corr</span>, <span class="va">x</span><span class="op">$</span><span class="va">lower</span><span class="op">$</span><span class="va">bound</span>, <span class="va">x</span><span class="op">$</span><span class="va">upper</span><span class="op">$</span><span class="va">bound</span>
 <span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; [1] 0.02168739 0.04054411 0.06412075</code></pre>
+<pre><code>#&gt; [1] 0.02168739 0.04054411 0.06412586</code></pre>
 <ul>
 <li><strong>Sample size</strong></li>
 </ul>
@@ -651,7 +651,7 @@ by</p>
 <div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">n_subject</span> <span class="op">&lt;-</span> <span class="va">n</span> <span class="op">*</span> <span class="va">ratio</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">ratio</span><span class="op">)</span>
 <span class="va">n_subject</span> <span class="op">*</span> <span class="va">gs_n_ratio</span></code></pre></div>
-<pre><code>#&gt; [1] 316.4489 316.4489 316.4489</code></pre>
+<pre><code>#&gt; [1] 316.4476 316.4476 316.4476</code></pre>
 <ul>
 <li><strong>Number of events</strong></li>
 </ul>
@@ -660,7 +660,7 @@ by</p>
 <code class="sourceCode R"><span class="va">n0</span> <span class="op">&lt;-</span> <span class="va">n1</span> <span class="op">&lt;-</span> <span class="va">n_subject</span> <span class="op">/</span> <span class="fl">2</span>
 <span class="fu">gsdmvn</span><span class="fu">:::</span><span class="fu">prob_event.arm</span><span class="op">(</span><span class="va">arm0</span>, tmax <span class="op">=</span> <span class="va">analysisTimes</span><span class="op">)</span> <span class="op">*</span> <span class="va">n0</span> <span class="op">+</span>
   <span class="fu">gsdmvn</span><span class="fu">:::</span><span class="fu">prob_event.arm</span><span class="op">(</span><span class="va">arm1</span>, tmax <span class="op">=</span> <span class="va">analysisTimes</span><span class="op">)</span> <span class="op">*</span> <span class="va">n1</span></code></pre></div>
-<pre><code>#&gt; [1]  67.9696 155.8722 209.6733</code></pre>
+<pre><code>#&gt; [1]  67.96932 155.87160 209.67245</code></pre>
 <ul>
 <li><strong>Average hazard ratio</strong></li>
 </ul>
@@ -683,7 +683,7 @@ Taylor series expansion.</p>
 </ul>
 <div class="sourceCode" id="cb193"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">n_subject</span> <span class="op">*</span> <span class="va">sigma2</span></code></pre></div>
-<pre><code>#&gt; [1] 0.4466856 3.3047899 7.6793909</code></pre>
+<pre><code>#&gt; [1] 0.4466838 3.3047765 7.6793597</code></pre>
 <ul>
 <li>The <code>info0</code> column is <span class="math inline">\(\sigma^2_k\)</span> times <span class="math inline">\(N\)</span> under the null where we both use <code>arm0</code> for calculation in active and control group.</li>
 </ul>
@@ -836,7 +836,7 @@ Taylor series expansion.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Group Sequential Design Under Non-Proportional Hazards</strong>: Deming Conference Course, December 6, 2021" was written by Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao. It was last built on 2021-12-06.</p>
+    <p>"<strong>Group Sequential Design Under Non-Proportional Hazards</strong>: Deming Conference Course, December 6, 2021" was written by Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao. It was last built on 2022-02-03.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

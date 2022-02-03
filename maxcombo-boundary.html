@@ -139,12 +139,12 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">Probability_Null</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_if</a></span><span class="op">(</span><span class="va">is.numeric</span>, <span class="va">round</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
 <pre><code>#&gt;   Analysis Bound Time      N Events     Z Probability Probability_Null (%)
-#&gt; 1        1 Upper   12 301.16  64.69  6.18        0.00                 0.00
-#&gt; 3        2 Upper   24 301.16 148.34  2.80        0.22                 0.26
-#&gt; 5        3 Upper   36 301.16 199.54  2.10        0.80                 2.50
-#&gt; 2        1 Lower   12 301.16  64.69 -2.72        0.00                   NA
-#&gt; 4        2 Lower   24 301.16 148.34  0.65        0.08                   NA
-#&gt; 6        3 Lower   36 301.16 199.54  2.10        0.20                   NA</code></pre>
+#&gt; 1        1 Upper   12 301.24  64.70  6.18        0.00                 0.00
+#&gt; 3        2 Upper   24 301.24 148.38  2.80        0.22                 0.26
+#&gt; 5        3 Upper   36 301.24 199.59  2.10        0.80                 2.50
+#&gt; 2        1 Lower   12 301.24  64.70 -2.72        0.00                   NA
+#&gt; 4        2 Lower   24 301.24 148.38  0.65        0.08                   NA
+#&gt; 6        3 Lower   36 301.24 199.59  2.10        0.20                   NA</code></pre>
 <ul>
 <li>Simulation results based on 10,000 replications.</li>
 </ul>
@@ -376,7 +376,7 @@ It can be skipped for the first read of this training material.</p>
   theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">fh_test</span><span class="op">)</span><span class="op">)</span>, <span class="co"># Under the null hypothesis</span>
   corr <span class="op">=</span> <span class="va">utility</span><span class="op">$</span><span class="va">corr</span> <span class="co"># Correlation</span>
 <span class="op">)</span><span class="op">$</span><span class="va">upper</span></code></pre></div>
-<pre><code>#&gt; [1] 6.175397 2.798651 2.097133</code></pre>
+<pre><code>#&gt; [1] 6.175397 2.798651 2.097262</code></pre>
 <ul>
 <li>Compared with upper bound calculated from <code>gsDesign</code>
 </li>
@@ -449,7 +449,7 @@ It can be skipped for the first read of this training material.</p>
 <span class="op">)</span>
 
 <span class="va">bound</span><span class="op">$</span><span class="va">lower</span></code></pre></div>
-<pre><code>#&gt; [1] -2.6106678  0.9619422  2.0970704</code></pre>
+<pre><code>#&gt; [1] -2.6106678  0.9619422  2.0969717</code></pre>
 <ul>
 <li>Compared with lower bound calculated from <code>gsDesign</code>
 </li>
@@ -475,7 +475,7 @@ It can be skipped for the first read of this training material.</p>
 <pre><code>#&gt;      upper      lower
 #&gt; 1 6.175397 -2.6106678
 #&gt; 2 2.798651  0.9619422
-#&gt; 3 2.097070  2.0970704</code></pre>
+#&gt; 3 2.096972  2.0969717</code></pre>
 <div class="sourceCode" id="cb348"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_design_combo.html">gs_design_combo</a></span><span class="op">(</span><span class="va">enrollRates</span>,
   <span class="va">failRates</span>,
@@ -488,12 +488,12 @@ It can be skipped for the first read of this training material.</p>
   lpar <span class="op">=</span> <span class="va">bound</span><span class="op">$</span><span class="va">lower</span>,
 <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_if</a></span><span class="op">(</span><span class="va">is.numeric</span>, <span class="va">round</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
 <pre><code>#&gt;   Analysis Bound Time      N Events     Z Probability Probability_Null
-#&gt; 1        1 Upper   12 324.92  69.79  6.18        0.00             0.00
-#&gt; 3        2 Upper   24 324.92 160.04  2.80        0.24             0.00
-#&gt; 5        3 Upper   36 324.92 215.29  2.10        0.80             0.03
-#&gt; 2        1 Lower   12 324.92  69.79 -2.61        0.00               NA
-#&gt; 4        2 Lower   24 324.92 160.04  0.96        0.13               NA
-#&gt; 6        3 Lower   36 324.92 215.29  2.10        0.20               NA</code></pre>
+#&gt; 1        1 Upper   12 324.91  69.79  6.18        0.00             0.00
+#&gt; 3        2 Upper   24 324.91 160.04  2.80        0.24             0.00
+#&gt; 5        3 Upper   36 324.91 215.28  2.10        0.80             0.03
+#&gt; 2        1 Lower   12 324.91  69.79 -2.61        0.00               NA
+#&gt; 4        2 Lower   24 324.91 160.04  0.96        0.13               NA
+#&gt; 6        3 Lower   36 324.91 215.28  2.10        0.20               NA</code></pre>
 </div>
 <div id="update-bound-based-on-newly-calculated-sample-size" class="section level3">
 <h3>
@@ -512,7 +512,7 @@ It can be skipped for the first read of this training material.</p>
 <pre><code>#&gt;      upper      lower
 #&gt; 1 6.175397 -2.6568642
 #&gt; 2 2.798651  0.8266125
-#&gt; 3 2.097112  2.0971124</code></pre>
+#&gt; 3 2.097261  2.0972609</code></pre>
 <ul>
 <li>Repeat the procedure above until the sample size and lower bound converge.</li>
 </ul>
@@ -565,7 +565,7 @@ It can be skipped for the first read of this training material.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Group Sequential Design Under Non-Proportional Hazards</strong>: Deming Conference Course, December 6, 2021" was written by Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao. It was last built on 2021-12-06.</p>
+    <p>"<strong>Group Sequential Design Under Non-Proportional Hazards</strong>: Deming Conference Course, December 6, 2021" was written by Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao. It was last built on 2022-02-03.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
