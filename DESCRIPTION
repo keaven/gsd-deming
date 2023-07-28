@@ -19,7 +19,7 @@ Imports:
   npsurvSS,
   gsDesign
 Remotes:
-  merck/gsdmvn,
-  merck/simtrial,
-  merck/gsDesign2
+  merck/simtrial@87cd828,
+  merck/gsDesign2@fc3a2d3,
+  merck/gsdmvn@ef2bb74
 Encoding: UTF-8
