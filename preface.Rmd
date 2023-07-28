@@ -64,9 +64,9 @@ install.packages("gsDesign")
 - For non-proportional hazards, the following 3 R packages would be useful to install
 
 ```{r, eval=FALSE}
-remotes::install_github("Merck/gsdmvn")
-remotes::install_github("Merck/gsDesign2")
-remotes::install_github("Merck/simtrial")
+remotes::install_github("Merck/simtrial@87cd828")
+remotes::install_github("Merck/gsDesign2@fc3a2d3")
+remotes::install_github("Merck/gsdmvn@ef2bb74", upgrade = "never")
 ```
 
 You will need reasonably recent versions of R and packages.
