@@ -7,7 +7,7 @@
 <title>Chapter 4 Introduction to gsdmvn, gsDesign2, and simtrial | Group Sequential Design Under Non-Proportional Hazards</title>
 <meta name="author" content="Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao">
 <meta name="description" content="simtrial, gsDesign2 and gsdmvn are under development and hosted on GitHub/Merck. Below is the Github repo link to the source code simtrial: https://github.com/Merck/simtrial  gsDesign2:...">
-<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta name="generator" content="bookdown 0.34 with bs4_book()">
 <meta property="og:title" content="Chapter 4 Introduction to gsdmvn, gsDesign2, and simtrial | Group Sequential Design Under Non-Proportional Hazards">
 <meta property="og:type" content="book">
 <meta property="og:description" content="simtrial, gsDesign2 and gsdmvn are under development and hosted on GitHub/Merck. Below is the Github repo link to the source code simtrial: https://github.com/Merck/simtrial  gsDesign2:...">
@@ -16,8 +16,34 @@
 <meta name="twitter:description" content="simtrial, gsDesign2 and gsdmvn are under development and hosted on GitHub/Merck. Below is the Github repo link to the source code simtrial: https://github.com/Merck/simtrial  gsDesign2:...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="style.css">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.0/transition.js"></script><script src="libs/bs3compat-0.5.0/tabs.js"></script><script src="libs/bs3compat-0.5.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -61,7 +87,7 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="pkgs" class="section level1">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="pkgs" class="section level1" number="4">
 <h1>
 <span class="header-section-number">4</span> Introduction to gsdmvn, gsDesign2, and simtrial<a class="anchor" aria-label="anchor" href="#pkgs"><i class="fas fa-link"></i></a>
 </h1>
@@ -78,7 +104,7 @@ Below is the Github repo link to the source code</p>
 <code>gsdmvn</code>: <a href="https://github.com/Merck/gsdmvn" class="uri">https://github.com/Merck/gsdmvn</a>
 </li>
 </ul>
-<div id="simtrial" class="section level2">
+<div id="simtrial" class="section level2" number="4.1">
 <h2>
 <span class="header-section-number">4.1</span> <code>simtrial</code><a class="anchor" aria-label="anchor" href="#simtrial"><i class="fas fa-link"></i></a>
 </h2>
@@ -137,7 +163,7 @@ Its validation is near completion (thanks to AP colleagues and Amin Shirazi).</p
 <code>MBdelayed</code>: Simulated survival dataset with delayed treatment effect</li>
 </ul>
 </div>
-<div id="gsdesign2" class="section level2">
+<div id="gsdesign2" class="section level2" number="4.2">
 <h2>
 <span class="header-section-number">4.2</span> <code>gsDesign2</code><a class="anchor" aria-label="anchor" href="#gsdesign2"><i class="fas fa-link"></i></a>
 </h2>
@@ -157,7 +183,7 @@ Its validation is near completion (thanks to AP colleagues and Amin Shirazi).</p
 <code><a href="https://merck.github.io/gsDesign2/reference/tEvents.html">tEvents()</a></code>: Predict time at which a targeted event count is achieved</li>
 </ul>
 </div>
-<div id="gsdmvn" class="section level2">
+<div id="gsdmvn" class="section level2" number="4.3">
 <h2>
 <span class="header-section-number">4.3</span> <code>gsdmvn</code><a class="anchor" aria-label="anchor" href="#gsdmvn"><i class="fas fa-link"></i></a>
 </h2>
@@ -197,7 +223,7 @@ The bound supports functions include</p>
 </li>
 </ul>
 </div>
-<div id="simulation" class="section level2">
+<div id="simulation" class="section level2" number="4.4">
 <h2>
 <span class="header-section-number">4.4</span> Simulation<a class="anchor" aria-label="anchor" href="#simulation"><i class="fas fa-link"></i></a>
 </h2>
@@ -210,7 +236,7 @@ Specifically speaking, we compare the results from <code><a href="https://merck.
 The details of this simulation can be found in Section <a href="pkgs.html#secAhrSimSimPWSurv">4.4.2</a>.</p>
 <p>The third simulation is to compare the estimation of <span class="math inline">\(\beta\)</span> by MLE and weighted summation as in Section <a href="ahr.html#secAhr">3.2</a>.
 The details of this simulation can be found in Section <a href="pkgs.html#secAhrSimMleWs">4.4.3</a>.</p>
-<div id="secAhrSimSimfix" class="section level3">
+<div id="secAhrSimSimfix" class="section level3" number="4.4.1">
 <h3>
 <span class="header-section-number">4.4.1</span> Simulation 1: Compare the IA power by <code>gs_power_ahr()</code> and simulation <code>sim_fix()</code><a class="anchor" aria-label="anchor" href="#secAhrSimSimfix"><i class="fas fa-link"></i></a>
 </h3>
@@ -218,151 +244,151 @@ The details of this simulation can be found in Section <a href="pkgs.html#secAhr
 The simulated power is calculated by <code><a href="https://merck.github.io/simtrial/reference/simfix.html">simtrial::simfix()</a></code>, and the asymptotic power is calculated by <code><a href="https://merck.github.io/gsdmvn/reference/gs_power_ahr.html">gsdmvn::gs_power_ahr()</a></code>.
 To conduct the comparison, we first save the output of <code><a href="https://merck.github.io/simtrial/reference/simfix.html">simtrial::simfix()</a></code> by running the following code chunk.
 After that, we simply load the simulation results and compare it with the asymptotic power.</p>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">gsDesign</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://merck.github.io/simtrial/">simtrial</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://merck.github.io/gsdmvn/">gsdmvn</a></span><span class="op">)</span>
-
-<span class="co">## Set the enrollment rates</span>
-<span class="va">my_enrollRates</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>
-  Stratum <span class="op">=</span> <span class="st">"All"</span>,
-  duration <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">6</span><span class="op">)</span>,
-  rate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">12</span>, <span class="fl">18</span>, <span class="fl">24</span><span class="op">)</span>
-<span class="op">)</span>
-<span class="co">## Set the failure rates</span>
-<span class="va">my_failRates</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>
-  Stratum <span class="op">=</span> <span class="st">"All"</span>,
-  duration <span class="op">=</span> <span class="fl">1</span>,
-  failRate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op">/</span> <span class="fl">9</span>,
-  hr <span class="op">=</span> <span class="fl">0.65</span>,
-  dropoutRate <span class="op">=</span> <span class="fl">0.001</span>
-<span class="op">)</span>
-<span class="co">## Set the number of simulations</span>
-<span class="va">my_nsim</span> <span class="op">&lt;-</span> <span class="fl">1e+5</span>
-
-<span class="co">## Create a group sequential design for survival outcome</span>
-<span class="va">my_gsSurv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/gsDesign/man/nSurv.html">gsSurv</a></span><span class="op">(</span>
-  k <span class="op">=</span> <span class="fl">2</span>,
-  test.type <span class="op">=</span> <span class="fl">1</span>,
-  alpha <span class="op">=</span> <span class="fl">0.025</span>,
-  beta <span class="op">=</span> <span class="fl">0.2</span>,
-  astar <span class="op">=</span> <span class="fl">0</span>,
-  timing <span class="op">=</span> <span class="fl">0.7</span>,
-  sfu <span class="op">=</span> <span class="va">sfLDOF</span>,
-  sfupar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span>,
-  sfl <span class="op">=</span> <span class="va">sfLDOF</span>,
-  sflpar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span>,
-  lambdaC <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op">/</span> <span class="fl">9</span>,
-  hr <span class="op">=</span> <span class="fl">0.65</span>,
-  hr0 <span class="op">=</span> <span class="fl">1</span>,
-  eta <span class="op">=</span> <span class="fl">0.001</span>,
-  gamma <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">12</span>, <span class="fl">18</span>, <span class="fl">24</span><span class="op">)</span>,
-  R <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">6</span><span class="op">)</span>,
-  S <span class="op">=</span> <span class="cn">NULL</span>,
-  T <span class="op">=</span> <span class="cn">NULL</span>,
-  minfup <span class="op">=</span> <span class="cn">NULL</span>,
-  ratio <span class="op">=</span> <span class="fl">1</span>
-<span class="op">)</span>
-
-<span class="co"># Update my_gsSurv with gsDesign() to get integer event counts</span>
-<span class="va">my_gsDesign</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/gsDesign/man/gsDesign.html">gsDesign</a></span><span class="op">(</span>
-  k <span class="op">=</span> <span class="va">my_gsSurv</span><span class="op">$</span><span class="va">k</span>,
-  test.type <span class="op">=</span> <span class="fl">1</span>,
-  alpha <span class="op">=</span> <span class="va">my_gsSurv</span><span class="op">$</span><span class="va">alpha</span>,
-  beta <span class="op">=</span> <span class="va">my_gsSurv</span><span class="op">$</span><span class="va">beta</span>,
-  sfu <span class="op">=</span> <span class="va">my_gsSurv</span><span class="op">$</span><span class="va">upper</span><span class="op">$</span><span class="va">sf</span>,
-  sfupar <span class="op">=</span> <span class="va">my_gsSurv</span><span class="op">$</span><span class="va">upper</span><span class="op">$</span><span class="va">param</span>,
-  n.I <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="va">my_gsSurv</span><span class="op">$</span><span class="va">n.I</span><span class="op">)</span>,
-  maxn.IPlan <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="va">my_gsSurv</span><span class="op">$</span><span class="va">n.I</span><span class="op">[</span><span class="va">my_gsSurv</span><span class="op">$</span><span class="va">k</span><span class="op">]</span><span class="op">)</span>,
-  delta <span class="op">=</span> <span class="va">my_gsSurv</span><span class="op">$</span><span class="va">delta</span>,
-  delta1 <span class="op">=</span> <span class="va">my_gsSurv</span><span class="op">$</span><span class="va">delta1</span>,
-  delta0 <span class="op">=</span> <span class="va">my_gsSurv</span><span class="op">$</span><span class="va">delta0</span>
-<span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span>
-<span class="va">my_simfix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://merck.github.io/simtrial/reference/simfix.html">simfix</a></span><span class="op">(</span> <span class="co"># Number of simulations to perform.</span>
-  nsim <span class="op">=</span> <span class="va">my_nsim</span>,
-  <span class="co"># Total sample size per simulation.</span>
-  sampleSize <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">my_gsSurv</span><span class="op">$</span><span class="va">eNC</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">my_gsSurv</span><span class="op">$</span><span class="va">eNE</span><span class="op">)</span><span class="op">)</span>,
-  <span class="co"># A tibble with</span>
-  <span class="co"># (1) strata specified in `Stratum`</span>
-  <span class="co"># (2) probability (incidence) of each stratum in `p`.</span>
-  strata <span class="op">=</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>Stratum <span class="op">=</span> <span class="st">"All"</span>, p <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,
-  <span class="co"># Targeted event count for analysis.</span>
-  <span class="co"># Here we only target on the 1st IA only.</span>
-  targetEvents <span class="op">=</span> <span class="va">my_gsDesign</span><span class="op">$</span><span class="va">n.I</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,
-  <span class="co"># Vector of treatments to be included in each block</span>
-  block <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"Control"</span>, <span class="fl">2</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"Experimental"</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>,
-  <span class="co"># Piecewise constant enrollment rates by time period.</span>
-  enrollRates <span class="op">=</span> <span class="va">my_enrollRates</span>,
-  <span class="co"># Piecewise constant control group failure rates,</span>
-  <span class="co"># hazard ratio for experimental vs control,</span>
-  <span class="co"># and dropout rates by stratum and time period.</span>
-  failRates <span class="op">=</span> <span class="va">my_failRates</span>,
-  <span class="co"># `timingType` has up to 5 elements indicating different options for data cutoff.</span>
-  <span class="co"># `timingType = 1`: uses the planned study duration</span>
-  <span class="co"># `timingType = 2`: the time the targeted event count is achieved</span>
-  <span class="co"># `timingType = 3`: the planned minimum follow-up after enrollment is complete</span>
-  <span class="co"># `timingType = 4`: the maximum of planned study duration and targeted event count cuts (1 and 2)</span>
-  <span class="co"># `timingType = 5`: the maximum of targeted event count and minimum follow-up cuts (2 and 3)</span>
-  timingType <span class="op">=</span> <span class="fl">2</span>
-<span class="op">)</span>
-<span class="co"># Save the simulation data</span>
-<span class="fu"><a href="https://rdrr.io/r/base/save.html">save</a></span><span class="op">(</span><span class="va">my_gsDesign</span>, file <span class="op">=</span> <span class="st">"./data/simulation_gs_power_ahr_my_gsDesign.Rdata"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/save.html">save</a></span><span class="op">(</span><span class="va">my_simfix</span>, file <span class="op">=</span> <span class="st">"./data/simulation_gs_power_ahr_my_simfix.Rdata"</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">gsDesign</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://merck.github.io/simtrial/">simtrial</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://merck.github.io/gsdmvn/">gsdmvn</a></span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"./data/simulation_gs_power_ahr_my_simfix.Rdata"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"./data/simulation_gs_power_ahr_my_gsDesign.Rdata"</span><span class="op">)</span>
-
-<span class="co">## Set the enrollment rates</span>
-<span class="va">my_enrollRates</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>
-  Stratum <span class="op">=</span> <span class="st">"All"</span>,
-  duration <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">6</span><span class="op">)</span>,
-  rate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">12</span>, <span class="fl">18</span>, <span class="fl">24</span><span class="op">)</span>
-<span class="op">)</span>
-<span class="co">## Set the failure rates</span>
-<span class="va">my_failRates</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>
-  Stratum <span class="op">=</span> <span class="st">"All"</span>,
-  duration <span class="op">=</span> <span class="fl">1</span>,
-  failRate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op">/</span> <span class="fl">9</span>,
-  hr <span class="op">=</span> <span class="fl">0.65</span>,
-  dropoutRate <span class="op">=</span> <span class="fl">0.001</span>
-<span class="op">)</span>
-<span class="va">my_nsim</span> <span class="op">&lt;-</span> <span class="fl">1e+5</span>
-
-<span class="co"># Calculate the simulated power at the 1st IA</span>
-<span class="va">my_sim_IA_power</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">my_simfix</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Z</span> <span class="op">&lt;=</span> <span class="op">-</span><span class="va">my_gsDesign</span><span class="op">$</span><span class="va">upper</span><span class="op">$</span><span class="va">bound</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-
-<span class="co"># Calculate the power by gs_ahr_power() at the 1st IA</span>
-<span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_power_ahr.html">gs_power_ahr</a></span><span class="op">(</span>
-  enrollRates <span class="op">=</span> <span class="va">my_enrollRates</span>,
-  failRates <span class="op">=</span> <span class="va">my_failRates</span>,
-  ratio <span class="op">=</span> <span class="fl">1</span>,
-  events <span class="op">=</span> <span class="va">my_gsDesign</span><span class="op">$</span><span class="va">n.I</span>, <span class="co"># set number of events the same as my_gsDesign above from gsDesign()</span>
-  analysisTimes <span class="op">=</span> <span class="cn">NULL</span>,
-  binding <span class="op">=</span> <span class="cn">FALSE</span>,
-  upper <span class="op">=</span> <span class="va">gs_spending_bound</span>,
-  upar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>sf <span class="op">=</span> <span class="fu">gsDesign</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/gsDesign/man/sfLDOF.html">sfLDOF</a></span>, total_spend <span class="op">=</span> <span class="fl">0.025</span>, param <span class="op">=</span> <span class="cn">NULL</span>, timing <span class="op">=</span> <span class="cn">NULL</span>, theta <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>,
-  lower <span class="op">=</span> <span class="va">gs_spending_bound</span>,
-  lpar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>sf <span class="op">=</span> <span class="fu">gsDesign</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/gsDesign/man/sfLDOF.html">sfLDOF</a></span>, total_spend <span class="op">=</span> <span class="fl">0.2</span>, param <span class="op">=</span> <span class="cn">NULL</span>, timing <span class="op">=</span> <span class="cn">NULL</span>, theta <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>,
-  test_upper <span class="op">=</span> <span class="cn">TRUE</span>,
-  test_lower <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span>
-<span class="va">my_ahr_IA_power</span> <span class="op">&lt;-</span> <span class="va">out</span><span class="op">$</span><span class="va">Probability</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"The power at the 1st IA by gs_power_ahr() is:"</span>, <span class="va">my_ahr_IA_power</span>, <span class="st">"\n"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keaven.github.io/gsDesign/">gsDesign</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://merck.github.io/simtrial/">simtrial</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://merck.github.io/gsdmvn/">gsdmvn</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Set the enrollment rates</span></span>
+<span><span class="va">my_enrollRates</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<span>  Stratum <span class="op">=</span> <span class="st">"All"</span>,</span>
+<span>  duration <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">6</span><span class="op">)</span>,</span>
+<span>  rate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">12</span>, <span class="fl">18</span>, <span class="fl">24</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">## Set the failure rates</span></span>
+<span><span class="va">my_failRates</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<span>  Stratum <span class="op">=</span> <span class="st">"All"</span>,</span>
+<span>  duration <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  failRate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op">/</span> <span class="fl">9</span>,</span>
+<span>  hr <span class="op">=</span> <span class="fl">0.65</span>,</span>
+<span>  dropoutRate <span class="op">=</span> <span class="fl">0.001</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">## Set the number of simulations</span></span>
+<span><span class="va">my_nsim</span> <span class="op">&lt;-</span> <span class="fl">1e+5</span></span>
+<span></span>
+<span><span class="co">## Create a group sequential design for survival outcome</span></span>
+<span><span class="va">my_gsSurv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://keaven.github.io/gsDesign/reference/nSurv.html">gsSurv</a></span><span class="op">(</span></span>
+<span>  k <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  test.type <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  alpha <span class="op">=</span> <span class="fl">0.025</span>,</span>
+<span>  beta <span class="op">=</span> <span class="fl">0.2</span>,</span>
+<span>  astar <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  timing <span class="op">=</span> <span class="fl">0.7</span>,</span>
+<span>  sfu <span class="op">=</span> <span class="va">sfLDOF</span>,</span>
+<span>  sfupar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span>,</span>
+<span>  sfl <span class="op">=</span> <span class="va">sfLDOF</span>,</span>
+<span>  sflpar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span>,</span>
+<span>  lambdaC <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op">/</span> <span class="fl">9</span>,</span>
+<span>  hr <span class="op">=</span> <span class="fl">0.65</span>,</span>
+<span>  hr0 <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  eta <span class="op">=</span> <span class="fl">0.001</span>,</span>
+<span>  gamma <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">12</span>, <span class="fl">18</span>, <span class="fl">24</span><span class="op">)</span>,</span>
+<span>  R <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">6</span><span class="op">)</span>,</span>
+<span>  S <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  T <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  minfup <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ratio <span class="op">=</span> <span class="fl">1</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Update my_gsSurv with gsDesign() to get integer event counts</span></span>
+<span><span class="va">my_gsDesign</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://keaven.github.io/gsDesign/reference/gsDesign.html">gsDesign</a></span><span class="op">(</span></span>
+<span>  k <span class="op">=</span> <span class="va">my_gsSurv</span><span class="op">$</span><span class="va">k</span>,</span>
+<span>  test.type <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  alpha <span class="op">=</span> <span class="va">my_gsSurv</span><span class="op">$</span><span class="va">alpha</span>,</span>
+<span>  beta <span class="op">=</span> <span class="va">my_gsSurv</span><span class="op">$</span><span class="va">beta</span>,</span>
+<span>  sfu <span class="op">=</span> <span class="va">my_gsSurv</span><span class="op">$</span><span class="va">upper</span><span class="op">$</span><span class="va">sf</span>,</span>
+<span>  sfupar <span class="op">=</span> <span class="va">my_gsSurv</span><span class="op">$</span><span class="va">upper</span><span class="op">$</span><span class="va">param</span>,</span>
+<span>  n.I <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="va">my_gsSurv</span><span class="op">$</span><span class="va">n.I</span><span class="op">)</span>,</span>
+<span>  maxn.IPlan <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="va">my_gsSurv</span><span class="op">$</span><span class="va">n.I</span><span class="op">[</span><span class="va">my_gsSurv</span><span class="op">$</span><span class="va">k</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>  delta <span class="op">=</span> <span class="va">my_gsSurv</span><span class="op">$</span><span class="va">delta</span>,</span>
+<span>  delta1 <span class="op">=</span> <span class="va">my_gsSurv</span><span class="op">$</span><span class="va">delta1</span>,</span>
+<span>  delta0 <span class="op">=</span> <span class="va">my_gsSurv</span><span class="op">$</span><span class="va">delta0</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
+<span><span class="va">my_simfix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://merck.github.io/simtrial/reference/simfix.html">simfix</a></span><span class="op">(</span> <span class="co"># Number of simulations to perform.</span></span>
+<span>  nsim <span class="op">=</span> <span class="va">my_nsim</span>,</span>
+<span>  <span class="co"># Total sample size per simulation.</span></span>
+<span>  sampleSize <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">my_gsSurv</span><span class="op">$</span><span class="va">eNC</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">my_gsSurv</span><span class="op">$</span><span class="va">eNE</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  <span class="co"># A tibble with</span></span>
+<span>  <span class="co"># (1) strata specified in `Stratum`</span></span>
+<span>  <span class="co"># (2) probability (incidence) of each stratum in `p`.</span></span>
+<span>  strata <span class="op">=</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>Stratum <span class="op">=</span> <span class="st">"All"</span>, p <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span>
+<span>  <span class="co"># Targeted event count for analysis.</span></span>
+<span>  <span class="co"># Here we only target on the 1st IA only.</span></span>
+<span>  targetEvents <span class="op">=</span> <span class="va">my_gsDesign</span><span class="op">$</span><span class="va">n.I</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,</span>
+<span>  <span class="co"># Vector of treatments to be included in each block</span></span>
+<span>  block <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"Control"</span>, <span class="fl">2</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"Experimental"</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  <span class="co"># Piecewise constant enrollment rates by time period.</span></span>
+<span>  enrollRates <span class="op">=</span> <span class="va">my_enrollRates</span>,</span>
+<span>  <span class="co"># Piecewise constant control group failure rates,</span></span>
+<span>  <span class="co"># hazard ratio for experimental vs control,</span></span>
+<span>  <span class="co"># and dropout rates by stratum and time period.</span></span>
+<span>  failRates <span class="op">=</span> <span class="va">my_failRates</span>,</span>
+<span>  <span class="co"># `timingType` has up to 5 elements indicating different options for data cutoff.</span></span>
+<span>  <span class="co"># `timingType = 1`: uses the planned study duration</span></span>
+<span>  <span class="co"># `timingType = 2`: the time the targeted event count is achieved</span></span>
+<span>  <span class="co"># `timingType = 3`: the planned minimum follow-up after enrollment is complete</span></span>
+<span>  <span class="co"># `timingType = 4`: the maximum of planned study duration and targeted event count cuts (1 and 2)</span></span>
+<span>  <span class="co"># `timingType = 5`: the maximum of targeted event count and minimum follow-up cuts (2 and 3)</span></span>
+<span>  timingType <span class="op">=</span> <span class="fl">2</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co"># Save the simulation data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/save.html">save</a></span><span class="op">(</span><span class="va">my_gsDesign</span>, file <span class="op">=</span> <span class="st">"./data/simulation_gs_power_ahr_my_gsDesign.Rdata"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/save.html">save</a></span><span class="op">(</span><span class="va">my_simfix</span>, file <span class="op">=</span> <span class="st">"./data/simulation_gs_power_ahr_my_simfix.Rdata"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keaven.github.io/gsDesign/">gsDesign</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://merck.github.io/simtrial/">simtrial</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://merck.github.io/gsdmvn/">gsdmvn</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"./data/simulation_gs_power_ahr_my_simfix.Rdata"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"./data/simulation_gs_power_ahr_my_gsDesign.Rdata"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Set the enrollment rates</span></span>
+<span><span class="va">my_enrollRates</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<span>  Stratum <span class="op">=</span> <span class="st">"All"</span>,</span>
+<span>  duration <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">6</span><span class="op">)</span>,</span>
+<span>  rate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">12</span>, <span class="fl">18</span>, <span class="fl">24</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">## Set the failure rates</span></span>
+<span><span class="va">my_failRates</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<span>  Stratum <span class="op">=</span> <span class="st">"All"</span>,</span>
+<span>  duration <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  failRate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op">/</span> <span class="fl">9</span>,</span>
+<span>  hr <span class="op">=</span> <span class="fl">0.65</span>,</span>
+<span>  dropoutRate <span class="op">=</span> <span class="fl">0.001</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">my_nsim</span> <span class="op">&lt;-</span> <span class="fl">1e+5</span></span>
+<span></span>
+<span><span class="co"># Calculate the simulated power at the 1st IA</span></span>
+<span><span class="va">my_sim_IA_power</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">my_simfix</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Z</span> <span class="op">&lt;=</span> <span class="op">-</span><span class="va">my_gsDesign</span><span class="op">$</span><span class="va">upper</span><span class="op">$</span><span class="va">bound</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Calculate the power by gs_ahr_power() at the 1st IA</span></span>
+<span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_power_ahr.html">gs_power_ahr</a></span><span class="op">(</span></span>
+<span>  enrollRates <span class="op">=</span> <span class="va">my_enrollRates</span>,</span>
+<span>  failRates <span class="op">=</span> <span class="va">my_failRates</span>,</span>
+<span>  ratio <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  events <span class="op">=</span> <span class="va">my_gsDesign</span><span class="op">$</span><span class="va">n.I</span>, <span class="co"># set number of events the same as my_gsDesign above from gsDesign()</span></span>
+<span>  analysisTimes <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  binding <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  upper <span class="op">=</span> <span class="va">gs_spending_bound</span>,</span>
+<span>  upar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>sf <span class="op">=</span> <span class="fu">gsDesign</span><span class="fu">::</span><span class="va"><a href="https://keaven.github.io/gsDesign/reference/sfLDOF.html">sfLDOF</a></span>, total_spend <span class="op">=</span> <span class="fl">0.025</span>, param <span class="op">=</span> <span class="cn">NULL</span>, timing <span class="op">=</span> <span class="cn">NULL</span>, theta <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>,</span>
+<span>  lower <span class="op">=</span> <span class="va">gs_spending_bound</span>,</span>
+<span>  lpar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>sf <span class="op">=</span> <span class="fu">gsDesign</span><span class="fu">::</span><span class="va"><a href="https://keaven.github.io/gsDesign/reference/sfLDOF.html">sfLDOF</a></span>, total_spend <span class="op">=</span> <span class="fl">0.2</span>, param <span class="op">=</span> <span class="cn">NULL</span>, timing <span class="op">=</span> <span class="cn">NULL</span>, theta <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>,</span>
+<span>  test_upper <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  test_lower <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">my_ahr_IA_power</span> <span class="op">&lt;-</span> <span class="va">out</span><span class="op">$</span><span class="va">Probability</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"The power at the 1st IA by gs_power_ahr() is:"</span>, <span class="va">my_ahr_IA_power</span>, <span class="st">"\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; The power at the 1st IA by gs_power_ahr() is: 0.4605649</code></pre>
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"The power at the 1st IA by"</span>, <span class="va">my_nsim</span>, <span class="st">"simulation is:"</span>, <span class="va">my_sim_IA_power</span>, <span class="st">"\n"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"The power at the 1st IA by"</span>, <span class="va">my_nsim</span>, <span class="st">"simulation is:"</span>, <span class="va">my_sim_IA_power</span>, <span class="st">"\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; The power at the 1st IA by 1e+05 simulation is: 0.46655</code></pre>
 </div>
-<div id="secAhrSimSimPWSurv" class="section level3">
+<div id="secAhrSimSimPWSurv" class="section level3" number="4.4.2">
 <h3>
 <span class="header-section-number">4.4.2</span> Simulation 2: Compare AHR by <code>gsDesign2::AHR()</code> and <code>simtrial::simPWSurv()</code><a class="anchor" aria-label="anchor" href="#secAhrSimSimPWSurv"><i class="fas fa-link"></i></a>
 </h3>
@@ -370,171 +396,183 @@ After that, we simply load the simulation results and compare it with the asympt
 The simulated power is calculated by <code><a href="https://merck.github.io/simtrial/reference/simPWSurv.html">simtrial::simPWSurv()</a></code>, and the asymptotic power is calculated by <code><a href="https://merck.github.io/gsDesign2/reference/AHR.html">gsDesign2::AHR()</a></code>.
 To conduct the comparison, we first save the output of <code><a href="https://merck.github.io/simtrial/reference/simPWSurv.html">simtrial::simPWSurv()</a></code> by running the following code chunk.
 After that, we simply load the simulation results and compare it with the asymptotic AHR</p>
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/therneau/survival">survival</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://merck.github.io/simtrial/">simtrial</a></span><span class="op">)</span>
-
-<span class="co"># Set the sample size</span>
-<span class="va">my_N</span> <span class="op">&lt;-</span> <span class="fl">500</span>
-<span class="co"># Set the analysis time, i.e., there are 4 looks</span>
-<span class="va">my_analysisTimes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">12</span>, <span class="fl">20</span>, <span class="fl">28</span>, <span class="fl">36</span><span class="op">)</span>
-<span class="co"># Set the enrollment rates</span>
-<span class="co"># This format of enrollment rates is design for simtrial::simfix()</span>
-<span class="co"># If it is later used to simtrial::simPWSurv(),</span>
-<span class="co"># function simtrial::simfix2simPWSurv() can used for transformation</span>
-<span class="va">my_enrollRates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>
-  Stratum <span class="op">=</span> <span class="st">"All"</span>,
-  duration <span class="op">=</span> <span class="fl">12</span>,
-  rate <span class="op">=</span> <span class="va">my_N</span> <span class="op">/</span> <span class="fl">12</span>
-<span class="op">)</span>
-<span class="co"># Set the failure rates</span>
-<span class="co"># This format of failure rates is design for simtrial::simfix()</span>
-<span class="co"># If it is later used to simtrial::simPWSurv(),</span>
-<span class="co"># function simtrial::simfix2simPWSurv() can used for transformation</span>
-<span class="va">my_failRates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>
-  Stratum <span class="op">=</span> <span class="st">"All"</span>,
-  duration <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">100</span><span class="op">)</span>,
-  failRate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op">/</span> <span class="fl">15</span>,
-  hr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0.6</span><span class="op">)</span>,
-  dropoutRate <span class="op">=</span> <span class="fl">0.001</span>
-<span class="op">)</span>
-
-<span class="co"># Set number of simulations</span>
-<span class="va">my_nsim</span> <span class="op">&lt;-</span> <span class="fl">10</span>
-<span class="co"># Set up matrix for simulation results</span>
-<span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">0</span>, nrow <span class="op">=</span> <span class="va">my_nsim</span> <span class="op">*</span> <span class="fl">4</span>, ncol <span class="op">=</span> <span class="fl">6</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Sim"</span>, <span class="st">"Analysis"</span>, <span class="st">"Events"</span>, <span class="st">"beta"</span>, <span class="st">"var"</span>, <span class="st">"logrank"</span><span class="op">)</span>
-
-<span class="co"># Set the index for results row</span>
-<span class="va">ii</span> <span class="op">&lt;-</span> <span class="fl">1</span>
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span>
-<span class="kw">for</span> <span class="op">(</span><span class="va">sim</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">my_nsim</span><span class="op">)</span> <span class="op">{</span>
-  <span class="co"># Simulate a trial</span>
-  <span class="va">ds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://merck.github.io/simtrial/reference/simPWSurv.html">simPWSurv</a></span><span class="op">(</span> <span class="co"># Generate my_N observations</span>
-    n <span class="op">=</span> <span class="va">my_N</span>,
-    <span class="co"># Use the same enrollRates as that in AHR</span>
-    enrollRates <span class="op">=</span> <span class="va">my_enrollRates</span>,
-    <span class="co"># Conversion of failRates from simfix() to simPWSurv() format</span>
-    failRates <span class="op">=</span> <span class="fu"><a href="https://merck.github.io/simtrial/reference/simfix2simPWSurv.html">simfix2simPWSurv</a></span><span class="op">(</span><span class="va">my_failRates</span><span class="op">)</span><span class="op">$</span><span class="va">failRates</span>,
-    <span class="co"># Conversion of dropoutRates from simfix() to simPWSurv() format</span>
-    dropoutRates <span class="op">=</span> <span class="fu"><a href="https://merck.github.io/simtrial/reference/simfix2simPWSurv.html">simfix2simPWSurv</a></span><span class="op">(</span><span class="va">my_failRates</span><span class="op">)</span><span class="op">$</span><span class="va">dropoutRates</span>
-  <span class="op">)</span>
-  <span class="co"># For each generated my_N observations</span>
-  <span class="co"># Go through pre-defined 4 looks</span>
-  <span class="kw">for</span> <span class="op">(</span><span class="va">j</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span><span class="op">(</span><span class="va">my_analysisTimes</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-    <span class="co"># Cut data at specified analysis times</span>
-    <span class="co"># Use cutDataAtCount to cut at event count</span>
-    <span class="co"># des is a dataset ready for survival analysis</span>
-    <span class="va">dsc</span> <span class="op">&lt;-</span> <span class="va">ds</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://merck.github.io/simtrial/reference/cutData.html">cutData</a></span><span class="op">(</span><span class="va">my_analysisTimes</span><span class="op">[</span><span class="va">j</span><span class="op">]</span><span class="op">)</span>
-
-    <span class="co"># 1st column of results records the index of the simulation</span>
-    <span class="va">results</span><span class="op">[</span><span class="va">ii</span>, <span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">sim</span>
-    <span class="co"># 2nd column of results records the index of the look</span>
-    <span class="va">results</span><span class="op">[</span><span class="va">ii</span>, <span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">j</span>
-    <span class="co"># 3rd column of results records the number of events</span>
-    <span class="va">results</span><span class="op">[</span><span class="va">ii</span>, <span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">dsc</span><span class="op">$</span><span class="va">event</span><span class="op">)</span>
-
-    <span class="co"># Apply Cox model</span>
-    <span class="va">cox</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/coxph.html">coxph</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html">Surv</a></span><span class="op">(</span><span class="va">tte</span>, <span class="va">event</span><span class="op">)</span> <span class="op">~</span> <span class="va">Treatment</span>, data <span class="op">=</span> <span class="va">dsc</span><span class="op">)</span>
-    <span class="co"># 4th column of results records the number log HR</span>
-    <span class="va">results</span><span class="op">[</span><span class="va">ii</span>, <span class="fl">4</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">cox</span><span class="op">$</span><span class="va">coefficients</span><span class="op">)</span>
-    <span class="co"># 5th column of results records the variance</span>
-    <span class="va">results</span><span class="op">[</span><span class="va">ii</span>, <span class="fl">5</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">cox</span><span class="op">$</span><span class="va">var</span><span class="op">)</span>
-
-    <span class="co"># Logrank test</span>
-    <span class="va">Z</span> <span class="op">&lt;-</span> <span class="va">dsc</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-      <span class="fu"><a href="https://merck.github.io/simtrial/reference/tensurv.html">tensurv</a></span><span class="op">(</span>txval <span class="op">=</span> <span class="st">"Experimental"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-      <span class="fu"><a href="https://merck.github.io/simtrial/reference/tenFH.html">tenFH</a></span><span class="op">(</span>rg <span class="op">=</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>rho <span class="op">=</span> <span class="fl">0</span>, gamma <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span>
-    <span class="co"># 5th column of results records the logrank</span>
-    <span class="va">results</span><span class="op">[</span><span class="va">ii</span>, <span class="fl">6</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">Z</span><span class="op">$</span><span class="va">Z</span><span class="op">)</span>
-
-    <span class="co"># Increate the row index</span>
-    <span class="va">ii</span> <span class="op">&lt;-</span> <span class="va">ii</span> <span class="op">+</span> <span class="fl">1</span>
-  <span class="op">}</span>
-<span class="op">}</span>
-<span class="fu"><a href="https://rdrr.io/r/base/save.html">save</a></span><span class="op">(</span><span class="va">results</span>, file <span class="op">=</span> <span class="st">"./data/simulation_AHR_simPRSurv.Rdata"</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Calculate the simulated AHR</span>
-<span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"./data/simulation_AHR_simPRSurv.Rdata"</span><span class="op">)</span>
-
-<span class="co"># Distribution of Cox coefficient</span>
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span>, 
-       <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">Analysis</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">beta</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_violin.html">geom_violin</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"Distribution of Cox Coefficient by Analysis"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Analysis"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Cox coefficient"</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-60-1.png" width="80%" style="display: block; margin: auto;"></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/therneau/survival">survival</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://merck.github.io/simtrial/">simtrial</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Set the sample size</span></span>
+<span><span class="va">my_N</span> <span class="op">&lt;-</span> <span class="fl">500</span></span>
+<span><span class="co"># Set the analysis time, i.e., there are 4 looks</span></span>
+<span><span class="va">my_analysisTimes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">12</span>, <span class="fl">20</span>, <span class="fl">28</span>, <span class="fl">36</span><span class="op">)</span></span>
+<span><span class="co"># Set the enrollment rates</span></span>
+<span><span class="co"># This format of enrollment rates is design for simtrial::simfix()</span></span>
+<span><span class="co"># If it is later used to simtrial::simPWSurv(),</span></span>
+<span><span class="co"># function simtrial::simfix2simPWSurv() can used for transformation</span></span>
+<span><span class="va">my_enrollRates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<span>  Stratum <span class="op">=</span> <span class="st">"All"</span>,</span>
+<span>  duration <span class="op">=</span> <span class="fl">12</span>,</span>
+<span>  rate <span class="op">=</span> <span class="va">my_N</span> <span class="op">/</span> <span class="fl">12</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co"># Set the failure rates</span></span>
+<span><span class="co"># This format of failure rates is design for simtrial::simfix()</span></span>
+<span><span class="co"># If it is later used to simtrial::simPWSurv(),</span></span>
+<span><span class="co"># function simtrial::simfix2simPWSurv() can used for transformation</span></span>
+<span><span class="va">my_failRates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<span>  Stratum <span class="op">=</span> <span class="st">"All"</span>,</span>
+<span>  duration <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">100</span><span class="op">)</span>,</span>
+<span>  failRate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op">/</span> <span class="fl">15</span>,</span>
+<span>  hr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0.6</span><span class="op">)</span>,</span>
+<span>  dropoutRate <span class="op">=</span> <span class="fl">0.001</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Set number of simulations</span></span>
+<span><span class="va">my_nsim</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
+<span><span class="co"># Set up matrix for simulation results</span></span>
+<span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">0</span>, nrow <span class="op">=</span> <span class="va">my_nsim</span> <span class="op">*</span> <span class="fl">4</span>, ncol <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Sim"</span>, <span class="st">"Analysis"</span>, <span class="st">"Events"</span>, <span class="st">"beta"</span>, <span class="st">"var"</span>, <span class="st">"logrank"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Set the index for results row</span></span>
+<span><span class="va">ii</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">sim</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">my_nsim</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># Simulate a trial</span></span>
+<span>  <span class="va">ds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://merck.github.io/simtrial/reference/simPWSurv.html">simPWSurv</a></span><span class="op">(</span> <span class="co"># Generate my_N observations</span></span>
+<span>    n <span class="op">=</span> <span class="va">my_N</span>,</span>
+<span>    <span class="co"># Use the same enrollRates as that in AHR</span></span>
+<span>    enrollRates <span class="op">=</span> <span class="va">my_enrollRates</span>,</span>
+<span>    <span class="co"># Conversion of failRates from simfix() to simPWSurv() format</span></span>
+<span>    failRates <span class="op">=</span> <span class="fu"><a href="https://merck.github.io/simtrial/reference/simfix2simPWSurv.html">simfix2simPWSurv</a></span><span class="op">(</span><span class="va">my_failRates</span><span class="op">)</span><span class="op">$</span><span class="va">failRates</span>,</span>
+<span>    <span class="co"># Conversion of dropoutRates from simfix() to simPWSurv() format</span></span>
+<span>    dropoutRates <span class="op">=</span> <span class="fu"><a href="https://merck.github.io/simtrial/reference/simfix2simPWSurv.html">simfix2simPWSurv</a></span><span class="op">(</span><span class="va">my_failRates</span><span class="op">)</span><span class="op">$</span><span class="va">dropoutRates</span></span>
+<span>  <span class="op">)</span></span>
+<span>  <span class="co"># For each generated my_N observations</span></span>
+<span>  <span class="co"># Go through pre-defined 4 looks</span></span>
+<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">j</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span><span class="op">(</span><span class="va">my_analysisTimes</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="co"># Cut data at specified analysis times</span></span>
+<span>    <span class="co"># Use cutDataAtCount to cut at event count</span></span>
+<span>    <span class="co"># des is a dataset ready for survival analysis</span></span>
+<span>    <span class="va">dsc</span> <span class="op">&lt;-</span> <span class="va">ds</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://merck.github.io/simtrial/reference/cutData.html">cutData</a></span><span class="op">(</span><span class="va">my_analysisTimes</span><span class="op">[</span><span class="va">j</span><span class="op">]</span><span class="op">)</span></span>
+<span></span>
+<span>    <span class="co"># 1st column of results records the index of the simulation</span></span>
+<span>    <span class="va">results</span><span class="op">[</span><span class="va">ii</span>, <span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">sim</span></span>
+<span>    <span class="co"># 2nd column of results records the index of the look</span></span>
+<span>    <span class="va">results</span><span class="op">[</span><span class="va">ii</span>, <span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">j</span></span>
+<span>    <span class="co"># 3rd column of results records the number of events</span></span>
+<span>    <span class="va">results</span><span class="op">[</span><span class="va">ii</span>, <span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">dsc</span><span class="op">$</span><span class="va">event</span><span class="op">)</span></span>
+<span></span>
+<span>    <span class="co"># Apply Cox model</span></span>
+<span>    <span class="va">cox</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/coxph.html">coxph</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html">Surv</a></span><span class="op">(</span><span class="va">tte</span>, <span class="va">event</span><span class="op">)</span> <span class="op">~</span> <span class="va">Treatment</span>, data <span class="op">=</span> <span class="va">dsc</span><span class="op">)</span></span>
+<span>    <span class="co"># 4th column of results records the number log HR</span></span>
+<span>    <span class="va">results</span><span class="op">[</span><span class="va">ii</span>, <span class="fl">4</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">cox</span><span class="op">$</span><span class="va">coefficients</span><span class="op">)</span></span>
+<span>    <span class="co"># 5th column of results records the variance</span></span>
+<span>    <span class="va">results</span><span class="op">[</span><span class="va">ii</span>, <span class="fl">5</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">cox</span><span class="op">$</span><span class="va">var</span><span class="op">)</span></span>
+<span></span>
+<span>    <span class="co"># Logrank test</span></span>
+<span>    <span class="va">Z</span> <span class="op">&lt;-</span> <span class="va">dsc</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="https://merck.github.io/simtrial/reference/tensurv.html">tensurv</a></span><span class="op">(</span>txval <span class="op">=</span> <span class="st">"Experimental"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="https://merck.github.io/simtrial/reference/tenFH.html">tenFH</a></span><span class="op">(</span>rg <span class="op">=</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>rho <span class="op">=</span> <span class="fl">0</span>, gamma <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="co"># 5th column of results records the logrank</span></span>
+<span>    <span class="va">results</span><span class="op">[</span><span class="va">ii</span>, <span class="fl">6</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">Z</span><span class="op">$</span><span class="va">Z</span><span class="op">)</span></span>
+<span></span>
+<span>    <span class="co"># Increate the row index</span></span>
+<span>    <span class="va">ii</span> <span class="op">&lt;-</span> <span class="va">ii</span> <span class="op">+</span> <span class="fl">1</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">}</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/save.html">save</a></span><span class="op">(</span><span class="va">results</span>, file <span class="op">=</span> <span class="st">"./data/simulation_AHR_simPRSurv.Rdata"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Variability of results</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span>, <span class="va">Sim</span> <span class="op">&lt;</span> <span class="fl">10</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-         <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Sim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">Sim</span><span class="op">)</span>, Analysis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">Analysis</span><span class="op">)</span><span class="op">)</span>, 
-       <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Analysis</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">beta</span><span class="op">)</span>, group <span class="op">=</span> <span class="va">Sim</span>, col <span class="op">=</span> <span class="va">Sim</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>show.legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="va">Analysis</span><span class="op">)</span>, show.legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_log10</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">.6</span>, <span class="fl">1.1</span>, <span class="fl">.1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"HR"</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-60-2.png" width="80%" style="display: block; margin: auto;"></div>
+<code class="sourceCode R"><span><span class="co"># Calculate the simulated AHR</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"./data/simulation_AHR_simPRSurv.Rdata"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Distribution of Cox coefficient</span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span>, </span>
+<span>       <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">Analysis</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">beta</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_violin</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"Distribution of Cox Coefficient by Analysis"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">xlab</span><span class="op">(</span><span class="st">"Analysis"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ylab</span><span class="op">(</span><span class="st">"Cox coefficient"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-60-1.png" width="80%" style="display: block; margin: auto;"></div>
 <div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Comparison of asymptotic vs simulation</span>
-<span class="va">AHR_simulated</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Analysis</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>
-    AHR <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">beta</span><span class="op">)</span><span class="op">)</span>,
-    Events <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Events</span><span class="op">)</span>,
-    info <span class="op">=</span> <span class="fl">1</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">beta</span><span class="op">)</span><span class="op">)</span>,
-    info0 <span class="op">=</span> <span class="va">Events</span> <span class="op">/</span> <span class="fl">4</span>
-  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">AHR</span>, <span class="va">Events</span>, <span class="va">info</span>, <span class="va">info0</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">AHR_simulated</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"AHR_sim"</span>, <span class="st">"Events_sim"</span>, <span class="st">"info_sim"</span>, <span class="st">"info0_sim"</span><span class="op">)</span>
-
-<span class="co"># Calculate the AHR asymptotically</span>
-<span class="co"># gsDesign2::AHR() uses asymptotic distribution</span>
-<span class="co"># We will compare its outputs with the simulated outputs</span>
-<span class="co"># The simulated outputs is calculated by simtrial::simPWSurv()</span>
-
-<span class="co"># Set the sample size the same as simPWSurv()</span>
-<span class="va">my_N</span> <span class="op">&lt;-</span> <span class="fl">500</span>
-<span class="co"># Set the analysis time the same as simPWSurv()</span>
-<span class="va">my_analysisTimes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">12</span>, <span class="fl">20</span>, <span class="fl">28</span>, <span class="fl">36</span><span class="op">)</span>
-<span class="co"># Set the enrollment rates the same as simPWSurv()</span>
-<span class="va">my_enrollRates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>
-  Stratum <span class="op">=</span> <span class="st">"All"</span>,
-  duration <span class="op">=</span> <span class="fl">12</span>,
-  rate <span class="op">=</span> <span class="va">my_N</span> <span class="op">/</span> <span class="fl">12</span>
-<span class="op">)</span>
-<span class="co"># Set the failure rates the same as simPWSurv()</span>
-<span class="va">my_failRates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>
-  Stratum <span class="op">=</span> <span class="st">"All"</span>,
-  duration <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">100</span><span class="op">)</span>,
-  failRate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op">/</span> <span class="fl">15</span>,
-  hr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0.6</span><span class="op">)</span>,
-  dropoutRate <span class="op">=</span> <span class="fl">0.001</span>
-<span class="op">)</span>
-
-<span class="va">AHR_asymptotics</span> <span class="op">&lt;-</span> <span class="fu">gsDesign2</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsDesign2/reference/AHR.html">AHR</a></span><span class="op">(</span>
-  enrollRates <span class="op">=</span> <span class="va">my_enrollRates</span>,
-  failRates <span class="op">=</span> <span class="va">my_failRates</span>,
-  totalDuration <span class="op">=</span> <span class="va">my_analysisTimes</span>,
-  ratio <span class="op">=</span> <span class="fl">1</span>
-<span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">AHR_asymptotics</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Time"</span>, <span class="st">"AHR_asy"</span>, <span class="st">"Events_asy"</span>, <span class="st">"info_asy"</span>, <span class="st">"info0_asy"</span><span class="op">)</span>
-
-<span class="co"># Compare the results</span>
-<span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">AHR_asymptotics</span>, <span class="va">AHR_simulated</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">8</span>, <span class="fl">9</span><span class="op">)</span>, decimals <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">7</span><span class="op">)</span>, decimals <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
-<div id="ryebschbly" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>html {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+<code class="sourceCode R"><span><span class="co"># Variability of results</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span>, <span class="va">Sim</span> <span class="op">&lt;</span> <span class="fl">10</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>         <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Sim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">Sim</span><span class="op">)</span>, Analysis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">Analysis</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>       <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">Analysis</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">beta</span><span class="op">)</span>, group <span class="op">=</span> <span class="va">Sim</span>, col <span class="op">=</span> <span class="va">Sim</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_line</span><span class="op">(</span>show.legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>shape <span class="op">=</span> <span class="va">Analysis</span><span class="op">)</span>, show.legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">scale_y_log10</span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">.6</span>, <span class="fl">1.1</span>, <span class="fl">.1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ylab</span><span class="op">(</span><span class="st">"HR"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-60-2.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Comparison of asymptotic vs simulation</span></span>
+<span><span class="va">AHR_simulated</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Analysis</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span></span>
+<span>    AHR <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">beta</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    Events <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Events</span><span class="op">)</span>,</span>
+<span>    info <span class="op">=</span> <span class="fl">1</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">beta</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    info0 <span class="op">=</span> <span class="va">Events</span> <span class="op">/</span> <span class="fl">4</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">AHR</span>, <span class="va">Events</span>, <span class="va">info</span>, <span class="va">info0</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">AHR_simulated</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"AHR_sim"</span>, <span class="st">"Events_sim"</span>, <span class="st">"info_sim"</span>, <span class="st">"info0_sim"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Calculate the AHR asymptotically</span></span>
+<span><span class="co"># gsDesign2::AHR() uses asymptotic distribution</span></span>
+<span><span class="co"># We will compare its outputs with the simulated outputs</span></span>
+<span><span class="co"># The simulated outputs is calculated by simtrial::simPWSurv()</span></span>
+<span></span>
+<span><span class="co"># Set the sample size the same as simPWSurv()</span></span>
+<span><span class="va">my_N</span> <span class="op">&lt;-</span> <span class="fl">500</span></span>
+<span><span class="co"># Set the analysis time the same as simPWSurv()</span></span>
+<span><span class="va">my_analysisTimes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">12</span>, <span class="fl">20</span>, <span class="fl">28</span>, <span class="fl">36</span><span class="op">)</span></span>
+<span><span class="co"># Set the enrollment rates the same as simPWSurv()</span></span>
+<span><span class="va">my_enrollRates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<span>  Stratum <span class="op">=</span> <span class="st">"All"</span>,</span>
+<span>  duration <span class="op">=</span> <span class="fl">12</span>,</span>
+<span>  rate <span class="op">=</span> <span class="va">my_N</span> <span class="op">/</span> <span class="fl">12</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co"># Set the failure rates the same as simPWSurv()</span></span>
+<span><span class="va">my_failRates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<span>  Stratum <span class="op">=</span> <span class="st">"All"</span>,</span>
+<span>  duration <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">100</span><span class="op">)</span>,</span>
+<span>  failRate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op">/</span> <span class="fl">15</span>,</span>
+<span>  hr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0.6</span><span class="op">)</span>,</span>
+<span>  dropoutRate <span class="op">=</span> <span class="fl">0.001</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">AHR_asymptotics</span> <span class="op">&lt;-</span> <span class="fu">gsDesign2</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsDesign2/reference/AHR.html">AHR</a></span><span class="op">(</span></span>
+<span>  enrollRates <span class="op">=</span> <span class="va">my_enrollRates</span>,</span>
+<span>  failRates <span class="op">=</span> <span class="va">my_failRates</span>,</span>
+<span>  totalDuration <span class="op">=</span> <span class="va">my_analysisTimes</span>,</span>
+<span>  ratio <span class="op">=</span> <span class="fl">1</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">AHR_asymptotics</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Time"</span>, <span class="st">"AHR_asy"</span>, <span class="st">"Events_asy"</span>, <span class="st">"info_asy"</span>, <span class="st">"info0_asy"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Compare the results</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">AHR_asymptotics</span>, <span class="va">AHR_simulated</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">8</span>, <span class="fl">9</span><span class="op">)</span>, decimals <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">7</span><span class="op">)</span>, decimals <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<div id="tpidhhnzes" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tpidhhnzes table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-#ryebschbly .gt_table {
+#tpidhhnzes thead, #tpidhhnzes tbody, #tpidhhnzes tfoot, #tpidhhnzes tr, #tpidhhnzes td, #tpidhhnzes th {
+  border-style: none;
+}
+
+#tpidhhnzes p {
+  margin: 0;
+  padding: 0;
+}
+
+#tpidhhnzes .gt_table {
   display: table;
   border-collapse: collapse;
+  line-height: normal;
   margin-left: auto;
   margin-right: auto;
   color: #333333;
@@ -557,7 +595,36 @@ After that, we simply load the simulation results and compare it with the asympt
   border-left-color: #D3D3D3;
 }
 
-#ryebschbly .gt_heading {
+#tpidhhnzes .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#tpidhhnzes .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#tpidhhnzes .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#tpidhhnzes .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -569,33 +636,13 @@ After that, we simply load the simulation results and compare it with the asympt
   border-right-color: #D3D3D3;
 }
 
-#ryebschbly .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#ryebschbly .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 0;
-  padding-bottom: 6px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#ryebschbly .gt_bottom_border {
+#tpidhhnzes .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ryebschbly .gt_col_headings {
+#tpidhhnzes .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -610,7 +657,7 @@ After that, we simply load the simulation results and compare it with the asympt
   border-right-color: #D3D3D3;
 }
 
-#ryebschbly .gt_col_heading {
+#tpidhhnzes .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -630,7 +677,7 @@ After that, we simply load the simulation results and compare it with the asympt
   overflow-x: hidden;
 }
 
-#ryebschbly .gt_column_spanner_outer {
+#tpidhhnzes .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -642,15 +689,15 @@ After that, we simply load the simulation results and compare it with the asympt
   padding-right: 4px;
 }
 
-#ryebschbly .gt_column_spanner_outer:first-child {
+#tpidhhnzes .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ryebschbly .gt_column_spanner_outer:last-child {
+#tpidhhnzes .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ryebschbly .gt_column_spanner {
+#tpidhhnzes .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -662,8 +709,15 @@ After that, we simply load the simulation results and compare it with the asympt
   width: 100%;
 }
 
-#ryebschbly .gt_group_heading {
-  padding: 8px;
+#tpidhhnzes .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#tpidhhnzes .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -682,9 +736,10 @@ After that, we simply load the simulation results and compare it with the asympt
   border-right-width: 1px;
   border-right-color: #D3D3D3;
   vertical-align: middle;
+  text-align: left;
 }
 
-#ryebschbly .gt_empty_group_heading {
+#tpidhhnzes .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -699,15 +754,15 @@ After that, we simply load the simulation results and compare it with the asympt
   vertical-align: middle;
 }
 
-#ryebschbly .gt_from_md > :first-child {
+#tpidhhnzes .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ryebschbly .gt_from_md > :last-child {
+#tpidhhnzes .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ryebschbly .gt_row {
+#tpidhhnzes .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -726,7 +781,7 @@ After that, we simply load the simulation results and compare it with the asympt
   overflow-x: hidden;
 }
 
-#ryebschbly .gt_stub {
+#tpidhhnzes .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -735,10 +790,33 @@ After that, we simply load the simulation results and compare it with the asympt
   border-right-style: solid;
   border-right-width: 2px;
   border-right-color: #D3D3D3;
-  padding-left: 12px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
-#ryebschbly .gt_summary_row {
+#tpidhhnzes .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#tpidhhnzes .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#tpidhhnzes .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#tpidhhnzes .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -748,17 +826,26 @@ After that, we simply load the simulation results and compare it with the asympt
   padding-right: 5px;
 }
 
-#ryebschbly .gt_first_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
+#tpidhhnzes .gt_first_summary_row {
   border-top-style: solid;
-  border-top-width: 2px;
   border-top-color: #D3D3D3;
 }
 
-#ryebschbly .gt_grand_summary_row {
+#tpidhhnzes .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#tpidhhnzes .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tpidhhnzes .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -768,7 +855,7 @@ After that, we simply load the simulation results and compare it with the asympt
   padding-right: 5px;
 }
 
-#ryebschbly .gt_first_grand_summary_row {
+#tpidhhnzes .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -778,11 +865,21 @@ After that, we simply load the simulation results and compare it with the asympt
   border-top-color: #D3D3D3;
 }
 
-#ryebschbly .gt_striped {
+#tpidhhnzes .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tpidhhnzes .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ryebschbly .gt_table_body {
+#tpidhhnzes .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -791,7 +888,7 @@ After that, we simply load the simulation results and compare it with the asympt
   border-bottom-color: #D3D3D3;
 }
 
-#ryebschbly .gt_footnotes {
+#tpidhhnzes .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -805,13 +902,16 @@ After that, we simply load the simulation results and compare it with the asympt
   border-right-color: #D3D3D3;
 }
 
-#ryebschbly .gt_footnote {
+#tpidhhnzes .gt_footnote {
   margin: 0px;
   font-size: 90%;
-  padding: 4px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
-#ryebschbly .gt_sourcenotes {
+#tpidhhnzes .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -825,199 +925,227 @@ After that, we simply load the simulation results and compare it with the asympt
   border-right-color: #D3D3D3;
 }
 
-#ryebschbly .gt_sourcenote {
+#tpidhhnzes .gt_sourcenote {
   font-size: 90%;
-  padding: 4px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
-#ryebschbly .gt_left {
+#tpidhhnzes .gt_left {
   text-align: left;
 }
 
-#ryebschbly .gt_center {
+#tpidhhnzes .gt_center {
   text-align: center;
 }
 
-#ryebschbly .gt_right {
+#tpidhhnzes .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ryebschbly .gt_font_normal {
+#tpidhhnzes .gt_font_normal {
   font-weight: normal;
 }
 
-#ryebschbly .gt_font_bold {
+#tpidhhnzes .gt_font_bold {
   font-weight: bold;
 }
 
-#ryebschbly .gt_font_italic {
+#tpidhhnzes .gt_font_italic {
   font-style: italic;
 }
 
-#ryebschbly .gt_super {
+#tpidhhnzes .gt_super {
   font-size: 65%;
 }
 
-#ryebschbly .gt_footnote_marks {
-  font-style: italic;
-  font-weight: normal;
-  font-size: 65%;
+#tpidhhnzes .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#tpidhhnzes .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#tpidhhnzes .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#tpidhhnzes .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#tpidhhnzes .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#tpidhhnzes .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#tpidhhnzes .gt_indent_5 {
+  text-indent: 25px;
 }
 </style>
-<div class="inline-table"><table class="gt_table">
-<thead class="gt_col_headings"><tr>
-<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Time</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">AHR_asy</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Events_asy</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">info_asy</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">info0_asy</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">AHR_sim</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Events_sim</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">info_sim</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">info0_sim</th>
+<div class="inline-table"><table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead><tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Time">Time</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="AHR_asy">AHR_asy</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Events_asy">Events_asy</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="info_asy">info_asy</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="info0_asy">info0_asy</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="AHR_sim">AHR_sim</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Events_sim">Events_sim</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="info_sim">info_sim</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="info0_sim">info0_sim</th>
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
-<td class="gt_row gt_right">12</td>
-<td class="gt_row gt_right">0.8395</td>
-<td class="gt_row gt_right">107.39</td>
-<td class="gt_row gt_right">26.3710</td>
-<td class="gt_row gt_right">26.8486</td>
-<td class="gt_row gt_right">0.8415</td>
-<td class="gt_row gt_right">107.25</td>
-<td class="gt_row gt_right">26.2593</td>
-<td class="gt_row gt_right">26.8130</td>
+<td headers="Time" class="gt_row gt_right">12</td>
+<td headers="AHR_asy" class="gt_row gt_right">0.8395</td>
+<td headers="Events_asy" class="gt_row gt_right">107.39</td>
+<td headers="info_asy" class="gt_row gt_right">26.3710</td>
+<td headers="info0_asy" class="gt_row gt_right">26.8486</td>
+<td headers="AHR_sim" class="gt_row gt_right">0.8415</td>
+<td headers="Events_sim" class="gt_row gt_right">107.25</td>
+<td headers="info_sim" class="gt_row gt_right">26.2593</td>
+<td headers="info0_sim" class="gt_row gt_right">26.8130</td>
 </tr>
 <tr>
-<td class="gt_row gt_right">20</td>
-<td class="gt_row gt_right">0.7379</td>
-<td class="gt_row gt_right">207.90</td>
-<td class="gt_row gt_right">50.6695</td>
-<td class="gt_row gt_right">51.9741</td>
-<td class="gt_row gt_right">0.7397</td>
-<td class="gt_row gt_right">207.71</td>
-<td class="gt_row gt_right">50.8936</td>
-<td class="gt_row gt_right">51.9281</td>
+<td headers="Time" class="gt_row gt_right">20</td>
+<td headers="AHR_asy" class="gt_row gt_right">0.7379</td>
+<td headers="Events_asy" class="gt_row gt_right">207.90</td>
+<td headers="info_asy" class="gt_row gt_right">50.6695</td>
+<td headers="info0_asy" class="gt_row gt_right">51.9741</td>
+<td headers="AHR_sim" class="gt_row gt_right">0.7397</td>
+<td headers="Events_sim" class="gt_row gt_right">207.71</td>
+<td headers="info_sim" class="gt_row gt_right">50.8936</td>
+<td headers="info0_sim" class="gt_row gt_right">51.9281</td>
 </tr>
 <tr>
-<td class="gt_row gt_right">28</td>
-<td class="gt_row gt_right">0.7000</td>
-<td class="gt_row gt_right">279.10</td>
-<td class="gt_row gt_right">68.2263</td>
-<td class="gt_row gt_right">69.7759</td>
-<td class="gt_row gt_right">0.7012</td>
-<td class="gt_row gt_right">278.93</td>
-<td class="gt_row gt_right">67.9878</td>
-<td class="gt_row gt_right">69.7321</td>
+<td headers="Time" class="gt_row gt_right">28</td>
+<td headers="AHR_asy" class="gt_row gt_right">0.7000</td>
+<td headers="Events_asy" class="gt_row gt_right">279.10</td>
+<td headers="info_asy" class="gt_row gt_right">68.2263</td>
+<td headers="info0_asy" class="gt_row gt_right">69.7759</td>
+<td headers="AHR_sim" class="gt_row gt_right">0.7012</td>
+<td headers="Events_sim" class="gt_row gt_right">278.93</td>
+<td headers="info_sim" class="gt_row gt_right">67.9878</td>
+<td headers="info0_sim" class="gt_row gt_right">69.7321</td>
 </tr>
 <tr>
-<td class="gt_row gt_right">36</td>
-<td class="gt_row gt_right">0.6832</td>
-<td class="gt_row gt_right">331.29</td>
-<td class="gt_row gt_right">81.3779</td>
-<td class="gt_row gt_right">82.8227</td>
-<td class="gt_row gt_right">0.6839</td>
-<td class="gt_row gt_right">331.19</td>
-<td class="gt_row gt_right">80.6198</td>
-<td class="gt_row gt_right">82.7969</td>
+<td headers="Time" class="gt_row gt_right">36</td>
+<td headers="AHR_asy" class="gt_row gt_right">0.6832</td>
+<td headers="Events_asy" class="gt_row gt_right">331.29</td>
+<td headers="info_asy" class="gt_row gt_right">81.3779</td>
+<td headers="info0_asy" class="gt_row gt_right">82.8227</td>
+<td headers="AHR_sim" class="gt_row gt_right">0.6839</td>
+<td headers="Events_sim" class="gt_row gt_right">331.19</td>
+<td headers="info_sim" class="gt_row gt_right">80.6198</td>
+<td headers="info0_sim" class="gt_row gt_right">82.7969</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 </div>
-<div id="secAhrSimMleWs" class="section level3">
+<div id="secAhrSimMleWs" class="section level3" number="4.4.3">
 <h3>
 <span class="header-section-number">4.4.3</span> Simulation 3: Compare <span class="math inline">\(\beta\)</span> by MLE and weighted summation<a class="anchor" aria-label="anchor" href="#secAhrSimMleWs"><i class="fas fa-link"></i></a>
 </h3>
 <p>This section compares the AHR estimated by MLE (see theoretical details in Section <a href="#secAhrMLE"><strong>??</strong></a>) and weighted summation (see theoretical details in Section <a href="#secAhrWeightedSum"><strong>??</strong></a>).</p>
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gt.rstudio.com/">gt</a></span><span class="op">)</span>
-<span class="va">my_nsim</span> <span class="op">&lt;-</span> <span class="fl">10</span>
-<span class="va">my_nNewtonRaphson</span> <span class="op">&lt;-</span> <span class="fl">10</span>
-<span class="va">compare_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">0</span>, nrow <span class="op">=</span> <span class="va">my_nsim</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span>
-
-<span class="kw">for</span> <span class="op">(</span><span class="va">sim</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">my_nsim</span><span class="op">)</span> <span class="op">{</span>
-  <span class="co"># Generate the number of change points, i.e., total number of timeline piece - 1</span>
-  <span class="va">sim_M</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">3</span><span class="op">:</span><span class="fl">10</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-  <span class="va">sim_d0_start</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">8</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-  <span class="va">sim_d1_start</span> <span class="op">&lt;-</span> <span class="va">sim_d0_start</span> <span class="op">-</span> <span class="fl">3</span>
-  <span class="va">sim_T0_start</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">10</span><span class="op">:</span><span class="fl">20</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-  <span class="va">sim_T1_start</span> <span class="op">&lt;-</span> <span class="va">sim_T0_start</span> <span class="op">+</span> <span class="fl">1</span>
-  <span class="co"># Generate simulated data</span>
-  <span class="va">obs_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span> <span class="co"># m = 1:5,</span>
-    m <span class="op">=</span> <span class="va">sim_M</span>,
-    <span class="co"># d0 = 4:8,</span>
-    d0 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="va">sim_d0_start</span>, length.out <span class="op">=</span> <span class="va">sim_M</span><span class="op">)</span>,
-    <span class="co"># d1 = 1:5,</span>
-    d1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="va">sim_d1_start</span>, length.out <span class="op">=</span> <span class="va">sim_M</span><span class="op">)</span>,
-    <span class="co"># T0 = 10:14,</span>
-    T0 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="va">sim_T0_start</span>, length.out <span class="op">=</span> <span class="va">sim_M</span><span class="op">)</span>,
-    <span class="co"># T1 = 11:15</span>
-    T1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="va">sim_T1_start</span>, length.out <span class="op">=</span> <span class="va">sim_M</span><span class="op">)</span>
-  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>
-      lambda0 <span class="op">=</span> <span class="va">d0</span> <span class="op">/</span> <span class="va">T0</span>,
-      lambda1 <span class="op">=</span> <span class="va">d1</span> <span class="op">/</span> <span class="va">T1</span>,
-      HR <span class="op">=</span> <span class="va">lambda1</span> <span class="op">/</span> <span class="va">lambda0</span>,
-      <span class="co"># beta_m</span>
-      gamma <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">HR</span><span class="op">)</span>,
-      <span class="co"># Var(beta_m)</span>
-      vargamma <span class="op">=</span> <span class="fl">1</span> <span class="op">/</span> <span class="va">d0</span> <span class="op">+</span> <span class="fl">1</span> <span class="op">/</span> <span class="va">d1</span>
-    <span class="op">)</span>
-
-  <span class="co"># Estimate beta by weighted summation</span>
-  <span class="co"># beta = variable `logAHR`</span>
-  <span class="va">estimate_beta_WS</span> <span class="op">&lt;-</span> <span class="va">obs_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>
-      wsum <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">/</span> <span class="va">vargamma</span><span class="op">)</span>,
-      <span class="co"># estimation of beta_WS</span>
-      beta_WS <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">gamma</span> <span class="op">/</span> <span class="va">vargamma</span><span class="op">)</span> <span class="op">/</span> <span class="va">wsum</span>,
-      <span class="co"># variance of the estimation of beta_WS</span>
-      var <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">vargamma</span><span class="op">^</span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span>,
-      <span class="co"># standard derivation of the estimation of beta_WS</span>
-      se <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">var</span><span class="op">)</span>,
-      <span class="co"># AHR: average of lambda_{1,m}/lambda_{0,m}</span>
-      AHR <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">beta_WS</span><span class="op">)</span>
-    <span class="op">)</span>
-  <span class="va">compare_results</span><span class="op">[</span><span class="va">sim</span>, <span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">estimate_beta_WS</span><span class="op">$</span><span class="va">beta_WS</span>
-
-  <span class="co"># Estimate beta by MLE</span>
-  <span class="va">beta_MLE</span> <span class="op">&lt;-</span> <span class="va">estimate_beta_WS</span><span class="op">$</span><span class="va">beta_WS</span>
-  <span class="co"># beta_MLE_seq &lt;- beta_MLE    # ensure convergence</span>
-
-  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">my_nNewtonRaphson</span><span class="op">)</span> <span class="op">{</span>
-    <span class="co">## Calculate the first order derivative at the value of beta_k</span>
-    <span class="va">temp_beta_d1</span> <span class="op">&lt;-</span> <span class="va">obs_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>beta_d1 <span class="op">=</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">d0</span> <span class="op">+</span> <span class="va">d1</span><span class="op">)</span> <span class="op">*</span> <span class="va">T1</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">beta_MLE</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="va">T0</span> <span class="op">+</span> <span class="va">T1</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">beta_MLE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-      <span class="op">+</span>
-        <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">d1</span><span class="op">)</span><span class="op">)</span>
-    <span class="va">beta_d1_curr</span> <span class="op">&lt;-</span> <span class="va">temp_beta_d1</span><span class="op">$</span><span class="va">beta_d1</span>
-
-    <span class="co">## Calculate the second order derivative at the value of beta_k</span>
-    <span class="va">temp_beta_d2</span> <span class="op">&lt;-</span> <span class="va">obs_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>beta_d2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">T1</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">beta_MLE</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span> <span class="op">*</span> <span class="op">(</span><span class="va">d0</span> <span class="op">+</span> <span class="va">d1</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="va">T0</span> <span class="op">+</span> <span class="va">T1</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">beta_MLE</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span>
-      <span class="op">-</span>
-        <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="op">(</span><span class="va">d0</span> <span class="op">+</span> <span class="va">d1</span><span class="op">)</span> <span class="op">*</span> <span class="va">T1</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">beta_MLE</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="va">T0</span> <span class="op">+</span> <span class="va">T1</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">beta_MLE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-    <span class="va">beta_d2_curr</span> <span class="op">&lt;-</span> <span class="va">temp_beta_d2</span><span class="op">$</span><span class="va">beta_d2</span>
-
-    <span class="co">## Update beta by Newton-Raphson method, i.e.,</span>
-    <span class="co">## beta_k+1 = beta_k - l'(beta_k)/l''(beta_k)</span>
-    <span class="va">beta_MLE</span> <span class="op">&lt;-</span> <span class="va">beta_MLE</span> <span class="op">-</span> <span class="va">beta_d1_curr</span> <span class="op">/</span> <span class="va">beta_d2_curr</span>
-    <span class="co"># beta_MLE_seq &lt;- c(beta_MLE_seq, beta_MLE)</span>
-  <span class="op">}</span>
-
-  <span class="va">compare_results</span><span class="op">[</span><span class="va">sim</span>, <span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">beta_MLE</span>
-<span class="op">}</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">compare_results</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Weighted Summation"</span>, <span class="st">"MLE"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/save.html">save</a></span><span class="op">(</span><span class="va">compare_results</span>, file <span class="op">=</span> <span class="st">"./data/simulation_MLE_vs_WS.Rdata"</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"./data/simulation_MLE_vs_WS.Rdata"</span><span class="op">)</span>
-<span class="va">my_nsim</span> <span class="op">&lt;-</span> <span class="fl">1e+5</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">compare_results</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gt.rstudio.com/">gt</a></span><span class="op">)</span></span>
+<span><span class="va">my_nsim</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
+<span><span class="va">my_nNewtonRaphson</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
+<span><span class="va">compare_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">0</span>, nrow <span class="op">=</span> <span class="va">my_nsim</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">sim</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">my_nsim</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># Generate the number of change points, i.e., total number of timeline piece - 1</span></span>
+<span>  <span class="va">sim_M</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">3</span><span class="op">:</span><span class="fl">10</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span>  <span class="va">sim_d0_start</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">8</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span>  <span class="va">sim_d1_start</span> <span class="op">&lt;-</span> <span class="va">sim_d0_start</span> <span class="op">-</span> <span class="fl">3</span></span>
+<span>  <span class="va">sim_T0_start</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">10</span><span class="op">:</span><span class="fl">20</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span>  <span class="va">sim_T1_start</span> <span class="op">&lt;-</span> <span class="va">sim_T0_start</span> <span class="op">+</span> <span class="fl">1</span></span>
+<span>  <span class="co"># Generate simulated data</span></span>
+<span>  <span class="va">obs_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span> <span class="co"># m = 1:5,</span></span>
+<span>    m <span class="op">=</span> <span class="va">sim_M</span>,</span>
+<span>    <span class="co"># d0 = 4:8,</span></span>
+<span>    d0 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="va">sim_d0_start</span>, length.out <span class="op">=</span> <span class="va">sim_M</span><span class="op">)</span>,</span>
+<span>    <span class="co"># d1 = 1:5,</span></span>
+<span>    d1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="va">sim_d1_start</span>, length.out <span class="op">=</span> <span class="va">sim_M</span><span class="op">)</span>,</span>
+<span>    <span class="co"># T0 = 10:14,</span></span>
+<span>    T0 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="va">sim_T0_start</span>, length.out <span class="op">=</span> <span class="va">sim_M</span><span class="op">)</span>,</span>
+<span>    <span class="co"># T1 = 11:15</span></span>
+<span>    T1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="va">sim_T1_start</span>, length.out <span class="op">=</span> <span class="va">sim_M</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>      lambda0 <span class="op">=</span> <span class="va">d0</span> <span class="op">/</span> <span class="va">T0</span>,</span>
+<span>      lambda1 <span class="op">=</span> <span class="va">d1</span> <span class="op">/</span> <span class="va">T1</span>,</span>
+<span>      HR <span class="op">=</span> <span class="va">lambda1</span> <span class="op">/</span> <span class="va">lambda0</span>,</span>
+<span>      <span class="co"># beta_m</span></span>
+<span>      gamma <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">HR</span><span class="op">)</span>,</span>
+<span>      <span class="co"># Var(beta_m)</span></span>
+<span>      vargamma <span class="op">=</span> <span class="fl">1</span> <span class="op">/</span> <span class="va">d0</span> <span class="op">+</span> <span class="fl">1</span> <span class="op">/</span> <span class="va">d1</span></span>
+<span>    <span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># Estimate beta by weighted summation</span></span>
+<span>  <span class="co"># beta = variable `logAHR`</span></span>
+<span>  <span class="va">estimate_beta_WS</span> <span class="op">&lt;-</span> <span class="va">obs_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
+<span>      wsum <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">/</span> <span class="va">vargamma</span><span class="op">)</span>,</span>
+<span>      <span class="co"># estimation of beta_WS</span></span>
+<span>      beta_WS <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">gamma</span> <span class="op">/</span> <span class="va">vargamma</span><span class="op">)</span> <span class="op">/</span> <span class="va">wsum</span>,</span>
+<span>      <span class="co"># variance of the estimation of beta_WS</span></span>
+<span>      var <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">vargamma</span><span class="op">^</span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span>,</span>
+<span>      <span class="co"># standard derivation of the estimation of beta_WS</span></span>
+<span>      se <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">var</span><span class="op">)</span>,</span>
+<span>      <span class="co"># AHR: average of lambda_{1,m}/lambda_{0,m}</span></span>
+<span>      AHR <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">beta_WS</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="va">compare_results</span><span class="op">[</span><span class="va">sim</span>, <span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">estimate_beta_WS</span><span class="op">$</span><span class="va">beta_WS</span></span>
+<span></span>
+<span>  <span class="co"># Estimate beta by MLE</span></span>
+<span>  <span class="va">beta_MLE</span> <span class="op">&lt;-</span> <span class="va">estimate_beta_WS</span><span class="op">$</span><span class="va">beta_WS</span></span>
+<span>  <span class="co"># beta_MLE_seq &lt;- beta_MLE    # ensure convergence</span></span>
+<span></span>
+<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">my_nNewtonRaphson</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="co">## Calculate the first order derivative at the value of beta_k</span></span>
+<span>    <span class="va">temp_beta_d1</span> <span class="op">&lt;-</span> <span class="va">obs_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>beta_d1 <span class="op">=</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">d0</span> <span class="op">+</span> <span class="va">d1</span><span class="op">)</span> <span class="op">*</span> <span class="va">T1</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">beta_MLE</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="va">T0</span> <span class="op">+</span> <span class="va">T1</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">beta_MLE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span>      <span class="op">+</span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">d1</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="va">beta_d1_curr</span> <span class="op">&lt;-</span> <span class="va">temp_beta_d1</span><span class="op">$</span><span class="va">beta_d1</span></span>
+<span></span>
+<span>    <span class="co">## Calculate the second order derivative at the value of beta_k</span></span>
+<span>    <span class="va">temp_beta_d2</span> <span class="op">&lt;-</span> <span class="va">obs_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>beta_d2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">T1</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">beta_MLE</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span> <span class="op">*</span> <span class="op">(</span><span class="va">d0</span> <span class="op">+</span> <span class="va">d1</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="va">T0</span> <span class="op">+</span> <span class="va">T1</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">beta_MLE</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span>
+<span>      <span class="op">-</span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="op">(</span><span class="va">d0</span> <span class="op">+</span> <span class="va">d1</span><span class="op">)</span> <span class="op">*</span> <span class="va">T1</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">beta_MLE</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="va">T0</span> <span class="op">+</span> <span class="va">T1</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">beta_MLE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="va">beta_d2_curr</span> <span class="op">&lt;-</span> <span class="va">temp_beta_d2</span><span class="op">$</span><span class="va">beta_d2</span></span>
+<span></span>
+<span>    <span class="co">## Update beta by Newton-Raphson method, i.e.,</span></span>
+<span>    <span class="co">## beta_k+1 = beta_k - l'(beta_k)/l''(beta_k)</span></span>
+<span>    <span class="va">beta_MLE</span> <span class="op">&lt;-</span> <span class="va">beta_MLE</span> <span class="op">-</span> <span class="va">beta_d1_curr</span> <span class="op">/</span> <span class="va">beta_d2_curr</span></span>
+<span>    <span class="co"># beta_MLE_seq &lt;- c(beta_MLE_seq, beta_MLE)</span></span>
+<span>  <span class="op">}</span></span>
+<span></span>
+<span>  <span class="va">compare_results</span><span class="op">[</span><span class="va">sim</span>, <span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">beta_MLE</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">compare_results</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Weighted Summation"</span>, <span class="st">"MLE"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/save.html">save</a></span><span class="op">(</span><span class="va">compare_results</span>, file <span class="op">=</span> <span class="st">"./data/simulation_MLE_vs_WS.Rdata"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"./data/simulation_MLE_vs_WS.Rdata"</span><span class="op">)</span></span>
+<span><span class="va">my_nsim</span> <span class="op">&lt;-</span> <span class="fl">1e+5</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">compare_results</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt;      Weighted Summation        MLE
 #&gt; [1,]         -0.4139139 -0.4158463
 #&gt; [2,]         -0.6729929 -0.6772665
@@ -1025,11 +1153,11 @@ After that, we simply load the simulation results and compare it with the asympt
 #&gt; [4,]         -0.5409583 -0.5530679
 #&gt; [5,]         -0.4247562 -0.4252013
 #&gt; [6,]         -0.7252355 -0.7411065</code></pre>
-<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span>
-  <span class="st">"The MSE between MLE and weighted summation is "</span>,
-  <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">compare_results</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="va">compare_results</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> <span class="op">/</span> <span class="va">my_nsim</span>, <span class="st">"\n"</span>
-<span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span></span>
+<span>  <span class="st">"The MSE between MLE and weighted summation is "</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">compare_results</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="va">compare_results</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> <span class="op">/</span> <span class="va">my_nsim</span>, <span class="st">"\n"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; The MSE between MLE and weighted summation is  4.464504e-05</code></pre>
 
 </div>
@@ -1072,7 +1200,7 @@ After that, we simply load the simulation results and compare it with the asympt
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Group Sequential Design Under Non-Proportional Hazards</strong>: Deming Conference Course, December 6, 2021" was written by Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao. It was last built on 2022-02-03.</p>
+    <p>"<strong>Group Sequential Design Under Non-Proportional Hazards</strong>: Deming Conference Course, December 6, 2021" was written by Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao. It was last built on 2023-07-28.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -1085,7 +1213,7 @@ After that, we simply load the simulation results and compare it with the asympt
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

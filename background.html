@@ -7,7 +7,7 @@
 <title>Chapter 1 Background | Group Sequential Design Under Non-Proportional Hazards</title>
 <meta name="author" content="Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao">
 <meta name="description" content="1.1 Non-proportional hazards Non-proportional hazards (NPH) are very common to see when there is a delayed effect. One example is given by KEYNOTE040, which targets to cure recurrent head and neck...">
-<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta name="generator" content="bookdown 0.34 with bs4_book()">
 <meta property="og:title" content="Chapter 1 Background | Group Sequential Design Under Non-Proportional Hazards">
 <meta property="og:type" content="book">
 <meta property="og:description" content="1.1 Non-proportional hazards Non-proportional hazards (NPH) are very common to see when there is a delayed effect. One example is given by KEYNOTE040, which targets to cure recurrent head and neck...">
@@ -16,8 +16,34 @@
 <meta name="twitter:description" content="1.1 Non-proportional hazards Non-proportional hazards (NPH) are very common to see when there is a delayed effect. One example is given by KEYNOTE040, which targets to cure recurrent head and neck...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="style.css">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.0/transition.js"></script><script src="libs/bs3compat-0.5.0/tabs.js"></script><script src="libs/bs3compat-0.5.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -61,11 +87,11 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="background" class="section level1">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="background" class="section level1" number="1">
 <h1>
 <span class="header-section-number">1</span> Background<a class="anchor" aria-label="anchor" href="#background"><i class="fas fa-link"></i></a>
 </h1>
-<div id="nph" class="section level2">
+<div id="nph" class="section level2" number="1.1">
 <h2>
 <span class="header-section-number">1.1</span> Non-proportional hazards<a class="anchor" aria-label="anchor" href="#nph"><i class="fas fa-link"></i></a>
 </h2>
@@ -87,7 +113,7 @@ FIGURE 1.1: KEYNOTE040
 </div>
 <p>From the figure above, we can see there is a delay of the treatment effect.</p>
 <p>The delayed effect is not just in oncology, it also lies in other TA.
-For example, in cholesterol lowering and mortality <span class="citation">(Miettinen et al <a href="references.html#ref-simva4s" role="doc-biblioref">1997</a>)</span>, there is also a delayed effect.</p>
+For example, in cholesterol lowering and mortality <span class="citation">(<a href="references.html#ref-simva4s" role="doc-biblioref">Miettinen et al 1997</a>)</span>, there is also a delayed effect.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-8"></span>
 <img src="images/ahr_slides_SSSS.jpeg" alt="Scandinavian Simvastatin Survival Study" width="80%"><p class="caption">
@@ -123,7 +149,7 @@ FIGURE 1.3: KEYNOTE061
 <li>Updating bounds</li>
 <li>Multiplicity adjustments</li>
 </ul>
-<div id="gsd" class="section level3">
+<div id="gsd" class="section level3" number="1.1.1">
 <h3>
 <span class="header-section-number">1.1.1</span> Group sequential design<a class="anchor" aria-label="anchor" href="#gsd"><i class="fas fa-link"></i></a>
 </h3>
@@ -134,7 +160,7 @@ The threshold is usually decided by the spending functions, which we introduced 
 And the test statistics are usually the Z-process and B-process, which are used to monitor the treatment effect under group sequential design.
 If a Z-process (B-process) cross the boundary, the trial is stopped.</p>
 </div>
-<div id="z-process-and-b-process" class="section level3">
+<div id="z-process-and-b-process" class="section level3" number="1.1.2">
 <h3>
 <span class="header-section-number">1.1.2</span> Z-process and B-process<a class="anchor" aria-label="anchor" href="#z-process-and-b-process"><i class="fas fa-link"></i></a>
 </h3>
@@ -186,7 +212,7 @@ For example, in a clinical trial with continuous outcome <span class="math inlin
 The same logic applies to the binary outcome.
 Another example is a clinical trial with survival outcome. In this case, the information at the <span class="math inline">\(k\)</span>-th look is <span class="math inline">\(\mathcal I_k = n_k\)</span> with <span class="math inline">\(n_k\)</span> as the number of events at the <span class="math inline">\(k\)</span>-th look.</p>
 </div>
-<div id="sec:EcfCf" class="section level3">
+<div id="sec:EcfCf" class="section level3" number="1.1.3">
 <h3>
 <span class="header-section-number">1.1.3</span> Canonical form<a class="anchor" aria-label="anchor" href="#sec:EcfCf"><i class="fas fa-link"></i></a>
 </h3>
@@ -274,7 +300,7 @@ So we have
   Cov(Z_i, Z_j)
 \end{eqnarray}\]</span></p>
 </div>
-<div id="sec:EcfEcf" class="section level3">
+<div id="sec:EcfEcf" class="section level3" number="1.1.4">
 <h3>
 <span class="header-section-number">1.1.4</span> Extended canonical form<a class="anchor" aria-label="anchor" href="#sec:EcfEcf"><i class="fas fa-link"></i></a>
 </h3>
@@ -313,7 +339,7 @@ If a statistics have the above distribution, we declare that it has the canonica
 </div>
 </div>
 </div>
-<div id="sf" class="section level2">
+<div id="sf" class="section level2" number="1.2">
 <h2>
 <span class="header-section-number">1.2</span> Spending function bounds<a class="anchor" aria-label="anchor" href="#sf"><i class="fas fa-link"></i></a>
 </h2>
@@ -325,20 +351,20 @@ We call the <span class="math inline">\(\{a_k, b_k \}_{k = 1,\ldots, K}\)</span>
 And we call <span class="math inline">\(\{b_k\}_{k=1,\ldots,K}\)</span> as the <em>efficiency boundary</em>, which are decided by the control of type I error, and <span class="math inline">\(\{a_k\}_{k=1,\ldots,K}\)</span> as the <em>futility boundary</em>, which are used to control boundary crossing probabilities.</p>
 <p>For the calculation of boundaries, there are typically two methods.
 The first one is the so-called error spending approach, which specifies boundary crossing probabilities at each analysis.
-This is most commonly done with the error spending function approach <span class="citation">(Lan and DeMets <a href="references.html#ref-LanDeMets" role="doc-biblioref">1983</a>)</span>.
+This is most commonly done with the error spending function approach <span class="citation">(<a href="references.html#ref-LanDeMets" role="doc-biblioref">Lan and DeMets 1983</a>)</span>.
 The second one is the so-called boundary family approach, which specifies how big boundary values should be relative to each other and adjust these relative values by a constant multiple to control overall error rates.
 The commonly applied boundary family include:</p>
 <ul>
-<li>Haybittle boundary <span class="citation">(Haybittle <a href="references.html#ref-haybittle1971repeated" role="doc-biblioref">1971</a>)</span>;</li>
-<li>Wang-Tsiatis boundary <span class="citation">(Wang and Tsiatis <a href="references.html#ref-wang1987approximately" role="doc-biblioref">1987</a>)</span>:
+<li>Haybittle boundary <span class="citation">(<a href="references.html#ref-haybittle1971repeated" role="doc-biblioref">Haybittle 1971</a>)</span>;</li>
+<li>Wang-Tsiatis boundary <span class="citation">(<a href="references.html#ref-wang1987approximately" role="doc-biblioref">Wang and Tsiatis 1987</a>)</span>:
 <ul>
-<li>Pocock boundary <span class="citation">(Pocock <a href="references.html#ref-pocock1977group" role="doc-biblioref">1977</a>)</span>;</li>
-<li>O’Brien and Fleming boundary <span class="citation">(O’Brien and Fleming <a href="references.html#ref-o1979multiple" role="doc-biblioref">1979</a>)</span>.</li>
+<li>Pocock boundary <span class="citation">(<a href="references.html#ref-pocock1977group" role="doc-biblioref">Pocock 1977</a>)</span>;</li>
+<li>O’Brien and Fleming boundary <span class="citation">(<a href="references.html#ref-o1979multiple" role="doc-biblioref">O’Brien and Fleming 1979</a>)</span>.</li>
 </ul>
 </li>
 </ul>
 <p>In the remainder of this section, we will introduce the above spending functions one by one.</p>
-<div id="haybittle-boundary" class="section level3">
+<div id="haybittle-boundary" class="section level3" number="1.2.1">
 <h3>
 <span class="header-section-number">1.2.1</span> Haybittle boundary<a class="anchor" aria-label="anchor" href="#haybittle-boundary"><i class="fas fa-link"></i></a>
 </h3>
@@ -358,7 +384,7 @@ Besides, it does not require them to be equally spaced in terms of information a
 <p>In summary, the Haybittle boundary uses a piecewise constant boundary, which makes it very easy to implement.
 But it is kind of conservative, and the selection of the constant boundary (e.g., 3 and 1.96) needs justifications.</p>
 </div>
-<div id="wang-tsiatis-boundary" class="section level3">
+<div id="wang-tsiatis-boundary" class="section level3" number="1.2.2">
 <h3>
 <span class="header-section-number">1.2.2</span> Wang-Tsiatis boundary<a class="anchor" aria-label="anchor" href="#wang-tsiatis-boundary"><i class="fas fa-link"></i></a>
 </h3>
@@ -371,7 +397,7 @@ where <span class="math inline">\(\Gamma(\alpha, K, \Delta)\)</span> is a consta
 When <span class="math inline">\(\Delta = 0.5\)</span>, it is the Pocock bounds.
 When <span class="math inline">\(\Delta = 0\)</span>, it is the O’Brien-Fleming bounds.</p>
 </div>
-<div id="pocock-boundary" class="section level3">
+<div id="pocock-boundary" class="section level3" number="1.2.3">
 <h3>
 <span class="header-section-number">1.2.3</span> Pocock boundary<a class="anchor" aria-label="anchor" href="#pocock-boundary"><i class="fas fa-link"></i></a>
 </h3>
@@ -387,7 +413,13 @@ FIGURE 1.5: Pocock boundary
 </p>
 </div>
 <p>Here is an example of the Pocock boundary.</p>
-<div class="inline-table"><table class="table table-sm">
+<div class="inline-table"><table style="width:100%;" class="table table-sm">
+<colgroup>
+<col width="30%">
+<col width="23%">
+<col width="23%">
+<col width="23%">
+</colgroup>
 <thead><tr class="header">
 <th align="center">total number of looks(K)</th>
 <th align="center"><span class="math inline">\(\alpha = 0.01\)</span></th>
@@ -432,7 +464,7 @@ FIGURE 1.5: Pocock boundary
 And the constant boundary <span class="math inline">\(c_P(K)\)</span> is decided by the type I error rate and the total number of looks.
 Its main weakness is the high price for the end of the trial and the requirement of equally spaced looks.</p>
 </div>
-<div id="obrien-fleming-boundary" class="section level3">
+<div id="obrien-fleming-boundary" class="section level3" number="1.2.4">
 <h3>
 <span class="header-section-number">1.2.4</span> O’Brien-Fleming boundary<a class="anchor" aria-label="anchor" href="#obrien-fleming-boundary"><i class="fas fa-link"></i></a>
 </h3>
@@ -446,7 +478,13 @@ FIGURE 1.6: OBrien-Fleming boundary
 </p>
 </div>
 <p>Here is an example of the O’Brien-Fleming boundary.</p>
-<div class="inline-table"><table class="table table-sm">
+<div class="inline-table"><table style="width:100%;" class="table table-sm">
+<colgroup>
+<col width="30%">
+<col width="23%">
+<col width="23%">
+<col width="23%">
+</colgroup>
 <thead><tr class="header">
 <th align="center">total number of looks(K)</th>
 <th align="center"><span class="math inline">\(\alpha = 0.01\)</span></th>
@@ -532,7 +570,7 @@ FIGURE 1.9: Three boundaries
 </div>
 </div>
 </div>
-<div id="statistical-information-and-time" class="section level2">
+<div id="statistical-information-and-time" class="section level2" number="1.3">
 <h2>
 <span class="header-section-number">1.3</span> Statistical information and time<a class="anchor" aria-label="anchor" href="#statistical-information-and-time"><i class="fas fa-link"></i></a>
 </h2>
@@ -588,7 +626,7 @@ Accordingly, the <em>information fraction</em> is
 \]</span></p>
 <p>Comparing survival outcome and continuous/binary outcome, we found the information (fraction) of survival outcome is decided by the number of events, while it is decided by the number of available observations under continuous/binary outcome.</p>
 <p>If there are multiple interim analysis at <span class="math inline">\(\tau_1\)</span>-th, <span class="math inline">\(\tau_2\)</span>-th, <span class="math inline">\(\ldots\)</span>, <span class="math inline">\(\tau_K\)</span>-th month, we get a sequence of information as <span class="math inline">\(I(\tau_1), I(\tau_2), \ldots, I(\tau_K)\)</span> and a sequence of information fraction <span class="math inline">\(t_1, t_2, \ldots, t_K\)</span>.
-Please note that the information sequence is sometimes simplified as <span class="math inline">\(I_1, I_2, \ldots, I_K\)</span> <span class="citation">(Jennison and Turnbull <a href="references.html#ref-JTBook" role="doc-biblioref">2000</a>)</span>.</p>
+Please note that the information sequence is sometimes simplified as <span class="math inline">\(I_1, I_2, \ldots, I_K\)</span> <span class="citation">(<a href="references.html#ref-JTBook" role="doc-biblioref">Jennison and Turnbull 2000</a>)</span>.</p>
 
 </div>
 </div>
@@ -633,7 +671,7 @@ Please note that the information sequence is sometimes simplified as <span class
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Group Sequential Design Under Non-Proportional Hazards</strong>: Deming Conference Course, December 6, 2021" was written by Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao. It was last built on 2022-02-03.</p>
+    <p>"<strong>Group Sequential Design Under Non-Proportional Hazards</strong>: Deming Conference Course, December 6, 2021" was written by Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao. It was last built on 2023-07-28.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -646,7 +684,7 @@ Please note that the information sequence is sometimes simplified as <span class
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');
