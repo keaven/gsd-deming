@@ -7,6 +7,15 @@ Below is the Github repo link to the source code
 - `gsDesign2`: <https://github.com/Merck/gsDesign2>
 - `gsdmvn`: <https://github.com/Merck/gsdmvn>
 
+::: {.rmdnote}
+Note: As of June 14, 2023, the `gsdmvn` package has been integrated into the
+`gsDesign2` package and archived on GitHub. For future projects,
+we recommend using `gsDesign2` (now available from CRAN) directly.
+Despite the fact that the code within this material has not been updated,
+it remains functional provided you install the specific development versions
+detailed in the preface.
+:::
+
 ## `simtrial`
 
 The R package `simtrial` targets on time-to-event trial simulation under the piecewise model.
