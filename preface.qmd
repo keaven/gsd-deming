@@ -55,7 +55,7 @@ All opinions expressed are those of the presenters and not Merck & Co., Inc., Ra
 
 If you choose to install R packages locally:
 
-- The **gsDesign** package (v3.2.1) is available at CRAN
+- The gsDesign package (v3.2.1) is available at CRAN
 
 ```{r, eval=FALSE}
 install.packages("gsDesign")

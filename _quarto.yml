@@ -27,6 +27,7 @@ book:
 
   site-url: https://keaven.github.io/gsd-deming/
   repo-url: https://github.com/keaven/gsd-deming
+  repo-branch: master
   repo-actions: [edit, issue, source]
   sharing: [twitter, linkedin]
   reader-mode: true
