@@ -4,7 +4,7 @@ This is the code and text behind
 [Group Sequential Design Under Non-Proportional Hazards](https://keaven.github.io/gsd-deming/).
 
 Course material presented at the
-[77th Annual Deming Conference on Applied Statistics](https://demingconference.org/programs/2021-program/)
+[77th Annual Deming Conference on Applied Statistics](https://web.archive.org/web/20220523204515/https://demingconference.org/programs/2021-program/)
 in December 2021.
 
 ## Install dependencies
