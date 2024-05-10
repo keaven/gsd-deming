@@ -306,12 +306,12 @@ window.Quarto = {
   <li><a href="#sec-SecAhrEgAhrVsPower" id="toc-sec-SecAhrEgAhrVsPower" class="nav-link" data-scroll-target="#sec-SecAhrEgAhrVsPower"><span class="header-section-number">3.3.2</span> Example 2</a></li>
   <li><a href="#sec-SecAhrEgCalcTiming" id="toc-sec-SecAhrEgCalcTiming" class="nav-link" data-scroll-target="#sec-SecAhrEgCalcTiming"><span class="header-section-number">3.3.3</span> Example 3</a></li>
   <li><a href="#sec-SecAhrEgPhNphOneSided" id="toc-sec-SecAhrEgPhNphOneSided" class="nav-link" data-scroll-target="#sec-SecAhrEgPhNphOneSided"><span class="header-section-number">3.3.4</span> Example 4</a></li>
-  <li><a href="#sec-SecAhrEgPhNphSymmetric" id="toc-sec-SecAhrEgPhNphSymmetric" class="nav-link" data-scroll-target="#sec-SecAhrEgPhNphSymmetric"><span class="header-section-number">3.3.5</span> Example 5</a></li>
-  <li><a href="#sec-SecAhrEgPhNphAsymmetric" id="toc-sec-SecAhrEgPhNphAsymmetric" class="nav-link" data-scroll-target="#sec-SecAhrEgPhNphAsymmetric"><span class="header-section-number">3.3.6</span> Example 6</a></li>
-  <li><a href="#sec-SecAhrEgPhNphSpecStop" id="toc-sec-SecAhrEgPhNphSpecStop" class="nav-link" data-scroll-target="#sec-SecAhrEgPhNphSpecStop"><span class="header-section-number">3.3.7</span> Example 7</a></li>
+  <li><a href="#sec-AhrEgPhNphSymmetric" id="toc-sec-AhrEgPhNphSymmetric" class="nav-link" data-scroll-target="#sec-AhrEgPhNphSymmetric"><span class="header-section-number">3.3.5</span> Example 5</a></li>
+  <li><a href="#sec-AhrEgPhNphAsymmetric" id="toc-sec-AhrEgPhNphAsymmetric" class="nav-link" data-scroll-target="#sec-AhrEgPhNphAsymmetric"><span class="header-section-number">3.3.6</span> Example 6</a></li>
+  <li><a href="#sec-AhrEgPhNphSpecStop" id="toc-sec-AhrEgPhNphSpecStop" class="nav-link" data-scroll-target="#sec-AhrEgPhNphSpecStop"><span class="header-section-number">3.3.7</span> Example 7</a></li>
   </ul>
 </li>
-  </ul><div class="toc-actions"><ul><li><a href="https://github.com/keaven/gsd-deming/edit/main/ahr.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/keaven/gsd-deming/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/keaven/gsd-deming/blob/main/ahr.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/keaven/gsd-deming/edit/master/ahr.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/keaven/gsd-deming/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/keaven/gsd-deming/blob/master/ahr.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
@@ -348,12 +348,14 @@ window.Quarto = {
 <p>For any <span class="math inline">\(m = 1, \ldots, M\)</span>,</p>
 <p><span class="math display">\[
   HR_m = \lambda_{1,m} / \lambda_{0,m},
-\]</span> where the subscript <span class="math inline">\(i\)</span> indexes the treatment group with <span class="math inline">\(i = 0\)</span> for control arm and <span class="math inline">\(i=1\)</span> for treatment arm. As in <span class="citation" data-cites="LachinFoulkes">Lachin and Foulkes (<a href="references.html#ref-LachinFoulkes" role="doc-biblioref">1986</a>)</span>, we will also assume an exponential dropout rate <span class="math inline">\(\eta_{i,m}\)</span> for treatment arm <span class="math inline">\(i=0,1, m=1,\ldots,M\)</span>. While not necessary, in software implementation in the <strong>gsDesign2</strong> and <strong>gsdmvn</strong> packages, we simplified to <span class="math inline">\(\eta_{0,m}=\eta_{1,m}=\eta_m, m=1,\ldots,M\)</span>.</p>
+\]</span></p>
+<p>where the subscript <span class="math inline">\(i\)</span> indexes the treatment group with <span class="math inline">\(i = 0\)</span> for control arm and <span class="math inline">\(i=1\)</span> for treatment arm. As in <span class="citation" data-cites="LachinFoulkes">Lachin and Foulkes (<a href="references.html#ref-LachinFoulkes" role="doc-biblioref">1986</a>)</span>, we will also assume an exponential dropout rate <span class="math inline">\(\eta_{i,m}\)</span> for treatment arm <span class="math inline">\(i=0,1, m=1,\ldots,M\)</span>. While not necessary, in software implementation in the gsDesign2 and gsdmvn packages, we simplified to <span class="math inline">\(\eta_{0,m}=\eta_{1,m}=\eta_m, m=1,\ldots,M\)</span>.</p>
 <p>We will denote</p>
 <p><span id="eq-AhrLambdaGamma"><span class="math display">\[
 \lambda_{i,m} = e^{\gamma_{i, m}}.
 \tag{3.1}\]</span></span></p>
-<p>By using the delta method, we get the asymptotic distribution of <span class="math inline">\(\widehat\lambda_{i,m}\)</span> as <span id="eq-AhrIndividualHazardRateDist"><span class="math display">\[
+<p>By using the delta method, we get the asymptotic distribution of <span class="math inline">\(\widehat\lambda_{i,m}\)</span> as</p>
+<p><span id="eq-AhrIndividualHazardRateDist"><span class="math display">\[
   \log(\widehat\lambda_{i,m})
   \overset{\cdot}{\sim}
   \text{Normal}
@@ -421,7 +423,8 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   \hat{w}_m
   \left(\hat\gamma_{1,m} - \hat\gamma_{0,m}\right)
 \tag{3.5}\]</span></span></p>
-<p>For the selection of weight <span class="math inline">\(\hat{w}_m,\)</span> <span class="math inline">\(m = 1, \ldots, M\)</span>, we use inverse variance weighting <span class="math display">\[
+<p>For the selection of weight <span class="math inline">\(\hat{w}_m,\)</span> <span class="math inline">\(m = 1, \ldots, M\)</span>, we use inverse variance weighting</p>
+<p><span class="math display">\[
   \hat{w}_m
   =
   \left.
@@ -463,13 +466,13 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
 <p><span class="math display">\[
 \mathcal{I} = \sum_{m = 1}^M \left( \frac{1}{E(d_{0,m})} + \frac{1}{E(d_{1,m})} \right)^{-1}.
 \]</span></p>
-<p>Not shown here is that this is the asymptotic distribution of the logrank test under the piecewise model which follows by the results of <span class="citation" data-cites="Schoenfeld1981">Schoenfeld (<a href="references.html#ref-Schoenfeld1981" role="doc-biblioref">1981</a>)</span>. The details for computing <span class="math inline">\(E(d_{i,m}),\)</span>, <span class="math inline">\(i=0,1\)</span>, <span class="math inline">\(m=1,\ldots,M\)</span> under the piecewise model are demonstrated in a vignette in the <strong>gsDesign2</strong> package. These computations form the basis for the asymptotic approximations for power and sample size implemented in the <strong>gsdmvn</strong> package using the functions <code><a href="https://merck.github.io/gsdmvn/reference/gs_power_ahr.html">gsdmvn::gs_power_ahr()</a></code> and <code><a href="https://merck.github.io/gsdmvn/reference/gs_design_ahr.html">gsdmvn::gs_design_ahr()</a></code>.</p>
+<p>Not shown here is that this is the asymptotic distribution of the logrank test under the piecewise model which follows by the results of <span class="citation" data-cites="Schoenfeld1981">Schoenfeld (<a href="references.html#ref-Schoenfeld1981" role="doc-biblioref">1981</a>)</span>. The details for computing <span class="math inline">\(E(d_{i,m}),\)</span>, <span class="math inline">\(i=0,1\)</span>, <span class="math inline">\(m=1,\ldots,M\)</span> under the piecewise model are demonstrated in a vignette in the gsDesign2 package. These computations form the basis for the asymptotic approximations for power and sample size implemented in the gsdmvn package using the functions <code><a href="https://merck.github.io/gsdmvn/reference/gs_power_ahr.html">gsdmvn::gs_power_ahr()</a></code> and <code><a href="https://merck.github.io/gsdmvn/reference/gs_design_ahr.html">gsdmvn::gs_design_ahr()</a></code>.</p>
 </section><section id="examples" class="level2" data-number="3.3"><h2 data-number="3.3" class="anchored" data-anchor-id="examples">
 <span class="header-section-number">3.3</span> Examples</h2>
 <p>In this section, we introduce 7 examples to help readers:</p>
 <ul>
 <li>Learn more about AHR by visualization.</li>
-<li>Learn the calculation of AHR by using the R package <strong>gsDesign2</strong> and <strong>gsdmvn</strong>.</li>
+<li>Learn the calculation of AHR by using the R package gsDesign2 and gsdmvn.</li>
 </ul>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/therneau/survival">survival</a></span><span class="op">)</span></span>
@@ -649,23 +652,23 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>col <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">6</span>, decimals <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="zgskyfffxv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#zgskyfffxv table {
+<div id="cnzmrmdcux" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#cnzmrmdcux table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#zgskyfffxv thead, #zgskyfffxv tbody, #zgskyfffxv tfoot, #zgskyfffxv tr, #zgskyfffxv td, #zgskyfffxv th {
+#cnzmrmdcux thead, #cnzmrmdcux tbody, #cnzmrmdcux tfoot, #cnzmrmdcux tr, #cnzmrmdcux td, #cnzmrmdcux th {
   border-style: none;
 }
 
-#zgskyfffxv p {
+#cnzmrmdcux p {
   margin: 0;
   padding: 0;
 }
 
-#zgskyfffxv .gt_table {
+#cnzmrmdcux .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -691,12 +694,12 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-left-color: #D3D3D3;
 }
 
-#zgskyfffxv .gt_caption {
+#cnzmrmdcux .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#zgskyfffxv .gt_title {
+#cnzmrmdcux .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -708,7 +711,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-width: 0;
 }
 
-#zgskyfffxv .gt_subtitle {
+#cnzmrmdcux .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -720,7 +723,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-top-width: 0;
 }
 
-#zgskyfffxv .gt_heading {
+#cnzmrmdcux .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -732,13 +735,13 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#zgskyfffxv .gt_bottom_border {
+#cnzmrmdcux .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#zgskyfffxv .gt_col_headings {
+#cnzmrmdcux .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -753,7 +756,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#zgskyfffxv .gt_col_heading {
+#cnzmrmdcux .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -773,7 +776,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   overflow-x: hidden;
 }
 
-#zgskyfffxv .gt_column_spanner_outer {
+#cnzmrmdcux .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -785,15 +788,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 4px;
 }
 
-#zgskyfffxv .gt_column_spanner_outer:first-child {
+#cnzmrmdcux .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#zgskyfffxv .gt_column_spanner_outer:last-child {
+#cnzmrmdcux .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#zgskyfffxv .gt_column_spanner {
+#cnzmrmdcux .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -805,11 +808,11 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   width: 100%;
 }
 
-#zgskyfffxv .gt_spanner_row {
+#cnzmrmdcux .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#zgskyfffxv .gt_group_heading {
+#cnzmrmdcux .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -835,7 +838,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   text-align: left;
 }
 
-#zgskyfffxv .gt_empty_group_heading {
+#cnzmrmdcux .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -850,15 +853,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   vertical-align: middle;
 }
 
-#zgskyfffxv .gt_from_md > :first-child {
+#cnzmrmdcux .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#zgskyfffxv .gt_from_md > :last-child {
+#cnzmrmdcux .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#zgskyfffxv .gt_row {
+#cnzmrmdcux .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -877,7 +880,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   overflow-x: hidden;
 }
 
-#zgskyfffxv .gt_stub {
+#cnzmrmdcux .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -890,7 +893,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#zgskyfffxv .gt_stub_row_group {
+#cnzmrmdcux .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -904,15 +907,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   vertical-align: top;
 }
 
-#zgskyfffxv .gt_row_group_first td {
+#cnzmrmdcux .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#zgskyfffxv .gt_row_group_first th {
+#cnzmrmdcux .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#zgskyfffxv .gt_summary_row {
+#cnzmrmdcux .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -922,16 +925,16 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#zgskyfffxv .gt_first_summary_row {
+#cnzmrmdcux .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#zgskyfffxv .gt_first_summary_row.thick {
+#cnzmrmdcux .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#zgskyfffxv .gt_last_summary_row {
+#cnzmrmdcux .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -941,7 +944,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#zgskyfffxv .gt_grand_summary_row {
+#cnzmrmdcux .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -951,7 +954,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#zgskyfffxv .gt_first_grand_summary_row {
+#cnzmrmdcux .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -961,7 +964,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-top-color: #D3D3D3;
 }
 
-#zgskyfffxv .gt_last_grand_summary_row_top {
+#cnzmrmdcux .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -971,11 +974,11 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#zgskyfffxv .gt_striped {
+#cnzmrmdcux .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#zgskyfffxv .gt_table_body {
+#cnzmrmdcux .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -984,7 +987,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#zgskyfffxv .gt_footnotes {
+#cnzmrmdcux .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -998,7 +1001,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#zgskyfffxv .gt_footnote {
+#cnzmrmdcux .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1007,7 +1010,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#zgskyfffxv .gt_sourcenotes {
+#cnzmrmdcux .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1021,7 +1024,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#zgskyfffxv .gt_sourcenote {
+#cnzmrmdcux .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1029,63 +1032,63 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#zgskyfffxv .gt_left {
+#cnzmrmdcux .gt_left {
   text-align: left;
 }
 
-#zgskyfffxv .gt_center {
+#cnzmrmdcux .gt_center {
   text-align: center;
 }
 
-#zgskyfffxv .gt_right {
+#cnzmrmdcux .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#zgskyfffxv .gt_font_normal {
+#cnzmrmdcux .gt_font_normal {
   font-weight: normal;
 }
 
-#zgskyfffxv .gt_font_bold {
+#cnzmrmdcux .gt_font_bold {
   font-weight: bold;
 }
 
-#zgskyfffxv .gt_font_italic {
+#cnzmrmdcux .gt_font_italic {
   font-style: italic;
 }
 
-#zgskyfffxv .gt_super {
+#cnzmrmdcux .gt_super {
   font-size: 65%;
 }
 
-#zgskyfffxv .gt_footnote_marks {
+#cnzmrmdcux .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#zgskyfffxv .gt_asterisk {
+#cnzmrmdcux .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#zgskyfffxv .gt_indent_1 {
+#cnzmrmdcux .gt_indent_1 {
   text-indent: 5px;
 }
 
-#zgskyfffxv .gt_indent_2 {
+#cnzmrmdcux .gt_indent_2 {
   text-indent: 10px;
 }
 
-#zgskyfffxv .gt_indent_3 {
+#cnzmrmdcux .gt_indent_3 {
   text-indent: 15px;
 }
 
-#zgskyfffxv .gt_indent_4 {
+#cnzmrmdcux .gt_indent_4 {
   text-indent: 20px;
 }
 
-#zgskyfffxv .gt_indent_5 {
+#cnzmrmdcux .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1139,7 +1142,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
 </div>
 </section><section id="sec-SecAhrEgPhNphOneSided" class="level3" data-number="3.3.4"><h3 data-number="3.3.4" class="anchored" data-anchor-id="sec-SecAhrEgPhNphOneSided">
 <span class="header-section-number">3.3.4</span> Example 4</h3>
-<p>In this example, we compare proportional hazard with non-proportional hazard, regarding of the sample size and crossing probability. In this example, we consider the one-sided design. We will discuss the other designs in the next few sections, including symmetric design in Section @ref(SecAhrEgPhNphSymmetric), asymmetric design in Section @ref(SecAhrEgPhNphAsymmetric) and design with interims at specified times in Section @ref(SecAhrEgPhNphSpecStop). For the calculation of proportional hazard, we use R function <code><a href="https://keaven.github.io/gsDesign/reference/nSurv.html">gsDesign::gsSurv()</a></code>. For the calculation of non-proportional hazard, we use R function <code><a href="https://merck.github.io/gsdmvn/reference/gs_design_ahr.html">gsdmvn::gs_design_ahr()</a></code>.</p>
+<p>In this example, we compare proportional hazard with non-proportional hazard, regarding of the sample size and crossing probability. In this example, we consider the one-sided design. We will discuss the other designs in the next few sections, including symmetric design in <a href="#sec-AhrEgPhNphSymmetric" class="quarto-xref"><span>Section 3.3.5</span></a>, asymmetric design in <a href="#sec-AhrEgPhNphAsymmetric" class="quarto-xref"><span>Section 3.3.6</span></a>, and design with interims at specified times in <a href="#sec-AhrEgPhNphSpecStop" class="quarto-xref"><span>Section 3.3.7</span></a>. For the calculation of proportional hazard, we use R function <code><a href="https://keaven.github.io/gsDesign/reference/nSurv.html">gsDesign::gsSurv()</a></code>. For the calculation of non-proportional hazard, we use R function <code><a href="https://merck.github.io/gsdmvn/reference/gs_design_ahr.html">gsdmvn::gs_design_ahr()</a></code>.</p>
 <p>First, we calculate the sample size and crossing probability under proportional hazard. And we find the sample size is <span class="math inline">\(444\)</span> with <span class="math inline">\(297\)</span> events. The crossing probabilities at the first, second, third and final interim analysis are <span class="math inline">\(0.0289, 0.4999, 0.7916, 0.9000\)</span> under <span class="math inline">\(H_1\)</span>.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Derive Group Sequential Design</span></span>
@@ -1179,23 +1182,23 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
 <span><span class="fu"><a href="https://keaven.github.io/gsDesign/reference/gsBoundSummary.html">gsBoundSummary</a></span><span class="op">(</span><span class="va">PH1sided</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="eapxyqgiso" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#eapxyqgiso table {
+<div id="mpuivuawxh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#mpuivuawxh table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#eapxyqgiso thead, #eapxyqgiso tbody, #eapxyqgiso tfoot, #eapxyqgiso tr, #eapxyqgiso td, #eapxyqgiso th {
+#mpuivuawxh thead, #mpuivuawxh tbody, #mpuivuawxh tfoot, #mpuivuawxh tr, #mpuivuawxh td, #mpuivuawxh th {
   border-style: none;
 }
 
-#eapxyqgiso p {
+#mpuivuawxh p {
   margin: 0;
   padding: 0;
 }
 
-#eapxyqgiso .gt_table {
+#mpuivuawxh .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1221,12 +1224,12 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-left-color: #D3D3D3;
 }
 
-#eapxyqgiso .gt_caption {
+#mpuivuawxh .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#eapxyqgiso .gt_title {
+#mpuivuawxh .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1238,7 +1241,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-width: 0;
 }
 
-#eapxyqgiso .gt_subtitle {
+#mpuivuawxh .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1250,7 +1253,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-top-width: 0;
 }
 
-#eapxyqgiso .gt_heading {
+#mpuivuawxh .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1262,13 +1265,13 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#eapxyqgiso .gt_bottom_border {
+#mpuivuawxh .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#eapxyqgiso .gt_col_headings {
+#mpuivuawxh .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1283,7 +1286,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#eapxyqgiso .gt_col_heading {
+#mpuivuawxh .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1303,7 +1306,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   overflow-x: hidden;
 }
 
-#eapxyqgiso .gt_column_spanner_outer {
+#mpuivuawxh .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1315,15 +1318,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 4px;
 }
 
-#eapxyqgiso .gt_column_spanner_outer:first-child {
+#mpuivuawxh .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#eapxyqgiso .gt_column_spanner_outer:last-child {
+#mpuivuawxh .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#eapxyqgiso .gt_column_spanner {
+#mpuivuawxh .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1335,11 +1338,11 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   width: 100%;
 }
 
-#eapxyqgiso .gt_spanner_row {
+#mpuivuawxh .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#eapxyqgiso .gt_group_heading {
+#mpuivuawxh .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1365,7 +1368,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   text-align: left;
 }
 
-#eapxyqgiso .gt_empty_group_heading {
+#mpuivuawxh .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1380,15 +1383,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   vertical-align: middle;
 }
 
-#eapxyqgiso .gt_from_md > :first-child {
+#mpuivuawxh .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#eapxyqgiso .gt_from_md > :last-child {
+#mpuivuawxh .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#eapxyqgiso .gt_row {
+#mpuivuawxh .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1407,7 +1410,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   overflow-x: hidden;
 }
 
-#eapxyqgiso .gt_stub {
+#mpuivuawxh .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1420,7 +1423,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#eapxyqgiso .gt_stub_row_group {
+#mpuivuawxh .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1434,15 +1437,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   vertical-align: top;
 }
 
-#eapxyqgiso .gt_row_group_first td {
+#mpuivuawxh .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#eapxyqgiso .gt_row_group_first th {
+#mpuivuawxh .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#eapxyqgiso .gt_summary_row {
+#mpuivuawxh .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1452,16 +1455,16 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#eapxyqgiso .gt_first_summary_row {
+#mpuivuawxh .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#eapxyqgiso .gt_first_summary_row.thick {
+#mpuivuawxh .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#eapxyqgiso .gt_last_summary_row {
+#mpuivuawxh .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1471,7 +1474,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#eapxyqgiso .gt_grand_summary_row {
+#mpuivuawxh .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1481,7 +1484,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#eapxyqgiso .gt_first_grand_summary_row {
+#mpuivuawxh .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1491,7 +1494,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-top-color: #D3D3D3;
 }
 
-#eapxyqgiso .gt_last_grand_summary_row_top {
+#mpuivuawxh .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1501,11 +1504,11 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#eapxyqgiso .gt_striped {
+#mpuivuawxh .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#eapxyqgiso .gt_table_body {
+#mpuivuawxh .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1514,7 +1517,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#eapxyqgiso .gt_footnotes {
+#mpuivuawxh .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1528,7 +1531,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#eapxyqgiso .gt_footnote {
+#mpuivuawxh .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1537,7 +1540,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#eapxyqgiso .gt_sourcenotes {
+#mpuivuawxh .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1551,7 +1554,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#eapxyqgiso .gt_sourcenote {
+#mpuivuawxh .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1559,63 +1562,63 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#eapxyqgiso .gt_left {
+#mpuivuawxh .gt_left {
   text-align: left;
 }
 
-#eapxyqgiso .gt_center {
+#mpuivuawxh .gt_center {
   text-align: center;
 }
 
-#eapxyqgiso .gt_right {
+#mpuivuawxh .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#eapxyqgiso .gt_font_normal {
+#mpuivuawxh .gt_font_normal {
   font-weight: normal;
 }
 
-#eapxyqgiso .gt_font_bold {
+#mpuivuawxh .gt_font_bold {
   font-weight: bold;
 }
 
-#eapxyqgiso .gt_font_italic {
+#mpuivuawxh .gt_font_italic {
   font-style: italic;
 }
 
-#eapxyqgiso .gt_super {
+#mpuivuawxh .gt_super {
   font-size: 65%;
 }
 
-#eapxyqgiso .gt_footnote_marks {
+#mpuivuawxh .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#eapxyqgiso .gt_asterisk {
+#mpuivuawxh .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#eapxyqgiso .gt_indent_1 {
+#mpuivuawxh .gt_indent_1 {
   text-indent: 5px;
 }
 
-#eapxyqgiso .gt_indent_2 {
+#mpuivuawxh .gt_indent_2 {
   text-indent: 10px;
 }
 
-#eapxyqgiso .gt_indent_3 {
+#mpuivuawxh .gt_indent_3 {
   text-indent: 15px;
 }
 
-#eapxyqgiso .gt_indent_4 {
+#mpuivuawxh .gt_indent_4 {
   text-indent: 20px;
 }
 
-#eapxyqgiso .gt_indent_5 {
+#mpuivuawxh .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1760,23 +1763,23 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>col <span class="op">=</span> <span class="fl">8</span><span class="op">:</span><span class="fl">9</span>, decimals <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="yocxdrblhr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#yocxdrblhr table {
+<div id="njzxbytacx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#njzxbytacx table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#yocxdrblhr thead, #yocxdrblhr tbody, #yocxdrblhr tfoot, #yocxdrblhr tr, #yocxdrblhr td, #yocxdrblhr th {
+#njzxbytacx thead, #njzxbytacx tbody, #njzxbytacx tfoot, #njzxbytacx tr, #njzxbytacx td, #njzxbytacx th {
   border-style: none;
 }
 
-#yocxdrblhr p {
+#njzxbytacx p {
   margin: 0;
   padding: 0;
 }
 
-#yocxdrblhr .gt_table {
+#njzxbytacx .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1802,12 +1805,12 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-left-color: #D3D3D3;
 }
 
-#yocxdrblhr .gt_caption {
+#njzxbytacx .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#yocxdrblhr .gt_title {
+#njzxbytacx .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1819,7 +1822,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-width: 0;
 }
 
-#yocxdrblhr .gt_subtitle {
+#njzxbytacx .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1831,7 +1834,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-top-width: 0;
 }
 
-#yocxdrblhr .gt_heading {
+#njzxbytacx .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1843,13 +1846,13 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#yocxdrblhr .gt_bottom_border {
+#njzxbytacx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#yocxdrblhr .gt_col_headings {
+#njzxbytacx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1864,7 +1867,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#yocxdrblhr .gt_col_heading {
+#njzxbytacx .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1884,7 +1887,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   overflow-x: hidden;
 }
 
-#yocxdrblhr .gt_column_spanner_outer {
+#njzxbytacx .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1896,15 +1899,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 4px;
 }
 
-#yocxdrblhr .gt_column_spanner_outer:first-child {
+#njzxbytacx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#yocxdrblhr .gt_column_spanner_outer:last-child {
+#njzxbytacx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#yocxdrblhr .gt_column_spanner {
+#njzxbytacx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1916,11 +1919,11 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   width: 100%;
 }
 
-#yocxdrblhr .gt_spanner_row {
+#njzxbytacx .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#yocxdrblhr .gt_group_heading {
+#njzxbytacx .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1946,7 +1949,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   text-align: left;
 }
 
-#yocxdrblhr .gt_empty_group_heading {
+#njzxbytacx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1961,15 +1964,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   vertical-align: middle;
 }
 
-#yocxdrblhr .gt_from_md > :first-child {
+#njzxbytacx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#yocxdrblhr .gt_from_md > :last-child {
+#njzxbytacx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#yocxdrblhr .gt_row {
+#njzxbytacx .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1988,7 +1991,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   overflow-x: hidden;
 }
 
-#yocxdrblhr .gt_stub {
+#njzxbytacx .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2001,7 +2004,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#yocxdrblhr .gt_stub_row_group {
+#njzxbytacx .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2015,15 +2018,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   vertical-align: top;
 }
 
-#yocxdrblhr .gt_row_group_first td {
+#njzxbytacx .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#yocxdrblhr .gt_row_group_first th {
+#njzxbytacx .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#yocxdrblhr .gt_summary_row {
+#njzxbytacx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2033,16 +2036,16 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#yocxdrblhr .gt_first_summary_row {
+#njzxbytacx .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#yocxdrblhr .gt_first_summary_row.thick {
+#njzxbytacx .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#yocxdrblhr .gt_last_summary_row {
+#njzxbytacx .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2052,7 +2055,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#yocxdrblhr .gt_grand_summary_row {
+#njzxbytacx .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2062,7 +2065,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#yocxdrblhr .gt_first_grand_summary_row {
+#njzxbytacx .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2072,7 +2075,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-top-color: #D3D3D3;
 }
 
-#yocxdrblhr .gt_last_grand_summary_row_top {
+#njzxbytacx .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2082,11 +2085,11 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#yocxdrblhr .gt_striped {
+#njzxbytacx .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#yocxdrblhr .gt_table_body {
+#njzxbytacx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2095,7 +2098,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#yocxdrblhr .gt_footnotes {
+#njzxbytacx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2109,7 +2112,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#yocxdrblhr .gt_footnote {
+#njzxbytacx .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2118,7 +2121,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#yocxdrblhr .gt_sourcenotes {
+#njzxbytacx .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2132,7 +2135,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#yocxdrblhr .gt_sourcenote {
+#njzxbytacx .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2140,63 +2143,63 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#yocxdrblhr .gt_left {
+#njzxbytacx .gt_left {
   text-align: left;
 }
 
-#yocxdrblhr .gt_center {
+#njzxbytacx .gt_center {
   text-align: center;
 }
 
-#yocxdrblhr .gt_right {
+#njzxbytacx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#yocxdrblhr .gt_font_normal {
+#njzxbytacx .gt_font_normal {
   font-weight: normal;
 }
 
-#yocxdrblhr .gt_font_bold {
+#njzxbytacx .gt_font_bold {
   font-weight: bold;
 }
 
-#yocxdrblhr .gt_font_italic {
+#njzxbytacx .gt_font_italic {
   font-style: italic;
 }
 
-#yocxdrblhr .gt_super {
+#njzxbytacx .gt_super {
   font-size: 65%;
 }
 
-#yocxdrblhr .gt_footnote_marks {
+#njzxbytacx .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#yocxdrblhr .gt_asterisk {
+#njzxbytacx .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#yocxdrblhr .gt_indent_1 {
+#njzxbytacx .gt_indent_1 {
   text-indent: 5px;
 }
 
-#yocxdrblhr .gt_indent_2 {
+#njzxbytacx .gt_indent_2 {
   text-indent: 10px;
 }
 
-#yocxdrblhr .gt_indent_3 {
+#njzxbytacx .gt_indent_3 {
   text-indent: 15px;
 }
 
-#yocxdrblhr .gt_indent_4 {
+#njzxbytacx .gt_indent_4 {
   text-indent: 20px;
 }
 
-#yocxdrblhr .gt_indent_5 {
+#njzxbytacx .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2277,36 +2280,38 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
 <ul>
 <li>Interim boundary crossing probability much lower than with proportional hazard bounds.</li>
 <li>Sample size larger than for proportional hazard.</li>
-</ul></section><section id="sec-SecAhrEgPhNphSymmetric" class="level3" data-number="3.3.5"><h3 data-number="3.3.5" class="anchored" data-anchor-id="sec-SecAhrEgPhNphSymmetric">
+</ul></section><section id="sec-AhrEgPhNphSymmetric" class="level3" data-number="3.3.5"><h3 data-number="3.3.5" class="anchored" data-anchor-id="sec-AhrEgPhNphSymmetric">
 <span class="header-section-number">3.3.5</span> Example 5</h3>
-<p>In this example, we compare proportional hazard with non-proportional hazard. Here, we consider the symmetric design: <span class="math display">\[
+<p>In this example, we compare proportional hazard with non-proportional hazard. Here, we consider the symmetric design:</p>
+<p><span class="math display">\[
   \begin{align}
   f(s_k,\alpha)-f(s_{k-1},\alpha)
   =&amp; P_0(\{Z_{k}\geq b_{k}(\alpha)\}\cap_{j=1}^{k-1}\{-b_{j}(\alpha)&lt; Z_{j}&lt; b_{j}(\alpha)\}\\
   =&amp; P_0(\{Z_{k}\le -b_{k}(\alpha)\}\cap_{j=1}^{k-1}\{-b_{j}(\alpha)&lt; Z_{j}&lt; b_{j}(\alpha)\}
   \end{align}.
-\]</span> The common practice is to use binding upper and lower bounds. In this example, we use two one-sided tests for <span class="math inline">\(\alpha-\)</span>spending.</p>
+\]</span></p>
+<p>The common practice is to use binding upper and lower bounds. In this example, we use two one-sided tests for <span class="math inline">\(\alpha-\)</span>spending.</p>
 <p>First, we calculate the sample size and crossing probability under proportional hazard by <code><a href="https://keaven.github.io/gsDesign/reference/nSurv.html">gsDesign::gsSurv()</a></code>. And we find the sample size is <span class="math inline">\(444\)</span> with <span class="math inline">\(297\)</span> events. The probabilities to cross the upper boundary at the first, second, third and final interim analysis are <span class="math inline">\(0.0289, 0.4999, 0.7916, 0.9000\)</span> under <span class="math inline">\(H_1\)</span>. The probabilities to cross the lower boundary at the first, second, third and final interim analysis are <span class="math inline">\(0.0001, 0.0047, 0.0146, 0.0250\)</span> under <span class="math inline">\(H_0\)</span>.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div>
-<div id="jxovqhfhxq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#jxovqhfhxq table {
+<div id="gpfjuwtotc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#gpfjuwtotc table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#jxovqhfhxq thead, #jxovqhfhxq tbody, #jxovqhfhxq tfoot, #jxovqhfhxq tr, #jxovqhfhxq td, #jxovqhfhxq th {
+#gpfjuwtotc thead, #gpfjuwtotc tbody, #gpfjuwtotc tfoot, #gpfjuwtotc tr, #gpfjuwtotc td, #gpfjuwtotc th {
   border-style: none;
 }
 
-#jxovqhfhxq p {
+#gpfjuwtotc p {
   margin: 0;
   padding: 0;
 }
 
-#jxovqhfhxq .gt_table {
+#gpfjuwtotc .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2332,12 +2337,12 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-left-color: #D3D3D3;
 }
 
-#jxovqhfhxq .gt_caption {
+#gpfjuwtotc .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#jxovqhfhxq .gt_title {
+#gpfjuwtotc .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2349,7 +2354,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-width: 0;
 }
 
-#jxovqhfhxq .gt_subtitle {
+#gpfjuwtotc .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2361,7 +2366,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-top-width: 0;
 }
 
-#jxovqhfhxq .gt_heading {
+#gpfjuwtotc .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2373,13 +2378,13 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#jxovqhfhxq .gt_bottom_border {
+#gpfjuwtotc .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#jxovqhfhxq .gt_col_headings {
+#gpfjuwtotc .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2394,7 +2399,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#jxovqhfhxq .gt_col_heading {
+#gpfjuwtotc .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2414,7 +2419,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   overflow-x: hidden;
 }
 
-#jxovqhfhxq .gt_column_spanner_outer {
+#gpfjuwtotc .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2426,15 +2431,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 4px;
 }
 
-#jxovqhfhxq .gt_column_spanner_outer:first-child {
+#gpfjuwtotc .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#jxovqhfhxq .gt_column_spanner_outer:last-child {
+#gpfjuwtotc .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#jxovqhfhxq .gt_column_spanner {
+#gpfjuwtotc .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2446,11 +2451,11 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   width: 100%;
 }
 
-#jxovqhfhxq .gt_spanner_row {
+#gpfjuwtotc .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#jxovqhfhxq .gt_group_heading {
+#gpfjuwtotc .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2476,7 +2481,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   text-align: left;
 }
 
-#jxovqhfhxq .gt_empty_group_heading {
+#gpfjuwtotc .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2491,15 +2496,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   vertical-align: middle;
 }
 
-#jxovqhfhxq .gt_from_md > :first-child {
+#gpfjuwtotc .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#jxovqhfhxq .gt_from_md > :last-child {
+#gpfjuwtotc .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#jxovqhfhxq .gt_row {
+#gpfjuwtotc .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2518,7 +2523,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   overflow-x: hidden;
 }
 
-#jxovqhfhxq .gt_stub {
+#gpfjuwtotc .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2531,7 +2536,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#jxovqhfhxq .gt_stub_row_group {
+#gpfjuwtotc .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2545,15 +2550,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   vertical-align: top;
 }
 
-#jxovqhfhxq .gt_row_group_first td {
+#gpfjuwtotc .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#jxovqhfhxq .gt_row_group_first th {
+#gpfjuwtotc .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#jxovqhfhxq .gt_summary_row {
+#gpfjuwtotc .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2563,16 +2568,16 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#jxovqhfhxq .gt_first_summary_row {
+#gpfjuwtotc .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#jxovqhfhxq .gt_first_summary_row.thick {
+#gpfjuwtotc .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#jxovqhfhxq .gt_last_summary_row {
+#gpfjuwtotc .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2582,7 +2587,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#jxovqhfhxq .gt_grand_summary_row {
+#gpfjuwtotc .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2592,7 +2597,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#jxovqhfhxq .gt_first_grand_summary_row {
+#gpfjuwtotc .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2602,7 +2607,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-top-color: #D3D3D3;
 }
 
-#jxovqhfhxq .gt_last_grand_summary_row_top {
+#gpfjuwtotc .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2612,11 +2617,11 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#jxovqhfhxq .gt_striped {
+#gpfjuwtotc .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#jxovqhfhxq .gt_table_body {
+#gpfjuwtotc .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2625,7 +2630,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#jxovqhfhxq .gt_footnotes {
+#gpfjuwtotc .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2639,7 +2644,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#jxovqhfhxq .gt_footnote {
+#gpfjuwtotc .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2648,7 +2653,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#jxovqhfhxq .gt_sourcenotes {
+#gpfjuwtotc .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2662,7 +2667,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#jxovqhfhxq .gt_sourcenote {
+#gpfjuwtotc .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2670,63 +2675,63 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#jxovqhfhxq .gt_left {
+#gpfjuwtotc .gt_left {
   text-align: left;
 }
 
-#jxovqhfhxq .gt_center {
+#gpfjuwtotc .gt_center {
   text-align: center;
 }
 
-#jxovqhfhxq .gt_right {
+#gpfjuwtotc .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#jxovqhfhxq .gt_font_normal {
+#gpfjuwtotc .gt_font_normal {
   font-weight: normal;
 }
 
-#jxovqhfhxq .gt_font_bold {
+#gpfjuwtotc .gt_font_bold {
   font-weight: bold;
 }
 
-#jxovqhfhxq .gt_font_italic {
+#gpfjuwtotc .gt_font_italic {
   font-style: italic;
 }
 
-#jxovqhfhxq .gt_super {
+#gpfjuwtotc .gt_super {
   font-size: 65%;
 }
 
-#jxovqhfhxq .gt_footnote_marks {
+#gpfjuwtotc .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#jxovqhfhxq .gt_asterisk {
+#gpfjuwtotc .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#jxovqhfhxq .gt_indent_1 {
+#gpfjuwtotc .gt_indent_1 {
   text-indent: 5px;
 }
 
-#jxovqhfhxq .gt_indent_2 {
+#gpfjuwtotc .gt_indent_2 {
   text-indent: 10px;
 }
 
-#jxovqhfhxq .gt_indent_3 {
+#gpfjuwtotc .gt_indent_3 {
   text-indent: 15px;
 }
 
-#jxovqhfhxq .gt_indent_4 {
+#gpfjuwtotc .gt_indent_4 {
   text-indent: 20px;
 }
 
-#jxovqhfhxq .gt_indent_5 {
+#gpfjuwtotc .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2889,23 +2894,23 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>col <span class="op">=</span> <span class="fl">8</span><span class="op">:</span><span class="fl">9</span>, decimals <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="dvfmjbnyfp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#dvfmjbnyfp table {
+<div id="hcstblauls" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hcstblauls table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#dvfmjbnyfp thead, #dvfmjbnyfp tbody, #dvfmjbnyfp tfoot, #dvfmjbnyfp tr, #dvfmjbnyfp td, #dvfmjbnyfp th {
+#hcstblauls thead, #hcstblauls tbody, #hcstblauls tfoot, #hcstblauls tr, #hcstblauls td, #hcstblauls th {
   border-style: none;
 }
 
-#dvfmjbnyfp p {
+#hcstblauls p {
   margin: 0;
   padding: 0;
 }
 
-#dvfmjbnyfp .gt_table {
+#hcstblauls .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2931,12 +2936,12 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-left-color: #D3D3D3;
 }
 
-#dvfmjbnyfp .gt_caption {
+#hcstblauls .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#dvfmjbnyfp .gt_title {
+#hcstblauls .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2948,7 +2953,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-width: 0;
 }
 
-#dvfmjbnyfp .gt_subtitle {
+#hcstblauls .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2960,7 +2965,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-top-width: 0;
 }
 
-#dvfmjbnyfp .gt_heading {
+#hcstblauls .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2972,13 +2977,13 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#dvfmjbnyfp .gt_bottom_border {
+#hcstblauls .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#dvfmjbnyfp .gt_col_headings {
+#hcstblauls .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2993,7 +2998,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#dvfmjbnyfp .gt_col_heading {
+#hcstblauls .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3013,7 +3018,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   overflow-x: hidden;
 }
 
-#dvfmjbnyfp .gt_column_spanner_outer {
+#hcstblauls .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3025,15 +3030,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 4px;
 }
 
-#dvfmjbnyfp .gt_column_spanner_outer:first-child {
+#hcstblauls .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#dvfmjbnyfp .gt_column_spanner_outer:last-child {
+#hcstblauls .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#dvfmjbnyfp .gt_column_spanner {
+#hcstblauls .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3045,11 +3050,11 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   width: 100%;
 }
 
-#dvfmjbnyfp .gt_spanner_row {
+#hcstblauls .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#dvfmjbnyfp .gt_group_heading {
+#hcstblauls .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3075,7 +3080,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   text-align: left;
 }
 
-#dvfmjbnyfp .gt_empty_group_heading {
+#hcstblauls .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3090,15 +3095,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   vertical-align: middle;
 }
 
-#dvfmjbnyfp .gt_from_md > :first-child {
+#hcstblauls .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#dvfmjbnyfp .gt_from_md > :last-child {
+#hcstblauls .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#dvfmjbnyfp .gt_row {
+#hcstblauls .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3117,7 +3122,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   overflow-x: hidden;
 }
 
-#dvfmjbnyfp .gt_stub {
+#hcstblauls .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3130,7 +3135,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#dvfmjbnyfp .gt_stub_row_group {
+#hcstblauls .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3144,15 +3149,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   vertical-align: top;
 }
 
-#dvfmjbnyfp .gt_row_group_first td {
+#hcstblauls .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#dvfmjbnyfp .gt_row_group_first th {
+#hcstblauls .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#dvfmjbnyfp .gt_summary_row {
+#hcstblauls .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3162,16 +3167,16 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#dvfmjbnyfp .gt_first_summary_row {
+#hcstblauls .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#dvfmjbnyfp .gt_first_summary_row.thick {
+#hcstblauls .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#dvfmjbnyfp .gt_last_summary_row {
+#hcstblauls .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3181,7 +3186,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#dvfmjbnyfp .gt_grand_summary_row {
+#hcstblauls .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3191,7 +3196,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#dvfmjbnyfp .gt_first_grand_summary_row {
+#hcstblauls .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3201,7 +3206,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-top-color: #D3D3D3;
 }
 
-#dvfmjbnyfp .gt_last_grand_summary_row_top {
+#hcstblauls .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3211,11 +3216,11 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#dvfmjbnyfp .gt_striped {
+#hcstblauls .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#dvfmjbnyfp .gt_table_body {
+#hcstblauls .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3224,7 +3229,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#dvfmjbnyfp .gt_footnotes {
+#hcstblauls .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3238,7 +3243,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#dvfmjbnyfp .gt_footnote {
+#hcstblauls .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3247,7 +3252,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#dvfmjbnyfp .gt_sourcenotes {
+#hcstblauls .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3261,7 +3266,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#dvfmjbnyfp .gt_sourcenote {
+#hcstblauls .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3269,63 +3274,63 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#dvfmjbnyfp .gt_left {
+#hcstblauls .gt_left {
   text-align: left;
 }
 
-#dvfmjbnyfp .gt_center {
+#hcstblauls .gt_center {
   text-align: center;
 }
 
-#dvfmjbnyfp .gt_right {
+#hcstblauls .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#dvfmjbnyfp .gt_font_normal {
+#hcstblauls .gt_font_normal {
   font-weight: normal;
 }
 
-#dvfmjbnyfp .gt_font_bold {
+#hcstblauls .gt_font_bold {
   font-weight: bold;
 }
 
-#dvfmjbnyfp .gt_font_italic {
+#hcstblauls .gt_font_italic {
   font-style: italic;
 }
 
-#dvfmjbnyfp .gt_super {
+#hcstblauls .gt_super {
   font-size: 65%;
 }
 
-#dvfmjbnyfp .gt_footnote_marks {
+#hcstblauls .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#dvfmjbnyfp .gt_asterisk {
+#hcstblauls .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#dvfmjbnyfp .gt_indent_1 {
+#hcstblauls .gt_indent_1 {
   text-indent: 5px;
 }
 
-#dvfmjbnyfp .gt_indent_2 {
+#hcstblauls .gt_indent_2 {
   text-indent: 10px;
 }
 
-#dvfmjbnyfp .gt_indent_3 {
+#hcstblauls .gt_indent_3 {
   text-indent: 15px;
 }
 
-#dvfmjbnyfp .gt_indent_4 {
+#hcstblauls .gt_indent_4 {
   text-indent: 20px;
 }
 
-#dvfmjbnyfp .gt_indent_5 {
+#hcstblauls .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -3454,16 +3459,18 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
 </div>
 </div>
 </div>
-</section><section id="sec-SecAhrEgPhNphAsymmetric" class="level3" data-number="3.3.6"><h3 data-number="3.3.6" class="anchored" data-anchor-id="sec-SecAhrEgPhNphAsymmetric">
+</section><section id="sec-AhrEgPhNphAsymmetric" class="level3" data-number="3.3.6"><h3 data-number="3.3.6" class="anchored" data-anchor-id="sec-AhrEgPhNphAsymmetric">
 <span class="header-section-number">3.3.6</span> Example 6</h3>
-<p>In this example, we compare proportional hazard with non-proportional hazard. Here, we consider the asymmetric design. For upper boundary, we use non-binding upper bound with spending function <span class="math inline">\(f_1(s,\alpha)\)</span>. For lower boundary, we use binding lower bound with spending function <span class="math inline">\(f_2(s,\gamma)\)</span> for some chosen <span class="math inline">\(0 &lt; \gamma \le 1-\alpha\)</span>, where <span class="math inline">\(\gamma\)</span> is the type II error. The boundaries are set to satisfy <span class="math display">\[
+<p>In this example, we compare proportional hazard with non-proportional hazard. Here, we consider the asymmetric design. For upper boundary, we use non-binding upper bound with spending function <span class="math inline">\(f_1(s,\alpha)\)</span>. For lower boundary, we use binding lower bound with spending function <span class="math inline">\(f_2(s,\gamma)\)</span> for some chosen <span class="math inline">\(0 &lt; \gamma \le 1-\alpha\)</span>, where <span class="math inline">\(\gamma\)</span> is the type II error. The boundaries are set to satisfy</p>
+<p><span class="math display">\[
   \begin{align}
   f_1(s_k,\alpha)-f_1(s_{k-1},\alpha)
   &amp; = Pr(\{Z_{k}\geq b_{k}(\alpha)\}\cap_{j=1}^{k-1}\{Z_{j}&lt; b_{j}(\alpha) \;|\; H_0\} )\\
   f_2(s_k,\gamma)-f_2(s_{k-1},\gamma)
   &amp; = Pr(\{Z_{k}&lt; a_{k}(\gamma)\}\cap_{j=1}^{k-1}\{a_{j}(\gamma)\le Z_{j}&lt; b_{j}(\alpha)  \;|\; H_1\})
   \end{align}
-\]</span> For the last look, <span class="math inline">\(K\)</span>-th look, generally, it is set as <span class="math inline">\(a_K = b_K\)</span>.</p>
+\]</span></p>
+<p>For the last look, <span class="math inline">\(K\)</span>-th look, generally, it is set as <span class="math inline">\(a_K = b_K\)</span>.</p>
 <p>First, we calculate the sample size and crossing probability under proportional hazard by <code><a href="https://keaven.github.io/gsDesign/reference/nSurv.html">gsDesign::gsSurv()</a></code>. And we find the sample size is <span class="math inline">\(476\)</span> with <span class="math inline">\(319\)</span> events. The probabilities to cross the upper boundary at the first, second, third and final interim analysis are <span class="math inline">\(0.0338, 0.5385, 0.8185, 0.9000\)</span> under <span class="math inline">\(H_1\)</span>. The probabilities to cross the lower boundary at the first, second, third and final interim analysis are <span class="math inline">\(0.0143, 0.0393, 0.0687, 0.1000\)</span> under <span class="math inline">\(H_1\)</span>.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Derive Group Sequential Design</span></span>
@@ -3508,23 +3515,23 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
 <span><span class="fu"><a href="https://keaven.github.io/gsDesign/reference/gsBoundSummary.html">gsBoundSummary</a></span><span class="op">(</span><span class="va">PHasymmetric</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="frkaezqoaw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#frkaezqoaw table {
+<div id="brkrlawijs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#brkrlawijs table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#frkaezqoaw thead, #frkaezqoaw tbody, #frkaezqoaw tfoot, #frkaezqoaw tr, #frkaezqoaw td, #frkaezqoaw th {
+#brkrlawijs thead, #brkrlawijs tbody, #brkrlawijs tfoot, #brkrlawijs tr, #brkrlawijs td, #brkrlawijs th {
   border-style: none;
 }
 
-#frkaezqoaw p {
+#brkrlawijs p {
   margin: 0;
   padding: 0;
 }
 
-#frkaezqoaw .gt_table {
+#brkrlawijs .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3550,12 +3557,12 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-left-color: #D3D3D3;
 }
 
-#frkaezqoaw .gt_caption {
+#brkrlawijs .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#frkaezqoaw .gt_title {
+#brkrlawijs .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3567,7 +3574,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-width: 0;
 }
 
-#frkaezqoaw .gt_subtitle {
+#brkrlawijs .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3579,7 +3586,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-top-width: 0;
 }
 
-#frkaezqoaw .gt_heading {
+#brkrlawijs .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3591,13 +3598,13 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#frkaezqoaw .gt_bottom_border {
+#brkrlawijs .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#frkaezqoaw .gt_col_headings {
+#brkrlawijs .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3612,7 +3619,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#frkaezqoaw .gt_col_heading {
+#brkrlawijs .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3632,7 +3639,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   overflow-x: hidden;
 }
 
-#frkaezqoaw .gt_column_spanner_outer {
+#brkrlawijs .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3644,15 +3651,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 4px;
 }
 
-#frkaezqoaw .gt_column_spanner_outer:first-child {
+#brkrlawijs .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#frkaezqoaw .gt_column_spanner_outer:last-child {
+#brkrlawijs .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#frkaezqoaw .gt_column_spanner {
+#brkrlawijs .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3664,11 +3671,11 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   width: 100%;
 }
 
-#frkaezqoaw .gt_spanner_row {
+#brkrlawijs .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#frkaezqoaw .gt_group_heading {
+#brkrlawijs .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3694,7 +3701,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   text-align: left;
 }
 
-#frkaezqoaw .gt_empty_group_heading {
+#brkrlawijs .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3709,15 +3716,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   vertical-align: middle;
 }
 
-#frkaezqoaw .gt_from_md > :first-child {
+#brkrlawijs .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#frkaezqoaw .gt_from_md > :last-child {
+#brkrlawijs .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#frkaezqoaw .gt_row {
+#brkrlawijs .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3736,7 +3743,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   overflow-x: hidden;
 }
 
-#frkaezqoaw .gt_stub {
+#brkrlawijs .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3749,7 +3756,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#frkaezqoaw .gt_stub_row_group {
+#brkrlawijs .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3763,15 +3770,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   vertical-align: top;
 }
 
-#frkaezqoaw .gt_row_group_first td {
+#brkrlawijs .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#frkaezqoaw .gt_row_group_first th {
+#brkrlawijs .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#frkaezqoaw .gt_summary_row {
+#brkrlawijs .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3781,16 +3788,16 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#frkaezqoaw .gt_first_summary_row {
+#brkrlawijs .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#frkaezqoaw .gt_first_summary_row.thick {
+#brkrlawijs .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#frkaezqoaw .gt_last_summary_row {
+#brkrlawijs .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3800,7 +3807,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#frkaezqoaw .gt_grand_summary_row {
+#brkrlawijs .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3810,7 +3817,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#frkaezqoaw .gt_first_grand_summary_row {
+#brkrlawijs .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3820,7 +3827,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-top-color: #D3D3D3;
 }
 
-#frkaezqoaw .gt_last_grand_summary_row_top {
+#brkrlawijs .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3830,11 +3837,11 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#frkaezqoaw .gt_striped {
+#brkrlawijs .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#frkaezqoaw .gt_table_body {
+#brkrlawijs .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3843,7 +3850,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#frkaezqoaw .gt_footnotes {
+#brkrlawijs .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3857,7 +3864,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#frkaezqoaw .gt_footnote {
+#brkrlawijs .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3866,7 +3873,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#frkaezqoaw .gt_sourcenotes {
+#brkrlawijs .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3880,7 +3887,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#frkaezqoaw .gt_sourcenote {
+#brkrlawijs .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3888,63 +3895,63 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#frkaezqoaw .gt_left {
+#brkrlawijs .gt_left {
   text-align: left;
 }
 
-#frkaezqoaw .gt_center {
+#brkrlawijs .gt_center {
   text-align: center;
 }
 
-#frkaezqoaw .gt_right {
+#brkrlawijs .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#frkaezqoaw .gt_font_normal {
+#brkrlawijs .gt_font_normal {
   font-weight: normal;
 }
 
-#frkaezqoaw .gt_font_bold {
+#brkrlawijs .gt_font_bold {
   font-weight: bold;
 }
 
-#frkaezqoaw .gt_font_italic {
+#brkrlawijs .gt_font_italic {
   font-style: italic;
 }
 
-#frkaezqoaw .gt_super {
+#brkrlawijs .gt_super {
   font-size: 65%;
 }
 
-#frkaezqoaw .gt_footnote_marks {
+#brkrlawijs .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#frkaezqoaw .gt_asterisk {
+#brkrlawijs .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#frkaezqoaw .gt_indent_1 {
+#brkrlawijs .gt_indent_1 {
   text-indent: 5px;
 }
 
-#frkaezqoaw .gt_indent_2 {
+#brkrlawijs .gt_indent_2 {
   text-indent: 10px;
 }
 
-#frkaezqoaw .gt_indent_3 {
+#brkrlawijs .gt_indent_3 {
   text-indent: 15px;
 }
 
-#frkaezqoaw .gt_indent_4 {
+#brkrlawijs .gt_indent_4 {
   text-indent: 20px;
 }
 
-#frkaezqoaw .gt_indent_5 {
+#brkrlawijs .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -4106,23 +4113,23 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>col <span class="op">=</span> <span class="fl">8</span><span class="op">:</span><span class="fl">9</span>, decimals <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="mtyhdbvjcm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#mtyhdbvjcm table {
+<div id="bluyxoadwl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#bluyxoadwl table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#mtyhdbvjcm thead, #mtyhdbvjcm tbody, #mtyhdbvjcm tfoot, #mtyhdbvjcm tr, #mtyhdbvjcm td, #mtyhdbvjcm th {
+#bluyxoadwl thead, #bluyxoadwl tbody, #bluyxoadwl tfoot, #bluyxoadwl tr, #bluyxoadwl td, #bluyxoadwl th {
   border-style: none;
 }
 
-#mtyhdbvjcm p {
+#bluyxoadwl p {
   margin: 0;
   padding: 0;
 }
 
-#mtyhdbvjcm .gt_table {
+#bluyxoadwl .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -4148,12 +4155,12 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-left-color: #D3D3D3;
 }
 
-#mtyhdbvjcm .gt_caption {
+#bluyxoadwl .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#mtyhdbvjcm .gt_title {
+#bluyxoadwl .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -4165,7 +4172,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-width: 0;
 }
 
-#mtyhdbvjcm .gt_subtitle {
+#bluyxoadwl .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4177,7 +4184,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-top-width: 0;
 }
 
-#mtyhdbvjcm .gt_heading {
+#bluyxoadwl .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -4189,13 +4196,13 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#mtyhdbvjcm .gt_bottom_border {
+#bluyxoadwl .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#mtyhdbvjcm .gt_col_headings {
+#bluyxoadwl .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4210,7 +4217,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#mtyhdbvjcm .gt_col_heading {
+#bluyxoadwl .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4230,7 +4237,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   overflow-x: hidden;
 }
 
-#mtyhdbvjcm .gt_column_spanner_outer {
+#bluyxoadwl .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4242,15 +4249,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 4px;
 }
 
-#mtyhdbvjcm .gt_column_spanner_outer:first-child {
+#bluyxoadwl .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#mtyhdbvjcm .gt_column_spanner_outer:last-child {
+#bluyxoadwl .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#mtyhdbvjcm .gt_column_spanner {
+#bluyxoadwl .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -4262,11 +4269,11 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   width: 100%;
 }
 
-#mtyhdbvjcm .gt_spanner_row {
+#bluyxoadwl .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#mtyhdbvjcm .gt_group_heading {
+#bluyxoadwl .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4292,7 +4299,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   text-align: left;
 }
 
-#mtyhdbvjcm .gt_empty_group_heading {
+#bluyxoadwl .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4307,15 +4314,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   vertical-align: middle;
 }
 
-#mtyhdbvjcm .gt_from_md > :first-child {
+#bluyxoadwl .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#mtyhdbvjcm .gt_from_md > :last-child {
+#bluyxoadwl .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#mtyhdbvjcm .gt_row {
+#bluyxoadwl .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4334,7 +4341,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   overflow-x: hidden;
 }
 
-#mtyhdbvjcm .gt_stub {
+#bluyxoadwl .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4347,7 +4354,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#mtyhdbvjcm .gt_stub_row_group {
+#bluyxoadwl .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4361,15 +4368,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   vertical-align: top;
 }
 
-#mtyhdbvjcm .gt_row_group_first td {
+#bluyxoadwl .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#mtyhdbvjcm .gt_row_group_first th {
+#bluyxoadwl .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#mtyhdbvjcm .gt_summary_row {
+#bluyxoadwl .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4379,16 +4386,16 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#mtyhdbvjcm .gt_first_summary_row {
+#bluyxoadwl .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#mtyhdbvjcm .gt_first_summary_row.thick {
+#bluyxoadwl .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#mtyhdbvjcm .gt_last_summary_row {
+#bluyxoadwl .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4398,7 +4405,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#mtyhdbvjcm .gt_grand_summary_row {
+#bluyxoadwl .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4408,7 +4415,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#mtyhdbvjcm .gt_first_grand_summary_row {
+#bluyxoadwl .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4418,7 +4425,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-top-color: #D3D3D3;
 }
 
-#mtyhdbvjcm .gt_last_grand_summary_row_top {
+#bluyxoadwl .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4428,11 +4435,11 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#mtyhdbvjcm .gt_striped {
+#bluyxoadwl .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#mtyhdbvjcm .gt_table_body {
+#bluyxoadwl .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4441,7 +4448,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#mtyhdbvjcm .gt_footnotes {
+#bluyxoadwl .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4455,7 +4462,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#mtyhdbvjcm .gt_footnote {
+#bluyxoadwl .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -4464,7 +4471,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#mtyhdbvjcm .gt_sourcenotes {
+#bluyxoadwl .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4478,7 +4485,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#mtyhdbvjcm .gt_sourcenote {
+#bluyxoadwl .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4486,63 +4493,63 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#mtyhdbvjcm .gt_left {
+#bluyxoadwl .gt_left {
   text-align: left;
 }
 
-#mtyhdbvjcm .gt_center {
+#bluyxoadwl .gt_center {
   text-align: center;
 }
 
-#mtyhdbvjcm .gt_right {
+#bluyxoadwl .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#mtyhdbvjcm .gt_font_normal {
+#bluyxoadwl .gt_font_normal {
   font-weight: normal;
 }
 
-#mtyhdbvjcm .gt_font_bold {
+#bluyxoadwl .gt_font_bold {
   font-weight: bold;
 }
 
-#mtyhdbvjcm .gt_font_italic {
+#bluyxoadwl .gt_font_italic {
   font-style: italic;
 }
 
-#mtyhdbvjcm .gt_super {
+#bluyxoadwl .gt_super {
   font-size: 65%;
 }
 
-#mtyhdbvjcm .gt_footnote_marks {
+#bluyxoadwl .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#mtyhdbvjcm .gt_asterisk {
+#bluyxoadwl .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#mtyhdbvjcm .gt_indent_1 {
+#bluyxoadwl .gt_indent_1 {
   text-indent: 5px;
 }
 
-#mtyhdbvjcm .gt_indent_2 {
+#bluyxoadwl .gt_indent_2 {
   text-indent: 10px;
 }
 
-#mtyhdbvjcm .gt_indent_3 {
+#bluyxoadwl .gt_indent_3 {
   text-indent: 15px;
 }
 
-#mtyhdbvjcm .gt_indent_4 {
+#bluyxoadwl .gt_indent_4 {
   text-indent: 20px;
 }
 
-#mtyhdbvjcm .gt_indent_5 {
+#bluyxoadwl .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -4672,9 +4679,9 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
 </div>
 </div>
 <p>This does important adjustment to futility bounds based on possibly delayed effect! - Note IA 1 futility bound under PH with <code><a href="https://keaven.github.io/gsDesign/reference/gsDesign.html">gsDesign()</a></code>: <span class="math inline">\(Z=-0.25\)</span></p>
-</section><section id="sec-SecAhrEgPhNphSpecStop" class="level3" data-number="3.3.7"><h3 data-number="3.3.7" class="anchored" data-anchor-id="sec-SecAhrEgPhNphSpecStop">
+</section><section id="sec-AhrEgPhNphSpecStop" class="level3" data-number="3.3.7"><h3 data-number="3.3.7" class="anchored" data-anchor-id="sec-AhrEgPhNphSpecStop">
 <span class="header-section-number">3.3.7</span> Example 7</h3>
-<p>In this example, we discuss the design with interims at specified times, say, there are futility boundary only at the first interim analysis (look for <span class="math inline">\(p=0.05\)</span> in the wrong direction) and there are efficacy boundaries only after the first interim. This is a variation on asymmetric design. It should be noted that it is not easily done with <code><a href="https://keaven.github.io/gsDesign/reference/nSurv.html">gsDesign::gsSurv()</a></code>, and cannot be done (at least not easily) with <strong>gsDesign</strong> package. So, we only discuss the implementation of <code><a href="https://merck.github.io/gsdmvn/reference/gs_design_ahr.html">gsdmvn::gs_design_ahr()</a></code> for design with interims at specified times. We will use information fraction instead of calendar times of analysis.</p>
+<p>In this example, we discuss the design with interims at specified times, say, there are futility boundary only at the first interim analysis (look for <span class="math inline">\(p=0.05\)</span> in the wrong direction) and there are efficacy boundaries only after the first interim. This is a variation on asymmetric design. It should be noted that it is not easily done with <code><a href="https://keaven.github.io/gsDesign/reference/nSurv.html">gsDesign::gsSurv()</a></code>, and cannot be done (at least not easily) with the gsDesign package. So, we only discuss the implementation of <code><a href="https://merck.github.io/gsdmvn/reference/gs_design_ahr.html">gsdmvn::gs_design_ahr()</a></code> for design with interims at specified times. We will use information fraction instead of calendar times of analysis.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">NPHskip</span> <span class="op">&lt;-</span> <span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_design_ahr.html">gs_design_ahr</a></span><span class="op">(</span></span>
 <span>  enrollRates <span class="op">=</span> <span class="va">enrollRates</span>,</span>
@@ -4702,23 +4709,23 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fl">8</span><span class="op">:</span><span class="fl">9</span>, decimals <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="heuxxziddz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#heuxxziddz table {
+<div id="pevchwnukc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#pevchwnukc table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#heuxxziddz thead, #heuxxziddz tbody, #heuxxziddz tfoot, #heuxxziddz tr, #heuxxziddz td, #heuxxziddz th {
+#pevchwnukc thead, #pevchwnukc tbody, #pevchwnukc tfoot, #pevchwnukc tr, #pevchwnukc td, #pevchwnukc th {
   border-style: none;
 }
 
-#heuxxziddz p {
+#pevchwnukc p {
   margin: 0;
   padding: 0;
 }
 
-#heuxxziddz .gt_table {
+#pevchwnukc .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -4744,12 +4751,12 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-left-color: #D3D3D3;
 }
 
-#heuxxziddz .gt_caption {
+#pevchwnukc .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#heuxxziddz .gt_title {
+#pevchwnukc .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -4761,7 +4768,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-width: 0;
 }
 
-#heuxxziddz .gt_subtitle {
+#pevchwnukc .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4773,7 +4780,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-top-width: 0;
 }
 
-#heuxxziddz .gt_heading {
+#pevchwnukc .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -4785,13 +4792,13 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#heuxxziddz .gt_bottom_border {
+#pevchwnukc .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#heuxxziddz .gt_col_headings {
+#pevchwnukc .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4806,7 +4813,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#heuxxziddz .gt_col_heading {
+#pevchwnukc .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4826,7 +4833,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   overflow-x: hidden;
 }
 
-#heuxxziddz .gt_column_spanner_outer {
+#pevchwnukc .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4838,15 +4845,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 4px;
 }
 
-#heuxxziddz .gt_column_spanner_outer:first-child {
+#pevchwnukc .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#heuxxziddz .gt_column_spanner_outer:last-child {
+#pevchwnukc .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#heuxxziddz .gt_column_spanner {
+#pevchwnukc .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -4858,11 +4865,11 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   width: 100%;
 }
 
-#heuxxziddz .gt_spanner_row {
+#pevchwnukc .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#heuxxziddz .gt_group_heading {
+#pevchwnukc .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4888,7 +4895,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   text-align: left;
 }
 
-#heuxxziddz .gt_empty_group_heading {
+#pevchwnukc .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4903,15 +4910,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   vertical-align: middle;
 }
 
-#heuxxziddz .gt_from_md > :first-child {
+#pevchwnukc .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#heuxxziddz .gt_from_md > :last-child {
+#pevchwnukc .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#heuxxziddz .gt_row {
+#pevchwnukc .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4930,7 +4937,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   overflow-x: hidden;
 }
 
-#heuxxziddz .gt_stub {
+#pevchwnukc .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4943,7 +4950,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#heuxxziddz .gt_stub_row_group {
+#pevchwnukc .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4957,15 +4964,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   vertical-align: top;
 }
 
-#heuxxziddz .gt_row_group_first td {
+#pevchwnukc .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#heuxxziddz .gt_row_group_first th {
+#pevchwnukc .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#heuxxziddz .gt_summary_row {
+#pevchwnukc .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4975,16 +4982,16 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#heuxxziddz .gt_first_summary_row {
+#pevchwnukc .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#heuxxziddz .gt_first_summary_row.thick {
+#pevchwnukc .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#heuxxziddz .gt_last_summary_row {
+#pevchwnukc .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4994,7 +5001,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#heuxxziddz .gt_grand_summary_row {
+#pevchwnukc .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5004,7 +5011,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#heuxxziddz .gt_first_grand_summary_row {
+#pevchwnukc .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5014,7 +5021,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-top-color: #D3D3D3;
 }
 
-#heuxxziddz .gt_last_grand_summary_row_top {
+#pevchwnukc .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5024,11 +5031,11 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#heuxxziddz .gt_striped {
+#pevchwnukc .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#heuxxziddz .gt_table_body {
+#pevchwnukc .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -5037,7 +5044,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#heuxxziddz .gt_footnotes {
+#pevchwnukc .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5051,7 +5058,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#heuxxziddz .gt_footnote {
+#pevchwnukc .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -5060,7 +5067,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#heuxxziddz .gt_sourcenotes {
+#pevchwnukc .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5074,7 +5081,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#heuxxziddz .gt_sourcenote {
+#pevchwnukc .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -5082,63 +5089,63 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#heuxxziddz .gt_left {
+#pevchwnukc .gt_left {
   text-align: left;
 }
 
-#heuxxziddz .gt_center {
+#pevchwnukc .gt_center {
   text-align: center;
 }
 
-#heuxxziddz .gt_right {
+#pevchwnukc .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#heuxxziddz .gt_font_normal {
+#pevchwnukc .gt_font_normal {
   font-weight: normal;
 }
 
-#heuxxziddz .gt_font_bold {
+#pevchwnukc .gt_font_bold {
   font-weight: bold;
 }
 
-#heuxxziddz .gt_font_italic {
+#pevchwnukc .gt_font_italic {
   font-style: italic;
 }
 
-#heuxxziddz .gt_super {
+#pevchwnukc .gt_super {
   font-size: 65%;
 }
 
-#heuxxziddz .gt_footnote_marks {
+#pevchwnukc .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#heuxxziddz .gt_asterisk {
+#pevchwnukc .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#heuxxziddz .gt_indent_1 {
+#pevchwnukc .gt_indent_1 {
   text-indent: 5px;
 }
 
-#heuxxziddz .gt_indent_2 {
+#pevchwnukc .gt_indent_2 {
   text-indent: 10px;
 }
 
-#heuxxziddz .gt_indent_3 {
+#pevchwnukc .gt_indent_3 {
   text-indent: 15px;
 }
 
-#heuxxziddz .gt_indent_4 {
+#pevchwnukc .gt_indent_4 {
   text-indent: 20px;
 }
 
-#heuxxziddz .gt_indent_5 {
+#pevchwnukc .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -5648,4 +5655,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/keaven/gsd-deming/edit/main/ahr.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/keaven/gsd-deming/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/keaven/gsd-deming/blob/main/ahr.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/keaven/gsd-deming/edit/master/ahr.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/keaven/gsd-deming/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/keaven/gsd-deming/blob/master/ahr.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div></div></footer></body></html>

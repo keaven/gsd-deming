@@ -322,7 +322,7 @@ window.Quarto = {
   <li><a href="#update-bound-based-on-newly-calculated-sample-size" id="toc-update-bound-based-on-newly-calculated-sample-size" class="nav-link" data-scroll-target="#update-bound-based-on-newly-calculated-sample-size"><span class="header-section-number">9.7.2</span> Update bound based on newly calculated sample size</a></li>
   </ul>
 </li>
-  </ul><div class="toc-actions"><ul><li><a href="https://github.com/keaven/gsd-deming/edit/main/maxcombo-boundary.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/keaven/gsd-deming/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/keaven/gsd-deming/blob/main/maxcombo-boundary.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/keaven/gsd-deming/edit/master/maxcombo-boundary.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/keaven/gsd-deming/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/keaven/gsd-deming/blob/master/maxcombo-boundary.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./other-tests.html">Others tests</a></li><li class="breadcrumb-item"><a href="./maxcombo-boundary.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Group sequential design boundary with MaxCombo test</span></a></li></ol></nav><div class="quarto-title">
@@ -421,12 +421,12 @@ window.Quarto = {
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">Probability_Null</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_if</a></span><span class="op">(</span><span class="va">is.numeric</span>, <span class="va">round</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   Analysis Bound Time      N Events     Z Probability</span></span>
-<span><span class="co">#&gt; 1        1 Upper   12 301.31  64.72  6.18        0.00</span></span>
-<span><span class="co">#&gt; 3        2 Upper   24 301.31 148.42  2.80        0.22</span></span>
-<span><span class="co">#&gt; 5        3 Upper   36 301.31 199.65  2.10        0.80</span></span>
-<span><span class="co">#&gt; 2        1 Lower   12 301.31  64.72 -2.72        0.00</span></span>
-<span><span class="co">#&gt; 4        2 Lower   24 301.31 148.42  0.65        0.08</span></span>
-<span><span class="co">#&gt; 6        3 Lower   36 301.31 199.65  2.10        0.20</span></span>
+<span><span class="co">#&gt; 1        1 Upper   12 301.28  64.71  6.18        0.00</span></span>
+<span><span class="co">#&gt; 3        2 Upper   24 301.28 148.40  2.80        0.22</span></span>
+<span><span class="co">#&gt; 5        3 Upper   36 301.28 199.62  2.10        0.80</span></span>
+<span><span class="co">#&gt; 2        1 Lower   12 301.28  64.71 -2.72        0.00</span></span>
+<span><span class="co">#&gt; 4        2 Lower   24 301.28 148.40  0.65        0.08</span></span>
+<span><span class="co">#&gt; 6        3 Lower   36 301.28 199.62  2.10        0.20</span></span>
 <span><span class="co">#&gt;   Probability_Null (%)</span></span>
 <span><span class="co">#&gt; 1                 0.00</span></span>
 <span><span class="co">#&gt; 3                 0.26</span></span>
@@ -688,7 +688,7 @@ f(t; \alpha)=2-2\Phi\left(\Phi^{-1}\left(\frac{1-\alpha/2}{t^{\rho/2}}\right)\ri
 <span>  theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">fh_test</span><span class="op">)</span><span class="op">)</span>, <span class="co"># Under the null hypothesis</span></span>
 <span>  corr <span class="op">=</span> <span class="va">utility</span><span class="op">$</span><span class="va">corr</span> <span class="co"># Correlation</span></span>
 <span><span class="op">)</span><span class="op">$</span><span class="va">upper</span></span>
-<span><span class="co">#&gt; [1] 6.175397 2.798651 2.097516</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co">#&gt; [1] 6.175397 2.798651 2.096780</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Compared with upper bound calculated from gsDesign</li>
@@ -765,7 +765,7 @@ f(t; \alpha)=2-2\Phi\left(\Phi^{-1}\left(\frac{1-\alpha/2}{t^{\rho/2}}\right)\ri
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">bound</span><span class="op">$</span><span class="va">lower</span></span>
-<span><span class="co">#&gt; [1] -2.6106678  0.9619422  2.0972654</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co">#&gt; [1] -2.6106678  0.9619422  2.0973166</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Compared with lower bound calculated from gsDesign</li>
@@ -787,7 +787,7 @@ f(t; \alpha)=2-2\Phi\left(\Phi^{-1}\left(\frac{1-\alpha/2}{t^{\rho/2}}\right)\ri
 <span><span class="co">#&gt;      upper      lower</span></span>
 <span><span class="co">#&gt; 1 6.175397 -2.6106678</span></span>
 <span><span class="co">#&gt; 2 2.798651  0.9619422</span></span>
-<span><span class="co">#&gt; 3 2.097265  2.0972654</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co">#&gt; 3 2.097317  2.0973166</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_design_combo.html">gs_design_combo</a></span><span class="op">(</span></span>
@@ -802,16 +802,16 @@ f(t; \alpha)=2-2\Phi\left(\Phi^{-1}\left(\frac{1-\alpha/2}{t^{\rho/2}}\right)\ri
 <span>  lpar <span class="op">=</span> <span class="va">bound</span><span class="op">$</span><span class="va">lower</span>,</span>
 <span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_if</a></span><span class="op">(</span><span class="va">is.numeric</span>, <span class="va">round</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   Analysis Bound Time      N Events     Z Probability</span></span>
-<span><span class="co">#&gt; 1        1 Upper   12 324.95  69.80  6.18        0.00</span></span>
-<span><span class="co">#&gt; 3        2 Upper   24 324.95 160.06  2.80        0.24</span></span>
-<span><span class="co">#&gt; 5        3 Upper   36 324.95 215.30  2.10        0.80</span></span>
-<span><span class="co">#&gt; 2        1 Lower   12 324.95  69.80 -2.61        0.00</span></span>
-<span><span class="co">#&gt; 4        2 Lower   24 324.95 160.06  0.96        0.13</span></span>
-<span><span class="co">#&gt; 6        3 Lower   36 324.95 215.30  2.10        0.20</span></span>
+<span><span class="co">#&gt; 1        1 Upper   12 324.96  69.80  6.18        0.00</span></span>
+<span><span class="co">#&gt; 3        2 Upper   24 324.96 160.06  2.80        0.24</span></span>
+<span><span class="co">#&gt; 5        3 Upper   36 324.96 215.31  2.10        0.80</span></span>
+<span><span class="co">#&gt; 2        1 Lower   12 324.96  69.80 -2.61        0.00</span></span>
+<span><span class="co">#&gt; 4        2 Lower   24 324.96 160.06  0.96        0.13</span></span>
+<span><span class="co">#&gt; 6        3 Lower   36 324.96 215.31  2.10        0.20</span></span>
 <span><span class="co">#&gt;   Probability_Null</span></span>
 <span><span class="co">#&gt; 1             0.00</span></span>
 <span><span class="co">#&gt; 3             0.00</span></span>
-<span><span class="co">#&gt; 5             0.03</span></span>
+<span><span class="co">#&gt; 5             0.02</span></span>
 <span><span class="co">#&gt; 2               NA</span></span>
 <span><span class="co">#&gt; 4               NA</span></span>
 <span><span class="co">#&gt; 6               NA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -831,7 +831,7 @@ f(t; \alpha)=2-2\Phi\left(\Phi^{-1}\left(\frac{1-\alpha/2}{t^{\rho/2}}\right)\ri
 <span><span class="co">#&gt;      upper      lower</span></span>
 <span><span class="co">#&gt; 1 6.175397 -2.6568642</span></span>
 <span><span class="co">#&gt; 2 2.798651  0.8266125</span></span>
-<span><span class="co">#&gt; 3 2.097386  2.0973860</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co">#&gt; 3 2.096120  2.0961202</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Repeat the procedure above until the sample size and lower bound converge.</li>
@@ -1266,4 +1266,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/keaven/gsd-deming/edit/main/maxcombo-boundary.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/keaven/gsd-deming/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/keaven/gsd-deming/blob/main/maxcombo-boundary.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/keaven/gsd-deming/edit/master/maxcombo-boundary.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/keaven/gsd-deming/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/keaven/gsd-deming/blob/master/maxcombo-boundary.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div></div></footer></body></html>
