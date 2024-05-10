@@ -1,5 +1,7 @@
+Type: Book
 Package: gsd.deming
-Title: Course presented at the Deming Conference in December 2021
+Title: Group Sequential Design Under Non-Proportional Hazards:
+    Course Presented at the Deming Conference in December 2021
 Version: 0.1.0
 Authors@R: c(
     person("Keaven", "Anderson", email = "keaven_anderson@merck.com", role = c("aut","cre")),
@@ -8,16 +10,14 @@ Authors@R: c(
     person("Yujie", "Zhao", role = c("aut"))
     )
 Imports:
-  bslib,
-  bookdown,
   downlit,
-  kableExtra,
-  knitr,
-  formatR,
-  fs,
+  dplyr,
+  ggplot2,
+  gsDesign,
   gt,
+  mvtnorm,
   npsurvSS,
-  gsDesign
+  xml2
 Remotes:
   merck/simtrial@87cd828,
   merck/gsDesign2@fc3a2d3,

@@ -1,34 +1,37 @@
-# Group sequential design boundary with weighted logrank test {#wlr-boundary}
+# Group sequential design boundary with weighted logrank test {#sec-wlr-boundary}
 
-```{r, include=FALSE}
-library(dplyr)
+```{r, setup, file="_common.R", include=FALSE}
+```
+
+```{r, warning=FALSE, message=FALSE}
 library(gsDesign)
 library(gsdmvn)
 library(mvtnorm)
+library(dplyr)
 ```
 
 ## Group sequential design boundary calculation strategy
 
-In the last chapter, we pre-specified boundary derived from `gsDesign`.
+In the last chapter, we pre-specified boundary derived from gsDesign.
 Therefore, the Type I error may be inflated because the information fraction is different for different WLR.
 
 In this chapter, we calculate boundaries based on the error spending approach following @gordon1983discrete.
 
-The spending function has been implemented in `gsDesign`.
+The spending function has been implemented in gsDesign.
 
-- `gsDesign::sfLDOF()` (O'Brien-Fleming bound approximation) or other functions starting with `sf` in `gsDesign`
-- The boundary family approach. @pocock1977group, @o1979multiple, @wang1987approximately
+- `gsDesign::sfLDOF()` (O'Brien-Fleming bound approximation) or other functions starting with `sf` in gsDesign.
+- The boundary family approach [@pocock1977group; @o1979multiple; @wang1987approximately].
 
 There are other ways to derive boundaries but will not be covered:
 
-- Conditional power [@lachin2005review]
+- Conditional power [@lachin2005review].
 
 ## Types of error probability
 
-There are 6 different types of error probability that have been implemented in `gsdmvn`.
+There are 6 different types of error probability that have been implemented in gsdmvn.
 In this training material, we focus on `test.type = 4`.
 
-- `test.type` argument in `gsDesign`
+- `test.type` argument in gsDesign
 - Upper bound:
   - $\alpha_k(0) = \text{Pr}(\cap_{i=1}^{i=k-1} a_i < Z_i < b_i, Z_k > b_k \mid H_0)$
   - $\alpha_k^{+}(0) = \text{Pr}(\cap_{i=1}^{i=k-1} a_i < Z_i < b_i, Z_k > b_k \mid H_0)$ (ignore lower bound)
@@ -97,7 +100,7 @@ Here, $t$ is information fraction in the formula below.
 
 $$f(t; \alpha)=2-2\Phi\left(\Phi^{-1}\left(\frac{1-\alpha/2}{t^{\rho/2}}\right)\right)$$
 
-### Spending function in `gsDesign`
+### Spending function in gsDesign
 
 After the spending function is selected, we can calculate the lower and upper bound of a
 group sequential design.
@@ -213,7 +216,7 @@ Let's calculate the lower and upper bound of the first interim analysis.
 
 - First interim analysis lower bound $\text{Pr}(Z_1 < b_1 \mid H_1)$
 
-::: {.rmdnote}
+::: {.callout-note}
 The lower bound is calculated under alternative hypothesis and depends on sample size.
 :::
 

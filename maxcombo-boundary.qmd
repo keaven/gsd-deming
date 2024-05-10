@@ -1,10 +1,13 @@
-# Group sequential design boundary with MaxCombo test {#maxcombo-boundary}
+# Group sequential design boundary with MaxCombo test {#sec-maxcombo-boundary}
 
-```{r, include=FALSE}
-library(dplyr)
+```{r, setup, file="_common.R", include=FALSE}
+```
+
+```{r, warning=FALSE, message=FALSE}
 library(gsDesign)
 library(gsdmvn)
 library(mvtnorm)
+library(dplyr)
 ```
 
 In this chapter, we calculate boundaries based on the error spending approach following @gordon1983discrete.
@@ -59,10 +62,11 @@ fh_test
 
 ## Sample size calculation based on spending function
 
-- Implementation in `gsdmvn`
+- Implementation in gsdmvn
 
 ```{r}
-gs_design_combo(enrollRates,
+gs_design_combo(
+  enrollRates,
   failRates,
   fh_test,
   alpha = 0.025,
@@ -152,7 +156,7 @@ Under the same design assumption, information fraction is different from differe
 
 There are two potential strategies to calculate the information fraction:
 
-- Option 1: Use minimal information fraction of all candidate tests (implemented in `gsdmvn`).
+- Option 1: Use minimal information fraction of all candidate tests (implemented in gsdmvn).
 - Option 2: Use the weighted average of information fraction.
 
 ```{r, echo = FALSE, out.width = "60%"}
@@ -176,7 +180,7 @@ min_info_frac
 
 ## Spending function
 
-- `gsDesign` bound can not be directly used for MaxCombo test:
+- gsDesign bound can not be directly used for MaxCombo test:
   - Multiple test statistics are considered in interim analysis or final analysis.
 
 - Design example:
@@ -189,7 +193,9 @@ min_info_frac
 - Lan-DeMets spending function to approximate an O'Brien-Fleming bound @gordon1983discrete. (`gsDesign::sfLDOF`)
 - $t$ is information fraction in the formula below.
 
-$$f(t; \alpha)=2-2\Phi\left(\Phi^{-1}\left(\frac{1-\alpha/2}{t^{\rho/2}}\right)\right)$$
+$$
+f(t; \alpha)=2-2\Phi\left(\Phi^{-1}\left(\frac{1-\alpha/2}{t^{\rho/2}}\right)\right)
+$$
 
 - Other spending functions are discussed in the gsDesign technical manual
   and implemented in `gsDesign::sf*()` functions.
@@ -221,7 +227,9 @@ It can be skipped for the first read of this training material.
 
 - First interim analysis
 
-$$\alpha_1 = \text{Pr}(Z_1 > b_1 \mid H_0)$$
+$$
+\alpha_1 = \text{Pr}(Z_1 > b_1 \mid H_0)
+$$
 
 ```{r}
 qnorm(1 - alpha_spend[1])
@@ -229,20 +237,29 @@ qnorm(1 - alpha_spend[1])
 
 - General formula (non-binding futility bound)
 
-$$\alpha_k = \text{Pr}(\cap_{i=1}^{i=k-1} Z_i < b_i, Z_k > b_k \mid H_0)$$
+$$
+\alpha_k = \text{Pr}(\cap_{i=1}^{i=k-1} Z_i < b_i, Z_k > b_k \mid H_0)
+$$
 
 ### MaxCombo upper bound
 
 - First interim analysis upper bound
 
-$$\alpha_1 = \text{Pr}(G_1 > b_1 \mid H_0) = 1 - \text{Pr}(\cap_i Z_{i1} < b_1 \mid H_0)$$
+$$
+\alpha_1 = \text{Pr}(G_1 > b_1 \mid H_0) = 1 - \text{Pr}(\cap_i Z_{i1} < b_1 \mid H_0)
+$$
 
 - General formula (non-binding futility bound)
 
-$$\alpha_k = \text{Pr}(\cap_{i=1}^{i=k-1} G_i < b_i, G_k > b_k \mid H_0)$$
-$$ = \text{Pr}(\cap_{i=1}^{i=k-1} G_i < b_i \mid H_0) - \text{Pr}(\cap_{i=1}^{i=k} G_i < b_i \mid H_0)$$
+$$
+\alpha_k = \text{Pr}(\cap_{i=1}^{i=k-1} G_i < b_i, G_k > b_k \mid H_0)
+$$
 
-- `gsdmvn` implementation for MaxCombo test
+$$
+= \text{Pr}(\cap_{i=1}^{i=k-1} G_i < b_i \mid H_0) - \text{Pr}(\cap_{i=1}^{i=k} G_i < b_i \mid H_0)
+$$
+
+- gsdmvn implementation for MaxCombo test
 
 ```{r}
 gsdmvn:::gs_bound(alpha_spend, beta_spend,
@@ -252,7 +269,7 @@ gsdmvn:::gs_bound(alpha_spend, beta_spend,
 )$upper
 ```
 
-- Compared with upper bound calculated from `gsDesign`
+- Compared with upper bound calculated from gsDesign
 
 ```{r}
 x <- gsDesign::gsSurv(
@@ -277,7 +294,9 @@ x$upper$bound
 
 - First interim analysis
 
-$$\beta_1 = \text{Pr}(Z_1 < a_1 \mid H_1)$$
+$$
+\beta_1 = \text{Pr}(Z_1 < a_1 \mid H_1)
+$$
 
 ```{r}
 n <- 400
@@ -290,24 +309,34 @@ qnorm(beta_spend[1], mean = utility$theta[1] * sqrt(n))
 ```
 
 - General formula
-$$\beta_k = \text{Pr}(\cap_{i=1}^{i=k-1}  a_i < Z_i < b_i, Z_k < a_k \mid H_1)$$
+
+$$
+\beta_k = \text{Pr}(\cap_{i=1}^{i=k-1}  a_i < Z_i < b_i, Z_k < a_k \mid H_1)
+$$
 
 ### MaxCombo lower bound
 
 - First interim analysis upper bound
 
-$$\beta_1 = \text{Pr}(G_1 < a_1 \mid H_1) = \text{Pr}(\cap_i Z_{i1} < a_1 \mid H_0)$$
+$$
+\beta_1 = \text{Pr}(G_1 < a_1 \mid H_1) = \text{Pr}(\cap_i Z_{i1} < a_1 \mid H_0)
+$$
 
 - General formula (non-binding futility bound)
 
-$$\beta_k = \text{Pr}(\cap_{i=1}^{i=k-1} a_i <G_i < b_i, G_k < a_k \mid H_0)$$
+$$
+\beta_k = \text{Pr}(\cap_{i=1}^{i=k-1} a_i <G_i < b_i, G_k < a_k \mid H_0)
+$$
 
-- `gsdmvn` implementation for MaxCombo test
+- gsdmvn implementation for MaxCombo test
 
 ```{r}
 n <- 400
-utility <- gsdmvn:::gs_utility_combo(enrollRates, failRates, fh_test = fh_test, ratio = 1)
-bound <- gsdmvn:::gs_bound(alpha_spend, beta_spend,
+utility <- gsdmvn:::gs_utility_combo(
+  enrollRates, failRates, fh_test = fh_test, ratio = 1
+)
+bound <- gsdmvn:::gs_bound(
+  alpha_spend, beta_spend,
   analysis = utility$info$Analysis, # Analysis indicator
   theta = utility$theta * sqrt(n), # Under the alternative hypothesis
   corr = utility$corr # Correlation
@@ -316,7 +345,7 @@ bound <- gsdmvn:::gs_bound(alpha_spend, beta_spend,
 bound$lower
 ```
 
-- Compared with lower bound calculated from `gsDesign`
+- Compared with lower bound calculated from gsDesign
 
 ```{r}
 x$lower$bound
@@ -333,7 +362,8 @@ bound
 ```
 
 ```{r}
-gs_design_combo(enrollRates,
+gs_design_combo(
+  enrollRates,
   failRates,
   fh_test,
   alpha = 0.025,

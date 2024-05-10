@@ -1,10 +1,13 @@
-# Weighted logrank test {#wlr}
+# Weighted logrank test {#sec-wlr}
 
-```{r, include=FALSE}
-library(dplyr)
+```{r, setup, file="_common.R", include=FALSE}
+```
+
+```{r, warning=FALSE, message=FALSE}
 library(gsDesign)
 library(gsdmvn)
 library(mvtnorm)
+library(dplyr)
 ```
 
 In this chapter, we start to discuss group sequential design for weighted logrank test.
@@ -16,7 +19,10 @@ The **calendar** time of the analyses are $t_k, k =1,\dots, K$.
 
 We define the test statistic at analysis $k=1,2,\dots,K$ as
 
-$$Z_k =  \frac{\widehat{\Delta}_k}{\sigma(\widehat{\Delta}_k)}$$
+$$
+Z_k =  \frac{\widehat{\Delta}_k}{\sigma(\widehat{\Delta}_k)}
+$$
+
 where $\widehat{\Delta}_k$ is a statistics to characterize group difference and
 $\sigma(\widehat{\Delta}_k)$ is the standard deviation of $\widehat{\Delta}_k$.
 
@@ -26,21 +32,29 @@ In group sequential design, we consider the test statistics are asymptotically n
 
 - Under the null hypothesis
 
-$$Z_k \sim \mathcal{N}(0,1)$$
+$$
+Z_k \sim \mathcal{N}(0,1)
+$$
 
 - Under a (local) alternative hypothesis
 
-$$Z_k \sim \mathcal{N}(\Delta_k I_k^{1/2}, 1)$$,
+$$
+Z_k \sim \mathcal{N}(\Delta_k I_k^{1/2}, 1),
+$$
 
-Where $I_k$ is the Fisher information $I_k \approx 1/{\sigma^2(\widehat{\Delta}_k)}$
+where $I_k$ is the Fisher information $I_k \approx 1/{\sigma^2(\widehat{\Delta}_k)}$
 
 Then we can define the effect size as
 
-$\theta = \Delta_k / \sigma_k = \Delta_k I_k^{1/2}$ with $\sigma_k = \sigma(\widehat{\Delta}_k)$.
+$$
+\theta = \Delta_k / \sigma_k = \Delta_k I_k^{1/2}$ with $\sigma_k = \sigma(\widehat{\Delta}_k)
+$$.
 
 So, it is equivalent to claim:
 
-$$Z_k \sim \mathcal{N}(\theta_k, 1)$$
+$$
+Z_k \sim \mathcal{N}(\theta_k, 1)
+$$
 
 ### Independent increments process
 
@@ -51,11 +65,13 @@ as a corollary of martingale representation.
 - Under the null $Z ~ \sim MVN(0,\Sigma)$
 - Under a local alternative $Z ~ \sim MVN(\theta, \Sigma)$
 
-- Here $\Sigma={\Sigma_{ij}}$ is a correlation matrix with
+- Here, $\Sigma={\Sigma_{ij}}$ is a correlation matrix with
 
-$$\Sigma_{ij} = \min(I_i, I_j) / \max(I_i, I_j) \approx \min(\sigma_i, \sigma_j) / \max(\sigma_i, \sigma_j)$$
+$$
+\Sigma_{ij} = \min(I_i, I_j) / \max(I_i, I_j) \approx \min(\sigma_i, \sigma_j) / \max(\sigma_i, \sigma_j)
+$$
 
-## Type I error, $\alpha$-spending function and group sequential design boundary
+## Type I error, $\alpha$-spending function, and group sequential design boundary
 
 - Define test boundary for each interim analysis
   - $\alpha$-spending function @LanDeMets
@@ -72,9 +88,9 @@ $$\Sigma_{ij} = \min(I_i, I_j) / \max(I_i, I_j) \approx \min(\sigma_i, \sigma_j)
 - Under the null hypothesis, the probability to reject the null hypothesis.
   - $\alpha = \sum_{k=1}^{K} u_k = \sum_{k=1}^{K} \text{Pr}(\{Z_k \ge b_k\} \cap_{j=1}^{k-1} \{a_j \le Z_j \le b_j\} \mid H_0)$
   - With a spending function family $f(t,\gamma)$,
-  - `gsDesign::sfLDOF()` (O'Brien-Fleming bound approximation) or other functions starts with `sf` in `gsDesign`
+  - `gsDesign::sfLDOF()` (O'Brien-Fleming bound approximation) or other functions starts with `sf` in gsDesign
 
-For simplicity, we directly use `gsDesign` boundary for this chapter.
+For simplicity, we directly use gsDesign boundary for this chapter.
 It will inflate Type I Error for WLR tests.
 We will discuss how to fix the issue in the next chapter.
 
@@ -110,24 +126,32 @@ Given the lower and upper bound of a group sequential design, we can calculate t
 
 - Power: under a (local) alternative hypothesis, the probability to reject the null hypothesis.
 
-$$1 - \beta =\sum_{k=1}^{K} u_k = \sum_{k=1}^{K} \text{Pr}(\{Z_k \ge b_k\} \cap_{j=1}^{k-1} \{a_j \le Z_j \le b_j\} \mid H_1)$$
+$$
+1 - \beta =\sum_{k=1}^{K} u_k = \sum_{k=1}^{K} \text{Pr}(\{Z_k \ge b_k\} \cap_{j=1}^{k-1} \{a_j \le Z_j \le b_j\} \mid H_1)
+$$
 
 If there is no lower bound, the formula can be simplified as
 
-$$\beta = \text{Pr}(\cap_{j=1}^{K} \{Z_j \le b_j\} \mid H_1)$$
+$$
+\beta = \text{Pr}(\cap_{j=1}^{K} \{Z_j \le b_j\} \mid H_1)
+$$
 
 We can calculate the sample size required for a group sequential design by solving
 the power equation with a given lower and upper bound and power, type I error and power.
 
 As a note, we can calculate futility probability similarly:
 
-$$\sum_{k=1}^{K} l_k = \sum_{k=1}^{K} \text{Pr}(\{Z_k < a_k\} \cap_{j=1}^{k-1} \{a_j \le Z_j \le b_j\}\mid H_1)$$
+$$
+\sum_{k=1}^{K} l_k = \sum_{k=1}^{K} \text{Pr}(\{Z_k < a_k\} \cap_{j=1}^{k-1} \{a_j \le Z_j \le b_j\}\mid H_1)
+$$
 
 ## Weighted logrank test
 
 Similar to the fixed design, we can define the test statistics for weighted logrank test using the counting process formula as
 
-$$ Z_k=\sqrt{\frac{n_{0}+n_{1}}{n_{0}n_{1}}}\int_{0}^{t_k}w(t)\frac{\overline{Y}_{0}(t)\overline{Y}_{1}(t)}{\overline{Y}_{0}(t)+\overline{Y}_{0}(t)}\left\{ \frac{d\overline{N}_{1}(t)}{\overline{Y}_{1}(t)}-\frac{d\overline{N}_{0}(t)}{\overline{Y}_{0}(t)}\right\} $$
+$$
+Z_k=\sqrt{\frac{n_{0}+n_{1}}{n_{0}n_{1}}}\int_{0}^{t_k}w(t)\frac{\overline{Y}_{0}(t)\overline{Y}_{1}(t)}{\overline{Y}_{0}(t)+\overline{Y}_{0}(t)}\left\{ \frac{d\overline{N}_{1}(t)}{\overline{Y}_{1}(t)}-\frac{d\overline{N}_{0}(t)}{\overline{Y}_{0}(t)}\right\}
+$$
 
 Here $n_i$ are the number of subjects in group $i$.
 $\overline{Y}_{i}(t)$ are the number of subjects in group $i$ at risk at time $t$.
@@ -135,7 +159,7 @@ $\overline{N}_{i}(t)$ are the number of events in group $i$ up to and including 
 
 Note, the only difference is that the test statistics fixed analysis up to $t_k$ at $k$th interim analysis
 
-::: {.rmdnote}
+::: {.callout-note}
 For simplicity, we illustrate the sample size and power calculation based on the boundary from the logrank test.
 The same boundary for different types of analysis for a fair comparison.
 However, different WLR can have different information fraction for the same interim analysis time.
@@ -176,11 +200,11 @@ analysisTimes <- c(12, 24, 36)
 
 ## Sample size under logrank test or $FH(0, 0)$
 
-In `gsdmvn`, the sample size can be calculated using `gsdmvn::gs_design_wlr()` for the WLR test.
+In gsdmvn, the sample size can be calculated using `gsdmvn::gs_design_wlr()` for the WLR test.
 For comparison purposes, we also provided the sample size calculation using `gsdmvn::gs_design_ahr()` for the logrank test.
 In each calculation, we compare the analytical results with the simulation results with 10,000 replications.
 
-::: {.rmdnote}
+::: {.callout-note}
 We described the theoretical details for sample size calculation in the technical details section.
 :::
 
@@ -431,11 +455,13 @@ To utilize `gs_power()`, four important blocks are required.
 1. The numerical vector of efficacy bound for multiple integration.
 
 First, we calculate
+
 $$
   \Delta_k
   =
   \int_{0}^{t_k}w(s)\frac{p_{0}\pi_{0}(s)p_{1}\pi_{1}(s)}{\pi(s)}\{\lambda_{1}(s)-\lambda_{0}(s)\}ds,
 $$
+
 where $p_0 = n_0/(n_0 + n_1), p_1 = n_1/(n_0 + n_1)$ are the randomization ratio of the control and treatment arm, respectively.
 $\pi_0(t) = E(N_0(t)), \pi_1(t) = E(N_1(t))$ are the expected number of failures of the control and treatment arm, respectively.
 $\pi(t) = p_0 \pi_0(t) + p_1 \pi_1(t)$ is the probability of events.
@@ -450,7 +476,11 @@ delta
 ```
 
 Second, we calculate
-$$\sigma_k^{2}=\int_{0}^{t_k}w(s)^{2}\frac{p_{0}\pi_{0}(s)p_{1}\pi_{1}(s)}{\pi(s)^{2}}dv(s), $$
+
+$$
+\sigma_k^{2}=\int_{0}^{t_k}w(s)^{2}\frac{p_{0}\pi_{0}(s)p_{1}\pi_{1}(s)}{\pi(s)^{2}}dv(s),
+$$
+
 where $v(t)= p_0 E(Y_0(t)) + p_1 E(Y_1(t))$ is the probability of people at risk.
 The detailed calculation of $\sigma_k^{2}$ is implemented in `gsdmvn:::gs_sigma2_wlr()`:
 
@@ -496,11 +526,13 @@ x$upper$bound
 - **Power**
 
 With all blocks prepared, one can calculate the power
+
 $$
   1 -\beta
   =
   \sum_{k=1}^{K} u_k = \sum_{k=1}^{K} \text{Pr}(\{Z_k \ge b_k\} \cap_{j=1}^{k-1} \{a_j \le Z_j \le b_j\})
 $$
+
 by
 
 ```{r}
@@ -529,7 +561,10 @@ cumsum(gs_power(
 
 Similarly, we can calculate the futility probability
 
-$$\sum_{k=1}^{K} l_k = \sum_{k=1}^{K} \text{Pr}(\{Z_k < a_k\} \cap_{j=1}^{k-1} \{a_j \le Z_j \le b_j\})$$
+$$
+\sum_{k=1}^{K} l_k = \sum_{k=1}^{K} \text{Pr}(\{Z_k < a_k\} \cap_{j=1}^{k-1} \{a_j \le Z_j \le b_j\})
+$$
+
 by
 
 ```{r}

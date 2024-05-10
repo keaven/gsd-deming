@@ -1,10 +1,13 @@
-# MaxCombo test {#maxcombo}
+# MaxCombo test {#sec-maxcombo}
 
-```{r, include=FALSE}
-library(dplyr)
+```{r, setup, file="_common.R", include=FALSE}
+```
+
+```{r, warning=FALSE, message=FALSE}
 library(gsDesign)
 library(gsdmvn)
 library(mvtnorm)
+library(dplyr)
 ```
 
 In this chapter, we discuss group sequential design for MaxCombo test.
@@ -15,7 +18,9 @@ In this chapter, we discuss group sequential design for MaxCombo test.
 
 - Test statistics: analysis at $t_k$ for weight $w_i(t)$
 
-$$ Z_{ik}=\sqrt{\frac{n_{0}+n_{1}}{n_{0}n_{1}}}\int_{0}^{t_k}w_i(t)\frac{\overline{Y}_{0}(t)\overline{Y}_{1}(t)}{\overline{Y}_{0}(t)+\overline{Y}_{0}(t)}\left\{ \frac{d\overline{N}_{1}(t)}{\overline{Y}_{1}(t)}-\frac{d\overline{N}_{0}(t)}{\overline{Y}_{0}(t)}\right\} $$
+$$
+Z_{ik}=\sqrt{\frac{n_{0}+n_{1}}{n_{0}n_{1}}}\int_{0}^{t_k}w_i(t)\frac{\overline{Y}_{0}(t)\overline{Y}_{1}(t)}{\overline{Y}_{0}(t)+\overline{Y}_{0}(t)}\left\{ \frac{d\overline{N}_{1}(t)}{\overline{Y}_{1}(t)}-\frac{d\overline{N}_{0}(t)}{\overline{Y}_{0}(t)}\right\}
+$$
 
 - Not necessary to have the same number of tests in each interim analysis
 
@@ -97,9 +102,9 @@ fh_test2
 
 ## Sample size calculation
 
-We first consider a user-defined lower and upper bound using `gsDesign` bound
+We first consider a user-defined lower and upper bound using gsDesign bound
 
-In general, `gsDesign` bound cannot be directly used for MaxCombo test:
+In general, gsDesign bound cannot be directly used for MaxCombo test:
 
 - Multiple test statistics are considered in interim analysis or final analysis.
 
@@ -256,7 +261,9 @@ knitr::include_graphics("images/corr_combo.png")
 - Within each interim analysis, the correlation between tests.
   - Recall the discussion in fixed design
 
-$$\hbox{Cov}(Z_{1k}, Z_{2k}) = \hbox{Var}(Z_k(\frac{\rho_1 + \rho_{2}}{2}, \frac{\gamma_1 + \gamma_2}{2}, \tau))$$
+$$
+\hbox{Cov}(Z_{1k}, Z_{2k}) = \hbox{Var}(Z_k(\frac{\rho_1 + \rho_{2}}{2}, \frac{\gamma_1 + \gamma_2}{2}, \tau))
+$$
 
 - Even though one test is used in all interim analysis, correlation of all tests are needed in each interim analysis.
 
@@ -358,11 +365,15 @@ corr_time2
 - Reference: Section 3.1 of @wang2019simulation
 - $Z_{ij}$: $i$-th test in $j$-th analysis.
 
-$$ \hbox{Cor}(Z_{11}, Z_{22}) = \hbox{Cor}(Z_{22}, Z_{11}) \approx \hbox{Cor}(Z_{11}, Z_{21}) \hbox{Cor}(Z_{21}Z_{22}) $$
+$$
+\hbox{Cor}(Z_{11}, Z_{22}) = \hbox{Cor}(Z_{22}, Z_{11}) \approx \hbox{Cor}(Z_{11}, Z_{21}) \hbox{Cor}(Z_{21}Z_{22})
+$$
 
 which implies
 
-$$ \hbox{Cor}(Z_{11}, Z_{22}) = \frac{\hbox{Cov}(Z_{11}, Z_{21})} {\sqrt{\hbox{Var}(Z_{11})\hbox{Var}(Z_{22})}}$$
+$$
+\hbox{Cor}(Z_{11}, Z_{22}) = \frac{\hbox{Cov}(Z_{11}, Z_{21})} {\sqrt{\hbox{Var}(Z_{11})\hbox{Var}(Z_{22})}}
+$$
 
 ### Example 1
 
@@ -434,20 +445,32 @@ plot(corr_combo2, corr_combo2 - corr2,
 
 - First interim analysis
 
-$$\text{Pr}( G_1 > b_1 \mid H_1) = 1 - \text{Pr}(G_1 < b_1 \mid H_1) $$
+$$
+\text{Pr}( G_1 > b_1 \mid H_1) = 1 - \text{Pr}(G_1 < b_1 \mid H_1)
+$$
 
 - Second interim analysis
 
-$$\text{Pr}( a_1 < G_1 < b_1, G_2 > b_2  \mid H_1) = \text{Pr}(G_1 < a_1, G_2 < b_2 \mid H_1)$$
-$$- \text{Pr}(G_1 < b_1, G_2 < b_2 \mid H_1) - \text{Pr}(G_1 < a_1, G_2 < \infty \mid H_1)$$
-$$ + \text{Pr}(G_1 < b_1, G_2 < \infty \mid H_1)$$
+$$
+\text{Pr}( a_1 < G_1 < b_1, G_2 > b_2  \mid H_1) = \text{Pr}(G_1 < a_1, G_2 < b_2 \mid H_1)
+$$
+
+$$
+- \text{Pr}(G_1 < b_1, G_2 < b_2 \mid H_1) - \text{Pr}(G_1 < a_1, G_2 < \infty \mid H_1)
+$$
+
+$$
++ \text{Pr}(G_1 < b_1, G_2 < \infty \mid H_1)
+$$
 
 - General interim analysis
 
 - Denote $l = (a_1, a_{k-1}, b_k)$ and $u = (b_1, b_{k-1}, \infty)$
 - $\xi = \{\xi_j; \; j=1,\dots, 2^k\}$: is all $2^k$ possible combination of the elements in $l$ and $u$
 
-$$\text{Pr}( \cap_{i=1}^{k-1} a_i < G_i < b_i, G_k > b_k \mid H_1)  = \sum_{j=1}^{2^k} (-1)^{\sum_{i=1}^{k} I(\xi_i = l_i)} \text{Pr}(\cap_{i=1}^k G_k < \xi_i) $$
+$$
+\text{Pr}( \cap_{i=1}^{k-1} a_i < G_i < b_i, G_k > b_k \mid H_1)  = \sum_{j=1}^{2^k} (-1)^{\sum_{i=1}^{k} I(\xi_i = l_i)} \text{Pr}(\cap_{i=1}^k G_k < \xi_i)
+$$
 
 - The computation can be simplified if $a_i = - \infty$ up to $k$-th interim analysis.
 

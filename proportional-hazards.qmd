@@ -1,20 +1,23 @@
-# Proportional hazards {#proportional-hazards}
+# Proportional hazards {#sec-proportional-hazards}
+
+```{r, setup, file="_common.R", include=FALSE}
+```
 
 We consider designs under the assumption of proportional hazards in this chapter applying the **gsDesign** package.
 These will be most easily be developed using the gsDesign Shiny app at <https://rinpharma.shinyapps.io/gsdesign/>.
-We have saved designs that can be re-loaded into the app in the bookdown website at <https://github.com/keaven/gsd-deming>;
+We have saved designs that can be re-loaded into the app in the book website at <https://github.com/keaven/gsd-deming>;
 if you copy the repository to your local PC, you will be able to easily access these designs.
 
 After a brief review of methodology, we recreate designs and evaluate final inference for multiple published trials:
 
-- We begin with the KEYNOTE 189 trial [@KEYNOTE189] to show a straightforward, common application in metastatic (high-risk) cancer.
-- We proceed to the AFCAPS/TEXCAPS trial [@AFCAPSdesign] [@AFCAPSresults], a cardiovascular endpoint trial with much lower risk than a metastatic oncology trial.
+- We begin with the KEYNOTE-189 trial [@KEYNOTE189] to show a straightforward, common application in metastatic (high-risk) cancer.
+- We proceed to the AFCAPS/TEXCAPS trial [@AFCAPSdesign; @AFCAPSresults], a cardiovascular endpoint trial with much lower risk than a metastatic oncology trial.
 - Next, we look at the EXAMINE trial [@EXAMINEresults], a trial in diabetic patients evaluating a non-inferiority hypothesis for cardiovascular outcomes.
 
 We also create a design for a hypothetical trial in oncology where a long-term plateau in endpoints is likely. We approach this with a proportional hazards cure model.
 We also demonstrate the use of calendar-based spending for this example.
 
-## Lachin and Foulkes method {#lachin-foulkes}
+## Lachin and Foulkes method {#sec-lachin-foulkes}
 
 The **gsDesign** R package focuses on sample size and power derivation primarily on the method of Lachin and Foulkes [@LachinFoulkes].
 This allows simple specification of piecewise constant enrollment, failure rates and dropout rates which can approximate general distributions for each.
@@ -27,11 +30,11 @@ One place where we deviate from the Lachin and Foulkes method is when we approxi
 This should always be considered an approximation that is informative to those reviewing the design rather than a requirement to cross a bound.
 In any case, the approximation is that of @Schoenfeld1981, which is quite simple and implemented in the function `gsDesign::gsHR()`.
 
-## Metastatic oncology example {#mediansurvival}
+## Metastatic oncology example {#sec-median-survival}
 
-The KEYNOTE 189 trial (@KEYNOTE189) evaluated progression-free survival (PFS) and overall survival (OS) in patients with previously untreated metastatic non-small cell lung cancer (NSCLC).
+The KEYNOTE-189 trial (@KEYNOTE189) evaluated progression-free survival (PFS) and overall survival (OS) in patients with previously untreated metastatic non-small cell lung cancer (NSCLC).
 Patients were all treated with chemotherapy and randomized 2:1 to an add-on of pembrolizumab or placebo.
-The most important finding was: *After a median follow-up of 10.5 months, the estimated rate of overall survival at 12 months was 69.2\% (95\% confidence interval [CI], 64.1 to 73.8) in the pembrolizumab-combination group versus 49.4% (95\% CI, 42.1 to 56.2) in the placebo-combination group (hazard ratio for death, 0.49; 95\% CI, 0.38 to 0.64; P<0.001)* (@KEYNOTE189).
+The most important finding was: *After a median follow-up of 10.5 months, the estimated rate of overall survival at 12 months was 69.2\% (95\% confidence interval [CI], 64.1 to 73.8) in the pembrolizumab-combination group versus 49.4% (95\% CI, 42.1 to 56.2) in the placebo-combination group (hazard ratio for death, 0.49; 95\% CI, 0.38 to 0.64; P<0.001)* [@KEYNOTE189].
 
 The design allocated 0.025 family-wise error rate (FWER, also referred to as 1-sided Type I error) between PFS ($\alpha=0.095$) and OS ($\alpha=0.015$).
 The graphical method $\alpha$-control for group sequential design of @MaurerBretz2013 was used to control Type I error.
@@ -53,11 +56,14 @@ This sort of adjustment can limit any confusion over the computation of interim 
 
 The design is derived as:
 
-```{r, message = FALSE}
+```{r, warning=FALSE, message=FALSE}
 library(gsDesign)
 library(dplyr)
 library(gt)
+library(ggplot2)
+```
 
+```{r}
 KEYNOTE189design <- gsSurv(
   # Number of analyses
   k = 3,
@@ -107,7 +113,7 @@ We further describe the information in this table as follows:
   opening of enrollment.
 - Z-values are for standard normal test statistics with positive values
   representing a treatment benefit for the experimental group.
-- p-values are nominal p-values corresponding to the Z-values.
+- $p$-values are nominal $p$-values corresponding to the Z-values.
 - ~HR at bound is an asymptotic approximation for the hazard ratio required
   to cross a bound. This is not a criterion that must be met for Type I error control.
 - P(Cross) if HR=1 is the cumulative probability of crossing a bound
@@ -148,8 +154,8 @@ xu %>%
     deltaname = "HR", # Name of treatment difference measure
     logdelta = TRUE, # For survival, delta is on a log scale; this transforms
     Nname = "Events", # "N" for analyses is events for survival analysis
-    digits = 5, # decimals for numbers in body of table
-    ddigits = 2, # decimals for natural parameter; HR in this case
+    digits = 5, # Decimals for numbers in body of table
+    ddigits = 2, # Decimals for natural parameter; HR in this case
     tdigits = 1, # Time digits (not needed here)
     # We select key parameters for printing
     exclude = c(
@@ -160,11 +166,11 @@ xu %>%
   gt() %>%
   tab_header(
     title = "Updated bounds for interim analysis",
-    subtitle = "KEYNOTE 189 trial"
+    subtitle = "KEYNOTE-189 trial"
   )
 ```
 
-The p-value reported at interim 1 was <0.001 [@KEYNOTE189], establishing statistical significance relative to the bound of 0.00128 in the summary table above as well as in the publication.
+The $p$-value reported at interim 1 was <0.001 [@KEYNOTE189], establishing statistical significance relative to the bound of 0.00128 in the summary table above as well as in the publication.
 
 ## Cardiovascular outcomes reduction
 
@@ -263,7 +269,7 @@ gsBoundSummary(x) # Tabular summary of design
 ```
 
 All details are available through the list of items returned; see the help file or try `names(x)` to see what is available.
-As examples, we look at the number of events and nominal p-value bounds for the design.
+As examples, we look at the number of events and nominal $p$-value bounds for the design.
 Note that the events planned are continuous numbers rather than integers.
 Parameters have been chosen for the design so that these are very close to but less than whole numbers.
 This is not required, but can limit misinterpretations.
@@ -272,13 +278,13 @@ This is not required, but can limit misinterpretations.
 x$n.I # Events at planned analyses
 ```
 
-Here are the nominal 1-sided p-value bounds which could also be seen with the `gsBoundSummary(x)` command above.
+Here are the nominal 1-sided $p$-value bounds which could also be seen with the `gsBoundSummary(x)` command above.
 
 ```{r}
 pnorm(-x$upper$bound)
 ```
 
-Doubling these 1-sided bounds, we can compare to bounds from @AFCAPSdesign: *The group sequential boundary (2-sided, $\alpha = 0.05$) for the scheduled analyses is 2.947, 2.411, and 2.011, which correspond to p-values of 0.0032, 0.0159, and 0.0443, respectively.* We see the results are nearly identical.
+Doubling these 1-sided bounds, we can compare to bounds from @AFCAPSdesign: *The group sequential boundary (2-sided, $\alpha = 0.05$) for the scheduled analyses is 2.947, 2.411, and 2.011, which correspond to $p$-values of 0.0032, 0.0159, and 0.0443, respectively.* We see the results are nearly identical.
 
 From @AFCAPSresults, we have *After an average follow-up of 5.2 years, lovastatin reduced the incidence of first acute major coronary events (183 vs 116 first events; relative risk [RR], 0.63; 95% confidence interval [CI], 0.50-0.79; P<.001).` This was at the second interim analysis. We see immediately that the 299 events were less than the second planned analysis after 332 events.
 The bounds are easily adapted in the app. We provide the code generated with the design update provided by the app. We assumed the first interim was performed with the planned 240 events.
@@ -319,22 +325,19 @@ xu <- gsDesign(
 
 To inspect the resulting bounds, we run `gsBoundSummary()` again.
 Several parameters are useful to get the desired results, as noted in the comments.
-We note that either the Z or p-value bound is what is needed.
+We note that either the Z or $p$-value bound is what is needed.
 For analysis 2, the nominal 1-sided bound 0.0183 has clearly been exceeded by the p < 0.001 reported in the manuscript, confirming statistical significance for the trial.
 Since we did not know the actual events at interim 1 were not reported, the final bound for the trial may have been slightly different.
 You can see how much this changes by trying different event counts in the updated design specification in the app.
 
 ```{r, message = FALSE}
-library(dplyr)
-library(gt)
-
 gsBoundSummary(
   xu, # Updated design
   deltaname = "HR", # Name of treatment difference measure
   logdelta = TRUE, # For survival, delta is on a log scale; this transforms
   Nname = "Events", # "N" for analyses is events for survival analysis
-  digits = 4, # decimals for numbers in body of table
-  ddigits = 2, # decimals for natural parameter; HR in this case
+  digits = 4, # Decimals for numbers in body of table
+  ddigits = 2, # Decimals for natural parameter; HR in this case
   tdigits = 1, # Time digits (not needed here)
   # We select key parameters for printing
   exclude = c(
@@ -348,7 +351,7 @@ gsBoundSummary(
 
 ## Cardiovascular outcomes non-inferiority
 
-The EXAMINE trial (@EXAMINEresults) established non-inferiority for major cardiovascular outcomes (MACE) for the treatment of diabetes using the DPP4 inhibitor alogliptin compared to placebo.
+The EXAMINE trial [@EXAMINEresults] established non-inferiority for major cardiovascular outcomes (MACE) for the treatment of diabetes using the DPP4 inhibitor alogliptin compared to placebo.
 The design was described in @EXAMINEdesign.
 We approximate the design and primary analysis evaluation here.
 Software and some assumptions of the model were not completely clear, so this is not an exact reproduction of @AFCAPSdesign, but is very close.
@@ -489,7 +492,7 @@ See the following link for the Moderna COVID-19 design replication: <https://med
 
 Can you reproduce this using the Shiny interface?
 
-## Cure model {#poissonmixture}
+## Cure model {#sec-poisson-mixture}
 
 We consider a Poisson mixture model @deCastroGAMLSS which has also been referred to as a transformation cure model @Zhang2018 or promotion time cure model @Zeng2006.
 This model can be useful to approximate event accrual in a trial where there is a substantial portion of patients who are expected to have good long-term result.

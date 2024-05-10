@@ -1,7 +1,0 @@
-bookdown::bs4_book:
-  theme:
-    primary: "#00857C"
-    fg: "#0C2340"
-    bg: "#ffffff"
-  repo: https://github.com/keaven/gsd-deming
-  css: "style.css"

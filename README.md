@@ -1,17 +1,27 @@
 # Group Sequential Design Under Non-Proportional Hazard
 
+This is the code and text behind
+[Group Sequential Design Under Non-Proportional Hazards](https://keaven.github.io/gsd-deming/).
+
 Course material presented at the
 [77th Annual Deming Conference on Applied Statistics](https://demingconference.org/programs/2021-program/)
 in December 2021.
 
-The book is available at <https://keaven.github.io/gsd-deming/>.
+## Install dependencies
 
-The project is still under development.
+To build the book, first install Quarto.
 
-The document is maintained by a community.
-While reading the document, you can be a contributor as well.
-The quality of this document relies on you.
+Then, install the R packages used by the book with:
 
-- Authors: contributed the majority of content to at least one chapter.
-- Contributors: contributed at least one commit to the source code.
-- [List of authors and contributors](https://keaven.github.io/gsd-deming/preface.html#authors-and-contributors)
+```r
+# install.packages("remotes")
+remotes::install_deps()
+```
+
+## Build the book
+
+In RStudio IDE, press Cmd/Ctrl + Shift + B. Or run:
+
+```r
+quarto::quarto_render()
+```

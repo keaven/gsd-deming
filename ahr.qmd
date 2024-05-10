@@ -1,15 +1,19 @@
-# Average hazard ratio {#ahr}
+# Average hazard ratio {#sec-ahr}
+
+```{r, setup, file="_common.R", include=FALSE}
+```
 
 We consider designs for non-proportional hazards in this chapter.
 Because of its importance for regulatory applications, we focus here on the logrank tests.
-Others tests will be considered in Chapter \@ref(overview-other-tests).
+Others tests will be considered in the chapters of the "other tests" part.
 
 ## Piecewise model
 
 To model a time-varying hazard ratio, we consider a model where failure rates for experimental and control groups are piecewise constant.
 Since this model can use arbitrarily small piecewise intervals, this is not really a restriction.
 In concept, this is an extension of the piecewise proportional hazards model of @LachinFoulkes.
-Suppose the piecewise constant changes at the change points $0 = t_0 < t_1 < \cdots < t_M \le \infty$, and for each individual interval $(t_{m-1}, t_m]$ for $m = 1, \ldots, M$, the hazard ratio is a constant $HR_m$ (experimental:control) , i.e.,
+Suppose the piecewise constant changes at the change points $0 = t_0 < t_1 < \cdots < t_M \le \infty$, and for each individual interval $(t_{m-1}, t_m]$ for $m = 1, \ldots, M$, the hazard ratio is a constant $HR_m$ (experimental:control), i.e.,
+
 $$
   \text{hazard ratio}
   =
@@ -22,7 +26,9 @@ $$
   \end{array}
   \right..
 $$
+
 For any $m = 1, \ldots, M$,
+
 $$
   HR_m = \lambda_{1,m} / \lambda_{0,m},
 $$
@@ -31,16 +37,13 @@ As in @LachinFoulkes, we will also assume an exponential dropout rate $\eta_{i,m
 While not necessary, in software implementation in the **gsDesign2** and **gsdmvn** packages, we simplified to $\eta_{0,m}=\eta_{1,m}=\eta_m, m=1,\ldots,M$.
 
 We will denote
-\begin{equation}
-   (\#eq:AhrLambdaGamma)
-   \lambda_{i,m} = e^{\gamma_{i, m}}.
-\end{equation}
 
-
+$$
+\lambda_{i,m} = e^{\gamma_{i, m}}.
+$$ {#eq-AhrLambdaGamma}
 
 By using the delta method, we get the asymptotic distribution of $\widehat\lambda_{i,m}$ as
-\begin{equation}
-  (\#eq:AhrIndividualHazardRateDist)
+$$
   \log(\widehat\lambda_{i,m})
   \overset{\cdot}{\sim}
   \text{Normal}
@@ -49,13 +52,13 @@ By using the delta method, we get the asymptotic distribution of $\widehat\lambd
   \right),
   \;\;
   \forall i \in \{0, 1\}
-\end{equation}
+$$ {#eq-AhrIndividualHazardRateDist}
 
 With the estimation of $\{\lambda_{i,m}\}_{i=0,1 \text{ and } m = 1, \ldots, M}$, it is not complicated to get the estimation and the asymptotic distribution of $HR_m$, which is defined as $HR_m = \lambda_{1,m}/\lambda_{0,m}$.
 In this chapter, we are interested in the logarithm of $HR_m$ and denote it as $\beta_m$.
 Recall that
-\begin{equation}
-  (\#eq:AhrSingleHazardRatioDef)
+
+$$
   \beta_m
   \triangleq
   \log(HR_m)
@@ -63,16 +66,19 @@ Recall that
   \log\left( \frac{\lambda_{1,m}}{\lambda_{0,m}} \right)
   =
   \log(\lambda_{1,m}) - \log(\lambda_{0,m}).
-\end{equation}
+$$ {#eq-AhrSingleHazardRatioDef}
+
 For both $\lambda_{1,m}$ and $\lambda_{0,m}$ above, we know they can be estimated by
+
 $$
-  \widehat\lambda_{i,m} = \frac{d_{i,m}}{T_{i, m}} \;\; i \in\{0, 1\}
+\widehat\lambda_{i,m} = \frac{d_{i,m}}{T_{i, m}} \;\; i \in\{0, 1\}
 $$
+
 where $d_{0,m}, d_{1,m}$ are number of events in $(t_{m-1}, t_m]$ for group $0,1$, respectively.
 
-By plugging the asymptotic distribution of $\{\lambda_{0, m}, \lambda_{1,m}\}$ in equation \@ref(eq:AhrIndividualHazardRateDist) into \@ref(eq:AhrSingleHazardRatioDef), we can derive the asymptotic distribution of $\beta_m$:
-\begin{equation}
-  (\#eq:AhrSignleLogHazardRatio)
+By plugging the asymptotic distribution of $\{\lambda_{0, m}, \lambda_{1,m}\}$ in @eq-AhrIndividualHazardRateDist into @eq-AhrSingleHazardRatioDef, we can derive the asymptotic distribution of $\beta_m$:
+
+$$
   \widehat\beta_m
   \overset{\cdot}{\sim}
   \text{Normal}
@@ -81,38 +87,55 @@ By plugging the asymptotic distribution of $\{\lambda_{0, m}, \lambda_{1,m}\}$ i
     \frac{1}{D_{0m}} + \frac{1}{D_{1m}}
   \right)
   \;\; \forall m = 1,\ldots, M .
-\end{equation}
+$$ {#eq-AhrSignleLogHazardRatio}
 
-## Average hazard ratio {#secAhr}
+## Average hazard ratio {#sec-secAhr}
 
 In this section, we define the average hazard ratio (AHR) and use it  to derive the asymptotic normal distribution of the logrank test.
 This is actually a weighted geometric mean of the hazard ratio in piecewise intervals we defined above.
 Defining $\beta_m=\log(\lambda_{1,m}/\lambda_{0,m})= \log(\lambda_{1,m})-\log(\lambda_{0,m}), m=1,\ldots,M$, we define the logarithm of AHR as a weighted sum of the individual log hazard ratios:
+
 $$
   \beta
   =
   \sum_{m=1}^M w_m \log(HR_m)=\sum_{m=1}^M w_m \beta_m=\sum_{m=1}^Mw_m(\log(\lambda_{1,m})-\log(\lambda_{0,m})).
 $$
+
 For $w_m$ we propose inverse variance weighting which is based on expected number of events expected in each treatment group in $(t_{m-1},t_m],$ $m=1,\ldots,M$.
 We denote $d_{i,m}, T_{i,m},$ $i=0,1,$ $m=1,\ldots,M$ the observed events and total time at risk in treatment group $i$ during period $(t_{m-1},t_m]$.
 Thus, for $m=1,\ldots,M$ we have
 
-$$w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,j}))^{-1}}.$$
-The corresponding estimate of $\log(\lambda_{i,m}), i=0,1, m=1,\ldots,M$  is
-$$\hat{\gamma}_{i,m}=\log\hat\lambda_{i,m} = \log(d_{i,m}/T_{i,m})$$
+$$
+w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,j}))^{-1}}.
+$$
+
+The corresponding estimate of $\log(\lambda_{i,m}), i=0,1, m=1,\ldots,M$ is
+
+$$
+\hat{\gamma}_{i,m}=\log\hat\lambda_{i,m} = \log(d_{i,m}/T_{i,m})
+$$
+
 which is asymptotically normal with variance
-$$\text{Var}(\hat\gamma_{i,m})=1/E(d_{i,m})$$
+
+$$
+\text{Var}(\hat\gamma_{i,m})=1/E(d_{i,m})
+$$
+
 and variance estimate
-$$\widehat{\text{Var}}(\hat\gamma_{i,m})=1/d_{i,m}.$$
+
+$$
+\widehat{\text{Var}}(\hat\gamma_{i,m})=1/d_{i,m}.
+$$
+
 We propose to estimate $\beta$ using estimated weights under the piecewise model.
-\begin{equation}
-  (#eq:AhrBetaEstimation)
+
+$$
   \tilde\beta
   =
   \sum_{m=1}^M
   \hat{w}_m
   \left(\hat\gamma_{1,m} - \hat\gamma_{0,m}\right)
-\end{equation}
+$$ {#eq-AhrBetaEstimation}
 
 For the selection of weight $\hat{w}_m,$ $m = 1, \ldots, M$, we use inverse variance weighting
 $$
@@ -128,7 +151,9 @@ $$
     \frac{1}{1/d_{0,i}+1/d_{1,i}}
   \right)^{-1}.
 $$
-By plugging the above weights into equation \@ref(eq:AhrBetaEstimation), $\beta$ can be estimated as
+
+By plugging the above weights into @eq-AhrBetaEstimation, $\beta$ can be estimated as
+
 $$
   \tilde\beta
   =
@@ -141,21 +166,28 @@ $$
     \left( \frac{1}{d_{0,m}}+\frac{1}{d_{1,m}} \right)^{-1}
   }.
 $$
+
 The corresponding variance estimate is:
+
 $$
   \widehat{\hbox{Var}}(\tilde\beta)
   =
   \left(\sum_{m=1}^M(1/d_{0,m} + 1/d_{1,m})^{-1}\right)^{-1}.
 $$
 
-By plugging the asymptotic distribution of $\hat\beta_m$ in equation \@ref(eq:AhrSignleLogHazardRatio), one gets the asymptotic distribution of $\tilde\beta$ as
+By plugging the asymptotic distribution of $\hat\beta_m$ in @eq-AhrSignleLogHazardRatio, one gets the asymptotic distribution of $\tilde\beta$ as
 
 $$
   \tilde\beta
   \overset{\cdot}{\sim}
   \hbox{Normal}(\beta, \; \mathcal{I}^{-1}),
 $$
-where $$\mathcal{I} = \sum_{m = 1}^M \left( \frac{1}{E(d_{0,m})} + \frac{1}{E(d_{1,m})} \right)^{-1}.$$
+
+where
+
+$$
+\mathcal{I} = \sum_{m = 1}^M \left( \frac{1}{E(d_{0,m})} + \frac{1}{E(d_{1,m})} \right)^{-1}.
+$$
 
 Not shown here is that this is the asymptotic distribution of the logrank test under the piecewise model which follows by the results of @Schoenfeld1981.
 The details for computing $E(d_{i,m}),$, $i=0,1$, $m=1,\ldots,M$ under the piecewise model are demonstrated in a vignette in the **gsDesign2** package.
@@ -163,12 +195,23 @@ These computations form the basis for the asymptotic approximations for power an
 
 ## Examples
 
-In this section, we introduce 7 examples to help reader
+In this section, we introduce 7 examples to help readers:
 
-- learn more about AHR by visualization;
-- learn the calculation of AHR by using the R package **gsDesign2** and **gsdmvn**.
+- Learn more about AHR by visualization.
+- Learn the calculation of AHR by using the R package **gsDesign2** and **gsdmvn**.
 
-### Example 1 {#SecAhrEgAhrVsTime}
+```{r, warning=FALSE, message=FALSE}
+library(survival)
+library(dplyr)
+library(ggplot2)
+library(gt)
+library(simtrial)
+library(gsDesign)
+library(gsDesign2)
+library(gsdmvn)
+```
+
+### Example 1 {#sec-SecAhrEgAhrVsTime}
 
 In this example, we assume the enrollment rate is a constant with $12$ month targeted enrollment.
 And we further assume the dropout rate is exponential, i.e., $0.001$ per month.
@@ -183,9 +226,9 @@ xx <- gsDesign2::AHR(
   # the enrollment rate is a constant with $12$ month targeted enrollment
   enrollRates = tibble::tibble(Stratum = "All", duration = 12, rate = 100 / 12),
   failRates = tibble::tibble(
-    Stratum = "All", 
+    Stratum = "All",
     # failure rate is assumed as exponential with the median of 15 months
-    failRate = log(2) / 15, 
+    failRate = log(2) / 15,
     # hazard ratio is assumed as 1 for the first 4 month, and 0.6 thereafter.
     hr = c(1, 0.6),
     duration = c(4, 100),
@@ -198,17 +241,21 @@ xx <- gsDesign2::AHR(
   ratio = 1
 )
 ```
+
 Its AHR plot can be found below, where its AHR steeps drop after $4$ months and leveling after about $24$ months.
+
 ```{r, echo=TRUE, warning=TRUE, message=FALSE}
 # plot the AHR curve
-ggplot(xx, aes(x = Time, y = AHR) ) +
-  geom_line(size = 2) +
+ggplot(xx, aes(x = Time, y = AHR)) +
+  geom_line(linewidth = 2) +
   ggtitle("AHR (Geometric Average Hazard Ratio) Over Time") +
   scale_x_continuous(breaks = seq(0, 36, 6)) +
   ylab("AHR") +
   xlab("Month") +
-  annotate(geom = "text", x = 20, y = .9, size = 6,
-           label = "Steep drop after 4 months\n leveling after about 24 months") +
+  annotate(
+    geom = "text", x = 20, y = .9, size = 6,
+    label = "Steep drop after 4 months\n leveling after about 24 months"
+  ) +
   theme_bw() +
   theme(
     axis.text = element_text(size = 14, colour = "black"),
@@ -219,14 +266,18 @@ ggplot(xx, aes(x = Time, y = AHR) ) +
 Then, we are interested to figure out the expected events per $100$ enrolled and find out that we need $35$-$40$ months until $65$\%-$70$\% have events.
 ```{r, echo=TRUE, warning=TRUE, message=FALSE}
 # plot AHR
-ggplot(xx %>%
-         group_by(Time) %>%
-         summarize(Events = sum(Events)), 
-       aes(x = Time, y = Events)) +
-  geom_line(size = 2) +
+ggplot(
+  xx %>%
+    group_by(Time) %>%
+    summarize(Events = sum(Events)),
+  aes(x = Time, y = Events)
+) +
+  geom_line(linewidth = 2) +
   scale_y_continuous(breaks = seq(0, 100, 10)) +
-  annotate(geom = "text", x = 28, y = 20, size = 6,
-           label = "Need 35-40 months until\n 65%-70% have events") +
+  annotate(
+    geom = "text", x = 28, y = 20, size = 6,
+    label = "Need 35-40 months until\n 65%-70% have events"
+  ) +
   scale_x_continuous(breaks = seq(0, 42, 6)) +
   ggtitle("Expected Events per 100 Enrolled") +
   theme_bw() +
@@ -238,7 +289,7 @@ ggplot(xx %>%
   xlab("Month")
 ```
 
-### Example 2 {#SecAhrEgAhrVsPower}
+### Example 2 {#sec-SecAhrEgAhrVsPower}
 
 In this example, we assume there are $332$ events and investigate the correlation between AHR and power.
 For AHR, we are interested in the range from $0.6$ to $1$ with intervals of $0.02$.
@@ -246,23 +297,32 @@ For power, it can be calculated by `gsDesign::nEvents()`.
 The correlation between AHR and power can be found in the following figure.
 
 ```{r, warning=FALSE, message=FALSE}
-ggplot(tibble(# interested in the range from 0.6 to 1 with intervals of 0.02
-              AHR = seq(.6, 1, .02), 
-              # power can be calculated by gsDesign::nEvents()
-              Power = gsDesign::nEvents(# assume there are 332 events
-                                        n = 332,
-                                        # if beta = NULL and n = number of events, 
-                                        # then power is computed instead of events required
-                                        beta = NULL, 
-                                        hr = seq(.6, 1, .02))), 
-       aes(x = AHR, y = Power)) +
-  geom_line(size = 2) +
+ggplot(
+  tibble(
+    # Interested in the range from 0.6 to 1 with intervals of 0.02
+    AHR = seq(.6, 1, .02),
+    # Power can be calculated by gsDesign::nEvents()
+    Power = gsDesign::nEvents( # assume there are 332 events
+      n = 332,
+      # If beta = NULL and n = number of events,
+      # then power is computed instead of events required
+      beta = NULL,
+      hr = seq(.6, 1, .02)
+    )
+  ),
+  aes(x = AHR, y = Power)
+) +
+  geom_line(linewidth = 2) +
   scale_y_continuous(labels = scales::percent, breaks = seq(0, 1, .2)) +
   ggtitle("Power by AHR, 332 Events, alpha=0.025, 1-sided") +
-  annotate(geom = "text", x = .7, y = .3, size = 6,
-           label = "Steep power decrease\n with increasing AHR") +
-  annotate(geom = "text", x = .88, y = .83, size = 6,
-           label = "Ensure follow-up sufficient\n to capture meaningful AHR") +
+  annotate(
+    geom = "text", x = .7, y = .3, size = 6,
+    label = "Steep power decrease\n with increasing AHR"
+  ) +
+  annotate(
+    geom = "text", x = .88, y = .83, size = 6,
+    label = "Ensure follow-up sufficient\n to capture meaningful AHR"
+  ) +
   theme_bw() +
   theme(
     axis.text = element_text(size = 18, colour = "black"),
@@ -271,41 +331,38 @@ ggplot(tibble(# interested in the range from 0.6 to 1 with intervals of 0.02
   )
 ```
 
-### Example 3 {#SecAhrEgCalcTiming}
+### Example 3 {#sec-SecAhrEgCalcTiming}
 
-In this example, we discuss the group sequential design with spending bounds. 
+In this example, we discuss the group sequential design with spending bounds.
 And we will show how to calculate the interim timing, final timing, effect size, and information by `gsDesign2::AHR()`.
 We assume the analysis is conducted after $12, 20, 28, 36$ months and the sample size is $500$.
 we further assume the enrollment rate is a constant with $12$ month targeted enrollment.
 And we further assume the dropout rate is exponential, i.e., $0.001$ per month.
 Besides, the failure rate is assumed as exponential with the median of $15$ months.
 The hazard ratio is assumed as $1$ for the first $4$ month, and $0.6$ thereafter.
+
 ```{r, echo=TRUE}
-library(survival)
-library(dplyr)
-library(simtrial)
-library(gsDesign)
-library(gsDesign2)
-library(gsdmvn)
-# assume the analysis is conducted after 12, 20, 28, 36 months
+# Assume the analysis is conducted after 12, 20, 28, 36 months
 analysisTimes <- c(12, 20, 28, 36)
-# sample size is 500
+# Sample size is 500
 sampleSize <- 500
-# enrollment rates
-enrollRates <- tibble(Stratum = "All", 
-                      # assume the enrollment rate is a constant with 
-                      # 12 month targeted enrollment.
-                      duration = 12, 
-                      rate = sampleSize / 12)
-# failure rates
+# Enrollment rates
+enrollRates <- tibble(
+  Stratum = "All",
+  # Assume the enrollment rate is a constant with
+  # 12 month targeted enrollment.
+  duration = 12,
+  rate = sampleSize / 12
+)
+# Failure rates
 failRates <- tibble(
   Stratum = "All",
-  # failure rate is assumed as exponential with the median of 15 months.
+  # Failure rate is assumed as exponential with the median of 15 months.
   failRate = log(2) / 15,
-  # hazard ratio is assumed as $1$ for the first 4 month, and $0.6$ thereafter.
+  # Hazard ratio is assumed as $1$ for the first 4 month, and $0.6$ thereafter.
   hr = c(1, .6),
   duration = c(4, 100),
-  # dropout rate is exponential, i.e., 0.001 per month
+  # Dropout rate is exponential, i.e., 0.001 per month
   dropoutRate = 0.001
 )
 ```
@@ -317,15 +374,15 @@ ahr <- gsDesign2::AHR(
   failRates = failRates,
   totalDuration = analysisTimes,
   ratio = 1
-) %>% mutate(timing = c(info0[1:3] / info0[4], 1)) 
+) %>% mutate(timing = c(info0[1:3] / info0[4], 1))
 
-ahr %>% 
+ahr %>%
   gt() %>%
   fmt_number(col = 2, decimals = 2) %>%
-  fmt_number(col = 3:6, decimals = 2) 
+  fmt_number(col = 3:6, decimals = 2)
 ```
 
-### Example 4 {#SecAhrEgPhNphOneSided}
+### Example 4 {#sec-SecAhrEgPhNphOneSided}
 
 In this example, we compare proportional hazard with non-proportional hazard, regarding of the sample size and crossing probability.
 In this example, we consider the one-sided design.
@@ -334,51 +391,51 @@ For the calculation of proportional hazard, we use R function `gsDesign::gsSurv(
 For the calculation of non-proportional hazard, we use R function `gsdmvn::gs_design_ahr()`.
 
 First, we calculate the sample size and crossing probability under proportional hazard.
-And we find the sample size is $444$ with $297$ events. 
+And we find the sample size is $444$ with $297$ events.
 The crossing probabilities at the first, second, third and final interim analysis are $0.0289, 0.4999, 0.7916, 0.9000$ under $H_1$.
 ```{r, echo=TRUE}
 # Derive Group Sequential Design
-PH1sided <- gsDesign::gsSurv( 
+PH1sided <- gsDesign::gsSurv(
   # Number of analyses (interim + final)
-  k = 4, 
+  k = 4,
   # use this for 1-sided testing
-  test.type = 1, 
+  test.type = 1,
   # 1-sided Type I error
-  alpha = 0.025, 
+  alpha = 0.025,
   # Type II error (1 - power)
-  beta = 0.1, 
+  beta = 0.1,
   # Information fraction for interim
-  timing = ahr$timing, 
+  timing = ahr$timing,
   # O'Brien-Fleming spending approximation
-  sfu = sfLDOF, 
+  sfu = sfLDOF,
   # Piecewise control failure rates
   lambdaC = failRates$failRate,
-   # Used final analysis AHR
+  # Used final analysis AHR
   hr = ahr$AHR[4],
   # Piecewise exponential dropout rates
   eta = failRates$dropoutRate,
   # Relative enrollment
-  gamma = enrollRates$rate, 
+  gamma = enrollRates$rate,
   # Duration of piecewise enrollment rates
-  R = enrollRates$duration, 
+  R = enrollRates$duration,
   # Duration of piecewise failure rates (K-1)
-  S = failRates$duration[1], 
+  S = failRates$duration[1],
   # Study duration
-  T = max(analysisTimes), 
+  T = max(analysisTimes),
   # Minimum follow-up
-  minfup = max(analysisTimes) - sum(enrollRates$duration), 
+  minfup = max(analysisTimes) - sum(enrollRates$duration),
   # Experimental:Control randomization ratio
-  ratio = 1 
+  ratio = 1
 )
 
-gsBoundSummary(PH1sided) %>%  gt()
+gsBoundSummary(PH1sided) %>% gt()
 ```
 
 Second, we calculate the sample size and crossing probability under non-proportional hazard.
-And we find the sample size is $465$ with $308$ events (you will want to round up events and sample size). 
+And we find the sample size is $465$ with $308$ events (you will want to round up events and sample size).
 The crossing probabilities at the first, second, third and final interim analysis are $0.0019, 0.3024, 0.7329, 0.9000$ under $H_1$.
+
 ```{r, echo=TRUE}
-library(gsdmvn)
 # Spending function setup
 NPH1sided <- gs_design_ahr(
   enrollRates = enrollRates,
@@ -399,10 +456,10 @@ NPH1sided <- gs_design_ahr(
 NPH1sided$bounds %>%
   filter(Bound == "Upper") %>%
   gt() %>%
-  fmt_number(col = c(1,3), decimals = 0) %>%
-  fmt_number(col=c(4:5, 10:11), decimals = 1) %>%
-  fmt_number(col=6:7, decimals = 4) %>%
-  fmt_number(col=8:9, decimals = 3)
+  fmt_number(col = c(1, 3), decimals = 0) %>%
+  fmt_number(col = c(4:5, 10:11), decimals = 1) %>%
+  fmt_number(col = 6:7, decimals = 4) %>%
+  fmt_number(col = 8:9, decimals = 3)
 ```
 
 Comparing the proportional hazard with non-proportional hazard, we find that
@@ -410,10 +467,10 @@ Comparing the proportional hazard with non-proportional hazard, we find that
 - Interim boundary crossing probability much lower than with proportional hazard bounds.
 - Sample size larger than for proportional hazard.
 
-### Example 5 {#SecAhrEgPhNphSymmetric}
+### Example 5 {#sec-SecAhrEgPhNphSymmetric}
 
 In this example, we compare proportional hazard with non-proportional hazard.
-Here, we consider the symmetric design: 
+Here, we consider the symmetric design:
 $$
   \begin{align}
   f(s_k,\alpha)-f(s_{k-1},\alpha)
@@ -425,7 +482,7 @@ The common practice is to use binding upper and lower bounds.
 In this example, we use two one-sided tests for $\alpha-$spending.
 
 First, we calculate the sample size and crossing probability under proportional hazard by `gsDesign::gsSurv()`.
-And we find the sample size is $444$ with $297$ events. 
+And we find the sample size is $444$ with $297$ events.
 The probabilities to cross the upper boundary at the first, second, third and final interim analysis are $0.0289, 0.4999, 0.7916, 0.9000$ under $H_1$.
 The probabilities to cross the lower boundary at the first, second, third and final interim analysis are $0.0001, 0.0047, 0.0146, 0.0250$ under $H_0$.
 
@@ -433,47 +490,46 @@ The probabilities to cross the lower boundary at the first, second, third and fi
 # Derive Group Sequential Design
 PHsymmetric <- gsDesign::gsSurv(
   # Number of analyses (interim + final)
-  k = 4, 
-  # ONLY CHANGED FROM BEFORE 
-  test.type = 2, 
+  k = 4,
+  # ONLY CHANGED FROM BEFORE
+  test.type = 2,
   # 1-sided Type I error
   alpha = 0.025,
   # Type II error (1 - power)
-  beta = 0.1, 
+  beta = 0.1,
   # Information fraction for interims
-  timing = ahr$timing, 
+  timing = ahr$timing,
   # O'Brien-Fleming spending approximation
-  sfu = sfLDOF, 
+  sfu = sfLDOF,
   # Piecewise control failure rates
-  lambdaC = failRates$failRate, 
+  lambdaC = failRates$failRate,
   # Alternate hypothesis HR
-  hr = ahr$AHR[4], 
+  hr = ahr$AHR[4],
   # Piecewise exponential dropout rates
-  eta = failRates$dropoutRate, 
+  eta = failRates$dropoutRate,
   # Relative enrollment
-  gamma = enrollRates$rate, 
+  gamma = enrollRates$rate,
   # Duration of piecewise enrollment rates
-  R = enrollRates$duration, 
+  R = enrollRates$duration,
   # Duration of piecewise failure rates (K-1)
-  S = failRates$duration[1], 
+  S = failRates$duration[1],
   # Study duration
-  T = max(analysisTimes), 
+  T = max(analysisTimes),
   # Minimum follow-up
   minfup = max(analysisTimes) - sum(enrollRates$duration),
   # Experimental:Control randomization ratio
-  ratio = 1 
+  ratio = 1
 )
 
 gsBoundSummary(PHsymmetric) %>% gt()
 ```
 
 Second, we calculate the sample size and crossing probability under non-proportional hazard by `gsdmvn::gs_design_ahr()`.
-And we find the sample size is $465$ with $308$ events (you will want to round up events and sample size). 
+And we find the sample size is $465$ with $308$ events (you will want to round up events and sample size).
 The probabilities to cross the upper boundaries at the first, second, third and final interim analysis are $0.0019, 0.3024, 0.7329, 0.9000$ under $H_1$.
 The probabilities to cross the lower boundaries at the first, second, third and final interim analysis are $0.0000, 0.0000, 0.0000, 0.0000$ under $H_0$.
 
 ```{r, echo=TRUE}
-library(gsdmvn)
 NPHsymmetric <- gsdmvn::gs_design_ahr(
   enrollRates = enrollRates,
   failRates = failRates,
@@ -491,16 +547,16 @@ NPHsymmetric <- gsdmvn::gs_design_ahr(
 )
 NPHsymmetric$bounds %>%
   gt() %>%
-  fmt_number(col = c(1,3), decimals = 0) %>%
+  fmt_number(col = c(1, 3), decimals = 0) %>%
   fmt_number(col = c(4:5, 10:11), decimals = 1) %>%
   fmt_number(col = 6:7, decimals = 4) %>%
   fmt_number(col = 8:9, decimals = 3)
 ```
 
-### Example 6 {#SecAhrEgPhNphAsymmetric}
+### Example 6 {#sec-SecAhrEgPhNphAsymmetric}
 
 In this example, we compare proportional hazard with non-proportional hazard.
-Here, we consider the asymmetric design. 
+Here, we consider the asymmetric design.
 For upper boundary, we use non-binding upper bound with spending function $f_1(s,\alpha)$.
 For lower boundary, we use binding lower bound with spending function $f_2(s,\gamma)$ for some chosen $0 < \gamma \le 1-\alpha$, where $\gamma$ is the type II error.
 The boundaries are set to satisfy
@@ -515,7 +571,7 @@ $$
 For the last look, $K$-th look, generally, it is set as  $a_K = b_K$.
 
 First, we calculate the sample size and crossing probability under proportional hazard by `gsDesign::gsSurv()`.
-And we find the sample size is $476$ with $319$ events. 
+And we find the sample size is $476$ with $319$ events.
 The probabilities to cross the upper boundary at the first, second, third and final interim analysis are $0.0338, 0.5385, 0.8185, 0.9000$ under $H_1$.
 The probabilities to cross the lower boundary at the first, second, third and final interim analysis are $0.0143, 0.0393, 0.0687, 0.1000$ under $H_1$.
 
@@ -524,51 +580,51 @@ The probabilities to cross the lower boundary at the first, second, third and fi
 # Derive Group Sequential Design
 PHasymmetric <- gsDesign::gsSurv(
   # Number of analyses (interim + final)
-  k = 4, 
-  # ONLY CHANGED FROM BEFORE 
+  k = 4,
+  # ONLY CHANGED FROM BEFORE
   # non-binding futility bound
-  test.type = 4, 
+  test.type = 4,
   # 1-sided Type I error
-  alpha = 0.025, 
+  alpha = 0.025,
   # Type II error (1 - power)
-  beta = 0.1, 
+  beta = 0.1,
   # Information fraction for interims
-  timing = ahr$timing, 
+  timing = ahr$timing,
   # O'Brien-Fleming spending approximation
-  sfu = sfLDOF, 
+  sfu = sfLDOF,
   # Hwang-Shih-DeCani futility spending function
-  sfl = sfHSD, 
+  sfl = sfHSD,
   # Accelerate early spending somewhat
-  sflpar = -2, 
+  sflpar = -2,
   # Piecewise control failure rates
-  lambdaC = failRates$failRate, 
+  lambdaC = failRates$failRate,
   # Alternate hypothesis HR
-  hr = ahr$AHR[4], 
+  hr = ahr$AHR[4],
   # Piecewise exponential dropout rates
-  eta = failRates$dropoutRate, 
+  eta = failRates$dropoutRate,
   # Relative enrollment
-  gamma = enrollRates$rate, 
+  gamma = enrollRates$rate,
   # Duration of piecewise enrollment rates
-  R = enrollRates$duration, 
+  R = enrollRates$duration,
   # Duration of piecewise failure rates (K-1)
-  S = failRates$duration[1], 
+  S = failRates$duration[1],
   # Study duration
-  T = max(analysisTimes), 
+  T = max(analysisTimes),
   # Minimum follow-up
   minfup = max(analysisTimes) - sum(enrollRates$duration),
   # Experimental:Control randomization ratio
-  ratio = 1)
+  ratio = 1
+)
 
 gsBoundSummary(PHasymmetric) %>% gt()
 ```
 
 Second, we calculate the sample size and crossing probability under non-proportional hazard by `gsdmvn::gs_design_ahr()`.
-And we find the sample size is $502$ with $333$ events (you will want to round up events and sample size). 
+And we find the sample size is $502$ with $333$ events (you will want to round up events and sample size).
 The probabilities to cross the upper boundaries at the first, second, third and final interim analysis are $0.0021, 0.3318, 0.7660, 0.9000$ under $H_1$.
 The probabilities to cross the lower boundaries at the first, second, third and final interim analysis are $0.0143, 0.0387, 0.0681, 0.1000$ under $H_0$.
 
 ```{r}
-library(gsdmvn)
 NPHasymmetric <- gsdmvn::gs_design_ahr(
   enrollRates = enrollRates,
   failRates = failRates,
@@ -579,13 +635,13 @@ NPHasymmetric <- gsdmvn::gs_design_ahr(
   upper = gs_spending_bound,
   lower = gs_spending_bound,
   # Spending function and parameters used
-  upar = list(sf = gsDesign::sfLDOF, total_spend = 0.025), 
+  upar = list(sf = gsDesign::sfLDOF, total_spend = 0.025),
   lpar = list(sf = gsDesign::sfHSD, total_spend = .1, param = -2)
 )
 
 NPHasymmetric$bounds %>%
   gt() %>%
-  fmt_number(col = c(1,3), decimals = 0) %>%
+  fmt_number(col = c(1, 3), decimals = 0) %>%
   fmt_number(col = c(4:5, 10:11), decimals = 1) %>%
   fmt_number(col = 6:7, decimals = 4) %>%
   fmt_number(col = 8:9, decimals = 3)
@@ -594,7 +650,7 @@ NPHasymmetric$bounds %>%
 This does important adjustment to futility bounds based on possibly delayed effect!
 - Note IA 1 futility bound under PH with `gsDesign()`: $Z=-0.25$
 
-### Example 7 {#SecAhrEgPhNphSpecStop}
+### Example 7 {#sec-SecAhrEgPhNphSpecStop}
 
 In this example, we discuss the design with interims at specified times, say, there are futility boundary only at the first interim analysis (look for $p=0.05$ in the wrong direction) and there are efficacy boundaries only after the first interim.
 This is a variation on asymmetric design.
@@ -610,12 +666,12 @@ NPHskip <- gsdmvn::gs_design_ahr(
   # Information fraction not required (but available!)
   analysisTimes = analysisTimes,
   # Upper spending bound
-  upper = gs_spending_bound, 
+  upper = gs_spending_bound,
   upar = list(sf = gsDesign::sfLDOF, total_spend = 0.025),
   # Skip first efficacy analysis
   test_upper = c(FALSE, TRUE, TRUE, TRUE),
   # Spending function and parameters used
-  lower = gs_b, 
+  lower = gs_b,
   lpar = c(qnorm(.05), rep(-Inf, 3))
 )
 
@@ -623,7 +679,7 @@ NPHskip$bounds %>%
   filter(abs(Z) < Inf) %>% # Throw out infinite bounds
   arrange(Analysis) %>% # Arrange by analysis
   gt() %>%
-  fmt_number(columns = c(1,3), decimals = 0) %>%
+  fmt_number(columns = c(1, 3), decimals = 0) %>%
   fmt_number(columns = c(4:5, 10:11), decimals = 1) %>%
   fmt_number(columns = 6:7, decimals = 4) %>%
   fmt_number(columns = 8:9, decimals = 3)

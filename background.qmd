@@ -1,9 +1,12 @@
 # Background
 
-## Non-proportional hazards {#nph}
+```{r, setup, file="_common.R", include=FALSE}
+```
+
+## Non-proportional hazards {#sec-nph}
 
 Non-proportional hazards (NPH) are very common to see when there is a delayed effect.
-One example is given by KEYNOTE040, which targets to cure recurrent head and neck squamous cell carcinoma.
+One example is given by KEYNOTE-040, which targets to cure recurrent head and neck squamous cell carcinoma.
 There are two arms, one is pembrolizumab, and the other is standard of care (SOC).
 The randomization ratio is 1:1 and the total sample size is 495.
 The primary endpoint is overall survival (OS) with 90\% power for HR=0.7, 1-sided $\alpha=0.025$
@@ -12,9 +15,13 @@ The primary endpoint is overall survival (OS) with 90\% power for HR=0.7, 1-side
 There are two interim analysis planned, one at 144 deaths (with information fraction as 0.42) and the other at 216 deaths (with information fraction as 0.64).
 The efficacy boundary is Hwang-Shih-DeCani (HSD) spending with $\gamma=-4$, and the futility boundary is non-binding $\beta$-spending HSD with $\gamma = -16$.
 The final analysis finds there are 388 deaths, compared with 340 planned death.
-The 1-sided nominal p-value for OS at the final analysis is 0.0161.
+The 1-sided nominal $p$-value for OS at the final analysis is 0.0161.
 
-```{r, echo=FALSE, fig.cap="KEYNOTE040",out.width = '100%'}
+```{r}
+#| fig-keynote-040,
+#| echo=FALSE,
+#| fig.cap="KEYNOTE-040",
+#| out.width="100%"
 knitr::include_graphics("./images/ahr_slides_KEYNOTE040.PNG")
 ```
 
@@ -23,26 +30,34 @@ From the figure above, we can see there is a delay of the treatment effect.
 The delayed effect is not just in oncology, it also lies in other TA.
 For example, in cholesterol lowering and mortality [@simva4s], there is also a delayed effect.
 
-```{r, echo=FALSE, fig.cap="Scandinavian Simvastatin Survival Study", out.width = '80%'}
+```{r}
+#| fig-ssss,
+#| echo=FALSE,
+#| fig.cap="Scandinavian Simvastatin Survival Study",
+#| out.width="80%"
 knitr::include_graphics("./images/ahr_slides_SSSS.jpeg")
 ```
 
 In addition to delayed effect, NPH also exists when there is a cross over of survival curves.
-For example, in KEYNOTE061 (recurrent advanced gastric or gastro-oesophageal junction cancer), there is a cross over of the pembrolizumab arm and paclitaxel arm (see figure below).
+For example, in KEYNOTE-061 (recurrent advanced gastric or gastro-oesophageal junction cancer), there is a cross over of the pembrolizumab arm and paclitaxel arm (see figure below).
 It is 1:1 randomization with 360 planned events (395 actual events) at the end of the trial in CPS $\ge$ 1 population.
 The first primary endpoints is OS in PD-L1 CPS $\ge$ 1.
 Its power is 91\% for HR=0.67 with 1-sided $\alpha=0.0215$.
 The secondary primary endpoints is PFS in PD-L1 CPS $\ge$ 1.
-(The detailed design can be found in the  [protocol](https://ars.els-cdn.com/content/image/1-s2.0-S0140673618312571-mmc1.pdf)
+(The detailed design can be found in the
+[protocol](https://ars.els-cdn.com/content/image/1-s2.0-S0140673618312571-mmc1.pdf).)
 
 When it proceeded to final analysis, there are 326 deaths with 290 planned.
 One interim analysis is conducted with 240 events at information fraction of 0.83.
 During the group sequential design, the efficacy boundary is Hwang-Shih-DeCani (HSD) spending with $\gamma=-4$ and there is not a futility boundary.
-The 1-sided nominal p-value for OS is 0.0421 (threshold: p=0.0135).
-And *Post hoc* FH($\rho=1,\gamma=1$) is  p=0.0009.
+The 1-sided nominal $p$-value for OS is 0.0421 (threshold: $p$=0.0135).
+And *Post hoc* FH($\rho=1,\gamma=1$) is $p$=0.0009.
 
-KEYNOTE 061: Overall Survival in CPS 1
-```{r, echo=FALSE, fig.cap="KEYNOTE061",out.width = '100%'}
+```{r}
+#| fig-keynote-061,
+#| echo=FALSE,
+#| fig.cap="KEYNOTE 061: Overall Survival in CPS 1.",
+#| out.width="100%"
 knitr::include_graphics("./images/ahr_slides_KEYNOTE061OS.PNG")
 ```
 
@@ -56,12 +71,12 @@ The above two examples motivate us to think about the following questions:
 - Updating bounds
 - Multiplicity adjustments
 
-### Group sequential design {#gsd}
+### Group sequential design {#sec-gsd}
 
 In group sequential design, groups of observations are collected and repeatedly analyzed, while controlling error rates.
 While the group sequential design is ongoing, a stopping rule specifies when and why a trial might be halted at these points.
 This stopping rule usually consists of two components, a test statistic and a threshold.
-The threshold is usually decided by the spending functions, which we introduced in Section \@ref(sf).
+The threshold is usually decided by the spending functions, which we introduced in @sec-sf.
 And the test statistics are usually the Z-process and B-process, which are used to monitor the treatment effect under group sequential design.
 If a Z-process (B-process) cross the boundary, the trial is stopped.
 
@@ -72,40 +87,37 @@ Suppose in the group sequential design, there are totally $K$ looks.
 In the $k$-th look, there are $n_k$ available observations.
 For notation simplicity, we denote the final number of available observations as $N$, i.e., $N \triangleq n_K$.
 
-:::{.definition #DefZprocess}
+::: {#def-Zprocess}
 The Z-process is defined as the standardized treatment effect, i.e.,
-\begin{equation}
+$$
   Z_{k}
   =
   \frac{\widehat\theta_k}{\sqrt{\hbox{Var}(\hat\theta_k)}},
-  (\#eq:DefZprocess)
-\end{equation}
+$$ {#eq-DefZprocess}
 where $k$ is the index of the looks, and we assume there are totally $K$ number of looks, i.e., $k = 1, 2, \ldots, K$.
 The numerator $\widehat\theta_k$ is the treatment effect estimated at the $k$-th look.
 :::
 
 For $\widehat\theta_k$, its form depends on the outcome of the clinical trials.
 In clinical trials with continuous outcome $X_1, X_2, \ldots \in \mathbb R$, the treatment effect estimated at the $k$-th look is
-\begin{equation}
+$$
   \widehat{\theta}_k
   =
   \frac{\sum_{i=1}^{n_k} X_{i}}{n_k}\equiv \bar X_{k},
-  (\#eq:DefThetaK)
-\end{equation}
+$$ {#eq-DefThetaK}
 where $n_k$ is the number of available observations at the $k$-th look.
-In clinical trials with binary outcome  $X_1, X_2, \ldots \in \mathbb \{0, 1\}$, $\widehat\theta_k$ can be estimated the same as in equation \@ref(eq:DefThetaK).
+In clinical trials with binary outcome  $X_1, X_2, \ldots \in \mathbb \{0, 1\}$, $\widehat\theta_k$ can be estimated the same as in @eq-DefThetaK.
 In clinical trials with survival outcome, $\widehat\theta_k$ would typically represent a Cox model coefficient representing the logarithm of the hazard ratio for experimental vs. control treatment.
 And $n_k$ would represent the planned number of events at $k$-th look.
 
 After discussing the Z-process, let us take a look at the B-process.
 
-:::{.definition #DefBprocess}
+::: {#def-Bprocess}
 The B-process is defined as
-\begin{equation}
+$$
   B_{k} = \sqrt{t_k} Z_k,
-  (\#eq:DefBprocess)
-\end{equation}
-where $Z_k$ is defined in Definition \@ref(def:DefZprocess) and $t_k$ is the information fraction at the $k$-th look, i.e.,
+$$ {#eq-DefBprocess}
+where $Z_k$ is defined in @def-Zprocess and $t_k$ is the information fraction at the $k$-th look, i.e.,
 $$
   t_k = \mathcal I_k / \mathcal I_K,
 $$
@@ -120,7 +132,7 @@ For example, in a clinical trial with continuous outcome $X_1, X_2, \ldots \over
 The same logic applies to the binary outcome.
 Another example is a clinical trial with survival outcome. In this case, the information at the $k$-th look is $\mathcal I_k = n_k$ with $n_k$ as the number of events at the $k$-th look.
 
-### Canonical form {#sec:EcfCf}
+### Canonical form {#sec-EcfCf}
 
 In the group sequential design, given the total $K$ look, there are sequences of Z-process and B-process, i.e., $\{Z_k\}_{k = 1, \ldots, K}$ and $\{B_k\}_{k = 1, \ldots, K}$.
 The CF refers to the joint distribution of $\{Z_k\}_{k = 1, \ldots, K}$ and $\{B_k\}_{k = 1, \ldots, K}$, including the distribution, the expectation mean, variance and covariance.
@@ -132,9 +144,9 @@ $$
 $$
 This asymptotic assumed throughout this book.
 
-An important assumption of CF is $E(\widehat\theta_k) = \theta$, where $\theta$ is a constant and $\widehat\theta$ is defined in equation \@ref(eq:DefThetaK).
+An important assumption of CF is $E(\widehat\theta_k) = \theta$, where $\theta$ is a constant and $\widehat\theta$ is defined in @eq-DefThetaK.
 
-::: {.theorem #ThmZprocessDistCF}
+::: {#thm-ZprocessDistCF}
 Suppose in a group sequential design, there are totally $K$ looks.
 At the $k$-th look, there are $n_k$ available observations, i.e., $\{X_i\}_{i = 1, \ldots, n_k}$.
 Assume that $\text{Var}(X_i) = 1$ for $i = 1, 2, \ldots, N$.
@@ -157,9 +169,9 @@ If a statistics have the above distribution, we declare that it has the canonica
 From the above theorem, we found that CF treats $E(\widehat\theta)$ as a constant, i.e., $\theta$.
 Following the similar, we can also summarize the distribution of B-process.
 
-::: {.theorem #ThmBprocessDistCF}
-Following the same setting of Theorem \@ref(thm:ThmZprocessDistCF)
-The distribution of B-process is
+::: {#thm-BprocessDistCF}
+Following the same setting of @thm-ZprocessDistCF,
+the distribution of B-process is
 $$
 \left\{
 \begin{array}{l}
@@ -211,13 +223,13 @@ So we have
   Cov(Z_i, Z_j)
 \end{eqnarray}
 
-### Extended canonical form {#sec:EcfEcf}
+### Extended canonical form {#sec-EcfEcf}
 
 The main difference between extended canonical form (ECF) and canonical form (CF) is that, ECF treats $E(\widehat\theta_k)$ as a time-varying parameter, i.e., $\theta(t_k)$.
 While CF treats it as a constant $\theta$.
 So we summarize the joint distribution of Z-process and B-process under ECF as follows
 
-::: {.theorem #ThmZprocessDistCF}
+::: {#thm-ECF}
 Suppose in a group sequential design, there are totally $K$ looks.
 At the $k$-th look, there are $n_k$ available observations, i.e., $\{X_i\}_{i = 1, \ldots, n_k}$.
 Assume that $\text{Var}(X_i) = 1$ for $i = 1, 2, \ldots, N$.
@@ -252,7 +264,7 @@ If a statistics have the above distribution, we declare that it has the canonica
 # General multivariate normal theory and bound derivation from Yilong's WLR chapter.
 ```
 
-## Spending function bounds {#sf}
+## Spending function bounds {#sec-sf}
 
 In this section, we introduce the spending function bounds in group sequential design.
 We start with it definitions and categories.
@@ -279,13 +291,17 @@ In the remainder of this section, we will introduce the above spending functions
 
 The main idea of the Haybittle boundary is to set the interim Z-score boundary as 3 and the final boundary as 1.96, which is visualized in the figure below.
 
-```{r, echo=FALSE, fig.cap="Haybittle boundary",out.width = '50%'}
+```{r}
+#| fig-bound-haybittle,
+#| echo=FALSE,
+#| fig.cap="Haybittle boundary",
+#| out.width="50%"
 knitr::include_graphics("images/background_SF_Haybittle_boundary.png")
 ```
 
 The above Haybittle boundary has three modified versions.
 
-The first modified version uses Bonferroni adjustment: for the first $K-1$ analyses, the significant p-value is set as 0.001; and for the final analysis, the significant p-value is set as $0.05 - 0.01 \times (K-1)$.
+The first modified version uses Bonferroni adjustment: for the first $K-1$ analyses, the significant $p$-value is set as 0.001; and for the final analysis, the significant $p$-value is set as $0.05 - 0.01 \times (K-1)$.
 This modification helps to avoid type I error inflation.
 Besides, it does not require them to be equally spaced in terms of information and can be used regardless of the joint distribution of Z-score, i.e., $Z(t_1),...,Z(t_k)$.
 
@@ -316,7 +332,11 @@ $$
 $$
 where $c_P(K)$ is fixed given the number of total looks $K$ and chosen such that $\text{Pr}(\cup_{k=1}^{K} |Z(k/K)| > c_P(K)) = \alpha$.
 
-```{r, echo=FALSE, fig.cap="Pocock boundary",out.width = '50%'}
+```{r}
+#| fig-bound-pocock,
+#| echo=FALSE,
+#| fig.cap="Pocock boundary",
+#| out.width="50%"
 knitr::include_graphics("images/background_SF_Pocock_boundary.png")
 ```
 
@@ -342,7 +362,11 @@ O'Brien-Fleming boundary is very conservative at the beginning, which gives a re
 But it gives a nominal value close to the overall value of the design $\approx 1.96$ when two-sied $\alpha = 0.05$ for the final stage.
 Its visualization can be found as follows.
 
-```{r, echo=FALSE, fig.cap="OBrien-Fleming boundary",out.width = '50%'}
+```{r}
+#| fig-bound-obf,
+#| echo=FALSE,
+#| fig.cap="O'Brien-Fleming boundary",
+#| out.width="50%"
 knitr::include_graphics("images/background_SF_OBF_boundary.png")
 ```
 
@@ -374,7 +398,11 @@ The first difference is, the Pocock boundary has flat Z-score boundaries, while 
 Accordingly, the O'Brien-Fleming boundary makes it much more difficult to stop early than the Pocock boundary.
 However, the O'Brien-Fleming boundary extracts a much smaller price at the end.
 
-```{r, echo=FALSE, fig.cap="Pocock (circles) and O'Brien-Fleming (squares) z-score boundaries for four looks",out.width = '50%'}
+```{r}
+#| fig-bound-pocock-obf,
+#| echo=FALSE,
+#| fig.cap="Pocock (circles) and O'Brien-Fleming (squares) z-score boundaries for four looks",
+#| out.width="50%"
 knitr::include_graphics("images/background_SF_OF_P_t.png")
 ```
 
@@ -383,13 +411,21 @@ The second difference is, they have different performance in cumulative type I e
 - The Pocock cumulative type I error rate increases sharply at first, but much less so toward the end.
 - The O'Brien-Fleming behaves in just the opposite way.
 
-```{r, echo=FALSE, fig.cap="Cumulative type I error rate used by the Pocock (circles) and O'Brien-Fleming (squares) procedures with four looks.",out.width = '50%'}
+```{r}
+#| fig-sf-cumulative-type-i,
+#| echo=FALSE,
+#| fig.cap="Cumulative type I error rate used by the Pocock (circles) and O'Brien-Fleming (squares) procedures with four looks.",
+#| out.width="50%"
 knitr::include_graphics("images/background_SF_cumType1_t.png")
 ```
 
 In conclusion, we visualize the three spending functions in the following figure.
 
-```{r, echo=FALSE, fig.cap="Three boundaries",out.width = '50%'}
+```{r}
+#| fig-sf-three,
+#| echo=FALSE,
+#| fig.cap="Three boundaries",
+#| out.width="50%"
 knitr::include_graphics("images/background_SF_ThreeBoundary.png")
 ```
 
