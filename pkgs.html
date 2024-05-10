@@ -1,126 +1,357 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 4 Introduction to gsdmvn, gsDesign2, and simtrial | Group Sequential Design Under Non-Proportional Hazards</title>
-<meta name="author" content="Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao">
-<meta name="description" content="simtrial, gsDesign2 and gsdmvn are under development and hosted on GitHub/Merck. Below is the Github repo link to the source code simtrial: https://github.com/Merck/simtrial  gsDesign2:...">
-<meta name="generator" content="bookdown 0.34 with bs4_book()">
-<meta property="og:title" content="Chapter 4 Introduction to gsdmvn, gsDesign2, and simtrial | Group Sequential Design Under Non-Proportional Hazards">
-<meta property="og:type" content="book">
-<meta property="og:description" content="simtrial, gsDesign2 and gsdmvn are under development and hosted on GitHub/Merck. Below is the Github repo link to the source code simtrial: https://github.com/Merck/simtrial  gsDesign2:...">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 4 Introduction to gsdmvn, gsDesign2, and simtrial | Group Sequential Design Under Non-Proportional Hazards">
-<meta name="twitter:description" content="simtrial, gsDesign2 and gsdmvn are under development and hosted on GitHub/Merck. Below is the Github repo link to the source code simtrial: https://github.com/Merck/simtrial  gsDesign2:...">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.0/transition.js"></script><script src="libs/bs3compat-0.5.0/tabs.js"></script><script src="libs/bs3compat-0.5.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
-    
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  </style>
-<style type="text/css">
-    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-    div.csl-bib-body { }
-    div.csl-entry {
-      clear: both;
-        }
-    .hanging div.csl-entry {
-      margin-left:2em;
-      text-indent:-2em;
+<meta name="generator" content="quarto-1.4.554">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="description" content="Learn how to derive group sequential designs for time-to-event endpoints under both proportional and non-proportional hazards assumptions for randomized clinical trials.">
+<title>Group Sequential Design Under Non-Proportional Hazards - 4&nbsp; Introduction to gsdmvn, gsDesign2, and simtrial</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./other-tests.html" rel="next">
+<link href="./ahr.html" rel="prev">
+<link href="./assets/favicon.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
     }
-    div.csl-left-margin {
-      min-width:2em;
-      float:left;
-    }
-    div.csl-right-inline {
-      margin-left:2em;
-      padding-left:1em;
-    }
-    div.csl-indent {
-      margin-left: 2em;
-    }
-  </style>
-<link rel="stylesheet" href="style.css">
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+<meta property="og:title" content="Group Sequential Design Under Non-Proportional Hazards - 4&nbsp; Introduction to gsdmvn, gsDesign2, and simtrial">
+<meta property="og:description" content="Learn how to derive group sequential designs for time-to-event endpoints under both proportional and non-proportional hazards assumptions for randomized clinical trials.">
+<meta property="og:image" content="https://keaven.github.io/gsd-deming/assets/preview.jpg">
+<meta property="og:site_name" content="Group Sequential Design Under Non-Proportional Hazards">
+<meta name="twitter:title" content="Group Sequential Design Under Non-Proportional Hazards - 4&nbsp; Introduction to gsdmvn, gsDesign2, and simtrial">
+<meta name="twitter:description" content="Learn how to derive group sequential designs for time-to-event endpoints under both proportional and non-proportional hazards assumptions for randomized clinical trials.">
+<meta name="twitter:image" content="https://keaven.github.io/gsd-deming/assets/preview.jpg">
+<meta name="twitter:card" content="summary_large_image">
 </head>
-<body data-spy="scroll" data-target="#toc">
+<body class="nav-sidebar floating">
 
-<div class="container-fluid">
-<div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
-
-    <div class="d-flex align-items-start justify-content-between">
-      <h1>
-        <a href="index.html" title="Deming Conference Course, December 6, 2021">Group Sequential Design Under Non-Proportional Hazards</a>:
-        <small class="text-muted">Deming Conference Course, December 6, 2021</small>
-      </h1>
-      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./pkgs.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introduction to gsdmvn, gsDesign2, and simtrial</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
     </div>
-
-    <div id="main-nav" class="collapse-lg">
-      <form role="search">
-        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
-</form>
-
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html">Welcome!</a></li>
-<li><a class="" href="preface.html">Preface</a></li>
-<li><a class="" href="background.html"><span class="header-section-number">1</span> Background</a></li>
-<li><a class="" href="proportional-hazards.html"><span class="header-section-number">2</span> Proportional hazards</a></li>
-<li><a class="" href="ahr.html"><span class="header-section-number">3</span> Average hazard ratio</a></li>
-<li><a class="active" href="pkgs.html"><span class="header-section-number">4</span> Introduction to gsdmvn, gsDesign2, and simtrial</a></li>
-<li class="book-part">Others tests</li>
-<li><a class="" href="overview-other-tests.html"><span class="header-section-number">5</span> Overview</a></li>
-<li><a class="" href="fixed-design.html"><span class="header-section-number">6</span> Fixed design</a></li>
-<li><a class="" href="wlr.html"><span class="header-section-number">7</span> Weighted logrank test</a></li>
-<li><a class="" href="wlr-boundary.html"><span class="header-section-number">8</span> Group sequential design boundary with weighted logrank test</a></li>
-<li><a class="" href="maxcombo.html"><span class="header-section-number">9</span> MaxCombo test</a></li>
-<li><a class="" href="maxcombo-boundary.html"><span class="header-section-number">10</span> Group sequential design boundary with MaxCombo test</a></li>
-<li><a class="" href="references.html">References</a></li>
-</ul>
-
-        <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/keaven/gsd-deming">View book source <i class="fab fa-github"></i></a></p>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Group Sequential Design Under Non-Proportional Hazards</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/keaven/gsd-deming" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+<li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
+              <i class="bi bi-bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
+              <i class="bi bi-bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+</div>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </nav>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./preface.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./background.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Background</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./proportional-hazards.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Proportional hazards</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ahr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Average hazard ratio</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pkgs.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introduction to gsdmvn, gsDesign2, and simtrial</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./other-tests.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Others tests</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fixed-design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Fixed design</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./wlr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Weighted logrank test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./wlr-boundary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Group sequential design boundary with weighted logrank test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./maxcombo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">MaxCombo test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./maxcombo-boundary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Group sequential design boundary with MaxCombo test</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="pkgs" class="section level1" number="4">
-<h1>
-<span class="header-section-number">4</span> Introduction to gsdmvn, gsDesign2, and simtrial<a class="anchor" aria-label="anchor" href="#pkgs"><i class="fas fa-link"></i></a>
-</h1>
-<p><code>simtrial</code>, <code>gsDesign2</code> and <code>gsdmvn</code> are under development and hosted on GitHub/Merck.
-Below is the Github repo link to the source code</p>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#simtrial" id="toc-simtrial" class="nav-link active" data-scroll-target="#simtrial"><span class="header-section-number">4.1</span> simtrial</a></li>
+  <li><a href="#gsdesign2" id="toc-gsdesign2" class="nav-link" data-scroll-target="#gsdesign2"><span class="header-section-number">4.2</span> gsDesign2</a></li>
+  <li><a href="#gsdmvn" id="toc-gsdmvn" class="nav-link" data-scroll-target="#gsdmvn"><span class="header-section-number">4.3</span> gsdmvn</a></li>
+  <li>
+<a href="#simulation" id="toc-simulation" class="nav-link" data-scroll-target="#simulation"><span class="header-section-number">4.4</span> Simulation</a>
+  <ul class="collapse">
+<li><a href="#sec-AhrSimSimfix" id="toc-sec-AhrSimSimfix" class="nav-link" data-scroll-target="#sec-AhrSimSimfix"><span class="header-section-number">4.4.1</span> Simulation 1: Compare the IA power by <code>gs_power_ahr()</code> and simulation <code>sim_fix()</code></a></li>
+  <li><a href="#sec-AhrSimSimPWSurv" id="toc-sec-AhrSimSimPWSurv" class="nav-link" data-scroll-target="#sec-AhrSimSimPWSurv"><span class="header-section-number">4.4.2</span> Simulation 2: Compare AHR by <code>gsDesign2::AHR()</code> and <code>simtrial::simPWSurv()</code></a></li>
+  <li><a href="#sec-AhrSimMleWs" id="toc-sec-AhrSimMleWs" class="nav-link" data-scroll-target="#sec-AhrSimMleWs"><span class="header-section-number">4.4.3</span> Simulation 3: Compare <span class="math inline">\(\beta\)</span> by MLE and weighted summation</a></li>
+  </ul>
+</li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/keaven/gsd-deming/edit/main/pkgs.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/keaven/gsd-deming/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/keaven/gsd-deming/blob/main/pkgs.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title"><span id="sec-pkgs" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introduction to gsdmvn, gsDesign2, and simtrial</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><p>simtrial, gsDesign2, and gsdmvn are under development and are hosted on GitHub. Below are the GitHub repository links to the source code:</p>
 <ul>
-<li>
-<code>simtrial</code>: <a href="https://github.com/Merck/simtrial" class="uri">https://github.com/Merck/simtrial</a>
+<li>simtrial: <a href="https://github.com/Merck/simtrial" class="uri">https://github.com/Merck/simtrial</a>
 </li>
-<li>
-<code>gsDesign2</code>: <a href="https://github.com/Merck/gsDesign2" class="uri">https://github.com/Merck/gsDesign2</a>
+<li>gsDesign2: <a href="https://github.com/Merck/gsDesign2" class="uri">https://github.com/Merck/gsDesign2</a>
 </li>
-<li>
-<code>gsdmvn</code>: <a href="https://github.com/Merck/gsdmvn" class="uri">https://github.com/Merck/gsdmvn</a>
+<li>gsdmvn: <a href="https://github.com/Merck/gsdmvn" class="uri">https://github.com/Merck/gsdmvn</a>
 </li>
 </ul>
-<div class="rmdnote">
-<p>Note: As of June 14, 2023, the <code>gsdmvn</code> package has been integrated into the
-<code>gsDesign2</code> package and archived on GitHub. For future projects,
-we recommend using <code>gsDesign2</code> (now available from CRAN) directly.
-Despite the fact that the code within this material has not been updated,
-it remains functional provided you install the specific development versions
-detailed in the preface.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<div id="simtrial" class="section level2" number="4.1">
-<h2>
-<span class="header-section-number">4.1</span> <code>simtrial</code><a class="anchor" aria-label="anchor" href="#simtrial"><i class="fas fa-link"></i></a>
-</h2>
-<p>The R package <code>simtrial</code> targets on time-to-event trial simulation under the piecewise model.
-It uses logrank and weighted logrank for analysis.
-It can simulate both fixed and group sequential design, also potential to simulate adaptive design.
-Its validation is near completion (thanks to AP colleagues and Amin Shirazi).</p>
-<p>In <code>simtrial</code>, there are several functions to generate simulated datasets:</p>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>As of June 14, 2023, the gsdmvn package has been integrated into the gsDesign2 package and archived on GitHub. For future projects, we recommend using gsDesign2 (now available from CRAN) directly. Despite the fact that the code within this material has not been updated, it remains functional provided you install the specific development versions detailed in the preface.</p>
+</div>
+</div>
+<section id="simtrial" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="simtrial">
+<span class="header-section-number">4.1</span> simtrial</h2>
+<p>The R package simtrial targets on time-to-event trial simulation under the piecewise model. It uses logrank and weighted logrank for analysis. It can simulate both fixed and group sequential design, also potential to simulate adaptive design. Its validation is near completion (thanks to AP colleagues and Amin Shirazi).</p>
+<p>In simtrial, there are several functions to generate simulated datasets:</p>
 <ul>
 <li>
 <code><a href="https://merck.github.io/simtrial/reference/simfix.html">simfix()</a></code>: Simulation of fixed sample size design for time-to-event endpoint</li>
@@ -153,7 +384,7 @@ Its validation is near completion (thanks to AP colleagues and Amin Shirazi).</p
 <li>
 <code><a href="https://merck.github.io/simtrial/reference/wMB.html">wMB()</a></code>: Magirr and Burman modestly weighted logrank tests</li>
 </ul>
-<p>In <code>simtrial</code>, there are reverse engineered datasets:</p>
+<p>In simtrial, there are reverse engineered datasets:</p>
 <ul>
 <li>
 <code>Ex1delayedEffect</code>: Time-to-event data example 1 for non-proportional hazards working group</li>
@@ -169,34 +400,25 @@ Its validation is near completion (thanks to AP colleagues and Amin Shirazi).</p
 <code>Ex6crossing</code>: Time-to-event data example 6 for non-proportional hazards working group</li>
 <li>
 <code>MBdelayed</code>: Simulated survival dataset with delayed treatment effect</li>
-</ul>
-</div>
-<div id="gsdesign2" class="section level2" number="4.2">
-<h2>
-<span class="header-section-number">4.2</span> <code>gsDesign2</code><a class="anchor" aria-label="anchor" href="#gsdesign2"><i class="fas fa-link"></i></a>
-</h2>
-<p>The R package <code>gsDesign2</code> has the main functions listed as follows.</p>
+</ul></section><section id="gsdesign2" class="level2" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="gsdesign2">
+<span class="header-section-number">4.2</span> gsDesign2</h2>
+<p>The R package gsDesign2 has the main functions listed as follows.</p>
 <ul>
 <li>
-<code><a href="https://merck.github.io/gsDesign2/reference/AHR.html">AHR()</a></code>: Average hazard ratio under non-proportional hazards</li>
+<code>AHR()</code>: Average hazard ratio under non-proportional hazards</li>
 <li>
-<code><a href="https://merck.github.io/gsDesign2/reference/eAccrual.html">eAccrual()</a></code>: Piecewise constant expected accrual</li>
+<code>eAccrual()</code>: Piecewise constant expected accrual</li>
 <li>
-<code><a href="https://merck.github.io/gsDesign2/reference/eEvents_df.html">eEvents_df()</a></code>: Expected events observed under piecewise exponential model</li>
+<code>eEvents_df()</code>: Expected events observed under piecewise exponential model</li>
 <li>
-<code><a href="https://merck.github.io/gsDesign2/reference/ppwe.html">ppwe()</a></code>: Estimate piecewise exponential cumulative distribution function</li>
+<code>ppwe()</code>: Estimate piecewise exponential cumulative distribution function</li>
 <li>
-<code><a href="https://merck.github.io/gsDesign2/reference/s2pwe.html">s2pwe()</a></code>: Approximate survival distribution with piecewise exponential distribution</li>
+<code>s2pwe()</code>: Approximate survival distribution with piecewise exponential distribution</li>
 <li>
-<code><a href="https://merck.github.io/gsDesign2/reference/tEvents.html">tEvents()</a></code>: Predict time at which a targeted event count is achieved</li>
-</ul>
-</div>
-<div id="gsdmvn" class="section level2" number="4.3">
-<h2>
-<span class="header-section-number">4.3</span> <code>gsdmvn</code><a class="anchor" aria-label="anchor" href="#gsdmvn"><i class="fas fa-link"></i></a>
-</h2>
-<p>The R package <code>gsdmvn</code> extends the <span class="citation">Jennison and Turnbull (<a href="references.html#ref-JTBook" role="doc-biblioref">2000</a>)</span> computational model to non-constant treatment effects.
-The bound supports functions include</p>
+<code>tEvents()</code>: Predict time at which a targeted event count is achieved</li>
+</ul></section><section id="gsdmvn" class="level2" data-number="4.3"><h2 data-number="4.3" class="anchored" data-anchor-id="gsdmvn">
+<span class="header-section-number">4.3</span> gsdmvn</h2>
+<p>The R package gsdmvn extends the <span class="citation" data-cites="JTBook">Jennison and Turnbull (<a href="references.html#ref-JTBook" role="doc-biblioref">2000</a>)</span> computational model to non-constant treatment effects. The bound supports functions include</p>
 <ul>
 <li>
 <code><a href="https://merck.github.io/gsdmvn/reference/gs_b.html">gs_b()</a></code>: direct input of bounds;</li>
@@ -205,7 +427,7 @@ The bound supports functions include</p>
 </ul>
 <p>Besides, it covers three models for analysis.</p>
 <ul>
-<li>Average hazard ratio model (see detailed description in Section <a href="ahr.html#secAhr">3.2</a>)
+<li>Average hazard ratio model (see detailed description in <a href="ahr.html#sec-secAhr" class="quarto-xref"><span>Section 3.2</span></a>)
 <ul>
 <li>
 <code><a href="https://merck.github.io/gsdmvn/reference/gs_power_ahr.html">gs_power_ahr()</a></code>: Power computation</li>
@@ -213,7 +435,7 @@ The bound supports functions include</p>
 <code><a href="https://merck.github.io/gsdmvn/reference/gs_design_ahr.html">gs_design_ahr()</a></code>: Design computations</li>
 </ul>
 </li>
-<li>Weighted logrank model (see detailed description in Section <a href="wlr.html#wlr">7</a>)
+<li>Weighted logrank model (see detailed description in <a href="wlr.html" class="quarto-xref"><span>Chapter 6</span></a>)
 <ul>
 <li>
 <code><a href="https://merck.github.io/gsdmvn/reference/gs_power_wlr.html">gs_power_wlr()</a></code>: Power computation</li>
@@ -221,7 +443,7 @@ The bound supports functions include</p>
 <code><a href="https://merck.github.io/gsdmvn/reference/gs_design_wlr.html">gs_design_wlr()</a></code>: Design computations</li>
 </ul>
 </li>
-<li>MaxCombo model (see detailed description in Section <a href="maxcombo.html#maxcombo">9</a>)
+<li>MaxCombo model (see detailed description in <a href="maxcombo.html" class="quarto-xref"><span>Chapter 8</span></a>)
 <ul>
 <li>
 <code><a href="https://merck.github.io/gsdmvn/reference/gs_power_combo.html">gs_power_combo()</a></code>: Power computation</li>
@@ -229,31 +451,18 @@ The bound supports functions include</p>
 <code><a href="https://merck.github.io/gsdmvn/reference/gs_design_combo.html">gs_design_combo()</a></code>: Design computations</li>
 </ul>
 </li>
-</ul>
-</div>
-<div id="simulation" class="section level2" number="4.4">
-<h2>
-<span class="header-section-number">4.4</span> Simulation<a class="anchor" aria-label="anchor" href="#simulation"><i class="fas fa-link"></i></a>
-</h2>
+</ul></section><section id="simulation" class="level2" data-number="4.4"><h2 data-number="4.4" class="anchored" data-anchor-id="simulation">
+<span class="header-section-number">4.4</span> Simulation</h2>
 <p>In this section, we conduct three simulations.</p>
-<p>The first simulation is to compare the simulated power and asymptotic power.
-Specifically speaking, we compare the results from <code><a href="https://merck.github.io/gsdmvn/reference/gs_power_ahr.html">gsdmvn::gs_power_ahr()</a></code> with that from <code><a href="https://merck.github.io/simtrial/reference/simfix.html">simtrial::simfix()</a></code>.
-The details of this simulation can be found in Section <a href="pkgs.html#secAhrSimSimfix">4.4.1</a>.</p>
-<p>The second simulation is to compare the simulated power and asymptotic power.
-Specifically speaking, we compare the results from <code><a href="https://merck.github.io/gsDesign2/reference/AHR.html">gsDesign2::AHR()</a></code> with that from <code><a href="https://merck.github.io/simtrial/reference/simPWSurv.html">simtrial::simPWSurv()</a></code>.
-The details of this simulation can be found in Section <a href="pkgs.html#secAhrSimSimPWSurv">4.4.2</a>.</p>
-<p>The third simulation is to compare the estimation of <span class="math inline">\(\beta\)</span> by MLE and weighted summation as in Section <a href="ahr.html#secAhr">3.2</a>.
-The details of this simulation can be found in Section <a href="pkgs.html#secAhrSimMleWs">4.4.3</a>.</p>
-<div id="secAhrSimSimfix" class="section level3" number="4.4.1">
-<h3>
-<span class="header-section-number">4.4.1</span> Simulation 1: Compare the IA power by <code>gs_power_ahr()</code> and simulation <code>sim_fix()</code><a class="anchor" aria-label="anchor" href="#secAhrSimSimfix"><i class="fas fa-link"></i></a>
+<p>The first simulation is to compare the simulated power and asymptotic power. Specifically speaking, we compare the results from <code><a href="https://merck.github.io/gsdmvn/reference/gs_power_ahr.html">gsdmvn::gs_power_ahr()</a></code> with that from <code><a href="https://merck.github.io/simtrial/reference/simfix.html">simtrial::simfix()</a></code>. The details of this simulation can be found in <a href="#sec-AhrSimSimfix" class="quarto-xref"><span>Section 4.4.1</span></a>.</p>
+<p>The second simulation is to compare the simulated power and asymptotic power. Specifically speaking, we compare the results from <code><a href="https://merck.github.io/gsDesign2/reference/AHR.html">gsDesign2::AHR()</a></code> with that from <code><a href="https://merck.github.io/simtrial/reference/simPWSurv.html">simtrial::simPWSurv()</a></code>. The details of this simulation can be found in <a href="#sec-AhrSimSimPWSurv" class="quarto-xref"><span>Section 4.4.2</span></a>.</p>
+<p>The third simulation is to compare the estimation of <span class="math inline">\(\beta\)</span> by MLE and weighted summation as in <a href="ahr.html#sec-secAhr" class="quarto-xref"><span>Section 3.2</span></a>. The details of this simulation can be found in <a href="#sec-AhrSimMleWs" class="quarto-xref"><span>Section 4.4.3</span></a>.</p>
+<section id="sec-AhrSimSimfix" class="level3" data-number="4.4.1"><h3 data-number="4.4.1" class="anchored" data-anchor-id="sec-AhrSimSimfix">
+<span class="header-section-number">4.4.1</span> Simulation 1: Compare the IA power by <code>gs_power_ahr()</code> and simulation <code>sim_fix()</code>
 </h3>
-<p>This section compares the simulated power and asymptotic power.
-The simulated power is calculated by <code><a href="https://merck.github.io/simtrial/reference/simfix.html">simtrial::simfix()</a></code>, and the asymptotic power is calculated by <code><a href="https://merck.github.io/gsdmvn/reference/gs_power_ahr.html">gsdmvn::gs_power_ahr()</a></code>.
-To conduct the comparison, we first save the output of <code><a href="https://merck.github.io/simtrial/reference/simfix.html">simtrial::simfix()</a></code> by running the following code chunk.
-After that, we simply load the simulation results and compare it with the asymptotic power.</p>
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keaven.github.io/gsDesign/">gsDesign</a></span><span class="op">)</span></span>
+<p>This section compares the simulated power and asymptotic power. The simulated power is calculated by <code><a href="https://merck.github.io/simtrial/reference/simfix.html">simtrial::simfix()</a></code>, and the asymptotic power is calculated by <code><a href="https://merck.github.io/gsdmvn/reference/gs_power_ahr.html">gsdmvn::gs_power_ahr()</a></code>. To conduct the comparison, we first save the output of <code><a href="https://merck.github.io/simtrial/reference/simfix.html">simtrial::simfix()</a></code> by running the following code chunk. After that, we simply load the simulation results and compare it with the asymptotic power.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keaven.github.io/gsDesign/">gsDesign</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://merck.github.io/simtrial/">simtrial</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://merck.github.io/gsdmvn/">gsdmvn</a></span><span class="op">)</span></span>
@@ -344,14 +553,17 @@ After that, we simply load the simulation results and compare it with the asympt
 <span><span class="op">)</span></span>
 <span><span class="co"># Save the simulation data</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/save.html">save</a></span><span class="op">(</span><span class="va">my_gsDesign</span>, file <span class="op">=</span> <span class="st">"./data/simulation_gs_power_ahr_my_gsDesign.Rdata"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/save.html">save</a></span><span class="op">(</span><span class="va">my_simfix</span>, file <span class="op">=</span> <span class="st">"./data/simulation_gs_power_ahr_my_simfix.Rdata"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keaven.github.io/gsDesign/">gsDesign</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/save.html">save</a></span><span class="op">(</span><span class="va">my_simfix</span>, file <span class="op">=</span> <span class="st">"./data/simulation_gs_power_ahr_my_simfix.Rdata"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keaven.github.io/gsDesign/">gsDesign</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://merck.github.io/simtrial/">simtrial</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://merck.github.io/gsdmvn/">gsdmvn</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"./data/simulation_gs_power_ahr_my_simfix.Rdata"</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"./data/simulation_gs_power_ahr_my_simfix.Rdata"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"./data/simulation_gs_power_ahr_my_gsDesign.Rdata"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## Set the enrollment rates</span></span>
@@ -390,22 +602,17 @@ After that, we simply load the simulation results and compare it with the asympt
 <span><span class="op">)</span></span>
 <span><span class="va">my_ahr_IA_power</span> <span class="op">&lt;-</span> <span class="va">out</span><span class="op">$</span><span class="va">Probability</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"The power at the 1st IA by gs_power_ahr() is:"</span>, <span class="va">my_ahr_IA_power</span>, <span class="st">"\n"</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; The power at the 1st IA by gs_power_ahr() is: 0.4605649</code></pre>
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"The power at the 1st IA by"</span>, <span class="va">my_nsim</span>, <span class="st">"simulation is:"</span>, <span class="va">my_sim_IA_power</span>, <span class="st">"\n"</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; The power at the 1st IA by 1e+05 simulation is: 0.46655</code></pre>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"The power at the 1st IA by gs_power_ahr() is:"</span>, <span class="va">my_ahr_IA_power</span>, <span class="st">"\n"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; The power at the 1st IA by gs_power_ahr() is: 0.4605649</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"The power at the 1st IA by"</span>, <span class="va">my_nsim</span>, <span class="st">"simulation is:"</span>, <span class="va">my_sim_IA_power</span>, <span class="st">"\n"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; The power at the 1st IA by 1e+05 simulation is: 0.46655</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="secAhrSimSimPWSurv" class="section level3" number="4.4.2">
-<h3>
-<span class="header-section-number">4.4.2</span> Simulation 2: Compare AHR by <code>gsDesign2::AHR()</code> and <code>simtrial::simPWSurv()</code><a class="anchor" aria-label="anchor" href="#secAhrSimSimPWSurv"><i class="fas fa-link"></i></a>
+</section><section id="sec-AhrSimSimPWSurv" class="level3" data-number="4.4.2"><h3 data-number="4.4.2" class="anchored" data-anchor-id="sec-AhrSimSimPWSurv">
+<span class="header-section-number">4.4.2</span> Simulation 2: Compare AHR by <code>gsDesign2::AHR()</code> and <code>simtrial::simPWSurv()</code>
 </h3>
-<p>This section compares the simulated AHR and asymptotic AHR
-The simulated power is calculated by <code><a href="https://merck.github.io/simtrial/reference/simPWSurv.html">simtrial::simPWSurv()</a></code>, and the asymptotic power is calculated by <code><a href="https://merck.github.io/gsDesign2/reference/AHR.html">gsDesign2::AHR()</a></code>.
-To conduct the comparison, we first save the output of <code><a href="https://merck.github.io/simtrial/reference/simPWSurv.html">simtrial::simPWSurv()</a></code> by running the following code chunk.
-After that, we simply load the simulation results and compare it with the asymptotic AHR</p>
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/therneau/survival">survival</a></span><span class="op">)</span></span>
+<p>This section compares the simulated AHR and asymptotic AHR The simulated power is calculated by <code><a href="https://merck.github.io/simtrial/reference/simPWSurv.html">simtrial::simPWSurv()</a></code>, and the asymptotic power is calculated by <code><a href="https://merck.github.io/gsDesign2/reference/AHR.html">gsDesign2::AHR()</a></code>. To conduct the comparison, we first save the output of <code><a href="https://merck.github.io/simtrial/reference/simPWSurv.html">simtrial::simPWSurv()</a></code> by running the following code chunk. After that, we simply load the simulation results and compare it with the asymptotic AHR</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/therneau/survival">survival</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://merck.github.io/simtrial/">simtrial</a></span><span class="op">)</span></span>
 <span></span>
@@ -487,32 +694,46 @@ After that, we simply load the simulation results and compare it with the asympt
 <span>    <span class="va">ii</span> <span class="op">&lt;-</span> <span class="va">ii</span> <span class="op">+</span> <span class="fl">1</span></span>
 <span>  <span class="op">}</span></span>
 <span><span class="op">}</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/save.html">save</a></span><span class="op">(</span><span class="va">results</span>, file <span class="op">=</span> <span class="st">"./data/simulation_AHR_simPRSurv.Rdata"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Calculate the simulated AHR</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/save.html">save</a></span><span class="op">(</span><span class="va">results</span>, file <span class="op">=</span> <span class="st">"./data/simulation_AHR_simPRSurv.Rdata"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Calculate the simulated AHR</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"./data/simulation_AHR_simPRSurv.Rdata"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Distribution of Cox coefficient</span></span>
-<span><span class="fu">ggplot</span><span class="op">(</span><span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span>, </span>
-<span>       <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">Analysis</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">beta</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_violin</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"Distribution of Cox Coefficient by Analysis"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">xlab</span><span class="op">(</span><span class="st">"Analysis"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ylab</span><span class="op">(</span><span class="st">"Cox coefficient"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-60-1.png" width="80%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Variability of results</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
-<span><span class="fu">ggplot</span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span>, <span class="va">Sim</span> <span class="op">&lt;</span> <span class="fl">10</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>         <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Sim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">Sim</span><span class="op">)</span>, Analysis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">Analysis</span><span class="op">)</span><span class="op">)</span>, </span>
-<span>       <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">Analysis</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">beta</span><span class="op">)</span>, group <span class="op">=</span> <span class="va">Sim</span>, col <span class="op">=</span> <span class="va">Sim</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_line</span><span class="op">(</span>show.legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_point</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>shape <span class="op">=</span> <span class="va">Analysis</span><span class="op">)</span>, show.legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">scale_y_log10</span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">.6</span>, <span class="fl">1.1</span>, <span class="fl">.1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ylab</span><span class="op">(</span><span class="st">"HR"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="gsd-deming_files/figure-html/unnamed-chunk-60-2.png" width="80%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Comparison of asymptotic vs simulation</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span></span>
+<span>  <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">Analysis</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">beta</span><span class="op">)</span></span>
+<span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_violin.html">geom_violin</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"Distribution of Cox Coefficient by Analysis"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Analysis"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Cox coefficient"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="pkgs_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co"># Variability of results</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span>, <span class="va">Sim</span> <span class="op">&lt;</span> <span class="fl">10</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Sim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">Sim</span><span class="op">)</span>, Analysis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">Analysis</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Analysis</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">beta</span><span class="op">)</span>, group <span class="op">=</span> <span class="va">Sim</span>, col <span class="op">=</span> <span class="va">Sim</span><span class="op">)</span></span>
+<span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>show.legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="va">Analysis</span><span class="op">)</span>, show.legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_log10</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">.6</span>, <span class="fl">1.1</span>, <span class="fl">.1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"HR"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="pkgs_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co"># Comparison of asymptotic vs simulation</span></span>
 <span><span class="va">AHR_simulated</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Analysis</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span></span>
@@ -560,24 +781,26 @@ After that, we simply load the simulation results and compare it with the asympt
 <span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">AHR_asymptotics</span>, <span class="va">AHR_simulated</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">8</span>, <span class="fl">9</span><span class="op">)</span>, decimals <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">7</span><span class="op">)</span>, decimals <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<div id="eddxihabhs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#eddxihabhs table {
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">7</span><span class="op">)</span>, decimals <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<div id="jcmaqqpfmt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jcmaqqpfmt table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#eddxihabhs thead, #eddxihabhs tbody, #eddxihabhs tfoot, #eddxihabhs tr, #eddxihabhs td, #eddxihabhs th {
+#jcmaqqpfmt thead, #jcmaqqpfmt tbody, #jcmaqqpfmt tfoot, #jcmaqqpfmt tr, #jcmaqqpfmt td, #jcmaqqpfmt th {
   border-style: none;
 }
 
-#eddxihabhs p {
+#jcmaqqpfmt p {
   margin: 0;
   padding: 0;
 }
 
-#eddxihabhs .gt_table {
+#jcmaqqpfmt .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -603,12 +826,12 @@ After that, we simply load the simulation results and compare it with the asympt
   border-left-color: #D3D3D3;
 }
 
-#eddxihabhs .gt_caption {
+#jcmaqqpfmt .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#eddxihabhs .gt_title {
+#jcmaqqpfmt .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -620,7 +843,7 @@ After that, we simply load the simulation results and compare it with the asympt
   border-bottom-width: 0;
 }
 
-#eddxihabhs .gt_subtitle {
+#jcmaqqpfmt .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -632,7 +855,7 @@ After that, we simply load the simulation results and compare it with the asympt
   border-top-width: 0;
 }
 
-#eddxihabhs .gt_heading {
+#jcmaqqpfmt .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -644,13 +867,13 @@ After that, we simply load the simulation results and compare it with the asympt
   border-right-color: #D3D3D3;
 }
 
-#eddxihabhs .gt_bottom_border {
+#jcmaqqpfmt .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#eddxihabhs .gt_col_headings {
+#jcmaqqpfmt .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -665,7 +888,7 @@ After that, we simply load the simulation results and compare it with the asympt
   border-right-color: #D3D3D3;
 }
 
-#eddxihabhs .gt_col_heading {
+#jcmaqqpfmt .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -685,7 +908,7 @@ After that, we simply load the simulation results and compare it with the asympt
   overflow-x: hidden;
 }
 
-#eddxihabhs .gt_column_spanner_outer {
+#jcmaqqpfmt .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -697,15 +920,15 @@ After that, we simply load the simulation results and compare it with the asympt
   padding-right: 4px;
 }
 
-#eddxihabhs .gt_column_spanner_outer:first-child {
+#jcmaqqpfmt .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#eddxihabhs .gt_column_spanner_outer:last-child {
+#jcmaqqpfmt .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#eddxihabhs .gt_column_spanner {
+#jcmaqqpfmt .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -717,11 +940,11 @@ After that, we simply load the simulation results and compare it with the asympt
   width: 100%;
 }
 
-#eddxihabhs .gt_spanner_row {
+#jcmaqqpfmt .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#eddxihabhs .gt_group_heading {
+#jcmaqqpfmt .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -747,7 +970,7 @@ After that, we simply load the simulation results and compare it with the asympt
   text-align: left;
 }
 
-#eddxihabhs .gt_empty_group_heading {
+#jcmaqqpfmt .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -762,15 +985,15 @@ After that, we simply load the simulation results and compare it with the asympt
   vertical-align: middle;
 }
 
-#eddxihabhs .gt_from_md > :first-child {
+#jcmaqqpfmt .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#eddxihabhs .gt_from_md > :last-child {
+#jcmaqqpfmt .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#eddxihabhs .gt_row {
+#jcmaqqpfmt .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -789,7 +1012,7 @@ After that, we simply load the simulation results and compare it with the asympt
   overflow-x: hidden;
 }
 
-#eddxihabhs .gt_stub {
+#jcmaqqpfmt .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -802,7 +1025,7 @@ After that, we simply load the simulation results and compare it with the asympt
   padding-right: 5px;
 }
 
-#eddxihabhs .gt_stub_row_group {
+#jcmaqqpfmt .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -816,15 +1039,15 @@ After that, we simply load the simulation results and compare it with the asympt
   vertical-align: top;
 }
 
-#eddxihabhs .gt_row_group_first td {
+#jcmaqqpfmt .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#eddxihabhs .gt_row_group_first th {
+#jcmaqqpfmt .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#eddxihabhs .gt_summary_row {
+#jcmaqqpfmt .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -834,16 +1057,16 @@ After that, we simply load the simulation results and compare it with the asympt
   padding-right: 5px;
 }
 
-#eddxihabhs .gt_first_summary_row {
+#jcmaqqpfmt .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#eddxihabhs .gt_first_summary_row.thick {
+#jcmaqqpfmt .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#eddxihabhs .gt_last_summary_row {
+#jcmaqqpfmt .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -853,7 +1076,7 @@ After that, we simply load the simulation results and compare it with the asympt
   border-bottom-color: #D3D3D3;
 }
 
-#eddxihabhs .gt_grand_summary_row {
+#jcmaqqpfmt .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -863,7 +1086,7 @@ After that, we simply load the simulation results and compare it with the asympt
   padding-right: 5px;
 }
 
-#eddxihabhs .gt_first_grand_summary_row {
+#jcmaqqpfmt .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -873,7 +1096,7 @@ After that, we simply load the simulation results and compare it with the asympt
   border-top-color: #D3D3D3;
 }
 
-#eddxihabhs .gt_last_grand_summary_row_top {
+#jcmaqqpfmt .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -883,11 +1106,11 @@ After that, we simply load the simulation results and compare it with the asympt
   border-bottom-color: #D3D3D3;
 }
 
-#eddxihabhs .gt_striped {
+#jcmaqqpfmt .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#eddxihabhs .gt_table_body {
+#jcmaqqpfmt .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -896,7 +1119,7 @@ After that, we simply load the simulation results and compare it with the asympt
   border-bottom-color: #D3D3D3;
 }
 
-#eddxihabhs .gt_footnotes {
+#jcmaqqpfmt .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -910,7 +1133,7 @@ After that, we simply load the simulation results and compare it with the asympt
   border-right-color: #D3D3D3;
 }
 
-#eddxihabhs .gt_footnote {
+#jcmaqqpfmt .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -919,7 +1142,7 @@ After that, we simply load the simulation results and compare it with the asympt
   padding-right: 5px;
 }
 
-#eddxihabhs .gt_sourcenotes {
+#jcmaqqpfmt .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -933,7 +1156,7 @@ After that, we simply load the simulation results and compare it with the asympt
   border-right-color: #D3D3D3;
 }
 
-#eddxihabhs .gt_sourcenote {
+#jcmaqqpfmt .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -941,135 +1164,136 @@ After that, we simply load the simulation results and compare it with the asympt
   padding-right: 5px;
 }
 
-#eddxihabhs .gt_left {
+#jcmaqqpfmt .gt_left {
   text-align: left;
 }
 
-#eddxihabhs .gt_center {
+#jcmaqqpfmt .gt_center {
   text-align: center;
 }
 
-#eddxihabhs .gt_right {
+#jcmaqqpfmt .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#eddxihabhs .gt_font_normal {
+#jcmaqqpfmt .gt_font_normal {
   font-weight: normal;
 }
 
-#eddxihabhs .gt_font_bold {
+#jcmaqqpfmt .gt_font_bold {
   font-weight: bold;
 }
 
-#eddxihabhs .gt_font_italic {
+#jcmaqqpfmt .gt_font_italic {
   font-style: italic;
 }
 
-#eddxihabhs .gt_super {
+#jcmaqqpfmt .gt_super {
   font-size: 65%;
 }
 
-#eddxihabhs .gt_footnote_marks {
+#jcmaqqpfmt .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#eddxihabhs .gt_asterisk {
+#jcmaqqpfmt .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#eddxihabhs .gt_indent_1 {
+#jcmaqqpfmt .gt_indent_1 {
   text-indent: 5px;
 }
 
-#eddxihabhs .gt_indent_2 {
+#jcmaqqpfmt .gt_indent_2 {
   text-indent: 10px;
 }
 
-#eddxihabhs .gt_indent_3 {
+#jcmaqqpfmt .gt_indent_3 {
   text-indent: 15px;
 }
 
-#eddxihabhs .gt_indent_4 {
+#jcmaqqpfmt .gt_indent_4 {
   text-indent: 20px;
 }
 
-#eddxihabhs .gt_indent_5 {
+#jcmaqqpfmt .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
-<div class="inline-table"><table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Time">Time</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="AHR_asy">AHR_asy</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Events_asy">Events_asy</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="info_asy">info_asy</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="info0_asy">info0_asy</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="AHR_sim">AHR_sim</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Events_sim">Events_sim</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="info_sim">info_sim</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="info0_sim">info0_sim</th>
-    </tr></thead>
+<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead><tr class="header gt_col_headings">
+<th id="Time" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Time</th>
+<th id="AHR_asy" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">AHR_asy</th>
+<th id="Events_asy" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Events_asy</th>
+<th id="info_asy" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">info_asy</th>
+<th id="info0_asy" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">info0_asy</th>
+<th id="AHR_sim" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">AHR_sim</th>
+<th id="Events_sim" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Events_sim</th>
+<th id="info_sim" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">info_sim</th>
+<th id="info0_sim" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">info0_sim</th>
+</tr></thead>
 <tbody class="gt_table_body">
-<tr>
-<td headers="Time" class="gt_row gt_right">12</td>
-<td headers="AHR_asy" class="gt_row gt_right">0.8395</td>
-<td headers="Events_asy" class="gt_row gt_right">107.39</td>
-<td headers="info_asy" class="gt_row gt_right">26.3710</td>
-<td headers="info0_asy" class="gt_row gt_right">26.8486</td>
-<td headers="AHR_sim" class="gt_row gt_right">0.8415</td>
-<td headers="Events_sim" class="gt_row gt_right">107.25</td>
-<td headers="info_sim" class="gt_row gt_right">26.2593</td>
-<td headers="info0_sim" class="gt_row gt_right">26.8130</td>
+<tr class="odd">
+<td class="gt_row gt_right" headers="Time">12</td>
+<td class="gt_row gt_right" headers="AHR_asy">0.8395</td>
+<td class="gt_row gt_right" headers="Events_asy">107.39</td>
+<td class="gt_row gt_right" headers="info_asy">26.3710</td>
+<td class="gt_row gt_right" headers="info0_asy">26.8486</td>
+<td class="gt_row gt_right" headers="AHR_sim">0.8415</td>
+<td class="gt_row gt_right" headers="Events_sim">107.25</td>
+<td class="gt_row gt_right" headers="info_sim">26.2593</td>
+<td class="gt_row gt_right" headers="info0_sim">26.8130</td>
 </tr>
-<tr>
-<td headers="Time" class="gt_row gt_right">20</td>
-<td headers="AHR_asy" class="gt_row gt_right">0.7379</td>
-<td headers="Events_asy" class="gt_row gt_right">207.90</td>
-<td headers="info_asy" class="gt_row gt_right">50.6695</td>
-<td headers="info0_asy" class="gt_row gt_right">51.9741</td>
-<td headers="AHR_sim" class="gt_row gt_right">0.7397</td>
-<td headers="Events_sim" class="gt_row gt_right">207.71</td>
-<td headers="info_sim" class="gt_row gt_right">50.8936</td>
-<td headers="info0_sim" class="gt_row gt_right">51.9281</td>
+<tr class="even">
+<td class="gt_row gt_right" headers="Time">20</td>
+<td class="gt_row gt_right" headers="AHR_asy">0.7379</td>
+<td class="gt_row gt_right" headers="Events_asy">207.90</td>
+<td class="gt_row gt_right" headers="info_asy">50.6695</td>
+<td class="gt_row gt_right" headers="info0_asy">51.9741</td>
+<td class="gt_row gt_right" headers="AHR_sim">0.7397</td>
+<td class="gt_row gt_right" headers="Events_sim">207.71</td>
+<td class="gt_row gt_right" headers="info_sim">50.8936</td>
+<td class="gt_row gt_right" headers="info0_sim">51.9281</td>
 </tr>
-<tr>
-<td headers="Time" class="gt_row gt_right">28</td>
-<td headers="AHR_asy" class="gt_row gt_right">0.7000</td>
-<td headers="Events_asy" class="gt_row gt_right">279.10</td>
-<td headers="info_asy" class="gt_row gt_right">68.2263</td>
-<td headers="info0_asy" class="gt_row gt_right">69.7759</td>
-<td headers="AHR_sim" class="gt_row gt_right">0.7012</td>
-<td headers="Events_sim" class="gt_row gt_right">278.93</td>
-<td headers="info_sim" class="gt_row gt_right">67.9878</td>
-<td headers="info0_sim" class="gt_row gt_right">69.7321</td>
+<tr class="odd">
+<td class="gt_row gt_right" headers="Time">28</td>
+<td class="gt_row gt_right" headers="AHR_asy">0.7000</td>
+<td class="gt_row gt_right" headers="Events_asy">279.10</td>
+<td class="gt_row gt_right" headers="info_asy">68.2263</td>
+<td class="gt_row gt_right" headers="info0_asy">69.7759</td>
+<td class="gt_row gt_right" headers="AHR_sim">0.7012</td>
+<td class="gt_row gt_right" headers="Events_sim">278.93</td>
+<td class="gt_row gt_right" headers="info_sim">67.9878</td>
+<td class="gt_row gt_right" headers="info0_sim">69.7321</td>
 </tr>
-<tr>
-<td headers="Time" class="gt_row gt_right">36</td>
-<td headers="AHR_asy" class="gt_row gt_right">0.6832</td>
-<td headers="Events_asy" class="gt_row gt_right">331.29</td>
-<td headers="info_asy" class="gt_row gt_right">81.3779</td>
-<td headers="info0_asy" class="gt_row gt_right">82.8227</td>
-<td headers="AHR_sim" class="gt_row gt_right">0.6839</td>
-<td headers="Events_sim" class="gt_row gt_right">331.19</td>
-<td headers="info_sim" class="gt_row gt_right">80.6198</td>
-<td headers="info0_sim" class="gt_row gt_right">82.7969</td>
+<tr class="even">
+<td class="gt_row gt_right" headers="Time">36</td>
+<td class="gt_row gt_right" headers="AHR_asy">0.6832</td>
+<td class="gt_row gt_right" headers="Events_asy">331.29</td>
+<td class="gt_row gt_right" headers="info_asy">81.3779</td>
+<td class="gt_row gt_right" headers="info0_asy">82.8227</td>
+<td class="gt_row gt_right" headers="AHR_sim">0.6839</td>
+<td class="gt_row gt_right" headers="Events_sim">331.19</td>
+<td class="gt_row gt_right" headers="info_sim">80.6198</td>
+<td class="gt_row gt_right" headers="info0_sim">82.7969</td>
 </tr>
 </tbody>
-</table></div>
+</table>
 </div>
 </div>
-<div id="secAhrSimMleWs" class="section level3" number="4.4.3">
-<h3>
-<span class="header-section-number">4.4.3</span> Simulation 3: Compare <span class="math inline">\(\beta\)</span> by MLE and weighted summation<a class="anchor" aria-label="anchor" href="#secAhrSimMleWs"><i class="fas fa-link"></i></a>
-</h3>
-<p>This section compares the AHR estimated by MLE (see theoretical details in Section <a href="#secAhrMLE"><strong>??</strong></a>) and weighted summation (see theoretical details in Section <a href="#secAhrWeightedSum"><strong>??</strong></a>).</p>
-<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gt.rstudio.com/">gt</a></span><span class="op">)</span></span>
+</div>
+</div>
+</section><section id="sec-AhrSimMleWs" class="level3" data-number="4.4.3"><h3 data-number="4.4.3" class="anchored" data-anchor-id="sec-AhrSimMleWs">
+<span class="header-section-number">4.4.3</span> Simulation 3: Compare <span class="math inline">\(\beta\)</span> by MLE and weighted summation</h3>
+<p>This section compares the AHR estimated by MLE (see theoretical details in <span class="quarto-unresolved-ref">?sec-AhrMLE</span>) and weighted summation (see theoretical details in <span class="quarto-unresolved-ref">?sec-AhrWeightedSum</span>).</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gt.rstudio.com">gt</a></span><span class="op">)</span></span>
+<span></span>
 <span><span class="va">my_nsim</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
 <span><span class="va">my_nNewtonRaphson</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
 <span><span class="va">compare_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">0</span>, nrow <span class="op">=</span> <span class="va">my_nsim</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
@@ -1149,101 +1373,453 @@ After that, we simply load the simulation results and compare it with the asympt
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">compare_results</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Weighted Summation"</span>, <span class="st">"MLE"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/save.html">save</a></span><span class="op">(</span><span class="va">compare_results</span>, file <span class="op">=</span> <span class="st">"./data/simulation_MLE_vs_WS.Rdata"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"./data/simulation_MLE_vs_WS.Rdata"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/save.html">save</a></span><span class="op">(</span><span class="va">compare_results</span>, file <span class="op">=</span> <span class="st">"./data/simulation_MLE_vs_WS.Rdata"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"./data/simulation_MLE_vs_WS.Rdata"</span><span class="op">)</span></span>
 <span><span class="va">my_nsim</span> <span class="op">&lt;-</span> <span class="fl">1e+5</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">compare_results</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt;      Weighted Summation        MLE
-#&gt; [1,]         -0.4139139 -0.4158463
-#&gt; [2,]         -0.6729929 -0.6772665
-#&gt; [3,]         -0.4203335 -0.4207679
-#&gt; [4,]         -0.5409583 -0.5530679
-#&gt; [5,]         -0.4247562 -0.4252013
-#&gt; [6,]         -0.7252355 -0.7411065</code></pre>
-<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">compare_results</span><span class="op">)</span></span>
+<span><span class="co">#&gt;      Weighted Summation        MLE</span></span>
+<span><span class="co">#&gt; [1,]         -0.4139139 -0.4158463</span></span>
+<span><span class="co">#&gt; [2,]         -0.6729929 -0.6772665</span></span>
+<span><span class="co">#&gt; [3,]         -0.4203335 -0.4207679</span></span>
+<span><span class="co">#&gt; [4,]         -0.5409583 -0.5530679</span></span>
+<span><span class="co">#&gt; [5,]         -0.4247562 -0.4252013</span></span>
+<span><span class="co">#&gt; [6,]         -0.7252355 -0.7411065</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span></span>
 <span>  <span class="st">"The MSE between MLE and weighted summation is "</span>,</span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">compare_results</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="va">compare_results</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> <span class="op">/</span> <span class="va">my_nsim</span>, <span class="st">"\n"</span></span>
-<span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; The MSE between MLE and weighted summation is  4.464504e-05</code></pre>
-
-</div>
-</div>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; The MSE between MLE and weighted summation is  4.464504e-05</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
-
-  <div class="chapter-nav">
-<div class="prev"><a href="ahr.html"><span class="header-section-number">3</span> Average hazard ratio</a></div>
-<div class="next"><a href="overview-other-tests.html"><span class="header-section-number">5</span> Overview</a></div>
-</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#pkgs"><span class="header-section-number">4</span> Introduction to gsdmvn, gsDesign2, and simtrial</a></li>
-<li><a class="nav-link" href="#simtrial"><span class="header-section-number">4.1</span> simtrial</a></li>
-<li><a class="nav-link" href="#gsdesign2"><span class="header-section-number">4.2</span> gsDesign2</a></li>
-<li><a class="nav-link" href="#gsdmvn"><span class="header-section-number">4.3</span> gsdmvn</a></li>
-<li>
-<a class="nav-link" href="#simulation"><span class="header-section-number">4.4</span> Simulation</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#secAhrSimSimfix"><span class="header-section-number">4.4.1</span> Simulation 1: Compare the IA power by gs_power_ahr() and simulation sim_fix()</a></li>
-<li><a class="nav-link" href="#secAhrSimSimPWSurv"><span class="header-section-number">4.4.2</span> Simulation 2: Compare AHR by gsDesign2::AHR() and simtrial::simPWSurv()</a></li>
-<li><a class="nav-link" href="#secAhrSimMleWs"><span class="header-section-number">4.4.3</span> Simulation 3: Compare \(\beta\) by MLE and weighted summation</a></li>
-</ul>
-</li>
-</ul>
-
-      <div class="book-extra">
-        <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/keaven/gsd-deming/blob/master/pkgs.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/keaven/gsd-deming/edit/master/pkgs.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
-        </ul>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-JTBook" class="csl-entry" role="listitem">
+Jennison, Christopher, and Bruce W. Turnbull. 2000. <em>Group Sequential Methods with Applications to Clinical Trials</em>. Boca Raton, FL: Chapman; Hall/CRC.
 </div>
-    </nav>
 </div>
-
-</div>
-</div> <!-- .container -->
-
-<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Group Sequential Design Under Non-Proportional Hazards</strong>: Deming Conference Course, December 6, 2021" was written by Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao. It was last built on 2023-07-29.</p>
-  </div>
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
-  </div>
-
-</div></div>
-</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
-for (let popover of popovers) {
-  const div = document.createElement('div');
-  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
-  div.innerHTML = popover.getAttribute('data-content');
-
-  var has_math = div.querySelector("span.math");
-  if (has_math) {
-    document.body.appendChild(div);
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
-    MathJax.Hub.Queue(function() {
-      popover.setAttribute('data-content', div.innerHTML);
-      document.body.removeChild(div);
-    })
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
   }
-}
-</script>
-</body>
-</html>
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/keaven\.github\.io\/gsd-deming\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./ahr.html" class="pagination-link" aria-label="Average hazard ratio">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Average hazard ratio</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./other-tests.html" class="pagination-link" aria-label="Others tests">
+        <span class="nav-page-text">Others tests</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/keaven/gsd-deming/edit/main/pkgs.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/keaven/gsd-deming/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/keaven/gsd-deming/blob/main/pkgs.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div></div></footer></body></html>

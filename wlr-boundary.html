@@ -1,127 +1,360 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 8 Group sequential design boundary with weighted logrank test | Group Sequential Design Under Non-Proportional Hazards</title>
-<meta name="author" content="Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao">
-<meta name="description" content="8.1 Group sequential design boundary calculation strategy In the last chapter, we pre-specified boundary derived from gsDesign. Therefore, the Type I error may be inflated because the information...">
-<meta name="generator" content="bookdown 0.34 with bs4_book()">
-<meta property="og:title" content="Chapter 8 Group sequential design boundary with weighted logrank test | Group Sequential Design Under Non-Proportional Hazards">
-<meta property="og:type" content="book">
-<meta property="og:description" content="8.1 Group sequential design boundary calculation strategy In the last chapter, we pre-specified boundary derived from gsDesign. Therefore, the Type I error may be inflated because the information...">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 8 Group sequential design boundary with weighted logrank test | Group Sequential Design Under Non-Proportional Hazards">
-<meta name="twitter:description" content="8.1 Group sequential design boundary calculation strategy In the last chapter, we pre-specified boundary derived from gsDesign. Therefore, the Type I error may be inflated because the information...">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.0/transition.js"></script><script src="libs/bs3compat-0.5.0/tabs.js"></script><script src="libs/bs3compat-0.5.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
-    
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  </style>
-<style type="text/css">
-    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-    div.csl-bib-body { }
-    div.csl-entry {
-      clear: both;
-        }
-    .hanging div.csl-entry {
-      margin-left:2em;
-      text-indent:-2em;
+<meta name="generator" content="quarto-1.4.554">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="description" content="Learn how to derive group sequential designs for time-to-event endpoints under both proportional and non-proportional hazards assumptions for randomized clinical trials.">
+<title>Group Sequential Design Under Non-Proportional Hazards - 7&nbsp; Group sequential design boundary with weighted logrank test</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./maxcombo.html" rel="next">
+<link href="./wlr.html" rel="prev">
+<link href="./assets/favicon.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
     }
-    div.csl-left-margin {
-      min-width:2em;
-      float:left;
-    }
-    div.csl-right-inline {
-      margin-left:2em;
-      padding-left:1em;
-    }
-    div.csl-indent {
-      margin-left: 2em;
-    }
-  </style>
-<link rel="stylesheet" href="style.css">
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+<meta property="og:title" content="Group Sequential Design Under Non-Proportional Hazards - 7&nbsp; Group sequential design boundary with weighted logrank test">
+<meta property="og:description" content="Learn how to derive group sequential designs for time-to-event endpoints under both proportional and non-proportional hazards assumptions for randomized clinical trials.">
+<meta property="og:image" content="https://keaven.github.io/gsd-deming/assets/preview.jpg">
+<meta property="og:site_name" content="Group Sequential Design Under Non-Proportional Hazards">
+<meta name="twitter:title" content="Group Sequential Design Under Non-Proportional Hazards - 7&nbsp; Group sequential design boundary with weighted logrank test">
+<meta name="twitter:description" content="Learn how to derive group sequential designs for time-to-event endpoints under both proportional and non-proportional hazards assumptions for randomized clinical trials.">
+<meta name="twitter:image" content="https://keaven.github.io/gsd-deming/assets/preview.jpg">
+<meta name="twitter:card" content="summary_large_image">
 </head>
-<body data-spy="scroll" data-target="#toc">
+<body class="nav-sidebar floating">
 
-<div class="container-fluid">
-<div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
-
-    <div class="d-flex align-items-start justify-content-between">
-      <h1>
-        <a href="index.html" title="Deming Conference Course, December 6, 2021">Group Sequential Design Under Non-Proportional Hazards</a>:
-        <small class="text-muted">Deming Conference Course, December 6, 2021</small>
-      </h1>
-      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./other-tests.html">Others tests</a></li><li class="breadcrumb-item"><a href="./wlr-boundary.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Group sequential design boundary with weighted logrank test</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
     </div>
-
-    <div id="main-nav" class="collapse-lg">
-      <form role="search">
-        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
-</form>
-
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html">Welcome!</a></li>
-<li><a class="" href="preface.html">Preface</a></li>
-<li><a class="" href="background.html"><span class="header-section-number">1</span> Background</a></li>
-<li><a class="" href="proportional-hazards.html"><span class="header-section-number">2</span> Proportional hazards</a></li>
-<li><a class="" href="ahr.html"><span class="header-section-number">3</span> Average hazard ratio</a></li>
-<li><a class="" href="pkgs.html"><span class="header-section-number">4</span> Introduction to gsdmvn, gsDesign2, and simtrial</a></li>
-<li class="book-part">Others tests</li>
-<li><a class="" href="overview-other-tests.html"><span class="header-section-number">5</span> Overview</a></li>
-<li><a class="" href="fixed-design.html"><span class="header-section-number">6</span> Fixed design</a></li>
-<li><a class="" href="wlr.html"><span class="header-section-number">7</span> Weighted logrank test</a></li>
-<li><a class="active" href="wlr-boundary.html"><span class="header-section-number">8</span> Group sequential design boundary with weighted logrank test</a></li>
-<li><a class="" href="maxcombo.html"><span class="header-section-number">9</span> MaxCombo test</a></li>
-<li><a class="" href="maxcombo-boundary.html"><span class="header-section-number">10</span> Group sequential design boundary with MaxCombo test</a></li>
-<li><a class="" href="references.html">References</a></li>
-</ul>
-
-        <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/keaven/gsd-deming">View book source <i class="fab fa-github"></i></a></p>
-        </div>
-      </nav>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Group Sequential Design Under Non-Proportional Hazards</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/keaven/gsd-deming" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+<li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
+              <i class="bi bi-bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
+              <i class="bi bi-bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="wlr-boundary" class="section level1" number="8">
-<h1>
-<span class="header-section-number">8</span> Group sequential design boundary with weighted logrank test<a class="anchor" aria-label="anchor" href="#wlr-boundary"><i class="fas fa-link"></i></a>
-</h1>
-<div id="group-sequential-design-boundary-calculation-strategy" class="section level2" number="8.1">
-<h2>
-<span class="header-section-number">8.1</span> Group sequential design boundary calculation strategy<a class="anchor" aria-label="anchor" href="#group-sequential-design-boundary-calculation-strategy"><i class="fas fa-link"></i></a>
-</h2>
-<p>In the last chapter, we pre-specified boundary derived from <code>gsDesign</code>.
-Therefore, the Type I error may be inflated because the information fraction is different for different WLR.</p>
-<p>In this chapter, we calculate boundaries based on the error spending approach following <span class="citation">Gordon Lan and DeMets (<a href="references.html#ref-gordon1983discrete" role="doc-biblioref">1983</a>)</span>.</p>
-<p>The spending function has been implemented in <code>gsDesign</code>.</p>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./preface.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./background.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Background</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./proportional-hazards.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Proportional hazards</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ahr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Average hazard ratio</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pkgs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introduction to gsdmvn, gsDesign2, and simtrial</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./other-tests.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Others tests</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fixed-design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Fixed design</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./wlr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Weighted logrank test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./wlr-boundary.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Group sequential design boundary with weighted logrank test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./maxcombo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">MaxCombo test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./maxcombo-boundary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Group sequential design boundary with MaxCombo test</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#group-sequential-design-boundary-calculation-strategy" id="toc-group-sequential-design-boundary-calculation-strategy" class="nav-link active" data-scroll-target="#group-sequential-design-boundary-calculation-strategy"><span class="header-section-number">7.1</span> Group sequential design boundary calculation strategy</a></li>
+  <li><a href="#types-of-error-probability" id="toc-types-of-error-probability" class="nav-link" data-scroll-target="#types-of-error-probability"><span class="header-section-number">7.2</span> Types of error probability</a></li>
+  <li><a href="#information-fraction" id="toc-information-fraction" class="nav-link" data-scroll-target="#information-fraction"><span class="header-section-number">7.3</span> Information fraction</a></li>
+  <li>
+<a href="#spending-function-based-on-information-fraction" id="toc-spending-function-based-on-information-fraction" class="nav-link" data-scroll-target="#spending-function-based-on-information-fraction"><span class="header-section-number">7.4</span> Spending function based on information fraction</a>
+  <ul class="collapse">
+<li><a href="#spending-function-in-gsdesign" id="toc-spending-function-in-gsdesign" class="nav-link" data-scroll-target="#spending-function-in-gsdesign"><span class="header-section-number">7.4.1</span> Spending function in gsDesign</a></li>
+  </ul>
+</li>
+  <li><a href="#lower-and-upper-bound" id="toc-lower-and-upper-bound" class="nav-link" data-scroll-target="#lower-and-upper-bound"><span class="header-section-number">7.5</span> Lower and upper bound</a></li>
+  <li><a href="#sample-size-calculation-logrank-test-based-on-ahr" id="toc-sample-size-calculation-logrank-test-based-on-ahr" class="nav-link" data-scroll-target="#sample-size-calculation-logrank-test-based-on-ahr"><span class="header-section-number">7.6</span> Sample size calculation logrank test based on AHR</a></li>
+  <li><a href="#sample-size-calculation-logrank-test-based-on-wlr-fh0-0" id="toc-sample-size-calculation-logrank-test-based-on-wlr-fh0-0" class="nav-link" data-scroll-target="#sample-size-calculation-logrank-test-based-on-wlr-fh0-0"><span class="header-section-number">7.7</span> Sample size calculation logrank test based on WLR <span class="math inline">\(FH(0, 0)\)</span></a></li>
+  <li><a href="#sample-size-calculation-fh0-1" id="toc-sample-size-calculation-fh0-1" class="nav-link" data-scroll-target="#sample-size-calculation-fh0-1"><span class="header-section-number">7.8</span> Sample size calculation <span class="math inline">\(FH(0, 1)\)</span></a></li>
+  <li><a href="#sample-size-calculation-fh0-0.5" id="toc-sample-size-calculation-fh0-0.5" class="nav-link" data-scroll-target="#sample-size-calculation-fh0-0.5"><span class="header-section-number">7.9</span> Sample size calculation <span class="math inline">\(FH(0, 0.5)\)</span></a></li>
+  <li><a href="#sample-size-calculation-fh0.5-0.5" id="toc-sample-size-calculation-fh0.5-0.5" class="nav-link" data-scroll-target="#sample-size-calculation-fh0.5-0.5"><span class="header-section-number">7.10</span> Sample size calculation <span class="math inline">\(FH(0.5, 0.5)\)</span></a></li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/keaven/gsd-deming/edit/main/wlr-boundary.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/keaven/gsd-deming/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/keaven/gsd-deming/blob/main/wlr-boundary.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./other-tests.html">Others tests</a></li><li class="breadcrumb-item"><a href="./wlr-boundary.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Group sequential design boundary with weighted logrank test</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-wlr-boundary" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Group sequential design boundary with weighted logrank test</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keaven.github.io/gsDesign/">gsDesign</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://merck.github.io/gsdmvn/">gsdmvn</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://mvtnorm.R-forge.R-project.org">mvtnorm</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="group-sequential-design-boundary-calculation-strategy" class="level2" data-number="7.1"><h2 data-number="7.1" class="anchored" data-anchor-id="group-sequential-design-boundary-calculation-strategy">
+<span class="header-section-number">7.1</span> Group sequential design boundary calculation strategy</h2>
+<p>In the last chapter, we pre-specified boundary derived from gsDesign. Therefore, the Type I error may be inflated because the information fraction is different for different WLR.</p>
+<p>In this chapter, we calculate boundaries based on the error spending approach following <span class="citation" data-cites="gordon1983discrete">Gordon Lan and DeMets (<a href="references.html#ref-gordon1983discrete" role="doc-biblioref">1983</a>)</span>.</p>
+<p>The spending function has been implemented in gsDesign.</p>
 <ul>
 <li>
-<code><a href="https://keaven.github.io/gsDesign/reference/sfLDOF.html">gsDesign::sfLDOF()</a></code> (O’Brien-Fleming bound approximation) or other functions starting with <code>sf</code> in <code>gsDesign</code>
-</li>
-<li>The boundary family approach. <span class="citation">Pocock (<a href="references.html#ref-pocock1977group" role="doc-biblioref">1977</a>)</span>, <span class="citation">O’Brien and Fleming (<a href="references.html#ref-o1979multiple" role="doc-biblioref">1979</a>)</span>, <span class="citation">Wang and Tsiatis (<a href="references.html#ref-wang1987approximately" role="doc-biblioref">1987</a>)</span>
-</li>
+<code><a href="https://keaven.github.io/gsDesign/reference/sfLDOF.html">gsDesign::sfLDOF()</a></code> (O’Brien-Fleming bound approximation) or other functions starting with <code>sf</code> in gsDesign.</li>
+<li>The boundary family approach <span class="citation" data-cites="pocock1977group o1979multiple wang1987approximately">(<a href="references.html#ref-pocock1977group" role="doc-biblioref">Pocock 1977</a>; <a href="references.html#ref-o1979multiple" role="doc-biblioref">O’Brien and Fleming 1979</a>; <a href="references.html#ref-wang1987approximately" role="doc-biblioref">Wang and Tsiatis 1987</a>)</span>.</li>
 </ul>
 <p>There are other ways to derive boundaries but will not be covered:</p>
 <ul>
-<li>Conditional power <span class="citation">(<a href="references.html#ref-lachin2005review" role="doc-biblioref">Lachin 2005</a>)</span>
-</li>
-</ul>
-</div>
-<div id="types-of-error-probability" class="section level2" number="8.2">
-<h2>
-<span class="header-section-number">8.2</span> Types of error probability<a class="anchor" aria-label="anchor" href="#types-of-error-probability"><i class="fas fa-link"></i></a>
-</h2>
-<p>There are 6 different types of error probability that have been implemented in <code>gsdmvn</code>.
-In this training material, we focus on <code>test.type = 4</code>.</p>
+<li>Conditional power <span class="citation" data-cites="lachin2005review">(<a href="references.html#ref-lachin2005review" role="doc-biblioref">Lachin 2005</a>)</span>.</li>
+</ul></section><section id="types-of-error-probability" class="level2" data-number="7.2"><h2 data-number="7.2" class="anchored" data-anchor-id="types-of-error-probability">
+<span class="header-section-number">7.2</span> Types of error probability</h2>
+<p>There are 6 different types of error probability that have been implemented in gsdmvn. In this training material, we focus on <code>test.type = 4</code>.</p>
 <ul>
 <li>
-<code>test.type</code> argument in <code>gsDesign</code>
-</li>
+<code>test.type</code> argument in gsDesign</li>
 <li>Upper bound:
 <ul>
 <li><span class="math inline">\(\alpha_k(0) = \text{Pr}(\cap_{i=1}^{i=k-1} a_i &lt; Z_i &lt; b_i, Z_k &gt; b_k \mid H_0)\)</span></li>
@@ -136,42 +369,42 @@ In this training material, we focus on <code>test.type = 4</code>.</p>
 <li>
 <span class="math inline">\(\beta_k(\delta) = \text{Pr}(\cap_{i=1}^{i=k-1} a_i &lt; Z_i &lt; b_i, Z_k &lt; a_k \mid H_1)\)</span> (under alternative)</li>
 </ul>
-<table class="table table-sm">
+<table class="table">
 <thead><tr class="header">
-<th align="center"><code>test.type</code></th>
-<th align="center">Upper bound</th>
-<th align="center">Lower bound</th>
+<th style="text-align: center;"><code>test.type</code></th>
+<th style="text-align: center;">Upper bound</th>
+<th style="text-align: center;">Lower bound</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="center">1</td>
-<td align="center"><span class="math inline">\(\alpha_k^{+}(0)\)</span></td>
-<td align="center">None</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;"><span class="math inline">\(\alpha_k^{+}(0)\)</span></td>
+<td style="text-align: center;">None</td>
 </tr>
 <tr class="even">
-<td align="center">2</td>
-<td align="center"><span class="math inline">\(\alpha(0)\)</span></td>
-<td align="center"><span class="math inline">\(\beta_k(0)\)</span></td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;"><span class="math inline">\(\alpha(0)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\beta_k(0)\)</span></td>
 </tr>
 <tr class="odd">
-<td align="center">3</td>
-<td align="center"><span class="math inline">\(\alpha_k(0)\)</span></td>
-<td align="center"><span class="math inline">\(\beta_k(\delta)\)</span></td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;"><span class="math inline">\(\alpha_k(0)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\beta_k(\delta)\)</span></td>
 </tr>
 <tr class="even">
-<td align="center">4</td>
-<td align="center"><span class="math inline">\(\alpha_k^{+}(0)\)</span></td>
-<td align="center"><span class="math inline">\(\beta_k(\delta)\)</span></td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;"><span class="math inline">\(\alpha_k^{+}(0)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\beta_k(\delta)\)</span></td>
 </tr>
 <tr class="odd">
-<td align="center">5</td>
-<td align="center"><span class="math inline">\(\alpha(0)\)</span></td>
-<td align="center"><span class="math inline">\(\beta_k(0)\)</span></td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;"><span class="math inline">\(\alpha(0)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\beta_k(0)\)</span></td>
 </tr>
 <tr class="even">
-<td align="center">6</td>
-<td align="center"><span class="math inline">\(\alpha^{+}(0)\)</span></td>
-<td align="center"><span class="math inline">\(\beta_k(0)\)</span></td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;"><span class="math inline">\(\alpha^{+}(0)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\beta_k(0)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -181,57 +414,52 @@ In this training material, we focus on <code>test.type = 4</code>.</p>
 <li>
 <code>test.type = 3</code> and <code>test.type = 4</code>: sample size and boundaries are set simultaneously using an iterative algorithm.</li>
 <li>This section and last section focus on <code>test.type = 4</code>.</li>
-</ul>
-</div>
-<div id="information-fraction" class="section level2" number="8.3">
-<h2>
-<span class="header-section-number">8.3</span> Information fraction<a class="anchor" aria-label="anchor" href="#information-fraction"><i class="fas fa-link"></i></a>
-</h2>
-<p>Under the same design assumption,
-information fraction is different from different weight parameters in WLR.</p>
+</ul></section><section id="information-fraction" class="level2" data-number="7.3"><h2 data-number="7.3" class="anchored" data-anchor-id="information-fraction">
+<span class="header-section-number">7.3</span> Information fraction</h2>
+<p>Under the same design assumption, information fraction is different from different weight parameters in WLR.</p>
 <p>We continue using the same example scenario in the last chapter.</p>
-<div class="inline-figure"><img src="images/g_info.png" width="60%" style="display: block; margin: auto;"></div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/g_info.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
 </div>
-<div id="spending-function-based-on-information-fraction" class="section level2" number="8.4">
-<h2>
-<span class="header-section-number">8.4</span> Spending function based on information fraction<a class="anchor" aria-label="anchor" href="#spending-function-based-on-information-fraction"><i class="fas fa-link"></i></a>
-</h2>
-<p>The spending function is based on information fraction.
-We considered the Lan-DeMets spending function to approximate an O’Brien-Fleming bound <span class="citation">Gordon Lan and DeMets (<a href="references.html#ref-gordon1983discrete" role="doc-biblioref">1983</a>)</span>. (<code><a href="https://keaven.github.io/gsDesign/reference/sfLDOF.html">gsDesign::sfLDOF()</a></code>).</p>
+</div>
+</div>
+</section><section id="spending-function-based-on-information-fraction" class="level2" data-number="7.4"><h2 data-number="7.4" class="anchored" data-anchor-id="spending-function-based-on-information-fraction">
+<span class="header-section-number">7.4</span> Spending function based on information fraction</h2>
+<p>The spending function is based on information fraction. We considered the Lan-DeMets spending function to approximate an O’Brien-Fleming bound <span class="citation" data-cites="gordon1983discrete">Gordon Lan and DeMets (<a href="references.html#ref-gordon1983discrete" role="doc-biblioref">1983</a>)</span>. (<code><a href="https://keaven.github.io/gsDesign/reference/sfLDOF.html">gsDesign::sfLDOF()</a></code>).</p>
 <p>Here, <span class="math inline">\(t\)</span> is information fraction in the formula below.</p>
 <p><span class="math display">\[f(t; \alpha)=2-2\Phi\left(\Phi^{-1}\left(\frac{1-\alpha/2}{t^{\rho/2}}\right)\right)\]</span></p>
-<div id="spending-function-in-gsdesign" class="section level3" number="8.4.1">
-<h3>
-<span class="header-section-number">8.4.1</span> Spending function in <code>gsDesign</code><a class="anchor" aria-label="anchor" href="#spending-function-in-gsdesign"><i class="fas fa-link"></i></a>
-</h3>
-<p>After the spending function is selected, we can calculate the lower and upper bound of a
-group sequential design.</p>
+<section id="spending-function-in-gsdesign" class="level3" data-number="7.4.1"><h3 data-number="7.4.1" class="anchored" data-anchor-id="spending-function-in-gsdesign">
+<span class="header-section-number">7.4.1</span> Spending function in gsDesign</h3>
+<p>After the spending function is selected, we can calculate the lower and upper bound of a group sequential design.</p>
 <p>In test type 4, the lower bound is non-binding. So we set lower bound are all <code>-Inf</code> when we calculate the probability to cross upper bound.</p>
 <p>We first use the alpha spending function to determine the upper bound of a group sequential design</p>
 <ul>
 <li>Let <span class="math inline">\((a_k, b_k), k=1,\dots, K\)</span> denotes the lower and upper bound.</li>
 </ul>
-<p>For gsDesign with logrank test,
-we considered equal increments of information fraction at <code>t = 1:3 / 3</code> is.</p>
-<p>The upper bound and lower bound based on the Lan-DeMets spending function
-can be calculated using <code><a href="https://keaven.github.io/gsDesign/reference/sfLDOF.html">gsDesign::sfLDOF()</a></code>.</p>
+<p>For gsDesign with logrank test, we considered equal increments of information fraction at <code>t = 1:3 / 3</code> is.</p>
+<p>The upper bound and lower bound based on the Lan-DeMets spending function can be calculated using <code><a href="https://keaven.github.io/gsDesign/reference/sfLDOF.html">gsDesign::sfLDOF()</a></code>.</p>
 <ul>
 <li>Upper bound:</li>
 </ul>
-<div class="sourceCode" id="cb210"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">alpha_spend</span> <span class="op">&lt;-</span> <span class="fu">gsDesign</span><span class="fu">::</span><span class="fu"><a href="https://keaven.github.io/gsDesign/reference/sfLDOF.html">sfLDOF</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.025</span>, t <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span> <span class="op">/</span> <span class="fl">3</span><span class="op">)</span><span class="op">$</span><span class="va">spend</span></span>
-<span><span class="va">alpha_spend</span></span></code></pre></div>
-<pre><code>#&gt; [1] 0.0001035057 0.0060483891 0.0250000000</code></pre>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">alpha_spend</span> <span class="op">&lt;-</span> <span class="fu">gsDesign</span><span class="fu">::</span><span class="fu"><a href="https://keaven.github.io/gsDesign/reference/sfLDOF.html">sfLDOF</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.025</span>, t <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span> <span class="op">/</span> <span class="fl">3</span><span class="op">)</span><span class="op">$</span><span class="va">spend</span></span>
+<span><span class="va">alpha_spend</span></span>
+<span><span class="co">#&gt; [1] 0.0001035057 0.0060483891 0.0250000000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <ul>
 <li>Lower bound:</li>
 </ul>
-<div class="sourceCode" id="cb212"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">beta_spend</span> <span class="op">&lt;-</span> <span class="fu">gsDesign</span><span class="fu">::</span><span class="fu"><a href="https://keaven.github.io/gsDesign/reference/sfLDOF.html">sfLDOF</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.2</span>, t <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span> <span class="op">/</span> <span class="fl">3</span><span class="op">)</span><span class="op">$</span><span class="va">spend</span></span>
-<span><span class="va">beta_spend</span></span></code></pre></div>
-<pre><code>#&gt; [1] 0.02643829 0.11651432 0.20000000</code></pre>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">beta_spend</span> <span class="op">&lt;-</span> <span class="fu">gsDesign</span><span class="fu">::</span><span class="fu"><a href="https://keaven.github.io/gsDesign/reference/sfLDOF.html">sfLDOF</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.2</span>, t <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span> <span class="op">/</span> <span class="fl">3</span><span class="op">)</span><span class="op">$</span><span class="va">spend</span></span>
+<span><span class="va">beta_spend</span></span>
+<span><span class="co">#&gt; [1] 0.02643829 0.11651432 0.20000000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>We considered different WLR tests with weight functions: <span class="math inline">\(FH(0, 0)\)</span>, <span class="math inline">\(FH(0.5, 0.5)\)</span>, <span class="math inline">\(FH(0, 0.5)\)</span>, <span class="math inline">\(FH(0, 1)\)</span></p>
-<div class="sourceCode" id="cb214"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">weight_fun</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">weight_fun</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
 <span>  <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">arm0</span>, <span class="va">arm1</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/wlr_weight.html">wlr_weight_fh</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">arm0</span>, <span class="va">arm1</span>, rho <span class="op">=</span> <span class="fl">0</span>, gamma <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
 <span>  <span class="op">}</span>,</span>
@@ -248,7 +476,8 @@ can be calculated using <code><a href="https://keaven.github.io/gsDesign/referen
 <span></span>
 <span><span class="co"># Weight name</span></span>
 <span><span class="va">weight_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>rho <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.5</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>, gamma <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">weight_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">weight_name</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"rho = "</span>, <span class="va">rho</span>, <span class="st">"; gamma = "</span>, <span class="va">gamma</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">weight_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">weight_name</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"rho = "</span>, <span class="va">rho</span>, <span class="st">"; gamma = "</span>, <span class="va">gamma</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>For test type 4, the alpha and beta is defined as below.</p>
 <ul>
 <li>
@@ -259,7 +488,7 @@ can be calculated using <code><a href="https://keaven.github.io/gsDesign/referen
 </ul>
 </li>
 <li>
-<span class="math inline">\(\beta_k(\delta) = \text{Pr}(\cap_{i=1}^{i=k-1} a_i &lt; Z_i &lt; b_i, Z_k &lt; a_k \mid H_1)\)</span> (under alternative)
+<span class="math inline">\(\beta_k(\delta) =  \text{Pr}(\cap_{i=1}^{i=k-1} a_i &lt; Z_i &lt; b_i, Z_k &lt; a_k \mid H_1)\)</span> (under alternative)
 <ul>
 <li>
 <span class="math inline">\(\beta_k(\delta)\)</span> is calculated under the alternative. It depends on the sample size.</li>
@@ -268,14 +497,26 @@ can be calculated using <code><a href="https://keaven.github.io/gsDesign/referen
 </li>
 </ul>
 <p>The table below provide the cumulative alpha and beta at different analysis time for each WLR test.</p>
-<p>we draw the Alpha spending (<span class="math inline">\(\alpha=0.025\)</span>) function
-based on information fraction at 12, 24 and 36 months</p>
-<div class="inline-figure"><img src="images/g_alpha.png" width="60%" style="display: block; margin: auto;"></div>
-<p>Similarly, we draw the Beta spending (<span class="math inline">\(\beta=0.2\)</span>) function
-based on information fraction at 12, 24 and 36 months</p>
-<div class="inline-figure"><img src="images/g_beta.png" width="60%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb215"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">analysisTimes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">12</span>, <span class="fl">24</span>, <span class="fl">36</span><span class="op">)</span></span>
+<p>we draw the Alpha spending (<span class="math inline">\(\alpha=0.025\)</span>) function based on information fraction at 12, 24 and 36 months</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/g_alpha.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Similarly, we draw the Beta spending (<span class="math inline">\(\beta=0.2\)</span>) function based on information fraction at 12, 24 and 36 months</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/g_beta.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">analysisTimes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">12</span>, <span class="fl">24</span>, <span class="fl">36</span><span class="op">)</span></span>
 <span><span class="va">gs_spend</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">weight_fun</span>, <span class="kw">function</span><span class="op">(</span><span class="va">weight</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_info_wlr.html">gs_info_wlr</a></span><span class="op">(</span></span>
 <span>    <span class="va">enrollRates</span>, <span class="va">failRates</span>,</span>
@@ -290,72 +531,87 @@ based on information fraction at 12, 24 and 36 months</p>
 <span>    alpha <span class="op">=</span> <span class="fu">gsDesign</span><span class="fu">::</span><span class="fu"><a href="https://keaven.github.io/gsDesign/reference/sfLDOF.html">sfLDOF</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.025</span>, t <span class="op">=</span> <span class="va">info0</span><span class="op">)</span><span class="op">$</span><span class="va">spend</span>,</span>
 <span>    beta <span class="op">=</span> <span class="fu">gsDesign</span><span class="fu">::</span><span class="fu"><a href="https://keaven.github.io/gsDesign/reference/sfLDOF.html">sfLDOF</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.20</span>, t <span class="op">=</span> <span class="va">info</span><span class="op">)</span><span class="op">$</span><span class="va">spend</span></span>
 <span>  <span class="op">)</span></span>
-<span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb216"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">gs_spend</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">weight_name</span></span>
+<span><span class="op">}</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">gs_spend</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">weight_name</span></span>
 <span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows</a></span><span class="op">(</span><span class="va">gs_spend</span>, .id <span class="op">=</span> <span class="st">"weight"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">weight</span>, <span class="va">Time</span>, <span class="va">alpha</span>, <span class="va">beta</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_if</a></span><span class="op">(</span><span class="va">is.numeric</span>, <span class="va">round</span>, digits <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt;                    weight Time alpha  beta
-#&gt; 1      rho = 0; gamma = 0   12 0.000 0.025
-#&gt; 2      rho = 0; gamma = 0   24 0.009 0.139
-#&gt; 3      rho = 0; gamma = 0   36 0.025 0.200
-#&gt; 4  rho = 0.5; gamma = 0.5   12 0.000 0.003
-#&gt; 5  rho = 0.5; gamma = 0.5   24 0.006 0.118
-#&gt; 6  rho = 0.5; gamma = 0.5   36 0.025 0.200
-#&gt; 7    rho = 0; gamma = 0.5   12 0.000 0.000
-#&gt; 8    rho = 0; gamma = 0.5   24 0.003 0.088
-#&gt; 9    rho = 0; gamma = 0.5   36 0.025 0.200
-#&gt; 10     rho = 0; gamma = 1   12 0.000 0.000
-#&gt; 11     rho = 0; gamma = 1   24 0.001 0.051
-#&gt; 12     rho = 0; gamma = 1   36 0.025 0.200</code></pre>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_if</a></span><span class="op">(</span><span class="va">is.numeric</span>, <span class="va">round</span>, digits <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="co">#&gt;                    weight Time alpha  beta</span></span>
+<span><span class="co">#&gt; 1      rho = 0; gamma = 0   12 0.000 0.025</span></span>
+<span><span class="co">#&gt; 2      rho = 0; gamma = 0   24 0.009 0.139</span></span>
+<span><span class="co">#&gt; 3      rho = 0; gamma = 0   36 0.025 0.200</span></span>
+<span><span class="co">#&gt; 4  rho = 0.5; gamma = 0.5   12 0.000 0.003</span></span>
+<span><span class="co">#&gt; 5  rho = 0.5; gamma = 0.5   24 0.006 0.118</span></span>
+<span><span class="co">#&gt; 6  rho = 0.5; gamma = 0.5   36 0.025 0.200</span></span>
+<span><span class="co">#&gt; 7    rho = 0; gamma = 0.5   12 0.000 0.000</span></span>
+<span><span class="co">#&gt; 8    rho = 0; gamma = 0.5   24 0.003 0.088</span></span>
+<span><span class="co">#&gt; 9    rho = 0; gamma = 0.5   36 0.025 0.200</span></span>
+<span><span class="co">#&gt; 10     rho = 0; gamma = 1   12 0.000 0.000</span></span>
+<span><span class="co">#&gt; 11     rho = 0; gamma = 1   24 0.001 0.051</span></span>
+<span><span class="co">#&gt; 12     rho = 0; gamma = 1   36 0.025 0.200</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<div id="lower-and-upper-bound" class="section level2" number="8.5">
-<h2>
-<span class="header-section-number">8.5</span> Lower and upper bound<a class="anchor" aria-label="anchor" href="#lower-and-upper-bound"><i class="fas fa-link"></i></a>
-</h2>
+</section></section><section id="lower-and-upper-bound" class="level2" data-number="7.5"><h2 data-number="7.5" class="anchored" data-anchor-id="lower-and-upper-bound">
+<span class="header-section-number">7.5</span> Lower and upper bound</h2>
 <p>Let’s calculate the lower and upper bound of the first interim analysis.</p>
 <ul>
 <li>First interim analysis upper bound: <span class="math inline">\(\text{Pr}(Z_1 &gt; b_1 \mid H_0)\)</span>
 </li>
 </ul>
-<div class="sourceCode" id="cb218"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="va">gs_spend</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">alpha</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; [1] 3.790778</code></pre>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="va">gs_spend</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">alpha</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 3.790778</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <ul>
 <li>First interim analysis lower bound <span class="math inline">\(\text{Pr}(Z_1 &lt; b_1 \mid H_1)\)</span>
 </li>
 </ul>
-<div class="rmdnote">
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>The lower bound is calculated under alternative hypothesis and depends on sample size.</p>
 </div>
-<div class="sourceCode" id="cb220"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">400</span></span>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">400</span></span>
 <span><span class="va">mean</span> <span class="op">&lt;-</span> <span class="va">gs_spend</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">theta</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="va">gs_spend</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">beta</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, mean <span class="op">=</span> <span class="va">mean</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; [1] -1.159606</code></pre>
-<div class="sourceCode" id="cb222"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">500</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="va">gs_spend</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">beta</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, mean <span class="op">=</span> <span class="va">mean</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] -1.159606</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">500</span></span>
 <span><span class="va">mean</span> <span class="op">&lt;-</span> <span class="va">gs_spend</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">theta</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="va">gs_spend</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">beta</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, mean <span class="op">=</span> <span class="va">mean</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; [1] -1.065469</code></pre>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="va">gs_spend</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">beta</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, mean <span class="op">=</span> <span class="va">mean</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] -1.065469</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>The figure below illustrates the lower and upper bound in different sample size</p>
 <ul>
 <li>A larger sample size has a larger lower bound (solid line compared with dashed line)</li>
 <li>Iteration is required to find proper sample size and boundary.</li>
 </ul>
-<div class="inline-figure"><img src="images/g_bound.png" width="60%" style="display: block; margin: auto;"></div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/g_bound.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
 </div>
-<div id="sample-size-calculation-logrank-test-based-on-ahr" class="section level2" number="8.6">
-<h2>
-<span class="header-section-number">8.6</span> Sample size calculation logrank test based on AHR<a class="anchor" aria-label="anchor" href="#sample-size-calculation-logrank-test-based-on-ahr"><i class="fas fa-link"></i></a>
-</h2>
+</div>
+</div>
+</section><section id="sample-size-calculation-logrank-test-based-on-ahr" class="level2" data-number="7.6"><h2 data-number="7.6" class="anchored" data-anchor-id="sample-size-calculation-logrank-test-based-on-ahr">
+<span class="header-section-number">7.6</span> Sample size calculation logrank test based on AHR</h2>
 <ul>
 <li>Sample size</li>
 </ul>
-<div class="sourceCode" id="cb224"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_design_ahr.html">gs_design_ahr</a></span><span class="op">(</span></span>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_design_ahr.html">gs_design_ahr</a></span><span class="op">(</span></span>
 <span>  enrollRates <span class="op">=</span> <span class="va">enrollRates</span>, failRates <span class="op">=</span> <span class="va">failRates</span>,</span>
 <span>  ratio <span class="op">=</span> <span class="va">ratio</span>, alpha <span class="op">=</span> <span class="va">alpha</span>, beta <span class="op">=</span> <span class="va">beta</span>,</span>
 <span>  upper <span class="op">=</span> <span class="va">gs_spending_bound</span>,</span>
@@ -365,59 +621,64 @@ based on information fraction at 12, 24 and 36 months</p>
 <span>  analysisTimes <span class="op">=</span> <span class="va">analysisTimes</span></span>
 <span><span class="op">)</span><span class="op">$</span><span class="va">bounds</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_if</a></span><span class="op">(</span><span class="va">is.numeric</span>, <span class="va">round</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
-<span><span class="va">x</span></span></code></pre></div>
-<pre><code>#&gt; # A tibble: 6 × 11
-#&gt;   Analysis Bound  Time     N Events     Z Probability   AHR theta  info info0
-#&gt;      &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1        1 Upper    12  379.   81.4  3.77        0     0.84  0.17  20.0  20.3
-#&gt; 2        2 Upper    24  379.  187.   2.35        0.47  0.71  0.34  45.5  46.6
-#&gt; 3        3 Upper    36  379.  251.   2.01        0.8   0.68  0.38  61.6  62.7
-#&gt; 4        1 Lower    12  379.   81.4 -1.19        0.02  0.84  0.17  20.0  20.3
-#&gt; 5        2 Lower    24  379.  187.   1.13        0.14  0.71  0.34  45.5  46.6
-#&gt; 6        3 Lower    36  379.  251.   2.01        0.2   0.68  0.38  61.6  62.7</code></pre>
+<span><span class="va">x</span></span>
+<span><span class="co">#&gt; # A tibble: 6 × 11</span></span>
+<span><span class="co">#&gt;   Analysis Bound  Time     N Events     Z Probability   AHR theta</span></span>
+<span><span class="co">#&gt;      &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1        1 Upper    12  379.   81.4  3.77        0     0.84  0.17</span></span>
+<span><span class="co">#&gt; 2        2 Upper    24  379.  187.   2.35        0.47  0.71  0.34</span></span>
+<span><span class="co">#&gt; 3        3 Upper    36  379.  251.   2.01        0.8   0.68  0.38</span></span>
+<span><span class="co">#&gt; 4        1 Lower    12  379.   81.4 -1.19        0.02  0.84  0.17</span></span>
+<span><span class="co">#&gt; 5        2 Lower    24  379.  187.   1.13        0.14  0.71  0.34</span></span>
+<span><span class="co">#&gt; 6        3 Lower    36  379.  251.   2.01        0.2   0.68  0.38</span></span>
+<span><span class="co">#&gt; # ℹ 2 more variables: info &lt;dbl&gt;, info0 &lt;dbl&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <ul>
 <li>Simulation results based on 10,000 replications.</li>
 </ul>
+<div class="cell" data-layout-align="center">
 <pre><code>#&gt;     n  t events  ahr lower upper
 #&gt; 1 379 12  81.23 0.86  0.02  0.00
 #&gt; 2 379 24 186.50 0.72  0.13  0.48
 #&gt; 3 379 36 251.05 0.69  0.19  0.81</code></pre>
+</div>
 <ul>
 <li>Type I error</li>
 </ul>
-<div class="sourceCode" id="cb227"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_power_npe.html">gs_power_npe</a></span><span class="op">(</span></span>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_power_npe.html">gs_power_npe</a></span><span class="op">(</span></span>
 <span>  theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">analysisTimes</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  info <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">info0</span><span class="op">[</span><span class="va">x</span><span class="op">$</span><span class="va">Bound</span> <span class="op">==</span> <span class="st">"Upper"</span><span class="op">]</span>,</span>
 <span>  upar <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">Z</span><span class="op">[</span><span class="va">x</span><span class="op">$</span><span class="va">Bound</span> <span class="op">==</span> <span class="st">"Upper"</span><span class="op">]</span>,</span>
 <span>  lpar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="op">-</span><span class="cn">Inf</span>, <span class="fl">3</span><span class="op">)</span></span>
-<span><span class="op">)</span><span class="op">$</span><span class="va">Probability</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">analysisTimes</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
-<pre><code>#&gt; [1] 8.162377e-05 9.415389e-03 2.505418e-02</code></pre>
+<span><span class="op">)</span><span class="op">$</span><span class="va">Probability</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">analysisTimes</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co">#&gt; [1] 8.162377e-05 9.415389e-03 2.505418e-02</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <ul>
 <li>Compared with fixed design</li>
 </ul>
-<div class="sourceCode" id="cb229"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_design_ahr.html">gs_design_ahr</a></span><span class="op">(</span></span>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_design_ahr.html">gs_design_ahr</a></span><span class="op">(</span></span>
 <span>  enrollRates <span class="op">=</span> <span class="va">enrollRates</span>, failRates <span class="op">=</span> <span class="va">failRates</span>,</span>
 <span>  ratio <span class="op">=</span> <span class="fl">1</span>, alpha <span class="op">=</span> <span class="fl">0.025</span>, beta <span class="op">=</span> <span class="fl">0.2</span>,</span>
 <span>  upar <span class="op">=</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.025</span><span class="op">)</span>,</span>
 <span>  lpar <span class="op">=</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.025</span><span class="op">)</span>,</span>
 <span>  analysisTimes <span class="op">=</span> <span class="fl">36</span></span>
-<span><span class="op">)</span><span class="op">$</span><span class="va">bounds</span></span></code></pre></div>
-<pre><code>#&gt; # A tibble: 1 × 11
-#&gt;   Analysis Bound  Time     N Events     Z Probability   AHR theta  info info0
-#&gt;      &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1        1 Upper    36  328.   217.  1.96         0.8 0.683 0.381  53.4  54.4</code></pre>
+<span><span class="op">)</span><span class="op">$</span><span class="va">bounds</span></span>
+<span><span class="co">#&gt; # A tibble: 1 × 11</span></span>
+<span><span class="co">#&gt;   Analysis Bound  Time     N Events     Z Probability   AHR theta</span></span>
+<span><span class="co">#&gt;      &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1        1 Upper    36  328.   217.  1.96         0.8 0.683 0.381</span></span>
+<span><span class="co">#&gt; # ℹ 2 more variables: info &lt;dbl&gt;, info0 &lt;dbl&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="sample-size-calculation-logrank-test-based-on-wlr-fh0-0" class="section level2" number="8.7">
-<h2>
-<span class="header-section-number">8.7</span> Sample size calculation logrank test based on WLR <span class="math inline">\(FH(0, 0)\)</span><a class="anchor" aria-label="anchor" href="#sample-size-calculation-logrank-test-based-on-wlr-fh0-0"><i class="fas fa-link"></i></a>
+</section><section id="sample-size-calculation-logrank-test-based-on-wlr-fh0-0" class="level2" data-number="7.7"><h2 data-number="7.7" class="anchored" data-anchor-id="sample-size-calculation-logrank-test-based-on-wlr-fh0-0">
+<span class="header-section-number">7.7</span> Sample size calculation logrank test based on WLR <span class="math inline">\(FH(0, 0)\)</span>
 </h2>
 <ul>
 <li>Sample size</li>
 </ul>
-<div class="sourceCode" id="cb231"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_design_wlr.html">gs_design_wlr</a></span><span class="op">(</span></span>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_design_wlr.html">gs_design_wlr</a></span><span class="op">(</span></span>
 <span>  enrollRates <span class="op">=</span> <span class="va">enrollRates</span>, failRates <span class="op">=</span> <span class="va">failRates</span>,</span>
 <span>  ratio <span class="op">=</span> <span class="va">ratio</span>, alpha <span class="op">=</span> <span class="va">alpha</span>, beta <span class="op">=</span> <span class="va">beta</span>,</span>
 <span>  weight <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">arm0</span>, <span class="va">arm1</span><span class="op">)</span> <span class="op">{</span></span>
@@ -430,39 +691,44 @@ based on information fraction at 12, 24 and 36 months</p>
 <span>  analysisTimes <span class="op">=</span> <span class="va">analysisTimes</span></span>
 <span><span class="op">)</span><span class="op">$</span><span class="va">bounds</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_if</a></span><span class="op">(</span><span class="va">is.numeric</span>, <span class="va">round</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
-<span><span class="va">x</span></span></code></pre></div>
-<pre><code>#&gt; # A tibble: 6 × 11
-#&gt;   Analysis Bound  Time     N Events     Z Probability   AHR theta  info info0
-#&gt;      &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1        1 Upper    12  377.    81   3.79        0     0.84  0.17  20.2  20.3
-#&gt; 2        2 Upper    24  377.   186.  2.36        0.46  0.72  0.33  46.3  46.8
-#&gt; 3        3 Upper    36  377.   250.  2.01        0.8   0.68  0.38  61.8  63.3
-#&gt; 4        1 Lower    12  377.    81  -1.18        0.03  0.84  0.17  20.2  20.3
-#&gt; 5        2 Lower    24  377.   186.  1.15        0.14  0.72  0.33  46.3  46.8
-#&gt; 6        3 Lower    36  377.   250.  2.01        0.2   0.68  0.38  61.8  63.3</code></pre>
+<span><span class="va">x</span></span>
+<span><span class="co">#&gt; # A tibble: 6 × 11</span></span>
+<span><span class="co">#&gt;   Analysis Bound  Time     N Events     Z Probability   AHR theta</span></span>
+<span><span class="co">#&gt;      &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1        1 Upper    12  377.    81   3.79        0     0.84  0.17</span></span>
+<span><span class="co">#&gt; 2        2 Upper    24  377.   186.  2.36        0.46  0.72  0.33</span></span>
+<span><span class="co">#&gt; 3        3 Upper    36  377.   250.  2.01        0.8   0.68  0.38</span></span>
+<span><span class="co">#&gt; 4        1 Lower    12  377.    81  -1.18        0.03  0.84  0.17</span></span>
+<span><span class="co">#&gt; 5        2 Lower    24  377.   186.  1.15        0.14  0.72  0.33</span></span>
+<span><span class="co">#&gt; 6        3 Lower    36  377.   250.  2.01        0.2   0.68  0.38</span></span>
+<span><span class="co">#&gt; # ℹ 2 more variables: info &lt;dbl&gt;, info0 &lt;dbl&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <ul>
 <li>Simulation results based on 10,000 replications.</li>
 </ul>
+<div class="cell" data-layout-align="center">
 <pre><code>#&gt;     n  t events  ahr lower upper
 #&gt; 1 378 12  80.98 0.86  0.03  0.00
 #&gt; 2 378 24 186.10 0.72  0.14  0.47
 #&gt; 3 378 36 250.33 0.69  0.20  0.80</code></pre>
+</div>
 <ul>
 <li>Type I error</li>
 </ul>
-<div class="sourceCode" id="cb234"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_power_npe.html">gs_power_npe</a></span><span class="op">(</span></span>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_power_npe.html">gs_power_npe</a></span><span class="op">(</span></span>
 <span>  theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">analysisTimes</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  info <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">info0</span><span class="op">[</span><span class="va">x</span><span class="op">$</span><span class="va">Bound</span> <span class="op">==</span> <span class="st">"Upper"</span><span class="op">]</span>,</span>
 <span>  upar <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">Z</span><span class="op">[</span><span class="va">x</span><span class="op">$</span><span class="va">Bound</span> <span class="op">==</span> <span class="st">"Upper"</span><span class="op">]</span>,</span>
 <span>  lpar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="op">-</span><span class="cn">Inf</span>, <span class="fl">3</span><span class="op">)</span></span>
-<span><span class="op">)</span><span class="op">$</span><span class="va">Probability</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">analysisTimes</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
-<pre><code>#&gt; [1] 7.532364e-05 9.164191e-03 2.497474e-02</code></pre>
+<span><span class="op">)</span><span class="op">$</span><span class="va">Probability</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">analysisTimes</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co">#&gt; [1] 7.532364e-05 9.164191e-03 2.497474e-02</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <ul>
 <li>Compared with fixed design</li>
 </ul>
-<div class="sourceCode" id="cb236"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_design_wlr.html">gs_design_wlr</a></span><span class="op">(</span></span>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_design_wlr.html">gs_design_wlr</a></span><span class="op">(</span></span>
 <span>  enrollRates <span class="op">=</span> <span class="va">enrollRates</span>, failRates <span class="op">=</span> <span class="va">failRates</span>,</span>
 <span>  weight <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">arm0</span>, <span class="va">arm1</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/wlr_weight.html">wlr_weight_fh</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">arm0</span>, <span class="va">arm1</span>, rho <span class="op">=</span> <span class="fl">0</span>, gamma <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
@@ -471,21 +737,21 @@ based on information fraction at 12, 24 and 36 months</p>
 <span>  upar <span class="op">=</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.025</span><span class="op">)</span>,</span>
 <span>  lpar <span class="op">=</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.025</span><span class="op">)</span>,</span>
 <span>  analysisTimes <span class="op">=</span> <span class="fl">36</span></span>
-<span><span class="op">)</span><span class="op">$</span><span class="va">bounds</span></span></code></pre></div>
-<pre><code>#&gt; # A tibble: 1 × 11
-#&gt;   Analysis Bound  Time     N Events     Z Probability   AHR theta  info info0
-#&gt;      &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1        1 Upper    36  324.   215.  1.96         0.8 0.683 0.381  53.2  54.5</code></pre>
+<span><span class="op">)</span><span class="op">$</span><span class="va">bounds</span></span>
+<span><span class="co">#&gt; # A tibble: 1 × 11</span></span>
+<span><span class="co">#&gt;   Analysis Bound  Time     N Events     Z Probability   AHR theta</span></span>
+<span><span class="co">#&gt;      &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1        1 Upper    36  324.   215.  1.96         0.8 0.683 0.381</span></span>
+<span><span class="co">#&gt; # ℹ 2 more variables: info &lt;dbl&gt;, info0 &lt;dbl&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="sample-size-calculation-fh0-1" class="section level2" number="8.8">
-<h2>
-<span class="header-section-number">8.8</span> Sample size calculation <span class="math inline">\(FH(0, 1)\)</span><a class="anchor" aria-label="anchor" href="#sample-size-calculation-fh0-1"><i class="fas fa-link"></i></a>
+</section><section id="sample-size-calculation-fh0-1" class="level2" data-number="7.8"><h2 data-number="7.8" class="anchored" data-anchor-id="sample-size-calculation-fh0-1">
+<span class="header-section-number">7.8</span> Sample size calculation <span class="math inline">\(FH(0, 1)\)</span>
 </h2>
 <ul>
 <li>Sample size</li>
 </ul>
-<div class="sourceCode" id="cb238"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_design_wlr.html">gs_design_wlr</a></span><span class="op">(</span></span>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_design_wlr.html">gs_design_wlr</a></span><span class="op">(</span></span>
 <span>  enrollRates <span class="op">=</span> <span class="va">enrollRates</span>, failRates <span class="op">=</span> <span class="va">failRates</span>,</span>
 <span>  ratio <span class="op">=</span> <span class="va">ratio</span>, alpha <span class="op">=</span> <span class="va">alpha</span>, beta <span class="op">=</span> <span class="va">beta</span>,</span>
 <span>  weight <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">arm0</span>, <span class="va">arm1</span><span class="op">)</span> <span class="op">{</span></span>
@@ -498,39 +764,44 @@ based on information fraction at 12, 24 and 36 months</p>
 <span>  analysisTimes <span class="op">=</span> <span class="va">analysisTimes</span></span>
 <span><span class="op">)</span><span class="op">$</span><span class="va">bounds</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_if</a></span><span class="op">(</span><span class="va">is.numeric</span>, <span class="va">round</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
-<span><span class="va">x</span></span></code></pre></div>
-<pre><code>#&gt; # A tibble: 6 × 11
-#&gt;   Analysis Bound  Time     N Events      Z Probability   AHR theta  info info0
-#&gt;      &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1        1 Upper    12  287.   61.6 Inf           0     0.73  1.58  0.4   0.41
-#&gt; 2        2 Upper    24  287.  141.    3.28        0.16  0.64  1.33  2.99  3.1 
-#&gt; 3        3 Upper    36  287.  190.    1.96        0.8   0.62  1.08  6.95  7.43
-#&gt; 4        1 Lower    12  287.   61.6  -4.18        0     0.73  1.58  0.4   0.41
-#&gt; 5        2 Lower    24  287.  141.    0.66        0.05  0.64  1.33  2.99  3.1 
-#&gt; 6        3 Lower    36  287.  190.    1.96        0.2   0.62  1.08  6.95  7.43</code></pre>
+<span><span class="va">x</span></span>
+<span><span class="co">#&gt; # A tibble: 6 × 11</span></span>
+<span><span class="co">#&gt;   Analysis Bound  Time     N Events      Z Probability   AHR</span></span>
+<span><span class="co">#&gt;      &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1        1 Upper    12  287.   61.6 Inf           0     0.73</span></span>
+<span><span class="co">#&gt; 2        2 Upper    24  287.  141.    3.28        0.16  0.64</span></span>
+<span><span class="co">#&gt; 3        3 Upper    36  287.  190.    1.96        0.8   0.62</span></span>
+<span><span class="co">#&gt; 4        1 Lower    12  287.   61.6  -4.18        0     0.73</span></span>
+<span><span class="co">#&gt; 5        2 Lower    24  287.  141.    0.66        0.05  0.64</span></span>
+<span><span class="co">#&gt; 6        3 Lower    36  287.  190.    1.96        0.2   0.62</span></span>
+<span><span class="co">#&gt; # ℹ 3 more variables: theta &lt;dbl&gt;, info &lt;dbl&gt;, info0 &lt;dbl&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <ul>
 <li>Simulation results based on 10,000 replications.</li>
 </ul>
+<div class="cell" data-layout-align="center">
 <pre><code>#&gt;      n  t events  ahr lower upper
 #&gt; 10 287 12  61.64 0.77  0.00  0.00
 #&gt; 11 287 24 141.41 0.65  0.05  0.17
 #&gt; 12 287 36 190.20 0.63  0.20  0.80</code></pre>
+</div>
 <ul>
 <li>Type I error</li>
 </ul>
-<div class="sourceCode" id="cb241"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_power_npe.html">gs_power_npe</a></span><span class="op">(</span></span>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_power_npe.html">gs_power_npe</a></span><span class="op">(</span></span>
 <span>  theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">analysisTimes</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  info <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">info0</span><span class="op">[</span><span class="va">x</span><span class="op">$</span><span class="va">Bound</span> <span class="op">==</span> <span class="st">"Upper"</span><span class="op">]</span>,</span>
 <span>  upar <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">Z</span><span class="op">[</span><span class="va">x</span><span class="op">$</span><span class="va">Bound</span> <span class="op">==</span> <span class="st">"Upper"</span><span class="op">]</span>,</span>
 <span>  lpar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="op">-</span><span class="cn">Inf</span>, <span class="fl">3</span><span class="op">)</span></span>
-<span><span class="op">)</span><span class="op">$</span><span class="va">Probability</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">analysisTimes</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
-<pre><code>#&gt; [1] 0.0000000000 0.0005191052 0.0251730067</code></pre>
+<span><span class="op">)</span><span class="op">$</span><span class="va">Probability</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">analysisTimes</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co">#&gt; [1] 0.0000000000 0.0005191052 0.0251730067</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <ul>
 <li>Compared with fixed design</li>
 </ul>
-<div class="sourceCode" id="cb243"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_design_wlr.html">gs_design_wlr</a></span><span class="op">(</span></span>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_design_wlr.html">gs_design_wlr</a></span><span class="op">(</span></span>
 <span>  enrollRates <span class="op">=</span> <span class="va">enrollRates</span>, failRates <span class="op">=</span> <span class="va">failRates</span>,</span>
 <span>  weight <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">arm0</span>, <span class="va">arm1</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/wlr_weight.html">wlr_weight_fh</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">arm0</span>, <span class="va">arm1</span>, rho <span class="op">=</span> <span class="fl">0</span>, gamma <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
@@ -539,21 +810,21 @@ based on information fraction at 12, 24 and 36 months</p>
 <span>  upar <span class="op">=</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.025</span><span class="op">)</span>,</span>
 <span>  lpar <span class="op">=</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.025</span><span class="op">)</span>,</span>
 <span>  analysisTimes <span class="op">=</span> <span class="fl">36</span></span>
-<span><span class="op">)</span><span class="op">$</span><span class="va">bounds</span></span></code></pre></div>
-<pre><code>#&gt; # A tibble: 1 × 11
-#&gt;   Analysis Bound  Time     N Events     Z Probability   AHR theta  info info0
-#&gt;      &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1        1 Upper    36  264.   175.  1.96         0.8 0.617  1.08  6.41  6.85</code></pre>
+<span><span class="op">)</span><span class="op">$</span><span class="va">bounds</span></span>
+<span><span class="co">#&gt; # A tibble: 1 × 11</span></span>
+<span><span class="co">#&gt;   Analysis Bound  Time     N Events     Z Probability   AHR theta</span></span>
+<span><span class="co">#&gt;      &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1        1 Upper    36  264.   175.  1.96         0.8 0.617  1.08</span></span>
+<span><span class="co">#&gt; # ℹ 2 more variables: info &lt;dbl&gt;, info0 &lt;dbl&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="sample-size-calculation-fh0-0.5" class="section level2" number="8.9">
-<h2>
-<span class="header-section-number">8.9</span> Sample size calculation <span class="math inline">\(FH(0, 0.5)\)</span><a class="anchor" aria-label="anchor" href="#sample-size-calculation-fh0-0.5"><i class="fas fa-link"></i></a>
+</section><section id="sample-size-calculation-fh0-0.5" class="level2" data-number="7.9"><h2 data-number="7.9" class="anchored" data-anchor-id="sample-size-calculation-fh0-0.5">
+<span class="header-section-number">7.9</span> Sample size calculation <span class="math inline">\(FH(0, 0.5)\)</span>
 </h2>
 <ul>
 <li>Sample size</li>
 </ul>
-<div class="sourceCode" id="cb245"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_design_wlr.html">gs_design_wlr</a></span><span class="op">(</span></span>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_design_wlr.html">gs_design_wlr</a></span><span class="op">(</span></span>
 <span>  enrollRates <span class="op">=</span> <span class="va">enrollRates</span>, failRates <span class="op">=</span> <span class="va">failRates</span>,</span>
 <span>  ratio <span class="op">=</span> <span class="va">ratio</span>, alpha <span class="op">=</span> <span class="va">alpha</span>, beta <span class="op">=</span> <span class="va">beta</span>,</span>
 <span>  weight <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">arm0</span>, <span class="va">arm1</span><span class="op">)</span> <span class="op">{</span></span>
@@ -566,39 +837,44 @@ based on information fraction at 12, 24 and 36 months</p>
 <span>  analysisTimes <span class="op">=</span> <span class="va">analysisTimes</span></span>
 <span><span class="op">)</span><span class="op">$</span><span class="va">bounds</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_if</a></span><span class="op">(</span><span class="va">is.numeric</span>, <span class="va">round</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
-<span><span class="va">x</span></span></code></pre></div>
-<pre><code>#&gt; # A tibble: 6 × 11
-#&gt;   Analysis Bound  Time     N Events     Z Probability   AHR theta  info info0
-#&gt;      &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1        1 Upper    12  288.   61.9  6.18        0     0.78  0.63  2.08  2.09
-#&gt; 2        2 Upper    24  288.  142    2.8         0.3   0.67  0.77  8.86  9.07
-#&gt; 3        3 Upper    36  288.  191.   1.97        0.8   0.64  0.73 15.7  16.4 
-#&gt; 4        1 Lower    12  288.   61.9 -2.43        0     0.78  0.63  2.08  2.09
-#&gt; 5        2 Lower    24  288.  142    0.93        0.09  0.67  0.77  8.86  9.07
-#&gt; 6        3 Lower    36  288.  191.   1.97        0.2   0.64  0.73 15.7  16.4</code></pre>
+<span><span class="va">x</span></span>
+<span><span class="co">#&gt; # A tibble: 6 × 11</span></span>
+<span><span class="co">#&gt;   Analysis Bound  Time     N Events     Z Probability   AHR theta</span></span>
+<span><span class="co">#&gt;      &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1        1 Upper    12  288.   61.9  6.18        0     0.78  0.63</span></span>
+<span><span class="co">#&gt; 2        2 Upper    24  288.  142    2.8         0.3   0.67  0.77</span></span>
+<span><span class="co">#&gt; 3        3 Upper    36  288.  191.   1.97        0.8   0.64  0.73</span></span>
+<span><span class="co">#&gt; 4        1 Lower    12  288.   61.9 -2.43        0     0.78  0.63</span></span>
+<span><span class="co">#&gt; 5        2 Lower    24  288.  142    0.93        0.09  0.67  0.77</span></span>
+<span><span class="co">#&gt; 6        3 Lower    36  288.  191.   1.97        0.2   0.64  0.73</span></span>
+<span><span class="co">#&gt; # ℹ 2 more variables: info &lt;dbl&gt;, info0 &lt;dbl&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <ul>
 <li>Simulation results based on 10,000 replications.</li>
 </ul>
+<div class="cell" data-layout-align="center">
 <pre><code>#&gt;     n  t events  ahr lower upper
 #&gt; 7 289 12  62.11 0.81  0.00   0.0
 #&gt; 8 289 24 142.28 0.68  0.09   0.3
 #&gt; 9 289 36 191.44 0.65  0.20   0.8</code></pre>
+</div>
 <ul>
 <li>Type I error</li>
 </ul>
-<div class="sourceCode" id="cb248"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_power_npe.html">gs_power_npe</a></span><span class="op">(</span></span>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_power_npe.html">gs_power_npe</a></span><span class="op">(</span></span>
 <span>  theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">analysisTimes</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  info <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">info0</span><span class="op">[</span><span class="va">x</span><span class="op">$</span><span class="va">Bound</span> <span class="op">==</span> <span class="st">"Upper"</span><span class="op">]</span>,</span>
 <span>  upar <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">Z</span><span class="op">[</span><span class="va">x</span><span class="op">$</span><span class="va">Bound</span> <span class="op">==</span> <span class="st">"Upper"</span><span class="op">]</span>,</span>
 <span>  lpar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="op">-</span><span class="cn">Inf</span>, <span class="fl">3</span><span class="op">)</span></span>
-<span><span class="op">)</span><span class="op">$</span><span class="va">Probability</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">analysisTimes</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
-<pre><code>#&gt; [1] 3.205080e-10 2.555246e-03 2.523428e-02</code></pre>
+<span><span class="op">)</span><span class="op">$</span><span class="va">Probability</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">analysisTimes</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co">#&gt; [1] 3.205080e-10 2.555246e-03 2.523428e-02</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <ul>
 <li>Compared with fixed design</li>
 </ul>
-<div class="sourceCode" id="cb250"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_design_wlr.html">gs_design_wlr</a></span><span class="op">(</span></span>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_design_wlr.html">gs_design_wlr</a></span><span class="op">(</span></span>
 <span>  enrollRates <span class="op">=</span> <span class="va">enrollRates</span>, failRates <span class="op">=</span> <span class="va">failRates</span>,</span>
 <span>  weight <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">arm0</span>, <span class="va">arm1</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/wlr_weight.html">wlr_weight_fh</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">arm0</span>, <span class="va">arm1</span>, rho <span class="op">=</span> <span class="fl">0</span>, gamma <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
@@ -607,21 +883,21 @@ based on information fraction at 12, 24 and 36 months</p>
 <span>  upar <span class="op">=</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.025</span><span class="op">)</span>,</span>
 <span>  lpar <span class="op">=</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.025</span><span class="op">)</span>,</span>
 <span>  analysisTimes <span class="op">=</span> <span class="fl">36</span></span>
-<span><span class="op">)</span><span class="op">$</span><span class="va">bounds</span></span></code></pre></div>
-<pre><code>#&gt; # A tibble: 1 × 11
-#&gt;   Analysis Bound  Time     N Events     Z Probability   AHR theta  info info0
-#&gt;      &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1        1 Upper    36  261.   173.  1.96         0.8 0.639 0.732  14.2  14.9</code></pre>
+<span><span class="op">)</span><span class="op">$</span><span class="va">bounds</span></span>
+<span><span class="co">#&gt; # A tibble: 1 × 11</span></span>
+<span><span class="co">#&gt;   Analysis Bound  Time     N Events     Z Probability   AHR theta</span></span>
+<span><span class="co">#&gt;      &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1        1 Upper    36  261.   173.  1.96         0.8 0.639 0.732</span></span>
+<span><span class="co">#&gt; # ℹ 2 more variables: info &lt;dbl&gt;, info0 &lt;dbl&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="sample-size-calculation-fh0.5-0.5" class="section level2" number="8.10">
-<h2>
-<span class="header-section-number">8.10</span> Sample size calculation <span class="math inline">\(FH(0.5, 0.5)\)</span><a class="anchor" aria-label="anchor" href="#sample-size-calculation-fh0.5-0.5"><i class="fas fa-link"></i></a>
+</section><section id="sample-size-calculation-fh0.5-0.5" class="level2" data-number="7.10"><h2 data-number="7.10" class="anchored" data-anchor-id="sample-size-calculation-fh0.5-0.5">
+<span class="header-section-number">7.10</span> Sample size calculation <span class="math inline">\(FH(0.5, 0.5)\)</span>
 </h2>
 <ul>
 <li>Sample size</li>
 </ul>
-<div class="sourceCode" id="cb252"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_design_wlr.html">gs_design_wlr</a></span><span class="op">(</span></span>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_design_wlr.html">gs_design_wlr</a></span><span class="op">(</span></span>
 <span>  enrollRates <span class="op">=</span> <span class="va">enrollRates</span>, failRates <span class="op">=</span> <span class="va">failRates</span>,</span>
 <span>  ratio <span class="op">=</span> <span class="va">ratio</span>, alpha <span class="op">=</span> <span class="va">alpha</span>, beta <span class="op">=</span> <span class="va">beta</span>,</span>
 <span>  weight <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">arm0</span>, <span class="va">arm1</span><span class="op">)</span> <span class="op">{</span></span>
@@ -634,45 +910,49 @@ based on information fraction at 12, 24 and 36 months</p>
 <span>  analysisTimes <span class="op">=</span> <span class="va">analysisTimes</span></span>
 <span><span class="op">)</span><span class="op">$</span><span class="va">bounds</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_if</a></span><span class="op">(</span><span class="va">is.numeric</span>, <span class="va">round</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
-<span><span class="va">x</span></span></code></pre></div>
-<pre><code>#&gt; # A tibble: 6 × 11
-#&gt;   Analysis Bound  Time     N Events     Z Probability   AHR theta  info info0
-#&gt;      &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1        1 Upper    12  304.   65.3  5.05        0     0.79  0.68  1.76  1.77
-#&gt; 2        2 Upper    24  304.  150.   2.51        0.42  0.68  0.93  6.17  6.28
-#&gt; 3        3 Upper    36  304.  201.   1.99        0.8   0.65  0.97  9.16  9.44
-#&gt; 4        1 Lower    12  304.   65.3 -1.8         0     0.79  0.68  1.76  1.77
-#&gt; 5        2 Lower    24  304.  150.   1.12        0.12  0.68  0.93  6.17  6.28
-#&gt; 6        3 Lower    36  304.  201.   1.99        0.2   0.65  0.97  9.16  9.44</code></pre>
+<span><span class="va">x</span></span>
+<span><span class="co">#&gt; # A tibble: 6 × 11</span></span>
+<span><span class="co">#&gt;   Analysis Bound  Time     N Events     Z Probability   AHR theta</span></span>
+<span><span class="co">#&gt;      &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1        1 Upper    12  304.   65.3  5.05        0     0.79  0.68</span></span>
+<span><span class="co">#&gt; 2        2 Upper    24  304.  150.   2.51        0.42  0.68  0.93</span></span>
+<span><span class="co">#&gt; 3        3 Upper    36  304.  201.   1.99        0.8   0.65  0.97</span></span>
+<span><span class="co">#&gt; 4        1 Lower    12  304.   65.3 -1.8         0     0.79  0.68</span></span>
+<span><span class="co">#&gt; 5        2 Lower    24  304.  150.   1.12        0.12  0.68  0.93</span></span>
+<span><span class="co">#&gt; 6        3 Lower    36  304.  201.   1.99        0.2   0.65  0.97</span></span>
+<span><span class="co">#&gt; # ℹ 2 more variables: info &lt;dbl&gt;, info0 &lt;dbl&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <ul>
 <li>Simulation results based on 10,000 replications.</li>
 </ul>
-<div class="sourceCode" id="cb254"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"simulation/simu_gsd_wlr_boundary.Rdata"</span><span class="op">)</span></span>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"simulation/simu_gsd_wlr_boundary.Rdata"</span><span class="op">)</span></span>
 <span><span class="va">simu_res</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">rho</span> <span class="op">==</span> <span class="fl">0.5</span> <span class="op">&amp;</span> <span class="va">gamma</span> <span class="op">==</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">scenario</span>, <span class="op">-</span><span class="va">rho</span>, <span class="op">-</span><span class="va">gamma</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_if</a></span><span class="op">(</span><span class="va">is.numeric</span>, <span class="va">round</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt;     n  t events  ahr lower upper
-#&gt; 4 304 12  65.10 0.81  0.00  0.00
-#&gt; 5 304 24 149.51 0.68  0.12  0.42
-#&gt; 6 304 36 201.23 0.66  0.20  0.80</code></pre>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_if</a></span><span class="op">(</span><span class="va">is.numeric</span>, <span class="va">round</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="co">#&gt;     n  t events  ahr lower upper</span></span>
+<span><span class="co">#&gt; 4 304 12  65.10 0.81  0.00  0.00</span></span>
+<span><span class="co">#&gt; 5 304 24 149.51 0.68  0.12  0.42</span></span>
+<span><span class="co">#&gt; 6 304 36 201.23 0.66  0.20  0.80</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <ul>
 <li>Type I error</li>
 </ul>
-<div class="sourceCode" id="cb256"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_power_npe.html">gs_power_npe</a></span><span class="op">(</span></span>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_power_npe.html">gs_power_npe</a></span><span class="op">(</span></span>
 <span>  theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">analysisTimes</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  info <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">info0</span><span class="op">[</span><span class="va">x</span><span class="op">$</span><span class="va">Bound</span> <span class="op">==</span> <span class="st">"Upper"</span><span class="op">]</span>,</span>
 <span>  upar <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">Z</span><span class="op">[</span><span class="va">x</span><span class="op">$</span><span class="va">Bound</span> <span class="op">==</span> <span class="st">"Upper"</span><span class="op">]</span>,</span>
 <span>  lpar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="op">-</span><span class="cn">Inf</span>, <span class="fl">3</span><span class="op">)</span></span>
-<span><span class="op">)</span><span class="op">$</span><span class="va">Probability</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">analysisTimes</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
-<pre><code>#&gt; [1] 2.209050e-07 6.036759e-03 2.515345e-02</code></pre>
+<span><span class="op">)</span><span class="op">$</span><span class="va">Probability</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">analysisTimes</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co">#&gt; [1] 2.209050e-07 6.036759e-03 2.515345e-02</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <ul>
 <li>Compared with fixed design</li>
 </ul>
-<div class="sourceCode" id="cb258"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_design_wlr.html">gs_design_wlr</a></span><span class="op">(</span></span>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_design_wlr.html">gs_design_wlr</a></span><span class="op">(</span></span>
 <span>  enrollRates <span class="op">=</span> <span class="va">enrollRates</span>, failRates <span class="op">=</span> <span class="va">failRates</span>,</span>
 <span>  weight <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">arm0</span>, <span class="va">arm1</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/wlr_weight.html">wlr_weight_fh</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">arm0</span>, <span class="va">arm1</span>, rho <span class="op">=</span> <span class="fl">0.5</span>, gamma <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
@@ -681,86 +961,453 @@ based on information fraction at 12, 24 and 36 months</p>
 <span>  upar <span class="op">=</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.025</span><span class="op">)</span>,</span>
 <span>  lpar <span class="op">=</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.025</span><span class="op">)</span>,</span>
 <span>  analysisTimes <span class="op">=</span> <span class="fl">36</span></span>
-<span><span class="op">)</span><span class="op">$</span><span class="va">bounds</span></span></code></pre></div>
-<pre><code>#&gt; # A tibble: 1 × 11
-#&gt;   Analysis Bound  Time     N Events     Z Probability   AHR theta  info info0
-#&gt;      &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1        1 Upper    36  269.   178.  1.96         0.8 0.650 0.973  8.11  8.36</code></pre>
-
-</div>
-</div>
-  <div class="chapter-nav">
-<div class="prev"><a href="wlr.html"><span class="header-section-number">7</span> Weighted logrank test</a></div>
-<div class="next"><a href="maxcombo.html"><span class="header-section-number">9</span> MaxCombo test</a></div>
-</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#wlr-boundary"><span class="header-section-number">8</span> Group sequential design boundary with weighted logrank test</a></li>
-<li><a class="nav-link" href="#group-sequential-design-boundary-calculation-strategy"><span class="header-section-number">8.1</span> Group sequential design boundary calculation strategy</a></li>
-<li><a class="nav-link" href="#types-of-error-probability"><span class="header-section-number">8.2</span> Types of error probability</a></li>
-<li><a class="nav-link" href="#information-fraction"><span class="header-section-number">8.3</span> Information fraction</a></li>
-<li>
-<a class="nav-link" href="#spending-function-based-on-information-fraction"><span class="header-section-number">8.4</span> Spending function based on information fraction</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#spending-function-in-gsdesign"><span class="header-section-number">8.4.1</span> Spending function in gsDesign</a></li></ul>
-</li>
-<li><a class="nav-link" href="#lower-and-upper-bound"><span class="header-section-number">8.5</span> Lower and upper bound</a></li>
-<li><a class="nav-link" href="#sample-size-calculation-logrank-test-based-on-ahr"><span class="header-section-number">8.6</span> Sample size calculation logrank test based on AHR</a></li>
-<li><a class="nav-link" href="#sample-size-calculation-logrank-test-based-on-wlr-fh0-0"><span class="header-section-number">8.7</span> Sample size calculation logrank test based on WLR \(FH(0, 0)\)</a></li>
-<li><a class="nav-link" href="#sample-size-calculation-fh0-1"><span class="header-section-number">8.8</span> Sample size calculation \(FH(0, 1)\)</a></li>
-<li><a class="nav-link" href="#sample-size-calculation-fh0-0.5"><span class="header-section-number">8.9</span> Sample size calculation \(FH(0, 0.5)\)</a></li>
-<li><a class="nav-link" href="#sample-size-calculation-fh0.5-0.5"><span class="header-section-number">8.10</span> Sample size calculation \(FH(0.5, 0.5)\)</a></li>
-</ul>
-
-      <div class="book-extra">
-        <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/keaven/gsd-deming/blob/master/wlr-boundary.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/keaven/gsd-deming/edit/master/wlr-boundary.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
-        </ul>
-</div>
-    </nav>
+<span><span class="op">)</span><span class="op">$</span><span class="va">bounds</span></span>
+<span><span class="co">#&gt; # A tibble: 1 × 11</span></span>
+<span><span class="co">#&gt;   Analysis Bound  Time     N Events     Z Probability   AHR theta</span></span>
+<span><span class="co">#&gt;      &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1        1 Upper    36  269.   178.  1.96         0.8 0.650 0.973</span></span>
+<span><span class="co">#&gt; # ℹ 2 more variables: info &lt;dbl&gt;, info0 &lt;dbl&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-gordon1983discrete" class="csl-entry" role="listitem">
+Gordon Lan, KK, and David L DeMets. 1983. <span>“Discrete Sequential Boundaries for Clinical Trials.”</span> <em>Biometrika</em> 70 (3): 659–63.
 </div>
-</div> <!-- .container -->
-
-<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Group Sequential Design Under Non-Proportional Hazards</strong>: Deming Conference Course, December 6, 2021" was written by Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao. It was last built on 2023-07-29.</p>
-  </div>
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
-  </div>
-
-</div></div>
-</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
-for (let popover of popovers) {
-  const div = document.createElement('div');
-  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
-  div.innerHTML = popover.getAttribute('data-content');
-
-  var has_math = div.querySelector("span.math");
-  if (has_math) {
-    document.body.appendChild(div);
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
-    MathJax.Hub.Queue(function() {
-      popover.setAttribute('data-content', div.innerHTML);
-      document.body.removeChild(div);
-    })
+<div id="ref-lachin2005review" class="csl-entry" role="listitem">
+Lachin, John M. 2005. <span>“A Review of Methods for Futility Stopping Based on Conditional Power.”</span> <em>Statistics in Medicine</em> 24 (18): 2747–64.
+</div>
+<div id="ref-o1979multiple" class="csl-entry" role="listitem">
+O’Brien, Peter C, and Thomas R Fleming. 1979. <span>“A Multiple Testing Procedure for Clinical Trials.”</span> <em>Biometrics</em>, 549–56.
+</div>
+<div id="ref-pocock1977group" class="csl-entry" role="listitem">
+Pocock, Stuart J. 1977. <span>“Group Sequential Methods in the Design and Analysis of Clinical Trials.”</span> <em>Biometrika</em> 64 (2): 191–99.
+</div>
+<div id="ref-wang1987approximately" class="csl-entry" role="listitem">
+Wang, Samuel K, and Anastasios A Tsiatis. 1987. <span>“Approximately Optimal One-Parameter Boundaries for Group Sequential Trials.”</span> <em>Biometrics</em>, 193–99.
+</div>
+</div>
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
   }
-}
-</script>
-</body>
-</html>
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/keaven\.github\.io\/gsd-deming\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./wlr.html" class="pagination-link" aria-label="Weighted logrank test">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Weighted logrank test</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./maxcombo.html" class="pagination-link" aria-label="MaxCombo test">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">MaxCombo test</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/keaven/gsd-deming/edit/main/wlr-boundary.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/keaven/gsd-deming/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/keaven/gsd-deming/blob/main/wlr-boundary.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div></div></footer></body></html>

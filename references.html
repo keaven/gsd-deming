@@ -1,293 +1,902 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>References | Group Sequential Design Under Non-Proportional Hazards</title>
-<meta name="author" content="Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao">
-<meta name="description" content="[1] Miettinen, T. A., Pyörälä, K., Olsson, A. G., Musliner, T. A., Cook, T. J., Faergeman, O., Berg, K., Pedersen, T., Kjekshus, J. and Group, for the S. S. S. (1997). Cholesterol-lowering...">
-<meta name="generator" content="bookdown 0.34 with bs4_book()">
-<meta property="og:title" content="References | Group Sequential Design Under Non-Proportional Hazards">
-<meta property="og:type" content="book">
-<meta property="og:description" content="[1] Miettinen, T. A., Pyörälä, K., Olsson, A. G., Musliner, T. A., Cook, T. J., Faergeman, O., Berg, K., Pedersen, T., Kjekshus, J. and Group, for the S. S. S. (1997). Cholesterol-lowering...">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="References | Group Sequential Design Under Non-Proportional Hazards">
-<meta name="twitter:description" content="[1] Miettinen, T. A., Pyörälä, K., Olsson, A. G., Musliner, T. A., Cook, T. J., Faergeman, O., Berg, K., Pedersen, T., Kjekshus, J. and Group, for the S. S. S. (1997). Cholesterol-lowering...">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.0/transition.js"></script><script src="libs/bs3compat-0.5.0/tabs.js"></script><script src="libs/bs3compat-0.5.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
-    
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  </style>
-<style type="text/css">
-    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-    div.csl-bib-body { }
-    div.csl-entry {
-      clear: both;
-        }
-    .hanging div.csl-entry {
-      margin-left:2em;
-      text-indent:-2em;
-    }
-    div.csl-left-margin {
-      min-width:2em;
-      float:left;
-    }
-    div.csl-right-inline {
-      margin-left:2em;
-      padding-left:1em;
-    }
-    div.csl-indent {
-      margin-left: 2em;
-    }
-  </style>
-<link rel="stylesheet" href="style.css">
-</head>
-<body data-spy="scroll" data-target="#toc">
+<meta name="generator" content="quarto-1.4.554">
 
-<div class="container-fluid">
-<div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-    <div class="d-flex align-items-start justify-content-between">
-      <h1>
-        <a href="index.html" title="Deming Conference Course, December 6, 2021">Group Sequential Design Under Non-Proportional Hazards</a>:
-        <small class="text-muted">Deming Conference Course, December 6, 2021</small>
-      </h1>
-      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
-    </div>
+<meta name="description" content="Learn how to derive group sequential designs for time-to-event endpoints under both proportional and non-proportional hazards assumptions for randomized clinical trials.">
 
-    <div id="main-nav" class="collapse-lg">
-      <form role="search">
-        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
-</form>
-
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html">Welcome!</a></li>
-<li><a class="" href="preface.html">Preface</a></li>
-<li><a class="" href="background.html"><span class="header-section-number">1</span> Background</a></li>
-<li><a class="" href="proportional-hazards.html"><span class="header-section-number">2</span> Proportional hazards</a></li>
-<li><a class="" href="ahr.html"><span class="header-section-number">3</span> Average hazard ratio</a></li>
-<li><a class="" href="pkgs.html"><span class="header-section-number">4</span> Introduction to gsdmvn, gsDesign2, and simtrial</a></li>
-<li class="book-part">Others tests</li>
-<li><a class="" href="overview-other-tests.html"><span class="header-section-number">5</span> Overview</a></li>
-<li><a class="" href="fixed-design.html"><span class="header-section-number">6</span> Fixed design</a></li>
-<li><a class="" href="wlr.html"><span class="header-section-number">7</span> Weighted logrank test</a></li>
-<li><a class="" href="wlr-boundary.html"><span class="header-section-number">8</span> Group sequential design boundary with weighted logrank test</a></li>
-<li><a class="" href="maxcombo.html"><span class="header-section-number">9</span> MaxCombo test</a></li>
-<li><a class="" href="maxcombo-boundary.html"><span class="header-section-number">10</span> Group sequential design boundary with MaxCombo test</a></li>
-<li><a class="active" href="references.html">References</a></li>
-</ul>
-
-        <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/keaven/gsd-deming">View book source <i class="fab fa-github"></i></a></p>
-        </div>
-      </nav>
-</div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="references" class="section level1 unnumbered">
-<h1>References<a class="anchor" aria-label="anchor" href="#references"><i class="fas fa-link"></i></a>
-</h1>
-
-<div id="refs" class="references csl-bib-body">
-<div id="ref-simva4s" class="csl-entry">
-<div class="csl-left-margin">[1] </div>
-<div class="csl-right-inline">Miettinen, T. A., Pyörälä, K., Olsson, A. G., Musliner, T. A., Cook, T. J., Faergeman, O., Berg, K., Pedersen, T., Kjekshus, J. and Group, for the S. S. S. (1997). Cholesterol-lowering therapy in women and elderly patients with myocardial infarction or angina pectoris: Findings from the scandinavian simvastatin survival study (4S). <em>Circulation</em> <strong>96</strong> 4211–8.</div>
-</div>
-<div id="ref-LanDeMets" class="csl-entry">
-<div class="csl-left-margin">[2] </div>
-<div class="csl-right-inline">Lan, K. K. G. and DeMets, D. L. (1983). Discrete sequential boundaries for clinical trials. <em>Biometrika</em> <strong>70</strong> 659–63.</div>
-</div>
-<div id="ref-haybittle1971repeated" class="csl-entry">
-<div class="csl-left-margin">[3] </div>
-<div class="csl-right-inline">Haybittle, J. (1971). Repeated assessment of results in clinical trials of cancer treatment. <em>The British Journal of Radiology</em> <strong>44</strong> 793–7.</div>
-</div>
-<div id="ref-wang1987approximately" class="csl-entry">
-<div class="csl-left-margin">[4] </div>
-<div class="csl-right-inline">Wang, S. K. and Tsiatis, A. A. (1987). Approximately optimal one-parameter boundaries for group sequential trials. <em>Biometrics</em> 193–9.</div>
-</div>
-<div id="ref-pocock1977group" class="csl-entry">
-<div class="csl-left-margin">[5] </div>
-<div class="csl-right-inline">Pocock, S. J. (1977). Group sequential methods in the design and analysis of clinical trials. <em>Biometrika</em> <strong>64</strong> 191–9.</div>
-</div>
-<div id="ref-o1979multiple" class="csl-entry">
-<div class="csl-left-margin">[6] </div>
-<div class="csl-right-inline">O’Brien, P. C. and Fleming, T. R. (1979). A multiple testing procedure for clinical trials. <em>Biometrics</em> 549–56.</div>
-</div>
-<div id="ref-JTBook" class="csl-entry">
-<div class="csl-left-margin">[7] </div>
-<div class="csl-right-inline">Jennison, C. and Turnbull, B. W. (2000). <em>Group sequential methods with applications to clinical trials</em>. Chapman; Hall/CRC, Boca Raton, FL.</div>
-</div>
-<div id="ref-KEYNOTE189" class="csl-entry">
-<div class="csl-left-margin">[8] </div>
-<div class="csl-right-inline">Gandhi, L., Rodrı́guez-Abreu, D., Gadgeel, S., Esteban, E., Felip, E., De Angelis, F., Domine, M., Clingan, P., Hochmair, M. J., Powell, S. F., et al. (2018). Pembrolizumab plus chemotherapy in metastatic non–small-cell lung cancer. <em>New England Journal of Medicine</em> <strong>378</strong> 2078–92.</div>
-</div>
-<div id="ref-AFCAPSdesign" class="csl-entry">
-<div class="csl-left-margin">[9] </div>
-<div class="csl-right-inline">Downs, J. R., Beere, P. A., Whitney, E., Clearfield, M., Weis, S., Rochen, J., Stein, E. A., Shapiro, D. R., Langendorfer, A. and Gotto Jr, A. M. (1997). Design &amp; rationale of the air force/texas coronary atherosclerosis prevention study (AFCAPS/TexCAPS). <em>The American Journal of Cardiology</em> <strong>80</strong> 287–93.</div>
-</div>
-<div id="ref-AFCAPSresults" class="csl-entry">
-<div class="csl-left-margin">[10] </div>
-<div class="csl-right-inline">Downs, J. R., Clearfield, M., Weis, S., Whitney, E., Shapiro, D. R., Beere, P. A., Langendorfer, A., Stein, E. A., Kruyer, W., Gotto Jr, A. M., et al. (1998). Primary prevention of acute coronary events with lovastatin in men and women with average cholesterol levels: Results of AFCAPS/TexCAPS. <em>Journal of the American Medical Association</em> <strong>279</strong> 1615–22.</div>
-</div>
-<div id="ref-EXAMINEresults" class="csl-entry">
-<div class="csl-left-margin">[11] </div>
-<div class="csl-right-inline">White, W. B., Cannon, C. P., Heller, S. R., Nissen, S. E., Bergenstal, R. M., Bakris, G. L., Perez, A. T., Fleck, P. R., Mehta, C. R., Kupfer, S., et al. (2013). Alogliptin after acute coronary syndrome in patients with type 2 diabetes. <em>New England Journal of Medicine</em> <strong>369</strong> 1327–35.</div>
-</div>
-<div id="ref-LachinFoulkes" class="csl-entry">
-<div class="csl-left-margin">[12] </div>
-<div class="csl-right-inline">Lachin, J. M. and Foulkes, M. A. (1986a). Evaluation of sample size and power for analyses of survival with allowance for nonuniform patient entry, losses to follow-up, noncompliance, and stratification. <em>Biometrics</em> <strong>42</strong> 507–19.</div>
-</div>
-<div id="ref-KimTsiatis" class="csl-entry">
-<div class="csl-left-margin">[13] </div>
-<div class="csl-right-inline">Kim, K. and Tsiatis, A. A. (1990). Study duration for clinical trials with survival response and early stopping rule. <em>Biometrics</em> <strong>46</strong> 81–92.</div>
-</div>
-<div id="ref-Schoenfeld1981" class="csl-entry">
-<div class="csl-left-margin">[14] </div>
-<div class="csl-right-inline">Schoenfeld, D. (1981). The asymptotic properties of nonparametric tests for comparing survival distributions. <em>Biometrika</em> <strong>68</strong> 316–9.</div>
-</div>
-<div id="ref-MaurerBretz2013" class="csl-entry">
-<div class="csl-left-margin">[15] </div>
-<div class="csl-right-inline">Maurer, W. and Bretz, F. (2013). <a href="https://doi.org/10.1080/19466315.2013.807748">Multiple testing in group sequential trials using graphical approaches</a>. <em>Statistics in Biopharmaceutical Research</em> <strong>5</strong> 311–20.</div>
-</div>
-<div id="ref-HSD" class="csl-entry">
-<div class="csl-left-margin">[16] </div>
-<div class="csl-right-inline">Hwang, I. K., Shih, W. J. and De Cani, J. S. (1990). Group sequential designs using a family of type i error probability spending functions. <em>Statistics in Medicine</em> <strong>9</strong> 1439–45.</div>
-</div>
-<div id="ref-EXAMINEdesign" class="csl-entry">
-<div class="csl-left-margin">[17] </div>
-<div class="csl-right-inline">White, W. B., Bakris, G. L., Bergenstal, R. M., Cannon, C. P., Cushman, W. C., Fleck, P., Heller, S., Mehta, C., Nissen, S. E., Perez, A., et al. (2011). EXamination of cArdiovascular outcoMes with alogliptIN versus standard of carE in patients with type 2 diabetes mellitus and acute coronary syndrome (EXAMINE): A cardiovascular safety study of the dipeptidyl peptidase 4 inhibitor alogliptin in patients with type 2 diabetes with acute coronary syndrome. <em>American Heart Journal</em> <strong>162</strong> 620–6.</div>
-</div>
-<div id="ref-deCastroGAMLSS" class="csl-entry">
-<div class="csl-left-margin">[18] </div>
-<div class="csl-right-inline">De Castro, M., Cancho, V. G. and Rodrigues, J. (2010). A hands-on approach for fitting long-term survival models under the GAMLSS framework. <em>Computer Methods and Programs in Biomedicine</em> <strong>97</strong> 168–77.</div>
-</div>
-<div id="ref-Zhang2018" class="csl-entry">
-<div class="csl-left-margin">[19] </div>
-<div class="csl-right-inline">Zhang, Y. and Shao, Y. (2018). Concordance measure and discriminatory accuracy in transformation cure models. <em>Biostatistics</em> <strong>19</strong> 14–26.</div>
-</div>
-<div id="ref-Zeng2006" class="csl-entry">
-<div class="csl-left-margin">[20] </div>
-<div class="csl-right-inline">Zeng, D., Yin, G. and Ibrahim, J. G. (2006). Semiparametric transformation models for survival data with a cure fraction. <em>Journal of the American Statistical Association</em> <strong>101</strong> 670–84.</div>
-</div>
-<div id="ref-hellmann2017estimating" class="csl-entry">
-<div class="csl-left-margin">[21] </div>
-<div class="csl-right-inline">Hellmann, M. D., Ma, J., Garon, E. B., Hui, R., Gandhi, L., Soria, J.-C., Anderson, K. M., Lubiniecki, G. M., Piperdi, B. and Herbst, R. S. (2017). Estimating long-term survival of PD-L1-expressing, previously treated, non-small cell lung cancer patients who received pembrolizumab in KEYNOTE-001 and-010.</div>
-</div>
-<div id="ref-LanDeMets1989" class="csl-entry">
-<div class="csl-left-margin">[22] </div>
-<div class="csl-right-inline">Lan, K. K. G. and DeMets, D. L. (1989). <a href="https://doi.org/10.1002/sim.4780081003">Group sequential procedures: Calendar versus information time</a>. <em>Statistics in Medicine</em> <strong>8</strong> 1191–8.</div>
-</div>
-<div id="ref-FHRhoGamma" class="csl-entry">
-<div class="csl-left-margin">[23] </div>
-<div class="csl-right-inline">Harrington, D. P. and Fleming, T. R. (1982). A class of rank test procedures for censored survival data. <em>Biometrika</em> <strong>69</strong> 553–66.</div>
-</div>
-<div id="ref-MagirrBurman" class="csl-entry">
-<div class="csl-left-margin">[24] </div>
-<div class="csl-right-inline">Magirr, D. and Burman, C.-F. (2019a). Modestly weighted logrank tests. <em>Statistics in Medicine</em> <strong>38</strong> 3782–90.</div>
-</div>
-<div id="ref-NPHWG2020sim" class="csl-entry">
-<div class="csl-left-margin">[25] </div>
-<div class="csl-right-inline">Lin, R. S., Lin, J., Roychoudhury, S., Anderson, K. M., Hu, T., Huang, B., Leon, L. F., Liao, J. J., Liu, R., Luo, X., et al. (2020). Alternative analysis methods for time to event endpoints under nonproportional hazards: A comparative analysis. <em>Statistics in Biopharmaceutical Research</em> <strong>12</strong> 187–98.</div>
-</div>
-<div id="ref-NPHWG2021Design" class="csl-entry">
-<div class="csl-left-margin">[26] </div>
-<div class="csl-right-inline">Roychoudhury, S., Anderson, K. M., Ye, J. and Mukhopadhyay, P. (2021). Robust design and analysis of clinical trials with non-proportional hazards: A straw man guidance from a cross-pharma working group. <em>Statistics in Biopharmaceutical Research</em> 1–37.</div>
-</div>
-<div id="ref-yung2019sample" class="csl-entry">
-<div class="csl-left-margin">[27] </div>
-<div class="csl-right-inline">Yung, G. and Liu, Y. (2019). Sample size and power for the weighted log-rank test and kaplan-meier based tests with allowance for nonproportional hazards. <em>Biometrics</em>.</div>
-</div>
-<div id="ref-lachin1986evaluation" class="csl-entry">
-<div class="csl-left-margin">[28] </div>
-<div class="csl-right-inline">Lachin, J. M. and Foulkes, M. A. (1986b). Evaluation of sample size and power for analyses of survival with allowance for nonuniform patient entry, losses to follow-up, noncompliance, and stratification. <em>Biometrics</em> 507–19.</div>
-</div>
-<div id="ref-magirr2019modestly" class="csl-entry">
-<div class="csl-left-margin">[29] </div>
-<div class="csl-right-inline">Magirr, D. and Burman, C.-F. (2019b). Modestly weighted logrank tests. <em>Statistics in Medicine</em> <strong>38</strong> 3782–90.</div>
-</div>
-<div id="ref-karrison2016versatile" class="csl-entry">
-<div class="csl-left-margin">[30] </div>
-<div class="csl-right-inline">Karrison, T. G. (2016). Versatile tests for comparing survival curves based on weighted log-rank statistics. <em>The Stata Journal</em> <strong>16</strong> 678–90.</div>
-</div>
-<div id="ref-wang2019simulation" class="csl-entry">
-<div class="csl-left-margin">[31] </div>
-<div class="csl-right-inline">Wang, L., Luo, X. and Zheng, C. (2019). A simulation-free group sequential design with max-combo tests in the presence of non-proportional hazards. <em>arXiv preprint arXiv:1911.05684</em>.</div>
-</div>
-<div id="ref-scharfstein1997semiparametric" class="csl-entry">
-<div class="csl-left-margin">[32] </div>
-<div class="csl-right-inline">Scharfstein, D. O., Tsiatis, A. A. and Robins, J. M. (1997). Semiparametric efficiency and its implication on the design and analysis of group-sequential studies. <em>Journal of the American Statistical Association</em> <strong>92</strong> 1342–50.</div>
-</div>
-<div id="ref-gordon1983discrete" class="csl-entry">
-<div class="csl-left-margin">[33] </div>
-<div class="csl-right-inline">Gordon Lan, K. and DeMets, D. L. (1983). Discrete sequential boundaries for clinical trials. <em>Biometrika</em> <strong>70</strong> 659–63.</div>
-</div>
-<div id="ref-lachin2005review" class="csl-entry">
-<div class="csl-left-margin">[34] </div>
-<div class="csl-right-inline">Lachin, J. M. (2005). A review of methods for futility stopping based on conditional power. <em>Statistics in Medicine</em> <strong>24</strong> 2747–64.</div>
-</div>
-</div>
-</div>
-  <div class="chapter-nav">
-<div class="prev"><a href="maxcombo-boundary.html"><span class="header-section-number">10</span> Group sequential design boundary with MaxCombo test</a></div>
-<div class="empty"></div>
-</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#references">References</a></li></ul>
-
-      <div class="book-extra">
-        <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/keaven/gsd-deming/blob/master/references.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/keaven/gsd-deming/edit/master/references.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
-        </ul>
-</div>
-    </nav>
-</div>
-
-</div>
-</div> <!-- .container -->
-
-<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Group Sequential Design Under Non-Proportional Hazards</strong>: Deming Conference Course, December 6, 2021" was written by Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao. It was last built on 2023-07-29.</p>
-  </div>
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
-  </div>
-
-</div></div>
-</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
-for (let popover of popovers) {
-  const div = document.createElement('div');
-  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
-  div.innerHTML = popover.getAttribute('data-content');
-
-  var has_math = div.querySelector("span.math");
-  if (has_math) {
-    document.body.appendChild(div);
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
-    MathJax.Hub.Queue(function() {
-      popover.setAttribute('data-content', div.innerHTML);
-      document.body.removeChild(div);
-    })
-  }
+<title>Group Sequential Design Under Non-Proportional Hazards - References</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
 }
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./maxcombo-boundary.html" rel="prev">
+<link href="./assets/favicon.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<meta property="og:title" content="Group Sequential Design Under Non-Proportional Hazards - References">
+<meta property="og:description" content="Learn how to derive group sequential designs for time-to-event endpoints under both proportional and non-proportional hazards assumptions for randomized clinical trials.">
+<meta property="og:image" content="https://keaven.github.io/gsd-deming/assets/preview.jpg">
+<meta property="og:site_name" content="Group Sequential Design Under Non-Proportional Hazards">
+<meta name="twitter:title" content="Group Sequential Design Under Non-Proportional Hazards - References">
+<meta name="twitter:description" content="Learn how to derive group sequential designs for time-to-event endpoints under both proportional and non-proportional hazards assumptions for randomized clinical trials.">
+<meta name="twitter:image" content="https://keaven.github.io/gsd-deming/assets/preview.jpg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./references.html">References</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Group Sequential Design Under Non-Proportional Hazards</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/keaven/gsd-deming" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+              <i class="bi bi-bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+              <i class="bi bi-bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+    </div>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./preface.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./background.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Background</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./proportional-hazards.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Proportional hazards</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ahr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Average hazard ratio</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pkgs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introduction to gsdmvn, gsDesign2, and simtrial</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./other-tests.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Others tests</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fixed-design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Fixed design</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./wlr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Weighted logrank test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./wlr-boundary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Group sequential design boundary with weighted logrank test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./maxcombo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">MaxCombo test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./maxcombo-boundary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Group sequential design boundary with MaxCombo test</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">References</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-deCastroGAMLSS" class="csl-entry" role="listitem">
+De Castro, Mario, Vicente G Cancho, and Josemar Rodrigues. 2010.
+<span>“A Hands-on Approach for Fitting Long-Term Survival Models Under
+the GAMLSS Framework.”</span> <em>Computer Methods and Programs in
+Biomedicine</em> 97 (2): 168–77.
+</div>
+<div id="ref-AFCAPSdesign" class="csl-entry" role="listitem">
+Downs, John R, Polly A Beere, Edwin Whitney, Michael Clearfield, Stephen
+Weis, Jeffrey Rochen, Evan A Stein, Deborah R Shapiro, Alexandra
+Langendorfer, and Antonio M Gotto Jr. 1997. <span>“Design &amp;
+Rationale of the Air Force/Texas Coronary Atherosclerosis Prevention
+Study (AFCAPS/TexCAPS).”</span> <em>The American Journal of
+Cardiology</em> 80 (3): 287–93.
+</div>
+<div id="ref-AFCAPSresults" class="csl-entry" role="listitem">
+Downs, John R, Michael Clearfield, Stephen Weis, Edwin Whitney, Deborah
+R Shapiro, Polly A Beere, Alexandra Langendorfer, et al. 1998.
+<span>“Primary Prevention of Acute Coronary Events with Lovastatin in
+Men and Women with Average Cholesterol Levels: Results of
+AFCAPS/TexCAPS.”</span> <em>Journal of the American Medical
+Association</em> 279 (20): 1615–22.
+</div>
+<div id="ref-KEYNOTE189" class="csl-entry" role="listitem">
+Gandhi, Leena, Delvys Rodrı́guez-Abreu, Shirish Gadgeel, Emilio Esteban,
+Enriqueta Felip, Flávia De Angelis, Manuel Domine, et al. 2018.
+<span>“Pembrolizumab Plus Chemotherapy in Metastatic Non–Small-Cell Lung
+Cancer.”</span> <em>New England Journal of Medicine</em> 378 (22):
+2078–92.
+</div>
+<div id="ref-gordon1983discrete" class="csl-entry" role="listitem">
+Gordon Lan, KK, and David L DeMets. 1983. <span>“Discrete Sequential
+Boundaries for Clinical Trials.”</span> <em>Biometrika</em> 70 (3):
+659–63.
+</div>
+<div id="ref-FHRhoGamma" class="csl-entry" role="listitem">
+Harrington, David P, and Thomas R Fleming. 1982. <span>“A Class of Rank
+Test Procedures for Censored Survival Data.”</span> <em>Biometrika</em>
+69 (3): 553–66.
+</div>
+<div id="ref-haybittle1971repeated" class="csl-entry" role="listitem">
+Haybittle, JL. 1971. <span>“Repeated Assessment of Results in Clinical
+Trials of Cancer Treatment.”</span> <em>The British Journal of
+Radiology</em> 44 (526): 793–97.
+</div>
+<div id="ref-hellmann2017estimating" class="csl-entry" role="listitem">
+Hellmann, Matthew David, Junshui Ma, Edward B Garon, Rina Hui, Leena
+Gandhi, Jean-Charles Soria, Keaven M Anderson, Gregory M Lubiniecki,
+Bilal Piperdi, and Roy S Herbst. 2017. <span>“Estimating Long-Term
+Survival of PD-L1-Expressing, Previously Treated, Non-Small Cell Lung
+Cancer Patients Who Received Pembrolizumab in KEYNOTE-001
+and-010.”</span> American Society of Clinical Oncology.
+</div>
+<div id="ref-HSD" class="csl-entry" role="listitem">
+Hwang, Irving K, Weichung J Shih, and John S De Cani. 1990. <span>“Group
+Sequential Designs Using a Family of Type <span>I</span> Error
+Probability Spending Functions.”</span> <em>Statistics in Medicine</em>
+9 (12): 1439–45.
+</div>
+<div id="ref-JTBook" class="csl-entry" role="listitem">
+Jennison, Christopher, and Bruce W. Turnbull. 2000. <em>Group Sequential
+Methods with Applications to Clinical Trials</em>. Boca Raton, FL:
+Chapman; Hall/CRC.
+</div>
+<div id="ref-karrison2016versatile" class="csl-entry" role="listitem">
+Karrison, Theodore G. 2016. <span>“Versatile Tests for Comparing
+Survival Curves Based on Weighted Log-Rank Statistics.”</span> <em>The
+Stata Journal</em> 16 (3): 678–90.
+</div>
+<div id="ref-KimTsiatis" class="csl-entry" role="listitem">
+Kim, Kyungmann, and Anastasios A. Tsiatis. 1990. <span>“Study Duration
+for Clinical Trials with Survival Response and Early Stopping
+Rule.”</span> <em>Biometrics</em> 46: 81–92.
+</div>
+<div id="ref-lachin2005review" class="csl-entry" role="listitem">
+Lachin, John M. 2005. <span>“A Review of Methods for Futility Stopping
+Based on Conditional Power.”</span> <em>Statistics in Medicine</em> 24
+(18): 2747–64.
+</div>
+<div id="ref-LachinFoulkes" class="csl-entry" role="listitem">
+Lachin, John M., and Mary A. Foulkes. 1986a. <span>“Evaluation of Sample
+Size and Power for Analyses of Survival with Allowance for Nonuniform
+Patient Entry, Losses to Follow-up, Noncompliance, and
+Stratification.”</span> <em>Biometrics</em> 42: 507–19.
+</div>
+<div id="ref-lachin1986evaluation" class="csl-entry" role="listitem">
+Lachin, John M, and Mary A Foulkes. 1986b. <span>“Evaluation of Sample
+Size and Power for Analyses of Survival with Allowance for Nonuniform
+Patient Entry, Losses to Follow-up, Noncompliance, and
+Stratification.”</span> <em>Biometrics</em>, 507–19.
+</div>
+<div id="ref-LanDeMets" class="csl-entry" role="listitem">
+Lan, K. K. G., and David L. DeMets. 1983. <span>“Discrete Sequential
+Boundaries for Clinical Trials.”</span> <em>Biometrika</em> 70: 659–63.
+</div>
+<div id="ref-LanDeMets1989" class="csl-entry" role="listitem">
+———. 1989. <span>“Group Sequential Procedures: Calendar Versus
+Information Time.”</span> <em>Statistics in Medicine</em> 8: 1191–98.
+</div>
+<div id="ref-NPHWG2020sim" class="csl-entry" role="listitem">
+Lin, Ray S, Ji Lin, Satrajit Roychoudhury, Keaven M Anderson, Tianle Hu,
+Bo Huang, Larry F Leon, et al. 2020. <span>“Alternative Analysis Methods
+for Time to Event Endpoints Under Nonproportional Hazards: A Comparative
+Analysis.”</span> <em>Statistics in Biopharmaceutical Research</em> 12
+(2): 187–98.
+</div>
+<div id="ref-magirr2019modestly" class="csl-entry" role="listitem">
+Magirr, Dominic, and Carl-Fredrik Burman. 2019b. <span>“Modestly
+Weighted Logrank Tests.”</span> <em>Statistics in Medicine</em> 38 (20):
+3782–90.
+</div>
+<div id="ref-MagirrBurman" class="csl-entry" role="listitem">
+———. 2019a. <span>“Modestly Weighted Logrank Tests.”</span>
+<em>Statistics in Medicine</em> 38 (20): 3782–90.
+</div>
+<div id="ref-MaurerBretz2013" class="csl-entry" role="listitem">
+Maurer, Willi, and Frank Bretz. 2013. <span>“Multiple Testing in Group
+Sequential Trials Using Graphical Approaches.”</span> <em>Statistics in
+Biopharmaceutical Research</em> 5: 311–20.
+</div>
+<div id="ref-simva4s" class="csl-entry" role="listitem">
+Miettinen, Tatu A, Kalevi Pyörälä, Anders G Olsson, Thomas A Musliner,
+Thomas J Cook, Ole Faergeman, Kåre Berg, Terje Pedersen, John Kjekshus,
+and for the Scandinavian Simvastatin Study Group. 1997.
+<span>“Cholesterol-Lowering Therapy in Women and Elderly Patients with
+Myocardial Infarction or Angina Pectoris: Findings from the Scandinavian
+Simvastatin Survival Study (4S).”</span> <em>Circulation</em> 96 (12):
+4211–18.
+</div>
+<div id="ref-o1979multiple" class="csl-entry" role="listitem">
+O’Brien, Peter C, and Thomas R Fleming. 1979. <span>“A Multiple Testing
+Procedure for Clinical Trials.”</span> <em>Biometrics</em>, 549–56.
+</div>
+<div id="ref-pocock1977group" class="csl-entry" role="listitem">
+Pocock, Stuart J. 1977. <span>“Group Sequential Methods in the Design
+and Analysis of Clinical Trials.”</span> <em>Biometrika</em> 64 (2):
+191–99.
+</div>
+<div id="ref-NPHWG2021Design" class="csl-entry" role="listitem">
+Roychoudhury, Satrajit, Keaven M Anderson, Jiabu Ye, and Pralay
+Mukhopadhyay. 2021. <span>“Robust Design and Analysis of Clinical Trials
+with Non-Proportional Hazards: A Straw Man Guidance from a Cross-Pharma
+Working Group.”</span> <em>Statistics in Biopharmaceutical
+Research</em>, 1–37.
+</div>
+<div id="ref-scharfstein1997semiparametric" class="csl-entry" role="listitem">
+Scharfstein, Daniel O, Anastasios A Tsiatis, and James M Robins. 1997.
+<span>“Semiparametric Efficiency and Its Implication on the Design and
+Analysis of Group-Sequential Studies.”</span> <em>Journal of the
+American Statistical Association</em> 92 (440): 1342–50.
+</div>
+<div id="ref-Schoenfeld1981" class="csl-entry" role="listitem">
+Schoenfeld, David. 1981. <span>“The Asymptotic Properties of
+Nonparametric Tests for Comparing Survival Distributions.”</span>
+<em>Biometrika</em> 68 (1): 316–19.
+</div>
+<div id="ref-wang2019simulation" class="csl-entry" role="listitem">
+Wang, Lili, Xiaodong Luo, and Cheng Zheng. 2019. <span>“A
+Simulation-Free Group Sequential Design with Max-Combo Tests in the
+Presence of Non-Proportional Hazards.”</span> <em>arXiv Preprint
+arXiv:1911.05684</em>.
+</div>
+<div id="ref-wang1987approximately" class="csl-entry" role="listitem">
+Wang, Samuel K, and Anastasios A Tsiatis. 1987. <span>“Approximately
+Optimal One-Parameter Boundaries for Group Sequential Trials.”</span>
+<em>Biometrics</em>, 193–99.
+</div>
+<div id="ref-EXAMINEdesign" class="csl-entry" role="listitem">
+White, William B, George L Bakris, Richard M Bergenstal, Christopher P
+Cannon, William C Cushman, Penny Fleck, Simon Heller, et al. 2011.
+<span>“EXamination of cArdiovascular outcoMes with alogliptIN Versus
+Standard of carE in Patients with Type 2 Diabetes Mellitus and Acute
+Coronary Syndrome (EXAMINE): A Cardiovascular Safety Study of the
+Dipeptidyl Peptidase 4 Inhibitor Alogliptin in Patients with Type 2
+Diabetes with Acute Coronary Syndrome.”</span> <em>American Heart
+Journal</em> 162 (4): 620–26.
+</div>
+<div id="ref-EXAMINEresults" class="csl-entry" role="listitem">
+White, William B, Christopher P Cannon, Simon R Heller, Steven E Nissen,
+Richard M Bergenstal, George L Bakris, Alfonso T Perez, et al. 2013.
+<span>“Alogliptin After Acute Coronary Syndrome in Patients with Type 2
+Diabetes.”</span> <em>New England Journal of Medicine</em> 369: 1327–35.
+</div>
+<div id="ref-yung2019sample" class="csl-entry" role="listitem">
+Yung, Godwin, and Yi Liu. 2019. <span>“Sample Size and Power for the
+Weighted Log-Rank Test and Kaplan-Meier Based Tests with Allowance for
+Nonproportional Hazards.”</span> <em>Biometrics</em>.
+</div>
+<div id="ref-Zeng2006" class="csl-entry" role="listitem">
+Zeng, Donglin, Guosheng Yin, and Joseph G Ibrahim. 2006.
+<span>“Semiparametric Transformation Models for Survival Data with a
+Cure Fraction.”</span> <em>Journal of the American Statistical
+Association</em> 101 (474): 670–84.
+</div>
+<div id="ref-Zhang2018" class="csl-entry" role="listitem">
+Zhang, Yilong, and Yongzhao Shao. 2018. <span>“Concordance Measure and
+Discriminatory Accuracy in Transformation Cure Models.”</span>
+<em>Biostatistics</em> 19 (1): 14–26.
+</div>
+</div>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/keaven\.github\.io\/gsd-deming\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
 </script>
-</body>
-</html>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./maxcombo-boundary.html" class="pagination-link" aria-label="Group sequential design boundary with MaxCombo test">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Group sequential design boundary with MaxCombo test</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/keaven/gsd-deming/edit/main/references.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/keaven/gsd-deming/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/keaven/gsd-deming/blob/main/references.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div></div></footer></body></html>
