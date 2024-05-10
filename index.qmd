@@ -1,0 +1,22 @@
+# Welcome {.unnumbered}
+
+::: {.content-visible when-format="html"}
+
+Welcome to the online version of **"Group Sequential Design Under Non-Proportional Hazards"**
+by [Keaven M. Anderson](https://keaven.github.io/),
+[Yilong Zhang](https://elong0527.github.io/),
+[Nan Xiao](https://nanx.me/), and
+[Yujie Zhao](https://sites.google.com/view/yujie-zhao).
+
+:::
+
+::: {.content-visible when-format="pdf"}
+
+Welcome to **"Group Sequential Design Under Non-Proportional Hazards"**
+by Keaven M. Anderson, Yilong Zhang, Nan Xiao, and Yujie Zhao.
+
+:::
+
+This is the material used in the 2021 Deming Conference course on group sequential design.
+
+We consider group sequential design for time-to-event endpoints under both proportional and non-proportional hazards assumptions for randomized clinical trials. While the primary focus will be on logrank testing due to its regulatory acceptance, weighted logrank test, combination tests and RMST will also be considered. Timing of analyses and boundary setting for efficacy and futility are critical topics to be discussed at length. A simple, piecewise model that can be used to approximate arbitrary scenarios is proposed. In addition to 2-arm comparisons for a single endpoint, we will also discuss graphical methods for strong control of Type I error when there are hypotheses for multiple endpoints and/or multiple populations. Asymptotic theory will be briefly noted as background, but the focus will be on applications, including software to quickly compare designs and scenarios. Throughout the course, we will develop designs incorporating each key new concept.

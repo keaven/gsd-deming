@@ -1,20 +1,23 @@
-# Fixed design {#fixed-design}
+# Fixed design {#sec-fixed-design}
 
-```{r, include=FALSE}
-library(dplyr)
-library(gsDesign)
-library(gsdmvn)
-library(mvtnorm)
+```{r, setup, file="_common.R", include=FALSE}
 ```
 
 We will briefly review fixed design based on weighted logrank test and MaxCombo test.
 
-::: {.rmdnote}
-For fixed design, [`npsurvSS`](https://cran.r-project.org/package=npsurvSS)
+::: {.callout-note}
+For fixed design, [npsurvSS](https://cran.r-project.org/package=npsurvSS)
 will be the tool for this training.
 :::
 
 The fixed design part largely follows the concept described in @yung2019sample.
+
+```{r, warning=FALSE, message=FALSE}
+library(gsDesign)
+library(gsdmvn)
+library(mvtnorm)
+library(dplyr)
+```
 
 ## Summary of assumptions
 
@@ -31,8 +34,8 @@ For simplicity, we made a few key assumptions.
 - No stratification
 - No cure fraction
 
-::: {.rmdnote}
-Some of these assumptions have been generalized in the literature and the R package `gsdmvn`.
+::: {.callout-note}
+Some of these assumptions have been generalized in the literature and the R package gsdmvn.
 These assumptions will be used unless another clarification is made in specific sections.
 :::
 
@@ -78,16 +81,16 @@ $$\sigma_0^2 \approx \sigma_1^2 = \sigma^2$$
 In this simplified case, the sample size can be calculated as
 
 $$ n = \frac{4 (z_{\alpha}+z_{\beta})^{2}}{\theta^2} $$
-Here $\theta$ is standardized treatment effect. 
+Here $\theta$ is standardized treatment effect.
 
 ## Two-sample t-test
 
 Let's revisit the two-sample t-test to make a connection between the math formula and R code.
 
-In two-sample t-test, we have 
+In two-sample t-test, we have
 
-$$\theta = \frac{\Delta}{\sigma}$$, 
-where $\theta$ is difference of mean in two groups and $\sigma$ is standard divation of $\theta$.
+$$\theta = \frac{\Delta}{\sigma}$$,
+where $\theta$ is difference of mean in two groups and $\sigma$ is standard deviation of $\theta$.
 
 If we consider a scenarios with treatment effect at 0.5 with pooled standard deviation at 2.
 
@@ -108,7 +111,7 @@ The same assumption is used in `gsDesign::nNormal()`.
 gsDesign::nNormal(delta1 = 0.5, sd = 2, alpha = 0.025, beta = 0.2)
 ```
 
-The `stats::power.t.test()` uses the t-distribution for test statistics that is recommended in practice.
+`stats::power.t.test()` uses the t-distribution for test statistics that is recommended in practice.
 It provides a slightly larger sample size under the same study design scenario.
 
 ```{r}
@@ -122,18 +125,14 @@ It is well known that the sample size calculation is "event-driven" in this spec
 
 This is a nice feature under the **proportional hazards assumption**. because the effect size for number of events is only depends on the hazard ratio.
 
-::: {.rmdnote}
-Notation: 
-- $\text{HR}$ is the hazard ratio.
-- $d$ is the number of events.
+::: {.callout-note}
+Notation: $\text{HR}$ is the hazard ratio. $d$ is the number of events.
 :::
 
 The effect size is:
 $$\theta = \log{\text{HR}} / 2$$
 
-
-
-::: {.rmdnote}
+::: {.callout-note}
 As an exercise, the readers can derive the effect size following
 Section 9.5 of the [NCSU ST520 course notes](https://www4.stat.ncsu.edu/~dzhang2/st520/520notes.pdf).
 The effect size is in formula (9.3) of the course notes.
@@ -152,7 +151,7 @@ The sample size calculation has been implemented in
 - `gsDesign::nSurv()`
 - `npsurvSS::size_two_arm()`
 
-::: {.rmdnote}
+::: {.callout-note}
 For simplicity, we skip the details of sample size calculation
 discussed in @lachin1986evaluation.
 :::
@@ -170,7 +169,7 @@ theta <- log(0.6) / 2
 (z_alpha + z_beta)^2 / theta^2
 ```
 
-We compare the results using `npsurvSS`.
+We compare the results using npsurvSS.
 The key argument in `npsurvSS::create_arm()` is `surv_scale` that defines the hazard rates in each arm.
 
 ```{r}
@@ -238,7 +237,7 @@ knitr::include_graphics("images/ch2_n_to_d.svg")
 - $\tau_a$: accrual time
 - $\tau_f$: follow-up time
 
-::: {.rmdnote}
+::: {.callout-note}
 The two figures above are copied from @yung2019sample.
 :::
 
@@ -282,7 +281,7 @@ For the weighted logrank test, we first illustrate it by using the Fleming-Harri
 
 $$FH^{\rho, \gamma}(t) = S(t)^\rho(1 - S(t))^\gamma$$
 
-To demonstrate the weight function, we covert the input of `enrollRates` and `failRates` as required by `npsurvSS`.
+To demonstrate the weight function, we covert the input of `enrollRates` and `failRates` as required by npsurvSS.
 
 ```{r}
 # Define study design object in each arm
@@ -296,8 +295,8 @@ arm0 <- gs_arm[["arm0"]]
 arm1 <- gs_arm[["arm1"]]
 ```
 
-::: {.rmdnote}
-Note: in `npsurvSS`, p1_q0 is for $\rho=q=0$ and $\gamma=p=1$
+::: {.callout-note}
+Note: in npsurvSS, p1_q0 is for $\rho=q=0$ and $\gamma=p=1$
 :::
 
 - FH(0,1): Place more weights on later time points
@@ -344,7 +343,7 @@ where $\theta = \Delta/\sigma$ is the effect size. Here the test statistics for 
 
 $$ Z=\sqrt{\frac{n_{0}+n_{1}}{n_{0}n_{1}}}\int_{0}^{\tau}w(t)\frac{\overline{Y}_{0}(t)\overline{Y}_{1}(t)}{\overline{Y}_{0}(t)+\overline{Y}_{0}(t)}\left\{ \frac{d\overline{N}_{1}(t)}{\overline{Y}_{1}(t)}-\frac{d\overline{N}_{0}(t)}{\overline{Y}_{0}(t)}\right\} $$
 
-- Weight $w(t)$: implemented in `gsdmvn`.
+- Weight $w(t)$: implemented in gsdmvn.
 - Integration up to total follow-up time $\tau$.
 
 ```{r}
@@ -356,14 +355,22 @@ weight <- function(x, arm0, arm1) {
 $$\Delta=\int_{0}^{\tau}w(s)\frac{p_{0}\pi_{0}(s)p_{1}\pi_{1}(s)}{\pi(s)}\{\lambda_{1}(s)-\lambda_{0}(s)\}ds$$,
 
 ```{r}
-delta <- abs(gsdmvn:::gs_delta_wlr(arm0, arm1, tmax = arm0$total_time, weight = weight))
+delta <- abs(gsdmvn:::gs_delta_wlr(
+  arm0, arm1,
+  tmax = arm0$total_time,
+  weight = weight
+))
 delta
 ```
 
 $$\sigma^{2}=\int_{0}^{\tau}w(s)^{2}\frac{p_{0}\pi_{0}(s)p_{1}\pi_{1}(s)}{\pi(s)^{2}}dv(s)$$
 
 ```{r}
-sigma2 <- gsdmvn:::gs_sigma2_wlr(arm0, arm1, tmax = arm0$total_time, weight = weight)
+sigma2 <- gsdmvn:::gs_sigma2_wlr(
+  arm0, arm1,
+  tmax = arm0$total_time,
+  weight = weight
+)
 sigma2
 ```
 
@@ -416,7 +423,8 @@ x <- seq(0, arm0$total_time, 0.1)
 # Piecewise Uniform Distribution
 plot(x, npsurvSS::daccr(x, arm = arm0),
   type = "s",
-  xlab = "Calendar time (month)", ylab = "Accrual Probability"
+  xlab = "Calendar time (month)",
+  ylab = "Accrual Probability"
 )
 ```
 
@@ -450,7 +458,9 @@ arm0$total_time
 # Piecewise Exponential distribution
 plot(x, 1 - npsurvSS::psurv(x, arm0),
   type = "l",
-  xlab = "Calendar time (month)", ylab = "Survival Probability", ylim = c(0, 1)
+  xlab = "Calendar time (month)",
+  ylab = "Survival Probability",
+  ylim = c(0, 1)
 )
 lines(x, 1 - npsurvSS::psurv(x, arm1), lty = 2)
 legend("topright", lty = c(1, 2), legend = c("control", "experiment"))
@@ -466,7 +476,8 @@ legend("topright", lty = c(1, 2), legend = c("control", "experiment"))
 # Exponential Distribution
 plot(x, 1 - pexp(x),
   type = "l",
-  xlab = "Calendar time (month)", ylab = "Loss to Follow-up Probability"
+  xlab = "Calendar time (month)",
+  ylab = "Loss to Follow-up Probability"
 )
 ```
 
@@ -489,7 +500,8 @@ $$E\{N(t)\} = \int_{0}^{t}f_{T}(s)S_{L}(s)F_{R}(\tau_{a}\land(\tau-s))ds$$
 x_int <- 0:arm0$total_time
 plot(x_int, gsdmvn:::prob_event.arm(arm0, tmax = x_int),
   type = "l",
-  xlab = "Calendar time (month)", ylab = "Event Probability",
+  xlab = "Calendar time (month)",
+  ylab = "Event Probability",
   ylim = c(0, 1)
 )
 ```
@@ -503,13 +515,15 @@ $$E\{Y(t)\} = S_{T}(s)S_{L}(s)F_{R}(\tau_{a}\land(\tau-s))$$
 # Probability of People at risk
 plot(x_int, gsdmvn:::prob_risk(arm0, x_int, arm0$total_time),
   type = "l",
-  xlab = "Calendar time (month)", ylab = "Probability at Risk", ylim = c(0, 1)
+  xlab = "Calendar time (month)",
+  ylab = "Probability at Risk",
+  ylim = c(0, 1)
 )
 ```
 
 ### Weight function in weighted logrank test
 
-- Define different weight functions in `gsdmvn`
+- Define different weight functions in gsdmvn
 - Weight function: $w(t)$
 - Constant weight (logrank test): $1$
 
@@ -520,26 +534,52 @@ gsdmvn::wlr_weight_1(x = c(12, 24, 36), arm0, arm1)
 - Fleming-Harrington weight: $w(t) = FH^{\rho, \gamma}(t) = S(t)^\rho(1 - S(t))^\gamma$
 
 ```{r}
-weight_legend <- apply(expand.grid(c("rho=0", "rho=1"), c("gamma=0", "gamma=1")), 1, paste0, collapse = "; ")
-plot(1:36, gsdmvn::wlr_weight_fh(x = 1:36, arm0, arm1, rho = 0, gamma = 0),
+weight_legend <- apply(
+  expand.grid(
+    c("rho=0", "rho=1"),
+    c("gamma=0", "gamma=1")
+  ),
+  1,
+  paste0,
+  collapse = "; "
+)
+plot(
+  1:36,
+  gsdmvn::wlr_weight_fh(x = 1:36, arm0, arm1, rho = 0, gamma = 0),
   xlab = "Calendar time (month)", col = 1,
   ylab = "Weight", type = "l", ylim = c(-0.5, 1.2)
 )
-lines(1:36, gsdmvn::wlr_weight_fh(x = 1:36, arm0, arm1, rho = 1, gamma = 0), col = 2)
-lines(1:36, gsdmvn::wlr_weight_fh(x = 1:36, arm0, arm1, rho = 0, gamma = 1), col = 3)
-lines(1:36, gsdmvn::wlr_weight_fh(x = 1:36, arm0, arm1, rho = 1, gamma = 1), col = 4)
+lines(
+  1:36,
+  gsdmvn::wlr_weight_fh(x = 1:36, arm0, arm1, rho = 1, gamma = 0),
+  col = 2
+)
+lines(
+  1:36,
+  gsdmvn::wlr_weight_fh(x = 1:36, arm0, arm1, rho = 0, gamma = 1),
+  col = 3
+)
+lines(
+  1:36,
+  gsdmvn::wlr_weight_fh(x = 1:36, arm0, arm1, rho = 1, gamma = 1),
+  col = 4
+)
 legend("bottomright", legend = weight_legend, lty = 1, col = 1:4)
 ```
 
-- Modestly WLR: $S^{-1}(t\land\tau_m)$ @magirr2019modestly
-
-- Choose $\tau_m$ around the change point in delay effect scenario
-
+- Modestly WLR: $S^{-1}(t\land\tau_m)$ @magirr2019modestly.
+- Choose $\tau_m$ around the change point in delay effect scenario.
 - Only down-weight early event. Constant weight after change point.
 
 ```{r}
-plot(1:36, gsdmvn::wlr_weight_fh(x = 1:36, arm0, arm1, rho = -1, gamma = 0, tau = 4),
-  xlab = "Calendar time (month)", ylab = "Weight", type = "l"
+plot(
+  1:36,
+  gsdmvn::wlr_weight_fh(
+    x = 1:36, arm0, arm1, rho = -1, gamma = 0, tau = 4
+  ),
+  xlab = "Calendar time (month)",
+  ylab = "Weight",
+  type = "l"
 )
 ```
 
@@ -576,9 +616,8 @@ plot(t, exp(log_ahr),
 ```
 
 - Note the AHR depends on the choice of weight function $w(\cdot)$.
-
-- Under logrank test with piecewise exponential distribution and 1:1 randomization ratio,
-it can be simplified to
+- Under logrank test with piecewise exponential distribution and
+  1:1 randomization ratio, it can be simplified to
 
 $$\log(AHR) = \frac{\sum d_i \log{HR_i}}{\sum d_i}$$
 
@@ -587,11 +626,13 @@ gsDesign2::AHR(enrollRates, failRates, totalDuration = arm0$total_time)
 ```
 
 ```{r}
-log_ahr <- gsdmvn:::gs_delta_wlr(arm0, arm1,
+log_ahr <- gsdmvn:::gs_delta_wlr(
+  arm0, arm1,
   tmax = arm0$total_time,
   weight = gsdmvn:::wlr_weight_1
 ) /
-  gsdmvn:::gs_delta_wlr(arm0, arm1,
+  gsdmvn:::gs_delta_wlr(
+    arm0, arm1,
     tmax = arm0$total_time,
     weight = gsdmvn:::wlr_weight_1,
     approx = "generalized schoenfeld",
@@ -617,7 +658,6 @@ the covariance of two test statistics $Z_1 = Z(\rho_1, \gamma_1), Z_2 = Z(\rho_2
 $$\text{Cov}(Z_1, Z_2) = \text{Var}(Z(\frac{\rho_1 + \rho_2}{2}, \frac{\gamma_1 + \gamma_2}{2}))$$
 
 - We illustrate the idea based on $FH(0, 0.5)$ and $FH(0.5, 0.5)$
-
 - All weight functions
 
 ```{r}
@@ -682,18 +722,20 @@ because the test statistic for MaxCombo is not asymptotically normal.
 
 The type I Error should be:
 
-$$\alpha = \text{Pr}(\max(Z_1, Z_2) > z_{\alpha} \, | \, H_0) = 1 - \text{Pr}(Z_1 < z_{\alpha}, Z_2 < z_{\alpha} \, | \, H_0)$$
+$$
+\alpha = \text{Pr}(\max(Z_1, Z_2) > z_{\alpha} \, | \, H_0) = 1 - \text{Pr}(Z_1 < z_{\alpha}, Z_2 < z_{\alpha} \, | \, H_0)
+$$
 
 ```{r}
-library(mvtnorm)
-
 z_alpha <- qmvnorm(p = 1 - 0.025, corr = corr_combo)
 z_alpha$quantile
 ```
 
 The power should be
 
-$$\beta = \text{Pr}(\max(Z_1, Z_2) > z_{\alpha} \, | \, H_1) = 1 - \text{Pr}(Z_1 < z_{\alpha}, Z_2 < z_{\alpha} \, | \, H_1)$$
+$$
+\beta = \text{Pr}(\max(Z_1, Z_2) > z_{\alpha} \, | \, H_1) = 1 - \text{Pr}(Z_1 < z_{\alpha}, Z_2 < z_{\alpha} \, | \, H_1)
+$$
 
 ```{r}
 #' @param n Sample size

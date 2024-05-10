@@ -1,0 +1,71 @@
+project:
+  type: book
+  resources:
+    - assets/
+    - data/
+    - slides/
+    - vignettes/
+
+book:
+  title: "Group Sequential Design Under Non-Proportional Hazards"
+  subtitle: "Deming Conference Course, December 6, 2021"
+  author:
+    - Keaven M. Anderson
+    - Yilong Zhang
+    - Nan Xiao
+    - Yujie Zhao
+  description: |
+    Learn how to derive group sequential designs for time-to-event endpoints
+    under both proportional and non-proportional hazards assumptions for
+    randomized clinical trials.
+
+  output-file: "gsd-deming"
+
+  cover-image: "assets/cover.png"
+  image: "assets/preview.jpg"
+  favicon: "assets/favicon.png"
+
+  site-url: https://keaven.github.io/gsd-deming/
+  repo-url: https://github.com/keaven/gsd-deming
+  repo-actions: [edit, issue, source]
+  sharing: [twitter, linkedin]
+  reader-mode: true
+
+  open-graph:
+    image: "assets/preview.jpg"
+    description: |
+      Learn how to derive group sequential designs for time-to-event endpoints
+      under both proportional and non-proportional hazards assumptions for
+      randomized clinical trials.
+  twitter-card:
+    image: "assets/preview.jpg"
+    description: |
+      Learn how to derive group sequential designs for time-to-event endpoints
+      under both proportional and non-proportional hazards assumptions for
+      randomized clinical trials.
+    card-style: summary_large_image
+
+  chapters:
+    - index.qmd
+    - preface.qmd
+    - background.qmd
+    - proportional-hazards.qmd
+    - ahr.qmd
+    - pkgs.qmd
+
+    - part: other-tests.qmd
+      chapters:
+        - fixed-design.qmd
+        - wlr.qmd
+        - wlr-boundary.qmd
+        - maxcombo.qmd
+        - maxcombo-boundary.qmd
+    - references.qmd
+
+bibliography: gsd-deming.bib
+
+format:
+  html:
+    theme: [cosmo, custom.scss]
+    mainfont: "Invention, system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Noto Sans, Liberation Sans, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji"
+    code-link: true
