@@ -9,7 +9,7 @@ We will illustrate the concepts based on an experimental R package:
 
 - [gsdmvn](https://merck.github.io/gsdmvn/): analytically based group sequential design.
 
-Specifically, we will provide therotical justification and examples for:
+Specifically, we will provide theoretical justification and examples for:
 
 - Fixed design based on weighted logrank test and MaxCombo test.
 - Group sequential design with weighted logrank test.

@@ -359,7 +359,7 @@ Its main weakness is the high price for the end of the trial and the requirement
 ### O'Brien-Fleming boundary
 
 O'Brien-Fleming boundary is very conservative at the beginning, which gives a relatively large boundary first.
-But it gives a nominal value close to the overall value of the design $\approx 1.96$ when two-sied $\alpha = 0.05$ for the final stage.
+But it gives a nominal value close to the overall value of the design $\approx 1.96$ when two-side $\alpha = 0.05$ for the final stage.
 Its visualization can be found as follows.
 
 ```{r}

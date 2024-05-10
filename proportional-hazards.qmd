@@ -11,7 +11,7 @@ if you copy the repository to your local PC, you will be able to easily access t
 After a brief review of methodology, we recreate designs and evaluate final inference for multiple published trials:
 
 - We begin with the KEYNOTE-189 trial [@KEYNOTE189] to show a straightforward, common application in metastatic (high-risk) cancer.
-- We proceed to the AFCAPS/TEXCAPS trial [@AFCAPSdesign; @AFCAPSresults], a cardiovascular endpoint trial with much lower risk than a metastatic oncology trial.
+- We proceed to the AFCAPS/TexCAPS trial [@AFCAPSdesign; @AFCAPSresults], a cardiovascular endpoint trial with much lower risk than a metastatic oncology trial.
 - Next, we look at the EXAMINE trial [@EXAMINEresults], a trial in diabetic patients evaluating a non-inferiority hypothesis for cardiovascular outcomes.
 
 We also create a design for a hypothetical trial in oncology where a long-term plateau in endpoints is likely. We approach this with a proportional hazards cure model.
@@ -174,7 +174,7 @@ The $p$-value reported at interim 1 was <0.001 [@KEYNOTE189], establishing stati
 
 ## Cardiovascular outcomes reduction
 
-The AFCAPS/TEXCAPS trial evaluated the use of lovastatin to reduce cardiovascular outcomes.
+The AFCAPS/TexCAPS trial evaluated the use of lovastatin to reduce cardiovascular outcomes.
 The design was described in @AFCAPSdesign while results were reported in @AFCAPSresults.
 We approximate the design and evaluation of statistical significance here.
 Software and some assumptions of the model were not completely clear, so this is not an exact reproduction of the design, but is very close.

@@ -90,7 +90,7 @@ Let's revisit the two-sample t-test to make a connection between the math formul
 In two-sample t-test, we have
 
 $$\theta = \frac{\Delta}{\sigma}$$,
-where $\theta$ is difference of mean in two groups and $\sigma$ is standard divation of $\theta$.
+where $\theta$ is difference of mean in two groups and $\sigma$ is standard deviation of $\theta$.
 
 If we consider a scenarios with treatment effect at 0.5 with pooled standard deviation at 2.
 
