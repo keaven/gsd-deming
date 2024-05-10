@@ -31,8 +31,10 @@ jobs:
         with:
           r-version: 'release'
 
-      - name: Set up R packages in DESCRIPTION
-        uses: r-lib/actions/setup-r-dependencies@v2
+      - name: Set up R packages using renv
+        uses: r-lib/actions/setup-renv@v2
+        with:
+          cache-version: 1
 
       # To publish to Netlify, RStudio Connect, or GitHub Pages, uncomment
       # the appropriate block below
