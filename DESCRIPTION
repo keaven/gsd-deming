@@ -14,9 +14,12 @@ Imports:
   dplyr,
   ggplot2,
   gsDesign,
+  gsDesign2,
+  gsdmvn,
   gt,
   mvtnorm,
   npsurvSS,
+  simtrial,
   xml2
 Remotes:
   merck/simtrial@87cd828,
