@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.554">
+<meta name="generator" content="quarto-1.8.25">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Learn how to derive group sequential designs for time-to-event endpoints under both proportional and non-proportional hazards assumptions for randomized clinical trials.">
-<title>Group Sequential Design Under Non-Proportional Hazards - 3&nbsp; Average hazard ratio</title>
+<title>3&nbsp; Average hazard ratio – Group Sequential Design Under Non-Proportional Hazards</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,8 +19,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -84,15 +85,17 @@ div.csl-indent {
 <link href="./pkgs.html" rel="next">
 <link href="./proportional-hazards.html" rel="prev">
 <link href="./assets/favicon.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-7c8a81ef2f980ab9f57414f8f926323d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -118,7 +121,7 @@ div.csl-indent {
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+}</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
 const typesetMath = (el) => {
   if (window.MathJax) {
     // MathJax Typeset
@@ -129,7 +132,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -144,48 +147,50 @@ window.Quarto = {
   typesetMath
 };
 </script>
-<meta property="og:title" content="Group Sequential Design Under Non-Proportional Hazards - 3&nbsp; Average hazard ratio">
+<meta property="og:title" content="3&nbsp; Average hazard ratio – Group Sequential Design Under Non-Proportional Hazards">
 <meta property="og:description" content="Learn how to derive group sequential designs for time-to-event endpoints under both proportional and non-proportional hazards assumptions for randomized clinical trials.">
 <meta property="og:image" content="https://keaven.github.io/gsd-deming/assets/preview.jpg">
 <meta property="og:site_name" content="Group Sequential Design Under Non-Proportional Hazards">
-<meta name="twitter:title" content="Group Sequential Design Under Non-Proportional Hazards - 3&nbsp; Average hazard ratio">
+<meta name="twitter:title" content="3&nbsp; Average hazard ratio – Group Sequential Design Under Non-Proportional Hazards">
 <meta name="twitter:description" content="Learn how to derive group sequential designs for time-to-event endpoints under both proportional and non-proportional hazards assumptions for randomized clinical trials.">
 <meta name="twitter:image" content="https://keaven.github.io/gsd-deming/assets/preview.jpg">
 <meta name="twitter:card" content="summary_large_image">
 </head>
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ahr.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Average hazard ratio</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Group Sequential Design Under Non-Proportional Hazards</a> 
         <div class="sidebar-tools-main tools-wide">
     <a href="https://github.com/keaven/gsd-deming" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
-      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
 <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
-              <i class="bi bi-bi-twitter pe-1"></i>
+              <i class="bi bi-twitter pe-1"></i>
             Twitter
             </a>
           </li>
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
-              <i class="bi bi-bi-linkedin pe-1"></i>
+              <i class="bi bi-linkedin pe-1"></i>
             LinkedIn
             </a>
           </li>
@@ -246,7 +251,7 @@ window.Quarto = {
       <div class="sidebar-item-container"> 
             <a href="./other-tests.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Others tests</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -475,21 +480,21 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
 <li>Learn the calculation of AHR by using the R package gsDesign2 and gsdmvn.</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/therneau/survival">survival</a></span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/therneau/survival">survival</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gt.rstudio.com">gt</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://merck.github.io/simtrial/">simtrial</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keaven.github.io/gsDesign/">gsDesign</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://merck.github.io/gsDesign2/">gsDesign2</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://merck.github.io/gsdmvn/">gsdmvn</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://merck.github.io/gsdmvn/">gsdmvn</a></span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="sec-SecAhrEgAhrVsTime" class="level3" data-number="3.3.1"><h3 data-number="3.3.1" class="anchored" data-anchor-id="sec-SecAhrEgAhrVsTime">
 <span class="header-section-number">3.3.1</span> Example 1</h3>
 <p>In this example, we assume the enrollment rate is a constant with <span class="math inline">\(12\)</span> month targeted enrollment. And we further assume the dropout rate is exponential, i.e., <span class="math inline">\(0.001\)</span> per month. Besides, the failure rate is assumed as exponential with the median of <span class="math inline">\(15\)</span> months. The hazard ratio is assumed as <span class="math inline">\(1\)</span> for the first 4 month, and <span class="math inline">\(0.6\)</span> thereafter.</p>
 <p>To calculate the AHR, we first use <code><a href="https://merck.github.io/gsDesign2/reference/AHR.html">gsDesign2::AHR()</a></code>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># calculate the AHR</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># calculate the AHR</span></span>
 <span><span class="va">xx</span> <span class="op">&lt;-</span> <span class="fu">gsDesign2</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsDesign2/reference/AHR.html">AHR</a></span><span class="op">(</span></span>
 <span>  <span class="co"># the enrollment rate is a constant with $12$ month targeted enrollment</span></span>
 <span>  enrollRates <span class="op">=</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>Stratum <span class="op">=</span> <span class="st">"All"</span>, duration <span class="op">=</span> <span class="fl">12</span>, rate <span class="op">=</span> <span class="fl">100</span> <span class="op">/</span> <span class="fl">12</span><span class="op">)</span>,</span>
@@ -507,11 +512,11 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
 <span>  totalDuration <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.001</span>, <span class="fl">4</span>, <span class="fl">4.1</span>, <span class="fl">4.25</span>, <span class="fl">4.5</span>, <span class="fl">5</span>, <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">36</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  <span class="co"># ratio of experimental to control randomization</span></span>
 <span>  ratio <span class="op">=</span> <span class="fl">1</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Its AHR plot can be found below, where its AHR steeps drop after <span class="math inline">\(4\)</span> months and leveling after about <span class="math inline">\(24\)</span> months.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># plot the AHR curve</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># plot the AHR curve</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">xx</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Time</span>, y <span class="op">=</span> <span class="va">AHR</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>linewidth <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"AHR (Geometric Average Hazard Ratio) Over Time"</span><span class="op">)</span> <span class="op">+</span></span>
@@ -527,7 +532,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
 <span>    axis.text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">14</span>, colour <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span>,</span>
 <span>    axis.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">18</span>, face <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span>,</span>
 <span>    title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">16</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="ahr_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
@@ -537,7 +542,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
 </div>
 <p>Then, we are interested to figure out the expected events per <span class="math inline">\(100\)</span> enrolled and find out that we need <span class="math inline">\(35\)</span>-<span class="math inline">\(40\)</span> months until <span class="math inline">\(65\)</span>%-<span class="math inline">\(70\)</span>% have events.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># plot AHR</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># plot AHR</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span></span>
 <span>  <span class="va">xx</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Time</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -558,7 +563,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
 <span>    axis.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">18</span>, face <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span>,</span>
 <span>    title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">18</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Month"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Month"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="ahr_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
@@ -570,7 +575,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
 <span class="header-section-number">3.3.2</span> Example 2</h3>
 <p>In this example, we assume there are <span class="math inline">\(332\)</span> events and investigate the correlation between AHR and power. For AHR, we are interested in the range from <span class="math inline">\(0.6\)</span> to <span class="math inline">\(1\)</span> with intervals of <span class="math inline">\(0.02\)</span>. For power, it can be calculated by <code><a href="https://keaven.github.io/gsDesign/reference/nSurvival.html">gsDesign::nEvents()</a></code>. The correlation between AHR and power can be found in the following figure.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
 <span>    <span class="co"># Interested in the range from 0.6 to 1 with intervals of 0.02</span></span>
 <span>    AHR <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">.6</span>, <span class="fl">1</span>, <span class="fl">.02</span><span class="op">)</span>,</span>
@@ -601,7 +606,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
 <span>    axis.text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">18</span>, colour <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span>,</span>
 <span>    axis.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">18</span>, face <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span>,</span>
 <span>    title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">16</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="ahr_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
@@ -613,7 +618,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
 <span class="header-section-number">3.3.3</span> Example 3</h3>
 <p>In this example, we discuss the group sequential design with spending bounds. And we will show how to calculate the interim timing, final timing, effect size, and information by <code><a href="https://merck.github.io/gsDesign2/reference/AHR.html">gsDesign2::AHR()</a></code>. We assume the analysis is conducted after <span class="math inline">\(12, 20, 28, 36\)</span> months and the sample size is <span class="math inline">\(500\)</span>. we further assume the enrollment rate is a constant with <span class="math inline">\(12\)</span> month targeted enrollment. And we further assume the dropout rate is exponential, i.e., <span class="math inline">\(0.001\)</span> per month. Besides, the failure rate is assumed as exponential with the median of <span class="math inline">\(15\)</span> months. The hazard ratio is assumed as <span class="math inline">\(1\)</span> for the first <span class="math inline">\(4\)</span> month, and <span class="math inline">\(0.6\)</span> thereafter.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Assume the analysis is conducted after 12, 20, 28, 36 months</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Assume the analysis is conducted after 12, 20, 28, 36 months</span></span>
 <span><span class="va">analysisTimes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">12</span>, <span class="fl">20</span>, <span class="fl">28</span>, <span class="fl">36</span><span class="op">)</span></span>
 <span><span class="co"># Sample size is 500</span></span>
 <span><span class="va">sampleSize</span> <span class="op">&lt;-</span> <span class="fl">500</span></span>
@@ -635,11 +640,11 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
 <span>  duration <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">100</span><span class="op">)</span>,</span>
 <span>  <span class="co"># Dropout rate is exponential, i.e., 0.001 per month</span></span>
 <span>  dropoutRate <span class="op">=</span> <span class="fl">0.001</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Given the above setting, we can calculate the interim timing, final timing, effect size, and information by <code><a href="https://merck.github.io/gsDesign2/reference/AHR.html">gsDesign2::AHR()</a></code>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ahr</span> <span class="op">&lt;-</span> <span class="fu">gsDesign2</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsDesign2/reference/AHR.html">AHR</a></span><span class="op">(</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ahr</span> <span class="op">&lt;-</span> <span class="fu">gsDesign2</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsDesign2/reference/AHR.html">AHR</a></span><span class="op">(</span></span>
 <span>  enrollRates <span class="op">=</span> <span class="va">enrollRates</span>,</span>
 <span>  failRates <span class="op">=</span> <span class="va">failRates</span>,</span>
 <span>  totalDuration <span class="op">=</span> <span class="va">analysisTimes</span>,</span>
@@ -649,26 +654,25 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
 <span><span class="va">ahr</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>col <span class="op">=</span> <span class="fl">2</span>, decimals <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>col <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">6</span>, decimals <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>col <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">6</span>, decimals <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div>
-<div id="cnzmrmdcux" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#cnzmrmdcux table {
+<div id="ocfzdekcki" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ocfzdekcki table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#cnzmrmdcux thead, #cnzmrmdcux tbody, #cnzmrmdcux tfoot, #cnzmrmdcux tr, #cnzmrmdcux td, #cnzmrmdcux th {
+#ocfzdekcki thead, #ocfzdekcki tbody, #ocfzdekcki tfoot, #ocfzdekcki tr, #ocfzdekcki td, #ocfzdekcki th {
   border-style: none;
 }
 
-#cnzmrmdcux p {
+#ocfzdekcki p {
   margin: 0;
   padding: 0;
 }
 
-#cnzmrmdcux .gt_table {
+#ocfzdekcki .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -694,12 +698,12 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-left-color: #D3D3D3;
 }
 
-#cnzmrmdcux .gt_caption {
+#ocfzdekcki .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#cnzmrmdcux .gt_title {
+#ocfzdekcki .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -711,7 +715,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-width: 0;
 }
 
-#cnzmrmdcux .gt_subtitle {
+#ocfzdekcki .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -723,7 +727,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-top-width: 0;
 }
 
-#cnzmrmdcux .gt_heading {
+#ocfzdekcki .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -735,13 +739,13 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#cnzmrmdcux .gt_bottom_border {
+#ocfzdekcki .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#cnzmrmdcux .gt_col_headings {
+#ocfzdekcki .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -756,7 +760,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#cnzmrmdcux .gt_col_heading {
+#ocfzdekcki .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -776,7 +780,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   overflow-x: hidden;
 }
 
-#cnzmrmdcux .gt_column_spanner_outer {
+#ocfzdekcki .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -788,15 +792,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 4px;
 }
 
-#cnzmrmdcux .gt_column_spanner_outer:first-child {
+#ocfzdekcki .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#cnzmrmdcux .gt_column_spanner_outer:last-child {
+#ocfzdekcki .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#cnzmrmdcux .gt_column_spanner {
+#ocfzdekcki .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -808,11 +812,11 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   width: 100%;
 }
 
-#cnzmrmdcux .gt_spanner_row {
+#ocfzdekcki .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#cnzmrmdcux .gt_group_heading {
+#ocfzdekcki .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -838,7 +842,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   text-align: left;
 }
 
-#cnzmrmdcux .gt_empty_group_heading {
+#ocfzdekcki .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -853,15 +857,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   vertical-align: middle;
 }
 
-#cnzmrmdcux .gt_from_md > :first-child {
+#ocfzdekcki .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#cnzmrmdcux .gt_from_md > :last-child {
+#ocfzdekcki .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#cnzmrmdcux .gt_row {
+#ocfzdekcki .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -880,7 +884,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   overflow-x: hidden;
 }
 
-#cnzmrmdcux .gt_stub {
+#ocfzdekcki .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -893,7 +897,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#cnzmrmdcux .gt_stub_row_group {
+#ocfzdekcki .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -907,15 +911,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   vertical-align: top;
 }
 
-#cnzmrmdcux .gt_row_group_first td {
+#ocfzdekcki .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#cnzmrmdcux .gt_row_group_first th {
+#ocfzdekcki .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#cnzmrmdcux .gt_summary_row {
+#ocfzdekcki .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -925,16 +929,16 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#cnzmrmdcux .gt_first_summary_row {
+#ocfzdekcki .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#cnzmrmdcux .gt_first_summary_row.thick {
+#ocfzdekcki .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#cnzmrmdcux .gt_last_summary_row {
+#ocfzdekcki .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -944,7 +948,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#cnzmrmdcux .gt_grand_summary_row {
+#ocfzdekcki .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -954,7 +958,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#cnzmrmdcux .gt_first_grand_summary_row {
+#ocfzdekcki .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -964,7 +968,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-top-color: #D3D3D3;
 }
 
-#cnzmrmdcux .gt_last_grand_summary_row_top {
+#ocfzdekcki .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -974,11 +978,11 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#cnzmrmdcux .gt_striped {
+#ocfzdekcki .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#cnzmrmdcux .gt_table_body {
+#ocfzdekcki .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -987,7 +991,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#cnzmrmdcux .gt_footnotes {
+#ocfzdekcki .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1001,7 +1005,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#cnzmrmdcux .gt_footnote {
+#ocfzdekcki .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1010,7 +1014,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#cnzmrmdcux .gt_sourcenotes {
+#ocfzdekcki .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1024,7 +1028,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#cnzmrmdcux .gt_sourcenote {
+#ocfzdekcki .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1032,68 +1036,77 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#cnzmrmdcux .gt_left {
+#ocfzdekcki .gt_left {
   text-align: left;
 }
 
-#cnzmrmdcux .gt_center {
+#ocfzdekcki .gt_center {
   text-align: center;
 }
 
-#cnzmrmdcux .gt_right {
+#ocfzdekcki .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#cnzmrmdcux .gt_font_normal {
+#ocfzdekcki .gt_font_normal {
   font-weight: normal;
 }
 
-#cnzmrmdcux .gt_font_bold {
+#ocfzdekcki .gt_font_bold {
   font-weight: bold;
 }
 
-#cnzmrmdcux .gt_font_italic {
+#ocfzdekcki .gt_font_italic {
   font-style: italic;
 }
 
-#cnzmrmdcux .gt_super {
+#ocfzdekcki .gt_super {
   font-size: 65%;
 }
 
-#cnzmrmdcux .gt_footnote_marks {
+#ocfzdekcki .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#cnzmrmdcux .gt_asterisk {
+#ocfzdekcki .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#cnzmrmdcux .gt_indent_1 {
+#ocfzdekcki .gt_indent_1 {
   text-indent: 5px;
 }
 
-#cnzmrmdcux .gt_indent_2 {
+#ocfzdekcki .gt_indent_2 {
   text-indent: 10px;
 }
 
-#cnzmrmdcux .gt_indent_3 {
+#ocfzdekcki .gt_indent_3 {
   text-indent: 15px;
 }
 
-#cnzmrmdcux .gt_indent_4 {
+#ocfzdekcki .gt_indent_4 {
   text-indent: 20px;
 }
 
-#cnzmrmdcux .gt_indent_5 {
+#ocfzdekcki .gt_indent_5 {
   text-indent: 25px;
 }
+
+#ocfzdekcki .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#ocfzdekcki div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
 </style>
-<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead><tr class="header gt_col_headings">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead><tr class="gt_col_headings header">
 <th id="Time" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Time</th>
 <th id="AHR" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">AHR</th>
 <th id="Events" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Events</th>
@@ -1139,13 +1152,12 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
 </div>
 </div>
 </div>
-</div>
 </section><section id="sec-SecAhrEgPhNphOneSided" class="level3" data-number="3.3.4"><h3 data-number="3.3.4" class="anchored" data-anchor-id="sec-SecAhrEgPhNphOneSided">
 <span class="header-section-number">3.3.4</span> Example 4</h3>
 <p>In this example, we compare proportional hazard with non-proportional hazard, regarding of the sample size and crossing probability. In this example, we consider the one-sided design. We will discuss the other designs in the next few sections, including symmetric design in <a href="#sec-AhrEgPhNphSymmetric" class="quarto-xref"><span>Section 3.3.5</span></a>, asymmetric design in <a href="#sec-AhrEgPhNphAsymmetric" class="quarto-xref"><span>Section 3.3.6</span></a>, and design with interims at specified times in <a href="#sec-AhrEgPhNphSpecStop" class="quarto-xref"><span>Section 3.3.7</span></a>. For the calculation of proportional hazard, we use R function <code><a href="https://keaven.github.io/gsDesign/reference/nSurv.html">gsDesign::gsSurv()</a></code>. For the calculation of non-proportional hazard, we use R function <code><a href="https://merck.github.io/gsdmvn/reference/gs_design_ahr.html">gsdmvn::gs_design_ahr()</a></code>.</p>
 <p>First, we calculate the sample size and crossing probability under proportional hazard. And we find the sample size is <span class="math inline">\(444\)</span> with <span class="math inline">\(297\)</span> events. The crossing probabilities at the first, second, third and final interim analysis are <span class="math inline">\(0.0289, 0.4999, 0.7916, 0.9000\)</span> under <span class="math inline">\(H_1\)</span>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Derive Group Sequential Design</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Derive Group Sequential Design</span></span>
 <span><span class="va">PH1sided</span> <span class="op">&lt;-</span> <span class="fu">gsDesign</span><span class="fu">::</span><span class="fu"><a href="https://keaven.github.io/gsDesign/reference/nSurv.html">gsSurv</a></span><span class="op">(</span></span>
 <span>  <span class="co"># Number of analyses (interim + final)</span></span>
 <span>  k <span class="op">=</span> <span class="fl">4</span>,</span>
@@ -1179,26 +1191,25 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
 <span>  ratio <span class="op">=</span> <span class="fl">1</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://keaven.github.io/gsDesign/reference/gsBoundSummary.html">gsBoundSummary</a></span><span class="op">(</span><span class="va">PH1sided</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://keaven.github.io/gsDesign/reference/gsBoundSummary.html">gsBoundSummary</a></span><span class="op">(</span><span class="va">PH1sided</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div>
-<div id="mpuivuawxh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#mpuivuawxh table {
+<div id="uyuughsbdn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#uyuughsbdn table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#mpuivuawxh thead, #mpuivuawxh tbody, #mpuivuawxh tfoot, #mpuivuawxh tr, #mpuivuawxh td, #mpuivuawxh th {
+#uyuughsbdn thead, #uyuughsbdn tbody, #uyuughsbdn tfoot, #uyuughsbdn tr, #uyuughsbdn td, #uyuughsbdn th {
   border-style: none;
 }
 
-#mpuivuawxh p {
+#uyuughsbdn p {
   margin: 0;
   padding: 0;
 }
 
-#mpuivuawxh .gt_table {
+#uyuughsbdn .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1224,12 +1235,12 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-left-color: #D3D3D3;
 }
 
-#mpuivuawxh .gt_caption {
+#uyuughsbdn .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#mpuivuawxh .gt_title {
+#uyuughsbdn .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1241,7 +1252,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-width: 0;
 }
 
-#mpuivuawxh .gt_subtitle {
+#uyuughsbdn .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1253,7 +1264,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-top-width: 0;
 }
 
-#mpuivuawxh .gt_heading {
+#uyuughsbdn .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1265,13 +1276,13 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#mpuivuawxh .gt_bottom_border {
+#uyuughsbdn .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#mpuivuawxh .gt_col_headings {
+#uyuughsbdn .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1286,7 +1297,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#mpuivuawxh .gt_col_heading {
+#uyuughsbdn .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1306,7 +1317,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   overflow-x: hidden;
 }
 
-#mpuivuawxh .gt_column_spanner_outer {
+#uyuughsbdn .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1318,15 +1329,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 4px;
 }
 
-#mpuivuawxh .gt_column_spanner_outer:first-child {
+#uyuughsbdn .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#mpuivuawxh .gt_column_spanner_outer:last-child {
+#uyuughsbdn .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#mpuivuawxh .gt_column_spanner {
+#uyuughsbdn .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1338,11 +1349,11 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   width: 100%;
 }
 
-#mpuivuawxh .gt_spanner_row {
+#uyuughsbdn .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#mpuivuawxh .gt_group_heading {
+#uyuughsbdn .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1368,7 +1379,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   text-align: left;
 }
 
-#mpuivuawxh .gt_empty_group_heading {
+#uyuughsbdn .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1383,15 +1394,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   vertical-align: middle;
 }
 
-#mpuivuawxh .gt_from_md > :first-child {
+#uyuughsbdn .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#mpuivuawxh .gt_from_md > :last-child {
+#uyuughsbdn .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#mpuivuawxh .gt_row {
+#uyuughsbdn .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1410,7 +1421,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   overflow-x: hidden;
 }
 
-#mpuivuawxh .gt_stub {
+#uyuughsbdn .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1423,7 +1434,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#mpuivuawxh .gt_stub_row_group {
+#uyuughsbdn .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1437,15 +1448,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   vertical-align: top;
 }
 
-#mpuivuawxh .gt_row_group_first td {
+#uyuughsbdn .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#mpuivuawxh .gt_row_group_first th {
+#uyuughsbdn .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#mpuivuawxh .gt_summary_row {
+#uyuughsbdn .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1455,16 +1466,16 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#mpuivuawxh .gt_first_summary_row {
+#uyuughsbdn .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#mpuivuawxh .gt_first_summary_row.thick {
+#uyuughsbdn .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#mpuivuawxh .gt_last_summary_row {
+#uyuughsbdn .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1474,7 +1485,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#mpuivuawxh .gt_grand_summary_row {
+#uyuughsbdn .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1484,7 +1495,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#mpuivuawxh .gt_first_grand_summary_row {
+#uyuughsbdn .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1494,7 +1505,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-top-color: #D3D3D3;
 }
 
-#mpuivuawxh .gt_last_grand_summary_row_top {
+#uyuughsbdn .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1504,11 +1515,11 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#mpuivuawxh .gt_striped {
+#uyuughsbdn .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#mpuivuawxh .gt_table_body {
+#uyuughsbdn .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1517,7 +1528,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#mpuivuawxh .gt_footnotes {
+#uyuughsbdn .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1531,7 +1542,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#mpuivuawxh .gt_footnote {
+#uyuughsbdn .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1540,7 +1551,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#mpuivuawxh .gt_sourcenotes {
+#uyuughsbdn .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1554,7 +1565,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#mpuivuawxh .gt_sourcenote {
+#uyuughsbdn .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1562,68 +1573,77 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#mpuivuawxh .gt_left {
+#uyuughsbdn .gt_left {
   text-align: left;
 }
 
-#mpuivuawxh .gt_center {
+#uyuughsbdn .gt_center {
   text-align: center;
 }
 
-#mpuivuawxh .gt_right {
+#uyuughsbdn .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#mpuivuawxh .gt_font_normal {
+#uyuughsbdn .gt_font_normal {
   font-weight: normal;
 }
 
-#mpuivuawxh .gt_font_bold {
+#uyuughsbdn .gt_font_bold {
   font-weight: bold;
 }
 
-#mpuivuawxh .gt_font_italic {
+#uyuughsbdn .gt_font_italic {
   font-style: italic;
 }
 
-#mpuivuawxh .gt_super {
+#uyuughsbdn .gt_super {
   font-size: 65%;
 }
 
-#mpuivuawxh .gt_footnote_marks {
+#uyuughsbdn .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#mpuivuawxh .gt_asterisk {
+#uyuughsbdn .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#mpuivuawxh .gt_indent_1 {
+#uyuughsbdn .gt_indent_1 {
   text-indent: 5px;
 }
 
-#mpuivuawxh .gt_indent_2 {
+#uyuughsbdn .gt_indent_2 {
   text-indent: 10px;
 }
 
-#mpuivuawxh .gt_indent_3 {
+#uyuughsbdn .gt_indent_3 {
   text-indent: 15px;
 }
 
-#mpuivuawxh .gt_indent_4 {
+#uyuughsbdn .gt_indent_4 {
   text-indent: 20px;
 }
 
-#mpuivuawxh .gt_indent_5 {
+#uyuughsbdn .gt_indent_5 {
   text-indent: 25px;
 }
+
+#uyuughsbdn .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#uyuughsbdn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
 </style>
-<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead><tr class="header gt_col_headings">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead><tr class="gt_col_headings header">
 <th id="Analysis" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Analysis</th>
 <th id="Value" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Value</th>
 <th id="Efficacy" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Efficacy</th>
@@ -1734,10 +1754,9 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
 </div>
 </div>
 </div>
-</div>
 <p>Second, we calculate the sample size and crossing probability under non-proportional hazard. And we find the sample size is <span class="math inline">\(465\)</span> with <span class="math inline">\(308\)</span> events (you will want to round up events and sample size). The crossing probabilities at the first, second, third and final interim analysis are <span class="math inline">\(0.0019, 0.3024, 0.7329, 0.9000\)</span> under <span class="math inline">\(H_1\)</span>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Spending function setup</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Spending function setup</span></span>
 <span><span class="va">NPH1sided</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_design_ahr.html">gs_design_ahr</a></span><span class="op">(</span></span>
 <span>  enrollRates <span class="op">=</span> <span class="va">enrollRates</span>,</span>
 <span>  failRates <span class="op">=</span> <span class="va">failRates</span>,</span>
@@ -1760,26 +1779,25 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span>, decimals <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">10</span><span class="op">:</span><span class="fl">11</span><span class="op">)</span>, decimals <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>col <span class="op">=</span> <span class="fl">6</span><span class="op">:</span><span class="fl">7</span>, decimals <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>col <span class="op">=</span> <span class="fl">8</span><span class="op">:</span><span class="fl">9</span>, decimals <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>col <span class="op">=</span> <span class="fl">8</span><span class="op">:</span><span class="fl">9</span>, decimals <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div>
-<div id="njzxbytacx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#njzxbytacx table {
+<div id="kqywpptpuk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#kqywpptpuk table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#njzxbytacx thead, #njzxbytacx tbody, #njzxbytacx tfoot, #njzxbytacx tr, #njzxbytacx td, #njzxbytacx th {
+#kqywpptpuk thead, #kqywpptpuk tbody, #kqywpptpuk tfoot, #kqywpptpuk tr, #kqywpptpuk td, #kqywpptpuk th {
   border-style: none;
 }
 
-#njzxbytacx p {
+#kqywpptpuk p {
   margin: 0;
   padding: 0;
 }
 
-#njzxbytacx .gt_table {
+#kqywpptpuk .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1805,12 +1823,12 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-left-color: #D3D3D3;
 }
 
-#njzxbytacx .gt_caption {
+#kqywpptpuk .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#njzxbytacx .gt_title {
+#kqywpptpuk .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1822,7 +1840,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-width: 0;
 }
 
-#njzxbytacx .gt_subtitle {
+#kqywpptpuk .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1834,7 +1852,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-top-width: 0;
 }
 
-#njzxbytacx .gt_heading {
+#kqywpptpuk .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1846,13 +1864,13 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#njzxbytacx .gt_bottom_border {
+#kqywpptpuk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#njzxbytacx .gt_col_headings {
+#kqywpptpuk .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1867,7 +1885,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#njzxbytacx .gt_col_heading {
+#kqywpptpuk .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1887,7 +1905,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   overflow-x: hidden;
 }
 
-#njzxbytacx .gt_column_spanner_outer {
+#kqywpptpuk .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1899,15 +1917,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 4px;
 }
 
-#njzxbytacx .gt_column_spanner_outer:first-child {
+#kqywpptpuk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#njzxbytacx .gt_column_spanner_outer:last-child {
+#kqywpptpuk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#njzxbytacx .gt_column_spanner {
+#kqywpptpuk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1919,11 +1937,11 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   width: 100%;
 }
 
-#njzxbytacx .gt_spanner_row {
+#kqywpptpuk .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#njzxbytacx .gt_group_heading {
+#kqywpptpuk .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1949,7 +1967,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   text-align: left;
 }
 
-#njzxbytacx .gt_empty_group_heading {
+#kqywpptpuk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1964,15 +1982,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   vertical-align: middle;
 }
 
-#njzxbytacx .gt_from_md > :first-child {
+#kqywpptpuk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#njzxbytacx .gt_from_md > :last-child {
+#kqywpptpuk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#njzxbytacx .gt_row {
+#kqywpptpuk .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1991,7 +2009,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   overflow-x: hidden;
 }
 
-#njzxbytacx .gt_stub {
+#kqywpptpuk .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2004,7 +2022,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#njzxbytacx .gt_stub_row_group {
+#kqywpptpuk .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2018,15 +2036,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   vertical-align: top;
 }
 
-#njzxbytacx .gt_row_group_first td {
+#kqywpptpuk .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#njzxbytacx .gt_row_group_first th {
+#kqywpptpuk .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#njzxbytacx .gt_summary_row {
+#kqywpptpuk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2036,16 +2054,16 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#njzxbytacx .gt_first_summary_row {
+#kqywpptpuk .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#njzxbytacx .gt_first_summary_row.thick {
+#kqywpptpuk .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#njzxbytacx .gt_last_summary_row {
+#kqywpptpuk .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2055,7 +2073,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#njzxbytacx .gt_grand_summary_row {
+#kqywpptpuk .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2065,7 +2083,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#njzxbytacx .gt_first_grand_summary_row {
+#kqywpptpuk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2075,7 +2093,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-top-color: #D3D3D3;
 }
 
-#njzxbytacx .gt_last_grand_summary_row_top {
+#kqywpptpuk .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2085,11 +2103,11 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#njzxbytacx .gt_striped {
+#kqywpptpuk .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#njzxbytacx .gt_table_body {
+#kqywpptpuk .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2098,7 +2116,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#njzxbytacx .gt_footnotes {
+#kqywpptpuk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2112,7 +2130,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#njzxbytacx .gt_footnote {
+#kqywpptpuk .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2121,7 +2139,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#njzxbytacx .gt_sourcenotes {
+#kqywpptpuk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2135,7 +2153,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#njzxbytacx .gt_sourcenote {
+#kqywpptpuk .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2143,68 +2161,77 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#njzxbytacx .gt_left {
+#kqywpptpuk .gt_left {
   text-align: left;
 }
 
-#njzxbytacx .gt_center {
+#kqywpptpuk .gt_center {
   text-align: center;
 }
 
-#njzxbytacx .gt_right {
+#kqywpptpuk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#njzxbytacx .gt_font_normal {
+#kqywpptpuk .gt_font_normal {
   font-weight: normal;
 }
 
-#njzxbytacx .gt_font_bold {
+#kqywpptpuk .gt_font_bold {
   font-weight: bold;
 }
 
-#njzxbytacx .gt_font_italic {
+#kqywpptpuk .gt_font_italic {
   font-style: italic;
 }
 
-#njzxbytacx .gt_super {
+#kqywpptpuk .gt_super {
   font-size: 65%;
 }
 
-#njzxbytacx .gt_footnote_marks {
+#kqywpptpuk .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#njzxbytacx .gt_asterisk {
+#kqywpptpuk .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#njzxbytacx .gt_indent_1 {
+#kqywpptpuk .gt_indent_1 {
   text-indent: 5px;
 }
 
-#njzxbytacx .gt_indent_2 {
+#kqywpptpuk .gt_indent_2 {
   text-indent: 10px;
 }
 
-#njzxbytacx .gt_indent_3 {
+#kqywpptpuk .gt_indent_3 {
   text-indent: 15px;
 }
 
-#njzxbytacx .gt_indent_4 {
+#kqywpptpuk .gt_indent_4 {
   text-indent: 20px;
 }
 
-#njzxbytacx .gt_indent_5 {
+#kqywpptpuk .gt_indent_5 {
   text-indent: 25px;
 }
+
+#kqywpptpuk .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#kqywpptpuk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
 </style>
-<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead><tr class="header gt_col_headings">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead><tr class="gt_col_headings header">
 <th id="Analysis" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Analysis</th>
 <th id="Bound" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Bound</th>
 <th id="Time" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Time</th>
@@ -2275,7 +2302,6 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
 </div>
 </div>
 </div>
-</div>
 <p>Comparing the proportional hazard with non-proportional hazard, we find that</p>
 <ul>
 <li>Interim boundary crossing probability much lower than with proportional hazard bounds.</li>
@@ -2294,24 +2320,23 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
 <p>First, we calculate the sample size and crossing probability under proportional hazard by <code><a href="https://keaven.github.io/gsDesign/reference/nSurv.html">gsDesign::gsSurv()</a></code>. And we find the sample size is <span class="math inline">\(444\)</span> with <span class="math inline">\(297\)</span> events. The probabilities to cross the upper boundary at the first, second, third and final interim analysis are <span class="math inline">\(0.0289, 0.4999, 0.7916, 0.9000\)</span> under <span class="math inline">\(H_1\)</span>. The probabilities to cross the lower boundary at the first, second, third and final interim analysis are <span class="math inline">\(0.0001, 0.0047, 0.0146, 0.0250\)</span> under <span class="math inline">\(H_0\)</span>.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div>
-<div id="gpfjuwtotc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#gpfjuwtotc table {
+<div id="xvbweewddu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xvbweewddu table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#gpfjuwtotc thead, #gpfjuwtotc tbody, #gpfjuwtotc tfoot, #gpfjuwtotc tr, #gpfjuwtotc td, #gpfjuwtotc th {
+#xvbweewddu thead, #xvbweewddu tbody, #xvbweewddu tfoot, #xvbweewddu tr, #xvbweewddu td, #xvbweewddu th {
   border-style: none;
 }
 
-#gpfjuwtotc p {
+#xvbweewddu p {
   margin: 0;
   padding: 0;
 }
 
-#gpfjuwtotc .gt_table {
+#xvbweewddu .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2337,12 +2362,12 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-left-color: #D3D3D3;
 }
 
-#gpfjuwtotc .gt_caption {
+#xvbweewddu .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#gpfjuwtotc .gt_title {
+#xvbweewddu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2354,7 +2379,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-width: 0;
 }
 
-#gpfjuwtotc .gt_subtitle {
+#xvbweewddu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2366,7 +2391,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-top-width: 0;
 }
 
-#gpfjuwtotc .gt_heading {
+#xvbweewddu .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2378,13 +2403,13 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#gpfjuwtotc .gt_bottom_border {
+#xvbweewddu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#gpfjuwtotc .gt_col_headings {
+#xvbweewddu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2399,7 +2424,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#gpfjuwtotc .gt_col_heading {
+#xvbweewddu .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2419,7 +2444,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   overflow-x: hidden;
 }
 
-#gpfjuwtotc .gt_column_spanner_outer {
+#xvbweewddu .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2431,15 +2456,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 4px;
 }
 
-#gpfjuwtotc .gt_column_spanner_outer:first-child {
+#xvbweewddu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#gpfjuwtotc .gt_column_spanner_outer:last-child {
+#xvbweewddu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#gpfjuwtotc .gt_column_spanner {
+#xvbweewddu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2451,11 +2476,11 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   width: 100%;
 }
 
-#gpfjuwtotc .gt_spanner_row {
+#xvbweewddu .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#gpfjuwtotc .gt_group_heading {
+#xvbweewddu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2481,7 +2506,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   text-align: left;
 }
 
-#gpfjuwtotc .gt_empty_group_heading {
+#xvbweewddu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2496,15 +2521,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   vertical-align: middle;
 }
 
-#gpfjuwtotc .gt_from_md > :first-child {
+#xvbweewddu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#gpfjuwtotc .gt_from_md > :last-child {
+#xvbweewddu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#gpfjuwtotc .gt_row {
+#xvbweewddu .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2523,7 +2548,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   overflow-x: hidden;
 }
 
-#gpfjuwtotc .gt_stub {
+#xvbweewddu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2536,7 +2561,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#gpfjuwtotc .gt_stub_row_group {
+#xvbweewddu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2550,15 +2575,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   vertical-align: top;
 }
 
-#gpfjuwtotc .gt_row_group_first td {
+#xvbweewddu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#gpfjuwtotc .gt_row_group_first th {
+#xvbweewddu .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#gpfjuwtotc .gt_summary_row {
+#xvbweewddu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2568,16 +2593,16 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#gpfjuwtotc .gt_first_summary_row {
+#xvbweewddu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#gpfjuwtotc .gt_first_summary_row.thick {
+#xvbweewddu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#gpfjuwtotc .gt_last_summary_row {
+#xvbweewddu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2587,7 +2612,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#gpfjuwtotc .gt_grand_summary_row {
+#xvbweewddu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2597,7 +2622,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#gpfjuwtotc .gt_first_grand_summary_row {
+#xvbweewddu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2607,7 +2632,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-top-color: #D3D3D3;
 }
 
-#gpfjuwtotc .gt_last_grand_summary_row_top {
+#xvbweewddu .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2617,11 +2642,11 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#gpfjuwtotc .gt_striped {
+#xvbweewddu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#gpfjuwtotc .gt_table_body {
+#xvbweewddu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2630,7 +2655,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#gpfjuwtotc .gt_footnotes {
+#xvbweewddu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2644,7 +2669,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#gpfjuwtotc .gt_footnote {
+#xvbweewddu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2653,7 +2678,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#gpfjuwtotc .gt_sourcenotes {
+#xvbweewddu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2667,7 +2692,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#gpfjuwtotc .gt_sourcenote {
+#xvbweewddu .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2675,68 +2700,77 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#gpfjuwtotc .gt_left {
+#xvbweewddu .gt_left {
   text-align: left;
 }
 
-#gpfjuwtotc .gt_center {
+#xvbweewddu .gt_center {
   text-align: center;
 }
 
-#gpfjuwtotc .gt_right {
+#xvbweewddu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#gpfjuwtotc .gt_font_normal {
+#xvbweewddu .gt_font_normal {
   font-weight: normal;
 }
 
-#gpfjuwtotc .gt_font_bold {
+#xvbweewddu .gt_font_bold {
   font-weight: bold;
 }
 
-#gpfjuwtotc .gt_font_italic {
+#xvbweewddu .gt_font_italic {
   font-style: italic;
 }
 
-#gpfjuwtotc .gt_super {
+#xvbweewddu .gt_super {
   font-size: 65%;
 }
 
-#gpfjuwtotc .gt_footnote_marks {
+#xvbweewddu .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#gpfjuwtotc .gt_asterisk {
+#xvbweewddu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#gpfjuwtotc .gt_indent_1 {
+#xvbweewddu .gt_indent_1 {
   text-indent: 5px;
 }
 
-#gpfjuwtotc .gt_indent_2 {
+#xvbweewddu .gt_indent_2 {
   text-indent: 10px;
 }
 
-#gpfjuwtotc .gt_indent_3 {
+#xvbweewddu .gt_indent_3 {
   text-indent: 15px;
 }
 
-#gpfjuwtotc .gt_indent_4 {
+#xvbweewddu .gt_indent_4 {
   text-indent: 20px;
 }
 
-#gpfjuwtotc .gt_indent_5 {
+#xvbweewddu .gt_indent_5 {
   text-indent: 25px;
 }
+
+#xvbweewddu .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#xvbweewddu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
 </style>
-<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead><tr class="header gt_col_headings">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead><tr class="gt_col_headings header">
 <th id="Analysis" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Analysis</th>
 <th id="Value" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Value</th>
 <th id="Efficacy" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Efficacy</th>
@@ -2868,10 +2902,9 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
 </div>
 </div>
 </div>
-</div>
 <p>Second, we calculate the sample size and crossing probability under non-proportional hazard by <code><a href="https://merck.github.io/gsdmvn/reference/gs_design_ahr.html">gsdmvn::gs_design_ahr()</a></code>. And we find the sample size is <span class="math inline">\(465\)</span> with <span class="math inline">\(308\)</span> events (you will want to round up events and sample size). The probabilities to cross the upper boundaries at the first, second, third and final interim analysis are <span class="math inline">\(0.0019, 0.3024, 0.7329, 0.9000\)</span> under <span class="math inline">\(H_1\)</span>. The probabilities to cross the lower boundaries at the first, second, third and final interim analysis are <span class="math inline">\(0.0000, 0.0000, 0.0000, 0.0000\)</span> under <span class="math inline">\(H_0\)</span>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">NPHsymmetric</span> <span class="op">&lt;-</span> <span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_design_ahr.html">gs_design_ahr</a></span><span class="op">(</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">NPHsymmetric</span> <span class="op">&lt;-</span> <span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_design_ahr.html">gs_design_ahr</a></span><span class="op">(</span></span>
 <span>  enrollRates <span class="op">=</span> <span class="va">enrollRates</span>,</span>
 <span>  failRates <span class="op">=</span> <span class="va">failRates</span>,</span>
 <span>  ratio <span class="op">=</span> <span class="fl">1</span>, alpha <span class="op">=</span> <span class="fl">.025</span>, beta <span class="op">=</span> <span class="fl">0.1</span>,</span>
@@ -2891,26 +2924,25 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span>, decimals <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">10</span><span class="op">:</span><span class="fl">11</span><span class="op">)</span>, decimals <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>col <span class="op">=</span> <span class="fl">6</span><span class="op">:</span><span class="fl">7</span>, decimals <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>col <span class="op">=</span> <span class="fl">8</span><span class="op">:</span><span class="fl">9</span>, decimals <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>col <span class="op">=</span> <span class="fl">8</span><span class="op">:</span><span class="fl">9</span>, decimals <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div>
-<div id="hcstblauls" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#hcstblauls table {
+<div id="zguveglxsl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#zguveglxsl table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#hcstblauls thead, #hcstblauls tbody, #hcstblauls tfoot, #hcstblauls tr, #hcstblauls td, #hcstblauls th {
+#zguveglxsl thead, #zguveglxsl tbody, #zguveglxsl tfoot, #zguveglxsl tr, #zguveglxsl td, #zguveglxsl th {
   border-style: none;
 }
 
-#hcstblauls p {
+#zguveglxsl p {
   margin: 0;
   padding: 0;
 }
 
-#hcstblauls .gt_table {
+#zguveglxsl .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2936,12 +2968,12 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-left-color: #D3D3D3;
 }
 
-#hcstblauls .gt_caption {
+#zguveglxsl .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#hcstblauls .gt_title {
+#zguveglxsl .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2953,7 +2985,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-width: 0;
 }
 
-#hcstblauls .gt_subtitle {
+#zguveglxsl .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2965,7 +2997,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-top-width: 0;
 }
 
-#hcstblauls .gt_heading {
+#zguveglxsl .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2977,13 +3009,13 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#hcstblauls .gt_bottom_border {
+#zguveglxsl .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#hcstblauls .gt_col_headings {
+#zguveglxsl .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2998,7 +3030,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#hcstblauls .gt_col_heading {
+#zguveglxsl .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3018,7 +3050,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   overflow-x: hidden;
 }
 
-#hcstblauls .gt_column_spanner_outer {
+#zguveglxsl .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3030,15 +3062,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 4px;
 }
 
-#hcstblauls .gt_column_spanner_outer:first-child {
+#zguveglxsl .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#hcstblauls .gt_column_spanner_outer:last-child {
+#zguveglxsl .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#hcstblauls .gt_column_spanner {
+#zguveglxsl .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3050,11 +3082,11 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   width: 100%;
 }
 
-#hcstblauls .gt_spanner_row {
+#zguveglxsl .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#hcstblauls .gt_group_heading {
+#zguveglxsl .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3080,7 +3112,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   text-align: left;
 }
 
-#hcstblauls .gt_empty_group_heading {
+#zguveglxsl .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3095,15 +3127,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   vertical-align: middle;
 }
 
-#hcstblauls .gt_from_md > :first-child {
+#zguveglxsl .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#hcstblauls .gt_from_md > :last-child {
+#zguveglxsl .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#hcstblauls .gt_row {
+#zguveglxsl .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3122,7 +3154,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   overflow-x: hidden;
 }
 
-#hcstblauls .gt_stub {
+#zguveglxsl .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3135,7 +3167,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#hcstblauls .gt_stub_row_group {
+#zguveglxsl .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3149,15 +3181,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   vertical-align: top;
 }
 
-#hcstblauls .gt_row_group_first td {
+#zguveglxsl .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#hcstblauls .gt_row_group_first th {
+#zguveglxsl .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#hcstblauls .gt_summary_row {
+#zguveglxsl .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3167,16 +3199,16 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#hcstblauls .gt_first_summary_row {
+#zguveglxsl .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#hcstblauls .gt_first_summary_row.thick {
+#zguveglxsl .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#hcstblauls .gt_last_summary_row {
+#zguveglxsl .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3186,7 +3218,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#hcstblauls .gt_grand_summary_row {
+#zguveglxsl .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3196,7 +3228,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#hcstblauls .gt_first_grand_summary_row {
+#zguveglxsl .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3206,7 +3238,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-top-color: #D3D3D3;
 }
 
-#hcstblauls .gt_last_grand_summary_row_top {
+#zguveglxsl .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3216,11 +3248,11 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#hcstblauls .gt_striped {
+#zguveglxsl .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#hcstblauls .gt_table_body {
+#zguveglxsl .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3229,7 +3261,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#hcstblauls .gt_footnotes {
+#zguveglxsl .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3243,7 +3275,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#hcstblauls .gt_footnote {
+#zguveglxsl .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3252,7 +3284,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#hcstblauls .gt_sourcenotes {
+#zguveglxsl .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3266,7 +3298,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#hcstblauls .gt_sourcenote {
+#zguveglxsl .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3274,68 +3306,77 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#hcstblauls .gt_left {
+#zguveglxsl .gt_left {
   text-align: left;
 }
 
-#hcstblauls .gt_center {
+#zguveglxsl .gt_center {
   text-align: center;
 }
 
-#hcstblauls .gt_right {
+#zguveglxsl .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#hcstblauls .gt_font_normal {
+#zguveglxsl .gt_font_normal {
   font-weight: normal;
 }
 
-#hcstblauls .gt_font_bold {
+#zguveglxsl .gt_font_bold {
   font-weight: bold;
 }
 
-#hcstblauls .gt_font_italic {
+#zguveglxsl .gt_font_italic {
   font-style: italic;
 }
 
-#hcstblauls .gt_super {
+#zguveglxsl .gt_super {
   font-size: 65%;
 }
 
-#hcstblauls .gt_footnote_marks {
+#zguveglxsl .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#hcstblauls .gt_asterisk {
+#zguveglxsl .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#hcstblauls .gt_indent_1 {
+#zguveglxsl .gt_indent_1 {
   text-indent: 5px;
 }
 
-#hcstblauls .gt_indent_2 {
+#zguveglxsl .gt_indent_2 {
   text-indent: 10px;
 }
 
-#hcstblauls .gt_indent_3 {
+#zguveglxsl .gt_indent_3 {
   text-indent: 15px;
 }
 
-#hcstblauls .gt_indent_4 {
+#zguveglxsl .gt_indent_4 {
   text-indent: 20px;
 }
 
-#hcstblauls .gt_indent_5 {
+#zguveglxsl .gt_indent_5 {
   text-indent: 25px;
 }
+
+#zguveglxsl .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#zguveglxsl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
 </style>
-<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead><tr class="header gt_col_headings">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead><tr class="gt_col_headings header">
 <th id="Analysis" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Analysis</th>
 <th id="Bound" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Bound</th>
 <th id="Time" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Time</th>
@@ -3458,7 +3499,6 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
 </div>
 </div>
 </div>
-</div>
 </section><section id="sec-AhrEgPhNphAsymmetric" class="level3" data-number="3.3.6"><h3 data-number="3.3.6" class="anchored" data-anchor-id="sec-AhrEgPhNphAsymmetric">
 <span class="header-section-number">3.3.6</span> Example 6</h3>
 <p>In this example, we compare proportional hazard with non-proportional hazard. Here, we consider the asymmetric design. For upper boundary, we use non-binding upper bound with spending function <span class="math inline">\(f_1(s,\alpha)\)</span>. For lower boundary, we use binding lower bound with spending function <span class="math inline">\(f_2(s,\gamma)\)</span> for some chosen <span class="math inline">\(0 &lt; \gamma \le 1-\alpha\)</span>, where <span class="math inline">\(\gamma\)</span> is the type II error. The boundaries are set to satisfy</p>
@@ -3473,7 +3513,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
 <p>For the last look, <span class="math inline">\(K\)</span>-th look, generally, it is set as <span class="math inline">\(a_K = b_K\)</span>.</p>
 <p>First, we calculate the sample size and crossing probability under proportional hazard by <code><a href="https://keaven.github.io/gsDesign/reference/nSurv.html">gsDesign::gsSurv()</a></code>. And we find the sample size is <span class="math inline">\(476\)</span> with <span class="math inline">\(319\)</span> events. The probabilities to cross the upper boundary at the first, second, third and final interim analysis are <span class="math inline">\(0.0338, 0.5385, 0.8185, 0.9000\)</span> under <span class="math inline">\(H_1\)</span>. The probabilities to cross the lower boundary at the first, second, third and final interim analysis are <span class="math inline">\(0.0143, 0.0393, 0.0687, 0.1000\)</span> under <span class="math inline">\(H_1\)</span>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Derive Group Sequential Design</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Derive Group Sequential Design</span></span>
 <span><span class="va">PHasymmetric</span> <span class="op">&lt;-</span> <span class="fu">gsDesign</span><span class="fu">::</span><span class="fu"><a href="https://keaven.github.io/gsDesign/reference/nSurv.html">gsSurv</a></span><span class="op">(</span></span>
 <span>  <span class="co"># Number of analyses (interim + final)</span></span>
 <span>  k <span class="op">=</span> <span class="fl">4</span>,</span>
@@ -3512,26 +3552,25 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
 <span>  ratio <span class="op">=</span> <span class="fl">1</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://keaven.github.io/gsDesign/reference/gsBoundSummary.html">gsBoundSummary</a></span><span class="op">(</span><span class="va">PHasymmetric</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://keaven.github.io/gsDesign/reference/gsBoundSummary.html">gsBoundSummary</a></span><span class="op">(</span><span class="va">PHasymmetric</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div>
-<div id="brkrlawijs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#brkrlawijs table {
+<div id="qjfmoldbrc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qjfmoldbrc table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#brkrlawijs thead, #brkrlawijs tbody, #brkrlawijs tfoot, #brkrlawijs tr, #brkrlawijs td, #brkrlawijs th {
+#qjfmoldbrc thead, #qjfmoldbrc tbody, #qjfmoldbrc tfoot, #qjfmoldbrc tr, #qjfmoldbrc td, #qjfmoldbrc th {
   border-style: none;
 }
 
-#brkrlawijs p {
+#qjfmoldbrc p {
   margin: 0;
   padding: 0;
 }
 
-#brkrlawijs .gt_table {
+#qjfmoldbrc .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3557,12 +3596,12 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-left-color: #D3D3D3;
 }
 
-#brkrlawijs .gt_caption {
+#qjfmoldbrc .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#brkrlawijs .gt_title {
+#qjfmoldbrc .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3574,7 +3613,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-width: 0;
 }
 
-#brkrlawijs .gt_subtitle {
+#qjfmoldbrc .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3586,7 +3625,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-top-width: 0;
 }
 
-#brkrlawijs .gt_heading {
+#qjfmoldbrc .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3598,13 +3637,13 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#brkrlawijs .gt_bottom_border {
+#qjfmoldbrc .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#brkrlawijs .gt_col_headings {
+#qjfmoldbrc .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3619,7 +3658,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#brkrlawijs .gt_col_heading {
+#qjfmoldbrc .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3639,7 +3678,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   overflow-x: hidden;
 }
 
-#brkrlawijs .gt_column_spanner_outer {
+#qjfmoldbrc .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3651,15 +3690,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 4px;
 }
 
-#brkrlawijs .gt_column_spanner_outer:first-child {
+#qjfmoldbrc .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#brkrlawijs .gt_column_spanner_outer:last-child {
+#qjfmoldbrc .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#brkrlawijs .gt_column_spanner {
+#qjfmoldbrc .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3671,11 +3710,11 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   width: 100%;
 }
 
-#brkrlawijs .gt_spanner_row {
+#qjfmoldbrc .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#brkrlawijs .gt_group_heading {
+#qjfmoldbrc .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3701,7 +3740,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   text-align: left;
 }
 
-#brkrlawijs .gt_empty_group_heading {
+#qjfmoldbrc .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3716,15 +3755,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   vertical-align: middle;
 }
 
-#brkrlawijs .gt_from_md > :first-child {
+#qjfmoldbrc .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#brkrlawijs .gt_from_md > :last-child {
+#qjfmoldbrc .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#brkrlawijs .gt_row {
+#qjfmoldbrc .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3743,7 +3782,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   overflow-x: hidden;
 }
 
-#brkrlawijs .gt_stub {
+#qjfmoldbrc .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3756,7 +3795,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#brkrlawijs .gt_stub_row_group {
+#qjfmoldbrc .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3770,15 +3809,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   vertical-align: top;
 }
 
-#brkrlawijs .gt_row_group_first td {
+#qjfmoldbrc .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#brkrlawijs .gt_row_group_first th {
+#qjfmoldbrc .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#brkrlawijs .gt_summary_row {
+#qjfmoldbrc .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3788,16 +3827,16 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#brkrlawijs .gt_first_summary_row {
+#qjfmoldbrc .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#brkrlawijs .gt_first_summary_row.thick {
+#qjfmoldbrc .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#brkrlawijs .gt_last_summary_row {
+#qjfmoldbrc .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3807,7 +3846,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#brkrlawijs .gt_grand_summary_row {
+#qjfmoldbrc .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3817,7 +3856,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#brkrlawijs .gt_first_grand_summary_row {
+#qjfmoldbrc .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3827,7 +3866,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-top-color: #D3D3D3;
 }
 
-#brkrlawijs .gt_last_grand_summary_row_top {
+#qjfmoldbrc .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3837,11 +3876,11 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#brkrlawijs .gt_striped {
+#qjfmoldbrc .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#brkrlawijs .gt_table_body {
+#qjfmoldbrc .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3850,7 +3889,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#brkrlawijs .gt_footnotes {
+#qjfmoldbrc .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3864,7 +3903,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#brkrlawijs .gt_footnote {
+#qjfmoldbrc .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3873,7 +3912,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#brkrlawijs .gt_sourcenotes {
+#qjfmoldbrc .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3887,7 +3926,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#brkrlawijs .gt_sourcenote {
+#qjfmoldbrc .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3895,68 +3934,77 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#brkrlawijs .gt_left {
+#qjfmoldbrc .gt_left {
   text-align: left;
 }
 
-#brkrlawijs .gt_center {
+#qjfmoldbrc .gt_center {
   text-align: center;
 }
 
-#brkrlawijs .gt_right {
+#qjfmoldbrc .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#brkrlawijs .gt_font_normal {
+#qjfmoldbrc .gt_font_normal {
   font-weight: normal;
 }
 
-#brkrlawijs .gt_font_bold {
+#qjfmoldbrc .gt_font_bold {
   font-weight: bold;
 }
 
-#brkrlawijs .gt_font_italic {
+#qjfmoldbrc .gt_font_italic {
   font-style: italic;
 }
 
-#brkrlawijs .gt_super {
+#qjfmoldbrc .gt_super {
   font-size: 65%;
 }
 
-#brkrlawijs .gt_footnote_marks {
+#qjfmoldbrc .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#brkrlawijs .gt_asterisk {
+#qjfmoldbrc .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#brkrlawijs .gt_indent_1 {
+#qjfmoldbrc .gt_indent_1 {
   text-indent: 5px;
 }
 
-#brkrlawijs .gt_indent_2 {
+#qjfmoldbrc .gt_indent_2 {
   text-indent: 10px;
 }
 
-#brkrlawijs .gt_indent_3 {
+#qjfmoldbrc .gt_indent_3 {
   text-indent: 15px;
 }
 
-#brkrlawijs .gt_indent_4 {
+#qjfmoldbrc .gt_indent_4 {
   text-indent: 20px;
 }
 
-#brkrlawijs .gt_indent_5 {
+#qjfmoldbrc .gt_indent_5 {
   text-indent: 25px;
 }
+
+#qjfmoldbrc .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#qjfmoldbrc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
 </style>
-<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead><tr class="header gt_col_headings">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead><tr class="gt_col_headings header">
 <th id="Analysis" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Analysis</th>
 <th id="Value" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Value</th>
 <th id="Efficacy" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Efficacy</th>
@@ -4088,10 +4136,9 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
 </div>
 </div>
 </div>
-</div>
 <p>Second, we calculate the sample size and crossing probability under non-proportional hazard by <code><a href="https://merck.github.io/gsdmvn/reference/gs_design_ahr.html">gsdmvn::gs_design_ahr()</a></code>. And we find the sample size is <span class="math inline">\(502\)</span> with <span class="math inline">\(333\)</span> events (you will want to round up events and sample size). The probabilities to cross the upper boundaries at the first, second, third and final interim analysis are <span class="math inline">\(0.0021, 0.3318, 0.7660, 0.9000\)</span> under <span class="math inline">\(H_1\)</span>. The probabilities to cross the lower boundaries at the first, second, third and final interim analysis are <span class="math inline">\(0.0143, 0.0387, 0.0681, 0.1000\)</span> under <span class="math inline">\(H_0\)</span>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">NPHasymmetric</span> <span class="op">&lt;-</span> <span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_design_ahr.html">gs_design_ahr</a></span><span class="op">(</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">NPHasymmetric</span> <span class="op">&lt;-</span> <span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_design_ahr.html">gs_design_ahr</a></span><span class="op">(</span></span>
 <span>  enrollRates <span class="op">=</span> <span class="va">enrollRates</span>,</span>
 <span>  failRates <span class="op">=</span> <span class="va">failRates</span>,</span>
 <span>  ratio <span class="op">=</span> <span class="fl">1</span>, alpha <span class="op">=</span> <span class="fl">.025</span>, beta <span class="op">=</span> <span class="fl">0.1</span>,</span>
@@ -4110,26 +4157,25 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span>, decimals <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">10</span><span class="op">:</span><span class="fl">11</span><span class="op">)</span>, decimals <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>col <span class="op">=</span> <span class="fl">6</span><span class="op">:</span><span class="fl">7</span>, decimals <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>col <span class="op">=</span> <span class="fl">8</span><span class="op">:</span><span class="fl">9</span>, decimals <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>col <span class="op">=</span> <span class="fl">8</span><span class="op">:</span><span class="fl">9</span>, decimals <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div>
-<div id="bluyxoadwl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#bluyxoadwl table {
+<div id="nwggiwgyjf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#nwggiwgyjf table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#bluyxoadwl thead, #bluyxoadwl tbody, #bluyxoadwl tfoot, #bluyxoadwl tr, #bluyxoadwl td, #bluyxoadwl th {
+#nwggiwgyjf thead, #nwggiwgyjf tbody, #nwggiwgyjf tfoot, #nwggiwgyjf tr, #nwggiwgyjf td, #nwggiwgyjf th {
   border-style: none;
 }
 
-#bluyxoadwl p {
+#nwggiwgyjf p {
   margin: 0;
   padding: 0;
 }
 
-#bluyxoadwl .gt_table {
+#nwggiwgyjf .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -4155,12 +4201,12 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-left-color: #D3D3D3;
 }
 
-#bluyxoadwl .gt_caption {
+#nwggiwgyjf .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#bluyxoadwl .gt_title {
+#nwggiwgyjf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -4172,7 +4218,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-width: 0;
 }
 
-#bluyxoadwl .gt_subtitle {
+#nwggiwgyjf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4184,7 +4230,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-top-width: 0;
 }
 
-#bluyxoadwl .gt_heading {
+#nwggiwgyjf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -4196,13 +4242,13 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#bluyxoadwl .gt_bottom_border {
+#nwggiwgyjf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#bluyxoadwl .gt_col_headings {
+#nwggiwgyjf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4217,7 +4263,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#bluyxoadwl .gt_col_heading {
+#nwggiwgyjf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4237,7 +4283,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   overflow-x: hidden;
 }
 
-#bluyxoadwl .gt_column_spanner_outer {
+#nwggiwgyjf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4249,15 +4295,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 4px;
 }
 
-#bluyxoadwl .gt_column_spanner_outer:first-child {
+#nwggiwgyjf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bluyxoadwl .gt_column_spanner_outer:last-child {
+#nwggiwgyjf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bluyxoadwl .gt_column_spanner {
+#nwggiwgyjf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -4269,11 +4315,11 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   width: 100%;
 }
 
-#bluyxoadwl .gt_spanner_row {
+#nwggiwgyjf .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#bluyxoadwl .gt_group_heading {
+#nwggiwgyjf .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4299,7 +4345,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   text-align: left;
 }
 
-#bluyxoadwl .gt_empty_group_heading {
+#nwggiwgyjf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4314,15 +4360,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   vertical-align: middle;
 }
 
-#bluyxoadwl .gt_from_md > :first-child {
+#nwggiwgyjf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bluyxoadwl .gt_from_md > :last-child {
+#nwggiwgyjf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bluyxoadwl .gt_row {
+#nwggiwgyjf .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4341,7 +4387,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   overflow-x: hidden;
 }
 
-#bluyxoadwl .gt_stub {
+#nwggiwgyjf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4354,7 +4400,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#bluyxoadwl .gt_stub_row_group {
+#nwggiwgyjf .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4368,15 +4414,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   vertical-align: top;
 }
 
-#bluyxoadwl .gt_row_group_first td {
+#nwggiwgyjf .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#bluyxoadwl .gt_row_group_first th {
+#nwggiwgyjf .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#bluyxoadwl .gt_summary_row {
+#nwggiwgyjf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4386,16 +4432,16 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#bluyxoadwl .gt_first_summary_row {
+#nwggiwgyjf .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#bluyxoadwl .gt_first_summary_row.thick {
+#nwggiwgyjf .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#bluyxoadwl .gt_last_summary_row {
+#nwggiwgyjf .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4405,7 +4451,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#bluyxoadwl .gt_grand_summary_row {
+#nwggiwgyjf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4415,7 +4461,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#bluyxoadwl .gt_first_grand_summary_row {
+#nwggiwgyjf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4425,7 +4471,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-top-color: #D3D3D3;
 }
 
-#bluyxoadwl .gt_last_grand_summary_row_top {
+#nwggiwgyjf .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4435,11 +4481,11 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#bluyxoadwl .gt_striped {
+#nwggiwgyjf .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bluyxoadwl .gt_table_body {
+#nwggiwgyjf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4448,7 +4494,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#bluyxoadwl .gt_footnotes {
+#nwggiwgyjf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4462,7 +4508,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#bluyxoadwl .gt_footnote {
+#nwggiwgyjf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -4471,7 +4517,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#bluyxoadwl .gt_sourcenotes {
+#nwggiwgyjf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4485,7 +4531,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#bluyxoadwl .gt_sourcenote {
+#nwggiwgyjf .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4493,68 +4539,77 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#bluyxoadwl .gt_left {
+#nwggiwgyjf .gt_left {
   text-align: left;
 }
 
-#bluyxoadwl .gt_center {
+#nwggiwgyjf .gt_center {
   text-align: center;
 }
 
-#bluyxoadwl .gt_right {
+#nwggiwgyjf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bluyxoadwl .gt_font_normal {
+#nwggiwgyjf .gt_font_normal {
   font-weight: normal;
 }
 
-#bluyxoadwl .gt_font_bold {
+#nwggiwgyjf .gt_font_bold {
   font-weight: bold;
 }
 
-#bluyxoadwl .gt_font_italic {
+#nwggiwgyjf .gt_font_italic {
   font-style: italic;
 }
 
-#bluyxoadwl .gt_super {
+#nwggiwgyjf .gt_super {
   font-size: 65%;
 }
 
-#bluyxoadwl .gt_footnote_marks {
+#nwggiwgyjf .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#bluyxoadwl .gt_asterisk {
+#nwggiwgyjf .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#bluyxoadwl .gt_indent_1 {
+#nwggiwgyjf .gt_indent_1 {
   text-indent: 5px;
 }
 
-#bluyxoadwl .gt_indent_2 {
+#nwggiwgyjf .gt_indent_2 {
   text-indent: 10px;
 }
 
-#bluyxoadwl .gt_indent_3 {
+#nwggiwgyjf .gt_indent_3 {
   text-indent: 15px;
 }
 
-#bluyxoadwl .gt_indent_4 {
+#nwggiwgyjf .gt_indent_4 {
   text-indent: 20px;
 }
 
-#bluyxoadwl .gt_indent_5 {
+#nwggiwgyjf .gt_indent_5 {
   text-indent: 25px;
 }
+
+#nwggiwgyjf .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#nwggiwgyjf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
 </style>
-<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead><tr class="header gt_col_headings">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead><tr class="gt_col_headings header">
 <th id="Analysis" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Analysis</th>
 <th id="Bound" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Bound</th>
 <th id="Time" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Time</th>
@@ -4677,13 +4732,12 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
 </div>
 </div>
 </div>
-</div>
 <p>This does important adjustment to futility bounds based on possibly delayed effect! - Note IA 1 futility bound under PH with <code><a href="https://keaven.github.io/gsDesign/reference/gsDesign.html">gsDesign()</a></code>: <span class="math inline">\(Z=-0.25\)</span></p>
 </section><section id="sec-AhrEgPhNphSpecStop" class="level3" data-number="3.3.7"><h3 data-number="3.3.7" class="anchored" data-anchor-id="sec-AhrEgPhNphSpecStop">
 <span class="header-section-number">3.3.7</span> Example 7</h3>
 <p>In this example, we discuss the design with interims at specified times, say, there are futility boundary only at the first interim analysis (look for <span class="math inline">\(p=0.05\)</span> in the wrong direction) and there are efficacy boundaries only after the first interim. This is a variation on asymmetric design. It should be noted that it is not easily done with <code><a href="https://keaven.github.io/gsDesign/reference/nSurv.html">gsDesign::gsSurv()</a></code>, and cannot be done (at least not easily) with the gsDesign package. So, we only discuss the implementation of <code><a href="https://merck.github.io/gsdmvn/reference/gs_design_ahr.html">gsdmvn::gs_design_ahr()</a></code> for design with interims at specified times. We will use information fraction instead of calendar times of analysis.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">NPHskip</span> <span class="op">&lt;-</span> <span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_design_ahr.html">gs_design_ahr</a></span><span class="op">(</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">NPHskip</span> <span class="op">&lt;-</span> <span class="fu">gsdmvn</span><span class="fu">::</span><span class="fu"><a href="https://merck.github.io/gsdmvn/reference/gs_design_ahr.html">gs_design_ahr</a></span><span class="op">(</span></span>
 <span>  enrollRates <span class="op">=</span> <span class="va">enrollRates</span>,</span>
 <span>  failRates <span class="op">=</span> <span class="va">failRates</span>,</span>
 <span>  ratio <span class="op">=</span> <span class="fl">1</span>, alpha <span class="op">=</span> <span class="fl">.025</span>, beta <span class="op">=</span> <span class="fl">0.1</span>,</span>
@@ -4706,26 +4760,25 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span>, decimals <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">10</span><span class="op">:</span><span class="fl">11</span><span class="op">)</span>, decimals <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fl">6</span><span class="op">:</span><span class="fl">7</span>, decimals <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fl">8</span><span class="op">:</span><span class="fl">9</span>, decimals <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fl">8</span><span class="op">:</span><span class="fl">9</span>, decimals <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div>
-<div id="pevchwnukc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#pevchwnukc table {
+<div id="arxpsxmrgj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#arxpsxmrgj table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#pevchwnukc thead, #pevchwnukc tbody, #pevchwnukc tfoot, #pevchwnukc tr, #pevchwnukc td, #pevchwnukc th {
+#arxpsxmrgj thead, #arxpsxmrgj tbody, #arxpsxmrgj tfoot, #arxpsxmrgj tr, #arxpsxmrgj td, #arxpsxmrgj th {
   border-style: none;
 }
 
-#pevchwnukc p {
+#arxpsxmrgj p {
   margin: 0;
   padding: 0;
 }
 
-#pevchwnukc .gt_table {
+#arxpsxmrgj .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -4751,12 +4804,12 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-left-color: #D3D3D3;
 }
 
-#pevchwnukc .gt_caption {
+#arxpsxmrgj .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#pevchwnukc .gt_title {
+#arxpsxmrgj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -4768,7 +4821,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-width: 0;
 }
 
-#pevchwnukc .gt_subtitle {
+#arxpsxmrgj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4780,7 +4833,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-top-width: 0;
 }
 
-#pevchwnukc .gt_heading {
+#arxpsxmrgj .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -4792,13 +4845,13 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#pevchwnukc .gt_bottom_border {
+#arxpsxmrgj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#pevchwnukc .gt_col_headings {
+#arxpsxmrgj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4813,7 +4866,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#pevchwnukc .gt_col_heading {
+#arxpsxmrgj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4833,7 +4886,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   overflow-x: hidden;
 }
 
-#pevchwnukc .gt_column_spanner_outer {
+#arxpsxmrgj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4845,15 +4898,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 4px;
 }
 
-#pevchwnukc .gt_column_spanner_outer:first-child {
+#arxpsxmrgj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#pevchwnukc .gt_column_spanner_outer:last-child {
+#arxpsxmrgj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#pevchwnukc .gt_column_spanner {
+#arxpsxmrgj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -4865,11 +4918,11 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   width: 100%;
 }
 
-#pevchwnukc .gt_spanner_row {
+#arxpsxmrgj .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#pevchwnukc .gt_group_heading {
+#arxpsxmrgj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4895,7 +4948,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   text-align: left;
 }
 
-#pevchwnukc .gt_empty_group_heading {
+#arxpsxmrgj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4910,15 +4963,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   vertical-align: middle;
 }
 
-#pevchwnukc .gt_from_md > :first-child {
+#arxpsxmrgj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#pevchwnukc .gt_from_md > :last-child {
+#arxpsxmrgj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#pevchwnukc .gt_row {
+#arxpsxmrgj .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4937,7 +4990,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   overflow-x: hidden;
 }
 
-#pevchwnukc .gt_stub {
+#arxpsxmrgj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4950,7 +5003,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#pevchwnukc .gt_stub_row_group {
+#arxpsxmrgj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4964,15 +5017,15 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   vertical-align: top;
 }
 
-#pevchwnukc .gt_row_group_first td {
+#arxpsxmrgj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#pevchwnukc .gt_row_group_first th {
+#arxpsxmrgj .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#pevchwnukc .gt_summary_row {
+#arxpsxmrgj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4982,16 +5035,16 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#pevchwnukc .gt_first_summary_row {
+#arxpsxmrgj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#pevchwnukc .gt_first_summary_row.thick {
+#arxpsxmrgj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#pevchwnukc .gt_last_summary_row {
+#arxpsxmrgj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5001,7 +5054,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#pevchwnukc .gt_grand_summary_row {
+#arxpsxmrgj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5011,7 +5064,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#pevchwnukc .gt_first_grand_summary_row {
+#arxpsxmrgj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5021,7 +5074,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-top-color: #D3D3D3;
 }
 
-#pevchwnukc .gt_last_grand_summary_row_top {
+#arxpsxmrgj .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5031,11 +5084,11 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#pevchwnukc .gt_striped {
+#arxpsxmrgj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#pevchwnukc .gt_table_body {
+#arxpsxmrgj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -5044,7 +5097,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-bottom-color: #D3D3D3;
 }
 
-#pevchwnukc .gt_footnotes {
+#arxpsxmrgj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5058,7 +5111,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#pevchwnukc .gt_footnote {
+#arxpsxmrgj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -5067,7 +5120,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#pevchwnukc .gt_sourcenotes {
+#arxpsxmrgj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5081,7 +5134,7 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   border-right-color: #D3D3D3;
 }
 
-#pevchwnukc .gt_sourcenote {
+#arxpsxmrgj .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -5089,68 +5142,77 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
   padding-right: 5px;
 }
 
-#pevchwnukc .gt_left {
+#arxpsxmrgj .gt_left {
   text-align: left;
 }
 
-#pevchwnukc .gt_center {
+#arxpsxmrgj .gt_center {
   text-align: center;
 }
 
-#pevchwnukc .gt_right {
+#arxpsxmrgj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#pevchwnukc .gt_font_normal {
+#arxpsxmrgj .gt_font_normal {
   font-weight: normal;
 }
 
-#pevchwnukc .gt_font_bold {
+#arxpsxmrgj .gt_font_bold {
   font-weight: bold;
 }
 
-#pevchwnukc .gt_font_italic {
+#arxpsxmrgj .gt_font_italic {
   font-style: italic;
 }
 
-#pevchwnukc .gt_super {
+#arxpsxmrgj .gt_super {
   font-size: 65%;
 }
 
-#pevchwnukc .gt_footnote_marks {
+#arxpsxmrgj .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#pevchwnukc .gt_asterisk {
+#arxpsxmrgj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#pevchwnukc .gt_indent_1 {
+#arxpsxmrgj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#pevchwnukc .gt_indent_2 {
+#arxpsxmrgj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#pevchwnukc .gt_indent_3 {
+#arxpsxmrgj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#pevchwnukc .gt_indent_4 {
+#arxpsxmrgj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#pevchwnukc .gt_indent_5 {
+#arxpsxmrgj .gt_indent_5 {
   text-indent: 25px;
 }
+
+#arxpsxmrgj .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#arxpsxmrgj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
 </style>
-<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead><tr class="header gt_col_headings">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead><tr class="gt_col_headings header">
 <th id="Analysis" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Analysis</th>
 <th id="Bound" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Bound</th>
 <th id="Time" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Time</th>
@@ -5221,7 +5283,6 @@ w_m=\frac{(1/E(d_{0,m})+1/E(d_{1,m}))^{-1}}{\sum_{j=1}^M (1/E(d_{0,j})+1/E(d_{1,
 </div>
 </div>
 </div>
-</div>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
@@ -5233,43 +5294,58 @@ Schoenfeld, David. 1981. <span>“The Asymptotic Properties of Nonparametric Tes
 </div>
 </div>
 </section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
       }
+      return false;
     }
-    return false;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
       for (const childEl of codeEl.children) {
         if (isCodeAnnotation(childEl)) {
           childEl.remove();
@@ -5277,184 +5353,184 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
       return codeEl.innerText;
     }
-  });
-  clipboard.on('success', function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  });
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/keaven\.github\.io\/gsd-deming\/");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
     });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
     }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/keaven\.github\.io\/gsd-deming\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
         }
-        return container.innerHTML
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -5462,185 +5538,161 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./proportional-hazards.html" class="pagination-link" aria-label="Proportional hazards">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Proportional hazards</span></span>
       </a>          

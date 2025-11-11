@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.554">
+<meta name="generator" content="quarto-1.8.25">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Learn how to derive group sequential designs for time-to-event endpoints under both proportional and non-proportional hazards assumptions for randomized clinical trials.">
-<title>Group Sequential Design Under Non-Proportional Hazards - 2&nbsp; Proportional hazards</title>
+<title>2&nbsp; Proportional hazards – Group Sequential Design Under Non-Proportional Hazards</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,8 +19,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -84,15 +85,17 @@ div.csl-indent {
 <link href="./ahr.html" rel="next">
 <link href="./background.html" rel="prev">
 <link href="./assets/favicon.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-7c8a81ef2f980ab9f57414f8f926323d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -118,7 +121,7 @@ div.csl-indent {
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+}</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
 const typesetMath = (el) => {
   if (window.MathJax) {
     // MathJax Typeset
@@ -129,7 +132,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -144,48 +147,50 @@ window.Quarto = {
   typesetMath
 };
 </script>
-<meta property="og:title" content="Group Sequential Design Under Non-Proportional Hazards - 2&nbsp; Proportional hazards">
+<meta property="og:title" content="2&nbsp; Proportional hazards – Group Sequential Design Under Non-Proportional Hazards">
 <meta property="og:description" content="Learn how to derive group sequential designs for time-to-event endpoints under both proportional and non-proportional hazards assumptions for randomized clinical trials.">
 <meta property="og:image" content="https://keaven.github.io/gsd-deming/assets/preview.jpg">
 <meta property="og:site_name" content="Group Sequential Design Under Non-Proportional Hazards">
-<meta name="twitter:title" content="Group Sequential Design Under Non-Proportional Hazards - 2&nbsp; Proportional hazards">
+<meta name="twitter:title" content="2&nbsp; Proportional hazards – Group Sequential Design Under Non-Proportional Hazards">
 <meta name="twitter:description" content="Learn how to derive group sequential designs for time-to-event endpoints under both proportional and non-proportional hazards assumptions for randomized clinical trials.">
 <meta name="twitter:image" content="https://keaven.github.io/gsd-deming/assets/preview.jpg">
 <meta name="twitter:card" content="summary_large_image">
 </head>
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./proportional-hazards.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Proportional hazards</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Group Sequential Design Under Non-Proportional Hazards</a> 
         <div class="sidebar-tools-main tools-wide">
     <a href="https://github.com/keaven/gsd-deming" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
-      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
 <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
-              <i class="bi bi-bi-twitter pe-1"></i>
+              <i class="bi bi-twitter pe-1"></i>
             Twitter
             </a>
           </li>
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
-              <i class="bi bi-bi-linkedin pe-1"></i>
+              <i class="bi bi-linkedin pe-1"></i>
             LinkedIn
             </a>
           </li>
@@ -246,7 +251,7 @@ window.Quarto = {
       <div class="sidebar-item-container"> 
             <a href="./other-tests.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Others tests</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -364,13 +369,13 @@ window.Quarto = {
 <p>We adjusted the exponential dropout rate to 0.133% per month and hazard ratio to 0.70025 in the following so that both targeted events and targeted sample size would be close to integers. This sort of adjustment can limit any confusion over the computation of interim bounds, as will be demonstrated.</p>
 <p>The design is derived as:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keaven.github.io/gsDesign/">gsDesign</a></span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://keaven.github.io/gsDesign/">gsDesign</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gt.rstudio.com">gt</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">KEYNOTE189design</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://keaven.github.io/gsDesign/reference/nSurv.html">gsSurv</a></span><span class="op">(</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">KEYNOTE189design</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://keaven.github.io/gsDesign/reference/nSurv.html">gsSurv</a></span><span class="op">(</span></span>
 <span>  <span class="co"># Number of analyses</span></span>
 <span>  k <span class="op">=</span> <span class="fl">3</span>,</span>
 <span>  <span class="co"># One-sided design</span></span>
@@ -403,26 +408,25 @@ window.Quarto = {
 <span><span class="va">KEYNOTE189design</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://keaven.github.io/gsDesign/reference/gsBoundSummary.html">gsBoundSummary</a></span><span class="op">(</span>ratio <span class="op">=</span> <span class="fl">2</span>, digits <span class="op">=</span> <span class="fl">5</span>, ddigits <span class="op">=</span> <span class="fl">2</span>, tdigits <span class="op">=</span> <span class="fl">1</span>, timename <span class="op">=</span> <span class="st">"Month"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"KEYNOTE189 OS design"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"KEYNOTE189 OS design"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div>
-<div id="kjwqzifwop" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#kjwqzifwop table {
+<div id="ykqokzvloi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ykqokzvloi table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#kjwqzifwop thead, #kjwqzifwop tbody, #kjwqzifwop tfoot, #kjwqzifwop tr, #kjwqzifwop td, #kjwqzifwop th {
+#ykqokzvloi thead, #ykqokzvloi tbody, #ykqokzvloi tfoot, #ykqokzvloi tr, #ykqokzvloi td, #ykqokzvloi th {
   border-style: none;
 }
 
-#kjwqzifwop p {
+#ykqokzvloi p {
   margin: 0;
   padding: 0;
 }
 
-#kjwqzifwop .gt_table {
+#ykqokzvloi .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -448,12 +452,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#kjwqzifwop .gt_caption {
+#ykqokzvloi .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#kjwqzifwop .gt_title {
+#ykqokzvloi .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -465,7 +469,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#kjwqzifwop .gt_subtitle {
+#ykqokzvloi .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -477,7 +481,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#kjwqzifwop .gt_heading {
+#ykqokzvloi .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -489,13 +493,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#kjwqzifwop .gt_bottom_border {
+#ykqokzvloi .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kjwqzifwop .gt_col_headings {
+#ykqokzvloi .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -510,7 +514,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#kjwqzifwop .gt_col_heading {
+#ykqokzvloi .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -530,7 +534,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#kjwqzifwop .gt_column_spanner_outer {
+#ykqokzvloi .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -542,15 +546,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#kjwqzifwop .gt_column_spanner_outer:first-child {
+#ykqokzvloi .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kjwqzifwop .gt_column_spanner_outer:last-child {
+#ykqokzvloi .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kjwqzifwop .gt_column_spanner {
+#ykqokzvloi .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -562,11 +566,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#kjwqzifwop .gt_spanner_row {
+#ykqokzvloi .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#kjwqzifwop .gt_group_heading {
+#ykqokzvloi .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -592,7 +596,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#kjwqzifwop .gt_empty_group_heading {
+#ykqokzvloi .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -607,15 +611,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#kjwqzifwop .gt_from_md > :first-child {
+#ykqokzvloi .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kjwqzifwop .gt_from_md > :last-child {
+#ykqokzvloi .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kjwqzifwop .gt_row {
+#ykqokzvloi .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -634,7 +638,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#kjwqzifwop .gt_stub {
+#ykqokzvloi .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -647,7 +651,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#kjwqzifwop .gt_stub_row_group {
+#ykqokzvloi .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -661,15 +665,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#kjwqzifwop .gt_row_group_first td {
+#ykqokzvloi .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#kjwqzifwop .gt_row_group_first th {
+#ykqokzvloi .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#kjwqzifwop .gt_summary_row {
+#ykqokzvloi .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -679,16 +683,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#kjwqzifwop .gt_first_summary_row {
+#ykqokzvloi .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#kjwqzifwop .gt_first_summary_row.thick {
+#ykqokzvloi .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kjwqzifwop .gt_last_summary_row {
+#ykqokzvloi .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -698,7 +702,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#kjwqzifwop .gt_grand_summary_row {
+#ykqokzvloi .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -708,7 +712,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#kjwqzifwop .gt_first_grand_summary_row {
+#ykqokzvloi .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -718,7 +722,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#kjwqzifwop .gt_last_grand_summary_row_top {
+#ykqokzvloi .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -728,11 +732,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#kjwqzifwop .gt_striped {
+#ykqokzvloi .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kjwqzifwop .gt_table_body {
+#ykqokzvloi .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -741,7 +745,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#kjwqzifwop .gt_footnotes {
+#ykqokzvloi .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -755,7 +759,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#kjwqzifwop .gt_footnote {
+#ykqokzvloi .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -764,7 +768,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#kjwqzifwop .gt_sourcenotes {
+#ykqokzvloi .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -778,7 +782,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#kjwqzifwop .gt_sourcenote {
+#ykqokzvloi .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -786,72 +790,81 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#kjwqzifwop .gt_left {
+#ykqokzvloi .gt_left {
   text-align: left;
 }
 
-#kjwqzifwop .gt_center {
+#ykqokzvloi .gt_center {
   text-align: center;
 }
 
-#kjwqzifwop .gt_right {
+#ykqokzvloi .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kjwqzifwop .gt_font_normal {
+#ykqokzvloi .gt_font_normal {
   font-weight: normal;
 }
 
-#kjwqzifwop .gt_font_bold {
+#ykqokzvloi .gt_font_bold {
   font-weight: bold;
 }
 
-#kjwqzifwop .gt_font_italic {
+#ykqokzvloi .gt_font_italic {
   font-style: italic;
 }
 
-#kjwqzifwop .gt_super {
+#ykqokzvloi .gt_super {
   font-size: 65%;
 }
 
-#kjwqzifwop .gt_footnote_marks {
+#ykqokzvloi .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#kjwqzifwop .gt_asterisk {
+#ykqokzvloi .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kjwqzifwop .gt_indent_1 {
+#ykqokzvloi .gt_indent_1 {
   text-indent: 5px;
 }
 
-#kjwqzifwop .gt_indent_2 {
+#ykqokzvloi .gt_indent_2 {
   text-indent: 10px;
 }
 
-#kjwqzifwop .gt_indent_3 {
+#ykqokzvloi .gt_indent_3 {
   text-indent: 15px;
 }
 
-#kjwqzifwop .gt_indent_4 {
+#ykqokzvloi .gt_indent_4 {
   text-indent: 20px;
 }
 
-#kjwqzifwop .gt_indent_5 {
+#ykqokzvloi .gt_indent_5 {
   text-indent: 25px;
 }
+
+#ykqokzvloi .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#ykqokzvloi div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
 </style>
-<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
-<tr class="header gt_heading">
-<th colspan="3" class="gt_heading gt_title gt_font_normal gt_bottom_border">KEYNOTE189 OS design</th>
+<tr class="gt_heading header">
+<td colspan="3" class="gt_heading gt_title gt_font_normal gt_bottom_border">KEYNOTE189 OS design</td>
 </tr>
-<tr class="odd gt_col_headings">
+<tr class="gt_col_headings even">
 <th id="Analysis" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Analysis</th>
 <th id="Value" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Value</th>
 <th id="Efficacy" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Efficacy</th>
@@ -938,7 +951,6 @@ window.Quarto = {
 </div>
 </div>
 </div>
-</div>
 <p>We further describe the information in this table as follows:</p>
 <ul>
 <li>The IA percent is the percent of statistical information (planned events) at the interim analysis relative to the final analysis. This matches the timing input.</li>
@@ -953,7 +965,7 @@ window.Quarto = {
 </ul>
 <p>The design is updated at the interim analysis with 235 deaths as follows. The code can be written by the app for you, this is provided only if you wish to dive into details. We note that the function <code><a href="https://keaven.github.io/gsDesign/reference/gsDesign.html">gsDesign()</a></code> is used for the update while <code><a href="https://keaven.github.io/gsDesign/reference/nSurv.html">gsSurv()</a></code> was used for the original design. The <code><a href="https://keaven.github.io/gsDesign/reference/nSurv.html">gsSurv()</a></code> function is useful to approximate calendar timing of event accrual, something that is no longer needed at the time of interim analysis. Note that the <code><a href="https://keaven.github.io/gsDesign/reference/gsBoundSummary.html">gsBoundSummary()</a></code> call below is specifically state treatment differences in the table on the hazard ratio scale as well as to interpret the event count as the key to calculating information fraction at the analysis.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">KEYNOTE189design</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">KEYNOTE189design</span></span>
 <span><span class="va">xu</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://keaven.github.io/gsDesign/reference/gsDesign.html">gsDesign</a></span><span class="op">(</span></span>
 <span>  <span class="co"># First 3 parameters are all updated</span></span>
 <span>  k <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">k</span>, <span class="co"># This must be at least 2</span></span>
@@ -987,26 +999,25 @@ window.Quarto = {
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html">tab_header</a></span><span class="op">(</span></span>
 <span>    title <span class="op">=</span> <span class="st">"Updated bounds for interim analysis"</span>,</span>
 <span>    subtitle <span class="op">=</span> <span class="st">"KEYNOTE-189 trial"</span></span>
-<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div>
-<div id="fnhtchibov" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#fnhtchibov table {
+<div id="regdqvrouf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#regdqvrouf table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#fnhtchibov thead, #fnhtchibov tbody, #fnhtchibov tfoot, #fnhtchibov tr, #fnhtchibov td, #fnhtchibov th {
+#regdqvrouf thead, #regdqvrouf tbody, #regdqvrouf tfoot, #regdqvrouf tr, #regdqvrouf td, #regdqvrouf th {
   border-style: none;
 }
 
-#fnhtchibov p {
+#regdqvrouf p {
   margin: 0;
   padding: 0;
 }
 
-#fnhtchibov .gt_table {
+#regdqvrouf .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1032,12 +1043,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#fnhtchibov .gt_caption {
+#regdqvrouf .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#fnhtchibov .gt_title {
+#regdqvrouf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1049,7 +1060,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#fnhtchibov .gt_subtitle {
+#regdqvrouf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1061,7 +1072,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#fnhtchibov .gt_heading {
+#regdqvrouf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1073,13 +1084,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#fnhtchibov .gt_bottom_border {
+#regdqvrouf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#fnhtchibov .gt_col_headings {
+#regdqvrouf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1094,7 +1105,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#fnhtchibov .gt_col_heading {
+#regdqvrouf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1114,7 +1125,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#fnhtchibov .gt_column_spanner_outer {
+#regdqvrouf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1126,15 +1137,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#fnhtchibov .gt_column_spanner_outer:first-child {
+#regdqvrouf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fnhtchibov .gt_column_spanner_outer:last-child {
+#regdqvrouf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fnhtchibov .gt_column_spanner {
+#regdqvrouf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1146,11 +1157,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#fnhtchibov .gt_spanner_row {
+#regdqvrouf .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#fnhtchibov .gt_group_heading {
+#regdqvrouf .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1176,7 +1187,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#fnhtchibov .gt_empty_group_heading {
+#regdqvrouf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1191,15 +1202,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#fnhtchibov .gt_from_md > :first-child {
+#regdqvrouf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fnhtchibov .gt_from_md > :last-child {
+#regdqvrouf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fnhtchibov .gt_row {
+#regdqvrouf .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1218,7 +1229,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#fnhtchibov .gt_stub {
+#regdqvrouf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1231,7 +1242,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#fnhtchibov .gt_stub_row_group {
+#regdqvrouf .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1245,15 +1256,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#fnhtchibov .gt_row_group_first td {
+#regdqvrouf .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#fnhtchibov .gt_row_group_first th {
+#regdqvrouf .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#fnhtchibov .gt_summary_row {
+#regdqvrouf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1263,16 +1274,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#fnhtchibov .gt_first_summary_row {
+#regdqvrouf .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#fnhtchibov .gt_first_summary_row.thick {
+#regdqvrouf .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#fnhtchibov .gt_last_summary_row {
+#regdqvrouf .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1282,7 +1293,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#fnhtchibov .gt_grand_summary_row {
+#regdqvrouf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1292,7 +1303,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#fnhtchibov .gt_first_grand_summary_row {
+#regdqvrouf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1302,7 +1313,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#fnhtchibov .gt_last_grand_summary_row_top {
+#regdqvrouf .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1312,11 +1323,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#fnhtchibov .gt_striped {
+#regdqvrouf .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#fnhtchibov .gt_table_body {
+#regdqvrouf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1325,7 +1336,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#fnhtchibov .gt_footnotes {
+#regdqvrouf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1339,7 +1350,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#fnhtchibov .gt_footnote {
+#regdqvrouf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1348,7 +1359,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#fnhtchibov .gt_sourcenotes {
+#regdqvrouf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1362,7 +1373,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#fnhtchibov .gt_sourcenote {
+#regdqvrouf .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1370,75 +1381,84 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#fnhtchibov .gt_left {
+#regdqvrouf .gt_left {
   text-align: left;
 }
 
-#fnhtchibov .gt_center {
+#regdqvrouf .gt_center {
   text-align: center;
 }
 
-#fnhtchibov .gt_right {
+#regdqvrouf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fnhtchibov .gt_font_normal {
+#regdqvrouf .gt_font_normal {
   font-weight: normal;
 }
 
-#fnhtchibov .gt_font_bold {
+#regdqvrouf .gt_font_bold {
   font-weight: bold;
 }
 
-#fnhtchibov .gt_font_italic {
+#regdqvrouf .gt_font_italic {
   font-style: italic;
 }
 
-#fnhtchibov .gt_super {
+#regdqvrouf .gt_super {
   font-size: 65%;
 }
 
-#fnhtchibov .gt_footnote_marks {
+#regdqvrouf .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#fnhtchibov .gt_asterisk {
+#regdqvrouf .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#fnhtchibov .gt_indent_1 {
+#regdqvrouf .gt_indent_1 {
   text-indent: 5px;
 }
 
-#fnhtchibov .gt_indent_2 {
+#regdqvrouf .gt_indent_2 {
   text-indent: 10px;
 }
 
-#fnhtchibov .gt_indent_3 {
+#regdqvrouf .gt_indent_3 {
   text-indent: 15px;
 }
 
-#fnhtchibov .gt_indent_4 {
+#regdqvrouf .gt_indent_4 {
   text-indent: 20px;
 }
 
-#fnhtchibov .gt_indent_5 {
+#regdqvrouf .gt_indent_5 {
   text-indent: 25px;
 }
+
+#regdqvrouf .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#regdqvrouf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
 </style>
-<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
-<tr class="header gt_heading">
-<th colspan="3" class="gt_heading gt_title gt_font_normal">Updated bounds for interim analysis</th>
+<tr class="gt_heading header">
+<td colspan="3" class="gt_heading gt_title gt_font_normal">Updated bounds for interim analysis</td>
 </tr>
-<tr class="odd gt_heading">
-<th colspan="3" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">KEYNOTE-189 trial</th>
+<tr class="gt_heading even">
+<td colspan="3" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">KEYNOTE-189 trial</td>
 </tr>
-<tr class="header gt_col_headings">
+<tr class="gt_col_headings header">
 <th id="Analysis" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Analysis</th>
 <th id="Value" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Value</th>
 <th id="Efficacy" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Efficacy</th>
@@ -1510,7 +1530,6 @@ window.Quarto = {
 </div>
 </div>
 </div>
-</div>
 <p>The <span class="math inline">\(p\)</span>-value reported at interim 1 was &lt;0.001 <span class="citation" data-cites="KEYNOTE189">(<a href="references.html#ref-KEYNOTE189" role="doc-biblioref">Gandhi et al. 2018</a>)</span>, establishing statistical significance relative to the bound of 0.00128 in the summary table above as well as in the publication.</p>
 </section><section id="cardiovascular-outcomes-reduction" class="level2" data-number="2.3"><h2 data-number="2.3" class="anchored" data-anchor-id="cardiovascular-outcomes-reduction">
 <span class="header-section-number">2.3</span> Cardiovascular outcomes reduction</h2>
@@ -1530,7 +1549,7 @@ window.Quarto = {
 </ul>
 <p>The design has been saved and can be reloaded from the gsDesign Shiny app from the book website in the <code>data</code> directory from the file <code>AFCAPSDesign.rds</code>. We provide code generated there for the design. This begins with loading the gsDesign package and setting parameters for the design with associated comments to help explain; default comments have been updated here. More parameters than needed are given than sometimes needed when code is generated by the app. Comments indicate where this is the case. Code and comments are largely copied from the app, so this may help the reader interpret what they see there.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Number of analyses</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Number of analyses</span></span>
 <span><span class="va">k</span> <span class="op">&lt;-</span> <span class="fl">3</span></span>
 <span><span class="co"># See gsDesign() help for description of boundary types</span></span>
 <span><span class="va">test.type</span> <span class="op">&lt;-</span> <span class="fl">2</span> <span class="co"># This indicates a 2-sided design</span></span>
@@ -1579,47 +1598,47 @@ window.Quarto = {
 <span><span class="co"># (complicated by the fact that the app has to allow piecewise rates)</span></span>
 <span><span class="va">obs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">0.01131</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="va">obs</span> <span class="op">&lt;-</span> <span class="va">obs</span><span class="op">[</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">obs</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> <span class="op">&amp;</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">obs</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>, <span class="fl">2</span><span class="op">]</span></span>
-<span><span class="va">lambdaC</span> <span class="op">&lt;-</span> <span class="va">obs</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">lambdaC</span> <span class="op">&lt;-</span> <span class="va">obs</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now we plug the above parameters into <code><a href="https://keaven.github.io/gsDesign/reference/nSurv.html">gsSurv()</a></code> to generate the design. See comments above for interpretation of the parameters.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://keaven.github.io/gsDesign/reference/nSurv.html">gsSurv</a></span><span class="op">(</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://keaven.github.io/gsDesign/reference/nSurv.html">gsSurv</a></span><span class="op">(</span></span>
 <span>  k <span class="op">=</span> <span class="va">k</span>, test.type <span class="op">=</span> <span class="va">test.type</span>, alpha <span class="op">=</span> <span class="va">alpha</span>, beta <span class="op">=</span> <span class="va">beta</span>,</span>
 <span>  astar <span class="op">=</span> <span class="va">astar</span>, timing <span class="op">=</span> <span class="va">timing</span>, sfu <span class="op">=</span> <span class="va">sfu</span>, sfupar <span class="op">=</span> <span class="va">sfupar</span>, sfl <span class="op">=</span> <span class="va">sfl</span>,</span>
 <span>  sflpar <span class="op">=</span> <span class="va">sflpar</span>, lambdaC <span class="op">=</span> <span class="va">lambdaC</span>, hr <span class="op">=</span> <span class="va">hr</span>, hr0 <span class="op">=</span> <span class="va">hr0</span>, eta <span class="op">=</span> <span class="va">eta</span>,</span>
 <span>  gamma <span class="op">=</span> <span class="va">gamma</span>, R <span class="op">=</span> <span class="va">R</span>, S <span class="op">=</span> <span class="va">S</span>, T <span class="op">=</span> <span class="cn">T</span>, minfup <span class="op">=</span> <span class="va">minfup</span>, ratio <span class="op">=</span> <span class="va">ratio</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The reader can see summaries of the above with the following commands which we do not run here:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># Textual summary of design</span></span>
-<span><span class="fu"><a href="https://keaven.github.io/gsDesign/reference/gsBoundSummary.html">gsBoundSummary</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># Tabular summary of design</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># Textual summary of design</span></span>
+<span><span class="fu"><a href="https://keaven.github.io/gsDesign/reference/gsBoundSummary.html">gsBoundSummary</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># Tabular summary of design</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>All details are available through the list of items returned; see the help file or try <code>names(x)</code> to see what is available. As examples, we look at the number of events and nominal <span class="math inline">\(p\)</span>-value bounds for the design. Note that the events planned are continuous numbers rather than integers. Parameters have been chosen for the design so that these are very close to but less than whole numbers. This is not required, but can limit misinterpretations.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span><span class="op">$</span><span class="va">n.I</span> <span class="co"># Events at planned analyses</span></span>
-<span><span class="co">#&gt; [1] 119.9993 239.9986 319.9981</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span><span class="op">$</span><span class="va">n.I</span> <span class="co"># Events at planned analyses</span></span>
+<span><span class="co">#&gt; [1] 119.9993 239.9986 319.9981</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Here are the nominal 1-sided <span class="math inline">\(p\)</span>-value bounds which could also be seen with the <code>gsBoundSummary(x)</code> command above.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="op">-</span><span class="va">x</span><span class="op">$</span><span class="va">upper</span><span class="op">$</span><span class="va">bound</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.001623978 0.007976344 0.022198916</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="op">-</span><span class="va">x</span><span class="op">$</span><span class="va">upper</span><span class="op">$</span><span class="va">bound</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.001623978 0.007976344 0.022198916</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Doubling these 1-sided bounds, we can compare to bounds from <span class="citation" data-cites="AFCAPSdesign">Downs et al. (<a href="references.html#ref-AFCAPSdesign" role="doc-biblioref">1997</a>)</span>: <em>The group sequential boundary (2-sided, <span class="math inline">\(\alpha = 0.05\)</span>) for the scheduled analyses is 2.947, 2.411, and 2.011, which correspond to <span class="math inline">\(p\)</span>-values of 0.0032, 0.0159, and 0.0443, respectively.</em> We see the results are nearly identical.</p>
 <p>From <span class="citation" data-cites="AFCAPSresults">Downs et al. (<a href="references.html#ref-AFCAPSresults" role="doc-biblioref">1998</a>)</span>, we have *After an average follow-up of 5.2 years, lovastatin reduced the incidence of first acute major coronary events (183 vs 116 first events; relative risk [RR], 0.63; 95% confidence interval [CI], 0.50-0.79; P&lt;.001).` This was at the second interim analysis. We see immediately that the 299 events were less than the second planned analysis after 332 events. The bounds are easily adapted in the app. We provide the code generated with the design update provided by the app. We assumed the first interim was performed with the planned 240 events. First, we enter the updated event counts.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n.I</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">120</span>, <span class="fl">299</span>, <span class="fl">320</span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n.I</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">120</span>, <span class="fl">299</span>, <span class="fl">320</span><span class="op">)</span></span>
 <span><span class="va">ku</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">n.I</span><span class="op">)</span></span>
 <span><span class="co"># The following are not needed here</span></span>
 <span><span class="co"># They just specify the spending time as information fraction based on</span></span>
 <span><span class="co"># observed events (integers) divided by final planned number of events</span></span>
 <span><span class="co"># from the design (continuous)</span></span>
 <span><span class="va">usTime</span> <span class="op">&lt;-</span> <span class="va">n.I</span> <span class="op">/</span> <span class="va">x</span><span class="op">$</span><span class="va">n.I</span><span class="op">[</span><span class="va">x</span><span class="op">$</span><span class="va">k</span><span class="op">]</span></span>
-<span><span class="va">lsTime</span> <span class="op">&lt;-</span> <span class="va">usTime</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">lsTime</span> <span class="op">&lt;-</span> <span class="va">usTime</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Based on the above we can update the design. Note that we are now using <code><a href="https://keaven.github.io/gsDesign/reference/gsDesign.html">gsDesign()</a></code> rather than <code><a href="https://keaven.github.io/gsDesign/reference/nSurv.html">gsSurv()</a></code> as calendar time is no longer relevant.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">xu</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://keaven.github.io/gsDesign/reference/gsDesign.html">gsDesign</a></span><span class="op">(</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">xu</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://keaven.github.io/gsDesign/reference/gsDesign.html">gsDesign</a></span><span class="op">(</span></span>
 <span>  <span class="co"># Updated parameters</span></span>
 <span>  k <span class="op">=</span> <span class="va">ku</span>, <span class="co"># Number of analyses</span></span>
 <span>  n.I <span class="op">=</span> <span class="va">n.I</span>, <span class="co"># Number of events</span></span>
@@ -1634,11 +1653,11 @@ window.Quarto = {
 <span>  <span class="co"># maxn.IPlan is key for update to set max planned information</span></span>
 <span>  maxn.IPlan <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">n.I</span><span class="op">[</span><span class="va">x</span><span class="op">$</span><span class="va">k</span><span class="op">]</span>,</span>
 <span>  delta <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">delta</span>, delta1 <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">delta1</span>, delta0 <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">delta0</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>To inspect the resulting bounds, we run <code><a href="https://keaven.github.io/gsDesign/reference/gsBoundSummary.html">gsBoundSummary()</a></code> again. Several parameters are useful to get the desired results, as noted in the comments. We note that either the Z or <span class="math inline">\(p\)</span>-value bound is what is needed. For analysis 2, the nominal 1-sided bound 0.0183 has clearly been exceeded by the p &lt; 0.001 reported in the manuscript, confirming statistical significance for the trial. Since we did not know the actual events at interim 1 were not reported, the final bound for the trial may have been slightly different. You can see how much this changes by trying different event counts in the updated design specification in the app.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://keaven.github.io/gsDesign/reference/gsBoundSummary.html">gsBoundSummary</a></span><span class="op">(</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://keaven.github.io/gsDesign/reference/gsBoundSummary.html">gsBoundSummary</a></span><span class="op">(</span></span>
 <span>  <span class="va">xu</span>, <span class="co"># Updated design</span></span>
 <span>  deltaname <span class="op">=</span> <span class="st">"HR"</span>, <span class="co"># Name of treatment difference measure</span></span>
 <span>  logdelta <span class="op">=</span> <span class="cn">TRUE</span>, <span class="co"># For survival, delta is on a log scale; this transforms</span></span>
@@ -1653,26 +1672,25 @@ window.Quarto = {
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Updated AFCAPS bounds at IA 2"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Updated AFCAPS bounds at IA 2"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div>
-<div id="vtfcgiaaqz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#vtfcgiaaqz table {
+<div id="qifbsjgtvu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qifbsjgtvu table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#vtfcgiaaqz thead, #vtfcgiaaqz tbody, #vtfcgiaaqz tfoot, #vtfcgiaaqz tr, #vtfcgiaaqz td, #vtfcgiaaqz th {
+#qifbsjgtvu thead, #qifbsjgtvu tbody, #qifbsjgtvu tfoot, #qifbsjgtvu tr, #qifbsjgtvu td, #qifbsjgtvu th {
   border-style: none;
 }
 
-#vtfcgiaaqz p {
+#qifbsjgtvu p {
   margin: 0;
   padding: 0;
 }
 
-#vtfcgiaaqz .gt_table {
+#qifbsjgtvu .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1698,12 +1716,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#vtfcgiaaqz .gt_caption {
+#qifbsjgtvu .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#vtfcgiaaqz .gt_title {
+#qifbsjgtvu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1715,7 +1733,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#vtfcgiaaqz .gt_subtitle {
+#qifbsjgtvu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1727,7 +1745,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#vtfcgiaaqz .gt_heading {
+#qifbsjgtvu .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1739,13 +1757,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#vtfcgiaaqz .gt_bottom_border {
+#qifbsjgtvu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#vtfcgiaaqz .gt_col_headings {
+#qifbsjgtvu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1760,7 +1778,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#vtfcgiaaqz .gt_col_heading {
+#qifbsjgtvu .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1780,7 +1798,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#vtfcgiaaqz .gt_column_spanner_outer {
+#qifbsjgtvu .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1792,15 +1810,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#vtfcgiaaqz .gt_column_spanner_outer:first-child {
+#qifbsjgtvu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#vtfcgiaaqz .gt_column_spanner_outer:last-child {
+#qifbsjgtvu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#vtfcgiaaqz .gt_column_spanner {
+#qifbsjgtvu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1812,11 +1830,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#vtfcgiaaqz .gt_spanner_row {
+#qifbsjgtvu .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#vtfcgiaaqz .gt_group_heading {
+#qifbsjgtvu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1842,7 +1860,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#vtfcgiaaqz .gt_empty_group_heading {
+#qifbsjgtvu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1857,15 +1875,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#vtfcgiaaqz .gt_from_md > :first-child {
+#qifbsjgtvu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#vtfcgiaaqz .gt_from_md > :last-child {
+#qifbsjgtvu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#vtfcgiaaqz .gt_row {
+#qifbsjgtvu .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1884,7 +1902,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#vtfcgiaaqz .gt_stub {
+#qifbsjgtvu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1897,7 +1915,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#vtfcgiaaqz .gt_stub_row_group {
+#qifbsjgtvu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1911,15 +1929,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#vtfcgiaaqz .gt_row_group_first td {
+#qifbsjgtvu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#vtfcgiaaqz .gt_row_group_first th {
+#qifbsjgtvu .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#vtfcgiaaqz .gt_summary_row {
+#qifbsjgtvu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1929,16 +1947,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#vtfcgiaaqz .gt_first_summary_row {
+#qifbsjgtvu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#vtfcgiaaqz .gt_first_summary_row.thick {
+#qifbsjgtvu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#vtfcgiaaqz .gt_last_summary_row {
+#qifbsjgtvu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1948,7 +1966,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#vtfcgiaaqz .gt_grand_summary_row {
+#qifbsjgtvu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1958,7 +1976,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#vtfcgiaaqz .gt_first_grand_summary_row {
+#qifbsjgtvu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1968,7 +1986,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#vtfcgiaaqz .gt_last_grand_summary_row_top {
+#qifbsjgtvu .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1978,11 +1996,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#vtfcgiaaqz .gt_striped {
+#qifbsjgtvu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#vtfcgiaaqz .gt_table_body {
+#qifbsjgtvu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1991,7 +2009,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#vtfcgiaaqz .gt_footnotes {
+#qifbsjgtvu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2005,7 +2023,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#vtfcgiaaqz .gt_footnote {
+#qifbsjgtvu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2014,7 +2032,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#vtfcgiaaqz .gt_sourcenotes {
+#qifbsjgtvu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2028,7 +2046,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#vtfcgiaaqz .gt_sourcenote {
+#qifbsjgtvu .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2036,72 +2054,81 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#vtfcgiaaqz .gt_left {
+#qifbsjgtvu .gt_left {
   text-align: left;
 }
 
-#vtfcgiaaqz .gt_center {
+#qifbsjgtvu .gt_center {
   text-align: center;
 }
 
-#vtfcgiaaqz .gt_right {
+#qifbsjgtvu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vtfcgiaaqz .gt_font_normal {
+#qifbsjgtvu .gt_font_normal {
   font-weight: normal;
 }
 
-#vtfcgiaaqz .gt_font_bold {
+#qifbsjgtvu .gt_font_bold {
   font-weight: bold;
 }
 
-#vtfcgiaaqz .gt_font_italic {
+#qifbsjgtvu .gt_font_italic {
   font-style: italic;
 }
 
-#vtfcgiaaqz .gt_super {
+#qifbsjgtvu .gt_super {
   font-size: 65%;
 }
 
-#vtfcgiaaqz .gt_footnote_marks {
+#qifbsjgtvu .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#vtfcgiaaqz .gt_asterisk {
+#qifbsjgtvu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#vtfcgiaaqz .gt_indent_1 {
+#qifbsjgtvu .gt_indent_1 {
   text-indent: 5px;
 }
 
-#vtfcgiaaqz .gt_indent_2 {
+#qifbsjgtvu .gt_indent_2 {
   text-indent: 10px;
 }
 
-#vtfcgiaaqz .gt_indent_3 {
+#qifbsjgtvu .gt_indent_3 {
   text-indent: 15px;
 }
 
-#vtfcgiaaqz .gt_indent_4 {
+#qifbsjgtvu .gt_indent_4 {
   text-indent: 20px;
 }
 
-#vtfcgiaaqz .gt_indent_5 {
+#qifbsjgtvu .gt_indent_5 {
   text-indent: 25px;
 }
+
+#qifbsjgtvu .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#qifbsjgtvu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
 </style>
-<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
-<tr class="header gt_heading">
-<th colspan="4" class="gt_heading gt_title gt_font_normal gt_bottom_border">Updated AFCAPS bounds at IA 2</th>
+<tr class="gt_heading header">
+<td colspan="4" class="gt_heading gt_title gt_font_normal gt_bottom_border">Updated AFCAPS bounds at IA 2</td>
 </tr>
-<tr class="odd gt_col_headings">
+<tr class="gt_col_headings even">
 <th id="Analysis" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Analysis</th>
 <th id="Value" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Value</th>
 <th id="Efficacy" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Efficacy</th>
@@ -2186,7 +2213,6 @@ window.Quarto = {
 </div>
 </div>
 </div>
-</div>
 </section><section id="cardiovascular-outcomes-non-inferiority" class="level2" data-number="2.4"><h2 data-number="2.4" class="anchored" data-anchor-id="cardiovascular-outcomes-non-inferiority">
 <span class="header-section-number">2.4</span> Cardiovascular outcomes non-inferiority</h2>
 <p>The EXAMINE trial <span class="citation" data-cites="EXAMINEresults">(<a href="references.html#ref-EXAMINEresults" role="doc-biblioref">White et al. 2013</a>)</span> established non-inferiority for major cardiovascular outcomes (MACE) for the treatment of diabetes using the DPP4 inhibitor alogliptin compared to placebo. The design was described in <span class="citation" data-cites="EXAMINEdesign">White et al. (<a href="references.html#ref-EXAMINEdesign" role="doc-biblioref">2011</a>)</span>. We approximate the design and primary analysis evaluation here. Software and some assumptions of the model were not completely clear, so this is not an exact reproduction of <span class="citation" data-cites="AFCAPSdesign">Downs et al. (<a href="references.html#ref-AFCAPSdesign" role="doc-biblioref">1997</a>)</span>, but is very close. Key assumptions we replicate here:</p>
@@ -2208,7 +2234,7 @@ window.Quarto = {
 </li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">EXAMINEdesign</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://keaven.github.io/gsDesign/reference/nSurv.html">gsSurv</a></span><span class="op">(</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">EXAMINEdesign</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://keaven.github.io/gsDesign/reference/nSurv.html">gsSurv</a></span><span class="op">(</span></span>
 <span>  k <span class="op">=</span> <span class="fl">3</span>, <span class="co"># Number of analyses</span></span>
 <span>  test.type <span class="op">=</span> <span class="fl">1</span>, <span class="co"># 1-sided testing</span></span>
 <span>  timing <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">550</span>, <span class="fl">600</span><span class="op">)</span> <span class="op">/</span> <span class="fl">650</span>, <span class="co"># Event fractions at interim analyses</span></span>
@@ -2225,26 +2251,25 @@ window.Quarto = {
 <span></span>
 <span><span class="fu"><a href="https://keaven.github.io/gsDesign/reference/gsBoundSummary.html">gsBoundSummary</a></span><span class="op">(</span><span class="va">EXAMINEdesign</span>, digits <span class="op">=</span> <span class="fl">4</span>, ddigits <span class="op">=</span> <span class="fl">2</span>, tdigits <span class="op">=</span> <span class="fl">2</span>, timename <span class="op">=</span> <span class="st">"Year"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"EXAMINE non-inferiority design bounds"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"EXAMINE non-inferiority design bounds"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div>
-<div id="cnzxxoaudc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#cnzxxoaudc table {
+<div id="pkchqzswid" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#pkchqzswid table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#cnzxxoaudc thead, #cnzxxoaudc tbody, #cnzxxoaudc tfoot, #cnzxxoaudc tr, #cnzxxoaudc td, #cnzxxoaudc th {
+#pkchqzswid thead, #pkchqzswid tbody, #pkchqzswid tfoot, #pkchqzswid tr, #pkchqzswid td, #pkchqzswid th {
   border-style: none;
 }
 
-#cnzxxoaudc p {
+#pkchqzswid p {
   margin: 0;
   padding: 0;
 }
 
-#cnzxxoaudc .gt_table {
+#pkchqzswid .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2270,12 +2295,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#cnzxxoaudc .gt_caption {
+#pkchqzswid .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#cnzxxoaudc .gt_title {
+#pkchqzswid .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2287,7 +2312,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#cnzxxoaudc .gt_subtitle {
+#pkchqzswid .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2299,7 +2324,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#cnzxxoaudc .gt_heading {
+#pkchqzswid .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2311,13 +2336,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#cnzxxoaudc .gt_bottom_border {
+#pkchqzswid .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#cnzxxoaudc .gt_col_headings {
+#pkchqzswid .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2332,7 +2357,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#cnzxxoaudc .gt_col_heading {
+#pkchqzswid .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2352,7 +2377,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#cnzxxoaudc .gt_column_spanner_outer {
+#pkchqzswid .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2364,15 +2389,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#cnzxxoaudc .gt_column_spanner_outer:first-child {
+#pkchqzswid .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#cnzxxoaudc .gt_column_spanner_outer:last-child {
+#pkchqzswid .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#cnzxxoaudc .gt_column_spanner {
+#pkchqzswid .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2384,11 +2409,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#cnzxxoaudc .gt_spanner_row {
+#pkchqzswid .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#cnzxxoaudc .gt_group_heading {
+#pkchqzswid .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2414,7 +2439,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#cnzxxoaudc .gt_empty_group_heading {
+#pkchqzswid .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2429,15 +2454,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#cnzxxoaudc .gt_from_md > :first-child {
+#pkchqzswid .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#cnzxxoaudc .gt_from_md > :last-child {
+#pkchqzswid .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#cnzxxoaudc .gt_row {
+#pkchqzswid .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2456,7 +2481,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#cnzxxoaudc .gt_stub {
+#pkchqzswid .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2469,7 +2494,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#cnzxxoaudc .gt_stub_row_group {
+#pkchqzswid .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2483,15 +2508,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#cnzxxoaudc .gt_row_group_first td {
+#pkchqzswid .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#cnzxxoaudc .gt_row_group_first th {
+#pkchqzswid .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#cnzxxoaudc .gt_summary_row {
+#pkchqzswid .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2501,16 +2526,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#cnzxxoaudc .gt_first_summary_row {
+#pkchqzswid .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#cnzxxoaudc .gt_first_summary_row.thick {
+#pkchqzswid .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#cnzxxoaudc .gt_last_summary_row {
+#pkchqzswid .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2520,7 +2545,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#cnzxxoaudc .gt_grand_summary_row {
+#pkchqzswid .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2530,7 +2555,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#cnzxxoaudc .gt_first_grand_summary_row {
+#pkchqzswid .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2540,7 +2565,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#cnzxxoaudc .gt_last_grand_summary_row_top {
+#pkchqzswid .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2550,11 +2575,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#cnzxxoaudc .gt_striped {
+#pkchqzswid .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#cnzxxoaudc .gt_table_body {
+#pkchqzswid .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2563,7 +2588,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#cnzxxoaudc .gt_footnotes {
+#pkchqzswid .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2577,7 +2602,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#cnzxxoaudc .gt_footnote {
+#pkchqzswid .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2586,7 +2611,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#cnzxxoaudc .gt_sourcenotes {
+#pkchqzswid .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2600,7 +2625,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#cnzxxoaudc .gt_sourcenote {
+#pkchqzswid .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2608,72 +2633,81 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#cnzxxoaudc .gt_left {
+#pkchqzswid .gt_left {
   text-align: left;
 }
 
-#cnzxxoaudc .gt_center {
+#pkchqzswid .gt_center {
   text-align: center;
 }
 
-#cnzxxoaudc .gt_right {
+#pkchqzswid .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#cnzxxoaudc .gt_font_normal {
+#pkchqzswid .gt_font_normal {
   font-weight: normal;
 }
 
-#cnzxxoaudc .gt_font_bold {
+#pkchqzswid .gt_font_bold {
   font-weight: bold;
 }
 
-#cnzxxoaudc .gt_font_italic {
+#pkchqzswid .gt_font_italic {
   font-style: italic;
 }
 
-#cnzxxoaudc .gt_super {
+#pkchqzswid .gt_super {
   font-size: 65%;
 }
 
-#cnzxxoaudc .gt_footnote_marks {
+#pkchqzswid .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#cnzxxoaudc .gt_asterisk {
+#pkchqzswid .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#cnzxxoaudc .gt_indent_1 {
+#pkchqzswid .gt_indent_1 {
   text-indent: 5px;
 }
 
-#cnzxxoaudc .gt_indent_2 {
+#pkchqzswid .gt_indent_2 {
   text-indent: 10px;
 }
 
-#cnzxxoaudc .gt_indent_3 {
+#pkchqzswid .gt_indent_3 {
   text-indent: 15px;
 }
 
-#cnzxxoaudc .gt_indent_4 {
+#pkchqzswid .gt_indent_4 {
   text-indent: 20px;
 }
 
-#cnzxxoaudc .gt_indent_5 {
+#pkchqzswid .gt_indent_5 {
   text-indent: 25px;
 }
+
+#pkchqzswid .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#pkchqzswid div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
 </style>
-<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
-<tr class="header gt_heading">
-<th colspan="3" class="gt_heading gt_title gt_font_normal gt_bottom_border">EXAMINE non-inferiority design bounds</th>
+<tr class="gt_heading header">
+<td colspan="3" class="gt_heading gt_title gt_font_normal gt_bottom_border">EXAMINE non-inferiority design bounds</td>
 </tr>
-<tr class="odd gt_col_headings">
+<tr class="gt_col_headings even">
 <th id="Analysis" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Analysis</th>
 <th id="Value" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Value</th>
 <th id="Efficacy" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Efficacy</th>
@@ -2760,10 +2794,9 @@ window.Quarto = {
 </div>
 </div>
 </div>
-</div>
 <p>Following is a plot of expected accrual of subjects and events over time under design assumptions for the alternate hypothesis. You may choose to ignore the code until you need to do a plot like this.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">accrual_fn</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">Time</span>, <span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">accrual_fn</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">Time</span>, <span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">xx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://keaven.github.io/gsDesign/reference/nSurv.html">nEventsIA</a></span><span class="op">(</span>tIA <span class="op">=</span> <span class="va">Time</span>, x <span class="op">=</span> <span class="va">x</span>, simple <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
 <span>    Time <span class="op">=</span> <span class="va">Time</span>,</span>
@@ -2781,7 +2814,7 @@ window.Quarto = {
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">accrual</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Time</span>, y <span class="op">=</span> <span class="va">Accrual</span>, col <span class="op">=</span> <span class="va">Count</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Expected Accrual"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"Expected accrual of enrollment and events for EXAMINE trial"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"Expected accrual of enrollment and events for EXAMINE trial"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="proportional-hazards_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
@@ -2791,18 +2824,18 @@ window.Quarto = {
 </div>
 <p>Findings for the trial: <em>the primary end point occurred at similar rates in the alogliptin and placebo groups (in 11.3% and 11.8% of patients, respectively, after a median exposure of 18 months; hazard ratio, 0.96; upper boundary of the one-sided repeated CI, 1.16; P&lt;0.001 for noninferiority</em> <span class="citation" data-cites="EXAMINEresults">(<a href="references.html#ref-EXAMINEresults" role="doc-biblioref">White et al. 2013</a>)</span>. This was the first interim for testing the non-inferiority hypothesis to rule out an excess risk with HR=1.3. This analysis was performed with 621 events rather than the planned 550. Such an overrun is not atypical when setting a database cutoff prior to final data cleanup and (blinded) endpoint review. In any case, here is the updated design. We enter the events at the interim analysis for the trial. Since <code><a href="https://keaven.github.io/gsDesign/reference/gsDesign.html">gsDesign()</a></code> requires at least 2 analyses, we also provide the final analysis planned event count even though that was not needed at the time of the interim analysis and could be updated at the time of the final analysis, if needed.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n.I</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">621</span>, <span class="fl">650</span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n.I</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">621</span>, <span class="fl">650</span><span class="op">)</span></span>
 <span><span class="va">ku</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">n.I</span><span class="op">)</span></span>
 <span><span class="co"># This is just specifying event fraction vs final planned</span></span>
 <span><span class="co"># is used for computing spending.</span></span>
 <span><span class="co"># If calendar spending were specified, calendar fraction</span></span>
 <span><span class="co"># would be used here.</span></span>
 <span><span class="va">usTime</span> <span class="op">&lt;-</span> <span class="va">n.I</span> <span class="op">/</span> <span class="va">EXAMINEdesign</span><span class="op">$</span><span class="va">n.I</span><span class="op">[</span><span class="va">x</span><span class="op">$</span><span class="va">k</span><span class="op">]</span></span>
-<span><span class="va">lsTime</span> <span class="op">&lt;-</span> <span class="va">usTime</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">lsTime</span> <span class="op">&lt;-</span> <span class="va">usTime</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now we incorporate this to update the original design. As in previous examples, most of the arguments are copied from the original design and we use <code><a href="https://keaven.github.io/gsDesign/reference/gsDesign.html">gsDesign()</a></code> to update rather than <code><a href="https://keaven.github.io/gsDesign/reference/nSurv.html">gsSurv()</a></code> which was used for the original design.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">EXAMINEdesign</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">EXAMINEdesign</span></span>
 <span><span class="va">xu</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://keaven.github.io/gsDesign/reference/gsDesign.html">gsDesign</a></span><span class="op">(</span></span>
 <span>  k <span class="op">=</span> <span class="va">ku</span>,</span>
 <span>  test.type <span class="op">=</span> <span class="va">test.type</span>,</span>
@@ -2821,11 +2854,11 @@ window.Quarto = {
 <span>  delta0 <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">delta0</span>,</span>
 <span>  usTime <span class="op">=</span> <span class="va">usTime</span>,</span>
 <span>  lsTime <span class="op">=</span> <span class="va">lsTime</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Next we document the updated bounds. The first code line here is needed for any case where <code>hr0 != 1</code>; i.e.&nbsp;for non-inferiority trials or, in the case of vaccines, super-superiority trials.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># The first line is required to make gsBoundSummary to work correctly</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># The first line is required to make gsBoundSummary to work correctly</span></span>
 <span><span class="co"># for non-inferiority and super-superiority trials</span></span>
 <span><span class="va">xu</span><span class="op">$</span><span class="va">hr0</span> <span class="op">&lt;-</span> <span class="va">EXAMINEdesign</span><span class="op">$</span><span class="va">hr0</span></span>
 <span><span class="fu"><a href="https://keaven.github.io/gsDesign/reference/gsBoundSummary.html">gsBoundSummary</a></span><span class="op">(</span></span>
@@ -2844,26 +2877,25 @@ window.Quarto = {
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html">tab_header</a></span><span class="op">(</span></span>
 <span>    title <span class="op">=</span> <span class="st">"EXAMINE trial design"</span>,</span>
 <span>    subtitle <span class="op">=</span> <span class="st">"Update at time of analysis"</span></span>
-<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div>
-<div id="bmsalytbzi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#bmsalytbzi table {
+<div id="ogjqmaaljx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ogjqmaaljx table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#bmsalytbzi thead, #bmsalytbzi tbody, #bmsalytbzi tfoot, #bmsalytbzi tr, #bmsalytbzi td, #bmsalytbzi th {
+#ogjqmaaljx thead, #ogjqmaaljx tbody, #ogjqmaaljx tfoot, #ogjqmaaljx tr, #ogjqmaaljx td, #ogjqmaaljx th {
   border-style: none;
 }
 
-#bmsalytbzi p {
+#ogjqmaaljx p {
   margin: 0;
   padding: 0;
 }
 
-#bmsalytbzi .gt_table {
+#ogjqmaaljx .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2889,12 +2921,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#bmsalytbzi .gt_caption {
+#ogjqmaaljx .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#bmsalytbzi .gt_title {
+#ogjqmaaljx .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2906,7 +2938,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#bmsalytbzi .gt_subtitle {
+#ogjqmaaljx .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2918,7 +2950,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#bmsalytbzi .gt_heading {
+#ogjqmaaljx .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2930,13 +2962,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#bmsalytbzi .gt_bottom_border {
+#ogjqmaaljx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#bmsalytbzi .gt_col_headings {
+#ogjqmaaljx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2951,7 +2983,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#bmsalytbzi .gt_col_heading {
+#ogjqmaaljx .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2971,7 +3003,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#bmsalytbzi .gt_column_spanner_outer {
+#ogjqmaaljx .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2983,15 +3015,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#bmsalytbzi .gt_column_spanner_outer:first-child {
+#ogjqmaaljx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bmsalytbzi .gt_column_spanner_outer:last-child {
+#ogjqmaaljx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bmsalytbzi .gt_column_spanner {
+#ogjqmaaljx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3003,11 +3035,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#bmsalytbzi .gt_spanner_row {
+#ogjqmaaljx .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#bmsalytbzi .gt_group_heading {
+#ogjqmaaljx .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3033,7 +3065,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#bmsalytbzi .gt_empty_group_heading {
+#ogjqmaaljx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3048,15 +3080,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#bmsalytbzi .gt_from_md > :first-child {
+#ogjqmaaljx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bmsalytbzi .gt_from_md > :last-child {
+#ogjqmaaljx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bmsalytbzi .gt_row {
+#ogjqmaaljx .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3075,7 +3107,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#bmsalytbzi .gt_stub {
+#ogjqmaaljx .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3088,7 +3120,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#bmsalytbzi .gt_stub_row_group {
+#ogjqmaaljx .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3102,15 +3134,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#bmsalytbzi .gt_row_group_first td {
+#ogjqmaaljx .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#bmsalytbzi .gt_row_group_first th {
+#ogjqmaaljx .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#bmsalytbzi .gt_summary_row {
+#ogjqmaaljx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3120,16 +3152,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#bmsalytbzi .gt_first_summary_row {
+#ogjqmaaljx .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#bmsalytbzi .gt_first_summary_row.thick {
+#ogjqmaaljx .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#bmsalytbzi .gt_last_summary_row {
+#ogjqmaaljx .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3139,7 +3171,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#bmsalytbzi .gt_grand_summary_row {
+#ogjqmaaljx .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3149,7 +3181,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#bmsalytbzi .gt_first_grand_summary_row {
+#ogjqmaaljx .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3159,7 +3191,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#bmsalytbzi .gt_last_grand_summary_row_top {
+#ogjqmaaljx .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3169,11 +3201,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#bmsalytbzi .gt_striped {
+#ogjqmaaljx .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bmsalytbzi .gt_table_body {
+#ogjqmaaljx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3182,7 +3214,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#bmsalytbzi .gt_footnotes {
+#ogjqmaaljx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3196,7 +3228,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#bmsalytbzi .gt_footnote {
+#ogjqmaaljx .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3205,7 +3237,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#bmsalytbzi .gt_sourcenotes {
+#ogjqmaaljx .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3219,7 +3251,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#bmsalytbzi .gt_sourcenote {
+#ogjqmaaljx .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3227,75 +3259,84 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#bmsalytbzi .gt_left {
+#ogjqmaaljx .gt_left {
   text-align: left;
 }
 
-#bmsalytbzi .gt_center {
+#ogjqmaaljx .gt_center {
   text-align: center;
 }
 
-#bmsalytbzi .gt_right {
+#ogjqmaaljx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bmsalytbzi .gt_font_normal {
+#ogjqmaaljx .gt_font_normal {
   font-weight: normal;
 }
 
-#bmsalytbzi .gt_font_bold {
+#ogjqmaaljx .gt_font_bold {
   font-weight: bold;
 }
 
-#bmsalytbzi .gt_font_italic {
+#ogjqmaaljx .gt_font_italic {
   font-style: italic;
 }
 
-#bmsalytbzi .gt_super {
+#ogjqmaaljx .gt_super {
   font-size: 65%;
 }
 
-#bmsalytbzi .gt_footnote_marks {
+#ogjqmaaljx .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#bmsalytbzi .gt_asterisk {
+#ogjqmaaljx .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#bmsalytbzi .gt_indent_1 {
+#ogjqmaaljx .gt_indent_1 {
   text-indent: 5px;
 }
 
-#bmsalytbzi .gt_indent_2 {
+#ogjqmaaljx .gt_indent_2 {
   text-indent: 10px;
 }
 
-#bmsalytbzi .gt_indent_3 {
+#ogjqmaaljx .gt_indent_3 {
   text-indent: 15px;
 }
 
-#bmsalytbzi .gt_indent_4 {
+#ogjqmaaljx .gt_indent_4 {
   text-indent: 20px;
 }
 
-#bmsalytbzi .gt_indent_5 {
+#ogjqmaaljx .gt_indent_5 {
   text-indent: 25px;
 }
+
+#ogjqmaaljx .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#ogjqmaaljx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
 </style>
-<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
-<tr class="header gt_heading">
-<th colspan="4" class="gt_heading gt_title gt_font_normal">EXAMINE trial design</th>
+<tr class="gt_heading header">
+<td colspan="4" class="gt_heading gt_title gt_font_normal">EXAMINE trial design</td>
 </tr>
-<tr class="odd gt_heading">
-<th colspan="4" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">Update at time of analysis</th>
+<tr class="gt_heading even">
+<td colspan="4" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">Update at time of analysis</td>
 </tr>
-<tr class="header gt_col_headings">
+<tr class="gt_col_headings header">
 <th id="Analysis" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Analysis</th>
 <th id="Value" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Value</th>
 <th id="Efficacy" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Efficacy</th>
@@ -3380,7 +3421,6 @@ window.Quarto = {
 </div>
 </div>
 </div>
-</div>
 <section id="exercise" class="level3" data-number="2.4.1"><h3 data-number="2.4.1" class="anchored" data-anchor-id="exercise">
 <span class="header-section-number">2.4.1</span> Exercise</h3>
 <p>See the following link for the Moderna COVID-19 design replication: <a href="https://medium.com/@yipeng_39244/reverse-engineering-the-statistical-analyses-in-the-moderna-protocol-2c9fd7544326" class="uri">https://medium.com/@yipeng_39244/reverse-engineering-the-statistical-analyses-in-the-moderna-protocol-2c9fd7544326</a></p>
@@ -3403,7 +3443,7 @@ window.Quarto = {
 <p><span class="math display">\[\theta = -\log(0.7)\]</span> <span class="math display">\[\lambda = -\log(1 + \log(0.75) / \theta) / 18.\]</span></p>
 <p>For a proportional hazards model with hazard ratio <span class="math inline">\(HR\)</span> we can assume control survival <span class="math inline">\(S_C(t)=S(t)\)</span> as above and experimental survival of <span class="math inline">\(S_E(t)=S_C(t)^{HR}\)</span>. Assuming <span class="math inline">\(HR=0.72\)</span> we plot assumed survival through 48 months for each treatment group.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Assumed long-term survival rate</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Assumed long-term survival rate</span></span>
 <span><span class="va">cureRate</span> <span class="op">&lt;-</span> <span class="fl">0.7</span></span>
 <span><span class="co"># Survival rate at specific time</span></span>
 <span><span class="va">survRate</span> <span class="op">&lt;-</span> <span class="fl">0.75</span></span>
@@ -3411,18 +3451,18 @@ window.Quarto = {
 <span><span class="co"># Maximum time for plot and study duration</span></span>
 <span><span class="va">maxTime</span> <span class="op">&lt;-</span> <span class="fl">60</span></span>
 <span><span class="co"># Assumed hazard ratio to power trial</span></span>
-<span><span class="va">hr</span> <span class="op">&lt;-</span> <span class="fl">0.72</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">hr</span> <span class="op">&lt;-</span> <span class="fl">0.72</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Next we translate the above inputs into the parameters in the Poison mixture model for the control group.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Compute theta for Poisson mixture cure rate model</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Compute theta for Poisson mixture cure rate model</span></span>
 <span><span class="va">theta</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">cureRate</span><span class="op">)</span></span>
 <span><span class="co"># Compute rate parameter lambda for Poisson mixture cure rate model</span></span>
-<span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">survRate</span><span class="op">)</span> <span class="op">/</span> <span class="va">theta</span><span class="op">)</span> <span class="op">/</span> <span class="va">survRateTime</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">survRate</span><span class="op">)</span> <span class="op">/</span> <span class="va">theta</span><span class="op">)</span> <span class="op">/</span> <span class="va">survRateTime</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now we plot assumed survival curves under the model parameters over the targeted time period specified above. We use a fairly refined grid to ensure the plot is smooth.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">Month</span> <span class="op">&lt;-</span> <span class="fl">0</span><span class="op">:</span><span class="va">maxTime</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">Month</span> <span class="op">&lt;-</span> <span class="fl">0</span><span class="op">:</span><span class="va">maxTime</span></span>
 <span><span class="co"># Control survival</span></span>
 <span><span class="va">S</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">-</span><span class="va">theta</span> <span class="op">*</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">-</span><span class="va">lambda</span> <span class="op">*</span> <span class="va">Month</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co"># Experimental survival</span></span>
@@ -3435,7 +3475,7 @@ window.Quarto = {
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">cure_model</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Month</span>, y <span class="op">=</span> <span class="va">Survival</span>, col <span class="op">=</span> <span class="va">Treatment</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">maxTime</span>, <span class="fl">6</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">.6</span>, <span class="fl">1</span>, <span class="fl">.1</span><span class="op">)</span>, limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.6</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">.6</span>, <span class="fl">1</span>, <span class="fl">.1</span><span class="op">)</span>, limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.6</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="proportional-hazards_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
@@ -3445,26 +3485,26 @@ window.Quarto = {
 </div>
 <p>To perform asymptotic calculations we approximate the survival rates in the above matrix with piecewise constant hazard rates that match the survival rates just computed at discrete points above. Since the cumulative hazard <span class="math inline">\(H(t)= - \log(S(t))\)</span> and <span class="math inline">\(H(t)=\int_0^t h(s)ds\)</span> where <span class="math inline">\(h()\)</span> is the hazard rate, we approximate with <span class="math display">\[\tilde h(t)=(H(t_m)-H(t_{m-1}))/(t_m - t_{m-1}), m=1,\ldots,M.\]</span></p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cure_model</span> <span class="op">&lt;-</span> <span class="va">cure_model</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cure_model</span> <span class="op">&lt;-</span> <span class="va">cure_model</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
 <span>    H <span class="op">=</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">Survival</span><span class="op">)</span>,</span>
 <span>    duration <span class="op">=</span> <span class="va">Month</span> <span class="op">-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span><span class="op">(</span><span class="va">Month</span>, default <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>,</span>
 <span>    h <span class="op">=</span> <span class="op">(</span><span class="va">H</span> <span class="op">-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span><span class="op">(</span><span class="va">H</span>, default <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">/</span> <span class="va">duration</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section><section id="expected-event-accumulation-over-time" class="level3" data-number="2.5.2"><h3 data-number="2.5.2" class="anchored" data-anchor-id="expected-event-accumulation-over-time">
 <span class="header-section-number">2.5.2</span> Expected event accumulation over time</h3>
 <p>Event accumulation over time can be very sensitive to many trial design assumptions. Generally, we are trying to mimic a slowing of event accumulation over time. We assume the following for relative enrollment rates end enrollment duration.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Relative enrollment rates</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Relative enrollment rates</span></span>
 <span><span class="va">enrollRates</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span></span>
 <span><span class="co"># Total duration for each enrollment rate</span></span>
 <span><span class="co"># Here they total 18 months planned to complete enrollment</span></span>
-<span><span class="va">enrollDurations</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">12</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">enrollDurations</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">12</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We plot the event accumulation in the above scenario by calendar time post study initiation. We then overlay the percent of final events at 1, 2, 3, 4, 5 and 6 years start of study.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Calendar times</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Calendar times</span></span>
 <span><span class="va">ti</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">maxTime</span>, <span class="fl">1</span><span class="op">)</span> <span class="co"># maxTime is study duration from above</span></span>
 <span><span class="co"># Placeholder for expected event counts</span></span>
 <span><span class="va">n</span> <span class="op">&lt;-</span> <span class="va">ti</span></span>
@@ -3490,11 +3530,11 @@ window.Quarto = {
 <span>  T <span class="op">=</span> <span class="va">maxTime</span>,</span>
 <span>  <span class="co"># Minimum follow-up time after enrollment complete</span></span>
 <span>  minfup <span class="op">=</span> <span class="va">maxTime</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">enrollDurations</span><span class="op">)</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Next we can compute the expected accrual of events over time relative to complete event accrual at the end of the study. This actual number of events and sample size will increase proportionately as long as the relative enrollment rates and durations remain unchanged.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span><span class="op">(</span><span class="va">ti</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span><span class="op">(</span><span class="va">ti</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">n</span><span class="op">[</span><span class="va">i</span> <span class="op">+</span> <span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://keaven.github.io/gsDesign/reference/nSurv.html">nEventsIA</a></span><span class="op">(</span>tIA <span class="op">=</span> <span class="va">ti</span><span class="op">[</span><span class="va">i</span> <span class="op">+</span> <span class="fl">1</span><span class="op">]</span>, x <span class="op">=</span> <span class="va">xx</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span><span class="co"># Now do a line plot of % of final events by month</span></span>
@@ -3509,7 +3549,7 @@ window.Quarto = {
 <span><span class="va">subti</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">12</span>, <span class="fl">18</span>, <span class="fl">24</span>, <span class="fl">36</span>, <span class="fl">48</span>, <span class="fl">60</span><span class="op">)</span></span>
 <span><span class="va">subpct</span> <span class="op">&lt;-</span> <span class="va">n</span><span class="op">[</span><span class="va">subti</span> <span class="op">+</span> <span class="fl">1</span><span class="op">]</span> <span class="op">/</span> <span class="va">n</span><span class="op">[</span><span class="va">maxTime</span> <span class="op">+</span> <span class="fl">1</span><span class="op">]</span> <span class="op">*</span> <span class="fl">100</span></span>
 <span><span class="va">txt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>Month <span class="op">=</span> <span class="va">subti</span>, ev <span class="op">=</span> <span class="va">subpct</span>, txt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">subpct</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>, <span class="st">"%"</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_label</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">txt</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Month</span>, y <span class="op">=</span> <span class="va">ev</span>, label <span class="op">=</span> <span class="va">txt</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_label</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">txt</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Month</span>, y <span class="op">=</span> <span class="va">ev</span>, label <span class="op">=</span> <span class="va">txt</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="proportional-hazards_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
@@ -3519,17 +3559,17 @@ window.Quarto = {
 </div>
 <p>We note that we will use calendar time as above for spending:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Spending fraction at interim analyses</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Spending fraction at interim analyses</span></span>
 <span><span class="va">usTime</span> <span class="op">&lt;-</span> <span class="va">subti</span> <span class="op">/</span> <span class="va">maxTime</span></span>
 <span><span class="co"># Information fraction is required for gsSurv input</span></span>
 <span><span class="co"># This was computed above</span></span>
-<span><span class="va">timing</span> <span class="op">&lt;-</span> <span class="va">n</span><span class="op">[</span><span class="va">subti</span> <span class="op">+</span> <span class="fl">1</span><span class="op">]</span> <span class="op">/</span> <span class="va">n</span><span class="op">[</span><span class="va">maxTime</span> <span class="op">+</span> <span class="fl">1</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">timing</span> <span class="op">&lt;-</span> <span class="va">n</span><span class="op">[</span><span class="va">subti</span> <span class="op">+</span> <span class="fl">1</span><span class="op">]</span> <span class="op">/</span> <span class="va">n</span><span class="op">[</span><span class="va">maxTime</span> <span class="op">+</span> <span class="fl">1</span><span class="op">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section><section id="the-design" class="level3" data-number="2.5.3"><h3 data-number="2.5.3" class="anchored" data-anchor-id="the-design">
 <span class="header-section-number">2.5.3</span> The design</h3>
 <p>Now we design the trial with both efficacy and futility bounds determined with calendar spending.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cure_model_design</span> <span class="op">&lt;-</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cure_model_design</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="https://keaven.github.io/gsDesign/reference/nSurv.html">gsSurv</a></span><span class="op">(</span></span>
 <span>    k <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">timing</span><span class="op">)</span>, <span class="co"># Specify number of analyses</span></span>
 <span>    alpha <span class="op">=</span> <span class="fl">0.025</span>, <span class="co"># 1-sided Type I error</span></span>
@@ -3565,26 +3605,25 @@ window.Quarto = {
 <span><span class="va">cure_model_design</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://keaven.github.io/gsDesign/reference/gsBoundSummary.html">gsBoundSummary</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Calendar-based spending"</span>, subtitle <span class="op">=</span> <span class="st">"Design with cure model"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Calendar-based spending"</span>, subtitle <span class="op">=</span> <span class="st">"Design with cure model"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div>
-<div id="tzgfrbhflq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#tzgfrbhflq table {
+<div id="nyxhlxiksz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#nyxhlxiksz table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#tzgfrbhflq thead, #tzgfrbhflq tbody, #tzgfrbhflq tfoot, #tzgfrbhflq tr, #tzgfrbhflq td, #tzgfrbhflq th {
+#nyxhlxiksz thead, #nyxhlxiksz tbody, #nyxhlxiksz tfoot, #nyxhlxiksz tr, #nyxhlxiksz td, #nyxhlxiksz th {
   border-style: none;
 }
 
-#tzgfrbhflq p {
+#nyxhlxiksz p {
   margin: 0;
   padding: 0;
 }
 
-#tzgfrbhflq .gt_table {
+#nyxhlxiksz .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3610,12 +3649,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#tzgfrbhflq .gt_caption {
+#nyxhlxiksz .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#tzgfrbhflq .gt_title {
+#nyxhlxiksz .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3627,7 +3666,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#tzgfrbhflq .gt_subtitle {
+#nyxhlxiksz .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3639,7 +3678,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#tzgfrbhflq .gt_heading {
+#nyxhlxiksz .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3651,13 +3690,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#tzgfrbhflq .gt_bottom_border {
+#nyxhlxiksz .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tzgfrbhflq .gt_col_headings {
+#nyxhlxiksz .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3672,7 +3711,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#tzgfrbhflq .gt_col_heading {
+#nyxhlxiksz .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3692,7 +3731,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#tzgfrbhflq .gt_column_spanner_outer {
+#nyxhlxiksz .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3704,15 +3743,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#tzgfrbhflq .gt_column_spanner_outer:first-child {
+#nyxhlxiksz .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tzgfrbhflq .gt_column_spanner_outer:last-child {
+#nyxhlxiksz .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tzgfrbhflq .gt_column_spanner {
+#nyxhlxiksz .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3724,11 +3763,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#tzgfrbhflq .gt_spanner_row {
+#nyxhlxiksz .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#tzgfrbhflq .gt_group_heading {
+#nyxhlxiksz .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3754,7 +3793,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#tzgfrbhflq .gt_empty_group_heading {
+#nyxhlxiksz .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3769,15 +3808,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#tzgfrbhflq .gt_from_md > :first-child {
+#nyxhlxiksz .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tzgfrbhflq .gt_from_md > :last-child {
+#nyxhlxiksz .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tzgfrbhflq .gt_row {
+#nyxhlxiksz .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3796,7 +3835,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#tzgfrbhflq .gt_stub {
+#nyxhlxiksz .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3809,7 +3848,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#tzgfrbhflq .gt_stub_row_group {
+#nyxhlxiksz .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3823,15 +3862,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#tzgfrbhflq .gt_row_group_first td {
+#nyxhlxiksz .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tzgfrbhflq .gt_row_group_first th {
+#nyxhlxiksz .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#tzgfrbhflq .gt_summary_row {
+#nyxhlxiksz .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3841,16 +3880,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#tzgfrbhflq .gt_first_summary_row {
+#nyxhlxiksz .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#tzgfrbhflq .gt_first_summary_row.thick {
+#nyxhlxiksz .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tzgfrbhflq .gt_last_summary_row {
+#nyxhlxiksz .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3860,7 +3899,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#tzgfrbhflq .gt_grand_summary_row {
+#nyxhlxiksz .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3870,7 +3909,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#tzgfrbhflq .gt_first_grand_summary_row {
+#nyxhlxiksz .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3880,7 +3919,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#tzgfrbhflq .gt_last_grand_summary_row_top {
+#nyxhlxiksz .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3890,11 +3929,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#tzgfrbhflq .gt_striped {
+#nyxhlxiksz .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tzgfrbhflq .gt_table_body {
+#nyxhlxiksz .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3903,7 +3942,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#tzgfrbhflq .gt_footnotes {
+#nyxhlxiksz .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3917,7 +3956,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#tzgfrbhflq .gt_footnote {
+#nyxhlxiksz .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3926,7 +3965,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#tzgfrbhflq .gt_sourcenotes {
+#nyxhlxiksz .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3940,7 +3979,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#tzgfrbhflq .gt_sourcenote {
+#nyxhlxiksz .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3948,75 +3987,84 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#tzgfrbhflq .gt_left {
+#nyxhlxiksz .gt_left {
   text-align: left;
 }
 
-#tzgfrbhflq .gt_center {
+#nyxhlxiksz .gt_center {
   text-align: center;
 }
 
-#tzgfrbhflq .gt_right {
+#nyxhlxiksz .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tzgfrbhflq .gt_font_normal {
+#nyxhlxiksz .gt_font_normal {
   font-weight: normal;
 }
 
-#tzgfrbhflq .gt_font_bold {
+#nyxhlxiksz .gt_font_bold {
   font-weight: bold;
 }
 
-#tzgfrbhflq .gt_font_italic {
+#nyxhlxiksz .gt_font_italic {
   font-style: italic;
 }
 
-#tzgfrbhflq .gt_super {
+#nyxhlxiksz .gt_super {
   font-size: 65%;
 }
 
-#tzgfrbhflq .gt_footnote_marks {
+#nyxhlxiksz .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#tzgfrbhflq .gt_asterisk {
+#nyxhlxiksz .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tzgfrbhflq .gt_indent_1 {
+#nyxhlxiksz .gt_indent_1 {
   text-indent: 5px;
 }
 
-#tzgfrbhflq .gt_indent_2 {
+#nyxhlxiksz .gt_indent_2 {
   text-indent: 10px;
 }
 
-#tzgfrbhflq .gt_indent_3 {
+#nyxhlxiksz .gt_indent_3 {
   text-indent: 15px;
 }
 
-#tzgfrbhflq .gt_indent_4 {
+#nyxhlxiksz .gt_indent_4 {
   text-indent: 20px;
 }
 
-#tzgfrbhflq .gt_indent_5 {
+#nyxhlxiksz .gt_indent_5 {
   text-indent: 25px;
 }
+
+#nyxhlxiksz .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#nyxhlxiksz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
 </style>
-<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
-<tr class="header gt_heading">
-<th colspan="4" class="gt_heading gt_title gt_font_normal">Calendar-based spending</th>
+<tr class="gt_heading header">
+<td colspan="4" class="gt_heading gt_title gt_font_normal">Calendar-based spending</td>
 </tr>
-<tr class="odd gt_heading">
-<th colspan="4" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">Design with cure model</th>
+<tr class="gt_heading even">
+<td colspan="4" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">Design with cure model</td>
 </tr>
-<tr class="header gt_col_headings">
+<tr class="gt_col_headings header">
 <th id="Analysis" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Analysis</th>
 <th id="Value" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Value</th>
 <th id="Efficacy" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Efficacy</th>
@@ -4209,21 +4257,20 @@ window.Quarto = {
 </div>
 </div>
 </div>
-</div>
 <p>We see in this table that only 7 events are expected in the final year under design assumptions. However, it is quite possible that event rate assumptions will be incorrect and that this duration of follow-up is wanted to reasonably evaluate the possibility of a plateau in survival. We note that with 18 months enrollment duration expected, this would give complete follow-up through 42 months at the planned end of the trial.</p>
 </section><section id="updating-calendar-based-spending-bounds-at-analysis" class="level3" data-number="2.5.4"><h3 data-number="2.5.4" class="anchored" data-anchor-id="updating-calendar-based-spending-bounds-at-analysis">
 <span class="header-section-number">2.5.4</span> Updating calendar-based spending bounds at analysis</h3>
 <p>We provide an example where assumptions incorrectly predicted event accrual to show some potential advantages and disadvantages of calendar-based timing. The deviations can be due to enrollment being different than planned, patient event rates different than planned, or treatment effect different than planned. The desire is to have a design that adapts bounds well to a variety of scenarios, allows carrying the trial to the targeted duration, and provides reasonable power. For our example, we assume events accumulate more rapidly than under the design approximation. Analysis times are also assumed to deviate from plan which can be due to operational issues.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">actual_events</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">110</span>, <span class="fl">230</span>, <span class="fl">333</span>, <span class="fl">444</span>, <span class="fl">475</span>, <span class="fl">500</span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">actual_events</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">110</span>, <span class="fl">230</span>, <span class="fl">333</span>, <span class="fl">444</span>, <span class="fl">475</span>, <span class="fl">500</span><span class="op">)</span></span>
 <span><span class="va">actual_analysis_times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">11.5</span>, <span class="fl">17</span>, <span class="fl">22.5</span>, <span class="fl">37</span>, <span class="fl">49</span>, <span class="fl">62</span><span class="op">)</span></span>
 <span><span class="va">ku</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">actual_events</span><span class="op">)</span></span>
 <span><span class="va">usTime</span> <span class="op">&lt;-</span> <span class="va">actual_analysis_times</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">cure_model_design</span><span class="op">$</span><span class="cn">T</span><span class="op">)</span></span>
-<span><span class="va">lsTime</span> <span class="op">&lt;-</span> <span class="va">usTime</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">lsTime</span> <span class="op">&lt;-</span> <span class="va">usTime</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We update by using actual event counts and calendar times of analysis, otherwise copying parameters from the planned design in <code>cure_model_design</code>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cure_model_update</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://keaven.github.io/gsDesign/reference/gsDesign.html">gsDesign</a></span><span class="op">(</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cure_model_update</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://keaven.github.io/gsDesign/reference/gsDesign.html">gsDesign</a></span><span class="op">(</span></span>
 <span>  k <span class="op">=</span> <span class="va">ku</span>,</span>
 <span>  test.type <span class="op">=</span> <span class="va">cure_model_design</span><span class="op">$</span><span class="va">test.type</span>,</span>
 <span>  alpha <span class="op">=</span> <span class="va">cure_model_design</span><span class="op">$</span><span class="va">alpha</span>,</span>
@@ -4240,10 +4287,10 @@ window.Quarto = {
 <span>  delta0 <span class="op">=</span> <span class="va">cure_model_design</span><span class="op">$</span><span class="va">delta0</span>,</span>
 <span>  usTime <span class="op">=</span> <span class="va">usTime</span>,</span>
 <span>  lsTime <span class="op">=</span> <span class="va">lsTime</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://keaven.github.io/gsDesign/reference/gsBoundSummary.html">gsBoundSummary</a></span><span class="op">(</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://keaven.github.io/gsDesign/reference/gsBoundSummary.html">gsBoundSummary</a></span><span class="op">(</span></span>
 <span>  <span class="va">cure_model_update</span>,</span>
 <span>  deltaname <span class="op">=</span> <span class="st">"HR"</span>,</span>
 <span>  logdelta <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -4260,26 +4307,25 @@ window.Quarto = {
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html">tab_header</a></span><span class="op">(</span></span>
 <span>    title <span class="op">=</span> <span class="st">"Calendar-based spending design"</span>,</span>
 <span>    subtitle <span class="op">=</span> <span class="st">"Update at time of analysis"</span></span>
-<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div>
-<div id="lwwgjingzt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#lwwgjingzt table {
+<div id="edvybouhcg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#edvybouhcg table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#lwwgjingzt thead, #lwwgjingzt tbody, #lwwgjingzt tfoot, #lwwgjingzt tr, #lwwgjingzt td, #lwwgjingzt th {
+#edvybouhcg thead, #edvybouhcg tbody, #edvybouhcg tfoot, #edvybouhcg tr, #edvybouhcg td, #edvybouhcg th {
   border-style: none;
 }
 
-#lwwgjingzt p {
+#edvybouhcg p {
   margin: 0;
   padding: 0;
 }
 
-#lwwgjingzt .gt_table {
+#edvybouhcg .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -4305,12 +4351,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#lwwgjingzt .gt_caption {
+#edvybouhcg .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#lwwgjingzt .gt_title {
+#edvybouhcg .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -4322,7 +4368,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#lwwgjingzt .gt_subtitle {
+#edvybouhcg .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4334,7 +4380,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#lwwgjingzt .gt_heading {
+#edvybouhcg .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -4346,13 +4392,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#lwwgjingzt .gt_bottom_border {
+#edvybouhcg .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#lwwgjingzt .gt_col_headings {
+#edvybouhcg .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4367,7 +4413,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#lwwgjingzt .gt_col_heading {
+#edvybouhcg .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4387,7 +4433,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#lwwgjingzt .gt_column_spanner_outer {
+#edvybouhcg .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4399,15 +4445,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#lwwgjingzt .gt_column_spanner_outer:first-child {
+#edvybouhcg .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#lwwgjingzt .gt_column_spanner_outer:last-child {
+#edvybouhcg .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#lwwgjingzt .gt_column_spanner {
+#edvybouhcg .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -4419,11 +4465,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#lwwgjingzt .gt_spanner_row {
+#edvybouhcg .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#lwwgjingzt .gt_group_heading {
+#edvybouhcg .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4449,7 +4495,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#lwwgjingzt .gt_empty_group_heading {
+#edvybouhcg .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4464,15 +4510,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#lwwgjingzt .gt_from_md > :first-child {
+#edvybouhcg .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#lwwgjingzt .gt_from_md > :last-child {
+#edvybouhcg .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#lwwgjingzt .gt_row {
+#edvybouhcg .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4491,7 +4537,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#lwwgjingzt .gt_stub {
+#edvybouhcg .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4504,7 +4550,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#lwwgjingzt .gt_stub_row_group {
+#edvybouhcg .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4518,15 +4564,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#lwwgjingzt .gt_row_group_first td {
+#edvybouhcg .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#lwwgjingzt .gt_row_group_first th {
+#edvybouhcg .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#lwwgjingzt .gt_summary_row {
+#edvybouhcg .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4536,16 +4582,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#lwwgjingzt .gt_first_summary_row {
+#edvybouhcg .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#lwwgjingzt .gt_first_summary_row.thick {
+#edvybouhcg .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#lwwgjingzt .gt_last_summary_row {
+#edvybouhcg .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4555,7 +4601,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#lwwgjingzt .gt_grand_summary_row {
+#edvybouhcg .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4565,7 +4611,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#lwwgjingzt .gt_first_grand_summary_row {
+#edvybouhcg .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4575,7 +4621,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#lwwgjingzt .gt_last_grand_summary_row_top {
+#edvybouhcg .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4585,11 +4631,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#lwwgjingzt .gt_striped {
+#edvybouhcg .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#lwwgjingzt .gt_table_body {
+#edvybouhcg .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4598,7 +4644,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#lwwgjingzt .gt_footnotes {
+#edvybouhcg .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4612,7 +4658,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#lwwgjingzt .gt_footnote {
+#edvybouhcg .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -4621,7 +4667,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#lwwgjingzt .gt_sourcenotes {
+#edvybouhcg .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4635,7 +4681,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#lwwgjingzt .gt_sourcenote {
+#edvybouhcg .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4643,75 +4689,84 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#lwwgjingzt .gt_left {
+#edvybouhcg .gt_left {
   text-align: left;
 }
 
-#lwwgjingzt .gt_center {
+#edvybouhcg .gt_center {
   text-align: center;
 }
 
-#lwwgjingzt .gt_right {
+#edvybouhcg .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#lwwgjingzt .gt_font_normal {
+#edvybouhcg .gt_font_normal {
   font-weight: normal;
 }
 
-#lwwgjingzt .gt_font_bold {
+#edvybouhcg .gt_font_bold {
   font-weight: bold;
 }
 
-#lwwgjingzt .gt_font_italic {
+#edvybouhcg .gt_font_italic {
   font-style: italic;
 }
 
-#lwwgjingzt .gt_super {
+#edvybouhcg .gt_super {
   font-size: 65%;
 }
 
-#lwwgjingzt .gt_footnote_marks {
+#edvybouhcg .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#lwwgjingzt .gt_asterisk {
+#edvybouhcg .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#lwwgjingzt .gt_indent_1 {
+#edvybouhcg .gt_indent_1 {
   text-indent: 5px;
 }
 
-#lwwgjingzt .gt_indent_2 {
+#edvybouhcg .gt_indent_2 {
   text-indent: 10px;
 }
 
-#lwwgjingzt .gt_indent_3 {
+#edvybouhcg .gt_indent_3 {
   text-indent: 15px;
 }
 
-#lwwgjingzt .gt_indent_4 {
+#edvybouhcg .gt_indent_4 {
   text-indent: 20px;
 }
 
-#lwwgjingzt .gt_indent_5 {
+#edvybouhcg .gt_indent_5 {
   text-indent: 25px;
 }
+
+#edvybouhcg .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#edvybouhcg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
 </style>
-<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
-<tr class="header gt_heading">
-<th colspan="4" class="gt_heading gt_title gt_font_normal">Calendar-based spending design</th>
+<tr class="gt_heading header">
+<td colspan="4" class="gt_heading gt_title gt_font_normal">Calendar-based spending design</td>
 </tr>
-<tr class="odd gt_heading">
-<th colspan="4" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">Update at time of analysis</th>
+<tr class="gt_heading even">
+<td colspan="4" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">Update at time of analysis</td>
 </tr>
-<tr class="header gt_col_headings">
+<tr class="gt_col_headings header">
 <th id="Analysis" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Analysis</th>
 <th id="Value" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Value</th>
 <th id="Efficacy" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Efficacy</th>
@@ -4868,7 +4923,6 @@ window.Quarto = {
 </div>
 </div>
 </div>
-</div>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
@@ -4922,43 +4976,58 @@ Zhang, Yilong, and Yongzhao Shao. 2018. <span>“Concordance Measure and Discrim
 </div>
 </div>
 </section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
       }
+      return false;
     }
-    return false;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
       for (const childEl of codeEl.children) {
         if (isCodeAnnotation(childEl)) {
           childEl.remove();
@@ -4966,184 +5035,184 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
       return codeEl.innerText;
     }
-  });
-  clipboard.on('success', function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  });
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/keaven\.github\.io\/gsd-deming\/");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
     });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
     }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/keaven\.github\.io\/gsd-deming\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
         }
-        return container.innerHTML
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -5151,185 +5220,161 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./background.html" class="pagination-link" aria-label="Background">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Background</span></span>
       </a>          
