@@ -17,7 +17,11 @@ Imports:
   gt,
   mvtnorm,
   npsurvSS,
-  xml2
+  xml2,
+  quarto,
+  simtrial,
+  gsDesign2,
+  gsdmvn
 Remotes:
   merck/simtrial@87cd828,
   merck/gsDesign2@fc3a2d3,
